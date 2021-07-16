@@ -1,0 +1,33 @@
+name: sdk-py-logbook
+version: 1.0.1
+summary: Logbook sample written in Python for ctrlX
+#title: sdk-py-logbook
+description: |
+  This sample shows how to log with different loglevels
+base: core18
+confinement: strict
+grade: stable
+
+apps:
+  logbook:
+    command: main.py
+    plugs:
+      - network
+    daemon: simple
+    passthrough:
+      restart-condition: always
+      restart-delay: 10s 
+
+parts:
+  logbook:
+    plugin: python
+    python-version: python3
+    source: .
+    python-packages: 
+      - systemd
+
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer 

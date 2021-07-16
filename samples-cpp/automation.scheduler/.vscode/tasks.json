@@ -1,0 +1,53 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "linux": {
+      "command": "./snapcraft.sh ${input:target}",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "type": "shell",
+    },
+    "tasks": [
+        {
+        "label": "CMake Build Snap",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "type": "shell",
+        "problemMatcher": [
+          "$gcc"
+        ],
+        "command": "cmake -DCMAKE_BUILD_KIT='${input:buildKit}' -DBUILD_SNAP=ON ..; make install; make clean; cd ..; snapcraft clean",
+        "options": {
+          "cwd": "${workspaceFolder}/build/"
+        },
+      },
+    ],
+    "inputs": [
+      {
+          "id": "target",
+          "type": "pickString",
+          "description": "targetname",
+          "options":[
+            "linux-gcc-x64",
+            "linux-gcc-aarch64"
+          ],
+          "default": "linux-gcc-x64"
+          // type specific configuration attributes
+      },
+      {
+        "id": "buildKit",
+        "type": "pickString",
+        "description": "CMake Build Kit",
+        "options":[
+          "GCC for x86_64-linux-gnu 7.4.0",
+          "GCC for aarch64-linux-gnu 7.4.0"
+        ],
+        "default": "GCC for x86_64-linux-gnu 7.4.0"
+        // type specific configuration attributes
+    }
+  ]
+  }

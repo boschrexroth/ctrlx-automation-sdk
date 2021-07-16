@@ -1,0 +1,42 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+name: ctrlx-dotnet-datalayer-provider
+version: '1.0.0'
+summary: Data Layer provider sample written in .NET for ctrlX.
+description: |
+  The sample demonstrates how to provide nodes to the ctrlX Data Layer tree. 
+  The provider creates nodes with types of int/double/string. 
+  Also a complex type encoded by https://google.github.io/flatbuffers/ is provided.
+confinement: strict 
+#confinement: devmode 
+#icon: assets/icons/ICONHERE.png
+grade: stable  # must be 'stable' to release into candidate/stable channels
+base: core18
+type: app
+
+apps:
+  app:
+    command: datalayer.provider
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: [network, network-status, network-bind, process-control]
+    daemon: simple
+    restart-condition: always
+    passthrough:   
+      restart-delay: 10s
+    
+    environment:
+      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
+ 
+parts:
+  app:
+    plugin: dump
+    source: ./generated
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer 

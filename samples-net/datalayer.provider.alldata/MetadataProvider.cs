@@ -1,0 +1,82 @@
+﻿/*
+MIT License
+
+Copyright (c) 2021 Bosch Rexroth AG
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+using comm.datalayer;
+using Datalayer;
+using FlatBuffers;
+
+namespace Samples.Datalayer.Provider.Alldata
+{
+    class MetadataProvider
+    {
+        public const string TypesInertialValue = "types/sample/schema/inertialValue";
+
+        private static Variant _instance;
+
+        private MetadataProvider()
+        {
+        }
+
+        public static Variant GetInstance()
+        {
+            return _instance ??= CreateMetadata();
+        }
+
+        private static Variant CreateMetadata()
+        {
+            var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
+
+            var readTypeBuilderString = builder.CreateString("readType");
+            var targetAddressBuilderString = builder.CreateString(TypesInertialValue);
+            var descriptionBuilderString = builder.CreateString("sample schema inertial value type");
+            var urlBuilderString = builder.CreateString("tbd");
+
+            AllowedOperations.StartAllowedOperations(builder);
+            AllowedOperations.AddCreate(builder, false);
+            AllowedOperations.AddDelete(builder, false);
+            AllowedOperations.AddRead(builder, true);
+            AllowedOperations.AddWrite(builder, false);
+            var operations = AllowedOperations.EndAllowedOperations(builder);
+
+            Reference.StartReference(builder);
+            Reference.AddType(builder, readTypeBuilderString);
+            Reference.AddTargetAddress(builder, targetAddressBuilderString);
+            var reference = Reference.EndReference(builder);
+
+            Metadata.StartReferencesVector(builder, 1);
+            builder.AddOffset(reference.Value);
+            var references = builder.EndVector();
+
+            Metadata.StartMetadata(builder);
+            Metadata.AddOperations(builder, operations);
+            Metadata.AddDescription(builder, descriptionBuilderString);
+            Metadata.AddDescriptionUrl(builder, urlBuilderString);
+            Metadata.AddReferences(builder, references);
+
+            var metadata = Metadata.EndMetadata(builder);
+            builder.Finish(metadata.Value);
+            var metadataVariant = new Variant(builder);
+            return metadataVariant;
+        }
+    }
+}

@@ -1,0 +1,6 @@
+venv/
+parts/
+prime/
+stage/
+snap/.snapcraft
+squashfs-root/

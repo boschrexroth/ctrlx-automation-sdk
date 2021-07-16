@@ -1,0 +1,29 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: automationscheduler
+version: "1.0.0"
+grade: stable
+summary: Sample Snap for providing simple bundle using scheduler
+description: |
+  This app will provide a simple bundle and show how to use the scheduler
+base: core18
+confinement: strict
+
+#  describes how to import, and potentially build each required part of the snap:
+parts:
+  bundle:
+    source: ./generated/automation-scheduler
+    plugin: dump
+    organize:
+     '*' : automation-bundle/${SNAPCRAFT_PROJECT_NAME}/
+
+slots:
+  automation-bundle:
+    interface: content
+    content: automation-bundle
+    source:
+      read:
+        - $SNAP/automation-bundle/${SNAPCRAFT_PROJECT_NAME}

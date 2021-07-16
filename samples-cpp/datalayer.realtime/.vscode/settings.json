@@ -1,0 +1,12 @@
+{
+    "window.zoomLevel": 0,
+    "cmake.configureArgs": [
+        "-DCMAKE_BUILD_KIT=${buildKit}"
+    ],
+    "files.associations": {
+        "functional": "cpp",
+        "chrono": "cpp",
+        "cstdlib": "cpp"
+    }
+    
+}

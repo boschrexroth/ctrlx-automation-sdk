@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "id": "rexroth-python-webserver",
+  "scopes-declaration": [
+    {
+      "identifier": "rexroth-python-webserver.web",
+      "name": "Python-Webserver",
+      "description": "Data Layer access permissions over webpage",
+      "scopes": [
+        {
+          "identifier": "rexroth-python-webserver.web.r",
+          "name": "Read",
+          "description": "Only read commands can be submitted over webpage"
+        },
+        {
+          "identifier": "rexroth-python-webserver.web.rw",
+          "name": "Read and write",
+          "description": "Read and write commands can be submitted over webpage"
+        }
+      ]
+    }
+  ], 
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "rexroth-python-webserver",
+        "url": "/python-webserver",
+        "binding": "unix://{$SNAP_DATA}/package-run/rexroth-python-webserver/web.sock",
+        "restricted": [
+        ]        
+      }
+    ]
+  },
+  "menus": {
+    "sidebar": [
+      {
+        "id": "rexroth-python-webserver",
+        "target": "_blank",
+        "title": "Python-Webserver",
+        "icon": "Bosch-Ic-worldwideweb",
+        "link": "/python-webserver?token=${bearertoken}"
+      }
+    ],
+    "settings": [
+    ],
+    "overview": [
+      {
+        "id": "rexroth-python-webserver",
+        "title": "Python-Webserver",
+        "icon": "Bosch-Ic-worldwideweb",
+        "link": "/python-webserver?token=${bearertoken}"
+      }
+    ]    
+  }
+}

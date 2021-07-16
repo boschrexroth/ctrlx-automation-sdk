@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Mkdocs
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  createdocu:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      -
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      -
+        run: pip install mkdocs-material
+      -
+        run: |
+          ls -alh
+          rsync -am --include='README.md' --include='*/' --include='/samples-*/' --exclude='*' ./ ./doc
+          rsync -am --include='*.png' --include='*/' --include='/samples-*/' --exclude='*' ./ ./doc
+          mkdocs gh-deploy --force

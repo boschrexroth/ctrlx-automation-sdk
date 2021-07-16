@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "id": "hello-webserver",
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "hello-webserver",
+        "url": "/hello-webserver/",
+        "binding": "unix://{$SNAP_DATA}/package-run/rexroth-hello-webserver/web.sock",
+        "restricted": [
+        ]        
+      }
+    ]
+  },
+  "menus": {
+    "sidebar": [
+      {
+        "id": "webserver",
+        "target": "_blank",
+        "title": "Hello-Webserver",
+        "icon": "Bosch-Ic-worldwideweb",
+        "link": "/hello-webserver/"
+      }
+    ],
+    "settings": [
+    ],
+    "overview": [
+      {
+        "id": "webserver",
+        "target": "_blank",
+        "title": "Hello-Webserver",
+        "icon": "Bosch-Ic-worldwideweb",
+        "link": "/hello-webserver/"
+      }
+    ]    
+  }
+}

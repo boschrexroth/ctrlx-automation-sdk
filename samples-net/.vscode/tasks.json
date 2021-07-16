@@ -1,0 +1,401 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build solution",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/datalayer.samples.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "clean solution",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/datalayer.samples.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish client amd64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-x64",
+                "-o",
+                "${workspaceFolder}/datalayer.client/publish/amd64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.client/datalayer.client.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish client arm64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-arm64",
+                "-o",
+                "${workspaceFolder}/datalayer.client/publish/arm64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.client/datalayer.client.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "make client snap amd64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.amd64",
+            "options": {
+                "cwd": "${workspaceFolder}/datalayer.client"
+            },
+            "dependsOn": [
+                "publish client amd64"
+            ]
+        },
+        {
+            "label": "make client snap arm64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.arm64",
+            "options": {
+                "cwd": "${workspaceFolder}/datalayer.client"
+            },
+            "dependsOn": [
+                "publish client arm64"
+            ]
+        },
+        {
+            "label": "watch client",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/datalayer.client/datalayer.client.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish provider amd64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-x64",
+                "-o",
+                "${workspaceFolder}/datalayer.provider/publish/amd64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.provider/datalayer.provider.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish provider arm64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-arm64",
+                "-o",
+                "${workspaceFolder}/datalayer.provider/publish/arm64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.provider/datalayer.provider.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "make provider snap amd64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.amd64",
+            "options": {
+                "cwd": "${workspaceFolder}/datalayer.provider"
+            },
+            "dependsOn": [
+                "publish provider amd64"
+            ]
+        },
+        {
+            "label": "make provider snap arm64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.arm64",
+            "options": {
+                "cwd": "${workspaceFolder}/datalayer.provider"
+            },
+            "dependsOn": [
+                "publish provider arm64"
+            ]
+        },
+        {
+            "label": "watch provider",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/datalayer.provider/datalayer.provider.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish provider.alldata amd64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-x64",
+                "-o",
+                "${workspaceFolder}/datalayer.provider.alldata/publish/amd64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.provider.alldata/datalayer.provider.alldata.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish provider.alldata arm64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-arm64",
+                "-o",
+                "${workspaceFolder}/datalayer.provider.alldata/publish/arm64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.provider.alldata/datalayer.provider.alldata.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "make provider.alldata snap amd64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.amd64",
+            "options": {
+                "cwd": "${workspaceFolder}/datalayer.provider.alldata"
+            },
+            "dependsOn": [
+                "publish provider.alldata amd64"
+            ]
+        },
+        {
+            "label": "make provider.alldata snap arm64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.arm64",
+            "options": {
+                "cwd": "${workspaceFolder}/datalayer.provider.alldata"
+            },
+            "dependsOn": [
+                "publish provider.alldata arm64"
+            ]
+        },
+        {
+            "label": "watch provider.alldata",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/datalayer.provider.alldata/datalayer.provider.alldata.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish browse amd64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-x64",
+                "-o",
+                "${workspaceFolder}/datalayer.client.browse/publish/amd64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.client.browse/datalayer.client.browse.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish browse arm64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-arm64",
+                "-o",
+                "${workspaceFolder}/datalayer.client.browse/publish/arm64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.client.browse/datalayer.client.browse.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "make browse snap amd64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.amd64",
+            "options": {
+                "cwd": "${workspaceFolder}/datalayer.client.browse"
+            },
+            "dependsOn": [
+                "publish browse amd64"
+            ]
+        },
+        {
+            "label": "make browse snap arm64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.arm64",
+            "options": {
+                "cwd": "${workspaceFolder}/datalayer.client.browse"
+            },
+            "dependsOn": [
+                "publish browse arm64"
+            ]
+        },
+        {
+            "label": "watch browse",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/datalayer.client.browse/datalayer.client.browse.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

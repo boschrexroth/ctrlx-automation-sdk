@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "id": "hello-webserver",
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "hello-webserver",
+        "url": "/hello-webserver/",
+        "binding": ":1234",
+        "restricted": [
+        ]        
+      }
+    ]
+  },
+  "menus": {
+    "sidebar": [
+      {
+        "id": "webserver",
+        "title": "Hello-Webserver",
+        "icon": "Bosch-Ic-worldwideweb",
+        "link": "/hello-webserver/"
+      }
+    ],
+    "settings": [
+    ],
+    "overview": [
+      {
+        "id": "webserver",
+        "title": "Hello-Webserver",
+        "icon": "Bosch-Ic-worldwideweb",
+        "link": "/hello-webserver/"
+      }
+    ]    
+  }
+}

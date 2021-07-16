@@ -1,0 +1,531 @@
+[data-md-color-scheme="rexroth-light"] {
+  --md--rexroth-bluegrey-40: #a3bac8;
+  --md--rexroth-bluegrey-80: #5A7C91;
+  --md--rexroth-turquoise-light: #91F0FF;
+  --md--rexroth-turquoise: #00CCFF;
+  --md--rexroth-darkblue: #002b49;
+  --md--rexroth-red: #df0024;
+  --md--rexroth-white: #ffffff;
+  --md--rexroth-black: #000000;
+
+  --md--rexroth-linkhover: #00ADD9;
+  --md--rexroth-lightgrey: #E5EEF2;
+
+}
+
+[data-md-color-scheme="rexroth-dark"] {
+  --md-primary-fg-color: #00ccff;
+  --md-primary-fg-color--light: #a3bac8;
+  --md-primary-fg-color--dark: #90030c;
+  --md-default-bg-color: #2e303e;
+  --md-default-fg-color: #ffffff;
+  --md-code-h0-color: #ffffff;
+  --md-accent-fg-color: #ffffff;
+  --md-accent-fg-color--transparent: hsla(0, 0%, 100%, 1);
+  --md-code-hl-color: hsla(0, 0%, 100%, 1);
+  --md-code-hl-number-color: hsla(0, 67%, 50%, 1);
+  --md-code-hl-special-color: hsla(340, 83%, 47%, 1);
+  --md-code-hl-function-color: hsla(291, 45%, 50%, 1);
+  --md-code-hl-constant-color: hsla(250, 63%, 60%, 1);
+  --md-code-hl-keyword-color: hsla(219, 54%, 51%, 1);
+  --md-code-hl-string-color: hsla(150, 63%, 30%, 1);
+  --md-code-hl-name-color: hsla(0, 0%, 100%, 1);
+  --md-code-hl-operator-color: hsla(0, 0%, 100%, 1);
+  --md-code-hl-punctuation-color: hsla(0, 0%, 100%, 1);
+  --md-code-hl-comment-color: hsla(0, 0%, 100%, 1);
+  --md-code-hl-generic-color: hsla(0, 0%, 100%, 1);
+  --md-code-hl-variable-color: hsla(0, 0%, 100%, 1);
+}
+
+/* Font */
+
+@font-face {
+  font-family: "Iconfont";
+  src: url(https://apps.boschrexroth.com/assets/ctrlx/Bosch-Icon.woff);
+}
+
+/* End font */
+
+/* Content */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4
+{
+  color: var(--md--rexroth-darkblue) !important;
+  font-weight: 700;
+}
+
+body,
+.md-typeset p {
+  color: var(--md--rexroth-black) !important;
+}
+
+.md-typeset a {
+  color: var(--md--rexroth-turquoise) !important;
+}
+
+.top-hr {
+  justify-content: space-between;
+  margin-top: 0px;
+}
+
+@media (max-width: 1220px ){
+  .top-hr {
+    padding: 0 40px;
+  }
+}
+
+.md-container {
+  min-height: 100vh;
+}
+
+/* Content end */
+
+/* Header */
+
+.md-header {
+  background-color: var(--md--rexroth-white) !important;
+}
+
+.md-header__topic .md-ellipsis {
+  color: var(--md--rexroth-darkblue);
+  margin-left: 100px;
+}
+
+/* Icon in Header */ 
+.md-logo {
+  display: none !important;
+}
+
+.md-header__button  {
+  color: var(--md--rexroth-turquoise);
+}
+
+.md-header__title {
+  background-image: url(https://apps.boschrexroth.com/assets/ctrlx/ctrlX_Logo_500_125px_frameless.gif) !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 10px 0 5px 20px;
+  height: 40px;
+}
+
+.md-header__title>.md-header__ellipsis {
+  top: -6px !important;
+}
+
+/* Header end */
+
+/* Footer */
+
+.md-footer, .md-footer__main {
+  background-color: var( --md--rexroth-darkblue );
+}
+
+.md-footer__main {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15%;
+  bottom: 0;
+  position: relative;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.md-footer__main::before {
+  content: '';
+  height: 40%;
+  width: 100vw;
+  position:absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to right bottom, #ffffff 49.5%, transparent 50%);
+} 
+
+.md-footer__main .md-footer-copyright {
+  padding-top: 4rem;
+}
+
+.md-footer-social {
+  display: none;
+}
+
+.link__microsite-wrapper {
+  padding: 4rem 0 .7rem 0;
+  margin: auto .6rem;
+}
+
+.link__microsite {
+  font-size: 1.8em;
+  color: var(--md--rexroth-turquoise );
+  width: 25%;
+  height: auto;
+  text-align: center;
+}
+
+.link__microsite::before {
+  content: '\E167';
+  font-family: "Iconfont";
+  color: var(--md--rexroth-turquoise );
+  margin-right: 5px;
+  font-size: .9em;
+}
+
+.link__microsite:hover, .link__microsite:hover::before {
+  color: var(--md--rexroth-linkhover);
+}
+
+@media (max-width: 1220px) {
+  .md-footer__main::before {
+    height: 35%;
+    background: linear-gradient(to right bottom, #ffffff 48.5%, transparent 50%);
+  }
+}
+
+@media (max-width: 760px) {
+  .md-footer__main::before {
+    height: 25%;
+    background: linear-gradient(to right bottom, #ffffff 48.5%, transparent 50%);
+  }
+
+  .md-footer__main {
+    align-items: center;
+    flex-direction: column-reverse;
+    height: 150px;
+  }
+
+  .md-footer__main .md-footer-copyright {
+    text-align: center;
+    padding-top: 0px;
+  }
+
+  .link__microsite-wrapper {
+    padding-top: 70px;
+  }
+}
+/*
+.md-footer-social a {
+  background-color: var( --md--rexroth-turquoise);
+  color: var( --md-accent-fg-color );
+}
+
+.md-footer-social a svg{
+  fill: var( --md--rexroth-white );
+}
+
+.md-footer-social a:hover {
+  background-color: var( --md--rexroth-linkhover);
+}
+*/
+/* Footer end */
+
+/* Navigation */
+
+/* Search input field */
+.md-search__input {
+  border: 2px var(--md--rexroth-bluegrey-40) solid;
+  background-color: var( --md--rexroth-white ) !important;
+  color: #000000 !important;
+}
+
+::placeholder {
+  color: var(--md--rexroth-bluegrey-40) !important;
+}
+
+.md-search__icon {
+  color: var(--md--rexroth-bluegrey-40) !important;
+  right: 0px;
+}
+
+/* Search input field end*/
+
+
+.md-nav__link--active {
+  color: var( --md--rexroth-turquoise ) !important;
+}
+
+.md-nav__link:focus, .md-nav__link:hover {
+  color: var( --md--rexroth-turquoise ) !important;
+}
+
+.md-tabs {
+  background-color: #ffffff;
+  color: var( --md--rexroth-darkblue );
+  font-weight: 700;
+  height: 60px;
+}
+
+.md-tabs__item {
+  padding: 0; 
+}
+
+.md-tabs__link {
+  color: var( --md--rexroth-darkblue ) !important;
+  opacity: 1;
+  font-size: 18px;
+  padding: 0 20px;
+}
+
+.md-tabs__link--active, .md-tabs__link:hover  {
+  color: var( --md--rexroth-turquoise ) !important;
+}
+
+/* Switch for dark color scheme */
+.md-header__option {
+  display: none;
+}
+
+.md-source {
+  color: var( --md--rexroth-bluegrey-40);
+}
+
+
+@media (max-width:59.9375em){
+  .md-source, .md-nav__source {
+    background-color: var( --md--rexroth-darkblue );
+  }
+
+  .md-source__icon, .md-source__repository {
+    fill: var( --md--rexroth-bluegrey-40 );
+    color: var( --md--rexroth-bluegrey-40 );
+  }
+}
+
+/* Mobile */
+@media (max-width: 1220px ){
+  
+  .md-nav .md-nav__title {
+    background-image: url(https://apps.boschrexroth.com/assets/ctrlx/ctrlX_Logo_500_125px_frameless.gif) !important;
+    background-repeat: no-repeat;
+    background-position: center 5%;
+    background-size: 50%;
+    background-color: var( --md--rexroth-white ) !important;
+    color: var( --md--rexroth-darkblue ) !important;
+    text-align: center;
+  }
+
+  .md-nav--secondary .md-nav__title {
+    background-image: none !important;
+    background-color: var( --md--rexroth-white ) !important;
+    color: var( --md--rexroth-turquoise ) !important;
+  }
+
+  label[for=__drawer]{
+    color: var( --md--rexroth-black ) !important;
+  }
+
+  .md-nav__button {
+    display: none !important;
+  }
+
+  .md-nav__item--active>.md-nav__link {
+    color: var( --md--rexroth-turquoise ) !important;
+  }
+
+}
+/* Navigation end*/
+
+/* Stage */
+.tx-container::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -2px;
+  width: 105%;
+  height: 105%;
+  background-image: url(https://apps.boschrexroth.com/assets/ctrlx/ctrlx-automation-always-connected-clean-neu.jpg);
+  background-position: center center;
+  background-size: cover;
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+}
+
+.tx-container {
+  position: relative;
+  overflow: hidden;
+  height: 600px;
+  top: -10px;
+  margin-bottom: 0px;
+}
+
+.tx-container::after {
+  content: '';
+  height: 15%;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to left top, #ffffff 49.5%, transparent 50%);
+}
+
+/* .tx-container::after {
+  content: '';
+  background-color: var(--md--rexroth-white);
+  height: 450px;
+  width: 120%;
+  position: absolute;
+  left: 0;
+  bottom: -450px;
+  transform: skewY( -3deg );
+  transform-origin: 0 0;
+} */
+
+.tx-hero {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  margin: 0 !important;
+  width: 100%;
+  padding: 0 30px;
+}
+
+.tx-hero .md-button {
+  text-transform: uppercase;
+  color: var(--md--rexroth-white) !important;
+  border: solid var(--md--rexroth-turquoise) 2px !important;
+}
+
+.tx-hero .md-button:hover, .tx-hero .md-button--primary {
+  background-color: var(--md--rexroth-linkhover) !important;
+  border-color: var(--md--rexroth-linkhover) !important;
+}
+
+.tx-hero .md-button--primary {
+  background-color: var(--md--rexroth-turquoise) !important;
+  border: solid var(--md--rexroth-turquoise) 2px !important;
+}
+
+.tx-hero__content h1, .tx-hero__content p {
+  color: var(--md--rexroth-white) !important;
+}
+
+@media (max-width: 1220px ){
+  .tx-container::after {
+    height: 10% !important;
+  }
+  
+  .tx-hero__content h1 {
+    font-size: 1.5em !important;
+  }
+}
+
+@media (max-width: 470px ){
+  .tx-container::after {
+    height: 5% !important;
+    background: linear-gradient(to left top, #ffffff 48.5%, transparent 51%);
+  }
+  
+  .tx-hero__content h1 {
+    font-size: 1.25em !important;
+  }
+}
+
+
+.tx-hero__content p {
+  text-transform: none !important;
+}
+
+.tx-hero__image {
+  display: none;
+}
+
+.tx-hero__content {
+  text-align: center;
+  max-width: none !important;
+}
+
+.top-hr a h2 {
+  font-size: 18px;
+}
+
+.feature-item:hover {
+  background-color: var( --md--rexroth-lightgrey) !important;
+}
+
+.feature-item p {
+  padding-left: 50px;
+}
+
+/* Icons */
+
+.feature-item::before {
+  content: '\e0b4';
+  font-family: "Iconfont";
+  font-size: 38px;
+  color: var( --md--rexroth-darkblue);
+  display: inline-block;
+  height: 40px;
+  width: 50px;
+  margin-top:10px;
+  float: left;
+}
+
+.feature-item:nth-child(2)::before {
+  content: '\e1ef';
+}
+
+.feature-item:nth-child(3)::before {
+  content: '\e251';
+}
+
+.feature-item:nth-child(4)::before {
+  content: '\e12d';
+}
+
+@media (max-width: 1220px ){
+  .feature-item p {
+    margin-bottom: 20px !important;
+  }
+}
+
+@media (max-width: 470px ){
+  .feature-item:nth-child(3):before {
+    margin-bottom: 30px;
+  }
+}
+
+/* End icons */
+
+
+
+.feature-item h2 svg {
+  transform: translateY(-12% ) !important;
+}
+
+.top-hr a h2, .top-hr a svg {
+  color: var( --md--rexroth-darkblue) !important;
+  fill: var(--md--rexroth-darkblue);
+}
+
+@media (max-width: 1220px ){
+  .top-hr a h2 {
+    margin-top: 7px;
+    margin-bottom: 10px;
+  }
+}
+
+
+/* Stage end */
+
+
+
+
+
+/*        
+#002b49
+Rexroth Blaugrau 40 #a3bac8
+Rexroth Blaugrau 80 #5a7c91
+Rexroth Dunkelblau #002b49
+Rexroth Rot #df0024
+Rexroth Türkis #00ccff 
+Rexroth Türkis light #91f0ff 
+
+  --md-primary-fg-color:        #0A488F;
+  --md-primary-fg-color--light: #a3bac8;
+  --md-primary-fg-color--dark:  #002b49;
+  --goreleaser-primary-color:   #df0024;
+*/

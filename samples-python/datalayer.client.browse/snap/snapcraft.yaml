@@ -1,0 +1,35 @@
+name: sdk-py-datalayer-browse
+version: '1.0.2'
+summary: Data Layer browse sample written in Python for ctrlX
+#title: sdk-py-datalayer-browse
+description: |
+  This sample demonstrates how to browse a Data Layer tree
+base: core18
+confinement: strict
+grade: stable
+
+apps:
+  client:
+    command: main.py
+    plugs:
+      - network
+    daemon: simple
+    passthrough:
+      restart-condition: always
+      restart-delay: 10s 
+
+parts:
+  client:
+    plugin: python
+    python-version: python3
+    source: .
+    python-packages:
+      - ../../whl/ctrlx_datalayer-1.3.0-py3-none-any.whl
+      - ../../whl/ctrlx_fbs-1.0.0-py3-none-any.whl
+      - flatbuffers~=1.12
+
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer 

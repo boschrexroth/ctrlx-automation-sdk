@@ -1,0 +1,43 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: datalayerecatio
+version: "1.0.0"
+grade: stable
+summary: Sample app for processing rt data from EtherCAT
+description: |
+  This app will modify values of 'myData' node provider  
+  on Datalayer (requires sample app 'registernode')
+base: core18
+confinement: strict
+
+# define how apps & services are exposed to host system
+apps:
+  datalayerecatio:
+    command: datalayerEcatio
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: [network, network-status, network-bind, process-control]
+    daemon: simple
+    passthrough:
+      restart-condition: always
+      restart-delay: 5s 
+
+parts:
+  datalayerecatio:
+    plugin: dump
+    source: ./generated/build
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer 
+
+  system-files:
+    interface: system-files
+    write:
+      - /dev/shm
+

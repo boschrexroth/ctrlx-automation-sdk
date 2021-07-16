@@ -1,0 +1,7 @@
+venv/
+parts/
+prime/
+stage/
+snap/.snapcraft
+datalayerprovider/__pycache__/
+*.orig

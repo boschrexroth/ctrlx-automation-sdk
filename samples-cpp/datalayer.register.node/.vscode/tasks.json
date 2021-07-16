@@ -1,0 +1,54 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake Build Snap",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "type": "shell",
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "command": "cmake -DCMAKE_BUILD_KIT='${input:buildKit}' -DBUILD_SNAP=ON ..; make install; make clean; cd ..; snapcraft clean; rm -rf ./generated/build",
+      "options": {
+        "cwd": "${workspaceFolder}/build/"
+      },
+    },
+    {
+      "label": "Launch GDB-Server",
+      "type": "shell",
+      
+      "problemMatcher": "$gcc",
+      "command": "ssh ${input:Root-User}@${input:Target-IP}  \"sudo snap run --experimental-gdbserver=:12345 registernode.registerNode\" ",
+    },
+  ],
+  "inputs": [
+    {
+      "id": "buildKit",
+      "type": "pickString",
+      "description": "CMake Build Kit",
+      "options":[
+        "GCC for x86_64-linux-gnu 7.4.0",
+        "GCC for aarch64-linux-gnu 7.4.0"
+      ],
+      "default": "GCC for x86_64-linux-gnu 7.4.0"
+      // type specific configuration attributes
+    },
+    {
+      "id": "Target-IP",
+      "type": "promptString",
+      "description": "Insert target ip",
+      "default": "192.168.1.1"
+    },
+    {
+      "id": "Root-User",
+      "type": "promptString",
+      "description": "Insert user",
+      "default": "rexroot"
+    },
+  ]
+}

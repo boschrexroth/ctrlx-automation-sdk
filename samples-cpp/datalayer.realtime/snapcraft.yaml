@@ -1,0 +1,43 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: datalayerrealtime
+version: "1.0.0"
+grade: stable
+summary: Example app for ctrlX Data Layer realtime
+description: | 
+  The example project datalayer.realtime shows the realtime access to the ctrlX Data Layer as
+  - a data provider - mem owner - creates some memory 'input' and 'output'
+  - a data consumer - mem user - can read 'input' and write 'output'
+  When the user has written outputs once, the owner will start copying from output to input.
+base: core18
+confinement: strict
+
+# define how apps & services are exposed to host system
+apps:
+  datalayerRealtimeOwner:
+    command: datalayerRealtimeOwner
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: [home, network, network-status, network-bind, process-control]
+    daemon: simple
+
+  datalayerRealtimeUser:
+    command: datalayerRealtimeUser
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: [home, network, network-status, network-bind, process-control]
+    daemon: simple
+
+#  describes how to import, and potentially build, each required part of the snap:
+parts:
+  datalayerrealtime:
+    plugin: dump
+    source: ./generated/build
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer

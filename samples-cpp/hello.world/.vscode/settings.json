@@ -1,0 +1,7 @@
+{
+    "window.zoomLevel": 0,
+    "cmake.configureArgs": [
+        "-DCMAKE_BUILD_KIT=${buildKit}",
+     ],
+       
+}

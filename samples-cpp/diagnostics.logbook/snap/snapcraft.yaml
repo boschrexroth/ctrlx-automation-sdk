@@ -1,0 +1,30 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: diaglogbook
+version: "0.0.1"
+grade: stable
+summary: Writes messages to journald and the ctrlX logbook
+description: |
+  This is a simple App to show how messages with different log levels are written to journald and the ctrlX logbook.
+base: core18
+confinement: strict
+
+# define how apps & services are exposed to host system
+apps:
+  logbook:
+    command: logbook
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: [ ]
+    daemon: simple
+    passthrough:
+      restart-condition: always
+      restart-delay: 30s 
+
+#  describes how to import, and potentially build, each required part of the snap:
+parts:
+  logbook:
+    plugin: dump
+    source: ./generated/build

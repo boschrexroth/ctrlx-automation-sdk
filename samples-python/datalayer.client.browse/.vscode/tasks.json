@@ -1,0 +1,18 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "snapcraft clean",
+            "type": "shell",
+            "command": "snapcraft clean --destructive-mode",
+            "problemMatcher": []
+        },
+        {
+            "label": "snapcraft",
+            "type": "shell",
+            "command": "snapcraft --destructive-mode"
+        }
+    ]
+}

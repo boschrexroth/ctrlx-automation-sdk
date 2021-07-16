@@ -1,0 +1,155 @@
+# General Settings
+site_name: Software Development Kit
+site_url: https://boschrexroth.github.io/ctrlx-automation-sdk
+site_description: ctrlX AUTOMATION Software Development Kit
+site_author: Bosch Rexroth AG
+copyright: Copyright &copy; 2020-2021 Bosch Rexroth AG
+
+# Repository Settings
+repo_name: boschrexroth/ctrlx-automation-sdk
+edit_uri: edit/master/doc/
+repo_url: https://github.com/boschrexroth/ctrlx-automation-sdk
+remote_branch: gh-pages
+
+docs_dir: doc
+site_dir: site
+use_directory_urls: false
+
+# Theming and style
+theme:
+  name: material
+  custom_dir: doc
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+  favicon: assets/favicon.png
+  icon:
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: rexroth-light
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+extra_css:
+  - stylesheets/sdk.css
+
+# Plugins
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/boschrexroth
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/boschrexroth
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - codehilite
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.tabbed
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - attr_list
+  - pymdownx.highlight:
+      linenums_style: pymdownx.inline
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.details
+
+# Content
+nav:
+    - Home: index.md
+    - Getting Started: 
+      - Overview : overview.md
+      - ctrlX AUTOMATION: ctrlx_automation.md
+      - Releases:
+        - Changelog: changelog.md
+    - Setup:
+      - setup_overview.md
+      - Setup via VirtualBox: setup_windows_virtualbox_ubuntu.md
+      - Setup via WSL: setup_windows_wsl_ubuntu.md
+      - Toolchain:
+        - .NET: dotnet.md
+      - Development:
+        - Remote Debugging: debug.md
+    - Samples:
+      - Overview:  samples_mkdocs.md
+      - Samples C/C++: 
+        - Hello World: samples-cpp/hello.world/README.md
+        - Hello PLC: samples-cpp/hello.plc/README.md
+        - ctrlX Data Layer Client: samples-cpp/datalayer.client/README.md
+        - ctrlX Data Layer RegisterNode: samples-cpp/datalayer.register.node/README.md
+        - ctrlX Automation Bundle: samples-cpp/automation.bundle/README.md
+        - ctrlX Automation Scheduler: samples-cpp/automation.scheduler/README.md
+        - ctrlX Data Layer EtherCAT I/O's: samples-cpp/datalayer.ecat.io/README.md
+        - ctrlX Data Layer Realtime: samples-cpp/datalayer.realtime/README.md
+        - ctrlX Data Layer All Data Provider: samples-cpp/datalayer.provider.all-data/README.md
+        - Diagnostics Logbook: samples-cpp/diagnostics.logbook/README.md
+      - Samples Golang:
+        - Hello Webserver: samples-go/hello.webserver/README.md
+        - AppData File Storage: samples-go/appdata/README.md
+      - Samples Python:
+        - ctrlX Data Layer Client: samples-python/datalayer.client.light/README.md
+        - ctrlX Data Layer Client (complex): samples-python/datalayer.client/README.md
+        - ctrlX Data Layer Client Subscription: samples-python/datalayer.client.sub/README.md
+        - ctrlX Data Layer Provider: samples-python/datalayer.provider/README.md
+        - ctrlX Data Layer Provider All Data: samples-python/datalayer.provider.all-data/README.md
+        - ctrlX Data Layer Browse: samples-python/datalayer.client.browse/README.md
+        - ctrlX Data Layer Calculation operations: samples-python/datalayer.calc/README.md
+        - Diagnostics Logbook: samples-python/python.logbook/README.md
+        - AppData File Storage: samples-python/appdata/README.md
+      - Samples .NET: 
+        - Hello World: samples-net/hello.world/README.md
+        - ctrlX Data Layer Client: samples-net/datalayer.client/README.md
+        - ctrlX Data Layer Client Browse: samples-net/datalayer.client.browse/README.md
+        - ctrlX Data Layer Browse: samples-net/datalayer.client.browse/README.md
+        - ctrlX Data Layer Provider: samples-net/datalayer.provider/README.md
+        - ctrlX Data Layer All Data Provider: samples-net/datalayer.provider.alldata/README.md
+        - ctrlX Data Layer Provider Virtual: samples-net/datalayer.provider.virtual/README.md
+        - ctrlX Data Layer MQTT: samples-net/datalayer.mqtt/README.md
+        - Diagnostics Logbook: samples-net/diagnostics.logbook/README.md
+      - Samples Shell:
+        - TPM2 Consumer: samples-sh/tpm2.consumer/README.md
+    - References: 
+        - Overview: references.md
+        - Developer Guideline: appdevguide.md
+        - Api Reference:
+          - c/c++: api/comm.datalayer/html/index.html
+          - c#: api/csharp/html/index.html
+          - python: api/python/html/index.html    
+    - About: about.md

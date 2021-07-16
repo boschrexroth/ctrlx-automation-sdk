@@ -1,0 +1,38 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: registernode
+version: "1.0.1"
+grade: stable
+summary: Sample app to register 'myData' node on ctrlX Data Layer
+description: |
+  This app will create a 'myData' node with different element types
+  on ctrlX Data Layer (required for sample app 'datalayerclient')
+base: core18
+confinement: strict
+
+# define how apps & services are exposed to host system
+apps:
+  registerNode:
+    command: registerNode
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: [network, network-status, network-bind, process-control]
+    daemon: simple
+
+parts:
+  registernode:
+    plugin: dump
+    source: ./generated/build
+
+  flatbuffers:
+    plugin: dump
+    source: ./bfbs
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer 

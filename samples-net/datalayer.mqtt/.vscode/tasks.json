@@ -1,0 +1,122 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/datalayer.mqtt.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "clean",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/datalayer.mqtt.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish amd64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-x64",
+                "-o",
+                "${workspaceFolder}/publish/amd64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.mqtt.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish arm64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "-c",
+                "Release",
+                "-r",
+                "linux-arm64",
+                "-o",
+                "${workspaceFolder}/publish/arm64",
+                "--self-contained",
+                "true",
+                "${workspaceFolder}/datalayer.mqtt.csproj",
+                "/property:GenerateFullPaths=true",
+                "/property:PublishSingleFile=true",
+                "/property:PublishTrimmed=true",
+                "/property:DebugType=None",
+                "/property:DebugSymbols=false",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "make snap amd64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.amd64",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": [
+                "publish amd64"
+            ]
+        },
+        {
+            "label": "make snap arm64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "make clean snap.arm64",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": [
+                "publish arm64"
+            ]
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/datalayer.mqtt.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

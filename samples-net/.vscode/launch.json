@@ -1,0 +1,79 @@
+{
+    // Use IntelliSense to find out which attributes exist for C# debugging
+    // Use hover for the description of the existing attributes
+    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "launch client",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build solution",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/datalayer.client/bin/Debug/net5.0/datalayer.client.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false,
+        },
+        {
+            "name": "launch browse",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build solution",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/datalayer.client.browse/bin/Debug/net5.0/datalayer.client.browse.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false,
+        },
+        {
+            "name": "launch provider",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build solution",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/datalayer.provider/bin/Debug/net5.0/datalayer.provider.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false,
+        },
+        {
+            "name": "launch provider.alldata",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build solution",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/datalayer.provider.alldata/bin/Debug/net5.0/datalayer.provider.alldata.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false,
+        },
+        {
+            "name": "launch hello world",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build solution",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/hello.world/bin/Debug/net5.0/hello.world.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false,
+        },
+        {
+            "name": "attach process",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+// IDL file for sample schema.
+
+namespace sample.schema;
+
+
+table InertialValue {
+    x:short;
+    y:short;
+    z:short;
+}
+
+root_type InertialValue;

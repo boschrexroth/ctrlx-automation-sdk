@@ -1,0 +1,66 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "HelloPlc",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/generated/linux-gcc-x64/Debug/helloPlc",
+            "args": [],
+            "additionalSOLibSearchPath": "${workspaceFolder}/generated/linux-gcc-x64/Debug/usr/lib/",
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set path variable to .",
+                    "text": "set env LD_LIBRARY_PATH=${workspaceFolder}/generated/linux-gcc-x64/Debug/usr/lib/",
+                    "ignoreFailures": false
+                }
+            ]
+        },
+        {
+            "name": "HelloPlc aarch64",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "~/remote-debug/helloplc",
+            "cwd": "~/remote-debug",
+            "sourceFileMap": {
+                "${workspaceFolder}": "${workspaceFolder}"
+            },
+            "stopAtEntry": true,
+            //"preLaunchTask": "PrepareEnv",
+            "pipeTransport": {
+                "debuggerPath": "stdbuf -i0 -o0 -e0 /snap/rexroth-analysistools/current/bin/gdb",
+                "pipeProgram": "/usr/bin/ssh",
+                "pipeArgs": [
+                    "boschrexroth@192.168.1.2"
+                ],
+                "pipeCwd": "${workspaceFolder}",
+                
+            },
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set path variable to .",
+                    "text": "set env LD_LIBRARY_PATH=/home/boschrexroth/remote-debug/usr/lib/",
+                    "ignoreFailures": false
+                } 
+            ]
+        }
+    ]
+}
