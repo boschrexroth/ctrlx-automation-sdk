@@ -1,7 +1,9 @@
 # Software Development Kit for ctrlX AUTOMATION
 
 This is the software development kit (SDK) for [ctrlX AUTOMATION](https://www.ctrlx-automation.com). It can be used to program Apps for ctrlX CORE. 
-Browse through the manual via: <https://boschrexroth.github.io/ctrlx-automation-sdk>
+
+ * Browse online through the manual via: <https://boschrexroth.github.io/ctrlx-automation-sdk>
+ * Download the complete SDK package with all examples, documentation and binary dependencies from here: <https://github.com/boschrexroth/ctrlx-automation-sdk/releases>
 
 ## Important directions for use
 
