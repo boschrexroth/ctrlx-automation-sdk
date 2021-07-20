@@ -1,0 +1,2526 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ctrlX AUTOMATION Software Development Kit">
+      
+      
+      
+        <meta name="author" content="Bosch Rexroth AG">
+      
+      
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/datalayer.html">
+      
+      <link rel="icon" href="assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>Documentation - Software Development Kit</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="stylesheets/sdk.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Software Development Kit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    boschrexroth/ctrlx-automation-sdk
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="index.html" class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="overview.html" class="md-tabs__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="setup_overview.html" class="md-tabs__link">
+        Setup
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="samples_mkdocs.html" class="md-tabs__link">
+        Samples
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="references.html" class="md-tabs__link">
+        References
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="about.html" class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Software Development Kit
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    boschrexroth/ctrlx-automation-sdk
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Getting Started
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ctrlx_automation.html" class="md-nav__link">
+        ctrlX AUTOMATION
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        Releases
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Releases" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Releases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog.html" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Setup
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Setup" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Setup
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_overview.html" class="md-nav__link">
+        Setup Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
+        Setup via VirtualBox
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_windows_wsl_ubuntu.html" class="md-nav__link">
+        Setup via WSL
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      <label class="md-nav__link" for="__nav_3_4">
+        Toolchain
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Toolchain" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Toolchain
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dotnet.html" class="md-nav__link">
+        .NET
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" >
+      
+      <label class="md-nav__link" for="__nav_3_5">
+        Development
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Development" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Development
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="debug.html" class="md-nav__link">
+        Remote Debugging
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Samples
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Samples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples_mkdocs.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      <label class="md-nav__link" for="__nav_4_2">
+        Samples C/C++
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples C/C++" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Samples C/C++
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/hello.world/index.html" class="md-nav__link">
+        Hello World
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/hello.plc/index.html" class="md-nav__link">
+        Hello PLC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.client/index.html" class="md-nav__link">
+        ctrlX Data Layer Client
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.register.node/index.html" class="md-nav__link">
+        ctrlX Data Layer RegisterNode
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/automation.bundle/index.html" class="md-nav__link">
+        ctrlX Automation Bundle
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/automation.scheduler/index.html" class="md-nav__link">
+        ctrlX Automation Scheduler
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.ecat.io/index.html" class="md-nav__link">
+        ctrlX Data Layer EtherCAT I/O's
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.realtime/index.html" class="md-nav__link">
+        ctrlX Data Layer Realtime
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.provider.all-data/index.html" class="md-nav__link">
+        ctrlX Data Layer All Data Provider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/diagnostics.logbook/index.html" class="md-nav__link">
+        Diagnostics Logbook
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      <label class="md-nav__link" for="__nav_4_3">
+        Samples Golang
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples Golang" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Samples Golang
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-go/hello.webserver/index.html" class="md-nav__link">
+        Hello Webserver
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-go/appdata/index.html" class="md-nav__link">
+        AppData File Storage
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" >
+      
+      <label class="md-nav__link" for="__nav_4_4">
+        Samples Python
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples Python" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Samples Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.client.light/index.html" class="md-nav__link">
+        ctrlX Data Layer Client
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.client/index.html" class="md-nav__link">
+        ctrlX Data Layer Client (complex)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.client.sub/index.html" class="md-nav__link">
+        ctrlX Data Layer Client Subscription
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.provider/index.html" class="md-nav__link">
+        ctrlX Data Layer Provider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.provider.all-data/index.html" class="md-nav__link">
+        ctrlX Data Layer Provider All Data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.client.browse/index.html" class="md-nav__link">
+        ctrlX Data Layer Browse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.calc/index.html" class="md-nav__link">
+        ctrlX Data Layer Calculation operations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/python.logbook/index.html" class="md-nav__link">
+        Diagnostics Logbook
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/appdata/index.html" class="md-nav__link">
+        AppData File Storage
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5" type="checkbox" id="__nav_4_5" >
+      
+      <label class="md-nav__link" for="__nav_4_5">
+        Samples .NET
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples .NET" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Samples .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/hello.world/index.html" class="md-nav__link">
+        Hello World
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.client/index.html" class="md-nav__link">
+        ctrlX Data Layer Client
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.client.browse/index.html" class="md-nav__link">
+        ctrlX Data Layer Client Browse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.client.browse/index.html" class="md-nav__link">
+        ctrlX Data Layer Browse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.provider/index.html" class="md-nav__link">
+        ctrlX Data Layer Provider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.provider.alldata/index.html" class="md-nav__link">
+        ctrlX Data Layer All Data Provider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.provider.virtual/index.html" class="md-nav__link">
+        ctrlX Data Layer Provider Virtual
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.mqtt/index.html" class="md-nav__link">
+        ctrlX Data Layer MQTT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/diagnostics.logbook/index.html" class="md-nav__link">
+        Diagnostics Logbook
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6" type="checkbox" id="__nav_4_6" >
+      
+      <label class="md-nav__link" for="__nav_4_6">
+        Samples Shell
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples Shell" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Samples Shell
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-sh/tpm2.consumer/index.html" class="md-nav__link">
+        TPM2 Consumer
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        References
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="References" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          References
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="references.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appdevguide.html" class="md-nav__link">
+        Developer Guideline
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        Api Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Api Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Api Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/comm.datalayer/html/index.html" class="md-nav__link">
+        c/c++
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/csharp/html/index.html" class="md-nav__link">
+        c#
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/python/html/index.html" class="md-nav__link">
+        python
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="about.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#node-names" class="md-nav__link">
+    Node names
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-naming-conventions" class="md-nav__link">
+    Node naming conventions 
+  </a>
+  
+    <nav class="md-nav" aria-label="Node naming conventions ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#use-small-capital-node-names" class="md-nav__link">
+    Use small capital node names
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hierarchical-relationships" class="md-nav__link">
+    Hierarchical relationships
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-nouns-to-represent-resources" class="md-nav__link">
+    Use nouns to represent resources
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-verbs-to-represent-actions" class="md-nav__link">
+    Use verbs to represent actions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-hyphens-to-improve-the-readability-of-nodes" class="md-nav__link">
+    Use hyphens (-) to improve the readability of nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#do-not-use-file-extensions" class="md-nav__link">
+    Do not use file extensions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#never-use-crud-function-names-in-path" class="md-nav__link">
+    Never use CRUD function names in path
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provider" class="md-nav__link">
+    Provider 
+  </a>
+  
+    <nav class="md-nav" aria-label="Provider ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#register-of-nodes" class="md-nav__link">
+    Register of nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-wildcard" class="md-nav__link">
+    Single wildcard "*"
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#double-wildcard" class="md-nav__link">
+    Double wildcard "**"
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#routing-of-requests" class="md-nav__link">
+    Routing of requests 
+  </a>
+  
+    <nav class="md-nav" aria-label="Routing of requests ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#behavior-of" class="md-nav__link">
+    Behavior of '/'
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-for-routing-of-requests" class="md-nav__link">
+    Example for routing of requests:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#browse" class="md-nav__link">
+    Browse
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#provider-interface-functions" class="md-nav__link">
+    Provider Interface functions 
+  </a>
+  
+    <nav class="md-nav" aria-label="Provider Interface functions ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oncreate" class="md-nav__link">
+    onCreate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onremove" class="md-nav__link">
+    onRemove
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onbrowse" class="md-nav__link">
+    onBrowse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onread" class="md-nav__link">
+    onRead
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onwrite" class="md-nav__link">
+    onWrite
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onmetadata" class="md-nav__link">
+    onMetadata
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-of-variant" class="md-nav__link">
+    Usage of Variant 
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage of Variant ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-a-value-of-a-variant" class="md-nav__link">
+    Set a value of a variant
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-a-value-of-a-variant" class="md-nav__link">
+    Get a value of a variant
+  </a>
+  
+    <nav class="md-nav" aria-label="Get a value of a variant">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-access-scalar-values" class="md-nav__link">
+    Example access scalar values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-values-of-an-array" class="md-nav__link">
+    Accessing values of an Array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-access-array-values" class="md-nav__link">
+    Example access array values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-flatbuffers" class="md-nav__link">
+    Access flatbuffers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-of-flatbuffers" class="md-nav__link">
+    Usage of flatbuffers 
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage of flatbuffers ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automatic-build-using-cmake" class="md-nav__link">
+    Automatic Build using CMake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tips-and-tricks" class="md-nav__link">
+    Tips and Tricks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    Metadata 
+  </a>
+  
+    <nav class="md-nav" aria-label="Metadata ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#references-to-other-nodes-in-metadata" class="md-nav__link">
+    References to other nodes in metadata 
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typetree" class="md-nav__link">
+    Typetree 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-of-client" class="md-nav__link">
+    Usage Of Client 
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Of Client ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creation" class="md-nav__link">
+    Creation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#celix-bundle" class="md-nav__link">
+    Celix Bundle
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/datalayer.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#namingConventions">naming conventions</a></li>
+<li><a href="#provider">provider</a></li>
+<li><a href="#routing">Routing of requests</a></li>
+<li><a href="#providerInterface">Provider Interface functions</a></li>
+<li><a href="#variant">Usage of Variant</a></li>
+<li><a href="#flatbuffers">Usage of flatbuffers</a></li>
+<li><a href="#metadata">Metadata</a></li>
+<li><a href="#typetree">Typetree</a></li>
+<li><a href="#client">Usage of client</a></li>
+</ul>
+<h2 id="node-names">Node names<a class="headerlink" href="#node-names" title="Permanent link">&para;</a></h2>
+<p>Each value is addressed by a path. A path creates of a set of nodes. When nodes are
+named, an API is intuitive and easy to use. If done poorly, that same API can
+feel difficult to use and to understand.</p>
+<p>A <strong>node can be a singleton or a collection</strong>. For Example <code>customers</code> is a
+collection node and <code>customer</code> is a singleton resource (in a banking
+domain). We can identify <code>customers</code> collection resource using the path
+<code>/customers</code>. We can identify a single <code>customer</code> resource using
+the path <code>/customers/{customerID}</code>.</p>
+<p>A <strong>node may contain sub-collection resources</strong> also. For example, sub-collection
+resource <code>accounts</code> of a particular <code>customer</code> can be identified
+using the path <code>/customers/{customerId}/accounts</code> (in a banking domain).
+Similarly, a singleton resource <code>account</code> inside the sub-collection
+resource <code>accounts</code> can be identified as
+follows:  <code>/customers/{customerId}/accounts/{accountId}</code>.</p>
+<h2 id="node-naming-conventions">Node naming conventions <a name="namingConventions"></a><a class="headerlink" href="#node-naming-conventions" title="Permanent link">&para;</a></h2>
+<h3 id="use-small-capital-node-names">Use small capital node names<a class="headerlink" href="#use-small-capital-node-names" title="Permanent link">&para;</a></h3>
+<p>Always use small capital node names!</p>
+<h3 id="hierarchical-relationships">Hierarchical relationships<a class="headerlink" href="#hierarchical-relationships" title="Permanent link">&para;</a></h3>
+<p>Use subnodes to indicate hierarchical relationship between resources</p>
+<div class="highlight"><pre><span></span><code>device-management
+device-management/managed-devices
+device-management/managed-devices/{id}
+device-management/managed-devices/{id}/scripts
+device-management/managed-devices/{id}/scripts/{id}
+</code></pre></div>
+<h3 id="use-nouns-to-represent-resources">Use nouns to represent resources<a class="headerlink" href="#use-nouns-to-represent-resources" title="Permanent link">&para;</a></h3>
+<p>Nodes should refer to a resource that is a thing (noun) instead of referring to
+an action (verb) because nouns have properties which verbs do not have - similar
+to resources have attributes. Some examples of a resource are:</p>
+<ul>
+<li>Users of the system</li>
+<li>User Accounts</li>
+<li>Network Devices etc.</li>
+</ul>
+<p>and their resource URIs can be designed as below:</p>
+<div class="highlight"><pre><span></span><code>device-management/managed-devices
+device-management/managed-devices/{device-id}
+user-management/users/
+user-management/users/{id}
+</code></pre></div>
+<h3 id="use-verbs-to-represent-actions">Use verbs to represent actions<a class="headerlink" href="#use-verbs-to-represent-actions" title="Permanent link">&para;</a></h3>
+<p>Has to return method in metadata.</p>
+<h3 id="use-hyphens-to-improve-the-readability-of-nodes">Use hyphens (-) to improve the readability of nodes<a class="headerlink" href="#use-hyphens-to-improve-the-readability-of-nodes" title="Permanent link">&para;</a></h3>
+<p>To make your nodes easy for people to interpret, use the hyphen (-)
+character to improve the readability of names in long path segments.</p>
+<div class="highlight"><pre><span></span><code>inventory-management/managed-entities/{id}/install-script-location  //More readable
+inventory-management/managedEntities/{id}/installScriptLocation  //Less readable
+</code></pre></div>
+<p><strong>Do not use underscores ( _ )</strong>
+It's possible to use an underscore in place of a hyphen to be used as
+separator. But depending on the applications font, it's possible that the
+underscore (_) character can either get partially obscured or completely hidden
+in some browsers or screens.</p>
+<p>To avoid this confusion, use hyphens (-) instead of underscores ( _ ).</p>
+<div class="highlight"><pre><span></span><code>inventory-management/managed-entities/{id}/install-script-location  //More readable
+inventory_management/managed_entities/{id}/install_script_location  //More error prone
+</code></pre></div>
+<h3 id="do-not-use-file-extensions">Do not use file extensions<a class="headerlink" href="#do-not-use-file-extensions" title="Permanent link">&para;</a></h3>
+<p>File extensions look bad and do not add any advantage. Removing them decreases
+the length of URIs as well. No reason to keep them.</p>
+<p>Apart from above reason, if you want to highlight the media type of API using
+file extension then you should use metadata type.</p>
+<div class="highlight"><pre><span></span><code>device-management/managed-devices.xml  /*Do not use it*/
+device-management/managed-devices  /*This is correct path*/
+</code></pre></div>
+<h3 id="never-use-crud-function-names-in-path">Never use CRUD function names in path<a class="headerlink" href="#never-use-crud-function-names-in-path" title="Permanent link">&para;</a></h3>
+<p>Paths should not be used to indicate that a CRUD (Create/Read/Update/Delete)
+function is performed. Paths should be used to uniquely identify resources and
+not any action upon them. Request methods should be used to indicate which CRUD
+function is performed.</p>
+<div class="highlight"><pre><span></span><code>browse device-management/managed-devices  //Get all devices
+create device-management/managed-devices  //Create new Device
+read   device-management/managed-devices/{id}  //Get device for given Id
+write  device-management/managed-devices/{id}  //Update device for given Id
+delete device-management/managed-devices/{id}  //Delete device for given Id
+</code></pre></div>
+<h2 id="provider">Provider <a name="provider"></a><a class="headerlink" href="#provider" title="Permanent link">&para;</a></h2>
+<p>A provider is responsible for nodes. One provider can handle an unlimited amount
+of nodes. All requests to one provider are serialized: It's guarantied that if
+you are in one of the interface functions of a node (onRead, onWrite, ...) no
+other interface function of a node handled by the same provider is called. So
+you don't have to handle mutual exclusion to data handled by one provider.</p>
+<h3 id="register-of-nodes">Register of nodes<a class="headerlink" href="#register-of-nodes" title="Permanent link">&para;</a></h3>
+<p>To register a path you have to specify which ProviderNode is responsible for this node.</p>
+<p>Example:
+Registration for ethercat/version: whenever a request for "ethercat/version" is send, this request will be routed to this particular node.</p>
+<p>If a provider is responsible for multiple nodes or the subnodes are unknown at the moment of registration, its possible to register with wildcards.</p>
+<h3 id="single-wildcard">Single wildcard "*"<a class="headerlink" href="#single-wildcard" title="Permanent link">&para;</a></h3>
+<p>A single wildcard is the sign "*". "*" stands for a any string on a hierarchy level. You can use multiple wildcards at different levels.</p>
+<p>Examples:</p>
+<ul>
+<li>provider1: test/*</li>
+<li>provider2: test/foo/*/bar</li>
+<li>provider3: test/*/foo</li>
+<li>provider4: test/*/*</li>
+<li>provider5: test/bar/bar</li>
+</ul>
+<h3 id="double-wildcard">Double wildcard "**"<a class="headerlink" href="#double-wildcard" title="Permanent link">&para;</a></h3>
+<p>A double wildcard is the string "**". "**" stands for any string on any hierarchy level. Such a wildcard is only allowed as last characters at your registration string.</p>
+<p>Example:</p>
+<ul>
+<li>provider6: test/**</li>
+<li>provider7: test/bar/**</li>
+</ul>
+<h2 id="routing-of-requests">Routing of requests <a name="Routing"></a><a class="headerlink" href="#routing-of-requests" title="Permanent link">&para;</a></h2>
+<p>All requests except browse requests are routed to the provider the address matches best to the registered path.
+So on each level a registration with a specific path matches before a registration with a wildcard.
+A single wildcard matches before a double wildcard.
+An address matches always the best registered provider (see example).
+Only provider with a wildcard at end of it's registered address will get browse requests.</p>
+<h3 id="behavior-of">Behavior of '/'<a class="headerlink" href="#behavior-of" title="Permanent link">&para;</a></h3>
+<p>Any '/' at begin or end at the request address will be removed. A provider will
+never get an address with a leading or tailing '/'. Routing of addresses will be
+done without a leading or tailing '/'.</p>
+<h3 id="example-for-routing-of-requests">Example for routing of requests:<a class="headerlink" href="#example-for-routing-of-requests" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>address</th>
+<th>destination for browse</th>
+<th>destination for read</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>""</td>
+<td>nobody</td>
+<td>nobody</td>
+</tr>
+<tr>
+<td>"test"</td>
+<td>provider1</td>
+<td>nobody</td>
+</tr>
+<tr>
+<td>"test/1"</td>
+<td>provider4</td>
+<td>provider1</td>
+</tr>
+<tr>
+<td>"test/1/foo"</td>
+<td>provider6</td>
+<td>provider3</td>
+</tr>
+<tr>
+<td>"test/1/bar"</td>
+<td>provider6</td>
+<td>provider4</td>
+</tr>
+<tr>
+<td>"test/foo"</td>
+<td>provider4</td>
+<td>provider1</td>
+</tr>
+<tr>
+<td>"test/bar"</td>
+<td>provider7</td>
+<td>provider1</td>
+</tr>
+<tr>
+<td>"test/bar/bar"</td>
+<td>provider7</td>
+<td>provider5</td>
+</tr>
+<tr>
+<td>"test/bar/foo"</td>
+<td>provider7</td>
+<td>provider7</td>
+</tr>
+<tr>
+<td>"test/bar/bar/foo"</td>
+<td>provider7</td>
+<td>provider7</td>
+</tr>
+<tr>
+<td>"test/bar/foo/foo"</td>
+<td>provider7</td>
+<td>provider7</td>
+</tr>
+<tr>
+<td>"test/foo/foo"</td>
+<td>provider6</td>
+<td>provider3</td>
+</tr>
+<tr>
+<td>"test/foo/foo/bar"</td>
+<td>provider6</td>
+<td>provider2</td>
+</tr>
+<tr>
+<td>"test/foo/foo/foo"</td>
+<td>provider6</td>
+<td>provider6</td>
+</tr>
+<tr>
+<td>"test/1/bar"</td>
+<td>provider6</td>
+<td>provider4</td>
+</tr>
+<tr>
+<td>"test/1/bar/1"</td>
+<td>provider6</td>
+<td>provider6</td>
+</tr>
+</tbody>
+</table>
+<h3 id="browse">Browse<a class="headerlink" href="#browse" title="Permanent link">&para;</a></h3>
+<p>Whenever a node is browsed, the result is a list of strings with contains the names of the subnodes of this nodes. In general datalayer wants to answer this kind of requests at its own. Only if someone has registered with a wildcard ("*") for this particular node this provider will be asked to give for subnodes. The result of this request will be merged with the nodes datalayer knows for its own. So a provider does not need to return values on a browse request it has already registered with a more specific path.</p>
+<table>
+<thead>
+<tr>
+<th>address</th>
+<th>result of browse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>""</td>
+<td>"test"</td>
+</tr>
+<tr>
+<td>"test"</td>
+<td>"foo", "bar" + return from provider1</td>
+</tr>
+<tr>
+<td>"test/1"</td>
+<td>"foo" + return from provider4</td>
+</tr>
+<tr>
+<td>"test/1/foo"</td>
+<td>return from provider6</td>
+</tr>
+<tr>
+<td>"test/1/bar"</td>
+<td>return from provider6</td>
+</tr>
+<tr>
+<td>"test/foo"</td>
+<td>"foo" + return from provider4</td>
+</tr>
+<tr>
+<td>"test/bar"</td>
+<td>"foo" + "bar"+ return from provider7</td>
+</tr>
+<tr>
+<td>"test/bar/bar"</td>
+<td>return from provider7</td>
+</tr>
+<tr>
+<td>"test/bar/foo"</td>
+<td>return from provider7</td>
+</tr>
+<tr>
+<td>"test/bar/bar/foo"</td>
+<td>return from provider7</td>
+</tr>
+<tr>
+<td>"test/bar/foo/foo"</td>
+<td>return from provider7</td>
+</tr>
+<tr>
+<td>"test/foo/foo"</td>
+<td>"bar" + return from provider6</td>
+</tr>
+<tr>
+<td>"test/foo/foo/bar"</td>
+<td>return from provider6</td>
+</tr>
+<tr>
+<td>"test/foo/foo/foo"</td>
+<td>return from provider6</td>
+</tr>
+<tr>
+<td>"test/1/bar"</td>
+<td>return from provider6</td>
+</tr>
+<tr>
+<td>"test/1/bar/1"</td>
+<td>return from provider6</td>
+</tr>
+</tbody>
+</table>
+<h2 id="provider-interface-functions">Provider Interface functions <a name="providerInterface"></a><a class="headerlink" href="#provider-interface-functions" title="Permanent link">&para;</a></h2>
+<p>Properties:</p>
+<ul>
+<li>idempotent, i.e. operation will have the same effect on the servers state if
+  executed once or multiple times (note: this does not necessarily mean returning
+  the same response or status code)</li>
+<li>safe, i.e. must not have side effects such as state changes</li>
+<li>Input data</li>
+<li>Output data</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>function</th>
+<th>description</th>
+<th align="center">safe</th>
+<th align="center">idempotent</th>
+<th align="center">Input</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onCreate</td>
+<td>Creates an object</td>
+<td align="center">no</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+</tr>
+<tr>
+<td>onRemove</td>
+<td>Removes an object</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td>onBrowse</td>
+<td>Browse childs of a node</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+</tr>
+<tr>
+<td>onRead</td>
+<td>Reads value of a node</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+</tr>
+<tr>
+<td>onWrite</td>
+<td>Writes value to a node</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+</tr>
+<tr>
+<td>onMetadata</td>
+<td>Reads metadata of a node</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+<td align="center">no</td>
+</tr>
+</tbody>
+</table>
+<p>Requests are Stateless: Your node/application is not allowed to store anything
+about latest request. Handle each and every request as new. No session, no
+history. Design your interface in a way that each request contains all the
+information necessary to service the request.</p>
+<div class="highlight"><pre><span></span><code>No Client context shall be stored on the server between requests.
+The client is responsible for managing the state of the application.
+</code></pre></div>
+<h3 id="oncreate">onCreate<a class="headerlink" href="#oncreate" title="Permanent link">&para;</a></h3>
+<p>This function should be used to create a new object. This function is not
+idempotent. So two calls of onCreate will not have the same result. As input
+all data should be provided to create the object. As output data the location
+(path) of of the new object should be returned.</p>
+<p>Examples:</p>
+<ul>
+<li>Creating an order in an online shop</li>
+<li>Creating an axis</li>
+<li>Creating a Motion Command</li>
+</ul>
+<h3 id="onremove">onRemove<a class="headerlink" href="#onremove" title="Permanent link">&para;</a></h3>
+<p>This function removes an object. No input and output data are allowed.</p>
+<p>Examples:</p>
+<ul>
+<li>Removing an axis</li>
+</ul>
+<h3 id="onbrowse">onBrowse<a class="headerlink" href="#onbrowse" title="Permanent link">&para;</a></h3>
+<p>This function returns child nodes of this node. The result must be an
+array of strings with the names of the child nodes.</p>
+<h3 id="onread">onRead<a class="headerlink" href="#onread" title="Permanent link">&para;</a></h3>
+<p>This function reads the value of a node. To specify the read operation the onRead
+function may have input data. This function is idempotent and safe. So two equal
+subsequent calls will have the same result and will not change the state.</p>
+<h3 id="onwrite">onWrite<a class="headerlink" href="#onwrite" title="Permanent link">&para;</a></h3>
+<p>This function changes the value of an already existing node. The new value is
+provided as input data. As output data you can return the new node value or
+nothing. This function is idempotent. So if you send a request multiple
+times, that should be equivalent to a single request modification.</p>
+<h3 id="onmetadata">onMetadata<a class="headerlink" href="#onmetadata" title="Permanent link">&para;</a></h3>
+<p>This function returns the metadata of this note. You have to return a
+metadata.fbs flatbuffer. See <a href="#metadata">metadata</a>.</p>
+<h2 id="usage-of-variant">Usage of Variant <a name="variant"></a><a class="headerlink" href="#usage-of-variant" title="Permanent link">&para;</a></h2>
+<p>A variant holds data of different types. Following basic types are defined:</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th align="right">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UNKNOWN</td>
+<td align="right">unknown datatype</td>
+</tr>
+<tr>
+<td>BOOL8</td>
+<td align="right">bool 8 bit</td>
+</tr>
+<tr>
+<td>INT8</td>
+<td align="right">signed int 8 bit</td>
+</tr>
+<tr>
+<td>UINT8</td>
+<td align="right">unsigned int 8 bit</td>
+</tr>
+<tr>
+<td>INT16</td>
+<td align="right">signed int 16 bit</td>
+</tr>
+<tr>
+<td>UINT16</td>
+<td align="right">unsigned int 16 bit</td>
+</tr>
+<tr>
+<td>INT32</td>
+<td align="right">signed int 32 bit</td>
+</tr>
+<tr>
+<td>UINT32</td>
+<td align="right">unsigned int 32 bit</td>
+</tr>
+<tr>
+<td>INT64</td>
+<td align="right">signed int 64 bit</td>
+</tr>
+<tr>
+<td>UINT64</td>
+<td align="right">unsigned int 64 bit</td>
+</tr>
+<tr>
+<td>FLOAT32</td>
+<td align="right">float 32 bit</td>
+</tr>
+<tr>
+<td>FLOAT64</td>
+<td align="right">float 64 bit</td>
+</tr>
+<tr>
+<td>STRING</td>
+<td align="right">string (UTF-8)</td>
+</tr>
+<tr>
+<td>ARRAY_OF_BOOL8</td>
+<td align="right">array of bool 8 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_INT8</td>
+<td align="right">array of signed int 8 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_UINT8</td>
+<td align="right">array of unsigned int 8 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_INT16</td>
+<td align="right">array of signed int 16 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_UINT16</td>
+<td align="right">array of unsigned int 16 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_INT32</td>
+<td align="right">array of signed int 32 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_UINT32</td>
+<td align="right">array of unsigned int 32 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_INT64</td>
+<td align="right">array of signed int 64 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_UINT64</td>
+<td align="right">array of unsigned int 64 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_FLOAT32</td>
+<td align="right">array of float 32 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_FLOAT64</td>
+<td align="right">array of float 64 bit</td>
+</tr>
+<tr>
+<td>ARRAY_OF_STRING</td>
+<td align="right">array of string (UTF-8)</td>
+</tr>
+<tr>
+<td>RAW</td>
+<td align="right">raw bytes</td>
+</tr>
+<tr>
+<td>FLATBUFFERS</td>
+<td align="right">bytes as a complex data type encoded as a flatbuffer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="set-a-value-of-a-variant">Set a value of a variant<a class="headerlink" href="#set-a-value-of-a-variant" title="Permanent link">&para;</a></h3>
+<p>To set a value to a variant, you can use one of the following functions:</p>
+<ul>
+<li>setValue(\&lt;type> value)</li>
+<li>value is a C data type: type of the variant will be identified <strong>automatically</strong> by its type (including string)</li>
+<li>value is a vector/set:<ul>
+<li>array type of the variant will be identified <strong>automatically</strong></li>
+<li>values will be copied</li>
+</ul>
+</li>
+<li>setValue(\&lt;type>* values, size_t count)</li>
+<li>value is array of c data type (including array of string)</li>
+<li>array type of variant will be identified <strong>automatically</strong> by its type (including string)</li>
+<li>values will be copied</li>
+<li>shareValue(\&lt;type>* values, size_t count)  </li>
+<li>In some cases it is not necessary to copy the value to a variant. A reference to the particular data is sufficient.</li>
+<li>type of variant will be identified automatically</li>
+<li>only a pointer to data will be stored</li>
+<li>this function is faster than the copy functions</li>
+<li>copyFlatbuffers()</li>
+<li>copyFlatbuffer from flatbuffer builder object</li>
+<li>shareFlatbuffers</li>
+<li>same as copyFlatbuffers() but data will not be copied.</li>
+<li>Only pointer to data will be stored</li>
+<li>setSharedPointer(type, data, size)</li>
+<li>set a variant to <strong>type</strong> with <strong>data</strong> and <strong>size</strong></li>
+<li>data will not be copied, only a pointer will be stored</li>
+<li>setType(type, size) + copyRaw(data, size)</li>
+<li>set a variant with a specific <strong>type</strong> and <strong>size</strong> with <strong>data</strong></li>
+<li>data will be copied</li>
+</ul>
+<h3 id="get-a-value-of-a-variant">Get a value of a variant<a class="headerlink" href="#get-a-value-of-a-variant" title="Permanent link">&para;</a></h3>
+<p>To access data you can assign a variant to a basic data type. If the type of the variant match the basic data type,
+the value will be copied to the variable. If the type did not match, 0 or NULL will be returned.</p>
+<h4 id="example-access-scalar-values">Example access scalar values<a class="headerlink" href="#example-access-scalar-values" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> Variant variant;
+ uint32_t value1 = 4711;
+ variant.setValue(value1);
+ uint32_t value2 = variant; // value2 is 4711
+ uint16_t value3 = variant; // value3 is 0
+</code></pre></div>
+<p>To get the type of a variant use <strong>getType()</strong></p>
+<h4 id="accessing-values-of-an-array">Accessing values of an Array<a class="headerlink" href="#accessing-values-of-an-array" title="Permanent link">&para;</a></h4>
+<p>You can assign a variant to an C array type. If the type of the variant match the basic data type.</p>
+<h4 id="example-access-array-values">Example access array values<a class="headerlink" href="#example-access-array-values" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code> Variant data; // data containing an array of string
+ const char** strArray = data;
+ for (size_t i = 0; i &lt; data.getCount(); i++)
+   printf(&quot;%s&quot;, strArray[i]);
+</code></pre></div>
+<p>You can also use this kind of access for non-array values. getCount() returns 1 for nonArray values and cast to const pointer returns address of data.</p>
+<h4 id="access-flatbuffers">Access flatbuffers<a class="headerlink" href="#access-flatbuffers" title="Permanent link">&para;</a></h4>
+<p>A variant can hold a flatbuffer. To check whether a variant has a specific flatbuffer type you can use the verifier of the flatbuffer.
+This check contains check for right data type (FLATBUFFERS) and check against flatbuffer verifier.</p>
+<div class="highlight"><pre><span></span><code>  Variant data; // data with a flatbuffer
+  if (STATUS_SUCCEEDED(data.verifyFlatbuffers(VerifyAxisBuffer))); // VerifyAxisBuffer is generated out of .fbs file
+  {
+    auto axis = GetAxis(data-&gt;getData()); // GetAxis is generated out of .fbs file
+  }
+</code></pre></div>
+<h2 id="usage-of-flatbuffers">Usage of flatbuffers <a name="flatbuffers"></a><a class="headerlink" href="#usage-of-flatbuffers" title="Permanent link">&para;</a></h2>
+<p>Flatbuffers is used for complex data types. Documentation is available at <a href="https://google.github.io/flatbuffers/">here</a>.</p>
+<p>Base of a complex data type is type defined in a <a href="https://google.github.io/flatbuffers/flatbuffers_guide_writing_schema.html">.fbs</a> file.
+Out of a .fbs file you have to generate different files:</p>
+<p><img alt="Flatbuffer Compiler" src="images/flatbuffer_compiler.png" /></p>
+<ul>
+<li>type_generated.h</li>
+<li>File to include in your source code. This header enables you to access a existing flatbuffer or create a new one.</li>
+<li>type.bfbs</li>
+<li>binary representation of the type. This file is used for generic access to a flatbuffer. It enables the datalayer to
+    convert between flatbuffer and JSON.</li>
+<li>If you use flatbuffers as a data, you have to return the content of this file as metadata (see <a href="#metadata">metadata</a>)</li>
+</ul>
+<h3 id="automatic-build-using-cmake">Automatic Build using CMake<a class="headerlink" href="#automatic-build-using-cmake" title="Permanent link">&para;</a></h3>
+<p>To build your <code>.fbs</code> files using CMake include following lines in your CMakeLists.txt.</p>
+<p>To use the right flatbuffer compiler use these lines:</p>
+<div class="highlight"><pre><span></span><code><span class="c"># set flatbuffer root folder</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">FLATBUFFER_ROOT</span> <span class="o">${</span><span class="nv">DEPENDENCIES_ROOT</span><span class="o">}</span><span class="s">/appflatbuffers</span><span class="p">)</span>
+
+<span class="c"># expand binary search path for flatbuffer compiler</span>
+<span class="nb">if</span> <span class="p">(</span><span class="s">WIN32</span><span class="p">)</span>
+  <span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_PROGRAM_PATH</span> <span class="o">${</span><span class="nv">CMAKE_PROGRAM_PATH</span><span class="o">}</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/win-msvc-x86/release</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+  <span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_PROGRAM_PATH</span> <span class="o">${</span><span class="nv">CMAKE_PROGRAM_PATH</span><span class="o">}</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/linux-gcc-x64/release</span><span class="p">)</span>
+
+  <span class="c"># set executable attributes for flatbuffer compiler</span>
+  <span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span> <span class="s">chmod</span> <span class="s">+x</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/linux-gcc-x64/debug/flatc</span><span class="p">)</span>
+  <span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span> <span class="s">chmod</span> <span class="s">+x</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/linux-gcc-x64/release/flatc</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># include flatbuffer cmake functions</span>
+<span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/CMake/FindFlatBuffers.cmake</span><span class="p">)</span>
+</code></pre></div>
+<p>To compile your <code>.fbs</code> files, use these lines:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_INCLUDE_PATH</span> <span class="o">${</span><span class="nv">CMAKE_INCLUDE_PATH</span><span class="o">}</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/include</span> <span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/CMake/FindFlatBuffers.cmake</span><span class="p">)</span>
+
+<span class="nb">SET</span> <span class="p">(</span> <span class="s">IDL_FILES</span> <span class="o">${</span><span class="nv">IDL_FILES</span><span class="o">}</span>
+  <span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/mockups/Interpolator.fbs</span>
+  <span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/mockups/AllDataTypes.fbs</span>
+  <span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/motion/axis.fbs</span>
+<span class="p">)</span>
+
+<span class="nb">build_flatbuffers</span><span class="p">(</span> <span class="s2">&quot;${IDL_FILES}&quot;</span> <span class="s2">&quot;&quot;</span> <span class="s">BuildFlatbuffers</span> <span class="s2">&quot;&quot;</span> <span class="s2">&quot;${CMAKE_CURRENT_BINARY_DIR}&quot;</span> <span class="s2">&quot;${CMAKE_CURRENT_BINARY_DIR}&quot;</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>This will generate an additional buildtarget <code>BuildFlatbuffers</code>. You can add this build target to your dependencies.</p>
+<h3 id="tips-and-tricks">Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Force Defaults / IsField Present</li>
+<li>Tables fields are only stored if they are set and are different from its default values. To ensure that all values are set in your
+     flatbuffer, you can enable force_default in flatbuffer builder object:
+     <div class="highlight"><pre><span></span><code><span class="n">flatbuffers</span><span class="o">::</span><span class="n">FlatBufferBuilder</span> <span class="n">builder</span><span class="p">;</span>
+<span class="n">builder</span><span class="p">.</span><span class="n">ForceDefaults</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Access of array values</li>
+<li>assume .fbs file
+     <div class="highlight"><pre><span></span><code><span class="n">table</span> <span class="n">myTable</span> <span class="p">{</span>
+  <span class="nl">myVecDouble</span><span class="p">:[</span><span class="kt">double</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="n">root_type</span> <span class="n">MyTable</span><span class="p">;</span>
+</code></pre></div></li>
+<li>access as flatbuffer vector
+     <div class="highlight"><pre><span></span><code><span class="k">auto</span> <span class="n">myTable</span> <span class="o">=</span> <span class="n">GetMyTable</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">getData</span><span class="p">());</span>
+<span class="k">auto</span> <span class="n">myVecDouble</span> <span class="o">=</span> <span class="n">myTable</span><span class="o">-&gt;</span><span class="n">myVecDouble</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myVecDouble</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="kt">double</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myVecDouble</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</code></pre></div></li>
+<li>access as C array
+     <div class="highlight"><pre><span></span><code><span class="k">auto</span> <span class="n">myTable</span> <span class="o">=</span> <span class="n">GetMyTable</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">getData</span><span class="p">());</span>
+<span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">myVecDouble</span> <span class="o">=</span> <span class="n">myTable</span><span class="o">-&gt;</span><span class="n">myVecDouble</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myVecDouble</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="kt">double</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myVecDouble</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</code></pre></div></li>
+<li>access as plane uint_8* memory (little endian)
+     <div class="highlight"><pre><span></span><code><span class="k">auto</span> <span class="n">myTable</span> <span class="o">=</span> <span class="n">GetMyTable</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">getData</span><span class="p">());</span>
+<span class="k">const</span> <span class="n">uint_8</span><span class="o">*</span> <span class="n">myVecDouble</span> <span class="o">=</span> <span class="n">myTable</span><span class="o">-&gt;</span><span class="n">myVecDouble</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">Data</span><span class="p">();</span>
+</code></pre></div></li>
+</ol>
+<h2 id="metadata">Metadata <a name="metadata"></a><a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h2>
+<p>Metadata contains additional information about a node. This information can be
+read using the metadata function.
+Definition of metadata can be found <a href="../../private/src/impl/metadata.fbs">here</a>.</p>
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nodeClass</td>
+<td>Resource: node is a resource <br> Method: node is a command <br> Type: node represents a type</td>
+</tr>
+<tr>
+<td>operations</td>
+<td>contains allowed operations</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Short description in markdown format</td>
+</tr>
+<tr>
+<td>descriptionUrl</td>
+<td>URL to detailed description</td>
+</tr>
+<tr>
+<td>displayName</td>
+<td>Name to be displayed instead of node address</td>
+</tr>
+<tr>
+<td>displayFormat</td>
+<td>Auto: display in standard type format <br> Bin: display as binary <br> Oct: display octal <br> Dec: display Decimal <br> Hex: display hexadecimal</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>unit of value</td>
+</tr>
+<tr>
+<td>extensions</td>
+<td>user defined extensions (key/value pair)</td>
+</tr>
+<tr>
+<td>references</td>
+<td>references to other nodes (key/value pair)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="references-to-other-nodes-in-metadata">References to other nodes in metadata <a name="metadataReferences"></a><a class="headerlink" href="#references-to-other-nodes-in-metadata" title="Permanent link">&para;</a></h3>
+<p>Metadata of nodes can reference other nodes. A reference contains of a type and
+a targetAddress.
+There are some predefined types of references</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>readType</td>
+<td>type when reading a value</td>
+</tr>
+<tr>
+<td>writeType</td>
+<td>type when writing a value</td>
+</tr>
+<tr>
+<td>createType</td>
+<td>type when creating a value</td>
+</tr>
+</tbody>
+</table>
+<p>The target of a reference is a address in the datalayer tree.</p>
+<h2 id="typetree">Typetree <a name="typetree"></a><a class="headerlink" href="#typetree" title="Permanent link">&para;</a></h2>
+<p>All types are included as nodes in the datalayer tree. Types are located under
+"types/". Types can be references in metadata as a reference.</p>
+<h2 id="usage-of-client">Usage Of Client <a name="client"></a><a class="headerlink" href="#usage-of-client" title="Permanent link">&para;</a></h2>
+<h3 id="creation">Creation<a class="headerlink" href="#creation" title="Permanent link">&para;</a></h3>
+<p>To create a client use factory function <code>createClient(addr)</code>.
+For <code>addr</code> you have following possibilities</p>
+<table>
+<thead>
+<tr>
+<th>connection scheme</th>
+<th>comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INPROC</td>
+<td>Use empty address string to use in process communication. This works only if your client is in same address space (process) like datalayer application.</td>
+</tr>
+<tr>
+<td>IPC</td>
+<td>Only available in Linux. Use this communication kind in same device between processes.</td>
+</tr>
+<tr>
+<td>TCP</td>
+<td>Communication between devices</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>addr</th>
+<th>comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>""</td>
+<td>INPROC communication (default)</td>
+</tr>
+<tr>
+<td>DL_IPC_AUTO</td>
+<td>Automatic choice of IPC port. It uses \&lt;$HOME>/.datalayer/frontend/2069 as IPC communication port. You can also use this define for communication between snaps with same user</td>
+</tr>
+<tr>
+<td>"ipc://\&lt;path></td>
+<td>IPC communication with specific path. You have to run a broker with this IPC path.</td>
+</tr>
+<tr>
+<td>"tcp://\&lt;ip>:\&lt;port></td>
+<td>TCP communication with specific device. Standard port of TCP is 2069.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="celix-bundle">Celix Bundle<a class="headerlink" href="#celix-bundle" title="Permanent link">&para;</a></h2>
+<p>This components includes a Celix bundle. You can use it in your own Celix
+framework. Be careful that on your target exists only one broker. So if you
+use datalayer in multiple Celix framework only one broker has to be started. To
+control start of broker you can use following entry in config.properties in your
+Celix preferences.</p>
+<div class="highlight"><pre><span></span><code><span class="n">datalayer</span><span class="p">.</span><span class="n">broker</span><span class="p">.</span><span class="n">enable</span><span class="o">=</span><span class="nb">false</span>
+</code></pre></div>
+<p>The default value of this switch is true. So you have to set it explicit to
+false to disable startup of broker in your system.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020-2021 Bosch Rexroth AG
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/boschrexroth" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/boschrexroth" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>

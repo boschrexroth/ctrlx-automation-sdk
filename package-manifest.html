@@ -1,0 +1,2029 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ctrlX AUTOMATION Software Development Kit">
+      
+      
+      
+        <meta name="author" content="Bosch Rexroth AG">
+      
+      
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/package-manifest.html">
+      
+      <link rel="icon" href="assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>Package manifest - Software Development Kit</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="stylesheets/sdk.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#basics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Software Development Kit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Package manifest
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    boschrexroth/ctrlx-automation-sdk
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="index.html" class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="overview.html" class="md-tabs__link">
+        Getting Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="setup_overview.html" class="md-tabs__link">
+        Setup
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="samples_mkdocs.html" class="md-tabs__link">
+        Samples
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="references.html" class="md-tabs__link">
+        References
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="about.html" class="md-tabs__link">
+      About
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Software Development Kit
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    boschrexroth/ctrlx-automation-sdk
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Getting Started
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Getting Started" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Getting Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ctrlx_automation.html" class="md-nav__link">
+        ctrlX AUTOMATION
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        Releases
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Releases" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Releases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog.html" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Setup
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Setup" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Setup
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_overview.html" class="md-nav__link">
+        Setup Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
+        Setup via VirtualBox
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_windows_wsl_ubuntu.html" class="md-nav__link">
+        Setup via WSL
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      <label class="md-nav__link" for="__nav_3_4">
+        Toolchain
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Toolchain" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Toolchain
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dotnet.html" class="md-nav__link">
+        .NET
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" >
+      
+      <label class="md-nav__link" for="__nav_3_5">
+        Development
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Development" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Development
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="debug.html" class="md-nav__link">
+        Remote Debugging
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Samples
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Samples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples_mkdocs.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      <label class="md-nav__link" for="__nav_4_2">
+        Samples C/C++
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples C/C++" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Samples C/C++
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/hello.world/index.html" class="md-nav__link">
+        Hello World
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/hello.plc/index.html" class="md-nav__link">
+        Hello PLC
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.client/index.html" class="md-nav__link">
+        ctrlX Data Layer Client
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.register.node/index.html" class="md-nav__link">
+        ctrlX Data Layer RegisterNode
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/automation.bundle/index.html" class="md-nav__link">
+        ctrlX Automation Bundle
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/automation.scheduler/index.html" class="md-nav__link">
+        ctrlX Automation Scheduler
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.ecat.io/index.html" class="md-nav__link">
+        ctrlX Data Layer EtherCAT I/O's
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.realtime/index.html" class="md-nav__link">
+        ctrlX Data Layer Realtime
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.provider.all-data/index.html" class="md-nav__link">
+        ctrlX Data Layer All Data Provider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/diagnostics.logbook/index.html" class="md-nav__link">
+        Diagnostics Logbook
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      <label class="md-nav__link" for="__nav_4_3">
+        Samples Golang
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples Golang" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Samples Golang
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-go/hello.webserver/index.html" class="md-nav__link">
+        Hello Webserver
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-go/appdata/index.html" class="md-nav__link">
+        AppData File Storage
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" >
+      
+      <label class="md-nav__link" for="__nav_4_4">
+        Samples Python
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples Python" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Samples Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.client.light/index.html" class="md-nav__link">
+        ctrlX Data Layer Client
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.client/index.html" class="md-nav__link">
+        ctrlX Data Layer Client (complex)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.client.sub/index.html" class="md-nav__link">
+        ctrlX Data Layer Client Subscription
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.provider/index.html" class="md-nav__link">
+        ctrlX Data Layer Provider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.provider.all-data/index.html" class="md-nav__link">
+        ctrlX Data Layer Provider All Data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.client.browse/index.html" class="md-nav__link">
+        ctrlX Data Layer Browse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.calc/index.html" class="md-nav__link">
+        ctrlX Data Layer Calculation operations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/python.logbook/index.html" class="md-nav__link">
+        Diagnostics Logbook
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/appdata/index.html" class="md-nav__link">
+        AppData File Storage
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5" type="checkbox" id="__nav_4_5" >
+      
+      <label class="md-nav__link" for="__nav_4_5">
+        Samples .NET
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples .NET" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Samples .NET
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/hello.world/index.html" class="md-nav__link">
+        Hello World
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.client/index.html" class="md-nav__link">
+        ctrlX Data Layer Client
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.client.browse/index.html" class="md-nav__link">
+        ctrlX Data Layer Client Browse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.client.browse/index.html" class="md-nav__link">
+        ctrlX Data Layer Browse
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.provider/index.html" class="md-nav__link">
+        ctrlX Data Layer Provider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.provider.alldata/index.html" class="md-nav__link">
+        ctrlX Data Layer All Data Provider
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.provider.virtual/index.html" class="md-nav__link">
+        ctrlX Data Layer Provider Virtual
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/datalayer.mqtt/index.html" class="md-nav__link">
+        ctrlX Data Layer MQTT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/diagnostics.logbook/index.html" class="md-nav__link">
+        Diagnostics Logbook
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6" type="checkbox" id="__nav_4_6" >
+      
+      <label class="md-nav__link" for="__nav_4_6">
+        Samples Shell
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Samples Shell" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Samples Shell
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-sh/tpm2.consumer/index.html" class="md-nav__link">
+        TPM2 Consumer
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        References
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="References" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          References
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="references.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appdevguide.html" class="md-nav__link">
+        Developer Guideline
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        Api Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Api Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Api Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/comm.datalayer/html/index.html" class="md-nav__link">
+        c/c++
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/csharp/html/index.html" class="md-nav__link">
+        c#
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/python/html/index.html" class="md-nav__link">
+        python
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="about.html" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    Basics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#providing-the-package-manifest" class="md-nav__link">
+    Providing the package-manifest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menus" class="md-nav__link">
+    Menus
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#declare-menu-items-in-package-manifest" class="md-nav__link">
+    Declare menu items in package-manifest
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reverse-proxy" class="md-nav__link">
+    Reverse Proxy
+  </a>
+  
+    <nav class="md-nav" aria-label="Reverse Proxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binding" class="md-nav__link">
+    Binding
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scopes-and-permissions" class="md-nav__link">
+    Scopes and Permissions
+  </a>
+  
+    <nav class="md-nav" aria-label="Scopes and Permissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enforcing-permissions-in-your-service" class="md-nav__link">
+    Enforcing permissions in your service
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#admin-scope" class="md-nav__link">
+    Admin Scope
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certificate-management-optional" class="md-nav__link">
+    Certificate Management (optional)
+  </a>
+  
+    <nav class="md-nav" aria-label="Certificate Management (optional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#certificate-stores" class="md-nav__link">
+    Certificate Stores
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-possibilities" class="md-nav__link">
+    Integration possibilities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/package-manifest.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Package manifest</h1>
+                
+                <h3 id="basics">Basics<a class="headerlink" href="#basics" title="Permanent link">&para;</a></h3>
+<p>An app can bring their own menu entries, use the reverse proxy infrastructure including permissions and use the solution for storage. This document describes the different integration points and how they work.</p>
+<p>Essential for the integration points to work is the package-manifest. Beside the snapcraft.yaml, it has to be provided by the app to integrate probably into the ctrlX CORE ecosystem. Here is an example of a package-manifest.json:</p>
+<details class="example"><summary>Example</summary><div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;certificatestores&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;examplestore&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Example Store&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;This is only an example store for documentation purpose.&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;services&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;proxyMapping&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions.web&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/rexroth-solutions&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;binding&quot;</span><span class="p">:</span> <span class="s2">&quot;:5000&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;restricted&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;/rexroth-solutions/api/v1.0&quot;</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;scopes-declaration&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions.web&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Solutions Scopes&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Scopes for the Solutions resources&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;scopes&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions.web.all.rw&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Manage Solutions&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Manage and modify all solutions&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions.web.all.r&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;View solutions&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;View (but not modify) solutions&quot;</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;menus&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;sidebar&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solutions&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Solutions&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;bosch-ic-solutions&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;solutions.r&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;solutions.rw&quot;</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solution-home&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Solutions Home&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;/solutions&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;solutions.r&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;solutions.rw&quot;</span>
+                        <span class="p">]</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solution-targets&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Targets&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;/solutions/targets&quot;</span><span class="p">,</span>
+                        <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="s2">&quot;solutions.r&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;solutions.rw&quot;</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solution-settings&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Solution Settings&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;bosch-ic-gear&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;/solutions/settings&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;solutions.rw&quot;</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;overview&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solution-overview&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Solutions&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;bosch-ic-solutions&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;/solutions&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;solutions.r&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;solutions.rw&quot;</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</details>
+<h3 id="providing-the-package-manifest">Providing the package-manifest<a class="headerlink" href="#providing-the-package-manifest" title="Permanent link">&para;</a></h3>
+<p>The manifest file has to be provided to app.deviceadmin by the third-party app, therefor a data exchange between both apps has to be established. To exchange the information, the content interface with the name "package-assets" is used. This content interface works inverted to the "normal" content interface. Instead of the slot is providing data that is used by the plug. The slot provides a folder where the plugs directories are mounted in. This principle is called "spool mode" by canonical.</p>
+<p>The following example shows you step-by-step, what you have to do.</p>
+<ol>
+<li>
+<p>Inside the root of your snap project, create a folder "configs/package-assets".</p>
+</li>
+<li>
+<p>Place your package-manifest into this folder and name it using the pattern <code>snap-name</code>.package-manifest.json, e.g. rexroth-solutions.package-manifest.json.</p>
+</li>
+<li>
+<p>Update your snapcraft.yaml</p>
+<ul>
+<li>
+<p>Add a new part which dumps the content of the "configs" directory into your $SNAP folder.</p>
+</li>
+<li>
+<p>Add the slot "package-assets" to your slots configuration</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>snapcraft.yaml:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rexroth-solutions</span>
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+<span class="nt">parts</span><span class="p">:</span>
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+  <span class="nt">configs</span><span class="p">:</span>
+    <span class="nt">plugin</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">dump</span>
+    <span class="nt">source</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">./configs</span>
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+<span class="nt">slots</span><span class="p">:</span> 
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+  <span class="nt">package-assets</span><span class="p">:</span>
+    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">content</span>
+    <span class="nt">content</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">package-assets</span>
+    <span class="nt">source</span><span class="p">:</span>
+      <span class="nt">read</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}</span>
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<h3 id="menus">Menus<a class="headerlink" href="#menus" title="Permanent link">&para;</a></h3>
+<p>An app can integrate into the ctrlX CORE navigation by defining menu entries. There are three possible integration points:</p>
+<ul>
+<li>Sidebar: to allow navigation to your apps main functionality</li>
+<li>Settings: to provide settings dialogs and pages</li>
+<li>Home Overview: to provide a custom tile for your application</li>
+</ul>
+<p><img alt="Integration" src="samples-go/hello.webserver/docs/images/integration.png" /></p>
+<h3 id="declare-menu-items-in-package-manifest">Declare menu items in package-manifest<a class="headerlink" href="#declare-menu-items-in-package-manifest" title="Permanent link">&para;</a></h3>
+<p>Add a "menus" element to your snap’s package manifest. The "menus" element is defined as an object that comprises three elements:</p>
+<ul>
+<li>sidebar: an array of items to be integrated into the main menu</li>
+<li>settings: an array of items to be integrated into the settings menu</li>
+<li>system: an array of items to be integrated into the system menu</li>
+<li>overview: an array of items to be integrated into the app overview</li>
+</ul>
+<p>An item is defined as an object that comprises the following elements:</p>
+<ul>
+<li>id: a string serving as the unique item identifier; used for ordering items (required)</li>
+<li>title: a string serving as the item’s display title (required)</li>
+<li>description: a string providing an additional description (optional and only used by overview items)</li>
+<li>icon: a string representing the name of the item’s icon (optional)</li>
+<li>link: a string representing the route associated to this item, including the application’s base href (required if no "items" are provided)</li>
+<li>target: a string that specifies where the link should be shown. Use "_blank" or a specific name to open the link in a new tab (recommended for 3rd-party apps)</li>
+<li>items: an array of sub-items of this item (required if no link is provided; currently, only supported for main menu items and restricted to one level of depth)</li>
+<li>permissions: an array of scope identifiers representing the permissions required to enable the item (optional)</li>
+</ul>
+<details class="example"><summary>Example</summary><div class="highlight"><pre><span></span><code><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+  <span class="nt">&quot;menus&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;sidebar&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solutions&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Solutions&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;bosch-ic-solutions&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;solutions.r&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;solutions.rw&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solutions-activeconfiguration&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Active Configuration&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;/solutions/activeconfiguration&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">&quot;solutions.r&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;solutions.rw&quot;</span>
+            <span class="p">]</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solutions-overview&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Solutions Overview&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;/solutions/solutions&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">&quot;solutions.r&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;solutions.rw&quot;</span>
+            <span class="p">]</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;settings&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solutions-settings&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Solution Settings&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;bosch-ic-gear&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;/solutions/settings&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;solutions.rw&quot;</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;system&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;reboot&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Reboot&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;bosch-ic-gear&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;/reboot-manager&quot;</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;overview&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;solutions-overview&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Solutions&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Manage solutions on the control&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;bosch-ic-solutions&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;/solutions/activeconfiguration&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;solutions.r&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;solutions.rw&quot;</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">[</span><span class="err">...</span><span class="p">]</span>
+</code></pre></div>
+</details>
+<p>When the third-party app is using a dedicated port and is not using our reverse proxy infrastructure, you can use the template variable "${hostname}" to let the ctrlX CORE replace it dynamically. E.g.:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+          <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;node-red&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Node-RED&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;http://${hostname}:1880/&quot;</span><span class="p">,</span>
+          <span class="p">}</span>
+<span class="p">[</span><span class="err">...</span><span class="p">]</span>
+</code></pre></div>
+</div>
+<h3 id="reverse-proxy">Reverse Proxy<a class="headerlink" href="#reverse-proxy" title="Permanent link">&para;</a></h3>
+<p>The Reverse Proxy handles all <strong>external</strong> web-based (HTTP/HTTPS) requests to the device. The Reverse Proxy provides the following functionality:</p>
+<ul>
+<li><strong>Automatic HTTPS:</strong> By default, all data exchanged between client and server is encrypted.</li>
+<li><strong>Token Validation:</strong> By default, only authenticated users may access resources on the device (except the login page). Requests with invalid tokens (lifetime expired, invalid signature) are rejected.</li>
+</ul>
+<p>The Proxy Mapping provides the configuration, which is required by the Reverse Proxy to redirect requests for a specific URL to a web server running on the device.</p>
+<p><strong>Proxy Mapping</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="p">[</span><span class="err">...</span><span class="p">]</span>
+  <span class="nt">&quot;services&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;proxyMapping&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions.web&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/rexroth-solutions&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;binding&quot;</span><span class="p">:</span> <span class="s2">&quot;:5000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;restricted&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;/rexroth-solutions/api/v1.0&quot;</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Providing a proxy configuration is optional in some cases (e.g. if your snap does not provide a web service). If a proxy configuration is supplied, the following parameters are valid:</p>
+<ul>
+<li><strong>name (mandatory):</strong> Name of the web service.  The format is: <code>&lt;id&gt;.&lt;service&gt;</code>The name has to be unique. Examples are:</li>
+<li><code>rexroth-solutions.web</code></li>
+<li><code>rexroth-hmi.web</code></li>
+<li>...</li>
+<li><strong>url (mandatory):</strong> URL which is provided by the Reverse Proxy. When a client tries to access this URL, the Reverse Proxy transparently redirects the request to the web server, this means your webserver has to be configured to listen to e.g. "/cool-app" and not "/". Must not conflict with other web services URLs. Examples are:</li>
+<li>/solutions</li>
+<li>/hmi</li>
+<li>...</li>
+<li><strong>binding (mandatory):</strong> Identifier of the resource to which the reverse proxy redirects the requests. The resource may be a port or a unix socket. Using a unix socket is highly recommended. Examples are:</li>
+<li>:5000</li>
+<li>192.168.1.17:5000</li>
+<li>"unix://{$SNAP_DATA}/package-run/rexroth-solutions/rexroth-solutions.web.sock"</li>
+<li><strong>restricted:</strong> Restricted URL. URLs defined here are accessible for authenticated clients only. One important example are the API URL(s) - those URLs should be restricted in the majority of the use cases. Examples:
+ "/rexroth-solutions/api/v1.0"</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>Remark:</strong> In case a snap provides multiple web servers, multiple entries of ProxyMapping are allowed.</p>
+</div>
+<h4 id="binding">Binding<a class="headerlink" href="#binding" title="Permanent link">&para;</a></h4>
+<p><strong>Unix sockets (recommended)</strong></p>
+<p>To use unix sockets the web server of your application has to bind against a <a href="https://en.wikipedia.org/wiki/Unix_domain_socket">Unix Domain Socket</a>. Most of web server frameworks already support this. The benefit of unix sockets is the additional security (file access can be restricted via file permissions) and the lower attack surface on network level (the service cannot be reached externally). To enable your snap and to provide the reverse proxy access to your unix socket, you have to use the content interface slot "package-run". It uses the same mechanism as the "package-assets" interface.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+  <span class="nt">package-run</span><span class="p">:</span>
+    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">content</span>
+    <span class="nt">content</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">package-run</span>
+    <span class="nt">source</span><span class="p">:</span>
+      <span class="nt">write</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}</span>
+</code></pre></div>
+</div>
+<p>In the example mentioned above, your "unix socket file" should be created under <code>{$SNAP_DATA}/package-run/{$SNAP_NAME}/web.sock</code>. Please ensure, that the file is completely managed by your application logic and, other than a network socket, has to be deleted after unbind. Also consider deleting it before binding your web server on start up.</p>
+<p>Now, you need to publish the information about the socket file using the package-manifest using the ProxyMapping described above. The relevant part is the "binding" section below. You have to replace</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The path length of a unix socket is limited to 108 characters. Therefore please ensure, that the resolved path, e.g /var/snap/third-party-snap/current/<mark>package-run/third-party-snap/third-party-snap.web.sock</mark>, respects that limit and the highlighted part has a maximal length of 50 characters. If necessary, you can shorten the path by replacing "package-run" with "run" and shorting the file name from "third-party-snap.web.sock" to "web.sock". See the following example:</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+  <span class="nt">&quot;services&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;proxyMapping&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;third-party-snap.web&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/cool-app&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;binding&quot;</span><span class="p">:</span> <span class="s2">&quot;unix://{$SNAP_DATA}/package-run/third-party-snap/web.sock&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+<span class="p">[</span><span class="err">...</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>Localhost (not recommended)</strong></p>
+<p>Binding to localhost should only be chosen, when a Unix Domain Socket (see above) cannot be used. It requires that your app binds to a dedicated port that is not used by other apps.</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+  <span class="nt">&quot;services&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;proxyMapping&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;third-party-snap.web&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/cool-app&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;binding&quot;</span><span class="p">:</span> <span class="s2">&quot;:4711&quot;</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+<span class="p">[</span><span class="err">...</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="scopes-and-permissions">Scopes and Permissions<a class="headerlink" href="#scopes-and-permissions" title="Permanent link">&para;</a></h3>
+<p>In case access to specific resources shall be restricted, scopes have to be defined. By using the Identity Management, an administrator is able to configure which users/groups are allowed to access specific resources. The following example shows two simple scopes (read/write all settings, read settings). The web server has to check in each routine if the provided token includes the scope.</p>
+<details class="example"><summary>Example</summary><div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions&quot;</span><span class="p">,</span>
+  <span class="p">[</span><span class="err">...</span><span class="p">]</span>
+  <span class="nt">&quot;scopes-declaration&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions.web&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Solutions Web Server permissions&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Solution Management Permissions&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;scopes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions.web.solutions.rw&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Solutions Management&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Manage and modify solutions&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-solutions.web.solutions.r&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;View solutions&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;View (but not modify) solutions&quot;</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+</code></pre></div>
+</details>
+<p><strong>Remark: Restrictions apply regarding the naming of the scopes, identifiers, etc. (please see below)</strong></p>
+<p>The main identifier of the scope must follow this schema by convention: </p>
+<p><code>&lt;id&gt;.&lt;service&gt;</code></p>
+<ul>
+<li>id: Identifier of the package. Must by convention correspond to the name of the snap</li>
+<li>Example: rexroth-solutions, rexroth-vpnmanager, ...</li>
+<li>service: Identifier of the service</li>
+<li>Example: web</li>
+</ul>
+<p>Some examples:</p>
+<ul>
+<li>rexroth-solutions.web</li>
+<li>rexroth-vpnmanager.web</li>
+</ul>
+<p>The identifier of each specific scope must follow this schema by convention: </p>
+<p><code>&lt;id&gt;.&lt;service&gt;.&lt;scope_name&gt;.&lt;access&gt;</code></p>
+<ul>
+<li>id : Identifier of the package. Must by convention correspond to the name of the snap</li>
+<li>Example: rexroth-solutions, rexroth-vpnmanager, ...</li>
+<li>service: Identifier of the service</li>
+<li>Example: web</li>
+<li>scope_name: Name of the specific scope</li>
+<li>Example: solutions, connections, configurations, users, ...</li>
+<li>access: Type of access to the resource which is represented by this scope. Supported are:</li>
+<li>r (read-only): Allows read access to specific resources</li>
+<li>w (write-only): Allows write-only access to specific resources</li>
+<li>rw (read/write): Allows read and write access to specific resources</li>
+<li>x (execute): Execute a specific action which is represented by a resource</li>
+</ul>
+<p>Some examples:</p>
+<ul>
+<li>rexroth-vpnmanager.web.shortcuts.r: Read access to VPN shortcuts</li>
+<li>rexroth-vpnmanager.web.shortcuts.rw: Read and create VPN connection shortcuts</li>
+<li>rexroth-deviceadmin.web.own_password.w: Update (but not read) the password of the user who is currently logged in</li>
+<li>rexroth-vpnmanager.web.shortcuts.x: Start / stop VPN connections via existing starters (shortcuts)</li>
+</ul>
+<h4 id="enforcing-permissions-in-your-service">Enforcing permissions in your service<a class="headerlink" href="#enforcing-permissions-in-your-service" title="Permanent link">&para;</a></h4>
+<p>The web server has to enforce the defined permissions. The following pseudo code snippet shows a light-weight example in which the function ListAddresses checks whether the client has the permission to execute the function. The scope "rexroth-device.all.rwx" is a special scope, which reflects an administrative access permission (see below). </p>
+<div class="highlight"><pre><span></span><code>func ListAddresses(w http.ResponseWriter, r *http.Request) {
+
+    // Define valid scopes for resource access
+    scope := []string{&quot;networkmanager.all.r&quot;, &quot;networkmanager.all.rw&quot;, &quot;rexroth-device.all.rwx&quot;}
+
+
+    // Extract scopes from http request and compare to valid scopes
+    // Return when permissions are not sufficient
+    if ok, _ := checkPermissions(r, scope); !ok {
+        errors.ErrUnauthorized.Write(w)
+        return
+    }
+</code></pre></div>
+<h4 id="admin-scope">Admin Scope<a class="headerlink" href="#admin-scope" title="Permanent link">&para;</a></h4>
+<p>The Identity Management by default provides a special admin scope ("rexroth-device.all.rwx"), which should only be assigned to admin users.  It is recommended - but not mandatory - to grant users with this permission full access to your web application. This makes the handling of administrator accounts easier.</p>
+<p>The following snippet shows the definition of the admin scope. You can see (and assign) the permission to users and/or groups.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-device&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Global device administration&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Global device administration permissions allow unrestricted access to all system resources&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;scopes&quot;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;rexroth-device.all.rwx&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Administration access&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;Unrestricted, administrative access to system resources&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="certificate-management-optional">Certificate Management (optional)<a class="headerlink" href="#certificate-management-optional" title="Permanent link">&para;</a></h3>
+<p>The certificate managers handles cryptographic material for all applications on the device. The certificate manager has the ability to add/delete/list certificates or keys to/from a specific application. It also warns the user if a certificate expires soon or is already invalid. If a snap handles cryptographic material it can use this centralized service by following the instructions:</p>
+<p>First, the snap has to provide the content interface "package-certificates". Via this interface the certificate manager is able to add and access certificates and keys of a specific snap. This is why write permissions are necessary.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rexroth-solutions</span>
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+<span class="nt">slots</span><span class="p">:</span> 
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+  <span class="nt">package-certificates</span><span class="p">:</span>
+    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">content</span>
+    <span class="nt">content</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">package-certificates</span>
+    <span class="nt">source</span><span class="p">:</span>
+      <span class="nt">write</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$SNAP_COMMON/package-certificates/${SNAPCRAFT_PROJECT_NAME}</span>
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<h4 id="certificate-stores">Certificate Stores<a class="headerlink" href="#certificate-stores" title="Permanent link">&para;</a></h4>
+<p>The certificate store block defines if a snap service has to handle with cryptographic keys or certificates. A snap should have different certificate stores for different services. These stores are defined within the package-assets-file (see following code snipped)</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;certificatestores&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+          <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;examplestore&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Example Store&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;This is only an example store for documentation purpose.&quot;</span>
+      <span class="p">}</span>
+  <span class="p">],</span>
+</code></pre></div>
+</div>
+<ul>
+<li><strong>id (mandatory):</strong> This id should be unique because it is used to identify the store over the REST-interface.</li>
+<li>opcua</li>
+<li>vpnmanager</li>
+<li>...</li>
+<li><strong>title (mandatory):</strong> This name is used in the frontend.</li>
+<li>OPCUA</li>
+<li>VPN-Manager</li>
+<li>...</li>
+<li><strong>description:</strong> The description is optional and displayed in the fronted. Here you can describe the application and can give the user some more information. </li>
+</ul>
+<p>Every certificate store needs the following, predefined folder structure:</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>SNAPCRAFT_PROJECT_NAME has to been replaced with the real name here!</p>
+</div>
+<p>/$SNAP_COMMON/package-certificates/{SNAPCRAFT_PROJECT_NAME}/</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<ul>
+<li>/application1</li>
+<li>/ca</li>
+<li>/own<ul>
+<li>/private</li>
+<li>/certs</li>
+</ul>
+</li>
+<li>/rejected<ul>
+<li>/keys</li>
+<li>/certs</li>
+</ul>
+</li>
+<li>/trusted<ul>
+<li>/keys</li>
+<li>/certs</li>
+</ul>
+</li>
+<li>/application2</li>
+<li>/ca</li>
+<li>...</li>
+</ul>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can store your keys with the help of a <a href="tpm2.html">TPM</a>.</p>
+</div>
+<h4 id="integration-possibilities">Integration possibilities<a class="headerlink" href="#integration-possibilities" title="Permanent link">&para;</a></h4>
+<p>Third-Party Application that brings its own web server, has got a possibility to integrate in ctrlX CORE user interface. </p>
+<p>After this integration, a Third-Party Application will be opened in a separate tab within the browser.</p>
+<p>The <strong>recommended integration</strong> with ctrlX CORE is to use <strong>package-manifest.json</strong> file.</p>
+<p>Within this file, you can specify the section for the menus and the sidebar. </p>
+<p>The important part is the assignment of the <strong>bearer token</strong> for the external authentication.</p>
+<p>The pattern for this file is shown below.</p>
+<div class="codehilite"><pre><span></span><code>```package-manifest.json
+...
+&quot;menus&quot;: {
+&quot;sidebar&quot;: [
+  {
+    &quot;id&quot;: &quot;app-name&quot;,
+    &quot;title&quot;: &quot;My App Name&quot;,
+    &quot;icon&quot;: &quot;myApp-Icon&quot;,
+    &quot;permissions&quot;: [],
+    &quot;items&quot;: [
+      {
+        &quot;id&quot;: &quot;myApp-Id&quot;,
+        &quot;title&quot;: &quot;MySideBarTitle&quot;,
+        &quot;link&quot;: &quot;/app-name?access_token=<span class="cp">${</span><span class="n">bearertoken</span><span class="cp">}</span>&quot;,
+        &quot;target&quot;:&quot;myApp-Id&quot;,
+        &quot;permissions&quot;: []
+      },...
+    ]
+  }]
+[...]
+```
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020-2021 Bosch Rexroth AG
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/boschrexroth" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/boschrexroth" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>
