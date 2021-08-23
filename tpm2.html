@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/tpm2.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.1">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
     
     
       
@@ -24,10 +24,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.1118c9be.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.f7f47774.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ba0d045b.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -1455,25 +1455,25 @@ tpm2_createprimary <span class="se">\</span>
     --unique-data<span class="o">=</span>unique.dat
 </code></pre></div>
 <p>In Golang, use following template:</p>
-<div class="highlight"><pre><span></span><code>import &quot;github.com/google/go-tpm/tpm2&quot;
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="s">&quot;github.com/google/go-tpm/tpm2&quot;</span>
 
-var DefaultSrkTemplate = tpm2.Public{
-        Type:       tpm2.AlgRSA,
-        NameAlg:    tpm2.AlgSHA256,
-        Attributes: tpm2.FlagFixedTPM | tpm2.FlagFixedParent | tpm2.FlagSensitiveDataOrigin | tpm2.FlagUserWithAuth | tpm2.FlagNoDA | tpm2.FlagRestricted | tpm2.FlagDecrypt,
-        AuthPolicy: nil,
-        RSAParameters: &amp;tpm2.RSAParams{
-            Symmetric: &amp;tpm2.SymScheme{
-                Alg:     tpm2.AlgAES,
-                KeyBits: 128,
-                Mode:    tpm2.AlgCFB,
-            },
-            Sign:        nil,
-            KeyBits:     2048,
-            ExponentRaw: 0,
-            ModulusRaw:  make([]byte, 256),
-        },
-    }
+<span class="kd">var</span> <span class="nx">DefaultSrkTemplate</span> <span class="p">=</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">Public</span><span class="p">{</span>
+        <span class="nx">Type</span><span class="p">:</span>       <span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgRSA</span><span class="p">,</span>
+        <span class="nx">NameAlg</span><span class="p">:</span>    <span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgSHA256</span><span class="p">,</span>
+        <span class="nx">Attributes</span><span class="p">:</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagFixedTPM</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagFixedParent</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagSensitiveDataOrigin</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagUserWithAuth</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagNoDA</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagRestricted</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagDecrypt</span><span class="p">,</span>
+        <span class="nx">AuthPolicy</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+        <span class="nx">RSAParameters</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">RSAParams</span><span class="p">{</span>
+            <span class="nx">Symmetric</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">SymScheme</span><span class="p">{</span>
+                <span class="nx">Alg</span><span class="p">:</span>     <span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgAES</span><span class="p">,</span>
+                <span class="nx">KeyBits</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+                <span class="nx">Mode</span><span class="p">:</span>    <span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgCFB</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="nx">Sign</span><span class="p">:</span>        <span class="kc">nil</span><span class="p">,</span>
+            <span class="nx">KeyBits</span><span class="p">:</span>     <span class="mi">2048</span><span class="p">,</span>
+            <span class="nx">ExponentRaw</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">ModulusRaw</span><span class="p">:</span>  <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
 </code></pre></div>
 <p>For further details for golang, please see the <a href="./samples-go/tpm2.srk/README.md">Golang example</a>.</p>
 <h3 id="trusted-software-stack">Trusted Software Stack<a class="headerlink" href="#trusted-software-stack" title="Permanent link">&para;</a></h3>
@@ -1570,10 +1570,10 @@ var DefaultSrkTemplate = tpm2.Public{
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.716f8af4.min.js"></script>
+      <script src="assets/javascripts/bundle.febc23d1.min.js"></script>
       
     
   </body>

@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/datalayer.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.1">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
     
     
       
@@ -24,10 +24,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.1118c9be.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.f7f47774.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ba0d045b.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -2281,31 +2281,31 @@ Out of a .fbs file you have to generate different files:</p>
 <li>Force Defaults / IsField Present</li>
 <li>Tables fields are only stored if they are set and are different from its default values. To ensure that all values are set in your
      flatbuffer, you can enable force_default in flatbuffer builder object:
-     <div class="highlight"><pre><span></span><code><span class="n">flatbuffers</span><span class="o">::</span><span class="n">FlatBufferBuilder</span> <span class="n">builder</span><span class="p">;</span>
-<span class="n">builder</span><span class="p">.</span><span class="n">ForceDefaults</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+     <div class="highlight"><pre><span></span><code><span class="n">flatbuffers</span><span class="o">::</span><span class="n">FlatBufferBuilder</span><span class="w"> </span><span class="n">builder</span><span class="p">;</span><span class="w"></span>
+<span class="n">builder</span><span class="p">.</span><span class="n">ForceDefaults</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
 </code></pre></div></li>
 <li>Access of array values</li>
 <li>assume .fbs file
-     <div class="highlight"><pre><span></span><code><span class="n">table</span> <span class="n">myTable</span> <span class="p">{</span>
-  <span class="nl">myVecDouble</span><span class="p">:[</span><span class="kt">double</span><span class="p">];</span>
-<span class="p">}</span>
-<span class="n">root_type</span> <span class="n">MyTable</span><span class="p">;</span>
+     <div class="highlight"><pre><span></span><code><span class="n">table</span><span class="w"> </span><span class="n">myTable</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nl">myVecDouble</span><span class="p">:[</span><span class="kt">double</span><span class="p">];</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="n">root_type</span><span class="w"> </span><span class="n">MyTable</span><span class="p">;</span><span class="w"></span>
 </code></pre></div></li>
 <li>access as flatbuffer vector
-     <div class="highlight"><pre><span></span><code><span class="k">auto</span> <span class="n">myTable</span> <span class="o">=</span> <span class="n">GetMyTable</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">getData</span><span class="p">());</span>
-<span class="k">auto</span> <span class="n">myVecDouble</span> <span class="o">=</span> <span class="n">myTable</span><span class="o">-&gt;</span><span class="n">myVecDouble</span><span class="p">();</span>
-<span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myVecDouble</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-  <span class="kt">double</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myVecDouble</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+     <div class="highlight"><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">myTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetMyTable</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">getData</span><span class="p">());</span><span class="w"></span>
+<span class="k">auto</span><span class="w"> </span><span class="n">myVecDouble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myTable</span><span class="o">-&gt;</span><span class="n">myVecDouble</span><span class="p">();</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">myVecDouble</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myVecDouble</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"></span>
 </code></pre></div></li>
 <li>access as C array
-     <div class="highlight"><pre><span></span><code><span class="k">auto</span> <span class="n">myTable</span> <span class="o">=</span> <span class="n">GetMyTable</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">getData</span><span class="p">());</span>
-<span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">myVecDouble</span> <span class="o">=</span> <span class="n">myTable</span><span class="o">-&gt;</span><span class="n">myVecDouble</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span>
-<span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myVecDouble</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-  <span class="kt">double</span> <span class="n">value</span> <span class="o">=</span> <span class="n">myVecDouble</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+     <div class="highlight"><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">myTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetMyTable</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">getData</span><span class="p">());</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="o">*</span><span class="w"> </span><span class="n">myVecDouble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myTable</span><span class="o">-&gt;</span><span class="n">myVecDouble</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">();</span><span class="w"></span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">myVecDouble</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myVecDouble</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="w"></span>
 </code></pre></div></li>
 <li>access as plane uint_8* memory (little endian)
-     <div class="highlight"><pre><span></span><code><span class="k">auto</span> <span class="n">myTable</span> <span class="o">=</span> <span class="n">GetMyTable</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">getData</span><span class="p">());</span>
-<span class="k">const</span> <span class="n">uint_8</span><span class="o">*</span> <span class="n">myVecDouble</span> <span class="o">=</span> <span class="n">myTable</span><span class="o">-&gt;</span><span class="n">myVecDouble</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">Data</span><span class="p">();</span>
+     <div class="highlight"><pre><span></span><code><span class="k">auto</span><span class="w"> </span><span class="n">myTable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetMyTable</span><span class="p">(</span><span class="n">value</span><span class="p">.</span><span class="n">getData</span><span class="p">());</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">uint_8</span><span class="o">*</span><span class="w"> </span><span class="n">myVecDouble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">myTable</span><span class="o">-&gt;</span><span class="n">myVecDouble</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">Data</span><span class="p">();</span><span class="w"></span>
 </code></pre></div></li>
 </ol>
 <h2 id="metadata">Metadata <a name="metadata"></a><a class="headerlink" href="#metadata" title="Permanent link">&para;</a></h2>
@@ -2446,7 +2446,7 @@ framework. Be careful that on your target exists only one broker. So if you
 use datalayer in multiple Celix framework only one broker has to be started. To
 control start of broker you can use following entry in config.properties in your
 Celix preferences.</p>
-<div class="highlight"><pre><span></span><code><span class="n">datalayer</span><span class="p">.</span><span class="n">broker</span><span class="p">.</span><span class="n">enable</span><span class="o">=</span><span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><span class="n">datalayer</span><span class="p">.</span><span class="n">broker</span><span class="p">.</span><span class="n">enable</span><span class="o">=</span><span class="nb">false</span><span class="w"></span>
 </code></pre></div>
 <p>The default value of this switch is true. So you have to set it explicit to
 false to disable startup of broker in your system.</p>
@@ -2511,10 +2511,10 @@ false to disable startup of broker in your system.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.716f8af4.min.js"></script>
+      <script src="assets/javascripts/bundle.febc23d1.min.js"></script>
       
     
   </body>

@@ -16,7 +16,7 @@
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/package-manifest.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.1">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.4">
     
     
       
@@ -24,10 +24,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.1118c9be.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.f7f47774.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ba0d045b.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -1821,18 +1821,18 @@
 </ul>
 <h4 id="enforcing-permissions-in-your-service">Enforcing permissions in your service<a class="headerlink" href="#enforcing-permissions-in-your-service" title="Permanent link">&para;</a></h4>
 <p>The web server has to enforce the defined permissions. The following pseudo code snippet shows a light-weight example in which the function ListAddresses checks whether the client has the permission to execute the function. The scope "rexroth-device.all.rwx" is a special scope, which reflects an administrative access permission (see below). </p>
-<div class="highlight"><pre><span></span><code>func ListAddresses(w http.ResponseWriter, r *http.Request) {
+<div class="highlight"><pre><span></span><code><span class="kd">func</span> <span class="nx">ListAddresses</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
 
-    // Define valid scopes for resource access
-    scope := []string{&quot;networkmanager.all.r&quot;, &quot;networkmanager.all.rw&quot;, &quot;rexroth-device.all.rwx&quot;}
+    <span class="c1">// Define valid scopes for resource access</span>
+    <span class="nx">scope</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;networkmanager.all.r&quot;</span><span class="p">,</span> <span class="s">&quot;networkmanager.all.rw&quot;</span><span class="p">,</span> <span class="s">&quot;rexroth-device.all.rwx&quot;</span><span class="p">}</span>
 
 
-    // Extract scopes from http request and compare to valid scopes
-    // Return when permissions are not sufficient
-    if ok, _ := checkPermissions(r, scope); !ok {
-        errors.ErrUnauthorized.Write(w)
-        return
-    }
+    <span class="c1">// Extract scopes from http request and compare to valid scopes</span>
+    <span class="c1">// Return when permissions are not sufficient</span>
+    <span class="k">if</span> <span class="nx">ok</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">checkPermissions</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+        <span class="nx">errors</span><span class="p">.</span><span class="nx">ErrUnauthorized</span><span class="p">.</span><span class="nx">Write</span><span class="p">(</span><span class="nx">w</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
 </code></pre></div>
 <h4 id="admin-scope">Admin Scope<a class="headerlink" href="#admin-scope" title="Permanent link">&para;</a></h4>
 <p>The Identity Management by default provides a special admin scope ("rexroth-device.all.rwx"), which should only be assigned to admin users.  It is recommended - but not mandatory - to grant users with this permission full access to your web application. This makes the handling of administrator accounts easier.</p>
@@ -2014,10 +2014,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.53c85856.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.709b4209.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.716f8af4.min.js"></script>
+      <script src="assets/javascripts/bundle.febc23d1.min.js"></script>
       
     
   </body>
