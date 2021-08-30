@@ -141,7 +141,7 @@ nav:
         - Overview: references.md
         - Developer Guideline: appdevguide.md
         - Api Reference:
-          - c/c++: api/comm.datalayer/html/index.html
-          - c#: api/csharp/html/index.html
-          - python: api/python/html/index.html    
+          - c/c++: https://apps.boschrexroth.com/docs/ctrlx/comm.datalayer/html/index.html
+          - c#: https://apps.boschrexroth.com/docs/ctrlx/csharp/html/index.html
+          - python: https://apps.boschrexroth.com/docs/ctrlx/python/html/index.html    
     - About: about.md
