@@ -1,3 +1,0 @@
-#!/bin/bash -x
-
-$SNAP/usr/bin/python3 $SNAP/main.py
