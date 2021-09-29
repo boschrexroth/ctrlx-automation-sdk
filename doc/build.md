@@ -25,7 +25,7 @@ e.g `./helloworld_1.0.0_amd64.snap`
 ### Create Snap
 
 Start task `Snapcraft` by selecting the following command of the menu bar in Visual Studio Code Editor:  
-__Terminal > Run Build Task__  or press __Ctrl-P__ and enter __task CMake Build Snap__. Select the target for which you want to create the snap.
+__Terminal > Run Build Task__  or press __Ctrl-P__ and enter __task Snapcraft__. Select the target for which you want to create the snap.
 Use `amd64` for __ctrlX CORE<sup>virtual</sup>__ and `arm64` for __ctrlX CORE__
 
 Now you should have one snap file generated:  
