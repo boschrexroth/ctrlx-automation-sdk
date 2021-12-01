@@ -9,14 +9,13 @@
         <meta name="description" content="ctrlX AUTOMATION Software Development Kit">
       
       
-      
         <meta name="author" content="Bosch Rexroth AG">
       
       
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/appdevguide.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
     
     
       
@@ -24,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.1c75ef36.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.816931ca.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.9204c3b2.min.css">
         
       
     
@@ -37,13 +36,13 @@
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
-    
     
     
       <link rel="stylesheet" href="stylesheets/sdk.css">
     
+    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?".":"."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
     
       
 
@@ -63,9 +62,8 @@
     <body dir="ltr" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
-    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
-      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -81,6 +79,7 @@
     <div data-md-component="announce">
       
     </div>
+    
     
       
 
@@ -130,8 +129,7 @@
       <label class="md-header__button md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -163,8 +161,7 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -204,13 +201,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="overview.html" class="md-tabs__link">
+      <a href="overview.html" class="md-tabs__link md-tabs__link--active">
         Getting Started
       </a>
     </li>
@@ -252,15 +251,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="references.html" class="md-tabs__link md-tabs__link--active">
+      <a href="references.html" class="md-tabs__link">
         References
       </a>
     </li>
@@ -310,8 +307,7 @@
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
@@ -345,12 +341,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       
       
@@ -399,6 +397,710 @@
               
   
   
+    
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          Guidelines
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Guidelines" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Guidelines
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="package-manifest.html" class="md-nav__link">
+        Package Manifest
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Developer Guideline
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="appdevguide.html" class="md-nav__link md-nav__link--active">
+        Developer Guideline
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of Contents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    1 Introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-app-development-for-ctrlx-automation" class="md-nav__link">
+    1.1 App Development for ctrlX AUTOMATION
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-obligations-for-technical-aspects" class="md-nav__link">
+    1.2 Obligations for Technical Aspects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-partner-contract-and-legal-framework" class="md-nav__link">
+    1.3 Partner Contract and Legal Framework
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-app-validation-process" class="md-nav__link">
+    2 App Validation Process
+  </a>
+  
+    <nav class="md-nav" aria-label="2 App Validation Process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-initial-meeting-for-app-validation" class="md-nav__link">
+    2.1 Initial Meeting for App Validation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-artifacts-delivery" class="md-nav__link">
+    2.2 Artifacts’ Delivery
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-validation-and-signing" class="md-nav__link">
+    2.4 Validation and Signing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-app-categories" class="md-nav__link">
+    3 App Categories
+  </a>
+  
+    <nav class="md-nav" aria-label="3 App Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-category-1-basic-applies-to-ctrlx-basic-mechanisms" class="md-nav__link">
+    3.1 Category 1 (Basic): Applies to ctrlX basic mechanisms
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Category 1 (Basic): Applies to ctrlX basic mechanisms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-overview" class="md-nav__link">
+    3.1.1 Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-customer-user-experience" class="md-nav__link">
+    3.1.2 Customer User Experience
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-technical-prerequisites" class="md-nav__link">
+    3.1.3 Technical Prerequisites
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-category-2-advanced-contributes-to-ctrlx-engineering-concepts" class="md-nav__link">
+    3.2 Category 2 (Advanced): Contributes to ctrlX engineering concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Category 2 (Advanced): Contributes to ctrlX engineering concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-overview" class="md-nav__link">
+    3.2.1 Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-customer-user-experience" class="md-nav__link">
+    3.2.2 Customer User Experience
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-technical-recommendations" class="md-nav__link">
+    3.2.3 Technical Recommendations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-category-3-extended-extends-ctrlx-automation-features" class="md-nav__link">
+    3.3 Category 3 (Extended): Extends ctrlX AUTOMATION features
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Category 3 (Extended): Extends ctrlX AUTOMATION features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-description" class="md-nav__link">
+    3.3.1 Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-customer-user-experience" class="md-nav__link">
+    3.3.2 Customer User Experience
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-technical-recommendations" class="md-nav__link">
+    3.3.3 Technical Recommendations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-basic-app-information-mandatory" class="md-nav__link">
+    4 Basic App Information (MANDATORY) 
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Basic App Information (MANDATORY) ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-app-artifacts-mandatory" class="md-nav__link">
+    4.1 App Artifacts (MANDATORY)
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 App Artifacts (MANDATORY)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-artifacts-folder-template" class="md-nav__link">
+    4.1.1 Artifacts Folder Template
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-disclosure-folder-mandatory" class="md-nav__link">
+    4.1.2 "Disclosure" folder (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-build-info-folder-mandatory" class="md-nav__link">
+    4.1.3 "Build Info" folder (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414-documentation-folder-mandatory" class="md-nav__link">
+    4.1.4 "Documentation" folder (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#415-app-states-folder-mandatory" class="md-nav__link">
+    4.1.5 "App States" folder (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#416-snaps-folder-mandatory" class="md-nav__link">
+    4.1.6 "Snaps" folder (MANDATORY)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-app-documentation-mandatory" class="md-nav__link">
+    4.2 App Documentation (MANDATORY)
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 App Documentation (MANDATORY)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421-user-manual-mandatory" class="md-nav__link">
+    4.2.1 User Manual (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422-test-setup-description-mandatory" class="md-nav__link">
+    4.2.2 Test Setup Description (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#423-release-notes-mandatory" class="md-nav__link">
+    4.2.3 Release Notes (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#424-general-app-description-for-the-ctrlx-app-zone-conditional" class="md-nav__link">
+    4.2.4 General App Description for the ctrlX App Zone (CONDITIONAL)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-additional-app-information-according-to-linux-ubuntu-conventions-mandatory" class="md-nav__link">
+    4.3 Additional App Information According to Linux Ubuntu Conventions (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-foss-info-provisioning-mandatory" class="md-nav__link">
+    4.4 FOSS Info Provisioning (MANDATORY)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-further-app-information-conditional" class="md-nav__link">
+    5 Further App Information (CONDITIONAL)
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Further App Information (CONDITIONAL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-foss-sources-conditional" class="md-nav__link">
+    5.1 FOSS Sources (CONDITIONAL)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-semantic-versioning-scheme-optional" class="md-nav__link">
+    5.2 Semantic Versioning Scheme (OPTIONAL)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-restart-delay-optional" class="md-nav__link">
+    5.3 Restart Delay (OPTIONAL)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-working-set-overview-mandatory" class="md-nav__link">
+    6 Working Set Overview (MANDATORY)
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Working Set Overview (MANDATORY)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-security-information-considerations" class="md-nav__link">
+    6.1 Security Information &amp; Considerations
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1 Security Information &amp; Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611-interfaces-slots-plugs-mandatory" class="md-nav__link">
+    6.1.1 Interfaces / Slots &amp; Plugs (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612-network-security-and-ports-conditional" class="md-nav__link">
+    6.1.2 Network Security and Ports (CONDITIONAL)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#613-file-permissions-conditional" class="md-nav__link">
+    6.1.3 File Permissions (CONDITIONAL)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-resource-consumption-and-readwrite-operations-mandatory" class="md-nav__link">
+    6.2 Resource Consumption and Read/Write Operations (MANDATORY)
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Resource Consumption and Read/Write Operations (MANDATORY)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#621-resource-consumption" class="md-nav__link">
+    6.2.1 Resource Consumption
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#622-integrated-storageflash-lifetime" class="md-nav__link">
+    6.2.2 Integrated Storage/Flash Lifetime
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-standard-task-scheduling-mandatory" class="md-nav__link">
+    6.3 Standard Task Scheduling (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-test-setup-for-typical-usage-scenario-mandatory" class="md-nav__link">
+    6.4 Test Setup for Typical Usage Scenario (MANDATORY)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-ctrlx-basic-mechanisms-mandatory" class="md-nav__link">
+    7 ctrlX Basic Mechanisms (MANDATORY)
+  </a>
+  
+    <nav class="md-nav" aria-label="7 ctrlX Basic Mechanisms (MANDATORY)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-ctrlx-license-handling-mandatory" class="md-nav__link">
+    7.1 ctrlX License Handling (MANDATORY)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-app-signing-by-bosch-rexroth-mandatory" class="md-nav__link">
+    7.2 App Signing by Bosch Rexroth (MANDATORY)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ctrlx-security-system-optional" class="md-nav__link">
+    8 ctrlX Security System (OPTIONAL)
+  </a>
+  
+    <nav class="md-nav" aria-label="8 ctrlX Security System (OPTIONAL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-ctrlx-core-reverse-proxy-optional" class="md-nav__link">
+    8.1 ctrlX CORE reverse proxy (OPTIONAL)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-ctrlx-key-certificate-management-optional" class="md-nav__link">
+    8.2 ctrlX Key &amp; Certificate Management (OPTIONAL)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-ctrlx-identity-managementauthentication-authorization-optional" class="md-nav__link">
+    8.3 ctrlX Identity Management/Authentication &amp; Authorization (OPTIONAL)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-ctrlx-user-interface-and-project-handling-optional" class="md-nav__link">
+    9 ctrlX User Interface and Project Handling (OPTIONAL)
+  </a>
+  
+    <nav class="md-nav" aria-label="9 ctrlX User Interface and Project Handling (OPTIONAL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-ctrlx-configuration-storage-conditional" class="md-nav__link">
+    9.1 ctrlX Configuration Storage (CONDITIONAL)
+  </a>
+  
+    <nav class="md-nav" aria-label="9.1 ctrlX Configuration Storage (CONDITIONAL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#911-solution-handling-optional" class="md-nav__link">
+    9.1.1 Solution Handling (OPTIONAL)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#922-environment-variables-conditional" class="md-nav__link">
+    9.2.2 Environment Variables (CONDITIONAL)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#external-storage-sd-card-and-usb-storage-device-not-available-yet" class="md-nav__link">
+    External storage / SD card and USB storage device (not available yet)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-ctrlx-automation-system-functions-optional" class="md-nav__link">
+    10 ctrlX AUTOMATION System Functions (OPTIONAL)
+  </a>
+  
+    <nav class="md-nav" aria-label="10 ctrlX AUTOMATION System Functions (OPTIONAL)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-ctrlx-logbook-and-diagnostic-system" class="md-nav__link">
+    10.1 ctrlX Logbook and Diagnostic System
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-real-time-extension-optional" class="md-nav__link">
+    11 Real Time Extension (OPTIONAL)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-licensing-optional" class="md-nav__link">
+    12 Licensing (OPTIONAL)
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="persistdata.html" class="md-nav__link">
+        Data Persistance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="licensing.html" class="md-nav__link">
+        Licensemanagement
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
   
     
       
@@ -406,18 +1108,18 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_2_3">
+        <label class="md-nav__link" for="__nav_2_4">
           Releases
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Releases" data-md-level="2">
-        <label class="md-nav__title" for="__nav_2_3">
+        <label class="md-nav__title" for="__nav_2_4">
           <span class="md-nav__icon md-icon"></span>
           Releases
         </label>
@@ -498,8 +1200,36 @@
   
   
     <li class="md-nav__item">
+      <a href="setup_qemu_ubuntu.html" class="md-nav__link">
+        Setup a QEMU VM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
-        Setup via VirtualBox
+        Setup a VirtualBox VM
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_ubuntu.html" class="md-nav__link">
+        Setup a Real Machine
       </a>
     </li>
   
@@ -513,7 +1243,7 @@
   
     <li class="md-nav__item">
       <a href="setup_windows_wsl_ubuntu.html" class="md-nav__link">
-        Setup via WSL
+        Setup WSL
       </a>
     </li>
   
@@ -531,22 +1261,36 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_6" type="checkbox" id="__nav_3_6" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_3_4">
+        <label class="md-nav__link" for="__nav_3_6">
           Toolchain
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Toolchain" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_4">
+        <label class="md-nav__title" for="__nav_3_6">
           <span class="md-nav__icon md-icon"></span>
           Toolchain
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vscode.html" class="md-nav__link">
+        Visual Studio Code
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -561,41 +1305,6 @@
   
 
             
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_3_5">
-          Development
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Development" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_5">
-          <span class="md-nav__icon md-icon"></span>
-          Development
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
           
             
               
@@ -784,6 +1493,34 @@
   
   
     <li class="md-nav__item">
+      <a href="samples-cpp/automation.diagnosis/index.html" class="md-nav__link">
+        ctrlX Automation Diagnosis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/automation.trace/index.html" class="md-nav__link">
+        ctrlX Automation Trace
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="samples-cpp/datalayer.ecat.io/index.html" class="md-nav__link">
         ctrlX Data Layer EtherCAT I/O's
       </a>
@@ -828,6 +1565,20 @@
     <li class="md-nav__item">
       <a href="samples-cpp/diagnostics.logbook/index.html" class="md-nav__link">
         Diagnostics Logbook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/datalayer.diagnosis/index.html" class="md-nav__link">
+        ctrlX Data Layer Diagnosis
       </a>
     </li>
   
@@ -891,6 +1642,20 @@
     <li class="md-nav__item">
       <a href="samples-go/appdata/index.html" class="md-nav__link">
         AppData File Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-go/tpm2.srk/index.html" class="md-nav__link">
+        TPM2.SRK
       </a>
     </li>
   
@@ -1052,6 +1817,20 @@
     <li class="md-nav__item">
       <a href="samples-python/appdata/index.html" class="md-nav__link">
         AppData File Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/datalayer.remote.debug/index.html" class="md-nav__link">
+        ctrlX Data Layer Remote Debug
       </a>
     </li>
   
@@ -1243,12 +2022,75 @@
       
       
         <label class="md-nav__link" for="__nav_4_6">
+          Samples Nodejs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Samples Nodejs" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Samples Nodejs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-node/hello-world/index.html" class="md-nav__link">
+        Hello World
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-node/datalayer.client/index.html" class="md-nav__link">
+        ctrlX Data Layer Client
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_7" type="checkbox" id="__nav_4_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_7">
           Samples Shell
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Samples Shell" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_6">
+        <label class="md-nav__title" for="__nav_4_7">
           <span class="md-nav__icon md-icon"></span>
           Samples Shell
         </label>
@@ -1275,6 +2117,55 @@
 
             
           
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Samples Snap
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Samples Snap" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Samples Snap
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-snap/generate-manifest/index.html" class="md-nav__link">
+        Generate Manifest
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1287,14 +2178,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
       
       
       
@@ -1329,623 +2218,6 @@
               
   
   
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Developer Guideline
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="appdevguide.html" class="md-nav__link md-nav__link--active">
-        Developer Guideline
-      </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#table-of-content" class="md-nav__link">
-    Table of content
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-introduction" class="md-nav__link">
-    1 Introduction
-  </a>
-  
-    <nav class="md-nav" aria-label="1 Introduction">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-app-development-for-ctrlx-automation" class="md-nav__link">
-    1.1 App development for ctrlX AUTOMATION
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-obligation-of-technical-aspects" class="md-nav__link">
-    1.2 Obligation of technical aspects
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-partner-contract-and-legal-framework" class="md-nav__link">
-    1.3 Partner Contract and Legal Framework
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-app-validation-process" class="md-nav__link">
-    2 App Validation Process
-  </a>
-  
-    <nav class="md-nav" aria-label="2 App Validation Process">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-inital-meeting-for-the-app-validation" class="md-nav__link">
-    2.1 Inital Meeting for the App Validation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-artifacts-delivery" class="md-nav__link">
-    2.2 Artifacts Delivery
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-validation-and-signing" class="md-nav__link">
-    2.4 Validation and Signing
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-app-categories" class="md-nav__link">
-    3 App Categories
-  </a>
-  
-    <nav class="md-nav" aria-label="3 App Categories">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31-category-1-basic-apply-to-ctrlx-basic-mechanisms" class="md-nav__link">
-    3.1 Category 1 (Basic): Apply to ctrlX Basic Mechanisms
-  </a>
-  
-    <nav class="md-nav" aria-label="3.1 Category 1 (Basic): Apply to ctrlX Basic Mechanisms">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#311-overview" class="md-nav__link">
-    3.1.1 Overview
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#312-customer-user-experience" class="md-nav__link">
-    3.1.2 Customer User Experience
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#313-technical-prerequisites" class="md-nav__link">
-    3.1.3 Technical Prerequisites
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-category-2-advanced-contribute-to-ctrlx-engineering-concepts" class="md-nav__link">
-    3.2 Category 2 (Advanced): Contribute to ctrlX Engineering Concepts
-  </a>
-  
-    <nav class="md-nav" aria-label="3.2 Category 2 (Advanced): Contribute to ctrlX Engineering Concepts">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#321-overview" class="md-nav__link">
-    3.2.1 Overview
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#322-customer-user-experience" class="md-nav__link">
-    3.2.2 Customer User Experience
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#323-technical-recommendations" class="md-nav__link">
-    3.2.3 Technical Recommendations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-category-3-extended-extend-ctrlx-automation-features" class="md-nav__link">
-    3.3 Category 3 (Extended): Extend ctrlX AUTOMATION features
-  </a>
-  
-    <nav class="md-nav" aria-label="3.3 Category 3 (Extended): Extend ctrlX AUTOMATION features">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#331-description" class="md-nav__link">
-    3.3.1 Description
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#332-customer-user-experience" class="md-nav__link">
-    3.3.2 Customer User Experience
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#333-technical-recommendations" class="md-nav__link">
-    3.3.3 Technical Recommendations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-basic-app-information-mandatory" class="md-nav__link">
-    4 Basic App Information (MANDATORY) 
-  </a>
-  
-    <nav class="md-nav" aria-label="4 Basic App Information (MANDATORY) ">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-app-artifacts-mandatory" class="md-nav__link">
-    4.1 App Artifacts (MANDATORY)
-  </a>
-  
-    <nav class="md-nav" aria-label="4.1 App Artifacts (MANDATORY)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#411-artifacts-folder-template" class="md-nav__link">
-    4.1.1 Artifacts folder template
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#412-disclosure-folder-mandatory" class="md-nav__link">
-    4.1.2 "Disclosure" folder (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#413-build-info-folder-mandatory" class="md-nav__link">
-    4.1.3 "Build Info" folder (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#414-documentation-folder-mandatory" class="md-nav__link">
-    4.1.4 "Documentation" folder (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#415-app-states-folder-mandatory" class="md-nav__link">
-    4.1.5 "App States" folder (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#416-snaps-folder-mandatory" class="md-nav__link">
-    4.1.6 "Snaps" folder (MANDATORY)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42-app-documentation-mandatory" class="md-nav__link">
-    4.2 App Documentation (MANDATORY)
-  </a>
-  
-    <nav class="md-nav" aria-label="4.2 App Documentation (MANDATORY)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#421-user-manual-mandatory" class="md-nav__link">
-    4.2.1 User Manual (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#422-test-setup-description-mandatory" class="md-nav__link">
-    4.2.2 Test Setup Description (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#423-release-notes-mandatory" class="md-nav__link">
-    4.2.3 Release Notes (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#424-general-app-description-for-the-ctrlx-app-zone-conditional" class="md-nav__link">
-    4.2.4 General App Description for the ctrlX App Zone (CONDITIONAL)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#43-additional-app-information-according-to-linux-ubuntu-conventions-mandatory" class="md-nav__link">
-    4.3 Additional  App Information according to Linux Ubuntu conventions (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#44-foss-info-provisioning-mandatory" class="md-nav__link">
-    4.4 FOSS Info Provisioning (MANDATORY)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-further-app-information-conditional" class="md-nav__link">
-    5 Further App Information (CONDITIONAL)
-  </a>
-  
-    <nav class="md-nav" aria-label="5 Further App Information (CONDITIONAL)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#51-foss-sources-conditional" class="md-nav__link">
-    5.1 FOSS Sources (CONDITIONAL)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#52-semantic-versioning-scheme-optional" class="md-nav__link">
-    5.2 Semantic versioning scheme (OPTIONAL)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#53-restart-delay-optional" class="md-nav__link">
-    5.3 Restart Delay (OPTIONAL)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-working-set-overview-mandatory" class="md-nav__link">
-    6 Working Set Overview (MANDATORY)
-  </a>
-  
-    <nav class="md-nav" aria-label="6 Working Set Overview (MANDATORY)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#61-security-information-considerations" class="md-nav__link">
-    6.1 Security Information &amp; Considerations
-  </a>
-  
-    <nav class="md-nav" aria-label="6.1 Security Information &amp; Considerations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#611-interfaces-slots-plugs-mandatory" class="md-nav__link">
-    6.1.1 Interfaces / Slots &amp; Plugs (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#612-network-security-and-ports-conditional" class="md-nav__link">
-    6.1.2 Network Security and Ports (CONDITIONAL)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#613-file-permissions-conditional" class="md-nav__link">
-    6.1.3 File permissions (CONDITIONAL)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#62-resource-consumption-and-readwrite-operations-mandatory" class="md-nav__link">
-    6.2 Resource Consumption and Read/Write Operations (MANDATORY)
-  </a>
-  
-    <nav class="md-nav" aria-label="6.2 Resource Consumption and Read/Write Operations (MANDATORY)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#621-resource-consumption" class="md-nav__link">
-    6.2.1 Resource Consumption
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#622-integrated-storage-flash-lifetime" class="md-nav__link">
-    6.2.2 Integrated storage / Flash lifetime
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#63-standard-task-scheduling-mandatory" class="md-nav__link">
-    6.3 Standard task scheduling (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#64-test-setup-for-typical-usage-scenario-mandatory" class="md-nav__link">
-    6.4 Test Setup for typical usage scenario (MANDATORY)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-ctrlx-basic-mechanisms-mandatory" class="md-nav__link">
-    7 ctrlX Basic Mechanisms (MANDATORY)
-  </a>
-  
-    <nav class="md-nav" aria-label="7 ctrlX Basic Mechanisms (MANDATORY)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#71-ctrlx-license-handling-mandatory" class="md-nav__link">
-    7.1 ctrlX License Handling (MANDATORY)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#72-app-signing-by-bosch-rexroth-mandatory" class="md-nav__link">
-    7.2 App signing by Bosch Rexroth (MANDATORY)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-ctrlx-security-system-optional" class="md-nav__link">
-    8 ctrlX Security System (OPTIONAL)
-  </a>
-  
-    <nav class="md-nav" aria-label="8 ctrlX Security System (OPTIONAL)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#81-ctrlx-reverse-proxy-optional" class="md-nav__link">
-    8.1 ctrlX Reverse Proxy (OPTIONAL)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#82-ctrlx-key-certificate-management-optional" class="md-nav__link">
-    8.2 ctrlX Key &amp; Certificate Management (OPTIONAL)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#83-ctrlx-identity-management-authentication-authorization-optional" class="md-nav__link">
-    8.3 ctrlX Identity Management / Authentication &amp; Authorization (OPTIONAL)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-ctrlx-user-interface-and-project-handling-optional" class="md-nav__link">
-    9 ctrlX User Interface and Project Handling (OPTIONAL)
-  </a>
-  
-    <nav class="md-nav" aria-label="9 ctrlX User Interface and Project Handling (OPTIONAL)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#91-ctrlx-configuration-storage-conditional" class="md-nav__link">
-    9.1 ctrlX Configuration Storage (CONDITIONAL)
-  </a>
-  
-    <nav class="md-nav" aria-label="9.1 ctrlX Configuration Storage (CONDITIONAL)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#911-solution-handling-optional" class="md-nav__link">
-    9.1.1 Solution Handling (OPTIONAL)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#922-environment-variables-conditional" class="md-nav__link">
-    9.2.2 Environment Variables (CONDITIONAL)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#external-storage-sd-card-and-usb-storage-device-not-available-yet" class="md-nav__link">
-    External storage / SD Card and USB storage device (not available yet)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-ctrlx-automation-system-functions-optional" class="md-nav__link">
-    10 ctrlX AUTOMATION System Functions (OPTIONAL)
-  </a>
-  
-    <nav class="md-nav" aria-label="10 ctrlX AUTOMATION System Functions (OPTIONAL)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#101-ctrlx-logbook-and-diagnostics-system" class="md-nav__link">
-    10.1 ctrlX Logbook and Diagnostics System
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#11-real-time-extension-optional" class="md-nav__link">
-    11 Real Time Extension (OPTIONAL)
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
   
     
       
@@ -1953,18 +2225,18 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_3">
+        <label class="md-nav__link" for="__nav_5_2">
           Api Reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Api Reference" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_3">
+        <label class="md-nav__title" for="__nav_5_2">
           <span class="md-nav__icon md-icon"></span>
           Api Reference
         </label>
@@ -2019,6 +2291,69 @@
 
             
           
+            
+              
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_3">
+          Bundle Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Bundle Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Bundle Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://apps.boschrexroth.com/docs/ctrlx/diagnosis/html/index.html" class="md-nav__link">
+        Diagnosis
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://apps.boschrexroth.com/docs/ctrlx/trace/html/index.html" class="md-nav__link">
+        Trace
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2052,6 +2387,7 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -2066,8 +2402,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#table-of-content" class="md-nav__link">
-    Table of content
+  <a href="#table-of-contents" class="md-nav__link">
+    Table of Contents
   </a>
   
 </li>
@@ -2082,14 +2418,14 @@
         
           <li class="md-nav__item">
   <a href="#11-app-development-for-ctrlx-automation" class="md-nav__link">
-    1.1 App development for ctrlX AUTOMATION
+    1.1 App Development for ctrlX AUTOMATION
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-obligation-of-technical-aspects" class="md-nav__link">
-    1.2 Obligation of technical aspects
+  <a href="#12-obligations-for-technical-aspects" class="md-nav__link">
+    1.2 Obligations for Technical Aspects
   </a>
   
 </li>
@@ -2115,15 +2451,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-inital-meeting-for-the-app-validation" class="md-nav__link">
-    2.1 Inital Meeting for the App Validation
+  <a href="#21-initial-meeting-for-app-validation" class="md-nav__link">
+    2.1 Initial Meeting for App Validation
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#22-artifacts-delivery" class="md-nav__link">
-    2.2 Artifacts Delivery
+    2.2 Artifacts’ Delivery
   </a>
   
 </li>
@@ -2149,11 +2485,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-category-1-basic-apply-to-ctrlx-basic-mechanisms" class="md-nav__link">
-    3.1 Category 1 (Basic): Apply to ctrlX Basic Mechanisms
+  <a href="#31-category-1-basic-applies-to-ctrlx-basic-mechanisms" class="md-nav__link">
+    3.1 Category 1 (Basic): Applies to ctrlX basic mechanisms
   </a>
   
-    <nav class="md-nav" aria-label="3.1 Category 1 (Basic): Apply to ctrlX Basic Mechanisms">
+    <nav class="md-nav" aria-label="3.1 Category 1 (Basic): Applies to ctrlX basic mechanisms">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2183,11 +2519,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-category-2-advanced-contribute-to-ctrlx-engineering-concepts" class="md-nav__link">
-    3.2 Category 2 (Advanced): Contribute to ctrlX Engineering Concepts
+  <a href="#32-category-2-advanced-contributes-to-ctrlx-engineering-concepts" class="md-nav__link">
+    3.2 Category 2 (Advanced): Contributes to ctrlX engineering concepts
   </a>
   
-    <nav class="md-nav" aria-label="3.2 Category 2 (Advanced): Contribute to ctrlX Engineering Concepts">
+    <nav class="md-nav" aria-label="3.2 Category 2 (Advanced): Contributes to ctrlX engineering concepts">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2217,11 +2553,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-category-3-extended-extend-ctrlx-automation-features" class="md-nav__link">
-    3.3 Category 3 (Extended): Extend ctrlX AUTOMATION features
+  <a href="#33-category-3-extended-extends-ctrlx-automation-features" class="md-nav__link">
+    3.3 Category 3 (Extended): Extends ctrlX AUTOMATION features
   </a>
   
-    <nav class="md-nav" aria-label="3.3 Category 3 (Extended): Extend ctrlX AUTOMATION features">
+    <nav class="md-nav" aria-label="3.3 Category 3 (Extended): Extends ctrlX AUTOMATION features">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2273,7 +2609,7 @@
         
           <li class="md-nav__item">
   <a href="#411-artifacts-folder-template" class="md-nav__link">
-    4.1.1 Artifacts folder template
+    4.1.1 Artifacts Folder Template
   </a>
   
 </li>
@@ -2361,7 +2697,7 @@
         
           <li class="md-nav__item">
   <a href="#43-additional-app-information-according-to-linux-ubuntu-conventions-mandatory" class="md-nav__link">
-    4.3 Additional  App Information according to Linux Ubuntu conventions (MANDATORY)
+    4.3 Additional App Information According to Linux Ubuntu Conventions (MANDATORY)
   </a>
   
 </li>
@@ -2395,7 +2731,7 @@
         
           <li class="md-nav__item">
   <a href="#52-semantic-versioning-scheme-optional" class="md-nav__link">
-    5.2 Semantic versioning scheme (OPTIONAL)
+    5.2 Semantic Versioning Scheme (OPTIONAL)
   </a>
   
 </li>
@@ -2444,7 +2780,7 @@
         
           <li class="md-nav__item">
   <a href="#613-file-permissions-conditional" class="md-nav__link">
-    6.1.3 File permissions (CONDITIONAL)
+    6.1.3 File Permissions (CONDITIONAL)
   </a>
   
 </li>
@@ -2470,8 +2806,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#622-integrated-storage-flash-lifetime" class="md-nav__link">
-    6.2.2 Integrated storage / Flash lifetime
+  <a href="#622-integrated-storageflash-lifetime" class="md-nav__link">
+    6.2.2 Integrated Storage/Flash Lifetime
   </a>
   
 </li>
@@ -2483,14 +2819,14 @@
         
           <li class="md-nav__item">
   <a href="#63-standard-task-scheduling-mandatory" class="md-nav__link">
-    6.3 Standard task scheduling (MANDATORY)
+    6.3 Standard Task Scheduling (MANDATORY)
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#64-test-setup-for-typical-usage-scenario-mandatory" class="md-nav__link">
-    6.4 Test Setup for typical usage scenario (MANDATORY)
+    6.4 Test Setup for Typical Usage Scenario (MANDATORY)
   </a>
   
 </li>
@@ -2517,7 +2853,7 @@
         
           <li class="md-nav__item">
   <a href="#72-app-signing-by-bosch-rexroth-mandatory" class="md-nav__link">
-    7.2 App signing by Bosch Rexroth (MANDATORY)
+    7.2 App Signing by Bosch Rexroth (MANDATORY)
   </a>
   
 </li>
@@ -2536,8 +2872,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#81-ctrlx-reverse-proxy-optional" class="md-nav__link">
-    8.1 ctrlX Reverse Proxy (OPTIONAL)
+  <a href="#81-ctrlx-core-reverse-proxy-optional" class="md-nav__link">
+    8.1 ctrlX CORE reverse proxy (OPTIONAL)
   </a>
   
 </li>
@@ -2550,8 +2886,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#83-ctrlx-identity-management-authentication-authorization-optional" class="md-nav__link">
-    8.3 ctrlX Identity Management / Authentication &amp; Authorization (OPTIONAL)
+  <a href="#83-ctrlx-identity-managementauthentication-authorization-optional" class="md-nav__link">
+    8.3 ctrlX Identity Management/Authentication &amp; Authorization (OPTIONAL)
   </a>
   
 </li>
@@ -2593,7 +2929,7 @@
         
           <li class="md-nav__item">
   <a href="#external-storage-sd-card-and-usb-storage-device-not-available-yet" class="md-nav__link">
-    External storage / SD Card and USB storage device (not available yet)
+    External storage / SD card and USB storage device (not available yet)
   </a>
   
 </li>
@@ -2617,8 +2953,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#101-ctrlx-logbook-and-diagnostics-system" class="md-nav__link">
-    10.1 ctrlX Logbook and Diagnostics System
+  <a href="#101-ctrlx-logbook-and-diagnostic-system" class="md-nav__link">
+    10.1 ctrlX Logbook and Diagnostic System
   </a>
   
 </li>
@@ -2635,6 +2971,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#12-licensing-optional" class="md-nav__link">
+    12 Licensing (OPTIONAL)
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2647,83 +2990,84 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/appdevguide.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="ctrlx-core-app-development-guideline">ctrlX CORE App Development Guideline<a class="headerlink" href="#ctrlx-core-app-development-guideline" title="Permanent link">&para;</a></h1>
-<p><strong>Liability</strong> The information in this guideline is intended for product description purposes only and shall not be deemed to be a guaranteed characteristic, unless expressly stipulated by contract. All rights are reserved with respect to the content of this documentation and the availability of the product.</p>
-<h3 id="table-of-content"><strong>Table of content</strong><a class="headerlink" href="#table-of-content" title="Permanent link">&para;</a></h3>
+<a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/appdevguide.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="ctrlx-core-app-development-guideline">ctrlX CORE App Development Guideline<a class="headerlink" href="#ctrlx-core-app-development-guideline" title="Permanent link">&para;</a></h1>
+<p><strong>Liability</strong> The information in this guideline is intended for product description purposes only and shall not be deemed to be of a warranty nature, unless expressly stipulated by contract. All rights are reserved with respect to the content of this documentation and the availability of the product.</p>
+<h3 id="table-of-contents"><strong>Table of Contents</strong><a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h3>
 <p><a href="#introduction">1 Introduction</a></p>
 <p><a href="#validation">2 App Validation Process</a></p>
 <p><a href="#categories">3 App Categories</a></p>
 <p><a href="#basic">4 Basic App Information (mandatory)</a></p>
 <p><a href="#further">5 Further App Information (conditional)</a></p>
 <p><a href="#workingset">6 Working Set Overview (mandatory)</a></p>
-<p><a href="#basicmechansms">7 ctrlX Basic Mechanisms (mandatory)</a></p>
+<p><a href="#basicmechanisms">7 ctrlX Basic Mechanisms (mandatory)</a></p>
 <p><a href="#security">8 ctrlX Security System (optional)</a></p>
 <p><a href="#userinterface">9 ctrlX User Interface and Project Handling (optional)</a></p>
 <p><a href="#automation">10 ctrlX AUTOMATION System Functions (optional)</a></p>
 <p><a href="#realtime">11 Real Time Extension (optional)</a></p>
+<p><a href="#licensing">12 Licensing (optional)</a></p>
 <h2 id="1-introduction">1 Introduction<a name="introduction"></a><a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
-<p>This guideline give orientation to App developers and Partners who want to contribute with new Apps to the ctrlX World Ecosystem. </p>
-<p>This is a so-called "living document". New Apps might lead to new topics and may result in new guidelines at any time.</p>
-<h3 id="11-app-development-for-ctrlx-automation">1.1 App development for ctrlX AUTOMATION<a class="headerlink" href="#11-app-development-for-ctrlx-automation" title="Permanent link">&para;</a></h3>
-<p>The open ctrlX AUTOMATION system architecture allows developers to implement further system functions with low effort at any time as Apps and as open source software. This document gives orientation on how to create apps to integrate best into ctrlX AUTOMATION.</p>
-<p>With a dedicated app validation and signing process, Bosch Rexroth approves an App as <strong>qualified for ctrlX AUTOMATION</strong>. This process ensures that the app meets the quality standards of ctrlX AUTOMATION.</p>
-<p>This document describes all aspects which have to be considered when an App is developed.
-Some aspects are <strong>mandatory</strong>, both from legal and technical viewpoint. Others are <strong>optional</strong> and decribe how an App can be fully integrated in the ctrlX system architecture to provide the best user experience.</p>
-<h3 id="12-obligation-of-technical-aspects">1.2 Obligation of technical aspects<a class="headerlink" href="#12-obligation-of-technical-aspects" title="Permanent link">&para;</a></h3>
-<p>This document describes technical aspects for ctrlX Apps. These aspects in each case have one of the following obligations:</p>
+<p>This guideline provides guidance for app developers and partners who want to contribute to the ctrlX World Ecosystem with new apps. </p>
+<p>This is a living document. New apps might lead to new topics and may result in new guidelines at any time.</p>
+<h3 id="11-app-development-for-ctrlx-automation">1.1 App Development for ctrlX AUTOMATION<a class="headerlink" href="#11-app-development-for-ctrlx-automation" title="Permanent link">&para;</a></h3>
+<p>The open ctrlX AUTOMATION system architecture allows developers to implement further system functions with little effort at any time as apps and as open source software. This document provides guidance on how to create apps to integrate them perfectly into ctrlX AUTOMATION.</p>
+<p>Bosch Rexroth approves an app as <strong>qualified for ctrlX AUTOMATION</strong> using a dedicated app validation and signing process. This process ensures that the app meets the ctrlX AUTOMATION quality standards.</p>
+<p>This document describes all aspects that have to be considered when an app is developed.
+Some aspects are <strong>mandatory</strong>, both from a legal and technical viewpoint. Others are <strong>optional</strong> and describe how an app can be fully integrated in the ctrlX system architecture to provide the best user experience.</p>
+<h3 id="12-obligations-for-technical-aspects">1.2 Obligations for Technical Aspects<a class="headerlink" href="#12-obligations-for-technical-aspects" title="Permanent link">&para;</a></h3>
+<p>This document describes the technical aspects for ctrlX apps. These aspects each have one of the following obligations:</p>
 <ul>
-<li><span style="color:red;"><strong>MANDATORY</strong></span> - This aspect is stricly required and <strong>must</strong> be implemented</li>
-<li><span style="color:green;"><strong>OPTIONAL</strong></span> This Aspect brings an added-value and <strong>can</strong> or <strong>should</strong> be implemented. </li>
-<li><span style="color:blue;"><strong>CONDITIONAL</strong></span>  - Aspect must be implemented in <strong>special cases</strong>. Bosch Rexroth and the Partner will identify the requirements during the App integration process.</li>
+<li><span style="color:red;"><strong>MANDATORY</strong></span> - This aspect is strictly required and <strong>must</strong> be implemented.</li>
+<li><span style="color:green;"><strong>OPTIONAL</strong></span> This aspect brings added value and <strong>can</strong> or <strong>should</strong> be implemented. </li>
+<li><span style="color:blue;"><strong>CONDITIONAL</strong></span> - This aspect is to be implemented in specific cases**. Bosch Rexroth and the partner identify the requirements during the app integration process.</li>
 </ul>
 <h3 id="13-partner-contract-and-legal-framework">1.3 Partner Contract and Legal Framework<a class="headerlink" href="#13-partner-contract-and-legal-framework" title="Permanent link">&para;</a></h3>
-<p>This Development Guide describes the technical integration of an app into ctrlX. In addition, as non-technical prerequisites, the following documents need to be available and signed, before an app gets published:</p>
+<p>This development guide describes the technical integration of an app into ctrlX CORE. The following documents also need to be available and signed as non-technical prerequisites before an app gets published:</p>
 <ul>
-<li>The <strong>Software Distribution Framework</strong> Agreement ("Partner Contract") describes fundamental constraints of the partnership between you as app developer and Bosch Rexroth and affiliates</li>
+<li>The <strong>Software Distribution Framework</strong> agreement ("Partner Contract") describes the fundamental constraints of the partnership between you as app developer and Bosch Rexroth and affiliates</li>
 <li>A <strong>License Contract</strong> describes all app related licenses as part of the product to be sold within Bosch Rexroth and affiliates sales channels</li>
 <li>Optionally a <strong>Letter of Intent</strong> (LOI)</li>
 <li>Optionally a <strong>Non Disclosure Agreement</strong> (NDA)</li>
 </ul>
 <h2 id="2-app-validation-process">2 App Validation Process<a name="validation"></a><a class="headerlink" href="#2-app-validation-process" title="Permanent link">&para;</a></h2>
-<p>As a mandatory step of an App integration into ctrlX, Bosch Rexroth will perform a standard App validation and signing process.</p>
-<p>For handover, Bosch Rexroth provides an according ctrlX World Partner Portal SharePoint space, which will be prepared during the Partner contracting process.</p>
-<h3 id="21-inital-meeting-for-the-app-validation">2.1 Inital Meeting for the App Validation<a class="headerlink" href="#21-inital-meeting-for-the-app-validation" title="Permanent link">&para;</a></h3>
-<p>Before the validation starts, the Partner / App Developer must provide the app architecture</p>
+<p>As a mandatory step for app integration into ctrlX, Bosch Rexroth will carry out a standard app validation and signing process.</p>
+<p>For handover, Bosch Rexroth accordingly provides a ctrlX World Partner Portal SharePoint space, which will be prepared during the partner contracting process.</p>
+<h3 id="21-initial-meeting-for-app-validation">2.1 Initial Meeting for App Validation<a class="headerlink" href="#21-initial-meeting-for-app-validation" title="Permanent link">&para;</a></h3>
+<p>Before the validation process starts, the partner / app developer must provide the app architecture</p>
 <p><strong>A picture of the main communication paths is needed, including</strong></p>
 <ul>
 <li>
-<p>a building block overview of the App</p>
+<p>a modular overview of the app</p>
 </li>
 <li>
-<p>a short description of the communication paths to other Apps / Devices</p>
+<p>a short description of the communication paths to other apps/devices</p>
 </li>
 <li>
-<p>the App configuration and data storage concept</p>
+<p>the app configuration and data storage concept</p>
 </li>
 <li>
 <p>a description of a typical standard scenario</p>
 </li>
 </ul>
-<p>The architecture overview should be stored as "<strong>architecture-overview.x</strong>" in the {app-name} folder and should be delivered with each new App version.</p>
-<p>This document typically will be provided for an initial meeting with the Partner / App Developer, the according Bosch Rexroth Partner Manager and the Bosch Rexroth App validation Team.
-At this point, the partner also should already have uploaded the necessary artifacts in order to be able to clarify any open points.</p>
-<h3 id="22-artifacts-delivery">2.2 Artifacts Delivery<a class="headerlink" href="#22-artifacts-delivery" title="Permanent link">&para;</a></h3>
-<p>In an automated validation Framework, Bosch Rexroth checks the provided artefacts and the described behaviour of an App that is to be signed as official ctrlX App.</p>
-<p>This validation Framework requires a standard format for artifacts and information.</p>
-<p>To simplify the artifact's delivery, we provide a base folder structure with description and schema files. This will help App developers to deliver the required artefacts and us to simplify the validation work. Please use the given structure, folder names and file names like given below, without any renaming. </p>
+<p>The architecture overview should be stored as "<strong>architecture-overview.x</strong>" in the {app-name} folder and should be delivered with each new app version.</p>
+<p>This document typically will be provided for an initial meeting with the partner / app developer, the relevant Bosch Rexroth partner manager and the Bosch Rexroth app validation team.
+At this point, the partner should also already have uploaded the necessary artifacts to be able to clarify any open points.</p>
+<h3 id="22-artifacts-delivery">2.2 Artifacts’ Delivery<a class="headerlink" href="#22-artifacts-delivery" title="Permanent link">&para;</a></h3>
+<p>Bosch Rexroth checks the provided artifacts and the described behavior of an app that is to be signed as an official ctrlX app in an automated validation framework.</p>
+<p>This validation framework requires a standard format for artifacts and information.</p>
+<p>To simplify the delivery of artifacts, we provide a base folder structure with description and schema files. This helps app developers to deliver the required artifacts and us to simplify the validation work. Please use the given structure, folder names and file names as given below, without any renaming. </p>
 <p>The provided artifacts and information must be organized in the following way:</p>
 <p><strong>General Folder structure</strong></p>
 <ul>
 <li>
-<p><strong>{company-name}\</strong> - Partner Company Name. Folder name is created by Bosch Rexroth</p>
+<p><strong>{company-name}\</strong> - Partner company name. Folder name is created by Bosch Rexroth</p>
 <ul>
 <li>
-<p><strong>{app-name}\</strong>  - Technical App Name. This App name is unique. A folder will be created by the partner</p>
+<p><strong>{app-name}\</strong>  - Technical app name. This app name is unique. A folder will be created by the partner</p>
 </li>
 <li>
 <p><strong>{version}\</strong> - The version folder separates the different versions. Format is three numbers separated by dots, e.g. "1.0.2". Each version has to be stored in a separate folder. A folder will be created by the partner</p>
@@ -2735,103 +3079,103 @@ At this point, the partner also should already have uploaded the necessary artif
 </li>
 </ul>
 <p><strong>Handover of artifacts</strong></p>
-<p>After all required information is available in your local folder, zip the folder with Windows-zip and upload it as "<strong>artifacts.zip</strong>" to the ctrlX World Partner Portal space in the "<strong>.../{company-name}/{app-name}/{version}/</strong>" path.</p>
+<p>Once all the required information is available in your local folder, zip the folder using Windows-zip and upload it as "<strong>artifacts.zip</strong>" to the ctrlX World Partner Portal space in the "<strong>.../{company-name}/{app-name}/{version}/</strong>" path.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>To avoid problems during upload of the artifacts.zip file, please use the Windows-zip function</p>
+<p>To avoid problems when uploading the artifacts.zip file, please use the Windows-zip feature</p>
 </div>
 <h3 id="24-validation-and-signing">2.4 Validation and Signing<a class="headerlink" href="#24-validation-and-signing" title="Permanent link">&para;</a></h3>
-<p>The Validation typically will be done in several iterations, depending on the result of a particular validation activity.
-If all required information is provided in the ctrlX World Partner Portal space, an according mail to <code>ctrlx.world@boschrexroth.de</code> will trigger a validation loop.
-Basically, the workflow will look like the following:</p>
+<p>Validation is typically carried out in several iterations, depending on the result of a particular validation activity.
+If all the required information is provided in the ctrlX World Partner Portal space, an email to <code>ctrlx.world@boschrexroth.de</code> will trigger a validation loop.
+Basically, the workflow will be as follows:</p>
 <ol>
-<li>Partner / App Developer: Upload required artefacts and inform Bosch Rexroth</li>
-<li>Bosch Rexroth checks the artefacts for completeness. If rework is required, the partner will be notified via Email with an attached report in the "<strong>.../{company-name}/{app-name}/{version}/results</strong>" folder</li>
-<li>When artefats are complete, the validation will start. Again, if rework is required, the partner will be notified with an attached report</li>
-<li>When validation was sucessful, Bosch Rexroth will sign the App and inform the Partner via Email.</li>
+<li>Partner/app developer: Uploads required artifacts and informs Bosch Rexroth</li>
+<li>Bosch Rexroth checks the artifacts for completeness. If rework is required, the partner will be notified by email with an attached report in the "<strong>.../{company-name}/{app-name}/{version}/results</strong>" folder</li>
+<li>Once the artifacts are complete, the validation will start. Again, if rework is required, the partner will be notified with an attached report</li>
+<li>Once validation has been successful, Bosch Rexroth will sign the app and inform the partner by email.</li>
 </ol>
 <h2 id="3-app-categories">3 App Categories<a name="categories"></a><a class="headerlink" href="#3-app-categories" title="Permanent link">&para;</a></h2>
-<p>Apps can be integrated into ctrlX on different levels. As an orientation for the prerequisites and possibilities on different levels, three categories are defined. A category, however, is no formal boundary, and an app can seamless support aspects of the different categories. Also, subsequent versions of an app might support more aspects than an earlier version.
-In addition, there is no correlation between the category and the business value of an app.
-However, at least all aspects that are mentioned in <strong>Category 1</strong> need to be met, since they are considered as <strong>mandatory</strong>.</p>
-<p>In this chapter, the aspects are briefly described. The remainder of these documents provides detailed information about all aspects and also refers to additional sources of information, like how-to documents and code samples.</p>
-<h3 id="31-category-1-basic-apply-to-ctrlx-basic-mechanisms">3.1 Category 1 (Basic): Apply to ctrlX Basic Mechanisms<a class="headerlink" href="#31-category-1-basic-apply-to-ctrlx-basic-mechanisms" title="Permanent link">&para;</a></h3>
+<p>Apps can be integrated into ctrlX on different levels. Three categories are defined as guidance for the prerequisites and possibilities on different levels. A category, however, is not a formal boundary, and an app can seamlessly support aspects in the different categories. Also, subsequent versions of an app might support more aspects than an earlier version.
+In addition, there is no correlation between the category and an app’s business value.
+However, at least all aspects that are mentioned in <strong>Category 1</strong> need to be met, since they are considered <strong>mandatory</strong>.</p>
+<p>The aspects are briefly described in this section The remainder of these documents provides detailed information about all aspects and also refers to additional sources of information, like how-to documents and code samples.</p>
+<h3 id="31-category-1-basic-applies-to-ctrlx-basic-mechanisms">3.1 Category 1 (Basic): Applies to ctrlX basic mechanisms<a class="headerlink" href="#31-category-1-basic-applies-to-ctrlx-basic-mechanisms" title="Permanent link">&para;</a></h3>
 <p>To be approved as an official ctrlX CORE app, an app must support a minimum set of mandatory aspects.</p>
 <h4 id="311-overview"><strong>3.1.1 Overview</strong><a class="headerlink" href="#311-overview" title="Permanent link">&para;</a></h4>
-<p>The App itself and an according user documentation needs to be provided. Also legal aspects like FOSS are required.
-Working set information is needed, to support the test and validation process.
-During runtime, the App must use the onboard licensing mechanism of ctrlX CORE.</p>
+<p>The app itself and corresponding user documentation need to be provided. Legal aspects like FOSS are also required.
+Working set information is needed to support the test and validation process.
+During runtime, the app must use the ctrlX CORE onboard licensing mechanism.</p>
 <h4 id="312-customer-user-experience"><strong>3.1.2 Customer User Experience</strong><a class="headerlink" href="#312-customer-user-experience" title="Permanent link">&para;</a></h4>
-<p>Customers find the App in the ctrlX App Store. They know how the App is licensed and can use the overall Bosch Rexroth licensing system for ctrlX.
-They also can be sure that the App contributes to the basic ctrlX Security Mechanisms.</p>
+<p>Customers can find the app in the ctrlX App Store. They know how the app is licensed and can use the overall Bosch Rexroth licensing system for ctrlX.
+They can also be sure that the app contributes to the basic ctrlX CORE security mechanisms.</p>
 <h4 id="313-technical-prerequisites"><strong>3.1.3 Technical Prerequisites</strong><a class="headerlink" href="#313-technical-prerequisites" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>As mentioned, the aspects which are listed here are <span style="color:red;"><strong>MANDATORY</strong></span>. Means, all of them are required for an official ctrlX app.</p>
+<p>As mentioned, the aspects listed here are <span style="color:red;"><strong>MANDATORY</strong></span>. This means all of them are required for an official ctrlX app.</p>
 </div>
-<p>Basic App Information:</p>
+<p>Basic app information:</p>
 <ul>
 <li>
-<p>App Artifacts (“Executables” for ctrlX CORE and ctrlX CORE virtual and basic technical information)</p>
+<p>App artifacts (“Executables” for ctrlX CORE and ctrlX CORE virtual and basic technical information)</p>
 </li>
 <li>
-<p>App Documentation / User Manual and Release Notes</p>
+<p>App documentation / user manual and release notes</p>
 </li>
 <li>
-<p>Additional App Properties according to Linux Ubuntu conventions</p>
+<p>Additional app properties according to Linux Ubuntu conventions</p>
 </li>
 <li>
-<p>FOSS Information </p>
+<p>FOSS information </p>
 </li>
 </ul>
-<p>Working Set Overview:</p>
+<p>Working set overview:</p>
 <ul>
 <li>
-<p>Information about Security behavior (Linux Slots &amp; Plugs, Ports, Sockets)</p>
+<p>Information about security behavior (Linux slots &amp; plugs, ports, sockets)</p>
 </li>
 <li>
-<p>Information about Resource Consumption and Read/Write Operations</p>
+<p>Information about resource consumption and read/write operations</p>
 </li>
 <li>
 <p>Standard task scheduling overview</p>
 </li>
 <li>
-<p>Test Setup Description for typical usage scenario</p>
+<p>Test setup description for typical usage scenario</p>
 </li>
 </ul>
-<p>Integration into ctrlX Basic Mechanisms:</p>
+<p>Integration into ctrlX basic mechanisms:</p>
 <ul>
 <li>
-<p>Use of ctrlX License Handling</p>
+<p>Use of ctrlX license handling</p>
 </li>
 <li>
 <p>App signed by Bosch Rexroth</p>
 </li>
 </ul>
-<h3 id="32-category-2-advanced-contribute-to-ctrlx-engineering-concepts">3.2 Category 2 (Advanced): Contribute to ctrlX Engineering Concepts<a class="headerlink" href="#32-category-2-advanced-contribute-to-ctrlx-engineering-concepts" title="Permanent link">&para;</a></h3>
-<p>For a good integration into ctrlX from a user's point of view, an App should fulfil the aspects of Category 2 - even if these aspects are not necessary for App validation.</p>
+<h3 id="32-category-2-advanced-contributes-to-ctrlx-engineering-concepts">3.2 Category 2 (Advanced): Contributes to ctrlX engineering concepts<a class="headerlink" href="#32-category-2-advanced-contributes-to-ctrlx-engineering-concepts" title="Permanent link">&para;</a></h3>
+<p>For good integration into ctrlX from a user's point of view, an app should meet the aspects of Category 2 – even if these aspects are not necessary for app validation.</p>
 <h4 id="321-overview"><strong>3.2.1 Overview</strong><a class="headerlink" href="#321-overview" title="Permanent link">&para;</a></h4>
-<p>The App uses the according ctrlX system interfaces and supports ctrlX platform features like Identity Management, Data Management and Backup/Restore.</p>
+<p>The app uses the relevant ctrlX system interfaces and supports ctrlX platform features like Identity Management, Data Management and Backup/Restore.</p>
 <h4 id="322-customer-user-experience"><strong>3.2.2 Customer User Experience</strong><a class="headerlink" href="#322-customer-user-experience" title="Permanent link">&para;</a></h4>
-<p>The App contributes to the ctrlX User Interface and System Behaviour. It integrates into basic user stories for configuration and maintenance of a ctrlX Application.</p>
+<p>The app contributes to the ctrlX user interface and system behavior. It integrates into basic user stories for configuration and maintenance of a ctrlX application.</p>
 <h4 id="323-technical-recommendations"><strong>3.2.3 Technical Recommendations</strong><a class="headerlink" href="#323-technical-recommendations" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>As mentioned, the aspects which are listed here are <span style="color:green;"><strong>OPTIONAL</strong></span>. However, they are highly recommended for a good user experience. Also, the aspects of category 2 and 3 are overlapping and not formally separated</p>
+<p>As mentioned, the aspects listed here are <span style="color:green;"><strong>OPTIONAL</strong></span>. However, they are highly recommended for a good user experience. Also, the category 2 and 3 aspects overlap and not formally separated</p>
 </div>
-<p>Further App Information:</p>
+<p>Further app information:</p>
 <ul>
 <li>
-<p>FOSS Sources</p>
+<p>FOSS sources</p>
 </li>
 <li>
 <p>Semantic versioning scheme</p>
 </li>
 </ul>
-<p>Integration into ctrlX Security System:</p>
+<p>Integration into ctrlX CORE security system:</p>
 <ul>
 <li>
-<p>ctrlX Reverse Proxy</p>
+<p>ctrlX CORE reverse proxy</p>
 </li>
 <li>
 <p>ctrlX Key &amp; Certificate Management</p>
@@ -2840,67 +3184,67 @@ They also can be sure that the App contributes to the basic ctrlX Security Mecha
 <p>ctrlX Identity Management</p>
 </li>
 <li>
-<p>Improved Network Security (no insecure protocols)</p>
+<p>Improved network security (no insecure protocols)</p>
 </li>
 </ul>
-<p>Integration into ctrlX User Interface and Project Handling</p>
+<p>Integration into ctrlX user interface and project handling</p>
 <ul>
 <li>
-<p>ctrlX Navigation Pane and Landing Page</p>
+<p>ctrlX CORE navigation pane and landing page</p>
 </li>
 <li>
-<p>ctrlX Configuration Storage</p>
+<p>ctrlX CORE configuration storage</p>
 </li>
 </ul>
-<h3 id="33-category-3-extended-extend-ctrlx-automation-features">3.3 Category 3 (Extended): Extend ctrlX AUTOMATION features<a class="headerlink" href="#33-category-3-extended-extend-ctrlx-automation-features" title="Permanent link">&para;</a></h3>
-<p>Finally, an App can integrate in the Automation framework and extend the ctrlX real time system</p>
+<h3 id="33-category-3-extended-extends-ctrlx-automation-features">3.3 Category 3 (Extended): Extends ctrlX AUTOMATION features<a class="headerlink" href="#33-category-3-extended-extends-ctrlx-automation-features" title="Permanent link">&para;</a></h3>
+<p>Finally, an app can integrate in the Automation framework and extend the ctrlX real time system</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Real time integration requires additional training and support from Bosch Rexroth to avoid unexpected system behavior and impacts on the ctrlX real time kernel.</p>
+<p>Real time integration requires additional training and support from Bosch Rexroth to avoid unexpected system behavior and impacts on the ctrlX real-time kernel.</p>
 </div>
 <h4 id="331-description"><strong>3.3.1 Description</strong><a class="headerlink" href="#331-description" title="Permanent link">&para;</a></h4>
-<p>The App exposes information in the ctrlX Data Layer for all other Apps. It also can extend the real time functions of ctrlX if it connected to the real time task scheduler</p>
+<p>The app exposes information in the ctrlX Data Layer for all other apps. It also can extend the real time functions of ctrlX if connected to the real-time task scheduler</p>
 <h4 id="332-customer-user-experience"><strong>3.3.2 Customer User Experience</strong><a class="headerlink" href="#332-customer-user-experience" title="Permanent link">&para;</a></h4>
-<p>The App extends the ctrlX AUTOMATION system functions, e.g. for Motion and/or PLC</p>
+<p>The app extends the ctrlX AUTOMATION system functions, e.g. for Motion and/or PLC</p>
 <h4 id="333-technical-recommendations"><strong>3.3.3 Technical Recommendations</strong><a class="headerlink" href="#333-technical-recommendations" title="Permanent link">&para;</a></h4>
-<p>Integration into ctrlX AUTOMATION System Functions:</p>
+<p>Integration into ctrlX AUTOMATION system functions:</p>
 <ul>
 <li>
 <p>ctrlX Data Layer</p>
 </li>
 <li>
-<p>ctrlX Logbook and Diagnostics System</p>
+<p>ctrlX CORE logbook and diagnostics system</p>
 </li>
 </ul>
-<p>Real Time Extension:</p>
+<p>Real-time extension:</p>
 <ul>
-<li>ctrlX Scheduler</li>
+<li>ctrlX CORE Scheduler</li>
 </ul>
 <h2 id="4-basic-app-information-mandatory">4 Basic App Information (<span style="color:red;"><strong>MANDATORY</strong></span>) <a name="basic"></a><a class="headerlink" href="#4-basic-app-information-mandatory" title="Permanent link">&para;</a></h2>
-<p>The Basic App Information is checked as prerequisite by Bosch Rexroth, before the validation starts.</p>
+<p>The basic app information is checked as a prerequisite by Bosch Rexroth, before the validation process starts.</p>
 <h3 id="41-app-artifacts-mandatory">4.1 App Artifacts (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#41-app-artifacts-mandatory" title="Permanent link">&para;</a></h3>
-<h4 id="411-artifacts-folder-template">4.1.1 Artifacts folder template<a class="headerlink" href="#411-artifacts-folder-template" title="Permanent link">&para;</a></h4>
-<p>The ctrlX World Partner Portal provides a file (artifacts.zip) which can be downloaded and extract locally.
+<h4 id="411-artifacts-folder-template">4.1.1 Artifacts Folder Template<a class="headerlink" href="#411-artifacts-folder-template" title="Permanent link">&para;</a></h4>
+<p>The ctrlX World Partner Portal provides a file (artifacts.zip), which can be downloaded and extracted locally.
 This will create the required folder structure for the mandatory artifacts out-of-the-box, with default descriptions and schema files.</p>
 <p>!!!! important 
      Please use the given structure, folder names and file names unchanged. This will support an efficient validation process.</p>
 <p><img alt="image" src="images/artefacts.png" /></p>
 <p>The artifacts are organized in five sub folders:</p>
 <h4 id="412-disclosure-folder-mandatory">4.1.2 "Disclosure" folder (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#412-disclosure-folder-mandatory" title="Permanent link">&para;</a></h4>
-<p>In the disclosure folder the FOSS source files and license text files are stored </p>
+<p>The FOSS source files and license text files are stored in the disclosure folder </p>
 <ul>
 <li>
-<p><strong>"fossinfo.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - license texts of all used open source software of an App. For more information about format and content, refer the example json and the according json-schema in the standard "artifacts.zip" file.</p>
+<p><strong>"fossinfo.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - license texts for all an app’s used open source software. For more information about format and content, refer to the json example and the corresponding json schema in the standard "artifacts.zip" file.</p>
 </li>
 <li>
 <p><strong>"foss-sources.zip" (<span style="color:blue;"></strong>CONDITIONAL<strong></span>)</strong> - In the foss-sources.zip file, the sources of all used open source libraries / packages are zipped without a password. </p>
 </li>
-<li><strong>"foss-offer.x" (<span style="color:blue;"></strong>CONDITIONAL<strong></span>)</strong> - If the foss-sources.zip file is not given, a human-readable file with the name "offer.x" is needed. It explains how the user can get the sources.</li>
+<li><strong>"foss-offer.x" (<span style="color:blue;"></strong>CONDITIONAL<strong></span>)</strong> - If the foss-sources.zip file is not provided, a human-readable file with the name "offer.x" is needed. It explains how the user can get the sources.</li>
 </ul>
 <p><strong>Either FOSS sources or FOSS offer is required</strong>.</p>
 <h4 id="413-build-info-folder-mandatory">4.1.3 "Build Info" folder (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#413-build-info-folder-mandatory" title="Permanent link">&para;</a></h4>
 <p>The build info folder stores all build relevant information.</p>
-<p>Note: For the <code>{xxx}-description</code> files, a default file (with explanation) and the according schema is provided in the standard <code>artifacts.zip</code> example.</p>
+<p>Note: For the <code>{xxx}-description</code> files, a default file (with explanation) and the corresponding schema is provided in the standard <code>artifacts.zip</code> example.</p>
 <ul>
 <li>
 <p><strong>"snapcraft.yaml" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The snapcraft.yaml file is the main entry point to create a snap through Snapcraft. It contains all the details the snapcraft command needs to build a snap. See also https://snapcraft.io/docs/snapcraft-yaml-reference</p>
@@ -2909,112 +3253,112 @@ This will create the required folder structure for the mandatory artifacts out-o
 <p><strong>"package-manifest.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The package-manifest.json covers essential settings, like the proxy URL</p>
 </li>
 <li>
-<p><strong>"portlist-description.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - In the port list all used ports are described</p>
+<p><strong>"portlist-description.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - All used ports are described in the port list</p>
 </li>
 <li>
-<p><strong>"unixsocket-description.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - In the Unix socket description all used Unix sockets are  described. If your app don´t us a Unix socket, provide a empty description file</p>
+<p><strong>"unixsocket-description.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - All used Unix sockets are described in the Unix socket description. If your app does not use a Unix socket, provide an empty description file</p>
 </li>
 <li>
-<p><strong>"slotplug-description.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - In the slot and plug description all used slot and plugs are  described</p>
+<p><strong>"slotplug-description.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - All used slot and plugs are described in the slot and plug description</p>
 </li>
 </ul>
 <h4 id="414-documentation-folder-mandatory">4.1.4 "Documentation" folder (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#414-documentation-folder-mandatory" title="Permanent link">&para;</a></h4>
-<p>Here, all App relevant documentation is provided </p>
+<p>All documentation relevant to the app is provided here </p>
 <ul>
-<li><strong>"manual.pdf" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The App description (User Manual) documents the overall functionality of the App</li>
-<li><strong>"test-setup-description.pdf" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The App setup describes how to configure the App on a ctrlX device for a typical usage and test scenario</li>
-<li><strong>"release-notes.pdf" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - In the release notes the newest changes, workarounds and defects are mentioned</li>
+<li><strong>"manual.pdf" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The app description (user manual) documents the app’s overall functionality</li>
+<li><strong>"test-setup-description.pdf" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The app setup describes how to configure the app on a ctrlX device for a typical usage and test scenario</li>
+<li><strong>"release-notes.pdf" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The latest changes, workarounds and defects are mentioned in the release notes</li>
 </ul>
 <h4 id="415-app-states-folder-mandatory">4.1.5 "App States" folder (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#415-app-states-folder-mandatory" title="Permanent link">&para;</a></h4>
-<p>The app validation framework tries to establish relevant states which have to be tested. Therefore, a sequence of API calls has to be provided to bring the App to the test state</p>
+<p>The app validation framework tries to establish relevant states that have to be tested. Therefore, a sequence of API calls has to be provided to bring the app to the test state</p>
 <ul>
 <li>
-<p><strong>"standard-scenario1.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - Each file contains a collection (sequence of Rest API calls) to generate the standard usage scenario. In each of these scenarios, the validation process monitors the memory and storage usage, the CPU load and the Ethernet communication load. The collections/files are to be created with Postman.</p>
+<p><strong>"standard-scenario1.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - Each file contains a collection (sequence of RESTAPI calls) to generate the standard usage scenario. In each of these scenarios, the validation process monitors the memory and storage usage, the CPU load and the Ethernet communication load. The collections/files are to be created using Postman.</p>
 </li>
 <li>
-<p><strong>"standard-scenario{2 to n}.json" (optional)</strong> - one or more scenarios, if appropriate</p>
+<p><strong>"standard-scenario{2 to n}.json" (optional)</strong> - One or more scenarios, if appropriate</p>
 </li>
 </ul>
 <h4 id="416-snaps-folder-mandatory">4.1.6 "Snaps" folder (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#416-snaps-folder-mandatory" title="Permanent link">&para;</a></h4>
-<p>ctrlX currently support the amd64 and the arm64 processor architecture. The according target snaps for the App are provided here</p>
+<p>ctrlX currently supports the amd64 and the arm64 processor architecture. The corresponding target snaps for the app are provided here</p>
 <ul>
 <li>
-<p><strong>"{TechnicalAppName}_{version}_arm64.snap" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - Snap which runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX CORE hardware.</p>
+<p><strong>"{TechnicalAppName}_{version}_arm64.snap" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - Snap that runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX CORE hardware.</p>
 </li>
 <li>
-<p><strong>"{TechnicalAppName}_{version}_amd64.snap" (<span style="color:green;"></strong>OPTIONAL<strong></span>)</strong> - Snap which runs in amd64 environments. The amd64 is used in ctrlX CORE virtual. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended to provide also a snap for this platform to avoid future inconvenience.</p>
+<p><strong>"{TechnicalAppName}_{version}_amd64.snap" (<span style="color:green;"></strong>OPTIONAL<strong></span>)</strong> - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE virtual. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.</p>
 </li>
 </ul>
 <h3 id="42-app-documentation-mandatory">4.2 App Documentation (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#42-app-documentation-mandatory" title="Permanent link">&para;</a></h3>
 <h4 id="421-user-manual-mandatory">4.2.1 User Manual (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#421-user-manual-mandatory" title="Permanent link">&para;</a></h4>
-<p>A user manual must be delivered together with the App.
-The user manual must describe typical user actions for commissioning and operation of the App from a user / customer perspective.</p>
+<p>A user manual must be delivered together with the app.
+The user manual must describe typical user actions for commissioning and operating the app from a user / customer perspective.</p>
 <h4 id="422-test-setup-description-mandatory">4.2.2 Test Setup Description (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#422-test-setup-description-mandatory" title="Permanent link">&para;</a></h4>
-<p>A test setup description must be delivered together with the App.
+<p>A test setup description must be delivered together with the app.
 The test setup description must contain instructions to realize a test scenario.
-It must include a description of sequences and dependencies, e.g. additional hardware. If you use plugs and slots, please provide an explanation here., </p>
+It must include a description of sequences and dependencies, e.g. additional hardware. If you use plugs and slots, please provide an explanation here. </p>
 <h4 id="423-release-notes-mandatory">4.2.3 Release Notes (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#423-release-notes-mandatory" title="Permanent link">&para;</a></h4>
-<p>A release note documentation must be delivered together with the App.</p>
+<p>Release note documentation must be delivered together with the app.</p>
 <h4 id="424-general-app-description-for-the-ctrlx-app-zone-conditional">4.2.4 General App Description for the ctrlX App Zone (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#424-general-app-description-for-the-ctrlx-app-zone-conditional" title="Permanent link">&para;</a></h4>
-<p>Each app needs product information as part of the sales package. The description shall be generated based on the App description template (from the ctrlX World Partner Portal)</p>
-<p>The App description package is necessary in case the App will be shown also in the App Zone of the ctrlX AUTOMATION Community or other marketing channels.</p>
-<h3 id="43-additional-app-information-according-to-linux-ubuntu-conventions-mandatory">4.3 Additional  App Information according to Linux Ubuntu conventions (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#43-additional-app-information-according-to-linux-ubuntu-conventions-mandatory" title="Permanent link">&para;</a></h3>
-<p>The following properties must be defined within the <strong>"snapcraft.yaml"</strong> file (see https://snapcraft.io/docs/snapcraft-yaml-reference), which also need to be exclusively part of the App and have to be collision free with other Apps.</p>
+<p>Each app needs product information as part of the sales package. The description shall be generated based on the app description template (from the ctrlX World Partner Portal)</p>
+<p>The app description package is necessary in case the app is also to be shown in the ctrlX AUTOMATION Community App Zone or other marketing channels.</p>
+<h3 id="43-additional-app-information-according-to-linux-ubuntu-conventions-mandatory">4.3 Additional App Information According to Linux Ubuntu Conventions (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#43-additional-app-information-according-to-linux-ubuntu-conventions-mandatory" title="Permanent link">&para;</a></h3>
+<p>The following properties must be defined within the <strong>"snapcraft.yaml"</strong> file (see https://snapcraft.io/docs/snapcraft-yaml-reference), which also need to be exclusively part of the app and have to be collision free with other apps.</p>
 <ul>
 <li>
-<p><strong>Title</strong> - The general name of the App, that will be shown in all sales channels and customer touch points, e.g. App overview or ctrlX App Store. Definition will be done together with the partner manager, as part of the business model definitions. Example: "My App"</p>
+<p><strong>Title</strong> - The general name of the app that will be shown on all sales channels and customer touch points, e.g. app overview or ctrlX App Store. This is defined together with the partner manager, as part of the business model definitions. Example: "My App"</p>
 </li>
 <li>
-<p><strong>Name</strong> - The technical name of the snap. The name has to unique in the snap-universe and across all snap developer and device vendors. The snap name has to <strong>start with "ctrlx-"</strong> and must be <strong>lowercase</strong> and a <strong>maximum length of 32 characters</strong>. ctrlX World Partners add their company name to the snap name. Example: "ctrlx-partnername-myapp"</p>
+<p><strong>Name</strong> - The technical name of the snap. The name has to be unique in the snap universe and across all snap developer and device vendors. The snap name has to <strong>start with "ctrlx-"</strong> and must be <strong>lowercase</strong> and a <strong>maximum length of 32 characters</strong>. ctrlX World Partners add their company name to the snap name. Example: "ctrlx-partnername-myapp"</p>
 </li>
 <li>
 <p><strong>Confinement</strong> - Must be set to <strong>"strict"</strong> for releases. See also https://snapcraft.io/docs/snap-confinement</p>
 </li>
 <li>
-<p><strong>Grade</strong> - Defines the quality grade of the App. During development, you may choose to use <strong>"devel"</strong>. When releasing the application, the grade must be set to <strong>"stable"</strong>.</p>
+<p><strong>Grade</strong> - Defines the quality grade of the app. During development, you may choose to use <strong>"devel"</strong>. When releasing the application, the grade must be set to <strong>"stable"</strong>.</p>
 </li>
 </ul>
 <h3 id="44-foss-info-provisioning-mandatory">4.4 FOSS Info Provisioning (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#44-foss-info-provisioning-mandatory" title="Permanent link">&para;</a></h3>
-<p>If the App uses Free and Open Source Software (FOSS), it is necessary to ship certain license information with the App.  </p>
-<p>With <strong>"fossinfo.xml"</strong> Open source license text must be obliged to disclose for copyright reasons. Bosch Rexroth offers the possibility to display the license texts of the used open source software in the web interface of ctrlX, For more information about "fossinfo.xml" please refer to the guideline in the SDK. If the display of FOSS license texts is implemented within the App, at least a reference to the license display in the App must be provided in the "fossinfo.xml". </p>
-<p>Since users must be able to view the license texts before the open source software is installed, the "fossinfo.xml" must also be stored outside the App in the "disclosure" directory (see chapter 3.1.2). In addition, the license texts must be listed within the user documentation or at least a reference must be inserted where the FOSS license texts are located.</p>
+<p>If the app uses Free and Open Source Software (FOSS), certain license information must be delivered together  with the app.  </p>
+<p>With <strong>"fossinfo.xml"</strong> the open source license text must be disclosed for copyright reasons. Bosch Rexroth offers the possibility to display the license texts for the used open source software in the ctrlX web interface. For more information about "fossinfo.xml" please refer to the guideline in the SDK. If FOSS license texts are displayed within the app, at least a reference to the license display in the app must be provided in the "fossinfo.xml". </p>
+<p>Since users must be able to view the license texts before the open source software is installed, the "fossinfo.xml" must also be stored outside the app in the "disclosure" directory (see section 3.1.2). In addition, the license texts must be listed within the user documentation or at least a reference must be inserted where the FOSS license texts are located.</p>
 <h2 id="5-further-app-information-conditional">5 Further App Information (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a name="further"></a><a class="headerlink" href="#5-further-app-information-conditional" title="Permanent link">&para;</a></h2>
 <h3 id="51-foss-sources-conditional">5.1 FOSS Sources (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#51-foss-sources-conditional" title="Permanent link">&para;</a></h3>
-<p>Bosch Rexroth recommends putting all FOSS sources in a zip file with the file name <strong>"foss-sources.zip"</strong> and store it in the <strong>"disclosure"</strong> directory, where the <strong>"fossinfo.xml"</strong> is provided. </p>
-<p>In case that the FOSS sources are not directly provided, a written offer is mandatory for open source software with copyleft clause (e.g. GPLv2 or GPLv3) . This means, a human-readable file with the name "foss-offer.x" needs to be provided, which explains how the user can get the FOSS sources of the App.</p>
-<h3 id="52-semantic-versioning-scheme-optional">5.2 Semantic versioning scheme (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#52-semantic-versioning-scheme-optional" title="Permanent link">&para;</a></h3>
-<p>It is recommended to use a versioning scheme which is based on the https://semver.org/ for versioning of the App. This setting is also relevant in the <strong>snapcraft.yaml</strong> file during creation of the snap.</p>
+<p>Bosch Rexroth recommends putting all FOSS sources in a zip file with the file name <strong>"foss-sources.zip"</strong> and storing it in the <strong>"disclosure"</strong> directory, where the <strong>"fossinfo.xml"</strong> is provided. </p>
+<p>In the event that the FOSS sources are not provided directly, a written offer is mandatory for open source software with copyleft clause (e.g. GPLv2 or GPLv3) . This means, a human-readable file with the name "foss-offer.x" needs to be provided, which explains how the user can get the app’s FOSS sources.</p>
+<h3 id="52-semantic-versioning-scheme-optional">5.2 Semantic Versioning Scheme (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#52-semantic-versioning-scheme-optional" title="Permanent link">&para;</a></h3>
+<p>It is recommended that a versioning scheme is used based on https://semver.org/ for the app’s versioning. This setting is also relevant in the <strong>snapcraft.yaml</strong> file while creating the snap.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Increasing version numbers are mandatory, independent of the used version scheme</p>
+<p>Increasing version numbers are mandatory, regardless of the versioning scheme used</p>
 </div>
 <h3 id="53-restart-delay-optional">5.3 Restart Delay (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#53-restart-delay-optional" title="Permanent link">&para;</a></h3>
-<p>The restart-delay of the App daemon should be set "5s" or similar in the <strong>snapcraft.yaml</strong> to prevent the 10s lock-out</p>
+<p>The restart delay of the app daemon should be set to "5s" or similar in the <strong>snapcraft.yaml</strong> to prevent the 10s lock-out</p>
 <h2 id="6-working-set-overview-mandatory">6 Working Set Overview (<span style="color:red;"><strong>MANDATORY</strong></span>)<a name="workingset"></a><a class="headerlink" href="#6-working-set-overview-mandatory" title="Permanent link">&para;</a></h2>
 <h3 id="61-security-information-considerations">6.1 Security Information &amp; Considerations<a class="headerlink" href="#61-security-information-considerations" title="Permanent link">&para;</a></h3>
-<p>ctrlX CORE is designed with strong security requirements. Also, the overall ctrlX CORE architecture is built to be compliant to be certified as defined by IEC62433. This also implies some requirements to the Apps and software running in the ctrlX Ecosystem. For ctrlX App, this means</p>
+<p>ctrlX CORE is designed with high security requirements. Also, the overall ctrlX CORE architecture is built to be compliant to be certified as defined by IEC62433. This also implies some requirements for the apps and software running in the ctrlX Ecosystem. For the ctrlX app, this means</p>
 <ul>
 <li>
-<p>Only encrypted and secured communication protocols (e.g. https) must be used. Unsecure protocols (e.g. http) are not to be used, unless explicitly defined in the validation process.</p>
+<p>Only encrypted and secured communication protocols (e.g. https) must be used. Insecure protocols (e.g. http) are not to be used, unless explicitly defined in the validation process.</p>
 </li>
 <li>
-<p>The attack surface of the device should be kept as minimal as possible. This means for example that the number of open ports of an App should be reduced to a minimum.</p>
+<p>The device attack surface should be kept as minimal as possible. This means, for example, that the number of open ports in an app should be reduced to a minimum.</p>
 </li>
 </ul>
 <h4 id="611-interfaces-slots-plugs-mandatory">6.1.1 Interfaces / Slots &amp; Plugs (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#611-interfaces-slots-plugs-mandatory" title="Permanent link">&para;</a></h4>
 <p>Used interfaces (Slots &amp; Plugs) must be documented in the <strong>snapcraft.yaml</strong> file. The following considerations must be taken into account:</p>
 <ul>
 <li>
-<p><strong>Use as fewer interfaces (slots/plugs) as possible</strong>. The amount of interfaces (slots &amp; plugs) shall be <strong>limited to a minimum</strong>. The App should declare only the interfaces (slots and/or plugs) which are absolutely required to minimize the attack surface. When reviewing the App, Bosch Rexroth needs to know for which purpose a specific slot and/or plug is required by an App. The according justification must be provided together with the App. </p>
+<p><strong>Use as few interfaces (slots/plugs) as possible</strong>. The amount of interfaces (slots &amp; plugs) shall be <strong>limited to a minimum</strong>. The app should only declare the interfaces (slots and/or plugs) that are absolutely required to minimize the attack surface. When reviewing the app, Bosch Rexroth needs to know for which purpose a specific slot and/or plug is required by an app. Corresponding justification must be provided together with the app. </p>
 </li>
 <li>
-<p><strong>No global slots &amp; plugs</strong>. App developers must avoid assigning global slots &amp; plugs, which are valid for all applications. Global slots &amp; plugs should be used only if absolutely necessary.</p>
+<p><strong>No global slots &amp; plugs</strong>. App developers must avoid assigning global slots &amp; plugs that are valid for all applications. Global slots &amp; plugs should only be used if absolutely necessary.</p>
 </li>
 <li>
-<p><strong>Debug interfaces only on demand</strong>. By default, the App should not provide any open network debug interfaces. If debugging is required, the user shall be able to enable the debug interface on demand and only after successful authentication (and authorization). In general, debug interfaces shall not be accessible without authentication and/or insufficient or even hard-coded credentials.</p>
+<p><strong>Debug interfaces only on demand</strong>. By default, the app should not provide any open network debug interfaces. If debugging is required, the user should be able to enable the debug interface on demand and only after successful authentication (and authorization). In general, debug interfaces shall not be accessible without authentication and/or insufficient or even hard-coded credentials.</p>
 </li>
 </ul>
-<p>The following Operating System interfaces are denied or restricted for usage. See also https://snapcraft.io/docs/supported-interfaces.</p>
+<p>The following operating system interfaces are denied or restricted for usage. See also https://snapcraft.io/docs/supported-interfaces.</p>
 <table>
 <thead>
 <tr>
@@ -3119,31 +3463,31 @@ It must include a description of sequences and dependencies, e.g. additional har
 </tr>
 </tbody>
 </table>
-<p>This list is subject to change and might be extended. If unsure, please provide the slot/plug you want to use inside your application together with a justification to check or not this specific slot/plug is allowed and find potential alternatives.</p>
+<p>This list is subject to change and might be extended. If unsure, please provide the slot/plug you want to use inside your application together with justification to check whether or not this specific slot/plug is allowed and find potential alternatives.</p>
 <h4 id="612-network-security-and-ports-conditional">6.1.2 Network Security and Ports (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#612-network-security-and-ports-conditional" title="Permanent link">&para;</a></h4>
 <p>The <strong>package-manifest.json</strong> must provide information about the used network interfaces.
-The app must keep it's network footprint as low as possible:</p>
+The app must keep its network footprint as low as possible:</p>
 <ul>
 <li>
 <p>No open debug ports by default</p>
 </li>
 <li>
-<p>Binding of the webserver to unix socket (preferred) or at least localhost</p>
+<p>Binding webserver to Unix socket (preferred) or at least localhost</p>
 </li>
 </ul>
-<p>Security protocols are to be be used by default. This means:</p>
+<p>Security protocols are to be used by default. This means:</p>
 <ul>
 <li>
-<p>No exposure of insecure protocols like http or websocket. ctrlX reverse proxy integration should be used for those specific protocols - or. in cases where that is not possible, https/websocket secure should be used in the App.</p>
+<p>No exposure of insecure protocols like http or web socket. ctrlX reverse proxy integration should be used for those specific protocols - Or, in cases where that is not possible, https/websocket secure should be used in the app.</p>
 </li>
 <li>
-<p>For non-web Apps, secure protocols shall be used. When the App supports secure &amp; insecure protocols, a secure configuration preset must be used for the App, so that the user must choose the override this setting if he wants to choose the insecure variant</p>
+<p>Secure protocols are to be used for non-web apps When the app supports secure &amp; insecure protocols, a secure configuration preset must be used for the app, so that the user must choose to override this setting if they want to choose the insecure version</p>
 </li>
 <li>
-<p>The App must provide a list of ports to be used in order to avoid conflicts. Thus, the App must be robust to already open / used ports. At least a warning shall be given to the user.</p>
+<p>The app must provide a list of ports to be used in order to avoid conflicts. The app must therefore be robust to already open / used ports. At least a warning is to be issued to the user.</p>
 </li>
 </ul>
-<p>The following ports are blocked and cannot be used by an App:</p>
+<p>The following ports are blocked and cannot be used by an app:</p>
 <ul>
 <li>
 <p>22</p>
@@ -3198,12 +3542,12 @@ The app must keep it's network footprint as low as possible:</p>
 </li>
 </ul>
 <p>This list is subject to change and might be extended.</p>
-<h4 id="613-file-permissions-conditional">6.1.3 File permissions (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#613-file-permissions-conditional" title="Permanent link">&para;</a></h4>
-<p>It is very likely that an App stores settings &amp; configuration data in the application's folder (e.g. $SNAP_DATA or $SNAP_COMMON). All file permissions have to be proper set so that only the owner of the files is allowed to read or alter the content.</p>
+<h4 id="613-file-permissions-conditional">6.1.3 File Permissions (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#613-file-permissions-conditional" title="Permanent link">&para;</a></h4>
+<p>It is very likely that an app stores settings &amp; configuration data in the application's folder (e.g. $SNAP_DATA or $SNAP_COMMON). All file permissions have to be set properly so that only the owner of the files is allowed to read or alter the content.</p>
 <h3 id="62-resource-consumption-and-readwrite-operations-mandatory">6.2 Resource Consumption and Read/Write Operations (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#62-resource-consumption-and-readwrite-operations-mandatory" title="Permanent link">&para;</a></h3>
-<p>Typically, more than one App is running on a ctrlX device. Thus, it is very important than an App does not consume too much system resources (e.g. RAM or disk space). In addition, the available virtual memory on the device is limited to the amount of physical available memory, because the possibility of swapping unused RAM to disk is disabled on ctrlX devices. Reasons for this is the otherwise negative impact on realtime capability and flash disk lifetime.</p>
+<p>Typically, more than one app runs on a ctrlX device. It is therefore very important than an app does not consume too many system resources (e.g. RAM or disk space). In addition, the available virtual memory on the device is limited to the amount of physical available memory, because the possibility of swapping unused RAM to disk is disabled on ctrlX devices. The reasons for this is the otherwise negative impact on real-time capability and flash disk lifetime.</p>
 <h4 id="621-resource-consumption">6.2.1 Resource Consumption<a class="headerlink" href="#621-resource-consumption" title="Permanent link">&para;</a></h4>
-<p>Recommended amount of resources per App:</p>
+<p>Recommended amount of resources per app:</p>
 <ul>
 <li>
 <p>RAM: &lt;75 MB</p>
@@ -3212,51 +3556,51 @@ The app must keep it's network footprint as low as possible:</p>
 <p>Snap-Size: ideally &lt;100 MB, as small as possible</p>
 </li>
 </ul>
-<p>If an App exceed these values by far, then please get in contact with your App partner support for further clarifications.</p>
-<h4 id="622-integrated-storage-flash-lifetime">6.2.2 Integrated storage / Flash lifetime<a class="headerlink" href="#622-integrated-storage-flash-lifetime" title="Permanent link">&para;</a></h4>
-<p>The App must not write diagnostics or similar data cyclically to the internal solid-state memory, as this will damage the flash cells. Instead, cyclical writing can be only be done to a network storage or any other external storage, as these allow easy and regular replacement for this use-case.</p>
-<p>The integrated storage medium and file system in the ctrlX CORE hardware is based on a solid state flash memory, which has by its nature a limited lifetime based on the number of erase cycles of its memory cells. In order to increase the overall lifetime of the device it is necessary to reduce the number of write/erase cycles on the flash cells.</p>
-<h3 id="63-standard-task-scheduling-mandatory">6.3 Standard task scheduling (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#63-standard-task-scheduling-mandatory" title="Permanent link">&para;</a></h3>
-<p>The App must not have a negative impact for the realtime behavior of other apps. Scheduling / task scheme must stay flexible to allow to operate other apps, e.g. the ctrlX Motion App.</p>
-<h3 id="64-test-setup-for-typical-usage-scenario-mandatory">6.4 Test Setup for typical usage scenario (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#64-test-setup-for-typical-usage-scenario-mandatory" title="Permanent link">&para;</a></h3>
-<p>For a fast and efficient start of the validation process, a usage scenario should be provided which does not require any peripheral components. This will help to identify first findings quickly and with rather low effort. If the App requires additional periphery for proper operation, a separate usage scenario should be provided which describes the interaction with the external component.</p>
+<p>If an app exceeds these values by a long way, then please contact your app partner support to clarify this further.</p>
+<h4 id="622-integrated-storageflash-lifetime">6.2.2 Integrated Storage/Flash Lifetime<a class="headerlink" href="#622-integrated-storageflash-lifetime" title="Permanent link">&para;</a></h4>
+<p>The app must not write diagnostics or similar data cyclically to the internal solid-state memory, as this will damage the flash cells. Instead, cyclical writing can be only be done to a network storage or any other external storage, as these allow easy and regular replacement for this use-case.</p>
+<p>The integrated storage medium and file system in the ctrlX CORE hardware is based on a solid state flash memory, which inherently has a limited lifetime based on the number of erase cycles for its memory cells. To increase the device’s overall lifetime it is necessary to reduce the number of write/erase cycles on the flash cells.</p>
+<h3 id="63-standard-task-scheduling-mandatory">6.3 Standard Task Scheduling (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#63-standard-task-scheduling-mandatory" title="Permanent link">&para;</a></h3>
+<p>The app must not have a negative impact on the real-time behavior of other apps. The scheduling / task scheme must remain flexible to allow other apps to run, e.g. the ctrlX Motion app.</p>
+<h3 id="64-test-setup-for-typical-usage-scenario-mandatory">6.4 Test Setup for Typical Usage Scenario (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#64-test-setup-for-typical-usage-scenario-mandatory" title="Permanent link">&para;</a></h3>
+<p>For a fast and efficient start to the validation process, a usage scenario should be provided that does not require any peripheral components. This will help to identify the initial findings quickly and with comparatively little effort. If the app requires additional periphery to run properly, a separate usage scenario should be provided that describes the interaction with the external component.</p>
 <p>Videos and further media can be attached.</p>
 <h2 id="7-ctrlx-basic-mechanisms-mandatory">7 ctrlX Basic Mechanisms (<span style="color:red;"><strong>MANDATORY</strong></span>)<a name="basicmechanisms"></a><a class="headerlink" href="#7-ctrlx-basic-mechanisms-mandatory" title="Permanent link">&para;</a></h2>
 <h3 id="71-ctrlx-license-handling-mandatory">7.1 ctrlX License Handling (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#71-ctrlx-license-handling-mandatory" title="Permanent link">&para;</a></h3>
-<p>A license model must be defined for each App which is part of ctrlX World. To ensure the maximum usability for a ctrlX CORE user, the App must call the ctrlX license manager API on start or in operation to check if a license is activated.  If a license is missing, the missing license will be shown to the user via a user interface (Note: This will be available after July 2021). A warning or error must be shown in case the license is missing.</p>
+<p>A license model must be defined for each app which is part of ctrlX World. To ensure maximum usability for a ctrlX CORE user, the app must call up the ctrlX license manager API when it starts or is running to check if a license is activated.  If a license is missing, the missing license will be shown to the user on a user interface (Note: This will be available after July 2021). A warning or error must be shown in case the license is missing.</p>
 <p>Each software license (SWL) bought by a customer generates one or more capabilities:</p>
 <ul>
 <li>
-<p>Each App checks the existence of these capabilities, using the license manager interface</p>
+<p>Each app checks the existence of these capabilities, using the license manager interface</p>
 </li>
 <li>
-<p>The enforcement of an App license shall be realized according to the App business model as part of the contract addendum</p>
+<p>An app license shall be enforced according to the app business model as part of the contract addendum</p>
 </li>
 <li>
 <p>The usage of other licensing mechanisms is not allowed</p>
 </li>
 <li>
-<p>Licensing Interface will be available by March 2021</p>
+<p>The licensing interface will be available by March 2021</p>
 </li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Currently, the License Manager returns no licenses on a ctrlX COREvirtual.</p>
+<p>Currently, the License Manager does not return licenses on a ctrlX COREvirtual.</p>
 </div>
-<h3 id="72-app-signing-by-bosch-rexroth-mandatory">7.2 App signing by Bosch Rexroth (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#72-app-signing-by-bosch-rexroth-mandatory" title="Permanent link">&para;</a></h3>
-<p>To make sure that only Apps, which have successfully passed the validation process, are available as ctrlX App, these Apps need to be signed by Bosch Rexroth.
-During the signing process, the App binaries are checked and combined with a signature. This signature guarantees that the App cannot be modified after the validation and signing process.</p>
+<h3 id="72-app-signing-by-bosch-rexroth-mandatory">7.2 App Signing by Bosch Rexroth (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#72-app-signing-by-bosch-rexroth-mandatory" title="Permanent link">&para;</a></h3>
+<p>To make sure that only apps that have successfully passed the validation process are available as a ctrlX app, these Apps need to be signed by Bosch Rexroth.
+During the signing process, the app binaries are checked and combined with a signature. This signature guarantees that the app cannot be modified after the validation and signing process.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Currently, only Bosch Rexroth can sign ctrlX Apps</p>
+<p>At the moment, only Bosch Rexroth can sign ctrlX apps</p>
 </div>
 <h2 id="8-ctrlx-security-system-optional">8 ctrlX Security System (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a name="security"></a><a class="headerlink" href="#8-ctrlx-security-system-optional" title="Permanent link">&para;</a></h2>
-<h3 id="81-ctrlx-reverse-proxy-optional">8.1 ctrlX Reverse Proxy (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#81-ctrlx-reverse-proxy-optional" title="Permanent link">&para;</a></h3>
-<p>The proxy URL is the most important setting in the <strong>package-manifest.json</strong> file, so that the App is integrated seamlessly into the ctrlX CORE. The reverse proxy will forward requests to the URL that are defined for the App web service.</p>
-<p>An App shall be bound to a unix socket instead of a local port. This will also prevent potential collisions with other services.</p>
+<h3 id="81-ctrlx-core-reverse-proxy-optional">8.1 ctrlX CORE reverse proxy (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#81-ctrlx-core-reverse-proxy-optional" title="Permanent link">&para;</a></h3>
+<p>The proxy URL is the most important setting in the <strong>package-manifest.json</strong> file for the app to be integrated seamlessly into the ctrlX CORE. The reverse proxy will forward requests to the URL that are defined for the app web service.</p>
+<p>An app is to be bound to a Unix socket instead of a local port. This will also prevent potential collisions with other services.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>We strongly recommend binding the App web service to a unix socket, e.g. <code>/var/snap/my-app/current/package-run/my-app/my-app.web.sock</code>, instead of a local port. This will also prevent potential collisions with other services. The path length of a unix socket is limited to 108 characters. The complete path must respect that limit and the highlighted part has a maximal length of 50 characters. The path can be shortened if necessary by replacing "package-run" with "run" and shorting the file name from "my-app.web.sock" to "web.sock". However the folder name within the package-run (or run) folder must always be the name of the snap.</p>
+<p>We strongly recommend binding the app web service to a Unix socket, e.g. <code>/var/snap/my-app/current/package-run/my-app/my-app.web.sock</code>, instead of a local port. This will also prevent potential collisions with other services. The path length of a Unix socket is limited to 108 characters. The complete path must respect that limit and the highlighted part has a maximal length of 50 characters. The path can be shortened if necessary by replacing "package-run" with "run" and shortening the file name from "my-app.web.sock" to "web.sock". However the folder name within the package-run (or run) folder must always be the name of the snap.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -3264,31 +3608,31 @@ During the signing process, the App binaries are checked and combined with a sig
 https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationWebServer-to-Reverse-Proxy/m-p/20193#M216</p>
 </div>
 <h3 id="82-ctrlx-key-certificate-management-optional">8.2 ctrlX Key &amp; Certificate Management (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#82-ctrlx-key-certificate-management-optional" title="Permanent link">&para;</a></h3>
-<p>The ctrlX CORE certificate management shall be used in order to manage the certificates of your application via the web interface.
+<p>The ctrlX CORE certificate management is to be used to manage your application’s certificates through the web interface.
 (package-manifest.json, snapcraft.yaml)</p>
-<p>Note: When the application acts as a ctrlX client, key &amp; certificate based authentication has to be used whenever possible. In case if user &amp; password based authentication is used, the configuration file permissions have to be correct so that no other user(s) on the system can read those data.</p>
-<h3 id="83-ctrlx-identity-management-authentication-authorization-optional">8.3 ctrlX Identity Management / Authentication &amp; Authorization (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#83-ctrlx-identity-management-authentication-authorization-optional" title="Permanent link">&para;</a></h3>
-<p>When running a web service, the App should use the authentication &amp; authorization mechanisms that the ctrlX CORE provides to protect the App against unauthorized access.</p>
-<p>If the mechanisms the ctrlX CORE provides are not used, hardcoded accounts / credentials have to be avoided.</p>
-<p>The ctrlX CORE's so called "scopes" shall be used to model App permissions. Scopes allow the assignment of permissions to users &amp; groups via the web interface. In case permissions are used, the enforcement of the permissions must be implemented within the App
+<p>Note: When the application acts as a ctrlX client, key &amp; certificate based authentication has to be used whenever possible. If user &amp; password based authentication is used, the configuration file permissions have to be correct so that no other user(s) on the system can read those data.</p>
+<h3 id="83-ctrlx-identity-managementauthentication-authorization-optional">8.3 ctrlX Identity Management/Authentication &amp; Authorization (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#83-ctrlx-identity-managementauthentication-authorization-optional" title="Permanent link">&para;</a></h3>
+<p>When running a web service, the app should use the authentication &amp; authorization mechanisms that the ctrlX CORE provides to protect the app against unauthorized access.</p>
+<p>If the mechanisms the ctrlX CORE provides are not used, hardcoded accounts/credentials have to be avoided.</p>
+<p>The ctrlX CORE's so called "scopes" are to be used to model app permissions. Scopes allow permissions to be assigned to users &amp; groups via the web interface. If case permissions are used, the permissions must be enforced within the app
 (package-manifest.json)</p>
 <h2 id="9-ctrlx-user-interface-and-project-handling-optional">9 ctrlX User Interface and Project Handling (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a name="userinterface"></a><a class="headerlink" href="#9-ctrlx-user-interface-and-project-handling-optional" title="Permanent link">&para;</a></h2>
 <h3 id="91-ctrlx-configuration-storage-conditional">9.1 ctrlX Configuration Storage (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#91-ctrlx-configuration-storage-conditional" title="Permanent link">&para;</a></h3>
-<p>The ctrlX CORE system provides multiple ways for an App to store its data. In order to provide a consistent backup and restore mechanism to users, the App data must be persisted within one of these locations.</p>
+<p>The ctrlX CORE system provides multiple ways for an app to store its data. The app data must be persisted within one of these locations to provide consistent backup and restore mechanism to users.</p>
 <h4 id="911-solution-handling-optional">9.1.1 Solution Handling (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#911-solution-handling-optional" title="Permanent link">&para;</a></h4>
-<p>The so-called "Solution" is an essential part of any ctrlX CORE device. It provides a central storage location for all ctrlX Apps, that need to persist their app data in configurations. Configuration files are saved to the solution storage or loaded from the storage on demand (by the user or by REST API calls).</p>
+<p>The so-called "Solution" is an essential part of any ctrlX CORE device. It provides a central storage location for all ctrlX apps that need to persist their app data in configurations. Configuration files are saved to the solution storage or loaded from the storage on demand (by the user or by REST API calls).</p>
 <ul>
 <li>
-<p>A Configuration file contain project-specific data, like machine-related, PLC, HMI, fieldbus configurations.</p>
+<p>A configuration file contains project-specific data, like machine-related, PLC, HMI, fieldbus configurations.</p>
 </li>
 <li>
-<p>Shall be used in case of one or more configurations that can be easily switched by the user. Configurations are used and shared by multiple apps.</p>
+<p>To be used in the event of one or more configurations that can be easily switched by the user. Configurations are used and shared by multiple apps.</p>
 </li>
 <li>
 <p>It does not contain data that is related to a specific device, e.g. certificates, network configurations, users and their permissions, or should be valid for multiple configurations (e.g. app settings).</p>
 </li>
 <li>
-<p>Should be non-binary (in future version control system / GIT will be used). However, If there is no alternative and the files are not changing too often, small binaries can be stored in a configuration.</p>
+<p>Should be non-binary (in future version control system / GIT will be used). However, if there is no alternative and the files do not change too often, small binaries can be stored in a configuration.</p>
 </li>
 </ul>
 <h4 id="922-environment-variables-conditional">9.2.2 Environment Variables (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#922-environment-variables-conditional" title="Permanent link">&para;</a></h4>
@@ -3296,19 +3640,19 @@ https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationW
 <p>In the specific context of ctrlX, the environment variables <strong>$SNAP_COMMON</strong> or <strong>$SNAP_DATA</strong>...</p>
 <ul>
 <li>
-<p>...Contain App-related data, that can be used across multiple configurations, e.g. solutions.</p>
+<p>...Contain app-related data, that can be used across multiple configurations, e.g. solutions.</p>
 </li>
 <li>
 <p>...Shall not contain data related to the user application, e.g. machine program, and should be applicable on multiple configurations.</p>
 </li>
 <li>
-<p>$SNAP_DATA shall be used for App data related to a specific app version (snap revision).</p>
+<p>$SNAP_DATA shall be used for app data related to a specific app version (snap revision).</p>
 </li>
 <li>
-<p>$SNAP_COMMON shall be used App data across versions (snap revisions).</p>
+<p>$SNAP_COMMON shall be app data used across versions (snap revisions).</p>
 </li>
 </ul>
-<h4 id="external-storage-sd-card-and-usb-storage-device-not-available-yet">External storage / SD Card and USB storage device (not available yet)<a class="headerlink" href="#external-storage-sd-card-and-usb-storage-device-not-available-yet" title="Permanent link">&para;</a></h4>
+<h4 id="external-storage-sd-card-and-usb-storage-device-not-available-yet">External storage / SD card and USB storage device (not available yet)<a class="headerlink" href="#external-storage-sd-card-and-usb-storage-device-not-available-yet" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>These external storage devices are not supported at the moment.</p>
@@ -3316,25 +3660,22 @@ https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationW
 <p>In the future, they</p>
 <ul>
 <li>
-<p>Can contain large data (&gt;100MB) or data that is frequently changed, e.g. logs, analytics, database.</p>
+<p>May contain large data (&gt;100MB) or data that is frequently changed, e.g. logs, analytics, database.</p>
 </li>
 <li>
-<p>Must contain only non-confidential (public) data or data must be protected on app side. Data can be accessed or manipulated from external.</p>
+<p>Must only contain non-confidential (public) data or data must be protected on app side. Data can be accessed or manipulated from external storage devices.</p>
 </li>
 </ul>
 <h2 id="10-ctrlx-automation-system-functions-optional">10 ctrlX AUTOMATION System Functions (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a name="automation"></a><a class="headerlink" href="#10-ctrlx-automation-system-functions-optional" title="Permanent link">&para;</a></h2>
-<h3 id="101-ctrlx-logbook-and-diagnostics-system">10.1 ctrlX Logbook and Diagnostics System<a class="headerlink" href="#101-ctrlx-logbook-and-diagnostics-system" title="Permanent link">&para;</a></h3>
+<h3 id="101-ctrlx-logbook-and-diagnostic-system">10.1 ctrlX Logbook and Diagnostic System<a class="headerlink" href="#101-ctrlx-logbook-and-diagnostic-system" title="Permanent link">&para;</a></h3>
 <p>For further information see https://docs.automation.boschrexroth.com</p>
 <h2 id="11-real-time-extension-optional">11 Real Time Extension (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a name="realtime"></a><a class="headerlink" href="#11-real-time-extension-optional" title="Permanent link">&para;</a></h2>
-<p>Please contact your Partner Manager if a real time extension might be required for your App.</p>
+<p>Please contact your partner manager if a real-time extension might be required for your app.</p>
+<h2 id="12-licensing-optional">12 Licensing (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a name="licensing"></a><a class="headerlink" href="#12-licensing-optional" title="Permanent link">&para;</a></h2>
+<p>If you are ctrlX World Partner you must use the licensing service that is operated by Bosch Rexroth. For information how to adapt an app to the licensing service please have look on the <a href="licensing.html">Licensing Page</a> </p>
 <p><strong>Copyright</strong>
 © Bosch Rexroth AG 2021
 This guideline, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch Rexroth AG. It may not be reproduced or given to third parties without our consent.</p>
-                
-              
-              
-                
-
 
               
             </article>
@@ -3343,13 +3684,12 @@ This guideline, as well as the data, specifications and other information set fo
         
       </main>
       
-        
-<footer class="md-footer">
+        <footer class="md-footer">
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="references.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
+        <a href="package-manifest.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Package Manifest" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -3358,20 +3698,20 @@ This guideline, as well as the data, specifications and other information set fo
               <span class="md-footer__direction">
                 Previous
               </span>
-              Overview
+              Package Manifest
             </div>
           </div>
         </a>
       
       
         
-        <a href="about.html" class="md-footer__link md-footer__link--next" aria-label="Next: About" rel="next">
+        <a href="persistdata.html" class="md-footer__link md-footer__link--next" aria-label="Next: Data Persistance" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              About
+              Data Persistance
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -3383,43 +3723,42 @@ This guideline, as well as the data, specifications and other information set fo
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-          <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2020-2021 Bosch Rexroth AG
-          </div>
-        
-        
-          Made with
-          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-            Material for MkDocs
-          </a>
-        
-        
-      </div>
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020-2021 Bosch Rexroth AG
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
       
-  <div class="md-footer-social">
+        <div class="md-social">
+  
+    
     
       
       
-        
-        
-      
-      <a href="https://github.com/boschrexroth" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-      </a>
+    
+    <a href="https://github.com/boschrexroth" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
     
       
       
-        
-        
-      
-      <a href="https://twitter.com/boschrexroth" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
-      </a>
     
-  </div>
-
+    <a href="https://twitter.com/boschrexroth" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
     </div>
   </div>
 </footer>
@@ -3428,10 +3767,10 @@ This guideline, as well as the data, specifications and other information set fo
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.e99e714c.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.01824240.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.c7d1b464.min.js"></script>
+      <script src="assets/javascripts/bundle.ff0eccb3.min.js"></script>
       
     
   </body>
