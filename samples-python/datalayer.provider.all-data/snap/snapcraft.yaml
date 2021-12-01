@@ -1,18 +1,19 @@
-name: sdk-py-datalayer-provider-alldata
-version: 1.0.1
-summary: All data provider sample written in Python for ctrlX
-#title: sdk-py-datalayer-provider-alldata
+name: sdk-py-provider-alldata
+version: 2.0.0
+summary: ctrlX Data Layer provider sample in Python
+title: sdk-py-provider-alldata
 description: |
-  This sample shows a Data Layer provider which is publishing nodes of all data types
-base: core18
+  ctrlX Data Layer provider in Python publishing nodes of all data types
+base: core20
 confinement: strict
 grade: stable
 
 apps:
   provider:
-    command: main.py
+    command: bin/main.py
     plugs:
       - network
+      - datalayer
     daemon: simple
     passthrough:
       restart-condition: always
@@ -21,13 +22,8 @@ apps:
 parts:
   provider:
     plugin: python
-    python-version: python3
     source: .
-    python-packages:
-      - ../../whl/ctrlx_datalayer-1.3.0-py3-none-any.whl
-      - ../../whl/ctrlx_fbs-1.0.0-py3-none-any.whl
-      - flatbuffers~=1.12
-
+ 
 plugs:
   datalayer:
     interface: content

@@ -53,10 +53,18 @@ namespace Samples.Datalayer.MQTT.Pub
         public override DLR_RESULT Start()
         {
             //Create, register and add the handled nodes here
+            //Folder (self)
+            var (result, node) = Root.Provider.CreateBranchNode(this, BaseAddress, Name);
+            if (result.IsBad())
+            {
+                return DLR_RESULT.DL_FAILED;
+            }
+            Nodes.Add(node.Address, node);
+
             //...
 
             //create
-            var (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Create, Variant.False);
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Create, Variant.False, writeable: true);
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;

@@ -1,9 +1,10 @@
-from distutils.core import setup
+from setuptools import setup
 
-setup(name = "sdk-py-datalayer-browse",
-      version = "1.0.2",
-      description = "This sample demonstrates how to browse a Data Layer tree",
-      author = "SDK Team",
+setup(name = 'sdk-py-browse',
+      version='2.0.0',
+      description = 'This sample demonstrates how to browse a Data Layer tree',
+      author = 'SDK Team',
+      install_requires = ['ctrlx-datalayer', 'ctrlx-fbs'],
       scripts = ['main.py'],
-      license = "Copyright (c) 2021 Bosch Rexroth AG, Licensed under MIT License"
+      license = 'Copyright (c) 2021 Bosch Rexroth AG, Licensed under MIT License'
 )

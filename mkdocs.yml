@@ -89,15 +89,22 @@ nav:
     - Getting Started: 
       - Overview : overview.md
       - ctrlX AUTOMATION: ctrlx_automation.md
+      - Guidelines:
+        - Package Manifest: package-manifest.md
+        - Developer Guideline: appdevguide.md
+        - Data Persistance: persistdata.md
+        - Licensemanagement: licensing.md
       - Releases:
         - Changelog: changelog.md
     - Setup:
       - setup_overview.md
-      - Setup via VirtualBox: setup_windows_virtualbox_ubuntu.md
-      - Setup via WSL: setup_windows_wsl_ubuntu.md
+      - Setup a QEMU VM: setup_qemu_ubuntu.md
+      - Setup a VirtualBox VM: setup_windows_virtualbox_ubuntu.md
+      - Setup a Real Machine: setup_ubuntu.md
+      - Setup WSL: setup_windows_wsl_ubuntu.md
       - Toolchain:
+        - Visual Studio Code: vscode.md
         - .NET: dotnet.md
-      - Development:
         - Remote Debugging: debug.md
     - Samples:
       - Overview:  samples_mkdocs.md
@@ -108,13 +115,17 @@ nav:
         - ctrlX Data Layer RegisterNode: samples-cpp/datalayer.register.node/README.md
         - ctrlX Automation Bundle: samples-cpp/automation.bundle/README.md
         - ctrlX Automation Scheduler: samples-cpp/automation.scheduler/README.md
+        - ctrlX Automation Diagnosis: samples-cpp/automation.diagnosis/README.md
+        - ctrlX Automation Trace: samples-cpp/automation.trace/README.md
         - ctrlX Data Layer EtherCAT I/O's: samples-cpp/datalayer.ecat.io/README.md
         - ctrlX Data Layer Realtime: samples-cpp/datalayer.realtime/README.md
         - ctrlX Data Layer All Data Provider: samples-cpp/datalayer.provider.all-data/README.md
         - Diagnostics Logbook: samples-cpp/diagnostics.logbook/README.md
+        - ctrlX Data Layer Diagnosis: samples-cpp/datalayer.diagnosis/README.md
       - Samples Golang:
         - Hello Webserver: samples-go/hello.webserver/README.md
         - AppData File Storage: samples-go/appdata/README.md
+        - TPM2.SRK: samples-go/tpm2.srk/README.md
       - Samples Python:
         - ctrlX Data Layer Client: samples-python/datalayer.client.light/README.md
         - ctrlX Data Layer Client (complex): samples-python/datalayer.client/README.md
@@ -125,6 +136,7 @@ nav:
         - ctrlX Data Layer Calculation operations: samples-python/datalayer.calc/README.md
         - Diagnostics Logbook: samples-python/python.logbook/README.md
         - AppData File Storage: samples-python/appdata/README.md
+        - ctrlX Data Layer Remote Debug: samples-python/datalayer.remote.debug/README.md
       - Samples .NET: 
         - Hello World: samples-net/hello.world/README.md
         - ctrlX Data Layer Client: samples-net/datalayer.client/README.md
@@ -135,13 +147,20 @@ nav:
         - ctrlX Data Layer Provider Virtual: samples-net/datalayer.provider.virtual/README.md
         - ctrlX Data Layer MQTT: samples-net/datalayer.mqtt/README.md
         - Diagnostics Logbook: samples-net/diagnostics.logbook/README.md
+      - Samples Nodejs:
+        - Hello World: samples-node/hello-world/README.md
+        - ctrlX Data Layer Client: samples-node/datalayer.client/README.md
       - Samples Shell:
         - TPM2 Consumer: samples-sh/tpm2.consumer/README.md
+      - Samples Snap:
+        - Generate Manifest: samples-snap/generate-manifest/README.md
     - References: 
         - Overview: references.md
-        - Developer Guideline: appdevguide.md
         - Api Reference:
           - c/c++: https://apps.boschrexroth.com/docs/ctrlx/comm.datalayer/html/index.html
           - c#: https://apps.boschrexroth.com/docs/ctrlx/csharp/html/index.html
-          - python: https://apps.boschrexroth.com/docs/ctrlx/python/html/index.html    
+          - python: https://apps.boschrexroth.com/docs/ctrlx/python/html/index.html
+        - Bundle Reference:
+          - Diagnosis: https://apps.boschrexroth.com/docs/ctrlx/diagnosis/html/index.html
+          - Trace: https://apps.boschrexroth.com/docs/ctrlx/trace/html/index.html
     - About: about.md

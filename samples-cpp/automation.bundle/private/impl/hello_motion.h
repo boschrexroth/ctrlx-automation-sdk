@@ -6,7 +6,7 @@
 #include <thread>
 #include "motion/common/defines/dia_defs.h"
 #include "motion/core/defines/motionsystem_statusdefs.h"
-#include "motion.lib.commands/motion/commands/defines/cmd_defs.h"
+#include "motion/jobs/defines/cmd_defs.h"
 #include "motion/core/interface/motion_cmd_if.h"
 #include "motion/core/interface/motion_sys_if.h"
 

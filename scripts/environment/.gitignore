@@ -1,0 +1,10 @@
+*-generated
+bak/
+qemu/
+*64.img
+*.qcow2
+QEMU_EFI.fd
+*.tar.*
+*copy
+*copy.*
+-pure.*

@@ -26,7 +26,7 @@
 #include <thread>
 #include <limits>
 
-#include "datalayerclient .h"
+#include "datalayerclient.h"
 
 // Function to print out array of all nodes from VariantType on ctrlX Data Layer
 void printStringList(comm::datalayer::Variant &data)
@@ -156,7 +156,7 @@ void DataLayerClient::ping()
 
 void DataLayerClient::readSync(const std::string node)
 {
-  std::string address = "all-data/static/" + node;
+  std::string address = "sdk-cpp-alldata/static/" + node;
   _result = _client->readSync(address, &_data);
   println("readSync() " + address, _result, &_data);
 }
@@ -166,7 +166,7 @@ void DataLayerClient::read()
 
   readSync("bool8");
 
-  std::string address = "all-data/static/bool8";
+  std::string address = "sdk-cpp-alldata/static/bool8";
 
   _result = _client->readAsync(address, _data, responseCallback());
   println("readAsync()", _result);
@@ -221,7 +221,7 @@ void DataLayerClient::read()
 
 void DataLayerClient::createSync(const std::string node)
 {
-  std::string address = "/all-data/dynamic/_cpp/" + node;
+  std::string address = "/sdk-cpp-alldata/dynamic/_cpp/" + node;
   _client->removeSync(address); // First remove - may be node exists
   _result = _client->createSync(address, &_data);
 }
@@ -309,7 +309,7 @@ void DataLayerClient::remove()
   _data.setValue("Will be removed");
   createSync("xxx");
 
-  std::string address = "/all-data/dynamic/_cpp/xxx";
+  std::string address = "/sdk-cpp-alldata/dynamic/_cpp/xxx";
   _result = _client->removeSync(address);
 
   createSync("xxx");
@@ -332,7 +332,7 @@ void DataLayerClient::browse()
 
 void DataLayerClient::writeSync(const std::string node)
 {
-  std::string address = "all-data/dynamic/" + node;
+  std::string address = "sdk-cpp-alldata/dynamic/" + node;
 
   _result = _client->writeSync(address, &_data);
   println("writeSync() " + address, _result, &_data);

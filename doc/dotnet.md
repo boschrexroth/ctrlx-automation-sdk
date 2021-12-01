@@ -1,156 +1,66 @@
-# README .NET 5.0 Apps @ ctrlX
+# README .NET Apps @ ctrlX
 
-![.NET5](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.NET_Logo.svg/120px-.NET_Logo.svg.png)
+![.NET](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.NET_Logo.svg/120px-.NET_Logo.svg.png)
 
 ## Introduction
 
-This document describes how to setup up your development environment on Windows for building __self-contained ctrlX Apps based on Microsoft .NET 5.0 (dotnet5) runtime__.
+This document describes how to setup up your development environment for building __self-contained ctrlX Apps based on Microsoft .NET runtime__.
 
-__Self-contained__ means, your App contains an already matching and optimized .NET 5.0 runtime for your target architecture, so there's no need to install any additional .NET 5.0 runtime.
+__Self-contained__ means, your App contains an already matching and optimized .NET runtime for your target architecture, so there's no need to install any additional .NET runtime.
 
-All samples generate Apps (snaps) for the targets:
+All samples generate Apps (snaps) for the targets
 
-+ ctrlXVirtual (amd64)
-+ ctrlX (arm64)
++ ctrlX CORE<sup>virtual</sup> (amd64)
++ ctrlX CORE (arm64)
 
 ## Pre-requisites
 
-### Install/Update Microsoft Visual C++ Redistributable for Visual Studio
-If you have latest Microsoft Visual Studio including C++ components installed, you can skip this step.
+In this chapter we describe how to install the necessary components on a development environment based on a QEMU VM.
 
-Please install the latest __Microsoft Visual C++ Redistributable for Visual Studio__ from [here](
-https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0).
+How you can create a QEMU VM is described [here](setup_qemu_ubuntu.md).
 
-### Install/Update Visual Studio Code (VS Code)
+### Installation of .NET SDK on the QEMU VM
 
-The ctrlX App IDE is __Microsoft Visual Studio Code__. Please ensure having latest version installed on your system from [here](https://code.visualstudio.com/).
+Start a SSH session and login into the VM with boschrexroth/boschrexroth:
 
-### Install and Update Windows Subsystem for Linux (WSL) and Ubuntu 18.04
+      ssh -p 10022 boschrexroth@localhost
 
-The samples make use of __Windows Subsystem for Linux (WSL) Version 18.04__. Please read common SDK help to setup. Also ensure your __proxy settings__ if you're behind a corporate proxy (Settings -> Proxy).
+Start the script to install .NET as snap on your VM:
 
-After done, please ensure you have the latest Linux environment, by updating your WSL:
+      ./install-dotnet-sdk.sh
 
-1. Open Visual Studio Code
-2. Open the Remote Explorer from the menu
-3. Connect to your WSL Target __Ubuntu-18.04__.
-4. Select __Open Folder in WSL__ and navigate to any .NET sample e.g. _hello.world_
-5. Open a new __Terminal__ (Terminal -> New Terminal)
-6. Run the following commands in your WSL console
+When installation is finished you can check your installed SDKs:
 
-            sudo apt update
-            sudo apt upgrade
+      dotnet --list-sdks
 
-### Prepare WSL
+The output should show the installed version and the path of ths dotnet-sdk.
 
-First, we have to prepare WSL to fetch packages of all supported platform architectures.
-Please search for __Dependencies for Crossbuild (Multiarch)__ [here](./setup_windows_wsl_ubuntu.md) or use the template file provided (please rename your existing to be restored on demand):
+Check your Runtime:
 
-1. Open WSL by Windows -> Start
-
-            wsl
-
-2. Ensure the following content at the end of file _/etc/apt/sources.list_
-
-            deb [arch=i386,amd64] http://security.ubuntu.com/ubuntu/ bionic-security main restricted
-            # deb-src http://security.ubuntu.com/ubuntu/ bionic-security main restricted
-            deb [arch=i386,amd64] http://security.ubuntu.com/ubuntu/ bionic-security universe
-            # deb-src http://security.ubuntu.com/ubuntu/ bionic-security universe
-            deb [arch=i386,amd64] http://security.ubuntu.com/ubuntu/ bionic-security multiverse
-            # deb-src http://security.ubuntu.com/ubuntu/ bionic-security multiverse
+      dotnet --list-runtimes
 
 
-Alternatively you can use the provided  template  _sources.list_ file and copy it from
+### Install the VS Code extension from Marketplace
 
-            ./samples.net/dotnet5/docs/files/sources.list
+We recommend to use __Microsoft Visual Studio Code__ on your host computer as IDE - [see here](vscode.md).
 
-to any directory e.g. _c:/temp/sources.list_
+To develop and test .NET application for the ctrlX we have to install the C# extension in the VM.
 
-After that copy the file from there into WSL
+* Start your VS Code IDE and connect it with the QEMU VM.
+* Select the extension icon in the left side bar and enter c#
+* Select this extension and click 'Install in SSH'
 
-            sudo cp /mnt/c/temp/sources.list  /etc/apt
+![C# extension](./images/csharpextension.png)
 
-Update the VS Code Server on WSL:
+### Prepare NuGet on the QEMU VM
 
-      Run the following commands in your WSL console
-
-            code
-
-## Installation of .NET 5 into WSL
-The following steps are based on [this](https://docs.microsoft.com/de-de/dotnet/core/install/linux-ubuntu#1804-) description
-
-1. Open WSL by Windows -> Start
-
-            wsl
-
-2. Add the Microsoft package signing key to your list of trusted keys
-
-      Run the following commands in your WSL console
-
-            wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-
-            sudo dpkg -i packages-microsoft-prod.deb
-
-3. Install the .NET SDK
-
-      Run the following commands in your WSL console
-
-            sudo apt-get update; \
-                  sudo apt-get install -y apt-transport-https && \
-                  sudo apt-get update && \
-                  sudo apt-get install -y dotnet-sdk-5.0
-
-If you're using __ASP.NET__, install the ASP.NET Runtime  
-
-      Run the following commands in your WSL console
-
-          sudo apt-get install -y aspnetcore-runtime-5.0
-
-1. Check your installed SDK's
-
-      Run the following command in your WSL console
-
-            dotnet --list-sdks
-
-      The output should be something like
-
-            5.0.102 [/usr/share/dotnet/sdk]
-
-2. Check your Runtime
-      Run the following command in your WSL console
-
-            dotnet --list-runtimes
-
-      The output should be something like
-
-            Microsoft.NETCore.App 5.0.2 [/usr/share/dotnet/shared/Microsoft.NETCore.App]
-
-### Prepare NuGet
+.NET projects can use NuGet packages. Therefor we have to provide some prerequisites on the VM.
 
 If you're behing a corporate proxy, you have to configure the __NuGet Proxy__ in configuration file:
 
       /home/{USERNAME}/.nuget/NuGet/NuGet.Config
 
 Edit the NuGet configuration file with your preferred editor or with VS Code and add a _config_ section containing the __http_proxy__ and __https_proxy__ inside the _configuration_ section like shown below.
-Alternatively you can copy the provided file
-
-1. Open WSL by Windows -> Start
-
-            wsl
-
-2. Copy the provided file from
-
-            ./samples.net/dotnet5/docs/files/NuGet.Config
-
-      to folder 
-    
-            /home/{USERNAME}/.nuget/NuGet
-
-You can copy it to a temp directory e.g. _c:/temp/NuGet.Config_
-
-After that copy the file from there into WSL
-
-            sudo cp /mnt/c/temp/NuGet.Config  /home/{USERNAME}/.nuget/NuGet
 
 __Example:__
 
@@ -165,22 +75,9 @@ for example:
       ...
       </configuration>
 
-## Install the VS Code extensions from Marketplace
-Finally we have to install some extensions for .NET to be ready for coding.
 
-![C# extension](./images/csharpextension.png)
-
-+ Click on the __Remote Explorer__ from the menu.
-+ Choose __Open Folder in WSL__.
-+ Open any __.NET sample directory (e.g. hello.world).__
-
-![.NET Sample](./images/wsl-helloworld.png)
-
-+ Open __Extensions__ from the menu.
-+ Install the C# Extension and press __Install on Windows Subsystem for Linux__.
-
-## Building
-Each sample provides a rich set of tasks for your convenience.
+## Building a .NET Sample Project
+Each .NET sample provides a rich set of tasks for your convenience.
 
 ![Tasks](./images/tasks.png)
 

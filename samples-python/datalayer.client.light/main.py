@@ -26,8 +26,8 @@ import os
 import time
 from datetime import datetime
 from typing import List
-
 import flatbuffers
+
 import datalayer
 from datalayer.variant import Result, Variant
 from comm.datalayer import SubscriptionProperties
@@ -43,7 +43,7 @@ def main():
     #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
     #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
 
-    connectionClient = "tcp://boschrexroth:boschrexroth@127.0.0.1:2069"
+    connectionClient = "tcp://boschrexroth:boschrexroth@10.0.2.2:2069"
 
     if 'SNAP' in os.environ:
         connectionClient = "ipc://"
@@ -92,13 +92,39 @@ def main():
                 print("ERROR Adding subscription node failed:", result)
 
             while datalayer_client.is_connected():
-                # Single Read sync
-                read_adr = "framework/metrics/system/memused-percent"
+
                 dt_str = datetime.now().strftime("%d/%m/%Y %H:%M:%S.%f")
-                result, read_var = datalayer_client.read_sync(read_adr)
+
+                addr = "framework/metrics/system/memused-percent"
+                result, read_var = datalayer_client.read_sync(addr)
                 val = read_var.get_float64()
-                print("INFO Single read: %s, %s: %f" % (dt_str, read_adr, val))
-                time.sleep(10.0)
+                print("INFO read_sync: %s, %s: %f" % (dt_str, addr, val))
+
+                '''
+                addr = "scheduler/admin/state"
+                dt_str = datetime.now().strftime("%d/%m/%Y %H:%M:%S.%f")
+                conv = datalayer_system.json_converter()
+                result, read_var = datalayer_client.read_json_sync(conv, "scheduler/admin/state", 0)
+                state = read_var.get_string()
+                print("INFO read_json_sync: %s, %s: %s" % (dt_str, addr, state))
+
+                if 'RUN' in state:
+                    state = state.replace('RUN', 'CONFIG')
+                else:
+                    state = state.replace('CONFIG', 'RUN')
+
+                print("New state: ", state)
+
+                # Result.OK expected
+                result, error = datalayer_client.write_json_sync(conv, addr, state)
+                print("write_json_sync Result:", result)
+
+                # Result.INVALID_ADDRESS expected
+                result, error = datalayer_client.write_json_sync(conv, addr+"x", state)
+                print("write_json_sync with invalid address Result:", result, "Error:", error.get_string())
+                '''
+                
+                time.sleep(5.0)
 
             print("ERROR Data Layer connection")
             print("INFO Close subscription")

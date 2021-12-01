@@ -1,0 +1,29 @@
+name: changing-world
+base: core20
+version: '1.0.0'
+summary: Simple snap with random menu entry
+description: |
+  This is a sample snap that generates a random menu entry when getting installed or updated
+
+grade: stable
+confinement: strict
+
+parts:
+  dump:
+    plugin: dump
+    source: ./dump
+    stage-packages:
+      - wamerican
+      - jq
+apps:
+  my-service:
+    command: bin/service.sh
+    daemon: simple
+
+slots:
+  package-assets:
+    interface: content
+    content: package-assets
+    source:
+      read:
+      - $SNAP_DATA/package-assets/$SNAPCRAFT_PROJECT_NAME

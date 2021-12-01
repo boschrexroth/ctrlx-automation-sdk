@@ -1,89 +1,26 @@
-# ctrlX Data Layer Client Sample in Python 
-
-This app is a ctrlX Data Layer Client written in Python which fetches Data Layer data via subscriptions.
+# ctrlX Data Layer Client Subscription
 
 ## Introduction
 
+
 The code shows how in Python the values of the ctrlX Data Layer are subscribed. Code snippets can be used in your own Python app.
 
-## Prerequisites for Developing Python Apps
+## Function Description
 
-* Linux Ubuntu 18.4 (or Windows PC running with Windows Subsystem for Linux (WSL) or a Virtual Box VM)
-* Python3 is installed (VS Code extension in case of using WSL) 
-* ctrlX AUTOMATION SDK Version 1.8 is installed (extracted and copied to the Ubuntu users home directory)
+The app uses a single node and a multi node subscription. 
 
-## Getting Started
+First the single node subscription is started. It will be stopped after a short period of time. 
 
-As Integrated Development Environment (IDE) we recommend Visual Studio Code.
-Therefor the folder .vscode contains configuration files.
-
-### Install Virtual Environment
-
-We recommend to create and activate a virtual environment. Start a terminal in the project directory (workspaceFolder) and enter:
-
-    virtualenv -p python3 venv
-    source venv/bin/activate
-
-### Install Wheels
-
-Install the required packages:
-
-    pip3 install -r requirements.txt
-    pip3 install ../../whl/ctrlx_datalayer*
-    pip3 install ../../whl/ctrlx_fbs-*
-
-### Start IDE
-
-Start your IDE, open main.py and start the program.
-
-## Build an AMD64 Snap
-
-Check your snapcraft version with the command:
-
-    snapcraft --version
-
-For cleaning and building snaps see according chapter.
-
-### Version 2.43
-
-To clean the previous snap build results use:
-
-    snapcraft clean
-
-Build the snap with:
-
-    snapcraft
-
-### Version 4.x or higher
-
-To clean the previous snap build results use:
-
-    snapcraft clean --destructive-mode
-
-Build the snap with:
-
-    snapcraft --destructive-mode
-
-__Important:__  To build an ARM64 (AARCH64) snap use a native ARM64 computer or a virtual machine emulating the ARM64 CPU e.g. with QEMU.
+Then the multi node subscription is started. It will run until a connection break to the Data Layer is detected. In this case the app unsubscribes the multi node subsciption and ends. The app is restarted automatically by snapd.
 
 
-## Install the Snap on the ctrlX
+## Implementation Description
 
-* Open the ctrlX CORE Home page, select Settings - Apps, click on 'Service mode' and confirm.
-* Click on the Settings icon and select 'Allow installation from unknown source'
-* Select tab 'Local storage', click the + icon, upload and install the snap.
-* Switch to Operation mode
-
-
-## Troubleshooting
-
-If your snap doesn't work well start a shell on the ctrlX and check the trace regarding your snap:
-
-    sudo snap logs -f sdk-py-datalayer-client-sub
-
-## Support
-
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+__main.py__ is the single module. It has follwing tasks:
+* Create a Data Layer client connection
+* Subscribe/unsubscribe a Data Layer single node subscription
+* Subscribe/unsubscribe a Data Layer multi node subscription
+* Close app on Data Layer client connection break
 
 ___
 

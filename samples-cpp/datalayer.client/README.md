@@ -9,9 +9,37 @@ The sample requires that datalayer.provider.all-data is running or installed fir
 
 ## Prerequisites
 
-* Buildenvironment WSL or Virtual Box
-* ctrlX AUTOMATION SDK Version 1.2 
+* Build environment - we recommend a QEMU virtual machine
+* ctrlX AUTOMATION SDK archive
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE
+
+### Prerequisites for Building the cpp Samples on the Build Environment
+
+* Start your build environment
+* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
+
+    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
+
+* Open a SSH shell on your build environment:
+
+    ssh -p 10022 boschrexroth@localhost
+
+* Unzip the archive
+
+    unzip -XK com.boschrexroth.sdk.control-*.zip
+
+* Change to SDK directory public
+* Set x flag: 
+
+    chmod +x bin\oss.flatbuffers\u*\release\flatc
+
+* If installed remove older ctrlx-datalayer package
+
+    sudo dpkg -r ctrlx-datalayer 
+
+* Install newest ctrlx-datalayer package
+
+    sudo dpkg -i deb/ctrlx-datalayer*.deb
 
 ## Getting Started
 
@@ -20,7 +48,6 @@ The sample requires that datalayer.provider.all-data is running or installed fir
 3. Build and install the snap as described in `Setup` section
 4. Check output in the web interface
 
-![Output in diagnosis logbook](docs/images/datalayer.client/messages.in.logbook.png)
 
 ## Troubleshooting
 
@@ -29,7 +56,7 @@ If there are unclear messages during the build process, it might help to delete 
 
 ## Support
 
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 

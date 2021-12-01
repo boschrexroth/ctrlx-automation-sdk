@@ -36,6 +36,9 @@ public:
   // The Data of the virtual node
   comm::datalayer::Variant Data;
 
+  // The Metadata of the virtual node
+  comm::datalayer::Variant Metadata;
+
   // The error code of the virtual node: <0: Error, ==0: OK; >0: Warning
   int ErrorCode = 0;      
   
@@ -43,10 +46,11 @@ public:
   std::string Error = "";
   
   // Constructor
-  DataContainer(const std::string &address, const comm::datalayer::Variant &data)
+  DataContainer(const std::string &address, const comm::datalayer::Variant &data, const comm::datalayer::Variant &meatadata)
   {
     Address = address;
     Data = data; // A copy is made
+    Metadata = meatadata; // A copy is made
   }
 };
 

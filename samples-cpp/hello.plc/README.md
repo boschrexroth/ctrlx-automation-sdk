@@ -17,7 +17,9 @@ All other data types are ignored.
 
 ## Pre-requisites
 
-* Buildenvironment WSL or Virtual Box
+* Build environment - we recommend a QEMU virtual machine
+* ctrlX AUTOMATION SDK archive
+* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
 * This sample requires the snap `rexroth-plc` installed on ctrlX CORE device.
 * Prepare a PLC Program with `ctrlX PLC Engineering`:
   (`ctrlX PLC Engineering` is a desktop program and a part of the ctrlX WORKS installation)
@@ -29,6 +31,36 @@ All other data types are ignored.
   * add the object 'Symbolconfiguration' to your Application
   * open the 'Symbolconfiguration' and select the program 'PLC_PRG'
   * download and start the plc-program to you control
+
+
+### Prerequisites for Building the cpp Samples on the Build Environment
+
+* Start your build environment
+* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
+
+    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
+
+* Open a SSH shell on your build environment:
+
+    ssh -p 10022 boschrexroth@localhost
+
+* Unzip the archive
+
+    unzip -XK com.boschrexroth.sdk.control-*.zip
+
+* Change to SDK directory public
+* Set x flag: 
+
+    chmod +x bin\oss.flatbuffers\u*\release\flatc
+
+* If installed remove older ctrlx-datalayer package
+
+    sudo dpkg -r ctrlx-datalayer 
+
+* Install newest ctrlx-datalayer package
+
+    sudo dpkg -i deb/ctrlx-datalayer*.deb
+
 
 ## Getting Started
 
@@ -64,7 +96,7 @@ If there are unclear messages during the build process, it might help to delete 
 
 If you've found an error in these sample, please [file an issue](https://github.com/boschrexroth)
 
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 

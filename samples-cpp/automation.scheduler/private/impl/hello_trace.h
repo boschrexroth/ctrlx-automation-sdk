@@ -5,7 +5,7 @@
 #include "common/log/trace/log_buffered.h"
 
 namespace common { namespace log { namespace trace { class IRegistration; } } }
-namespace common { namespace log { namespace trace { class IRegistrationRealTime; } } }
+namespace common { namespace log { namespace trace { class IRegistrationRealTime2; } } }
 namespace common { namespace log { namespace trace { enum class TraceResult; } } }
 
 #define AUTOMATIONSCHEDULER_API
@@ -79,8 +79,8 @@ namespace automation
 
       common::log::trace::ILogRealTime& operator()() const { return *m_rtTraceContext; }
 
-      void attachTrace(common::log::trace::IRegistrationRealTime* traceRegistration);
-      void detachTrace(common::log::trace::IRegistrationRealTime* traceRegistration);
+      void attachTrace(common::log::trace::IRegistrationRealTime2* traceRegistration);
+      void detachTrace(common::log::trace::IRegistrationRealTime2* traceRegistration);
 
       inline const char* getTraceName() { return m_traceName.c_str(); }
 

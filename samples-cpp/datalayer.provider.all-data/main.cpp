@@ -28,29 +28,17 @@
 
 #include "providerNodeAllData.h"
 
-// This app needs access rights to the Data Layer of your ctrlX.
-// TODO These user and password settings are default values.
-// TODO Add a new user for this app in the ctrlX und change the settings here.
-static const std::string tcpUser = "boschrexroth";
-static const std::string tcpPwd = "boschrexroth";
+static std::string dl_addr_base = "sdk-cpp-alldata/"; // snap/snapcraft.yaml name:
 
-// Check/Change this IP address
-// take 127.0.0.1 when you have a ctrlX virtual with PortForwarding
-static std::string tcpIpAddress = "192.168.1.1";
-
-static std::string getConnection(const std::string &tcpConnectionArg, int port)
+static std::string getConnection()
 {
   if (is_snap())
   {
     return DL_IPC_AUTO; // ipc://datalayer/backend
   }
 
-  if (tcpConnectionArg.empty())
-  {
-    return DL_TCP + tcpUser + ":" + tcpPwd + "@" + tcpIpAddress + ":" + std::to_string(port);
-  }
-
-  return DL_TCP + tcpConnectionArg + ":" + std::to_string(port);
+  // 10.0.2.2 - build environment is VM and target is ctrlX virtual with port forwarding
+  return DL_TCP + std::string("boschrexroth:boschrexroth@10.0.2.2:") + std::to_string(DL_TCP_BACKEND_FIRST_PORT);
 }
 
 // Add some signal Handling so we are able to abort the program with sending sigint
@@ -62,6 +50,12 @@ static void sigHandler(int sig, siginfo_t *siginfo, void *context)
 
 int main(int ac, char *av[])
 {
+  #ifdef MY_DEBUG
+  std::cout << "Raising SIGSTOP" << std::endl;
+  //  raise(SIGSTOP);
+  std::cout << "... Continue..." << std::endl;
+#endif
+
   // Prepare signal structure to interrupt the endless loop with ctrl + c
   struct sigaction act;
   memset(&act, '\0', sizeof(act));
@@ -74,21 +68,14 @@ int main(int ac, char *av[])
   std::cout << "INFO Starting Data Layer System" << std::endl;
   datalayerSystem.start(false);
 
-  std::string tcpConnectionArg = "";
-
-  if (ac > 1)
-  {
-    // Fetch the connection string from the command line.
-    tcpConnectionArg = av[1];
-  }
-
   // Creates a provider instance at Data Layer backend to provide data to Data Layer clients
-  std::string providerConnection = getConnection(tcpConnectionArg, DL_TCP_BACKEND_FIRST_PORT);
+  std::string providerConnection = getConnection();
   std::cout << "INFO Creating Data Layer Provider, using connection " + providerConnection << std::endl;
   auto *dlProvider = datalayerSystem.factory()->createProvider(providerConnection);
 
   std::cout << "INFO Starting Data Layer Provider" << std::endl;
   auto result = dlProvider->start();
+
   if (STATUS_FAILED(result))
   {
     std::cout << "FATAL Starting Data Layer Provider failed with " << result.toString() << std::endl;
@@ -99,11 +86,11 @@ int main(int ac, char *av[])
   std::cout << "INFO Pause 1s while Data Layer Provider connection will be established" << std::endl;
   std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // Pause until dlProvider->isConnected() is called
 
-  std::cout << "INFO Creating Data Layer branch 'all-data'" << std::endl;
-  auto providerNodeStatic = new ProviderNodeAllData(dlProvider, "all-data/", false);
+  std::cout << "INFO Creating Data Layer branch " << dl_addr_base << std::endl;
+  auto providerNodeStatic = new ProviderNodeAllData(dlProvider, dl_addr_base, false);
   providerNodeStatic->RegisterNodes();
 
-  auto providerNodeDynamic = new ProviderNodeAllData(dlProvider, "all-data/", true);
+  auto providerNodeDynamic = new ProviderNodeAllData(dlProvider, dl_addr_base, true);
   providerNodeDynamic->RegisterNodes();
 
   std::cout << "INFO Running endless loop - end with Ctrl+C" << std::endl;

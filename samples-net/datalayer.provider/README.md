@@ -16,21 +16,15 @@ Also a complex type encoded by [FlatBuffers](https://google.github.io/flatbuffer
 
 ## Description
 
-The following code shows the main method with inline documentation:
+The sample demonstrates 
 
-[Program.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.provider/Program.cs)
++ How to provide nodes with different data types to __ctrlX Data Layer__
 
-The class ReadOnlyNodeHandler implements the callback methods for read-only support:
++ How to create and provide meta data to nodes
 
-[ReadOnlyNodeHandler.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.provider/ReadOnlyNodeHandler.cs)
-
-The class ReadWriteNodeHandler implements the callback methods for read-write support:
-
-[ReadWriteNodeHandler.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.provider/ReadWriteNodeHandler.cs)
-
-The class MetadataProvider create the metadata for the registered flatbuffers type and provides it as a singleton:
-
-[MetadataProvider.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.provider/MetadataProvider.cs.cs)
++ How to provide nodes with read-only or read-write support
+  
++ How to register a user defined flatbuffers type
 
 ## Prerequisites
 

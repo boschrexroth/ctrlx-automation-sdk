@@ -1,6 +1,9 @@
 
 # Setup ctrlX AUTOMATION Development Environment using Windows WSL
 
+!!! important
+    Setting up a WSL virtual machine is deprecated because WSL1 does support only Ubuntu 18.04.
+
 ## Overview
 
 This guide shows how to use the Windows Subsystem for Linux (WSL) as an development environment to develop ctrlX AUTOMATION Apps. It allows you to use Visual Studio Code for Windows as your IDE and to compile your program in the WSL running on Windows. This setup gives you a seamless development environment for Linux applications from within you Windows environment.
@@ -21,7 +24,7 @@ Enable Admin access and run PowerShell with Administrator privileges.
 
 Follow the instructions and reboot. For troubleshooting, see the official Microsoft documentation: <https://docs.microsoft.com/de-de/windows/wsl/install-win10>  
 
-## Install Distribution (Ubuntu 18.04)
+## Install Distribution ( 18.04)
 
 Download your desired Distribution (Ubuntu 18.04 recommended) from <https://docs.microsoft.com/en-us/windows/wsl/install-manual> and install the archive by executing it from the windows host.
 

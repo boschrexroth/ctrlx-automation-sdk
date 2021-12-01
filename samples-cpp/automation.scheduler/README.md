@@ -147,7 +147,7 @@ DELETE https://192.168.1.1/automation/api/v1/scheduler/tasks/HelloCallable
 
 ## Support
 
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 ___
 
 

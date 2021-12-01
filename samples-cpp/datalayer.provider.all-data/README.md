@@ -16,11 +16,39 @@ The static branch and its nodes cannot be changed by Data Layer Client interacti
 The dynamic branch however is changeable. Nodes can be written or even deleted by clients. Furthermore new nodes or whole sub branches can be created.
 
 
-## Pre-requisites
+## Prerequisites
 
-* Build Environment: Ubuntu 18.4 installed on WSL or Virtual Box VM
-* ctrlX AUTOMATION SDK Version 1.8 
+* Build environment - we recommend a QEMU virtual machine
+* ctrlX AUTOMATION SDK archive
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE
+
+### Prerequisites for Building the cpp Samples on the Build Environment
+
+* Start your build environment
+* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
+
+    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
+
+* Open a SSH shell on your build environment:
+
+    ssh -p 10022 boschrexroth@localhost
+
+* Unzip the archive
+
+    unzip -XK com.boschrexroth.sdk.control-*.zip
+
+* Change to SDK directory public
+* Set x flag: 
+
+    chmod +x bin\oss.flatbuffers\u*\release\flatc
+
+* If installed remove older ctrlx-datalayer package
+
+    sudo dpkg -r ctrlx-datalayer 
+
+* Install newest ctrlx-datalayer package
+
+    sudo dpkg -i deb/ctrlx-datalayer*.deb
 
 ## Getting Started
 
@@ -55,10 +83,7 @@ Static means that the values of the nodes and the structure of he branch  cannot
 
 All nodes of such a sub branch are 'virtual' because the node behind is always the same ProviderNodeAllData instance. Therefore it registers itself with a wildcard address (e.g. all-data/dynamic/\*\*) at the Data Layer. The 'seen' nodes are DataContainer instances managed in a list and accessed by the on... callback functions of the ProviderNodeAllData class. 
   
-## Screenshots
-
-![Data Layer tree](docs/images/datalayer.provider.all-data/alldataprovider.png)
-
+  
 ## Troubleshooting
 
 All automatically created files are located in folders `build` and `generated`.  
@@ -66,7 +91,7 @@ If there are unclear messages during the build process, it might help to delete 
 
 ## Support
 
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 

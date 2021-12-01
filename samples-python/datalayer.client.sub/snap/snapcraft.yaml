@@ -1,18 +1,19 @@
-name: sdk-py-datalayer-client-sub
-version: 1.0.2
+name: sdk-py-client-sub
+version: 2.0.0
 summary: Data Layer client subscription sample written in Python for ctrlX
-#title: sdk-py-datalayer-client-sub
+title: sdk-py-client-sub
 description: |
   This sample demonstrates how to use Data Layer subscriptions with Python
-base: core18
+base: core20
 confinement: strict
 grade: stable
 
 apps:
   client:
-    command: main.py
+    command: bin/main.py
     plugs:
       - network
+      - datalayer
     daemon: simple
     passthrough:
       restart-condition: always
@@ -21,12 +22,7 @@ apps:
 parts:
   client:
     plugin: python
-    python-version: python3
     source: .
-    python-packages:
-      - ../../whl/ctrlx_datalayer-1.3.0-py3-none-any.whl
-      - ../../whl/ctrlx_fbs-1.0.0-py3-none-any.whl
-      - flatbuffers~=1.12
 
 plugs:
   datalayer:

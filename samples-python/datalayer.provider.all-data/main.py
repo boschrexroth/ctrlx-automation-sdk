@@ -27,28 +27,18 @@ import sys
 import time
 
 import datalayer
+from datalayerprovider.nodeManagerAllData import NodeManagerAllData
 
 from datalayerprovider.providerNodeAllData import ProviderNodeAllData
 
+address_root = "sdk-py-provider-alldata/"
+
 def main(argv):
-    arg_num_loops = '--num-loops'
-    arg_time_sleep = '--time-sleep'
 
     time_sleep = 1.0
-    num_loops = -1
-
-    print(sys.argv)
-    for i, arg in enumerate(sys.argv):
-        if i <= 0:
-            continue
-        if arg.startswith(arg_num_loops):
-            num_loops = int(arg[len(arg_num_loops)+1:])
-        if arg.startswith(arg_time_sleep):
-            time_sleep = float(arg[len(arg_time_sleep)+1:])
 
     with datalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
-
 
         # This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:PORT
         # Please check and change according your environment:
@@ -58,7 +48,7 @@ def main(argv):
         #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
         #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
 
-        connectionProvider = "tcp://boschrexroth:boschrexroth@127.0.0.1:2070"
+        connectionProvider = "tcp://boschrexroth:boschrexroth@10.0.2.2:2070"
 
         if 'SNAP' in os.environ:
             connectionProvider = "ipc://"
@@ -70,34 +60,17 @@ def main(argv):
                 print("ERROR Starting Data Layer Provider failed with: ", result)
                 sys.exit(1)
 
-            providerNodeAllDataStatic = ProviderNodeAllData(
-                provider, "all-data/_py/", False)
-            providerNodeAllDataStatic.RegisterNodes()
+            nodeManager = NodeManagerAllData(provider, "sdk-py-provider-alldata/")
+            nodeManager.create_dynamic_nodes()
+            nodeManager.create_static_nodes()
 
-            providerNodeAllDataDynamic = ProviderNodeAllData(
-                provider, "all-data/_py/", True)
-            providerNodeAllDataDynamic.RegisterNodes()
+            while provider.is_connected() :
 
-            loops = 1
-            while True:
-
-                print("Loop", loops, end='')
-                if num_loops >= 1:
-                    print(" of ",  num_loops, end='')
-                    if loops > num_loops:
-                        print("DONE")
-                        break
-                print()
-                
-                loops = loops + 1
-
-                if provider.is_connected() == False:
-                    print("ERROR: Data Layer provider is NOT connected")
-                    break
-
-                providerNodeAllDataDynamic.CheckConfig()
+                # providerNodeAllDataDynamic.CheckConfig()
 
                 time.sleep(time_sleep)
+
+            print("ERROR: Data Layer provider is NOT connected")
 
             provider.stop()
             # python context manager calls automatically provider.close()

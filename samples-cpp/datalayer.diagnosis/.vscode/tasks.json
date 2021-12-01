@@ -1,0 +1,52 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake Build Snap",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "type": "shell",
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "command": "cmake -DCMAKE_BUILD_KIT='${input:buildKit}' -DBUILD_SNAP=ON ..; make install; make clean; cd ..; snapcraft clean --destructive-mode; rm -rf ./generated/build",
+      "options": {
+        "cwd": "${workspaceFolder}/build/"
+      },
+    },
+    {
+      "label": "Launch Remote GDB Server",
+      "type": "shell",
+      "problemMatcher": "$gcc",
+      "command": "ssh ${input:Root-User}@${input:Target-IP}  \"sudo snap run --experimental-gdbserver=:12345 datalayerdiagnosis.datalayerDiagnosis\" "
+    },
+  ],
+  "inputs": [
+    {
+      "id": "buildKit",
+      "type": "pickString",
+      "description": "CMake Build Kit",
+      "options":[
+        "GCC x86_64-linux-gnu",
+        "GCC aarch64-linux-gnu"
+      ],
+      "default": "GCC x86_64-linux-gnu"
+    },
+    {
+      "id": "Target-IP",
+      "type": "promptString",
+      "description": "Insert target ip",
+      "default": "192.168.1.1"
+    },
+    {
+      "id": "Root-User",
+      "type": "promptString",
+      "description": "Insert user",
+      "default": "rexroot"
+    },
+  ]
+}

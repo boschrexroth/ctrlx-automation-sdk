@@ -1,2 +1,3 @@
-flatbuffers~=1.12
 autopep8
+ctrlx-datalayer
+../../whl/ctrlx_fbs-1.1.0-py3-none-any.whl

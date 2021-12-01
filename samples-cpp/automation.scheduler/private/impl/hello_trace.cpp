@@ -46,7 +46,7 @@ automation::scheduler::BaseTrace::BaseTrace()
 
 
 
-void automation::scheduler::RtTrace::attachTrace(common::log::trace::IRegistrationRealTime* traceRegistration)
+void automation::scheduler::RtTrace::attachTrace(common::log::trace::IRegistrationRealTime2* traceRegistration)
 {
   if (nullptr != traceRegistration)
   {
@@ -55,7 +55,7 @@ void automation::scheduler::RtTrace::attachTrace(common::log::trace::IRegistrati
       detachTrace(traceRegistration);
     }
     common::log::trace::ILogRealTime* rtTraceContext = nullptr;
-    common::log::trace::TraceResult traceResult = traceRegistration->registerUnit(&rtTraceContext, getTraceName(), g_rt_trace.getTraceEnablingState);
+    common::log::trace::TraceResult traceResult = traceRegistration->registerUnit(&rtTraceContext, getTraceName(), m_traceEnablingState);
     if (rtTraceContext && common::log::trace::statusSucceeded(traceResult))
     {
       m_rtTraceContext = rtTraceContext;
@@ -68,7 +68,7 @@ void automation::scheduler::RtTrace::attachTrace(common::log::trace::IRegistrati
   }
 }
 
-void automation::scheduler::RtTrace::detachTrace(common::log::trace::IRegistrationRealTime* traceRegistration)
+void automation::scheduler::RtTrace::detachTrace(common::log::trace::IRegistrationRealTime2* traceRegistration)
 {
   if (nullptr != traceRegistration)
   {

@@ -1,37 +1,72 @@
 # README Go appdata
 
-The Go sample app __appdata__ shows how to persist application data in ctrlX environment using an
-HTTP Listener. Please read the available _HOW-TO persist your app data_ documention for details.
-
 ## Introduction
 
-This sample shows how to load and save data according to ctrlx storage concept.
-
-## Description
-
-Use the ctrlX App Data storage for your application data persistence.
+This sample shows how to load and save data according to the ctrlx storage concept.
 
 ## Getting Started
 
-1. Launch VSCode
+1. Launch VSCode on your host computer.
 2. Click on the __Remote Explorer__ from the menu.
-3. Choose __Open Folder in WSL__.
-4. Open the directory __appdata__.
-5. Checkout ctrlX Data Layer web frontend (System | Data Layer) 
-6. Check the output using __Diagnostics__:
+3. Connect via SSH to your Ubuntu development environment.
+4. In the menu item File - Open Folder select the folder public/samples-go/__appdata__.
 
-   - Login into your ctrlX
-   - Navigate to __Diagnostics -> Logbook__
-   - Click __Settings__ on the right top corner
-   - Enable __Show system messages__
-   - Navigate to __Filter -> Units__ and check your __snap.ctrlx-go-appdata.app.service__
-   - Now you should the see the app output diagnostics.
-   - Press __Refresh__ to update.
+## Build a Snap
+
+Select main menu item Termninal - Run Build Task select the architecture of your ctrlX CORE:
+    amd64 for ctrlX CORE <sub>virtual</sub>
+    arm64 for ctrlX CORE
+
+A snap file will be build.
+
+## Install the Snap
+
+Right click the snap file in the File explorer window and select download. The file will be downloaded into a destination directory on your host computer.
+
+* Login into your ctrlX, from the home page click __Install an app__.
+* Switch to Service Mode
+* Select __Install from file__ and select the snap file on your host computer.
+* When installation is finished switch to Operation Mode.
+
+## Test the Snap
+
+* From the ctrlX home page Cclick __Diagnostics -> Logbook__
+* Click __Settings__ on the right top corner
+* Enable __Show system messages__
+* Navigate to __Filter -> Units__ and check your __snap.sdk-go-appdata.app.service__
+* Now you should the see the app output diagnostics.
+* Press __Refresh__ to update.
 
 7. If you have root permissions, you can also watch the output on any ssh console with the command:
    ```bash
-   sudo snap logs ctrlx-go-appdata.app -f | more
+   sudo snap logs -f sdk-go-appdata.app
    ```
+## Provide FOSS Info
+
+
+If your programcode contains additional open source software, the FOSS Info (Free and Open Source Software) must be filled in order to publish your App to the ctrlX Store.
+1. Navigate to the folder configs/package-assets in the root path of your snap project
+2. Open the file app.'snap-name'.fossinfo.json
+3. Add license information of the used open source software with the following json-structure:
+```
+   {
+        "name": "",
+        "version": "",
+        "homepage": "",
+        "usage": "",
+        "integrationMechanism": "",
+        "copyright": {
+            "text": ""
+        },
+        "licenses": [
+            {
+                "name": "",
+                "spdx": "",
+                "text": ""
+            }
+        ]
+    }
+```
 
 ## Install the App
 

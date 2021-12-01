@@ -12,9 +12,37 @@ When the user has written outputs once, the owner will start copying from output
 
 ## Prerequisites
 
-* Buildenvironment WSL or Virtual Box
-* ctrlX AUTOMATION SDK Version 1.6 
+* Build environment - we recommend a QEMU virtual machine
+* ctrlX AUTOMATION SDK archive
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE
+
+### Prerequisites for Building the cpp Samples on the Build Environment
+
+* Start your build environment
+* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
+
+    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
+
+* Open a SSH shell on your build environment:
+
+    ssh -p 10022 boschrexroth@localhost
+
+* Unzip the archive
+
+    unzip -XK com.boschrexroth.sdk.control-*.zip
+
+* Change to SDK directory public
+* Set x flag: 
+
+    chmod +x bin\oss.flatbuffers\u*\release\flatc
+
+* If installed remove older ctrlx-datalayer package
+
+    sudo dpkg -r ctrlx-datalayer 
+
+* Install newest ctrlx-datalayer package
+
+    sudo dpkg -i deb/ctrlx-datalayer*.deb
 
 ## Getting Started
 
@@ -35,7 +63,7 @@ If there are unclear messages during the build process, it might help to delete 
 
 ## Support
 
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 

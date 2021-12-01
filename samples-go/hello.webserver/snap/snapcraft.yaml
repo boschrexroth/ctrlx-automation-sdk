@@ -4,12 +4,13 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
 name: rexroth-hello-webserver
-version: '1.1'
+version: '2.0.0'
 icon: snap/icons/icon.png
 summary: Simple Go-Webserver 
 description: This sample app shows how to create a webserver app in ctrlX CORE
 grade: stable
 confinement: strict
+base: core20
 
 apps:
   my-server:
@@ -18,10 +19,11 @@ apps:
       - network
       - network-bind
       - network-status
+      - active-solution
     daemon: simple
     restart-condition: always
     passthrough:
-      restart-delay: 10s 
+      restart-delay: 10s
 
 parts:
   simple-webserver:
@@ -32,7 +34,7 @@ parts:
     source: ./configs
     plugin: dump
     organize:
-      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/    
+      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
     
   my-server:
     plugin: dump

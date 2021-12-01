@@ -4,5 +4,4 @@
 
 ## Find out the supported samples 
 
-* ["Hello Webserver"](./hello.webserver/README.md)
-* ["AppData"](./appdata/README.md)  
+* ["Hello Webserver"](./hello.webserver/README.md) 

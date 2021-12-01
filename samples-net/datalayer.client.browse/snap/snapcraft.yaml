@@ -3,7 +3,7 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-dotnet-datalayer-client-browse
-version: '1.0.0'
+version: '2.0.0'
 summary: Data Layer browse sample written in .NET for ctrlX.
 description: |
   The sample app shows how to browse the Data Layer tree.
@@ -11,7 +11,7 @@ confinement: strict
 #confinement: devmode 
 #icon: assets/icons/ICONHERE.png
 grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core18
+base: core20
 type: app
 
 apps:
@@ -30,7 +30,7 @@ apps:
 parts:
   app:
     plugin: dump
-    source: ./generated
+    source: ./publish/${SNAPCRAFT_TARGET_ARCH}
 
 # describes which interface slots are supported by defining the plugs
 plugs:

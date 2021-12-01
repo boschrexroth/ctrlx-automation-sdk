@@ -1,0 +1,31 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+version: "2.0.0"
+name: ctrlx-node-hello-world
+summary: Hello World sample written in node.js for ctrlX.
+description: |
+  Programm is prompting "Hello World" to standard output. Enter 'sudo snap logs ctrlx-node-hello-world.app -f | more' to see the output.
+confinement: strict
+#confinement: devmode
+#icon: assets/icons/ICONHERE.png
+grade: stable # must be 'stable' to release into candidate/stable channels
+base: core20
+type: app
+
+apps:
+  app:
+    command: bin/hello-world
+    daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+    plugs:
+      - network
+
+parts:
+  app:
+    source: ./src
+    plugin: npm
+    npm-node-version: "14.17.6"

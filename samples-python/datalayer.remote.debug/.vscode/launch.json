@@ -1,0 +1,59 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Local main.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "args": ["--debug-port=15678"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Remote ctrlX CORE virtual - Port forwarding",
+            "type": "python",
+            "request": "attach",
+            // IP address where the remote debug server is listening for debug connections.
+            // From the QEMU SDK VM (guest) 10.0.2.2 will address the host.
+            // From the host the ctrlX CORE virtual is connected via Port Forwarding.
+            "host": "10.0.2.2",  // NOT change
+            // Port where the remote debug server is listening for debug connections.
+            "port": 15678,
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}", 
+                    "remoteRoot": "/snap/sdk-py-datalayer-remote-debug/current/bin" 
+                }
+            ]
+        },
+        {
+            "name": "Remote ctrlX CORE virtual - Network adapter",
+            "type": "python",
+            "request": "attach",
+            "host": "192.168.1.1", // Do NOT change - this is the IP address of your ctrlX virtual
+            "port": 15678,
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}", 
+                    "remoteRoot": "/snap/sdk-py-datalayer-remote-debug/current/bin" 
+                }
+            ]
+        },
+        {
+            "name": "Remote ctrlX CORE",
+            "type": "python",
+            "request": "attach",
+            "host": "192.168.2.61", // TODO: Check/change the IP address of your ctrlX
+            "port": 15678,
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}", 
+                    "remoteRoot": "/snap/sdk-py-datalayer-remote-debug/current/bin" 
+                }
+            ]
+        }    
+    ]
+}

@@ -23,30 +23,45 @@ SOFTWARE.
 */
 
 using Datalayer;
-using FlatBuffers;
-using sample.schema;
-using System;
-using System.IO;
-using System.Net;
-using System.Threading;
 
 namespace Samples.Datalayer.Provider
 {
-    class Program
+    using comm.datalayer;
+    using FlatBuffers;
+    using sample.schema;
+    using System;
+    using System.IO;
+    using System.Net;
+    using System.Threading;
+
+    /// <summary>
+    /// Defines the <see cref="Program" />.
+    /// </summary>
+    internal class Program
     {
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // !!! CHANGE THIS TO YOUR ENVIRONMENT !!!
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        private static readonly IPAddress IpAddress = IPAddress.Parse("192.168.1.1"); // IPAddress.Loopback
+        /// <summary>
+        /// Defines the IpAddress.
+        /// </summary>
+        private static readonly IPAddress IpAddress = IPAddress.Parse("192.168.1.1");// IPAddress.Loopback
+
+        /// <summary>
+        /// Defines the Username.
+        /// </summary>
         private static readonly string Username = "boschrexroth";
+
+        /// <summary>
+        /// Defines the Password.
+        /// </summary>
         private static readonly string Password = "boschrexroth";
 
-        public const string AddressMyInt = "samples/myInt";
-        public const string AddressMyDouble = "samples/myDouble";
-        public const string AddressMyString = "samples/myString";
-        public const string AddressMyFlatbuffers = "samples/myFlatbuffer";
-
-        static void Main(string[] args)
+        /// <summary>
+        /// The Main.
+        /// </summary>
+        /// <param name="args">The args<see cref="string[]"/>.</param>
+        internal static void Main(string[] args)
         {
             //Add app exit handler to handle optional clean up
             AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
@@ -71,35 +86,36 @@ namespace Samples.Datalayer.Provider
                     Password);
             Console.WriteLine("ctrlX Data Layer provider created.");
 
-            // Register node on given address and read-only callbacks.
-            var (resultMyInt, myIntNode) = provider.RegisterNode(AddressMyInt, new ReadOnlyNodeHandler(new Variant(42)));
-            Console.WriteLine($"Registering Node with address='{AddressMyInt}', result='{resultMyInt}'");
+            // Create and register node on given address and read-only callbacks.
+            var myIntNode = CreateReadOnlyNode("samples/myInt", "types/datalayer/int32", "MyInt Description", new Variant(42));
+            var (resultMyInt, _) = provider.RegisterNode(myIntNode.Address, new ReadOnlyNodeHandler(myIntNode));
+            Console.WriteLine($"Registering Node with address='{myIntNode.Address}', result='{resultMyInt}'");
 
-            // Register node on given address and read-only callbacks.
-            var (resultMyDouble, myDoubleNode) = provider.RegisterNode(AddressMyDouble, new ReadOnlyNodeHandler(new Variant(Math.PI)));
-            Console.WriteLine($"Registering Node with address='{AddressMyDouble}', result='{resultMyDouble}'");
+            // Create and register node on given address and read-only callbacks.
+            var myDoubleNode = CreateReadOnlyNode("samples/myDouble", "types/datalayer/float64", "MyDouble Description", new Variant(Math.PI));
+            var (resultMyDouble, _) = provider.RegisterNode(myDoubleNode.Address, new ReadOnlyNodeHandler(myDoubleNode));
+            Console.WriteLine($"Registering Node with address='{myDoubleNode.Address}', result='{resultMyDouble}'");
 
-            // Register node on given address and read-write callbacks.
-            var (resultMyString, myStringNode) = provider.RegisterNode(AddressMyString, new ReadWriteNodeHandler(new Variant("Hello ctrlX")));
-            Console.WriteLine($"Registering Node with address='{AddressMyString}', result='{resultMyString}'");
+            // Create and register node on given address and read-write callbacks.
+            var myStringNode = CreateReadWriteNode("samples/myString", "types/datalayer/string", "MyDouble Description", new Variant("Hello ctrlX"));
+            var (resultMyString, _) = provider.RegisterNode(myStringNode.Address, new ReadWriteNodeHandler(myStringNode));
+            Console.WriteLine($"Registering Node with address='{myStringNode.Address}', result='{resultMyString}'");
 
             // Register type with binary flatbuffers schema file: sampleSchema.bfbs (auto generated from sampleSchema.fbs by flatc compiler)
-            var resultRegisterType = provider.RegisterType(MetadataProvider.TypesInertialValue, Path.Combine(AppContext.BaseDirectory, "sampleSchema.bfbs"));
-            Console.WriteLine($"Registering Type with address='{MetadataProvider.TypesInertialValue}', result='{resultRegisterType}'");
+            const string typeAddressInertialValue = "types/sample/schema/inertial-value";
+            var resultRegisterType = provider.RegisterType(typeAddressInertialValue, Path.Combine(AppContext.BaseDirectory, "sampleSchema.bfbs"));
+            Console.WriteLine($"Registering Type with address='{typeAddressInertialValue}', result='{resultRegisterType}'");
 
             // Create flatbuffers value with FlatbufferBuilder (flatbuffers c# API) and InertialValue (auto generated from sampleSchema.fbs by flatc compiler) 
             var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
-            InertialValue.StartInertialValue(builder);
-            InertialValue.AddX(builder, 30);
-            InertialValue.AddY(builder, -442);
-            InertialValue.AddZ(builder, 911);
-            var inertialValue = InertialValue.EndInertialValue(builder);
-            builder.Finish(inertialValue.Value);
+            var offset = InertialValue.CreateInertialValue(builder, 30, -442, 911);
+            builder.Finish(offset.Value);
             var variantFlatbuffers = new Variant(builder);
 
-            // Register node on given address and read-only callbacks.
-            var (resultMyFlatbuffers, myFlatbuffersNode) = provider.RegisterNode(AddressMyFlatbuffers, new ReadOnlyNodeHandler(variantFlatbuffers));
-            Console.WriteLine($"Registering Node with address='{AddressMyFlatbuffers}', result='{resultMyFlatbuffers}'");
+            // Create and register node on given address and read-only callbacks.
+            var myFlatbuffersNode = CreateReadOnlyNode("samples/inertial-value", typeAddressInertialValue, "My Inertial Value Description", variantFlatbuffers);
+            var (resultMyFlatbuffers, _) = provider.RegisterNode(myFlatbuffersNode.Address, new ReadOnlyNodeHandler(myFlatbuffersNode));
+            Console.WriteLine($"Registering Node with address='{myFlatbuffersNode.Address}', result='{resultMyFlatbuffers}'");
 
             // Start the Provider
             var startResult = provider.Start();
@@ -129,20 +145,55 @@ namespace Samples.Datalayer.Provider
             }
         }
 
+        /// <summary>
+        /// The CurrentDomain_ProcessExit.
+        /// </summary>
+        /// <param name="sender">The sender<see cref="object"/>.</param>
+        /// <param name="e">The e<see cref="EventArgs"/>.</param>
         private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
         {
             Console.WriteLine("Application exit");
+        }
 
-            //The EventHandler for this event can perform termination activities, such as closing files, releasing storage and so on, before the process ends.
+        /// <summary>
+        /// The CreateNode.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="targetAddress">The targetAddress<see cref="string"/>.</param>
+        /// <param name="description">The description<see cref="string"/>.</param>
+        /// <param name="value">The value<see cref="IVariant"/>.</param>
+        /// <returns>The <see cref="Node"/>.</returns>
+        public static Node CreateReadOnlyNode(string address, string targetAddress, string description, IVariant value)
+        {
+            var metaData = new MetadataBuilder()
+                .SetNodeClass(NodeClass.Variable)
+                .SetDescription(description)
+                .SetAllowedOperations(read: true, write: false, create: false, delete: false, browse: false)
+                .AddReference("readType", targetAddress)
+                .Build();
 
-            //Note:
-            //In.NET Framework, the total execution time of all ProcessExit event handlers is limited,
-            //just as the total execution time of all finalizers is limited at process shutdown.
-            //The default is two seconds. An unmanaged host can change this execution time by calling the ICLRPolicyManager::SetTimeout method with the OPR_ProcessExit enumeration value.
-            //This time limit does not exist in .NET Core.
+            return new Node(address, value, metaData);
+        }
 
-            // Your optional clean up code goes here ... 
-            //...
+        /// <summary>
+        /// The CreateReadWriteNode.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="targetAddress">The targetAddress<see cref="string"/>.</param>
+        /// <param name="description">The description<see cref="string"/>.</param>
+        /// <param name="value">The value<see cref="IVariant"/>.</param>
+        /// <returns>The <see cref="Node"/>.</returns>
+        public static Node CreateReadWriteNode(string address, string targetAddress, string description, IVariant value)
+        {
+            var metaData = new MetadataBuilder()
+                .SetNodeClass(NodeClass.Variable)
+                .SetDescription(description)
+                .SetAllowedOperations(read: true, write: true, create: false, delete: false, browse: false)
+                .AddReference("readType", targetAddress)
+                .AddReference("writeType", targetAddress)
+                .Build();
+
+            return new Node(address, value, metaData);
         }
     }
 }

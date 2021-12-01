@@ -70,7 +70,7 @@ namespace Samples.Datalayer.MQTT.Test
         public override DLR_RESULT Start()
         {
             //dummy1
-            var (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Dummy1, Variant.Null);
+            var (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Dummy1, Variant.Null);
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -78,7 +78,7 @@ namespace Samples.Datalayer.MQTT.Test
             Nodes.Add(node.Address, node);
 
             //dummy2
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Dummy2, Variant.Null);
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Dummy2, Variant.Null);
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -86,7 +86,7 @@ namespace Samples.Datalayer.MQTT.Test
             Nodes.Add(node.Address, node);
 
             //dummy3
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Dummy3, Variant.Null);
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Dummy3, Variant.Null);
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;

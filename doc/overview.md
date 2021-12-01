@@ -2,14 +2,14 @@
 
 ## Introduction
 
-The ctrlX AUTOMATION SDK is a Software Development Kit (SDK) for the development of software applications (apps) for [ctrlX AUTOMATION](https://www.ctrlx-automation.com) devices, especially for the linux based ctrlX CORE devices. It enables the development of apps in various high level languages.
+The ctrlX AUTOMATION SDK is a Software Development Kit (SDK) for the development of software applications (APPS) for [ctrlX AUTOMATION](https://www.ctrlx-automation.com) devices, especially for the linux based ctrlX CORE devices. It enables the development of APPS in various high level languages.
 
 Use the following sections of this documentation to learn more about the contents of the ctrlX AUTOMATION SDK.
 
-* [ctrlX AUTOMATION](ctrlx_automation.md): A short introduction and overview of the SDK.
+* [ctrlX-AUTOMATION](ctrlx_automation.md): A short introduction and overview of the SDK.
 
 ### Setup
-How to setup a development environment using Virtual Box and Ubuntu or Windows Subsystem for Linux (WSL).
+How to setup a Linux Ubuntu development environment using a real or a virtual machine.
 
 * [Setup overview](setup_overview.md): How to setup a development environment.
 

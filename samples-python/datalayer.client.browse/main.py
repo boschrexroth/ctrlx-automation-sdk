@@ -23,17 +23,11 @@
 # SOFTWARE.
 
 import os
-import sys
-import time
 
 import datalayer
-import datalayer.clib
 
-import flatbuffers
 from comm.datalayer import Metadata
-from comm.datalayer import AllowedOperations
-from comm.datalayer import Reference
-from datalayer.variant import Result, Variant, VariantType
+from datalayer.variant import (Result, VariantType)
 
 
 def main():
@@ -49,7 +43,7 @@ def main():
         #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
         #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
 
-        connectionClient = "tcp://boschrexroth:boschrexroth@127.0.0.1:2069"
+        connectionClient = "tcp://boschrexroth:boschrexroth@10.0.2.2:2069"
 
         if 'SNAP' in os.environ:
             connectionClient = "ipc://"
@@ -161,7 +155,7 @@ def get_value(client: datalayer.client.Client, converter: datalayer.system.Conve
                 return
 
             # Convert variant flatbuffers data to json type
-            result, json = converter.converter_generate_json_complex(data, typeVar,-1)
+            result, json = converter.converter_generate_json_complex(data, typeVar, -1)
             if result != Result.OK:
                 print("ERROR Converting json failed with: ", result)
                 return
@@ -209,7 +203,7 @@ def get_typeaddress(client: datalayer.client.Client, address: str):
 
     result, metadata = client.metadata_sync(address)
     if result != Result.OK:
-        print("ERROR Reading metadata of ",address, " failed with: ", result)
+        print("ERROR Reading metadata of ", address, " failed with: ", result)
         return
 
     metadata_root = Metadata.Metadata.GetRootAsMetadata(metadata.get_flatbuffers())

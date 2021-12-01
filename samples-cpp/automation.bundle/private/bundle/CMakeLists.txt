@@ -36,7 +36,9 @@ target_include_directories( ${ACTIVATOR_NAME}
   PRIVATE ${CMAKE_SOURCE_DIR}/public/include
   PRIVATE ${USER_DEPENDENCY_DIR}/public/include/oss.celix
   PRIVATE ${USER_DEPENDENCY_DIR}/include/motion.core
+  PRIVATE ${USER_DEPENDENCY_DIR}/include/motion.lib.base
   PRIVATE ${USER_DEPENDENCY_DIR}/include/motion.lib.common
+  PRIVATE ${USER_DEPENDENCY_DIR}/include/motion.lib.jobs
 )
 
 target_link_libraries(${ACTIVATOR_NAME} -Wl,--no-undefined -Wl,--whole-archive ${CELIX_DM_STATIC_CXX_LIB} -Wl,--no-whole-archive ${CELIX_LIBRARIES})

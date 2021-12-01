@@ -22,7 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+using comm.datalayer;
 using Datalayer;
+using FlatBuffers;
 using MQTTnet;
 using MQTTnet.Protocol;
 using Samples.Datalayer.MQTT.Base;
@@ -77,7 +79,7 @@ namespace Samples.Datalayer.MQTT.Sub
             //Create, register and add the handled nodes here
 
             //We listen to our base address using a wildcard on '{FullAddress}/**' which is 'scanner/**'
-            var (result, _) = Root.Provider.CreateNode(this, FullAddress, "**", Variant.False);
+            var (result, _) = Root.Provider.CreateBranchNode(this, FullAddress, "**");
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -130,6 +132,66 @@ namespace Samples.Datalayer.MQTT.Sub
         }
 
         /// <summary>
+        /// OnMetadata handler
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="result"></param>
+        public override void OnMetadata(string address, IProviderNodeResult result)
+        {
+            //'scanner' node (folder)
+            if (address.Equals(FullAddress))
+            {
+                CreateFolderMetadata(address, result);
+                return;
+            }
+
+            //Virtual nodes
+            var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
+            var operations = AllowedOperations.CreateAllowedOperations(builder,
+               read: true,
+               write: false,
+               browse: true, // We don't know the node's dynamic hierarchy
+               create: false,
+               delete: false);
+
+            var metaData = Metadata.CreateMetadata(builder,
+                nodeClass: NodeClass.Variable,
+                operationsOffset: operations,
+                descriptionOffset: builder.CreateString(address),
+                descriptionUrlOffset: builder.CreateString(address));
+            builder.Finish(metaData.Value);
+            result.SetResult(DLR_RESULT.DL_OK, new Variant(builder));
+        }
+
+        /// <summary>
+        /// Creates Folder Metadata
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="result"></param>
+        private static void CreateFolderMetadata(string address, IProviderNodeResult result)
+        {
+            //Create MetaData
+            var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
+
+            var folderOperations = AllowedOperations.CreateAllowedOperations(builder,
+                   read: false,
+                   write: false,
+                   browse: true,
+                   create: false,
+                   delete: false);
+
+            var folderMetaData = Metadata.CreateMetadata(builder,
+                nodeClass: NodeClass.Folder,
+                operationsOffset: folderOperations,
+                descriptionOffset: builder.CreateString(address),
+                descriptionUrlOffset: builder.CreateString(address));
+
+            builder.Finish(folderMetaData.Value);
+            result.SetResult(DLR_RESULT.DL_OK, new Variant(builder));
+            return;
+        }
+
+        /// <summary>
         /// OnBrowse handler
         /// </summary>
         /// <param name="address"></param>
@@ -169,6 +231,12 @@ namespace Samples.Datalayer.MQTT.Sub
 
             //Filter for null topic which may occure
             if (args.ApplicationMessage.Topic == null)
+            {
+                return;
+            }
+
+            //Filter for null payload which may occure
+            if (args.ApplicationMessage.Payload == null)
             {
                 return;
             }

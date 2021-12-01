@@ -10,7 +10,7 @@
                 "isDefault": true
             },
             "type": "shell",
-            "command": "snapcraft --target-arch='${input:arch}';snapcraft clean"
+            "command": "snapcraft --enable-experimental-target-arch --target-arch='${input:arch}' --destructive-mode;snapcraft clean --destructive-mode"
         }
         
     ],

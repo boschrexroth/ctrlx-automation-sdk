@@ -58,9 +58,42 @@ add_celix_bundle(${BUNDLEX_NAME}
     sdk_scheduler
 )
 
+
 #
 # Install target dep. generator type
 #
 # single-configuration generator (Unix Makefile)
 message(STATUS "Bundle directrory: ${BUNDLEX_PUBLIC_INSTALL_DIR}")
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${BUNDLEX_NAME}.zip DESTINATION ${BUNDLEX_PUBLIC_INSTALL_DIR}/)
+
+#
+# Create a List with necessary bundles
+#
+set(BUNDLE_LIST "")
+file(GLOB_RECURSE BUNDLES_CX ${CMAKE_SOURCE_DIR}/../../bundle/*/linux-gcc-x64/*.zip)
+foreach(BUNDLE_CX ${BUNDLES_CX})
+  list(APPEND BUNDLE_LIST ${BUNDLE_CX})
+endforeach()
+
+set(BUNDLE_LIST_FW "")
+file(GLOB_RECURSE BUNDLES_CX_FW ${CMAKE_SOURCE_DIR}/../../bin/framework/linux-gcc-x64/bundle/*.zip)
+foreach(BUNDLE_CX_FW ${BUNDLES_CX_FW})
+  list(APPEND BUNDLE_LIST_FW ${BUNDLE_CX_FW})
+endforeach()
+
+
+#
+# bundle list will be modified by bundles in sub directories (above, search and replace)
+#
+foreach(BUNDLE_CX_TMP ${BUNDLES_CX_FW})
+  list(APPEND BUNDLE_LIST ${BUNDLE_CX_TMP})
+endforeach()
+message(BUNDLE_LIST= ${BUNDLE_LIST})
+message(BUNDLE_LIST_FW= ${BUNDLE_LIST_FW})
+list(APPEND BUNDLE_LIST ${BUNDLEX_PUBLIC_INSTALL_DIR}/${BUNDLEX_NAME}.zip)
+
+string(REPLACE ";" " " START_LIST "${BUNDLE_LIST}")
+file(GENERATE
+     OUTPUT "${CMAKE_SOURCE_DIR}/generated/config.properties"
+     CONTENT "cosgi.auto.start.1=${START_LIST}\n"
+)

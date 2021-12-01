@@ -13,15 +13,14 @@
       "problemMatcher": [
         "$gcc"
       ],
-      "command": "cmake -DCMAKE_BUILD_KIT='${input:buildKit}' -DBUILD_SNAP=ON ..; make install; make clean; cd ..; snapcraft clean; rm -rf ./generated/build",
+      "command": "cmake -DCMAKE_BUILD_KIT='${input:buildKit}' -DBUILD_SNAP=ON ..; make install; make clean; cd ..; snapcraft clean --destructive-mode; rm -rf ./generated/build",
       "options": {
         "cwd": "${workspaceFolder}/build/"
       },
     },
     {
-      "label": "Launch GDB-Server",
+      "label": "Launch Remote GDB Server",
       "type": "shell",
-      
       "problemMatcher": "$gcc",
       "command": "ssh ${input:Root-User}@${input:Target-IP}  \"sudo snap run --experimental-gdbserver=:12345 registernode.registerNode\" ",
     },
@@ -32,11 +31,10 @@
       "type": "pickString",
       "description": "CMake Build Kit",
       "options":[
-        "GCC for x86_64-linux-gnu 7.4.0",
-        "GCC for aarch64-linux-gnu 7.4.0"
+        "GCC x86_64-linux-gnu",
+        "GCC aarch64-linux-gnu"
       ],
-      "default": "GCC for x86_64-linux-gnu 7.4.0"
-      // type specific configuration attributes
+      "default": "GCC x86_64-linux-gnu"
     },
     {
       "id": "Target-IP",

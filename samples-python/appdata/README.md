@@ -1,62 +1,26 @@
-# README Python appdata
-
-The Python sample app __appdata__ shows how to persist application data in ctrlX environment using an
-HTTP Listener. Please read the available _HOW-TO persist your app data_ documention for details.
+# AppData File Storage
 
 ## Introduction
 
-This sample shows how to load and save data according to ctrlx storage concept.
+This Python sample app shows how to persist application data in ctrlX environment. 
 
-## Description
+## Function Description
 
-Use the ctrlX App Data storage for your application data persistence.
+This app uses a web server to listen for events regarding loading and save configuration data.
 
-## Prerequisites
+Running in the snap environment of a ctrlX CORE therefor a web socket connection is used.
 
-Please read the common Python docs [here](./../README.md), first.
+In debug mode (running in the build environment) a TCP/IP connection is used.
 
-## Getting Started
+## Implementation Description
 
-1. Launch VSCode
-2. Click on the __Remote Explorer__ from the menu.
-3. Choose __Open Folder in WSL__.
-4. Open the directory __appdata__.
-5. Build and install snap as described [here](./../README.md).
-6. Checkout ctrlX Data Layer web frontend (System | Data Layer) 
-7. Check the output using __Diagnostics__:
+__main.py__ starts the web server in TCP or Unix socket mode.
 
-   - Login into your ctrlX
-   - Navigate to __Diagnostics -> Logbook__
-   - Click __Settings__ on the right top corner
-   - Enable __Show system messages__
-   - Navigate to __Filter -> Units__ and check your __snap.ctrlx-go-appdata.app.service__
-   - Now you should the see the app output diagnostics.
-   - Press __Refresh__ to update.
+The package __web__  contains the web server implementation using the build in Python module http.server. For encoding and decoding JSON Web Tokens the Python library pyjwt is used.
 
-8. If you have root permissions, you can also watch the output on any ssh console with the command:
-   ```bash
-   sudo snap logs sdk-py-appdata.app -f | more
-   ```
+The folder __configs__ contains the file package-manifest.json. It is used to register the snap with in the ctrlX CORE as participant of the configuration load/store mechanism. 
 
-## Install the App
-
-Login into ctrlX and install the App (Apps).
-
-## Gratulations - We're finished - Let's start coding!
-
-
-## Support
-### Developer Community
-
-Please join the [Developer Community](https://developer.community.boschrexroth.com/) 
-
-### SDK Forum
-
-Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/) 
-
-### Issues
-
-If you've found an error in these sample, please [file an issue](https://github.com/boschrexroth)
+___
 
 ## License
 

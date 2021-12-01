@@ -5,7 +5,6 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/../../include",
-                "${workspaceFolder}/../../include/comm.datalayer",
                 "${workspaceFolder}/../../include/motion.core",
                 "${workspaceFolder}/../../include/motion.lib.common",
                 "${workspaceFolder}/../../include/oss.celix/dependency_manager_cxx"

@@ -82,10 +82,19 @@ namespace Samples.Datalayer.MQTT.Client
         public override DLR_RESULT Start()
         {
             //Create, register and add the handled nodes here
+
+            //Folder (self)
+            var (result, node) = Root.Provider.CreateBranchNode(this, BaseAddress, Name);
+            if (result.IsBad())
+            {
+                return DLR_RESULT.DL_FAILED;
+            }
+            Nodes.Add(node.Address, node);
+
             //...
 
             //server-address
-            var (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.ServerAddress, new Variant(BrokerAddress.ToString()));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.ServerAddress, new Variant(BrokerAddress.ToString()));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -93,7 +102,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //port
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Port, new Variant(Root.MqttClient.Port));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Port, new Variant(Root.MqttClient.Port));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -101,7 +110,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //client-id
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.ClientId, new Variant(MqttClientWrapper.DefaultClientId()));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.ClientId, new Variant(MqttClientWrapper.DefaultClientId()));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -109,7 +118,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //username
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Username, new Variant(Username));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Username, new Variant(Username));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -117,7 +126,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //password
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Password, new Variant(Password));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Password, new Variant(Password));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -125,7 +134,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //clean-session
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.CleanSession, Variant.False);
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.CleanSession, Variant.False);
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -133,7 +142,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //communication-timeout
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.CommunicationTimeoutMillis, new Variant(1_0000));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.CommunicationTimeoutMillis, new Variant(1_0000));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -141,7 +150,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //keep-alive-period
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.KeepAlivePeriodMillis, new Variant(1_0000));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.KeepAlivePeriodMillis, new Variant(1_0000));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -149,7 +158,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //status        
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Status, ToStatus(DLR_RESULT.DL_FAILED), true);
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Status, ToStatus(DLR_RESULT.DL_FAILED), true);
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;

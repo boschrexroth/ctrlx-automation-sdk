@@ -7,7 +7,7 @@ cmake_minimum_required( VERSION 3.9 )
 # Project information
 # Set project, VERSION should be same as snap version
 #
-set(VERSION 0.0.3)
+set(VERSION 2.0.0)
 project( datalayer_realtime_owner_snap_project VERSION ${VERSION} )
 
 #
@@ -46,21 +46,17 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DMY_DEBUG")
 #
 # set libraries dirs and includes
 #
-if( UNIX )
-  IF( ${CMAKE_BUILD_KIT} MATCHES "aarch64")
-    MESSAGE(STATUS "Set Platformname to: linux-gcc-aarch64")
-    SET(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
-    SET(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
-    SET(PLATFORM_NAME "linux-gcc-aarch64")
-    SET(SNAP_ARCH "arm64")
-  ELSE()
-    MESSAGE(STATUS "Set Platformname to: linux-gcc-x64")
-    SET(CMAKE_C_COMPILER gcc)
-    SET(CMAKE_CXX_COMPILER g++)
-    SET(PLATFORM_NAME "linux-gcc-x64")
-    SET(SNAP_ARCH "amd64")
-  ENDIF()
-endif()
+IF( ${CMAKE_BUILD_KIT} MATCHES "aarch64")
+  SET(PLATFORM_NAME "ubuntu20-gcc-aarch64")
+  SET(SNAP_ARCH "arm64")
+  SET(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
+  SET(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
+ELSE()
+  SET(PLATFORM_NAME "ubuntu20-gcc-x64")
+  SET(SNAP_ARCH "amd64")
+  SET(CMAKE_C_COMPILER gcc)
+  SET(CMAKE_CXX_COMPILER g++)
+ENDIF()
 
 #
 # set source files for executables
@@ -124,7 +120,7 @@ target_include_directories ( ${TARGET_PROJECT_USER_NAME}
 #
 TARGET_LINK_LIBRARIES ( ${TARGET_PROJECT_OWNER_NAME}
       general
-        ${DATALAYER_DEP_DIR}/${PLATFORM_NAME}/release/libcomm_datalayer.so
+        libcomm_datalayer.so
         pthread
         systemd
         ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so
@@ -134,7 +130,7 @@ TARGET_LINK_LIBRARIES ( ${TARGET_PROJECT_OWNER_NAME}
 
 TARGET_LINK_LIBRARIES ( ${TARGET_PROJECT_USER_NAME}
       general
-        ${DATALAYER_DEP_DIR}/${PLATFORM_NAME}/release/libcomm_datalayer.so
+        libcomm_datalayer.so
         pthread
         systemd
         ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so
@@ -163,7 +159,6 @@ install( TARGETS ${TARGET_PROJECT_USER_NAME}
 #
 # Set destination paths of user dependency files for installation
 #
-install(FILES ${DATALAYER_DEP_DIR}/${PLATFORM_NAME}/release/libcomm_datalayer.so DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}/usr/lib)
 install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}/usr/lib)
 install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so.5 DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}/usr/lib)
 
@@ -187,7 +182,6 @@ if (BUILD_SNAP)
   #
   # Set destination paths of user dependency files for installation
   #
-  install(FILES ${DATALAYER_DEP_DIR}/${PLATFORM_NAME}/release/libcomm_datalayer.so DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build/usr/lib)
   install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build/usr/lib)
   install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so.5 DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build/usr/lib)
 endif(BUILD_SNAP)
@@ -208,8 +202,8 @@ add_custom_command(TARGET ${TARGET_PROJECT_OWNER_NAME}
 if (BUILD_SNAP)
   add_custom_command( TARGET ${TARGET_PROJECT_USER_NAME}
     POST_BUILD
-    COMMAND snapcraft --target-arch=${SNAP_ARCH}
-    COMMAND snapcraft clean
+    COMMAND snapcraft --enable-experimental-target-arch --target-arch=${SNAP_ARCH} --destructive-mode
+    COMMAND snapcraft clean --destructive-mode
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
   )
 endif(BUILD_SNAP)

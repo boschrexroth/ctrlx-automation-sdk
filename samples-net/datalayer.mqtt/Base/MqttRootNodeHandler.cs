@@ -153,6 +153,14 @@ namespace Samples.Datalayer.MQTT.Base
                 return DLR_RESULT.DL_FAILED;
             }
 
+            //Folder (self)
+            var (result, node) = Provider.CreateBranchNode(this, BaseAddress, Name);
+            if (result.IsBad())
+            {
+                return DLR_RESULT.DL_FAILED;
+            }
+            Nodes.Add(node.Address, node);
+
             return base.Start();
         }
 

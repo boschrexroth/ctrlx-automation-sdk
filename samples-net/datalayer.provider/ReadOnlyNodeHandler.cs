@@ -23,60 +23,97 @@ SOFTWARE.
 */
 
 using Datalayer;
-using System;
 
 namespace Samples.Datalayer.Provider
 {
+    using System;
+
+    /// <summary>
+    /// ReadOnlyNodeHandler provides handler with read-only support.
+    /// </summary>
     internal class ReadOnlyNodeHandler : IProviderNodeHandler
     {
-        public ReadOnlyNodeHandler(IVariant value)
+        /// <summary>
+        /// Gets the Node.
+        /// </summary>
+        public Node Node { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReadOnlyNodeHandler"/> class.
+        /// </summary>
+        /// <param name="node">The node<see cref="Node"/>.</param>
+        public ReadOnlyNodeHandler(Node node)
         {
-            Value = value;
+            Node = node;
         }
 
-        public IVariant Value { get; set; }
-
+        /// <summary>
+        /// The OnCreate.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="args">The args<see cref="IVariant"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnCreate(string address, IVariant args, IProviderNodeResult result)
         {
             Console.WriteLine($"OnCreate {address}");
             result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
         }
 
+        /// <summary>
+        /// The OnRemove.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnRemove(string address, IProviderNodeResult result)
         {
             Console.WriteLine($"OnRemove {address}");
             result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
         }
 
+        /// <summary>
+        /// The OnBrowse.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnBrowse(string address, IProviderNodeResult result)
         {
             Console.WriteLine($"OnBrowse {address}");
             result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
         }
 
+        /// <summary>
+        /// The OnRead.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="args">The args<see cref="IVariant"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnRead(string address, IVariant args, IProviderNodeResult result)
         {
             Console.WriteLine($"OnRead {address}: {args}");
-            result.SetResult(DLR_RESULT.DL_OK, Value);
+            result.SetResult(DLR_RESULT.DL_OK, Node.Value);
         }
 
+        /// <summary>
+        /// The OnWrite.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="writeValue">The writeValue<see cref="IVariant"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnWrite(string address, IVariant writeValue, IProviderNodeResult result)
         {
             Console.WriteLine($"OnWrite {address}: {writeValue}");
             result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
         }
 
+        /// <summary>
+        /// The OnMetadata.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnMetadata(string address, IProviderNodeResult result)
         {
             Console.WriteLine($"OnMetadata {address}");
-
-            if (!address.Equals(Program.AddressMyFlatbuffers))
-            {
-                result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
-                return;
-            }
-
-            result.SetResult(DLR_RESULT.DL_OK, MetadataProvider.GetInstance());
+            result.SetResult(DLR_RESULT.DL_OK, Node.Metadata);
         }
     }
 }

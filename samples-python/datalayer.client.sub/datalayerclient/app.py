@@ -20,21 +20,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import time
 import typing
 from datetime import datetime
 
 # C-interfaces
 import datalayer
 import datalayer.subscription
-import datalayer.clib
 from datalayer.client import Client
 from datalayer.variant import Result, Variant
 
 
 def rncb(result: Result, items: typing.List[datalayer.subscription.NotifyItem], userdata: datalayer.clib.userData_c_void_p):
-
-    rncb_called = True
 
     now = datetime.now().time()
     print(now, "----------------------------------------------------------")
@@ -61,26 +57,25 @@ def rncb(result: Result, items: typing.List[datalayer.subscription.NotifyItem], 
             item.get_timestamp()))
         n = n + 1
 
-def subscribe_single(client: Client, subscription_properties: Variant):
-    
-    print("subscribe_single() +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
-    rncb_called = False
+def subscribe_single(client: Client, subscription_properties: Variant):
+
+    print("subscribe_single() +++++++++++++++++++++++++++++++++++++++++++++++")
 
     result, subscription = client.create_subscription_sync(
         subscription_properties, rncb)
     if result != Result.OK:
         print("ERROR create_subscription_sync() failed with:", result)
-        return result, None 
+        return result, None
 
     if subscription is None:
         print("ERROR create_subscription_sync() returned: None")
-        return Result.CREATION_FAILED, None 
+        return Result.CREATION_FAILED, None
 
     address = "framework/metrics/system/cpu-utilisation-percent"
     result = subscription.subscribe(address)
 
-    return result, subscription 
+    return result, subscription
 
 
 def get_address_list(client: Client, addressBase: str):
@@ -101,7 +96,7 @@ def get_address_list(client: Client, addressBase: str):
 
 def subscribe_multi(client: Client, subscription_properties: Variant):
 
-    print("subscribe_multi() +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("subscribe_multi() ++++++++++++++++++++++++++++++++++++++++++++++++")
 
     addressBase = "framework/metrics/system/"
     addressList = get_address_list(client, addressBase)
@@ -112,12 +107,12 @@ def subscribe_multi(client: Client, subscription_properties: Variant):
     result, subscription = client.create_subscription_sync(subscription_properties, rncb)
     if result != Result.OK:
         print("ERROR create_subscription_sync() failed with:", result)
-        return result, None 
+        return result, None
 
     if subscription is None:
         print("ERROR create_subscription_sync() returned: None")
-        return Result.CREATION_FAILED, None 
-    
+        return Result.CREATION_FAILED, None
+
     result = subscription.subscribe_multi(addressList)
 
     return result, subscription

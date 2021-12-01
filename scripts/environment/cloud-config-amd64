@@ -1,0 +1,257 @@
+#cloud-config
+hostname: ctrlX-sdk
+chpasswd: { expire: False }
+ssh_pwauth: True
+
+users:
+  - name: boschrexroth
+    gecos: Default user for ctrlX AUTOMATION SDK builder VM
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: false
+    # $ mkpasswd --method=SHA-512 --rounds=4096 boschrexroth
+    passwd: $6$rounds=4096$C1jBPhpkzCeT7$n2KxrcOhTBhYXKAUVMxB2yOup.HVJaijyVwdkSLS4GYsL8hNAp.pqYivGHS1/L9bxyAFdtfBLXBaZvjXK6kQ8/
+    #ssh-authorized-keys:
+    # Add YOUR ssh public key from ~/.ssh/id_rsa.pub here:
+    #  - ssh-rsa ...
+    shell: /bin/bash
+
+write_files:
+  - content: |
+      sudo snap install snapcraft --classic
+      snapcraft --version
+    # Create here because /home/boschrexroth doesn't exists at this moment
+    path: /tmp/cloud-config/install-snapcraft.sh
+    permissions: '0755'
+
+  # install-dotnet-sdk
+  - content: |
+      sudo snap install dotnet-sdk --classic 
+      sudo ln -sv /snap/dotnet-sdk/current/dotnet /usr/local/bin/dotnet
+      sh -c 'echo "export DOTNET_ROOT=/snap/dotnet-sdk/current" >> /home/boschrexroth/.bashrc'
+    # Create here because /home/boschrexroth doesn't exists at this moment
+    path: /tmp/cloud-config/install-dotnet-sdk.sh
+    permissions: '0755'
+
+  # Insert content of install-nodejs-npm.sh here
+  - content: |
+      #!/usr/bin/env bash
+
+      # Installs node.js and npm on the virtual machine
+
+      # TODO: Check/change the version
+      VERSION=v14.18.1
+
+      ARCH=`uname -p`
+      ARCH_OK=no
+
+      if grep -q "x86_64" <<<${ARCH}; then
+        ARCH=x64
+        ARCH_OK=yes
+      fi
+
+      if grep -q "aarch64" <<<${ARCH}; then
+        ARCH=arm64
+        ARCH_OK=yes
+      fi
+
+      if grep -q "no" <<<${ARCH_OK}; then
+        echo ERROR: Unknown processor type $ARCH
+        exit 1
+      fi
+
+      DISTRO=linux-${ARCH}
+      NODE=node-${VERSION}-${DISTRO}
+      ARCHIVE=${NODE}.tar.xz
+      EXPORT_CMD=export' 'PATH=/usr/local/lib/nodejs/${NODE}/bin
+      PROFILE=~/.profile
+      NODEJS_DIR=/usr/local/lib/nodejs
+      URL=https://nodejs.org/dist/${VERSION}/${ARCHIVE}
+
+      if [ ! -f ${ARCHIVE} ]; then
+          echo Downloading $URL
+          read -p "OK? Waiting 10s ..." -t 10
+
+          wget $URL
+          EXIT_CODE=$?
+          if [ ! $EXIT_CODE -eq 0 ]
+          then
+              echo ERROR: Downloading $URL failed with exit code $EXIT_CODE
+              exit $EXIT_CODE
+          fi
+      fi
+
+      echo Installing content of $ARCHIVE to $NODEJS_DIR
+      read -p "OK? Waiting 10s ..." -t 10
+
+      sudo rm -rf $NODEJS_DIR
+      sudo mkdir -p $NODEJS_DIR
+      sudo tar -xJvf ${ARCHIVE} -C $NODEJS_DIR
+
+      if [ ! -f $PROFILE ]; then
+          echo Creating ${PROFILE}
+          echo '# Created by install-nodejs-npm.sh' >${PROFILE}
+      fi
+
+      if ! grep -q $NODE $PROFILE
+      then
+          # Add two line feeds
+          echo Appending $EXPORT_CMD:'$PATH' to $PROFILE
+          read -p "OK? Waiting 10s ..." -t 10
+          sed -i -z 's/$/\n\n/g' $PROFILE
+          echo $EXPORT_CMD:'$PATH' >>${PROFILE}
+          cat $PROFILE
+          . ~/.profile
+          echo $PATH changed: $PATH
+      fi
+
+      echo
+      echo Done: ${NODEJS_DIR}/${NODE}/ installed
+      echo     
+    path: /tmp/cloud-config/install-nodejs-npm.sh
+    permissions: '0755'
+
+  # Insert content of install-go.sh here
+  - content: |
+      #!/usr/bin/env bash
+
+      # Installs go on the virtual machine
+
+      # TODO: Check/change the version
+      GO_VERSION=go1.17.2.linux
+
+      ARCH=`uname -p`
+      ARCH_OK=no
+
+      if grep -q "x86_64" <<<${ARCH}; then
+        ARCH=amd64
+        ARCH_OK=yes
+      fi
+
+      if grep -q "aarch64" <<<${ARCH}; then
+        ARCH=arm64
+        ARCH_OK=yes
+      fi
+
+      if grep -q "no" <<<${ARCH_OK}; then
+        echo ERROR: Unknown processor type $ARCH
+        exit 1
+      fi
+
+      ARCHIVE=${GO_VERSION}-${ARCH}.tar.gz
+      URL=https://golang.org/dl/${ARCHIVE}
+
+      if [ ! -f ${ARCHIVE} ]; then
+          echo Downloading $URL
+          read -p "OK? Waiting 10s ..." -t 10
+
+          wget $URL
+          EXIT_CODE=$?
+          if [ ! $EXIT_CODE -eq 0 ]
+          then
+              echo ERROR: Downloading $URL failed with exit code $EXIT_CODE
+              exit $EXIT_CODE
+          fi
+      fi
+
+      INSTALL_DIR=/usr/local
+      GO_INSTALL_DIR=/usr/local/go
+      EXPORT_CMD=export' 'PATH=/usr/local/go/bin
+      PROFILE=~/.profile
+
+      echo Installing content of $ARCHIVE to $INSTALL_DIR
+      read -p "OK? Waiting 10s ..." -t 10
+
+
+      sudo rm -rf $GO_INSTALL_DIR
+      sudo tar -xzf $ARCHIVE -C $INSTALL_DIR
+
+      if [ ! -f $PROFILE ]; then
+          echo Creating ${PROFILE}
+          echo '# Created by install-nodejs-npm.sh' >${PROFILE}
+      fi
+
+      if ! grep -q $GO_INSTALL_DIR $PROFILE
+      then
+          # Add two line feeds
+          echo Appending $EXPORT_CMD:'$PATH' to $PROFILE
+          read -p "OK? Waiting 10s ..." -t 10
+          sed -i -z 's/$/\n\n/g' $PROFILE
+          echo $EXPORT_CMD:'$PATH' >>${PROFILE}
+          cat $PROFILE
+          . ~/.profile
+          echo $PATH changed: $PATH
+      fi
+
+      echo
+      echo Done: $ARCHIVE installed to $GO_INSTALL_DIR/ 
+      echo 
+    path: /tmp/cloud-config/install-go.sh
+    permissions: '0755'
+
+
+# Proxy settings for apt                                                          #Remove-if-noproxy
+apt:                                                                              #Remove-if-noproxy
+  http_proxy: http://10.0.2.2:3128/                                               #Remove-if-noproxy
+  https_proxy: http://10.0.2.2:3128/                                              #Remove-if-noproxy
+
+# Install neccessary packages, will automatically set package_update: true, package_upgrade: true
+packages:
+  - ssh
+  - zip
+  - unzip
+  - p7zip-full
+  - git
+  - curl
+  - cifs-utils
+  - apt-transport-https
+  - crossbuild-essential-arm64
+  - gcc
+  - gdb-multiarch
+  - whois
+  - python3-pip
+  - virtualenv
+  - cmake
+  - net-tools
+
+# Run commands on first boot  
+runcmd:
+  # Proxy settings for wget                                                       #Remove-if-noproxy
+  - sudo sh -c 'echo http_proxy = http://10.0.2.2:3128/ >> /etc/wgetrc'           #Remove-if-noproxy
+  - sudo sh -c 'echo https_proxy = http://10.0.2.2:3128/ >> /etc/wgetrc'          #Remove-if-noproxy
+  - sudo sh -c 'echo use_proxy = on >> /etc/wgetrc'                               #Remove-if-noproxy
+
+  # Proxy settings for environment                                                #Remove-if-noproxy
+  - sudo sh -c 'echo http_proxy=\"http://10.0.2.2:3128\" >> /etc/environment'     #Remove-if-noproxy
+  - sudo sh -c 'echo https_proxy=\"http://10.0.2.2:3128\" >> /etc/environment'    #Remove-if-noproxy
+  - sudo sh -c 'echo HTTP_PROXY=\"http://10.0.2.2:3128\" >> /etc/environment'     #Remove-if-noproxy
+  - sudo sh -c 'echo HTTPS_PROXY=\"http://10.0.2.2:3128\" >> /etc/environment'    #Remove-if-noproxy
+  - sudo sh -c 'echo no_proxy=localhost,127.0.0.1,.local >> /etc/environment'     #Remove-if-noproxy
+
+  # https://wiki.ubuntu.com/MultiarchSpec
+  - sudo dpkg --add-architecture arm64
+  - sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ focal main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
+  - sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ focal-updates main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
+  # Qualify architecture
+  - sudo sed -i 's/deb http:/deb [arch=amd64] http:/g' /etc/apt/sources.list
+
+  # Update sources lists
+  - sudo apt-get clean
+  - sudo apt-get update
+
+  # Install neccessary libs
+  - sudo apt-get -y install libsystemd-dev:arm64
+  - sudo apt-get -y install libsystemd-dev:amd64
+  - sudo apt-get -y install libssl-dev:amd64
+  - sudo apt-get -y install libssl-dev:arm64
+
+  # Now move install scripts to /home/boschrexroth and change owner and group
+  - sudo mv /tmp/cloud-config/install-*.sh /home/boschrexroth
+  - sudo chown boschrexroth:boschrexroth /home/boschrexroth/install-*.sh
+
+# Delayed reboot after insallation
+power_state:
+  delay: "+1"
+  mode: reboot
+  message: ======================== Installation Finished - System will reboot ========================
+  timeout: 60
+  condition: True

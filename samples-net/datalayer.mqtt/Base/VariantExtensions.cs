@@ -108,7 +108,6 @@ namespace Samples.Datalayer.MQTT.Base
             return string.IsNullOrWhiteSpace(value?.ToString());
         }
 
-
         /// <summary>
         /// Returns the JSON representation of the Variant value
         /// </summary>

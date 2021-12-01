@@ -266,7 +266,7 @@ namespace Samples.Datalayer.MQTT.Base
 
         #endregion
 
-        #region Virtual
+        #region Virtual / Event Handler
 
         /// <summary>
         /// Starts the handler recursively
@@ -393,23 +393,7 @@ namespace Samples.Datalayer.MQTT.Base
                 return;
             }
 
-            //Create MetaData
-            var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
-
-            var operations = AllowedOperations.CreateAllowedOperations(builder,
-                create: false, //Default
-                delete: false, //Default
-                read: true, //Default
-                write: !wrappedNode.IsReadOnly);
-
-            var metaData = Metadata.CreateMetadata(builder,
-                operationsOffset: operations,
-                descriptionOffset: builder.CreateString(""),
-                descriptionUrlOffset: builder.CreateString("")
-            );
-
-            builder.Finish(metaData.Value);
-            result.SetResult(DLR_RESULT.DL_OK, new Variant(builder));
+            CreateMetadata(wrappedNode, result);
         }
 
         #endregion
@@ -433,6 +417,37 @@ namespace Samples.Datalayer.MQTT.Base
 
             Nodes.Clear();
             return DLR_RESULT.DL_OK;
+        }
+
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Creates meta informations for a wrapped node
+        /// </summary>
+        /// <param name="wrappedNode"></param>
+        /// <param name="result"></param>
+        private static void CreateMetadata(ProviderNodeWrapper wrappedNode, IProviderNodeResult result)
+        {
+            //Create MetaData
+            var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
+
+            var operations = AllowedOperations.CreateAllowedOperations(builder,
+                read: wrappedNode.IsReadable,
+                write: wrappedNode.IsWriteable,
+                browse: wrappedNode.IsBrowsable,
+                create: wrappedNode.IsCreatable,
+                delete: wrappedNode.IsDeleteable);
+
+            var metaData = Metadata.CreateMetadata(builder,
+                nodeClass: wrappedNode.Category,
+                operationsOffset: operations,
+                descriptionOffset: builder.CreateString(wrappedNode.Address),
+                descriptionUrlOffset: builder.CreateString(wrappedNode.Address));
+
+            builder.Finish(metaData.Value);
+            result.SetResult(DLR_RESULT.DL_OK, new Variant(builder));
         }
 
         #endregion

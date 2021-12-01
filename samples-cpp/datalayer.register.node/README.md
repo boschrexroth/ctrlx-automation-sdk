@@ -1,6 +1,6 @@
 # README datalayer.register.node
 
-The sample app __datalayer.register.node__ creates a new provider with node '__myData__' and different type elements to the ctrlX Data Layer.
+The sample app __datalayer.register.node__ creates a new provider with node '__sdk-cpp-registernode__' and different type elements to the ctrlX Data Layer.
 
 ## Introduction
 
@@ -9,12 +9,39 @@ It demonstrates how you can create a node with data elements to ctrlX CORE or ct
 * a data provider -> registernode (snap name)
 * a data client -> datalayerclient (snap name) can be used to change the values of provided nodes of datalayer.register.node
 
-## Pre-requisites
+## Prerequisites
 
-* Buildenvironment WSL or Virtual Box
-* ctrlX AUTOMATION SDK Version 1.2 
+* Build environment - we recommend a QEMU virtual machine
+* ctrlX AUTOMATION SDK archive
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE
 
+### Prerequisites for Building the cpp Samples on the Build Environment
+
+* Start your build environment
+* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
+
+    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
+
+* Open a SSH shell on your build environment:
+
+    ssh -p 10022 boschrexroth@localhost
+
+* Unzip the archive
+
+    unzip -XK com.boschrexroth.sdk.control-*.zip
+
+* Change to SDK directory public
+* Set x flag: 
+
+    chmod +x bin\oss.flatbuffers\u*\release\flatc
+
+* If installed remove older ctrlx-datalayer package
+
+    sudo dpkg -r ctrlx-datalayer 
+
+* Install newest ctrlx-datalayer package
+
+    sudo dpkg -i deb/ctrlx-datalayer*.deb
 
 ## Getting Started
 
@@ -36,7 +63,7 @@ If there are unclear messages during the build process, it might help to delete 
 
 ## Support
 
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 

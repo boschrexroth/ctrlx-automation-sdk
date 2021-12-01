@@ -1,0 +1,45 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: sdk-cpp-datalayerdiagnosis
+version: "1.0.0"
+grade: stable
+summary: Sample app for processing diagnosis data via Data Layer
+description: |
+  This app will call diagnosis functions via Data Layer
+base: core20
+confinement: strict
+
+# define how apps & services are exposed to host system
+apps:
+  datalayerdiagnosis:
+    command: datalayerDiagnosis
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: 
+      - network
+      - network-status
+      - network-bind
+      - process-control
+      - datalayer
+    daemon: simple
+    passthrough:
+      restart-condition: always
+      restart-delay: 10s
+
+parts:
+  datalayerdiagnosis:
+    plugin: dump
+    source: ./generated/build
+
+  deb:
+    plugin: dump
+    source: ../../deb/ctrlx-datalayer-1.7.4.deb
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer 

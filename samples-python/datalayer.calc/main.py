@@ -33,14 +33,12 @@ from datalayer.variant import Result
 
 from calculations.basic_arithmetic_operations import BasicArithmeticOperations
 
-def is_snap() -> bool:
-    return 'SNAP' in os.environ
-
 # Do NOT change these values
 connection_ipc = "ipc://"
 port_client = ":2069"
 port_provider = ":2070"
 
+addr_root = "sdk-py-calc"
 
 # This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS
 # Please check and change according your environment:
@@ -50,7 +48,31 @@ port_provider = ":2070"
 #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
 #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
 
-connection_tcp = "tcp://boschrexroth:boschrexroth@127.0.0.1"
+connection_tcp = "tcp://boschrexroth:boschrexroth@10.0.2.2"
+
+
+def is_snap() -> bool:
+    return 'SNAP' in os.environ
+
+
+def start_new_basic_arithmetic_operation(
+        provider: datalayer.provider.Provider,
+        client: datalayer.client.Client,
+        id: str,
+        mode: str):
+
+    basicArithmeticOperation = BasicArithmeticOperations(
+        provider, client, addr_root, id, mode)
+    basicArithmeticOperation.register_nodes()
+
+    while basicArithmeticOperation.subscribe() != Result.OK:
+        basicArithmeticOperation.unsubscribe()
+        print("WARN Starting Data Layer subsciptions for",
+              addr_root + "/" + id, "failed with: " + str(result))
+        print("INFO Retry in 5s")
+        time.sleep(5.0)
+    pass
+
 
 if __name__ == '__main__':
 
@@ -83,17 +105,10 @@ if __name__ == '__main__':
     provider = system.factory().create_provider(connection_provider)
     result = provider.start()
     if result != Result.OK:
-        print("ERROR Starting Data Layer provider failed with: "  +str(result))
+        print("ERROR Starting Data Layer provider failed with: " + str(result))
         sys.exit(1)
 
-    bao = BasicArithmeticOperations(provider, client, "basic-arithm-operations", "1")
-    bao.register_nodes()
-
-    while bao.subscribe() != Result.OK:
-        bao.unsubscribe()
-        print("WARN Starting Data Layer subsciptions failed with: " +  str(result))
-        print("INFO Retry in 5s")
-        time.sleep(5.0)
+    bao_plus = start_new_basic_arithmetic_operation(provider, client, "plus", "+")
 
     # Endless loop
     while client.is_connected():
@@ -101,8 +116,8 @@ if __name__ == '__main__':
 
     print("ERROR Data Layer client is disconnected - exiting application. Will be restarted automatically.")
 
-    bao.unsubscribe()
-    
+    bao_plus.unsubscribe()
+
     client.close()
 
     system.stop(True)

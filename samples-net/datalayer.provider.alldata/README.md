@@ -15,25 +15,20 @@ The sample demonstrates how to provide all available data types to ctrlX Data La
 
 ## Description
 
-The following code shows the main method with inline documentation:
+The sample demonstrates 
 
-[Program.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.provider.alldata/Program.cs)
++ How to provide nodes with different data types to __ctrlX Data Layer__
 
-The class ProviderExtensions extends the provider with methods for create the dynamic and static nodes:
++ How to create and provide meta data to nodes
 
-[ProviderExtensions.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.provider.alldata/ProviderExtensions.cs)
++ How to provide nodes with read-only or read-write support
 
-The class ProviderNodeWithAddress is used to keep 1:1 relation from node to address:
++ How to change node values dynamically 
+  
++ How to register a user defined flatbuffers type
 
-[ProviderNodeWithAddress.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.provider.alldata/ProviderNodeWithAddress.cs)
-
-The class ProviderNodeExtensions provides the extension method to change the value of the dynamic nodes:
-
-[ProviderNodeExtensions.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.provider.alldata/ProviderNodeExtensions.cs)
-
-The class MetadataProvider create the metadata for the registered flatbuffers type and provides it as a singleton:
-
-[MetadataProvider.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.provider.alldata/MetadataProvider.cs)
++ How to read and write user defined flatbuffers nodes
+  
 ## Prerequisites
 
 Please read the common .NET docs [here](./../README.md), first.

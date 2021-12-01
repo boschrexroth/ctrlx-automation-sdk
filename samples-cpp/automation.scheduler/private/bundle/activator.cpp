@@ -75,7 +75,7 @@ void Activator::init()
     serviceDepScheduler.setCallbacks(&sdk::control::Cmp1::cppSchedulerServiceAdded, &sdk::control::Cmp1::cppSchedulerServiceRemoved);
 
     // rt trace: cpp ServiceDependency w/ specifier 'name'
-    ServiceDependency<sdk::control::Cmp1, common::log::trace::IRegistrationRealTime>& serviceDepRtTrace = component.createServiceDependency<common::log::trace::IRegistrationRealTime>(common::log::trace::CPP_INTERFACE_REAL_TIME_NAME);
+    ServiceDependency<sdk::control::Cmp1, common::log::trace::IRegistrationRealTime2>& serviceDepRtTrace = component.createServiceDependency<common::log::trace::IRegistrationRealTime2>(common::log::trace::CPP_INTERFACE_REAL_TIME_2_NAME);
     serviceDepRtTrace.setVersionRange(common::log::trace::CPP_INTERFACE_CONSUMER_RANGE);
     serviceDepRtTrace.setRequired(false);
     serviceDepRtTrace.setStrategy(DependencyUpdateStrategy::locking);

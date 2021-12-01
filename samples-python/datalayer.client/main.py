@@ -22,7 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from app import call_datalayer_client
 import os
 import faulthandler
 import time
@@ -44,7 +43,7 @@ if __name__ == '__main__':
     #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
     #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
 
-    connectionClient = "tcp://boschrexroth:boschrexroth@127.0.0.1:2069"
+    connectionClient = "tcp://boschrexroth:boschrexroth@10.0.2.2:2069"
 
     if 'SNAP' in os.environ:
         connectionClient = "ipc://"
@@ -79,24 +78,24 @@ if __name__ == '__main__':
             time.sleep(1.0)
 
             print("INFO Testing connection")
-            while datalayer_client.is_connected() == False:
+            while datalayer_client.is_connected() is False:
                 print()
                 print("ERROR Data Layer Client is - NOT - connected")
                 print("INFO Ensure that ctrlX is running and in Operation Mode")
                 print("INFO Sleeping for 5s...")
                 print()
                 time.sleep(5.0)
-                
+
             print("INFO Setting Data Layer Client timeout")
             result = datalayer_client.set_timeout(datalayer.client.TimeoutSetting.PING, 5000)
             if result != Result.OK:
                 print("ERROR Setting Data Layer Client timeout failed with", result)
 
             print("INFO Creating Python Data Layer Client instance")
-            call_datalayer_client = CallDataLayerClient(datalayer_client)
+            calldatalayerclient = CallDataLayerClient(datalayer_client)
 
             while datalayer_client.is_connected():
-                call_datalayer_client.run()
+                calldatalayerclient.run()
                 print(
                     "Sleeping --------------------------------------------------------------------------")
                 time.sleep(1.0)

@@ -1,0 +1,40 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+name: ctrlx-node-datalayer-client
+version: '2.0.0'
+summary: Data Layer client sample written in node.js for ctrlX.
+description: |
+  The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console. 
+  A subscription is used to get values by data change event in a deterministic publish interval. 
+  The single read is performed every 10 seconds in an endless loop.
+confinement: strict 
+#confinement: devmode 
+#icon: assets/icons/ICONHERE.png
+grade: stable  # must be 'stable' to release into candidate/stable channels
+base: core20
+type: app
+
+apps:
+  app:
+    command: bin/main
+    daemon: simple
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: [network, datalayer]
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+
+parts:
+  app:
+    source: ./src
+    plugin: npm
+    npm-node-version: "16.13.0"
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer 

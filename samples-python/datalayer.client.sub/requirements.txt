@@ -1,2 +1,4 @@
-flatbuffers~=1.12
 autopep8
+flake8
+ctrlx-datalayer
+ctrlx-fbs

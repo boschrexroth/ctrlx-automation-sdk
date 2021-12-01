@@ -41,7 +41,7 @@ namespace Samples.Datalayer.Provider.Virtual
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // !!! CHANGE THIS TO YOUR ENVIRONMENT !!!
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        private static readonly IPAddress IpAddress = IPAddress.Parse("192.168.1.250");
+        private static readonly IPAddress IpAddress = IPAddress.Parse("192.168.1.1");
         private static readonly string Username = "boschrexroth";
         private static readonly string Password = "boschrexroth";
 
@@ -61,7 +61,7 @@ namespace Samples.Datalayer.Provider.Virtual
         /// <summary>
         /// Represents virtual light-weight Node
         /// </summary>
-        private record VirtualNode(string Address, IVariant Value, bool IsReadOnly);
+        private record VirtualNode(string Address, IVariant Value, NodeClass Category, bool IsBrowsable, bool IsReadable, bool IsWritable, bool IsCreatable, bool IsDeletable);
 
         /// <summary>
         /// The map we're holding our nodes by address
@@ -155,6 +155,8 @@ namespace Samples.Datalayer.Provider.Virtual
             {
                 return DLR_RESULT.DL_FAILED;
             }
+            var folderNode = new VirtualNode(FullAddress, Variant.Null, NodeClass.Folder, true, false, false, false, false);
+            _nodes.AddOrUpdate(folderNode.Address, folderNode, (k, v) => folderNode);
 
             //Create some virtual nodes here just for demonstration
             int currentLevel = 0;
@@ -205,55 +207,6 @@ namespace Samples.Datalayer.Provider.Virtual
         /// </summary>
         /// <returns></returns>
         public static bool IsSnapped => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP"));
-
-        #endregion
-
-        #region Private
-
-        /// <summary>
-        /// Creates some virtual dummy nodes
-        /// </summary>
-        /// <param name="currentPath"></param>
-        /// <param name="nodesPerLevel"></param>
-        /// <param name="currentLevel"></param>
-        /// <param name="maxDepth"></param>
-        /// <returns></returns>
-        private DLR_RESULT CreateDummyNodes(string currentPath, int nodesPerLevel, ref int currentLevel, int maxDepth)
-        {
-            const int NameLength = 5;
-
-            currentLevel++;
-
-            for (int i = 0; i < nodesPerLevel; i++)
-            {
-                var address = $"{currentPath}/{RandomString(NameLength)}";
-
-                //Add the nodes to our map by address
-                var virtualNode = new VirtualNode(address, new Variant(_random.Next()), true);
-                _nodes.AddOrUpdate(address, virtualNode, (k, v) => virtualNode);
-
-                Console.WriteLine($"Created a virtual node on address: {address}");
-
-                if (currentLevel < maxDepth)
-                {
-                    CreateDummyNodes(address, nodesPerLevel, ref currentLevel, maxDepth);
-                }
-            }
-
-            currentLevel--;
-            return DLR_RESULT.DL_OK;
-        }
-
-        /// <summary>
-        /// Returns a random string
-        /// </summary>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        private string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            return new string(Enumerable.Repeat(chars, length).Select(s => s[_random.Next(s.Length)]).ToArray());
-        }
 
         #endregion
 
@@ -359,20 +312,80 @@ namespace Samples.Datalayer.Provider.Virtual
                 return;
             }
 
+            CreateMetadata(virtualNode, result);
+        }
+
+        #endregion
+
+        #region Private
+
+        /// <summary>
+        /// Creates some virtual dummy nodes
+        /// </summary>
+        /// <param name="currentPath"></param>
+        /// <param name="nodesPerLevel"></param>
+        /// <param name="currentLevel"></param>
+        /// <param name="maxDepth"></param>
+        /// <returns></returns>
+        private DLR_RESULT CreateDummyNodes(string currentPath, int nodesPerLevel, ref int currentLevel, int maxDepth)
+        {
+            const int NameLength = 5;
+
+            currentLevel++;
+
+            for (int i = 0; i < nodesPerLevel; i++)
+            {
+                var address = $"{currentPath}/{RandomString(NameLength)}";
+
+                //Add the nodes to our map by address
+                var virtualNode = new VirtualNode(address, new Variant(_random.Next()), NodeClass.Variable, true, true, false, false, false);
+                _nodes.AddOrUpdate(address, virtualNode, (k, v) => virtualNode);
+
+                Console.WriteLine($"Created a virtual node on address: {address}");
+
+                if (currentLevel < maxDepth)
+                {
+                    CreateDummyNodes(address, nodesPerLevel, ref currentLevel, maxDepth);
+                }
+            }
+
+            currentLevel--;
+            return DLR_RESULT.DL_OK;
+        }
+
+        /// <summary>
+        /// Returns a random string
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        private string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[_random.Next(s.Length)]).ToArray());
+        }
+
+        /// <summary>
+        /// Creates meta informations for a variable
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="result"></param>
+        private static void CreateMetadata(VirtualNode node, IProviderNodeResult result)
+        {
             //Create MetaData
             var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
 
             var operations = AllowedOperations.CreateAllowedOperations(builder,
-                create: false, //Default
-                delete: false, //Default
-                read: true, //Default
-                write: !virtualNode.IsReadOnly); //Default
+                read: node.IsReadable,
+                write: node.IsWritable,
+                browse: node.IsBrowsable,
+                create: node.IsCreatable,
+                delete: node.IsDeletable);
 
             var metaData = Metadata.CreateMetadata(builder,
+                nodeClass: node.Category,
                 operationsOffset: operations,
-                descriptionOffset: builder.CreateString(""),
-                descriptionUrlOffset: builder.CreateString("")
-            );
+                descriptionOffset: builder.CreateString(node.Address),
+                descriptionUrlOffset: builder.CreateString(node.Address));
 
             builder.Finish(metaData.Value);
             result.SetResult(DLR_RESULT.DL_OK, new Variant(builder));

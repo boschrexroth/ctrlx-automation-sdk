@@ -3,37 +3,39 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
-name: ctrlx-go-appdata
-version: '1.0.0'
+name: sdk-go-appdata
+version: '2.0.0'
 summary: Application data sample written in go for ctrlX
 description: |
   This sample demonstrates how to persist your application data in ctrlX environment
 grade: stable
 confinement: strict
+base: core20
 
 apps:
   app:
-    command: ./bin/appdata .
+    command: ./bin/appdata
     plugs:
       - network
       - network-bind
       - network-status
+      - active-solution
     daemon: simple
     restart-condition: always
     passthrough:
-      restart-delay: 10s 
+      restart-delay: 10s
 
 parts:
   app:
     source: .
     plugin: go
-    
+
   configs:
     source: ./configs
     plugin: dump
     organize:
-      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/    
-      
+      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
+
 slots:
   package-assets:
     interface: content
@@ -41,7 +43,7 @@ slots:
     source:
       read:
       - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
-      
+
   package-run:
     interface: content
     content: package-run

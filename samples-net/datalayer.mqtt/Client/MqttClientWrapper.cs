@@ -425,7 +425,7 @@ namespace Samples.Datalayer.MQTT.Client
         /// <summary>
         /// <param name="qos"></param>
         /// <returns></returns>
-        /// Checks wheather a given QoS level integer value is valid
+        /// Checks whether a given QoS level integer value is valid
         /// </summary>
         public static bool IsValidQualityOfServiceLevel(int qos)
         {
@@ -433,7 +433,7 @@ namespace Samples.Datalayer.MQTT.Client
         }
 
         /// <summary>
-        /// Checks wheather a given protocol version integer value is valid
+        /// Checks whether a given protocol version integer value is valid
         /// </summary>
         /// <param name="protocolVersion"></param>
         /// <returns></returns>

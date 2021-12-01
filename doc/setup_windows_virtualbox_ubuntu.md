@@ -15,10 +15,11 @@ This setup gives you a seamless development environment for Linux applications w
 
 Install [ORACLE VM VirtualBox](https://www.virtualbox.org/). The software can be downloaded from here: <https://www.virtualbox.org/.>
 
-## Setup Virtual Machine and install Distribution (Ubuntu 18.04)
+## Setup Virtual Machine and install Ubuntu Distribution
 
-Once installed setup a new virtual machine to host your Ubuntu Desktop guest system. For the installation of the Ubuntu Operating System, download an iso-Image.
-It is recommended to use Ubuntu Desktop 18.04 LTS from here: <https://releases.ubuntu.com/18.04.4/>
+Once installed setup a new virtual machine to host your Ubuntu guest system. For the installation of the Ubuntu Operating System, download an iso-Image.
+
+It is recommended to use Ubuntu Desktop 20.04 LTS from here: <https://old-releases.ubuntu.com/releases/focal/>
 
 * Create a virtual machine running the Ubuntu, recommendation:
 * min 8 Gb Ram
@@ -90,16 +91,16 @@ Run the commands below as root user:
 
 
     sudo dpkg --add-architecture arm64
-    sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ bionic main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
-    sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ bionic-updates main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
+    sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ focal main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
+    sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ focal-updates main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
     sudo apt-get clean
     sudo apt-get update
 
 
-After apt-get update, you might get some warnings like: `Failed to fetch http://de.archive.ubuntu.com/ubuntu/dists/bionic/universe/binary-arm64/Packages`. To avoid it add the vendor with the host architecture `[arch=i386,amd64]` to your sources list `/etc/apt/sources.list`.
+After apt-get update, you might get some warnings like: `Failed to fetch http://de.archive.ubuntu.com/ubuntu/dists/focal/universe/binary-arm64/Packages`. To avoid it add the vendor with the host architecture `[arch=i386,amd64]` to your sources list `/etc/apt/sources.list`.
 
 For example:
-`deb [arch=i386,amd64] http://de.archive.ubuntu.com/ubuntu/ bionic main restricted`
+`deb [arch=i386,amd64] http://de.archive.ubuntu.com/ubuntu/ focal main restricted`
 
 Now it is possible to download packages for other architectures. For building the examples, you need to install additional libraries
 

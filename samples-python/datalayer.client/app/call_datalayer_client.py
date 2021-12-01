@@ -27,8 +27,6 @@ from datalayer.client import Client
 
 # C-interfaces
 import datalayer
-import datalayer.clib
-
 
 from comm.datalayer import Metadata
 
@@ -134,8 +132,8 @@ class CallDataLayerClient:
 
             self.print_data("read_async()", result, address, data)
 
-
     def print_data(self, msg: str, result: Result, address: str, data: Variant):
+
         if result != Result.OK:
             return
 
@@ -451,7 +449,7 @@ class CallDataLayerClient:
 
     def browse(self):
 
-        logging.info( "browse_sync() /")
+        logging.info("browse_sync() /")
         result, data = self.client.browse_sync("")
         with data:
             logging.info("browse_sync: %s %s", result, data.get_array_string())
@@ -468,7 +466,7 @@ class CallDataLayerClient:
 
     def write_sync(self, addressBase: str, node: str, data: datalayer.variant.Variant):
         address = addressBase + node
-        logging.info( "write_sync() %s", address)
+        logging.info("write_sync() %s", address)
         result, _ = self.client.write_sync(address, data)
         self.log_result("write_sync()", result)
 
@@ -480,7 +478,7 @@ class CallDataLayerClient:
             address = addressBase + "bool8"
             data.set_bool8(True)
             self.waiting_for = "write_async_callback"
-            logging.info(                  "write_async() %s", address)
+            logging.info("write_async() %s", address)
             result = self.client.write_async(
                 address, data, self.write_async_callback, 475)
             self.log_result("write_async()", result)
@@ -515,7 +513,7 @@ class CallDataLayerClient:
             logging.error("%s failed with %s", text, result)
             return
 
-        if data == None:
+        if data is None:
             logging.error("%s failed: data is None", text)
             return
 

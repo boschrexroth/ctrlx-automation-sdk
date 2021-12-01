@@ -25,32 +25,30 @@ https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-download
 
 The ctrlX App IDE is __Microsoft Visual Studio Code__. Please ensure having latest version installed on your system from [here](https://code.visualstudio.com/).
 
-### Install and Update Windows Subsystem for Linux (WSL) and Ubuntu 18.04
+### Install/Update the virtual machine for Ubuntu 18.04
 
-The samples make use of __Windows Subsystem for Linux (WSL) Version 18.04__. Please read common SDK help to setup. Also ensure your __proxy settings__ if you're behind a corporate proxy (Settings -> Proxy).
+The samples make use of the __virtual machine for Ubuntu 18.04__. Please read common SDK help to setup. Also ensure your __proxy settings__ if you're behind a corporate proxy (Settings -> Proxy).
 
-After done, please ensure you have the latest Linux environment, by updating your WSL:
+Following, please ensure to have the latest Linux environment, by updating your virtual machine:
 
 1. Open Visual Studio Code
 2. Open the Remote Explorer from the menu
-3. Connect to your WSL Target __Ubuntu-18.04__.
-4. Select __Open Folder in WSL__ and navigate to any .NET sample e.g. _hello.world_
+3. Connect to your virtual machine.
+4. Select __Open Folder__ and navigate to any .NET sample e.g. _hello.world_
 5. Open a new __Terminal__ (Terminal -> New Terminal)
-6. Run the following commands in your WSL console
+6. Run the following commands in your virtual machine console
 
             sudo apt update
             sudo apt upgrade
 
-### Prepare WSL
+### Prepare the virtual machine
 
-First, we have to prepare WSL to fetch packages of all supported platform architectures.
+First, we have to prepare your virtual machine to fetch packages of all supported platform architectures.
 Please search for __Dependencies for Crossbuild (Multiarch)__ [here](./../setup_windows_wsl_ubuntu.md) or use the template file provided (please rename your existing to be restored on demand):
 
-1. Open WSL by Windows -> Start
+1. Open your virtual machine
 
-            wsl
-
-2. Ensure the following content at the end of file _/etc/apt/sources.list_
+2. Ensure the following content at the end of the file _/etc/apt/sources.list_
 
             deb [arch=i386,amd64] http://security.ubuntu.com/ubuntu/ bionic-security main restricted
             # deb-src http://security.ubuntu.com/ubuntu/ bionic-security main restricted
@@ -60,32 +58,29 @@ Please search for __Dependencies for Crossbuild (Multiarch)__ [here](./../setup_
             # deb-src http://security.ubuntu.com/ubuntu/ bionic-security multiverse
 
 
-Alternatively you can use the provided  template  _sources.list_ file and copy it from
+Alternatively, you can use the provided template _sources.list_ file and copy it from
 
             ./samples.net/docs/files/sources.list
 
 to any directory e.g. _c:/temp/sources.list_
 
-After that copy the file from there into WSL
+After that, copy the file from there into the virtual machine
 
             sudo cp /mnt/c/temp/sources.list  /etc/apt
 
-Update the VS Code Server on WSL:
+Update the VS Code Server on the virtual machine:
 
-      Run the following commands in your WSL console
+      Run the following commands in your virtual machine console
 
             code
 
-## Installation of .NET 5 into WSL
+## Installation of .NET 5 into the virtual machine
 The following steps are based on [this](https://docs.microsoft.com/de-de/dotnet/core/install/linux-ubuntu#1804-) description
 
-1. Open WSL by Windows -> Start
-
-            wsl
-
+1. Open the virtual machine
 2. Add the Microsoft package signing key to your list of trusted keys
 
-      Run the following commands in your WSL console
+      Run the following commands in your virtual machine console
 
             wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 
@@ -93,22 +88,22 @@ The following steps are based on [this](https://docs.microsoft.com/de-de/dotnet/
 
 3. Install the .NET SDK
 
-      Run the following commands in your WSL console
+      Run the following commands in your virtual machine console
 
             sudo apt-get update; \
                   sudo apt-get install -y apt-transport-https && \
                   sudo apt-get update && \
                   sudo apt-get install -y dotnet-sdk-5.0
 
-If you're using __ASP.NET__, install the ASP.NET Runtime  
+If you're using __ASP.NET__, install the ASP.NET Runtime
 
-      Run the following commands in your WSL console
+      Run the following commands in your virtual machine console
 
           sudo apt-get install -y aspnetcore-runtime-5.0
 
 1. Check your installed SDK's
 
-      Run the following command in your WSL console
+      Run the following command in your virtual machine console
 
             dotnet --list-sdks
 
@@ -117,7 +112,7 @@ If you're using __ASP.NET__, install the ASP.NET Runtime
             5.0.102 [/usr/share/dotnet/sdk]
 
 2. Check your Runtime
-      Run the following command in your WSL console
+      Run the following command in your virtual machine console
 
             dotnet --list-runtimes
 
@@ -127,16 +122,14 @@ If you're using __ASP.NET__, install the ASP.NET Runtime
 
 ### Prepare NuGet
 
-If you're behing a corporate proxy, you have to configure the __NuGet Proxy__ in configuration file:
+If you're behind a corporate proxy, you have to configure the __NuGet Proxy__ in configuration file:
 
       /home/{USERNAME}/.nuget/NuGet/NuGet.Config
 
 Edit the NuGet configuration file with your preferred editor or with VS Code and add a _config_ section containing the __http_proxy__ and __https_proxy__ inside the _configuration_ section like shown below.
 Alternatively you can copy the provided file
 
-1. Open WSL by Windows -> Start
-
-            wsl
+1. Open the virtual machine
 
 2. Copy the provided file from
 
@@ -148,7 +141,7 @@ Alternatively you can copy the provided file
 
 You can copy it to a temp directory e.g. _c:/temp/NuGet.Config_
 
-After that copy the file from there into WSL
+After that copy the file from there into the virtual machine
 
             sudo cp /mnt/c/temp/NuGet.Config  /home/{USERNAME}/.nuget/NuGet
 
@@ -166,12 +159,12 @@ for example:
       </configuration>
 
 ## Install the VS Code extensions from Marketplace
-Finally we have to install some extensions for .NET to be ready for coding.
+Finally, we have to install some extensions for .NET to be ready for coding.
 
 ![C# extension](./../images/csharpextension.png)
 
 + Click on the __Remote Explorer__ from the menu.
-+ Choose __Open Folder in WSL__.
++ Choose __Open Folder in the virtual machine.
 + Open any __.NET sample directory (e.g. hello.world).__
 
 ![.NET Sample](./../images/wsl-helloworld.png)
@@ -209,13 +202,13 @@ Each sample provides a rich set of tasks for your convenience.
 
 ## Debugging
 
-### Debug on WSL
+### Debug on the virtual machine
 
 Just press __F5__ or
 
 + Click on the __Run__ from the menu.
 + Choose Run -> __.NET Core Launch (console)__.
-+ Press the green  __Play__ button.
++ Press the green __Play__ button.
 
 ### Debug snap on ctrlXVirtual
 
@@ -231,9 +224,9 @@ Just press __F5__ or
 + Install snap on ctrlX via ctrlX web interface
 + For debugging snaps see [here](https://snapcraft.io/docs/debug-snaps)
 
-Now you're ready to code .NET on ctrlX! Please open any sample directory in WSL using the Remote Explorer and see documentations how to 
+Now you're ready to code .NET on ctrlX! Please open any sample directory in the virtual machine using the Remote Explorer and see documentations how to 
 
-## Best Practise
+## Best Practice
 
 ### Provider Concepts
 
@@ -254,11 +247,11 @@ __Recommendation:__
 
 __Pros:__
 
-+ The Data Layer is managaging your node hierarchy: No implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
++ The Data Layer is managing your node hierarchy: No implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
 
 __Contras:__
 
-+ Not efficent for a large/very large set of nodes to handle.
++ Not efficient for a large/very large set of nodes to handle.
 
 __Samples:__
 
@@ -279,7 +272,7 @@ __Recommendation:__
 
 __Pros:__
 
-+ The Data Layer is managaging your node hierarchy: No Implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
++ The Data Layer is managing your node hierarchy: No Implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
 
 __Contras:__
 
@@ -292,7 +285,7 @@ __Samples:__
 
 #### Virtual provider (lightweight): Register on wildcard and manage virtual nodes
 
-Create just _one_ node with a single node handler, registered to a _wildcard_ address  (e.g. myroot/**) and managing the nodes for your own. This _lightweight_ handler returns _virtual_ nodes in _OnBrowse()_ method. 
+Create just _one_ node with a single node handler, registered to a _wildcard_ address (e.g. myroot/**) and managing the nodes for your own. This _lightweight_ handler returns _virtual_ nodes in _OnBrowse()_ method. 
 See Data Layer documentation for details.
 
             1 x CreateNode
@@ -318,7 +311,7 @@ __Samples:__
 
 ## Pitfalls
 
-### Arithmetic operators of different integral or foating point types
+### Arithmetic operators of different integral or floating point types
 
 The following operators perform arithmetic operations with operands of numeric types:
 
@@ -343,7 +336,7 @@ Let' say we just wan't to increment a __sbyte__ Variant value by keeping the dat
       var oldVariant = new Variant(value)
       var newVariant = new Variant((sbyte)(oldVariant.ToSByte() + 1));
 
-+ Please see [here](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators) for more informations.
++ Please see [here](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators) for more information.
 
  
 ## Support

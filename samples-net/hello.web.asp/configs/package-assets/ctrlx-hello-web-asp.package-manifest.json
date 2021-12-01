@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "id": "ctrlx-hello-web-asp",
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "hello.web.asp",
+        "url": "/hello-web-asp",
+        "binding": ":5000"
+      }
+    ]
+  },
+  "menus": {
+    "sidebar": [
+      {
+        "icon": "bosch-ic-grid-view",
+        "id": "hello.web.asp",
+        "link": "/hello-web-asp",
+        "title": "Hello Web ASP.NET",
+        "target": "_blank"
+      }
+    ]
+  }
+}

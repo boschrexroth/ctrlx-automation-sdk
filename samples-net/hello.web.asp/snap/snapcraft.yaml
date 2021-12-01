@@ -1,0 +1,59 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+name: ctrlx-dotnet-hello-web-asp
+
+version: '2.0.0'
+summary: Hello World sample written in ASP.NET for ctrlX
+description: |
+   The sample provides a web page written in ASP.NET that shows some data layer values. 
+confinement: strict 
+#confinement: devmode 
+#icon: assets/icons/ICONHERE.png
+grade: stable  # must be 'stable' to release into candidate/stable channels
+base: core20
+type: app
+
+apps:
+  app:
+    command: hello.web.asp
+    daemon: simple
+    restart-condition: on-failure
+    passthrough:
+      restart-delay: 10s
+    plugs:
+      - network
+      - network-status
+      - network-bind
+      - network-observe
+      - network-control
+
+    environment:
+      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
+
+parts:
+  app:
+    plugin: dump
+    source: ./publish/${SNAPCRAFT_TARGET_ARCH}
+  configs:
+    source: ./configs
+    plugin: dump
+    organize:
+      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
+
+# Describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer
+
+slots:
+  # This slot is for sidebar integration
+  package-assets:
+    interface: content
+    content: package-assets
+    source:
+      read:
+      - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}

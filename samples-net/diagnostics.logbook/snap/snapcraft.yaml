@@ -2,7 +2,7 @@
 # See https://snapcraft.io/docs/getting-started
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-version: '1.0.0'
+version: '2.0.0'
 name: ctrlx-dotnet-logbook
 summary: Logbook sample written in .NET for ctrlX.
 description: |
@@ -11,7 +11,7 @@ confinement: strict
 #confinement: devmode 
 #icon: assets/icons/ICONHERE.png
 grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core18
+base: core20
 type: app
 
 apps:
@@ -28,4 +28,4 @@ apps:
 parts:
   app:
     plugin: dump
-    source: ./generated
+    source: ./publish/${SNAPCRAFT_TARGET_ARCH}

@@ -7,20 +7,21 @@ It includes a hello world and motion commands for axis and kinematics.
 
 ## Prerequisites
 
-* Buildenvironment WSL or Virtual Box
-* ctrlX AUTOMATION SDK Version 1.2
+* Build environment - we recommend a QEMU virtual machine
+* ctrlX AUTOMATION SDK archive
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE
 
-## Requirements and dependencies
+### Requirements and Dependencies on the ctrlX CORE
 
 This example requires the snap `rexroth-automationcore` and `rexroth-motion` installed on ctrlX CORE device.
 
-## Getting Started
+## Visual Studio Code (VSCode)
 
-1. Launch IDE (VSCode for example)
-2. Open the sample directory `samples-cpp/automation.bundle`
-3. Build and install the snap as described in `Setup` section
-4. Check output in the web interface
+1. Launch VSCode on your host computer.
+2. Connect to your build environment
+2. Open the folder `samples-cpp/automation.bundle`
+3. Build and install the snap as described in the `Setup` section
+4. Check the output in the ctrlX web interface
 
 ## Screenshots
 

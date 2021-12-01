@@ -25,6 +25,8 @@
  * SOFTWARE.
  */
 
+#include <string>
+
 #include "providerNodeAllData.h"
 #include "sampleSchema_generated.h"
 
@@ -40,27 +42,22 @@ DataContainer *ProviderNodeAllData::getDataContainer(const std::string &address)
   return NULL;
 }
 
-bool ProviderNodeAllData::createDataContainer(
+comm::datalayer::DlResult ProviderNodeAllData::createDataContainer(
     const std::string &address,
     const comm::datalayer::Variant &data)
 {
-
   if (getDataContainer(address) != nullptr)
   {
     std::cout << "ERROR - Node exists: " << address;
-    return false;
+    return comm::datalayer::DlResult::DL_CREATION_FAILED;
   }
 
-  auto dataContainer = new DataContainer(address, data);
+  auto metadata = createMetadata(data, address);
+  auto dataContainer = new DataContainer(address, data, metadata);
+  
   _dataContainers.emplace_back(dataContainer);
 
-  if (_provider->registerNode(address, this) != comm::datalayer::DlResult::DL_OK)
-  {
-    std::cout << "ERROR - Registering node: " << address;
-    return false;
-  }
-
-  return true;
+  return _provider->registerNode(address, this);
 }
 
 void ProviderNodeAllData::createDataContainer(
@@ -74,26 +71,95 @@ void ProviderNodeAllData::createDataContainer(
     std::cout << "ERROR - Data could not be set: " << address;
     return;
   }
+  if (createDataContainer(address, data) != comm::datalayer::DlResult::DL_OK){
+     std::cout << "ERROR - DataContainer could not be created: " << address;
+  }
+}
 
-  createDataContainer(address, data);
+comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalayer::Variant &data, const std::string &address)
+{
+  
+  flatbuffers::FlatBufferBuilder builder;
+  auto description = builder.CreateString("This is a description for " + address);
+  comm::datalayer::NodeClass nodeClass = comm::datalayer::NodeClass_Variable;
+
+  bool isBaseFolder = address == _addressBase;
+  if (isBaseFolder)
+  {
+    nodeClass = comm::datalayer::NodeClass_Folder; 
+  }
+
+  comm::datalayer::AllowedOperationsBuilder allowedOperations(builder);
+  allowedOperations.add_read(!isBaseFolder);
+  allowedOperations.add_write(!isBaseFolder && _dynamic);
+  allowedOperations.add_create(!isBaseFolder && _dynamic);
+  allowedOperations.add_delete_(!isBaseFolder && _dynamic);
+  auto operations = allowedOperations.Finish();
+
+
+  flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<comm::datalayer::Reference>>> references;
+  if (data.getType() == comm::datalayer::VariantType::FLATBUFFERS)
+  {
+    const char *type_addr = "types/sampleSchema/inertialValue";
+
+    if (_dynamic)
+    {
+      flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
+          {
+              comm::datalayer::CreateReferenceDirect(builder, "readType", type_addr),
+              comm::datalayer::CreateReferenceDirect(builder, "writeType", type_addr),
+          };
+      references = builder.CreateVectorOfSortedTables(vecReferences, 2);
+    }
+    else
+    {
+      flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
+          {
+              comm::datalayer::CreateReferenceDirect(builder, "readType", type_addr),
+          };
+      references = builder.CreateVectorOfSortedTables(vecReferences, 1);
+    }
+  }
+
+  
+  // Create metadata
+  comm::datalayer::MetadataBuilder metadata(builder);
+  metadata.add_nodeClass(nodeClass);
+  metadata.add_description(description);
+  metadata.add_descriptionUrl(description);
+  metadata.add_operations(operations);
+  if (data.getType() == comm::datalayer::VariantType::FLATBUFFERS)
+  {
+    metadata.add_references(references);
+  }
+
+  auto metaFinished = metadata.Finish();
+  builder.Finish(metaFinished);
+
+  comm::datalayer::Variant variant;
+  variant.shareFlatbuffers(builder);
+  return variant;
 }
 
 ProviderNodeAllData::ProviderNodeAllData(comm::datalayer::IProvider *provider, const std::string &addressRoot, bool dynamic)
 {
   _provider = provider;
-
   _addressRoot = addressRoot;
-
   _dynamic = dynamic;
+
   _addressBase = dynamic ? _addressRoot + "dynamic/" : _addressRoot + "static/";
+
+  const comm::datalayer::Variant data;
+  _metadata = createMetadata(data, _addressBase);
 }
 
 void ProviderNodeAllData::RegisterNodes()
 {
-  auto result = _provider->registerNode(_addressBase + "**", this);
-
-  comm::datalayer::Variant data;
+  comm::datalayer::DlResult result;
+  result = _provider->registerNode(_addressBase + "**", this);
   
+  comm::datalayer::Variant data;
+
   result = data.setValue(true);
   createDataContainer(result, "bool8", data);
 
@@ -186,7 +252,7 @@ void ProviderNodeAllData::RegisterNodes()
   createDataContainer(result, "array-of-bytes", data);
 
   // Register the FlatBuffers type
-  std::string typeAddress = "types/" + _addressRoot + "sampleSchema";
+  std::string typeAddress = "types/sampleSchema/inertialValue";
   std::string bfbs = is_snap() ? std::string(snap_path()).append("/sampleSchema.bfbs") : "bfbs/sampleSchema.bfbs";
   result = _provider->registerType(typeAddress, bfbs);
   if (result != comm::datalayer::DlResult::DL_OK)
@@ -227,16 +293,9 @@ void ProviderNodeAllData::onCreate(
   static comm::datalayer::Variant empty;
   comm::datalayer::Variant myData = data != nullptr ? *data : empty; // Avoid nullptr assignment
 
-  if (createDataContainer(address, myData) == false)
-  {
-    result = comm::datalayer::DlResult::DL_FAILED;
-    std::cout << "onCreate(): " << address << " " << result.toString() << std::endl;
-    callback(result, nullptr);
-    return;
-  }
-
-  result = comm::datalayer::DlResult::DL_OK;
+  result = createDataContainer(address, myData);
   std::cout << "onCreate(): " << address << " " << result.toString() << std::endl;
+
   callback(result, nullptr);
 }
 
@@ -355,62 +414,24 @@ void ProviderNodeAllData::onBrowse(
   callback(comm::datalayer::DlResult::DL_OK, nullptr); // Data Layer Broker "knows" all sub node, we don't add further nodes here.
 }
 
-// Read function of metadata of an object. Function will be called whenever a node should be written.
+// Read function of metadata of an object. Function will be called whenever the metadata of a node should be written.
 void ProviderNodeAllData::onMetadata(
     const std::string &address,
     const comm::datalayer::IProviderNode::ResponseCallback &callback)
 {
   comm::datalayer::DlResult result;
-  DataContainer *dataContainer = getDataContainer(address); // For .../dynamic or .../static we get nullptr - this is OK
+  DataContainer *dataContainer = getDataContainer(address); // For .../dynamic or .../static we get also nullptr 
   if (nullptr == dataContainer)
   {
+    if(address +"/" == _addressBase){
+      callback(comm::datalayer::DlResult::DL_OK, &_metadata);
+      return;
+    }
     result = comm::datalayer::DlResult::DL_INVALID_ADDRESS;
     std::cout << "onMetadata(): " << address << " " << result.toString() << std::endl;
     callback(result, nullptr);
     return;
   }
-
-  flatbuffers::FlatBufferBuilder builder;
-  auto description = builder.CreateString("This is a description for " + address);
-
-  comm::datalayer::AllowedOperationsBuilder allowedOperations(builder);
-  allowedOperations.add_read(true);
-  allowedOperations.add_write(_dynamic);
-  allowedOperations.add_create(_dynamic);
-  allowedOperations.add_delete_(_dynamic);
-  auto operations = allowedOperations.Finish();
-
-  flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<comm::datalayer::Reference>>> references;
-  if (dataContainer->Data.getType() == comm::datalayer::VariantType::FLATBUFFERS)
-  {
-    flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
-        {
-            comm::datalayer::CreateReferenceDirect(builder, "readType", "types/all-data/sampleSchema"),
-            comm::datalayer::CreateReferenceDirect(builder, "writeType", "types/all-data/sampleSchema"),
-            comm::datalayer::CreateReferenceDirect(builder, "createType", "types/all-data/sampleSchema"),
-        };
-    references = builder.CreateVectorOfSortedTables(vecReferences, 3);
-  }
-
-  // Create metadata
-  comm::datalayer::MetadataBuilder metadata(builder);
-  metadata.add_description(description);
-  metadata.add_descriptionUrl(description);
-  metadata.add_operations(operations);
-  if (dataContainer->Data.getType() == comm::datalayer::VariantType::FLATBUFFERS)
-  {
-    metadata.add_references(references);
-  }
-
-  auto metaFinished = metadata.Finish();
-  builder.Finish(metaFinished);
-
-  comm::datalayer::Variant variant;
-  variant.shareFlatbuffers(builder);
-
-  result = comm::datalayer::DlResult::DL_OK;
-  std::cout << "onMetadata(): " << address << " " << result.toString() << std::endl;
-  callback(result, &variant);
+  callback(comm::datalayer::DlResult::DL_OK, &dataContainer->Metadata);
 }
-
 #endif

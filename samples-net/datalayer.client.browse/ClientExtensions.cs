@@ -22,28 +22,44 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-using comm.datalayer;
 using Datalayer;
-using System;
 
 namespace Samples.Datalayer.Client.Browse
 {
+    using System;
+
     /// <summary>
-    /// Provides extension methods for IClient
+    /// Provides extension methods for IClient.
     /// </summary>
     internal static class ClientExtensions
     {
         /// <summary>
-        /// Browses all nodes in given address and write leaf and value with indentation to console.
+        /// Defines the MaxChars.
         /// </summary>
-        /// <param name="client">The client</param>
-        /// <param name="converter">The converter</param>
-        /// <param name="address">The address</param>
-        /// <param name="leaf">The leaf</param>
-        /// <param name="indent">The indentation</param>
-        /// <param name="last">The last</param>
-        internal static void BrowseTree(this IClient client, IConverter converter, string address = "", string leaf = "", string indent = "",
-         bool last = true)
+        private static readonly int MaxChars = 100;
+
+        /// <summary>
+        /// Browses all nodes in DataLayer tree.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        internal static void BrowseTree(this IClient client)
+        {
+            client.Traverse();
+        }
+
+        /// <summary>
+        /// Traverse all nodes in given address and write leaf and value with indentation to console.
+        /// </summary>
+        /// <param name="client">The client.</param>
+        /// <param name="address">The address.</param>
+        /// <param name="leaf">The leaf.</param>
+        /// <param name="indent">The indentation.</param>
+        /// <param name="last">The last.</param>
+        private static void Traverse(this IClient client,
+            string address = "",
+            string leaf = "",
+            string indent = "",
+            bool last = true)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(indent);
@@ -61,7 +77,7 @@ namespace Samples.Datalayer.Client.Browse
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write($"[{leaf}] ");
 
-            var valueAsString = client.GetValue(converter, address);
+            var valueAsString = client.GetValue(address);
 
             Console.ForegroundColor = valueAsString.StartsWith("error:") ? ConsoleColor.Red : ConsoleColor.Cyan;
             Console.WriteLine(valueAsString);
@@ -74,21 +90,21 @@ namespace Samples.Datalayer.Client.Browse
             for (var i = 0; i < children.Length; i++)
             {
                 var rootAddress = string.IsNullOrEmpty(address) ? children[i] : $"{address}/{children[i]}";
-                client.BrowseTree(converter, rootAddress, children[i], indent, i == children.Length - 1);
+                client.Traverse(rootAddress, children[i], indent, i == children.Length - 1);
             }
+
             Console.ResetColor();
         }
 
         /// <summary>
         /// Gets the value as string of the given address.
         /// </summary>
-        /// <param name="client">The client</param>
-        /// <param name="converter">The converter</param>
-        /// <param name="address">The address</param>
-        /// <returns>The value as string</returns>
-        private static string GetValue(this IClient client, IConverter converter, string address)
+        /// <param name="client">The client.</param>
+        /// <param name="address">The address.</param>
+        /// <returns>The value as string.</returns>
+        private static string GetValue(this IClient client, string address)
         {
-            var (result, valueVariant) = client.Read(address);
+            var (result, valueVariant) = client.ReadJson(address, -1);
             if (result == DLR_RESULT.DL_INVALID_ADDRESS)
             {
                 return string.Empty;
@@ -104,71 +120,18 @@ namespace Samples.Datalayer.Client.Browse
                 return "null";
             }
 
-            if (valueVariant.IsArray)
-            {
-                var objectArray = valueVariant.Value as object[] ?? Array.Empty<object>();
-                var stringArray = string.Join(",", objectArray);
-                return $"[{stringArray}]";
-            }
-
-            if (valueVariant.IsFlatbuffers)
-            {
-                var typeAddress = client.GetTypeAddress(address);
-                if (typeAddress == null)
-                {
-                    return "error: no read type found";
-                }
-
-                var (resultType, typeVariant) = client.Read(typeAddress);
-                if (resultType != DLR_RESULT.DL_OK)
-                {
-                    return $"error: read type {typeAddress} failed";
-                }
-
-                var (resultJson, json) = converter.GenerateJsonComplex(valueVariant, typeVariant, -1);
-                if (resultJson != DLR_RESULT.DL_OK)
-                {
-                    return $"error: generate json of type {typeAddress} failed";
-                }
-
-                return json.Value.ToString();
-            }
-
-            return valueVariant.Value.ToString();
+            return Truncate(valueVariant.Value.ToString(), MaxChars);
         }
 
         /// <summary>
-        /// Get the type address of the given address.
+        /// Truncates the given string to a maximum count of characters defined by maxChars and append '...'
         /// </summary>
-        /// <param name="client">The client</param>
-        /// <param name="address">The address</param>
-        /// <returns>The type address as string</returns>
-        private static string GetTypeAddress(this IClient client, string address)
+        /// <param name="value">The value<see cref="string"/>.</param>
+        /// <param name="maxChars">The maxChars<see cref="int"/>.</param>
+        /// <returns>The <see cref="string"/>.</returns>
+        private static string Truncate(string value, int maxChars)
         {
-            var (resultReadMetadata, metadataVariant) = client.ReadMetadata(address);
-            if (resultReadMetadata != DLR_RESULT.DL_OK) return null;
-
-            var metaData = Metadata.GetRootAsMetadata(metadataVariant.ToFlatbuffers());
-            if (metaData.ReferencesLength == 0) return null;
-
-            string readTypeAddress = null;
-            for (var i = 0; i < metaData.ReferencesLength; i++)
-            {
-                var reference = metaData.References(i);
-                if (!reference.HasValue)
-                {
-                    continue;
-                }
-
-                if (reference.Value.Type.ToLower() != "readtype")
-                {
-                    continue;
-                }
-
-                readTypeAddress = reference.Value.TargetAddress;
-            }
-
-            return readTypeAddress;
+            return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
         }
     }
 }

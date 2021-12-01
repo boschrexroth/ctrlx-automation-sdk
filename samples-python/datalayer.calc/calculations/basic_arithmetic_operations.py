@@ -22,16 +22,20 @@
 
 import typing
 
+import flatbuffers
+from comm.datalayer import Metadata, NodeClass, AllowedOperations, Reference
+
 import datalayer
 from datalayer.provider import Provider
 from datalayer.client import Client
 from datalayer.provider_node import ProviderNodeCallbacks, NodeCallback
 from datalayer.variant import Result, Variant, VariantType
 
+type_address_string = "types/datalayer/string"
 
 class BasicArithmeticOperations:
 
-    def __init__(self, provider: Provider, client: Client,  addressRoot: str, id: str):
+    def __init__(self, provider: Provider, client: Client,  addressRoot: str, id: str, mode : str):
 
         self.provider = provider
         self.client = client
@@ -42,16 +46,28 @@ class BasicArithmeticOperations:
         self.in1_address.set_string(
             "framework/metrics/system/cpu-utilisation-percent")
         self.in1_value = Variant()
+        data = self.create_metadata(type_address_string, id, "", "Enter address of input value 1 here", True)
+        self.in1_metadata = Variant()
+        self.in1_metadata.set_flatbuffers(data)
 
         self.in2_address = Variant()
         self.in2_address.set_string(
             "framework/metrics/system/cpu-utilisation-percent")
         self.in2_value = Variant()
+        data = self.create_metadata(type_address_string, id, "", "Enter address of input value 2 here", True)
+        self.in2_metadata = Variant()
+        self.in2_metadata.set_flatbuffers(data)
 
         self.mode = Variant()
-        self.mode.set_string("+")
+        self.mode.set_string(mode)
+        data = self.create_metadata(type_address_string, id, "", "Enter the operation mode here: + - / *", True)
+        self.mode_metadata = Variant()
+        self.mode_metadata.set_flatbuffers(data)
 
         self.out = Variant()
+        data = self.create_metadata(type_address_string, id, "", "The result of the operation", False)
+        self.out_metadata = Variant()
+        self.out_metadata.set_flatbuffers(data)
         self.out_error = True
 
         self.cbs = ProviderNodeCallbacks(
@@ -195,6 +211,76 @@ class BasicArithmeticOperations:
         if self.subscription is not None:
             self.subscription.unsubscribe_all()
 
+    def create_metadata(self, typeAddress: str, name: str, unit: str, description: str, allowWrite : bool):
+
+        # Create `FlatBufferBuilder`instance. Initial Size 1024 bytes (grows automatically if needed)
+        builder = flatbuffers.Builder(1024)
+
+        # Serialize AllowedOperations data
+        AllowedOperations.AllowedOperationsStart(builder)
+        AllowedOperations.AllowedOperationsAddRead(builder, True)
+        AllowedOperations.AllowedOperationsAddWrite(builder, allowWrite)
+        AllowedOperations.AllowedOperationsAddCreate(builder, False)
+        AllowedOperations.AllowedOperationsAddDelete(builder, False)
+        operations = AllowedOperations.AllowedOperationsEnd(builder)
+
+        # Metadata description strings
+        descriptionBuilderString = builder.CreateString(description)
+        urlBuilderString = builder.CreateString("tbd")
+        displayNameString = builder.CreateString(name)
+        unitString = builder.CreateString(unit)
+
+        # Store string parameter into builder
+        readTypeBuilderString = builder.CreateString("readType")
+        writeTypeBuilderString = builder.CreateString("writeType")
+        #createTypeBuilderString = builder.CreateString("createType")
+        targetAddressBuilderString = builder.CreateString(typeAddress)
+
+        # Serialize Reference data (for read operation)
+        Reference.ReferenceStart(builder)
+        Reference.ReferenceAddType(builder, readTypeBuilderString)
+        Reference.ReferenceAddTargetAddress(
+            builder, targetAddressBuilderString)
+        reference_read = Reference.ReferenceEnd(builder)
+
+        # Serialize Reference data (for write operation)
+        Reference.ReferenceStart(builder)
+        Reference.ReferenceAddType(builder, writeTypeBuilderString)
+        Reference.ReferenceAddTargetAddress(
+            builder, targetAddressBuilderString)
+        reference_write = Reference.ReferenceEnd(builder)
+
+        # Serialize Reference data (for create operation)
+        # Reference.ReferenceStart(builder)
+        #Reference.ReferenceAddType(builder, createTypeBuilderString)
+        #Reference.ReferenceAddTargetAddress(builder, targetAddressBuilderString)
+        #reference_create = Reference.ReferenceEnd(builder)
+
+        # Create FlatBuffer vector and prepend reference data. Note: Since we prepend the data, prepend them in reverse order.
+        Metadata.MetadataStartReferencesVector(builder, 2)
+        # builder.PrependSOffsetTRelative(reference_create)
+        builder.PrependSOffsetTRelative(reference_write)
+        builder.PrependSOffsetTRelative(reference_read)
+        references = builder.EndVector(2)
+
+        # Serialize Metadata data
+        Metadata.MetadataStart(builder)
+        Metadata.MetadataAddNodeClass(builder, NodeClass.NodeClass.Variable)
+        Metadata.MetadataAddOperations(builder, operations)
+        Metadata.MetadataAddDescription(builder, descriptionBuilderString)
+        Metadata.MetadataAddDescriptionUrl(builder, urlBuilderString)
+        Metadata.MetadataAddDisplayName(builder, displayNameString)
+        Metadata.MetadataAddUnit(builder, unitString)
+
+        # Metadata reference table
+        Metadata.MetadataAddReferences(builder, references)
+        metadata = Metadata.MetadataEnd(builder)
+
+        # Closing operation
+        builder.Finish(metadata)
+        return builder.Output()
+
+
     def __on_create(self, userdata: datalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
         cb(Result.OK, None)
 
@@ -259,4 +345,20 @@ class BasicArithmeticOperations:
         cb(Result.INVALID_ADDRESS, None)
 
     def __on_metadata(self, userdata: datalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
+        if address.endswith("in1"):
+            cb(Result.OK, self.in1_metadata)
+            return
+
+        if address.endswith("in2"):
+            cb(Result.OK, self.in2_metadata)
+            return
+
+        if address.endswith("mode"):
+            cb(Result.OK, self.mode_metadata)
+            return
+
+        if address.endswith("out"):
+            cb(Result.OK, self.out_metadata)
+            return
+
         cb(Result.OK, None)

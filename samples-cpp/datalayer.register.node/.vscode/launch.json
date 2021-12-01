@@ -5,12 +5,12 @@
     "version": "1.0.0",
     "configurations": [
         {
-            "name": "RegisterNode x64",
+            "name": "x64 Builder VM",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/generated/linux-gcc-x64/Debug/registerNode",
+            "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/registerNode",
             "args": [],
-            "additionalSOLibSearchPath": "${workspaceFolder}/generated/linux-gcc-x64/Debug/usr/lib/",
+            "additionalSOLibSearchPath": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/usr/lib/",
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -23,22 +23,62 @@
                 },
                 {
                     "description": "Set path variable to .",
-                    //"text": "set solib-search-path ${workspaceFolder}/generated/linux-gcc-x64/debug/usr/lib/",
-                    "text": "set env LD_LIBRARY_PATH=${workspaceFolder}/generated/linux-gcc-x64/Debug/usr/lib/",
+                    //"text": "set solib-search-path ${workspaceFolder}/generated/ubuntu20-gcc-x64/debug/usr/lib/",
+                    "text": "set env LD_LIBRARY_PATH=${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/usr/lib/",
                     "ignoreFailures": false
                 }
             ]
         },
         {
-            "name": "RegisterNode aarch64",
+            "name": "aarch64 ctrlX",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/generated/linux-gcc-aarch64/Debug/registerNode",
+            "program": "${workspaceFolder}/generated/ubuntu20-gcc-aarch64/Debug/registerNode",
             "cwd": "${workspaceFolder}",
             "miDebuggerPath": "/usr/bin/gdb-multiarch",
             "miDebuggerServerAddress": "192.168.1.1:12345",
             "stopAtEntry": true,
             "targetArchitecture": "arm64",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+            ]
+        },
+        {
+            "name": "x64 ctrlX virt. Network Adapter",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/registerNode",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "miDebuggerServerAddress": "192.168.1.1:12345",
+            "stopAtEntry": true,
+            "targetArchitecture": "x64",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+            ]
+        },
+        {
+            "name": "x64 ctrlX virt. Port Forwarding",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/registerNode",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "miDebuggerServerAddress": "127.0.0.1:12345",
+            "stopAtEntry": true,
+            "targetArchitecture": "x64",
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [

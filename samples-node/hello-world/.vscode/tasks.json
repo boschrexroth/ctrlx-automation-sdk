@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "snap amd64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "snapcraft clean --destructive-mode && snapcraft --destructive-mode",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "snap arm64",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "snapcraft clean --destructive-mode && snapcraft --destructive-mode --enable-experimental-target-arch --target-arch arm64",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ]
+}

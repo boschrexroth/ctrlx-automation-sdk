@@ -1,0 +1,85 @@
+{
+  "language": "en-us",
+  "product": "XCR-V-0110",
+  "component": "common.log.diagnosis",
+  "mainDiagnostics": [
+    {
+      "number": "0E0A0001",
+      "version": "1",
+      "text": "Successfully finished boot process",
+      "detailedDiagnostics": [
+        {
+          "number": "1",
+          "version": "1",
+          "text": "Finished boot process without errors"
+        }
+      ]
+    },
+    {
+      "number": "0E0E0001",
+      "version": "1",
+      "text": "Temperature problem of control detected",
+			"detailedDiagnostics": [
+				{
+					"number": "1",
+					"text": "Temperature exceeded maximum temperature"
+				},
+				{
+					"number": "2",
+					"text": "Defect of temperature sensor"
+				}
+			]
+    },
+    {
+      "number": "0E0E0002",
+			"version": "2",
+      "text": "User id was changed"
+		},
+    {
+      "number": "0E0E0003",
+      "text": "Watchdog occured",
+      "detailedDiagnostics": [
+        {
+          "number": "1",
+          "text": "Unsafe machine state DEBUG"
+        }
+      ]
+    },
+    {
+      "number": "0E0F0001",
+      "version": "1",
+      "text": "Connection to I/O is not possible",
+      "detailedDiagnostics": [
+        {
+          "number": "1",
+          "version": "1",
+          "text": "The cable is not plugged"
+        }
+      ]
+    },
+    {
+      "number": "0E0F2001",
+      "version": "1",
+      "text": "General axis command error",
+      "detailedDiagnostics": [
+        {
+          "number": "1",
+          "version": "1",
+          "text": "Axis for axis command was not found"
+        }
+      ]
+    },
+		{
+      "number": "0E0F6001",
+      "version": 1,
+      "text": "Fatal axis command error",
+      "detailedDiagnostics": [
+        {
+          "number": "1",
+          "version": 1,
+          "text": "Stop commissioning of all axes"
+        }
+      ]
+		}
+  ]
+}

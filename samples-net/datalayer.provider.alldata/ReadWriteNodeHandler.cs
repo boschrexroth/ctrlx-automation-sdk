@@ -23,63 +23,116 @@ SOFTWARE.
 */
 
 using Datalayer;
-using System;
 
 namespace Samples.Datalayer.Provider.Alldata
 {
+    using System;
+
     /// <summary>
-    /// ReadWriteNodeHandler provides handler with read-write support
+    /// ReadWriteNodeHandler provides handler with read-write support.
     /// </summary>
-    internal class ReadWriteNodeHandler : IProviderValueNodeHandler
+    internal class ReadWriteNodeHandler : IProviderNodeHandler
     {
-        public ReadWriteNodeHandler(IVariant value)
+        /// <summary>
+        /// Gets the Node.
+        /// </summary>
+        public Node Node { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReadWriteNodeHandler"/> class.
+        /// </summary>
+        /// <param name="node">The node<see cref="Node"/>.</param>
+        public ReadWriteNodeHandler(Node node)
         {
-            Value = value;
+            Node = node;
         }
 
-        public IVariant Value { get; set; }
-
+        /// <summary>
+        /// The OnCreate.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="args">The args<see cref="IVariant"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnCreate(string address, IVariant args, IProviderNodeResult result)
         {
             Console.WriteLine($"OnCreate {address}");
             result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
         }
 
+        /// <summary>
+        /// The OnRemove.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnRemove(string address, IProviderNodeResult result)
         {
             Console.WriteLine($"OnRemove {address}");
             result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
         }
 
+        /// <summary>
+        /// The OnBrowse.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnBrowse(string address, IProviderNodeResult result)
         {
             Console.WriteLine($"OnBrowse {address}");
             result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
         }
 
+        /// <summary>
+        /// The OnRead.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="args">The args<see cref="IVariant"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnRead(string address, IVariant args, IProviderNodeResult result)
         {
             Console.WriteLine($"OnRead {address}: {args}");
-            result.SetResult(DLR_RESULT.DL_OK, Value);
+            result.SetResult(DLR_RESULT.DL_OK, Node.Value);
         }
 
+        /// <summary>
+        /// The OnWrite.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="writeValue">The writeValue<see cref="IVariant"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
         public void OnWrite(string address, IVariant writeValue, IProviderNodeResult result)
         {
             Console.WriteLine($"OnWrite {address}: {writeValue}");
-            Value = new Variant(writeValue);
-            result.SetResult(DLR_RESULT.DL_OK, writeValue);
-        }
-
-        public void OnMetadata(string address, IProviderNodeResult result)
-        {
-            Console.WriteLine($"OnMetadata {address}");
-            if (!address.EndsWith("fbs"))
+            if (writeValue == null)
             {
-                result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
+                result.SetResult(DLR_RESULT.DL_INVALID_VALUE);
                 return;
             }
 
-            result.SetResult(DLR_RESULT.DL_OK, MetadataProvider.GetInstance());
+            if (writeValue.DataType == DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_UNKNOWN)
+            {
+                result.SetResult(DLR_RESULT.DL_INVALID_VALUE);
+                return;
+            }
+
+            if (Node.Value.DataType != writeValue.DataType)
+            {
+                result.SetResult(DLR_RESULT.DL_TYPE_MISMATCH);
+                return;
+            }
+
+            Node.Value = new Variant(writeValue);
+            result.SetResult(DLR_RESULT.DL_OK, writeValue);
+        }
+
+        /// <summary>
+        /// The OnMetadata.
+        /// </summary>
+        /// <param name="address">The address<see cref="string"/>.</param>
+        /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
+        public void OnMetadata(string address, IProviderNodeResult result)
+        {
+            Console.WriteLine($"OnMetadata {address}");
+            result.SetResult(DLR_RESULT.DL_OK, Node.Metadata);
         }
     }
 }

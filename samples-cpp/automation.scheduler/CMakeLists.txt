@@ -6,7 +6,7 @@ cmake_minimum_required( VERSION 3.9 )
 #
 # Project information
 #
-set(VERSION 1.0.0)
+set(VERSION 2.0.0)
 project( automation_scheduler_project VERSION ${VERSION} )
 
 #
@@ -37,21 +37,17 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 #
 # set libraries dirs and includes
 #
-if( UNIX )
-  IF( ${CMAKE_BUILD_KIT} MATCHES "aarch64")
-    MESSAGE(STATUS "Set Platformname to: linux-gcc-aarch64")
-    set(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
-    set(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
-    SET(PLATFORM_NAME "linux-gcc-aarch64")
-    SET(SNAP_ARCH "arm64")
-  ELSE()
-    MESSAGE(STATUS "Set Platformname to: linux-gcc-x64")
-    set(CMAKE_C_COMPILER gcc)
-    set(CMAKE_CXX_COMPILER g++)
-    SET(PLATFORM_NAME "linux-gcc-x64")
-    SET(SNAP_ARCH "amd64")
-    ENDIF()
-endif()
+IF( ${CMAKE_BUILD_KIT} MATCHES "aarch64")
+  SET(PLATFORM_NAME "ubuntu20-gcc-aarch64")
+  SET(SNAP_ARCH "arm64")
+  set(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
+  set(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
+ELSE()
+  SET(PLATFORM_NAME "ubuntu20-gcc-x64")
+  SET(SNAP_ARCH "amd64")
+  set(CMAKE_C_COMPILER gcc)
+  set(CMAKE_CXX_COMPILER g++)
+ENDIF()
 
 link_directories(
   ${TRACE_DEPENDENCY_DIR}/${PLATFORM_NAME}/release
@@ -112,6 +108,7 @@ add_executable(dummy
   ${CMAKE_SOURCE_DIR}/private/src/dummy.cpp
 )
 
+
 add_custom_command( TARGET dummy
   POST_BUILD
   COMMAND make install
@@ -120,8 +117,8 @@ add_custom_command( TARGET dummy
 if (BUILD_SNAP)
   add_custom_command( TARGET dummy
     POST_BUILD
-    COMMAND snapcraft --target-arch=${SNAP_ARCH}
-    COMMAND snapcraft clean
+    COMMAND snapcraft --enable-experimental-target-arch --target-arch=${SNAP_ARCH} --destructive-mode
+    COMMAND snapcraft clean --destructive-mode
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
   )
 endif(BUILD_SNAP)

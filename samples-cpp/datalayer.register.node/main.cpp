@@ -21,10 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- 
 
-// The example app datalayer.register.node creates a new provider 
-// with node 'myData' and different type elements to the ctrlX Data Layer.
+// The example app datalayer.register.node creates a new provider
+// with node 'sdk-cpp-registernode' and different type elements to the ctrlX Data Layer.
 
 #include "comm/datalayer/datalayer.h"
 #include "comm/datalayer/datalayer_system.h"
@@ -37,7 +36,8 @@
 
 // Add some signal Handling so we are able to abort the program with sending sigint
 bool endProcess = false;
-static void sigHandler (int sig, siginfo_t *siginfo, void *context)
+
+static void sigHandler(int sig, siginfo_t *siginfo, void *context)
 {
   endProcess = true;
 }
@@ -45,23 +45,23 @@ static void sigHandler (int sig, siginfo_t *siginfo, void *context)
 using comm::datalayer::IProviderNode;
 
 // Basic class Provider node interface for providing data to the system
-class MyProviderNode : public IProviderNode {
+class MyProviderNode : public IProviderNode
+{
 public:
   MyProviderNode(comm::datalayer::Variant value)
   {
     m_data = value;
   };
-  virtual ~MyProviderNode() override
-  {};
+  virtual ~MyProviderNode() override{};
 
   // Create function of an object. Function will be called whenever a object should be created.
-  virtual void onCreate(const std::string &address, const comm::datalayer::Variant* data, const comm::datalayer::IProviderNode::ResponseCallback &callback) override
+  virtual void onCreate(const std::string &address, const comm::datalayer::Variant *data, const comm::datalayer::IProviderNode::ResponseCallback &callback) override
   {
     callback(comm::datalayer::DlResult::DL_FAILED, nullptr);
   }
 
   // Read function of a node. Function will be called whenever a node should be read.
-  virtual void onRead(const std::string &address, const comm::datalayer::Variant* data, const comm::datalayer::IProviderNode::ResponseCallback &callback) override
+  virtual void onRead(const std::string &address, const comm::datalayer::Variant *data, const comm::datalayer::IProviderNode::ResponseCallback &callback) override
   {
     comm::datalayer::Variant result;
     result = m_data;
@@ -69,29 +69,27 @@ public:
   }
 
   // Write function of a node. Function will be called whenever a node should be written.
-  virtual void onWrite(const std::string &address, const comm::datalayer::Variant* data, const comm::datalayer::IProviderNode::ResponseCallback &callback) override
+  virtual void onWrite(const std::string &address, const comm::datalayer::Variant *data, const comm::datalayer::IProviderNode::ResponseCallback &callback) override
   {
-    if(data->getType() == m_data.getType())
-    {
-      m_data = *data;
-#ifdef MY_DEBUG
-// If we get in here the app stopes until SIGCONT
-      if (address.compare("myData/myDebug") == 0)
-      {
-        std::cout << "Raising SIGSTOP" << std::endl;
-        raise(SIGSTOP);
-        std::cout << "... Continue..." << std::endl;
-      }
-#endif
-
-      callback(comm::datalayer::DlResult::DL_OK, data);
-    }
-    else
+    if (data->getType() != m_data.getType())
     {
       callback(comm::datalayer::DlResult::DL_TYPE_MISMATCH, nullptr);
     }
-  }
 
+#ifdef MY_DEBUG
+    // If we get in here the app stopes until SIGCONT
+    if (address.compare("sdk-cpp-registernode/myDebug") == 0)
+    {
+      std::cout << "Raising SIGSTOP" << std::endl;
+      // raise(SIGSTOP);
+      std::cout << "... Continue..." << std::endl;
+    }
+#endif
+
+    m_data = *data;
+
+    callback(comm::datalayer::DlResult::DL_OK, data);
+  }
 
   // Remove function for an object. Function will be called whenever a object should be removed.
   virtual void onRemove(const std::string &address, const comm::datalayer::IProviderNode::ResponseCallback &callback) override
@@ -112,30 +110,33 @@ public:
     flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<comm::datalayer::Reference>>> references;
     auto emptyString = builder.CreateString("This is a Description");
 
-    if (address.compare("myData/myFlatbuffer") == 0)
+    auto flatbufferName = std::string("myFlatbuffer");
+    if (address.find(flatbufferName) != std::string::npos)
     {
       flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
-      {
-        comm::datalayer::CreateReferenceDirect(builder, "readType", "types/sampleSchema/inertialValue"),
-      };
+          {
+              comm::datalayer::CreateReferenceDirect(builder, "readType", "types/sampleSchema/inertialValue"),
+              comm::datalayer::CreateReferenceDirect(builder, "writeType", "types/sampleSchema/inertialValue"),
+          };
 
-      references = builder.CreateVectorOfSortedTables(vecReferences, 1);
+      references = builder.CreateVectorOfSortedTables(vecReferences, 2);
     }
 
     // Set allowed operations
     comm::datalayer::AllowedOperationsBuilder allowedOperations(builder);
     allowedOperations.add_read(true);
-    allowedOperations.add_write(false);
-    allowedOperations.add_create(true);
+    allowedOperations.add_write(true);
+    allowedOperations.add_create(false);
     allowedOperations.add_delete_(false);
     auto operations = allowedOperations.Finish();
 
     // Create metadata
     comm::datalayer::MetadataBuilder metadata(builder);
+    metadata.add_nodeClass(comm::datalayer::NodeClass_Variable);
     metadata.add_description(emptyString);
     metadata.add_descriptionUrl(emptyString);
     metadata.add_operations(operations);
-    if (address.compare("myData/myFlatbuffer") == 0)
+    if (address.compare("sdk-cpp-registernode/myFlatbuffer") == 0)
     {
       metadata.add_references(references);
     }
@@ -146,26 +147,28 @@ public:
     variant.shareFlatbuffers(builder);
     callback(comm::datalayer::DlResult::DL_OK, &variant);
   }
-  
+
 private:
   comm::datalayer::Variant m_data;
 };
 
-
-int main(int ac, char* av[])
+int main(int ac, char *av[])
 {
 #ifdef MY_DEBUG
-  raise(SIGSTOP);
+  std::cout << "Raising SIGSTOP" << std::endl;
+  //  raise(SIGSTOP);
+  std::cout << "... Continue..." << std::endl;
 #endif
 
   comm::datalayer::DatalayerSystem datalayer;
   comm::datalayer::DlResult result;
   // Starts the ctrlX Data Layer system without a new broker because one broker is already running on ctrlX device
   datalayer.start(false);
-  std::cout << "Register 'myData' as root element with 4 nodes 'myFlatbuffer', 'myFloat', 'myString' and 'myInt64'" << std::endl;
-  
+  std::cout << "Register 'sdk-cpp-registernode' as root element with 4 nodes 'myFlatbuffer', 'myFloat', 'myString' and 'myInt64'" << std::endl;
+
   // Creates a provider at Data Layer backend to provide data to Data Layer clients
-  comm::datalayer::IProvider *myProvider = datalayer.factory()->createProvider("tcp://boschrexroth:boschrexroth@192.168.1.1:2070"); //or "tcp://boschrexroth:boschrexroth@192.168.1.1:2070
+  auto providerConnection = getenv("SNAP") != nullptr ? DL_IPC_AUTO : "tcp://boschrexroth:boschrexroth@10.0.2.2:2070";
+  comm::datalayer::IProvider *myProvider = datalayer.factory()->createProvider(providerConnection);
 
   // Create some simple dummy data
   comm::datalayer::Variant myString;
@@ -186,7 +189,7 @@ int main(int ac, char* av[])
   // If running on SNAP environment, use $SNAP environment variable for register the bfbs
   auto bfbsPath = getenv("SNAP") != nullptr ? strcat(getenv("SNAP"), "/sampleSchema.bfbs") : "bfbs/sampleSchema.bfbs";
   result = myProvider->registerType("types/sampleSchema/inertialValue", bfbsPath);
-  if(STATUS_FAILED(result))
+  if (STATUS_FAILED(result))
   {
     std::cout << "Register type 'types/sampleSchema/inertialValue' failed with: " << result.toString() << std::endl;
   }
@@ -196,47 +199,47 @@ int main(int ac, char* av[])
   }
 
   // Register a node as flatbuffer value
-  result = myProvider->registerNode("myData/myFlatbuffer", new MyProviderNode(myFlatbuffer));
-  if(STATUS_FAILED(result))
+  result = myProvider->registerNode("sdk-cpp-registernode/myFlatbuffer", new MyProviderNode(myFlatbuffer));
+  if (STATUS_FAILED(result))
   {
-    std::cout << "Register node 'myData/myFlatbuffer' failed with: " << result.toString() << std::endl;
+    std::cout << "Register node 'sdk-cpp-registernode/myFlatbuffer' failed with: " << result.toString() << std::endl;
   }
   else
   {
-    std::cout << "Register node 'myData/myFlatbuffer' was successful!" << std::endl;
+    std::cout << "Register node 'sdk-cpp-registernode/myFlatbuffer' was successful!" << std::endl;
   }
 
   // Register a node as string value
-  result = myProvider->registerNode("myData/myString", new MyProviderNode(myString));
-  if(STATUS_FAILED(result))
+  result = myProvider->registerNode("sdk-cpp-registernode/myString", new MyProviderNode(myString));
+  if (STATUS_FAILED(result))
   {
-    std::cout << "Register node 'myData/myString' failed with: " << result.toString() << std::endl;
+    std::cout << "Register node 'sdk-cpp-registernode/myString' failed with: " << result.toString() << std::endl;
   }
   else
   {
-    std::cout << "Register node 'myData/myString' was successful!" << std::endl;
+    std::cout << "Register node 'sdk-cpp-registernode/myString' was successful!" << std::endl;
   }
 
   // Register a node as float value
-  result = myProvider->registerNode("myData/myFloat", new MyProviderNode(myFloat));
-  if(STATUS_FAILED(result))
+  result = myProvider->registerNode("sdk-cpp-registernode/myFloat", new MyProviderNode(myFloat));
+  if (STATUS_FAILED(result))
   {
-    std::cout << "Register node 'myData/myFloat' failed with: " << result.toString() << std::endl;
+    std::cout << "Register node 'sdk-cpp-registernode/myFloat' failed with: " << result.toString() << std::endl;
   }
   else
   {
-    std::cout << "Register node 'myData/myFloat' was successful!" << std::endl;
+    std::cout << "Register node 'sdk-cpp-registernode/myFloat' was successful!" << std::endl;
   }
 
   // Register a node as int64 value
-  result = myProvider->registerNode("myData/myInt64", new MyProviderNode(myInt64));
-  if(STATUS_FAILED(result))
+  result = myProvider->registerNode("sdk-cpp-registernode/myInt64", new MyProviderNode(myInt64));
+  if (STATUS_FAILED(result))
   {
-    std::cout << "Register node 'myData/myInt64' failed with: " << result.toString() << std::endl;
+    std::cout << "Register node 'sdk-cpp-registernode/myInt64' failed with: " << result.toString() << std::endl;
   }
   else
   {
-    std::cout << "Register node 'myData/myInt64' was successful!" << std::endl;
+    std::cout << "Register node 'sdk-cpp-registernode/myInt64' was successful!" << std::endl;
   }
 
 //Stop on Debugbuilds to attach gdb
@@ -244,13 +247,13 @@ int main(int ac, char* av[])
 #ifdef MY_DEBUG
   comm::datalayer::Variant myDebug;
   myDebug.setValue(false);
-  result = myProvider->registerNode("myData/myDebug", new MyProviderNode(myDebug));
-  if(STATUS_FAILED(result))
+  result = myProvider->registerNode("sdk-cpp-registernode/myDebug", new MyProviderNode(myDebug));
+  if (STATUS_FAILED(result))
   {
-    std::cout << "Register node 'myData/myDebug' failed with: " << result.toString() << std::endl;
+    std::cout << "Register node 'sdk-cpp-registernode/myDebug' failed with: " << result.toString() << std::endl;
   }
 
-  std::cout << "Register node 'myData/myDebug' was successful!" << std::endl;
+  std::cout << "Register node 'sdk-cpp-registernode/myDebug' was successful!" << std::endl;
 #endif
 
   // Start to add Code here to register more nodes
@@ -265,7 +268,7 @@ int main(int ac, char* av[])
   else
   {
     std::cout << "Provider was started!" << std::endl;
-  } 
+  }
 
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
   if (!myProvider->isConnected())
@@ -274,13 +277,13 @@ int main(int ac, char* av[])
     return -1;
   }
 
-  // Prepare signal structure to interrupt the endless loop with ctrl + c 
+  // Prepare signal structure to interrupt the endless loop with ctrl + c
   struct sigaction act;
-  memset (&act, '\0', sizeof(act));
+  memset(&act, '\0', sizeof(act));
   act.sa_sigaction = &sigHandler;
   act.sa_flags = SA_SIGINFO;
   sigaction(SIGINT, &act, NULL);
-  
+
   do
   {
     /* code */
@@ -290,11 +293,12 @@ int main(int ac, char* av[])
 
   // Unregister type and nodes
   myProvider->unregisterType("types/sampleSchema/inertialValue");
-  myProvider->unregisterNode("myData/myFlatbuffer");
-  myProvider->unregisterNode("myData/myString");
-  myProvider->unregisterNode("myData/myFloat");
-  myProvider->unregisterNode("myData/myInt64");
-  std::cout << std::endl << "Provider type and nodes were unregistered!" << std::endl;
+  myProvider->unregisterNode("sdk-cpp-registernode/myFlatbuffer");
+  myProvider->unregisterNode("sdk-cpp-registernode/myString");
+  myProvider->unregisterNode("sdk-cpp-registernode/myFloat");
+  myProvider->unregisterNode("sdk-cpp-registernode/myInt64");
+  std::cout << std::endl
+            << "Provider type and nodes were unregistered!" << std::endl;
 
   // Stop Datalayer Provider
   myProvider->stop();

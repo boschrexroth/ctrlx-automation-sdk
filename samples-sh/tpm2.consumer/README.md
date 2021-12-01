@@ -40,7 +40,7 @@ openssl x509 -req -days 360 -in webserver_csr.pem -CA ca/ca.crt -CAkey ca/ca.key
 
 ## Support
 
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 

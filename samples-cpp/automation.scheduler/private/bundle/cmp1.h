@@ -56,7 +56,7 @@ private:
 
   std::shared_ptr<example::HelloCallableFactory> m_factory;
 
-  common::log::trace::IRegistrationRealTime* m_rtTraceSrv = nullptr;
+  common::log::trace::IRegistrationRealTime2* m_rtTraceSrv = nullptr;
 
 public:
   Cmp1() = default;
@@ -125,17 +125,17 @@ public:
   //! This method is called when the state of a cpp service changes
   //!
   //! @param[in]  service  A pointer to the service.
-  void cppRtTraceServiceStateChanged(common::log::trace::IRegistrationRealTime* service);
+  void cppRtTraceServiceStateChanged(common::log::trace::IRegistrationRealTime2* service);
 
   //! This method is called when a cpp service is added
   //!
   //! @param[in]  service  A pointer to the service.
-  void cppRtTraceServiceAdded(common::log::trace::IRegistrationRealTime* service);
+  void cppRtTraceServiceAdded(common::log::trace::IRegistrationRealTime2* service);
 
   //! This method is called when a cpp service is removed
   //!
   //! @param[in]  service  A pointer to the service.
-  void cppRtTraceServiceRemoved(common::log::trace::IRegistrationRealTime* service);
+  void cppRtTraceServiceRemoved(common::log::trace::IRegistrationRealTime2* service);
 
 };
 

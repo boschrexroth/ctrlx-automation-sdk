@@ -1,0 +1,8 @@
+_*.sh
+
+*/build/
+*/parts/
+*/prime/
+*/snap/.snapcraft
+*/squashfs-root/
+*/stage/

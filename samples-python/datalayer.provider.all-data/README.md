@@ -1,87 +1,22 @@
-# README datalayer.provider.alldata
-
-This python app __datalayer.provider.alldata__ provides Data Layer nodes. It can be used as sample to implement own apps.
+# ctrlX Data Layer Provider All Data
 
 ## Introduction
 
-The app demonstrates how a Data Layer connecion is established and nodes are provided.
+This Python app provides ctrlX Data Layer nodes represending different data types. 
 
-## Prerequisites for Developing Python Apps
+## Function Description
 
-* Linux Ubuntu 18.4 (or Windows PC running with Windows Subsystem for Linux (WSL) or a Virtual Box VM)
-* Python3 is installed (VS Code extension in case of using WSL) 
-* ctrlX AUTOMATION SDK Version 1.8 is installed (extracted and copied to the Ubuntu users home directory)
+When this app is started it connects to the ctrlX Data Layer and creates two subtrees with data nodes. 
 
-## Getting Started
+The values of the nodes in the 'static' subtree cannot be changed by clients but they can be used to test reading different types of data and their numerical limits.
 
-As Integrated Development Environment (IDE) we recommend Visual Studio Code.
-Therefor the folder .vscode contains configuration files.
+The values of the nodes in the 'dynamic' subtree can be changed (written) by clients.
 
-### Install Virtual Environment
+## Implementation Description
 
-We recommend to create and activate a virtual environment. Start a terminal in the project directory (workspaceFolder) and enter:
+__main.py__ starts the Data Layer system and the Data Layer provider. Furthermore two instances of the class ProviderNodeAllData are created. One instance is called for creating static (immutable) Data Layer nodes. The other instance is called for creating dynamic (changable) Data Layer nodes.
 
-    virtualenv -p python3 venv
-    source venv/bin/activate
-
-### Install Wheels
-
-Install the required packages:
-
-    pip3 install -r requirements.txt
-    pip3 install ../../whl/ctrlx_datalayer*
-    pip3 install ../../whl/ctrlx_fbs-*
-
-### Start IDE
-
-Start your IDE, open main.py and start the program.
-
-## Build an AMD64 Snap
-
-Check your snapcraft version with the command:
-
-    snapcraft --version
-
-For cleaning and building snaps see according chapter.
-
-### Version 2.43
-
-To clean the previous snap build results use:
-
-    snapcraft clean
-
-Build the snap with:
-
-    snapcraft
-
-### Version 4.x or higher
-
-To clean the previous snap build results use:
-
-    snapcraft clean --destructive-mode
-
-Build the snap with:
-
-    snapcraft --destructive-mode
-
-__Important:__  To build an ARM64 (AARCH64) snap use a native ARM64 computer or a virtual machine emulating the ARM64 CPU e.g. with QEMU.
-
-
-## Install the Snap on the ctrlX
-
-* Open the ctrlX CORE Home page, select Settings - Apps, click on 'Service mode' and confirm.
-* Click on the Settings icon and select 'Allow installation from unknown source'
-* Select tab 'Local storage', click the + icon, upload and install the snap.
-* Switch to Operation mode
-
-## Troubleshooting
-
-Enable ssh accessto your 
-If your snap doesn't work well start a shell on the ctrlX and check the trace regarding your snap: `$ sudo snap logs -f sdk-py-datalayer-provider-alldata`
-
-## Support
-
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+The package __datalayerprovider__ contains the classes for data storage, configuration and Data Layer handling.
 
 ___
 

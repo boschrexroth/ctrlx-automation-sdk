@@ -1,8 +1,8 @@
-### Basics
+﻿### Basics
 
-An app can bring their own menu entries, use the reverse proxy infrastructure including permissions and use the solution for storage. This document describes the different integration points and how they work.
+An app can provide own menu entries, use the reverse proxy infrastructure including permissions and the storage solution. This document describes the different integration points and how they work.
 
-Essential for the integration points to work is the package-manifest. Beside the snapcraft.yaml, it has to be provided by the app to integrate probably into the ctrlX CORE ecosystem. Here is an example of a package-manifest.json:
+The package-manifest is essential for the integration points. Beside the snapcraft.yaml, it is strongly recommended that the app has to provide the package manifest to be integrated into the ctrlX CORE Ecosystem. Example of a package-manifest.json:
 
 
 ??? example
@@ -15,7 +15,7 @@ Essential for the integration points to work is the package-manifest. Beside the
             {
                 "id": "examplestore",
                 "title": "Example Store",
-                "description": "This is only an example store for documentation purpose."
+                "description": "This is only an example store for documentation purposes."
             }
         ],
         "services": {
@@ -111,18 +111,18 @@ Essential for the integration points to work is the package-manifest. Beside the
 
 ### Providing the package-manifest
 
-The manifest file has to be provided to app.deviceadmin by the third-party app, therefor a data exchange between both apps has to be established. To exchange the information, the content interface with the name "package-assets" is used. This content interface works inverted to the "normal" content interface. Instead of the slot is providing data that is used by the plug. The slot provides a folder where the plugs directories are mounted in. This principle is called "spool mode" by canonical.
+The third-party app has to provide the manifest file to app.deviceadmin. Thus, a data exchange has to be set up between both apps. To exchange information, the content interface with the name "package-assets" is used. This content interface works opposite to the "normal" content interface. In this case, the plug provides data by mounting a directory into the space provided by the slot.   Canonical calls this principle "spool mode".
 
-The following example shows you step-by-step, what you have to do.
+The following example shows the procedure step-by-step.
 
-1. Inside the root of your snap project, create a folder "configs/package-assets".
+1. Create the folder "configs/package-assets” in the root of your snap project.
 
-2. Place your package-manifest into this folder and name it using the pattern `snap-name`.package-manifest.json, e.g. rexroth-solutions.package-manifest.json.
+2. Add your package-manifest to this folder and name it using the pattern `snap-name`.package-manifest.json, e.g. rexroth-solutions.package-manifest.json.
 
 3. Update your snapcraft.yaml
-    * Add a new part which dumps the content of the "configs" directory into your $SNAP folder.
+    * Add a new part which copies the content of the "configs" directory to your $SNAP folder using the dump plugin.
 
-    * Add the slot "package-assets" to your slots configuration
+    * Add the slot "package-assets" to your slot configuration
 
 
 snapcraft.yaml:
@@ -149,33 +149,33 @@ slots:
 
 ### Menus
 
-An app can integrate into the ctrlX CORE navigation by defining menu entries. There are three possible integration points:
+An app can be integrated into the ctrlX CORE navigation by defining menu entries. There are three possible integration points:
 
-* Sidebar: to allow navigation to your apps main functionality
-* Settings: to provide settings dialogs and pages
-* Home Overview: to provide a custom tile for your application
+* Sidebar: To allow the navigation to the main functionality of your apps
+* Settings: To allow the navigation to your app settings
+* Home Overview: To provide a customized tile for your application
   
 ![Integration](./samples-go/hello.webserver/docs/images/integration.png)
 
-### Declare menu items in package-manifest
+### Declare menu items in the package-manifest
 
-Add a "menus" element to your snap’s package manifest. The "menus" element is defined as an object that comprises three elements:
+Add a "menus" element to the package manifest of your snap. The "menus" element is defined as an object that comprises three elements:
 
-* sidebar: an array of items to be integrated into the main menu
-* settings: an array of items to be integrated into the settings menu
-* system: an array of items to be integrated into the system menu
-* overview: an array of items to be integrated into the app overview
+* sidebar: An array of items to be integrated into the main menu
+* settings: An array of items to be integrated into the settings menu
+* system: An array of items to be integrated into the system menu
+* overview: An array of items to be integrated into the app overview
 
-An item is defined as an object that comprises the following elements:
+An item is defined as an object with the following elements:
 
-* id: a string serving as the unique item identifier; used for ordering items (required)
-* title: a string serving as the item’s display title (required)
-* description: a string providing an additional description (optional and only used by overview items)
-* icon: a string representing the name of the item’s icon (optional)
-* link: a string representing the route associated to this item, including the application’s base href (required if no "items" are provided)
-* target: a string that specifies where the link should be shown. Use "_blank" or a specific name to open the link in a new tab (recommended for 3rd-party apps)
-* items: an array of sub-items of this item (required if no link is provided; currently, only supported for main menu items and restricted to one level of depth)
-* permissions: an array of scope identifiers representing the permissions required to enable the item (optional)
+* id: A string used as unique item identifier to order items (required)
+* title: A string used as display title of the item (required)
+* description: A string providing an additional description (optional and only used by overview items)
+* icon: A string representing the icon name of the item (optional)
+* link: A string representing the target address of this item, including the application base href (required if no "items" are provided)
+* target: A string that specifies where the link is shown. Use "_blank" or a specific name to open the link in a new tab (recommended for 3rd-party apps)
+* items: An array of sub-items of this item (required if no link is provided. It is currently only supported for main menu items and restricted to one sub-level)
+* permissions: An array of scope identifiers representing the permissions required to enable the item (optional)
 
 ??? example 
 
@@ -251,7 +251,7 @@ An item is defined as an object that comprises the following elements:
     ```
 
 
-When the third-party app is using a dedicated port and is not using our reverse proxy infrastructure, you can use the template variable "${hostname}" to let the ctrlX CORE replace it dynamically. E.g.:
+If the third-party app uses a specified port and not our reverse proxy infrastructure, use the template variable "${hostname}" to allow the ctrlX CORE to replace it dynamically. E.g.:
 
 !!! note
 
@@ -267,12 +267,12 @@ When the third-party app is using a dedicated port and is not using our reverse 
 
 ### Reverse Proxy
 
-The Reverse Proxy handles all **external** web-based (HTTP/HTTPS) requests to the device. The Reverse Proxy provides the following functionality:
+The reverse proxy handles all **external** web-based (HTTP/HTTPS) requests to the device. The reverse proxy provides the following functionality:
 
 * **Automatic HTTPS:** By default, all data exchanged between client and server is encrypted.
-* **Token Validation:** By default, only authenticated users may access resources on the device (except the login page). Requests with invalid tokens (lifetime expired, invalid signature) are rejected.
+* **Token validation:** By default, only authenticated users may access resources on the device (except the login page). Requests with invalid tokens (lifetime expired, invalid signature) are rejected.
 
-The Proxy Mapping provides the configuration, which is required by the Reverse Proxy to redirect requests for a specific URL to a web server running on the device.
+The proxy mapping provides the configuration required by the reverse proxy to redirect requests for a specific URL to a web server running on the device.
 
 **Proxy Mapping**
 
@@ -296,31 +296,31 @@ The Proxy Mapping provides the configuration, which is required by the Reverse P
 }
 ```
 
-Providing a proxy configuration is optional in some cases (e.g. if your snap does not provide a web service). If a proxy configuration is supplied, the following parameters are valid:
+Providing a proxy configuration is optional in some cases (e.g. if your snap does not provide a web service). If a proxy configuration is provided, the following parameters are valid:
 
-* **name (mandatory):** Name of the web service.  The format is: `<id>.<service>`The name has to be unique. Examples are:
+* **name (mandatory):** Name of the web service.  The format is: `<id>.<service>`The name has to be unique. Examples:
   * `rexroth-solutions.web`
   * `rexroth-hmi.web`
   * ...
-* **url (mandatory):** URL which is provided by the Reverse Proxy. When a client tries to access this URL, the Reverse Proxy transparently redirects the request to the web server, this means your webserver has to be configured to listen to e.g. "/cool-app" and not "/". Must not conflict with other web services URLs. Examples are:
+* **url (mandatory):** URL provided by the reverse proxy. When a client tries to access this URL, the reverse proxy transparently redirects the request to the web server. Thus, your web server has to be configured to listen to e.g. "/cool-app" and not "/". Must not conflict with other web service URLs. Examples:
   * /solutions
   * /hmi
   * ...
-* **binding (mandatory):** Identifier of the resource to which the reverse proxy redirects the requests. The resource may be a port or a unix socket. Using a unix socket is highly recommended. Examples are:
+* **binding (mandatory):** Resource identifier to which the reverse proxy redirects the requests. The resource can either be a port or a Unix socket. Using a Unix socket is highly recommended. Examples:
   * :5000
   * 192.168.1.17:5000
   * "unix://{$SNAP_DATA}/package-run/rexroth-solutions/rexroth-solutions.web.sock"
-* **restricted:** Restricted URL. URLs defined here are accessible for authenticated clients only. One important example are the API URL(s) - those URLs should be restricted in the majority of the use cases. Examples:
+* **restricted:** Restricted URL. Only authenticated clients can access the URLs defined here. One important example is the API URL(s) - those URLs should be restricted in most use cases. Examples:
  "/rexroth-solutions/api/v1.0"
 
 !!! info
-    **Remark:** In case a snap provides multiple web servers, multiple entries of ProxyMapping are allowed.
+    **Remark:** If a snap provides multiple web servers, multiple ProxyMapping entries are allowed.
 
 #### Binding
 
 **Unix sockets (recommended)**
 
-To use unix sockets the web server of your application has to bind against a [Unix Domain Socket](https://en.wikipedia.org/wiki/Unix_domain_socket). Most of web server frameworks already support this. The benefit of unix sockets is the additional security (file access can be restricted via file permissions) and the lower attack surface on network level (the service cannot be reached externally). To enable your snap and to provide the reverse proxy access to your unix socket, you have to use the content interface slot "package-run". It uses the same mechanism as the "package-assets" interface.
+To use Unix sockets, the web server of your application has to bind against a [Unix Domain Socket](https://en.wikipedia.org/wiki/Unix_domain_socket). Most web server frameworks already support this functionality. The benefit of Unix sockets is the additional security (file access can be restricted via file permissions) and the lower attack surface on network level (the service cannot be reached externally). To enable your snap and to provide the reverse proxy access to your Unix socket, use the content interface slot "package-run". It uses the same mechanism as the "package-assets" interface.
 
 !!! example
     ```yaml
@@ -333,12 +333,12 @@ To use unix sockets the web server of your application has to bind against a [Un
           - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
     ```
 
-In the example mentioned above, your "unix socket file" should be created under `{$SNAP_DATA}/package-run/{$SNAP_NAME}/web.sock`. Please ensure, that the file is completely managed by your application logic and, other than a network socket, has to be deleted after unbind. Also consider deleting it before binding your web server on start up.
+In the example mentioned above, your "unix socket file" should be created under `{$SNAP_DATA}/package-run/{$SNAP_NAME}/web.sock`. The file has to be managed completely by your application logic and - in contrast to a network socket, has to be deleted after unbinding. Also consider deleting the Unix domain socket before binding your web server before start-up.
 
-Now, you need to publish the information about the socket file using the package-manifest using the ProxyMapping described above. The relevant part is the "binding" section below. You have to replace
+Now, publish the information on the socket file using the package-manifest via the ProxyMapping described above. The relevant part is the "binding" section below. Replace
 
 !!! warning
-    The path length of a unix socket is limited to 108 characters. Therefore please ensure, that the resolved path, e.g /var/snap/third-party-snap/current/==package-run/third-party-snap/third-party-snap.web.sock==, respects that limit and the highlighted part has a maximal length of 50 characters. If necessary, you can shorten the path by replacing "package-run" with "run" and shorting the file name from "third-party-snap.web.sock" to "web.sock". See the following example:
+    The path length of a Unix socket is limited to 108 characters. Thus, ensure that the resolved path, e.g /var/snap/third-party-snap/current/==package-run/third-party-snap/third-party-snap.web.sock== does not exceed that limit and that the highlighted part does not exceed 50 characters. If required, shorten the path by replacing "package-run" with "run" and change the file name from "third-party-snap.web.sock" to "web.sock". Example:
 
 
 ```json
@@ -355,9 +355,9 @@ Now, you need to publish the information about the socket file using the package
 [...]
 ```
 
-**Localhost (not recommended)**
+**Local host (not recommended)**
 
-Binding to localhost should only be chosen, when a Unix Domain Socket (see above) cannot be used. It requires that your app binds to a dedicated port that is not used by other apps.
+Only bind to a local host if a Unix domain socket (see above) cannot be used. Your app has to bind to a specified port that is not used by other apps.
 
 
 
@@ -377,7 +377,7 @@ Binding to localhost should only be chosen, when a Unix Domain Socket (see above
 
 ### Scopes and Permissions
 
-In case access to specific resources shall be restricted, scopes have to be defined. By using the Identity Management, an administrator is able to configure which users/groups are allowed to access specific resources. The following example shows two simple scopes (read/write all settings, read settings). The web server has to check in each routine if the provided token includes the scope.
+If access is restricted to specific resources, define scopes. When using the Identity Management, an administrator can configure the users and groups allowed to access specific resources. The following example shows two simple scopes (read/write, all settings, read-only settings). In every routine, the web server has to check whether the provided token includes the scope.
 
 ??? example
 
@@ -406,15 +406,15 @@ In case access to specific resources shall be restricted, scopes have to be defi
       ],
     ```
 
-**Remark: Restrictions apply regarding the naming of the scopes, identifiers, etc. (please see below)**
+**Remark: Restrictions apply on the scope namings, identifiers, etc. (see below)**
 
-The main identifier of the scope must follow this schema by convention: 
+Use the following schema for the main identifier of the scope: 
 
 `<id>.<service>`
 
-* id: Identifier of the package. Must by convention correspond to the name of the snap
+* id: Package identifier. Has to correspond to the snap name
   * Example: rexroth-solutions, rexroth-vpnmanager, ...
-* service: Identifier of the service
+* service: Service identifier
   * Example: web
 
 Some examples:
@@ -422,32 +422,32 @@ Some examples:
 * rexroth-solutions.web
 * rexroth-vpnmanager.web
 
-The identifier of each specific scope must follow this schema by convention: 
+Use this schema for the identifier of the scope: 
 
 `<id>.<service>.<scope_name>.<access>`
 
-* id : Identifier of the package. Must by convention correspond to the name of the snap
+* id : Package identifier. Has to correspond to the snap name
   * Example: rexroth-solutions, rexroth-vpnmanager, ...
-* service: Identifier of the service
+* service: Service identifier
   * Example: web
 * scope_name: Name of the specific scope
   * Example: solutions, connections, configurations, users, ...
-* access: Type of access to the resource which is represented by this scope. Supported are:
-  * r (read-only): Allows read access to specific resources
+* access: Type of access to the resource represented by this scope. Supported are:
+  * r (read-only): Allows read-only access to specific resources
   * w (write-only): Allows write-only access to specific resources
-  * rw (read/write): Allows read and write access to specific resources
-  * x (execute): Execute a specific action which is represented by a resource
+  * rw (read/write): Allows read-only and write access to specific resources
+  * x (execute): Executes a specific action represented by a resource
 
 Some examples:
 
-* rexroth-vpnmanager.web.shortcuts.r: Read access to VPN shortcuts
+* rexroth-vpnmanager.web.shortcuts.r: Read-only access to VPN shortcuts
 * rexroth-vpnmanager.web.shortcuts.rw: Read and create VPN connection shortcuts
-* rexroth-deviceadmin.web.own_password.w: Update (but not read) the password of the user who is currently logged in
-* rexroth-vpnmanager.web.shortcuts.x: Start / stop VPN connections via existing starters (shortcuts)
+* rexroth-deviceadmin.web.own_password.w: Update (but not read) the password of the user currently logged in
+* rexroth-vpnmanager.web.shortcuts.x: Start/stop VPN connections via existing starters (shortcuts)
 
 #### Enforcing permissions in your service
 
-The web server has to enforce the defined permissions. The following pseudo code snippet shows a light-weight example in which the function ListAddresses checks whether the client has the permission to execute the function. The scope "rexroth-device.all.rwx" is a special scope, which reflects an administrative access permission (see below). 
+The web server has to enforce the defined permissions. The following pseudo code snippet shows a simple example in which the function ListAddresses checks whether the client has the permission to execute the function. The scope "rexroth-device.all.rwx" is a special scope reflecting an administrative access permission (see below). 
 
 ```golang
 func ListAddresses(w http.ResponseWriter, r *http.Request) {
@@ -456,8 +456,8 @@ func ListAddresses(w http.ResponseWriter, r *http.Request) {
     scope := []string{"networkmanager.all.r", "networkmanager.all.rw", "rexroth-device.all.rwx"}
  
  
-    // Extract scopes from http request and compare to valid scopes
-    // Return when permissions are not sufficient
+    // Extract scopes from http request and compare them to valid scopes
+    // Return if not authorized
     if ok, _ := checkPermissions(r, scope); !ok {
         errors.ErrUnauthorized.Write(w)
         return
@@ -466,7 +466,7 @@ func ListAddresses(w http.ResponseWriter, r *http.Request) {
 
 #### Admin Scope
 
-The Identity Management by default provides a special admin scope ("rexroth-device.all.rwx"), which should only be assigned to admin users.  It is recommended - but not mandatory - to grant users with this permission full access to your web application. This makes the handling of administrator accounts easier.
+By default, the Identity Management provides a special admin scope ("rexroth-device.all.rwx”) that should only be assigned to admin users.  It is recommended to grant users full access to your web application if they are provided with this permission. This facilitates the handling of administrator accounts.
 
 The following snippet shows the definition of the admin scope. You can see (and assign) the permission to users and/or groups.
 
@@ -487,10 +487,10 @@ The following snippet shows the definition of the admin scope. You can see (and 
 
 ### Certificate Management (optional)
 
-The certificate managers handles cryptographic material for all applications on the device. The certificate manager has the ability to add/delete/list certificates or keys to/from a specific application. It also warns the user if a certificate expires soon or is already invalid. If a snap handles cryptographic material it can use this centralized service by following the instructions:
+The certificate manager handles cryptographic material for all applications on the device. The certificate manager can add/delete/list certificates or keys to/from a specific application. It also issues a warning if a certificate expires soon or is already invalid. If a snap handles cryptographic material, it can use this centralized service following the instructions:
 
 
-First, the snap has to provide the content interface "package-certificates". Via this interface the certificate manager is able to add and access certificates and keys of a specific snap. This is why write permissions are necessary.
+First, the snap has to provide the content interface "package-certificates". Via this interface, the certificate manager can add and access certificates and keys of a specific snap. Thus, write permissions are required.
 
 
 ```yaml
@@ -509,7 +509,7 @@ slots:
 
 #### Certificate Stores
 
-The certificate store block defines if a snap service has to handle with cryptographic keys or certificates. A snap should have different certificate stores for different services. These stores are defined within the package-assets-file (see following code snipped)
+The certificate store block defines whether a snap service has to handle cryptographic keys or certificates. A snap should have different certificate stores for different services. These stores are defined in the package-assets file (see following code snippet)
 
 !!! example
     ```json
@@ -517,25 +517,25 @@ The certificate store block defines if a snap service has to handle with cryptog
           {
               "id": "examplestore",
               "title": "Example Store",
-              "description": "This is only an example store for documentation purpose."
+              "description": "This is only an example store for documentation purposes."
           }
       ],
     ```
 
-* **id (mandatory):** This id should be unique because it is used to identify the store over the REST-interface.
+* **id (mandatory):** Use a unique ID, as it is used to identify the store via the REST interface.
   * opcua
   * vpnmanager
   * ...
-* **title (mandatory):** This name is used in the frontend.
+* **title (mandatory):** Name used in the front end.
   * OPCUA
-  * VPN-Manager
+  * VPN Manager
   * ...
-* **description:** The description is optional and displayed in the fronted. Here you can describe the application and can give the user some more information. 
+* **description:** Optional and displayed in the front end. To describe the application and provide some more information. 
 
-Every certificate store needs the following, predefined folder structure:
+The following predefined folder structure applies to every certificate store:
 
 !!! hint
-    SNAPCRAFT_PROJECT_NAME has to been replaced with the real name here!
+    SNAPCRAFT_PROJECT_NAME has to be replaced with the real name!
 
 /$SNAP_COMMON/package-certificates/{SNAPCRAFT_PROJECT_NAME}/
 
@@ -556,19 +556,19 @@ Every certificate store needs the following, predefined folder structure:
       * ...
 
 !!! hint
-    You can store your keys with the help of a [TPM](./tpm2.md).
+    You can store your keys using a [TPM](./tpm2.md).
 
-#### Integration possibilities
+#### Integration options
 
-Third-Party Application that brings its own web server, has got a possibility to integrate in ctrlX CORE user interface. 
+Third-party apps with an own web server can be integrated into the ctrlX CORE user interface. 
 
-After this integration, a Third-Party Application will be opened in a separate tab within the browser.
+After this integration, a third-party app opens in a separate tab in the browser.
 
-The **recommended integration** with ctrlX CORE is to use **package-manifest.json** file.
+The **recommended integration** with ctrlX CORE is the use of the **package-manifest.json** file.
 
-Within this file, you can specify the section for the menus and the sidebar. 
+The section for the menus and the sidebar can be specified in this file. 
 
-The important part is the assignment of the **bearer token** for the external authentication.
+Assigning the **bearer token** is important for the external authentication.
 
 The pattern for this file is shown below.
 

@@ -24,13 +24,12 @@ SOFTWARE.
 namespace Samples.Datalayer.MQTT.Base
 {
     /// <summary>
-    /// 
+    /// Used Names
     /// </summary>
     internal static class Names
     {
-        public const string Create = "» create";
-        public const string Remove = "× remove";
-        public const string Status = "• status";
+        public const string Create = "create";
+        public const string Status = "status";
         public const string Topic = "topic";
         public const string QualityOfService = "quality-of-service";
 

@@ -33,6 +33,7 @@ from datalayer.variant import Result
 
 import datalayerclient.app
 
+
 def is_snap() -> bool:
     return 'SNAP' in os.environ
 
@@ -59,7 +60,7 @@ if __name__ == '__main__':
         #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
         #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
         
-        connection = "tcp://boschrexroth:boschrexroth@127.0.0.1:2069"
+        connection = "tcp://boschrexroth:boschrexroth@10.0.2.2:2069"
 
         if is_snap():
             connection = "ipc://"

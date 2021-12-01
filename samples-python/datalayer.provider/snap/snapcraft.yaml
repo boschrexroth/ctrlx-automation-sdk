@@ -1,32 +1,32 @@
-name: sdk-py-datalayer-provider
-version: 1.0.2
+name: sdk-py-provider
+version: 2.0.0
 summary: Data Layer provider sample written in Python for ctrlX
-#title: sdk-py-datalayer-provider
+title: sdk-py-provider
 description: |
-  This sample shows how to provide data to ctrlX Data Layer
-base: core18
+  This sample shows how to provide data to the ctrlX Data Layer
+base: core20
 confinement: strict
 grade: stable
 
 apps:
   provider:
-    command: main.py
+    command: bin/main.py
     plugs:
       - network
+      - datalayer
     daemon: simple
+    restart-condition: always
     passthrough:   
-      restart-condition: always
       restart-delay: 10s
 
 parts:
   provider:
     plugin: python
-    python-version: python3
     source: .
-    python-packages:
-      - ../../whl/ctrlx_datalayer-1.3.0-py3-none-any.whl
-      - ../../whl/ctrlx_fbs-1.0.0-py3-none-any.whl
-      - flatbuffers~=1.12
+
+  files:
+    plugin: dump
+    source: ./bfbs 
 
 plugs:
   datalayer:

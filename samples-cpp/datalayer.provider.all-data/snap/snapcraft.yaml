@@ -3,14 +3,17 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
-name: alldataprovider
-version: "1.0.1"
+name: sdk-cpp-alldata
+version: "2.0.0"
 grade: stable
-summary: ctrlX Data Layer Provider App which provides many nodes
+summary: SDK sample app in cpp - provides Data Layer nodes with different data types
 description: |
-  This app will provide a Data Layer node for each supported data type.
-  It can be used in tests for Data Layer Clients.
-base: core18
+  This app provides two Data Layer branches, each branch initialy has nodes with all simple data types and one flatbuffers type.
+  The 'static' branch allows only read access. 
+  The 'dynamic' branch allows read and write access of each node.
+  Furthermore nodes can be added.
+title: sdk-cpp-alldata
+base: core20
 confinement: strict
 
 # define how apps & services are exposed to host system
@@ -18,7 +21,9 @@ apps:
   allDataProvider:
     command: allDataProvider
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: [network]
+    plugs: 
+      - network
+      - datalayer
     daemon: simple
     passthrough:
       restart-condition: always
@@ -32,6 +37,10 @@ parts:
   flatbuffers:
     plugin: dump
     source: ./bfbs
+  
+  deb:
+    plugin: dump
+    source: ../../deb/ctrlx-datalayer-1.7.4.deb
 
 # describes which interface slots are supported by defining the plugs
 plugs:

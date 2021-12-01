@@ -59,10 +59,18 @@ namespace Samples.Datalayer.MQTT.Sub
         public override DLR_RESULT Start()
         {
             //Create, register and add the handled nodes here
+            //Folder (self)
+            var (result, node) = Root.Provider.CreateBranchNode(this, BaseAddress, Name, true);
+            if (result.IsBad())
+            {
+                return DLR_RESULT.DL_FAILED;
+            }
+            Nodes.Add(node.Address, node);
+
             //...
 
             //topic
-            var (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Topic, new Variant(MqttClientWrapper.DefaultTopic));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Topic, new Variant(MqttClientWrapper.DefaultTopic));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -70,7 +78,7 @@ namespace Samples.Datalayer.MQTT.Sub
             Nodes.Add(node.Address, node);
 
             //target-address
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.TargetAddress, new Variant(Root.Test.Dummy1));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.TargetAddress, new Variant(Root.Test.Dummy1));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -78,7 +86,7 @@ namespace Samples.Datalayer.MQTT.Sub
             Nodes.Add(node.Address, node);
 
             //json-data-type
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.JsonDataType, new Variant("float"));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.JsonDataType, new Variant("float"));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -86,15 +94,7 @@ namespace Samples.Datalayer.MQTT.Sub
             Nodes.Add(node.Address, node);
 
             //quality-of-service
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.QualityOfService, new Variant((int)MqttQualityOfServiceLevel.AtLeastOnce));
-            if (result.IsBad())
-            {
-                return DLR_RESULT.DL_FAILED;
-            }
-            Nodes.Add(node.Address, node);
-
-            //remove        
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Remove, Variant.False);
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.QualityOfService, new Variant((int)MqttQualityOfServiceLevel.AtLeastOnce));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -228,42 +228,30 @@ namespace Samples.Datalayer.MQTT.Sub
                         return;
                     }
                     break;
-
-                //remove
-                case Names.Remove:
-
-                    if (!writeValue.IsBool)
-                    {
-                        result.SetResult(DLR_RESULT.DL_FAILED);
-                        return;
-                    }
-
-                    //Check for write value 'true'
-                    if (!writeValue.ToBool())
-                    {
-                        result.SetResult(DLR_RESULT.DL_FAILED);
-                        return;
-                    }
-
-                    //Stop the handler
-                    if (Stop().IsBad())
-                    {
-                        result.SetResult(DLR_RESULT.DL_FAILED);
-                        return;
-                    }
-
-                    //Remove from parent
-                    Parent.Handlers.Remove(this);
-                    break;
             }
 
             //Success
             result.SetResult(DLR_RESULT.DL_OK, writeValue);
         }
 
-        #endregion
+        /// <summary>
+        /// OnRemove handler
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="result"></param>
+        public override void OnRemove(string address, IProviderNodeResult result)
+        {
+            //Stop the handler
+            if (Stop().IsBad())
+            {
+                result.SetResult(DLR_RESULT.DL_FAILED);
+                return;
+            }
 
-        #region Overrides
+            //Remove from parent
+            Parent.Handlers.Remove(this);
+            result.SetResult(DLR_RESULT.DL_OK);
+        }
 
         /// <summary>
         /// MQTT message received event handler
@@ -279,6 +267,12 @@ namespace Samples.Datalayer.MQTT.Sub
 
             //Filter for null topic which may occure
             if (args.ApplicationMessage.Topic == null)
+            {
+                return;
+            }
+
+            //Filter for null payload which may occure
+            if (args.ApplicationMessage.Payload == null)
             {
                 return;
             }

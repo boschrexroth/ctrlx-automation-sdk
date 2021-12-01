@@ -21,7 +21,7 @@ The sample __hello-webserver__ contains simple webserver.
 
 For the best webserver integration take a look at
 
-[package-manifest](./../../package-manifest.md)
+[package-manifest](./../package-manifest.md)
 
 
 ## Screenshots
@@ -30,7 +30,7 @@ For the best webserver integration take a look at
 
 ## Support
 
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 

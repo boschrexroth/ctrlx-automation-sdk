@@ -8,9 +8,9 @@
             "name": "HelloPlc",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/generated/linux-gcc-x64/Debug/helloPlc",
+            "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/helloPlc",
             "args": [],
-            "additionalSOLibSearchPath": "${workspaceFolder}/generated/linux-gcc-x64/Debug/usr/lib/",
+            "additionalSOLibSearchPath": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/usr/lib/",
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -23,7 +23,7 @@
                 },
                 {
                     "description": "Set path variable to .",
-                    "text": "set env LD_LIBRARY_PATH=${workspaceFolder}/generated/linux-gcc-x64/Debug/usr/lib/",
+                    "text": "set env LD_LIBRARY_PATH=${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/usr/lib/",
                     "ignoreFailures": false
                 }
             ]

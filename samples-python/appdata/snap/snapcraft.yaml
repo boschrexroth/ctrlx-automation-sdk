@@ -1,19 +1,23 @@
 name: sdk-py-appdata
-version: 1.0.2
+version: 2.0.0
 summary: Application data sample written in Python for ctrlX
-# title: sdk-py-appdata
+title: sdk-py-appdata
 description: |
   This sample demonstrates how to persist your application data in ctrlX environment
 
-base: core18
+base: core20
 confinement: strict
 grade: stable
 
 apps:
   appdata:
-    command: main.py
+    command: bin/main.py
     plugs:
       - network-bind
+      - active-solution
+    slots:
+      - package-assets
+      - package-run
     daemon: simple
     restart-condition: always
     passthrough:
@@ -22,13 +26,7 @@ apps:
 parts:
   appdata:
     plugin: python
-    python-version: python3
     source: .
-    python-packages:
-      - PyJWT
-      - ../../whl/ctrlx_datalayer-1.3.0-py3-none-any.whl
-      - ../../whl/ctrlx_fbs-1.0.0-py3-none-any.whl
-      - flatbuffers~=1.12
 
   configs:
     source: ./configs

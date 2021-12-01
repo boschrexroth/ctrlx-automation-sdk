@@ -38,6 +38,7 @@ namespace Samples.Datalayer.Client.Browse
         private static readonly string Username = "boschrexroth";
         private static readonly string Password = "boschrexroth";
 
+
         static void Main(string[] args)
         {
             //Add app exit handler to handle optional clean up
@@ -79,7 +80,7 @@ namespace Samples.Datalayer.Client.Browse
                 stopWatch.Start();
 
                 // Traverse the whole ctrlX Data Layer tree
-                client.BrowseTree(system.Converter);
+                client.BrowseTree();
 
                 stopWatch.Stop();
 

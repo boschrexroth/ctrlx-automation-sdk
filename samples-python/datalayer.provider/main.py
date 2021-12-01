@@ -30,7 +30,6 @@ import datalayer
 from datalayer.variant import Variant
 
 from app.my_provider_node import MyProviderNode
-from sample.schema.InertialValue import InertialValue
 from sample.schema.InertialValue import InertialValueAddX
 from sample.schema.InertialValue import InertialValueAddY
 from sample.schema.InertialValue import InertialValueAddZ
@@ -41,10 +40,11 @@ from sample.schema.InertialValue import InertialValueStart
 bfbs_file = "sampleSchema.bfbs"
 
 # Type address of sampleSchema
-type_address = "types/sample-py/schema/inertial-value"
+type_address_fbs = "types/sample-py/schema/inertial-value"
+type_address_string = "types/datalayer/string"
+
 # addresses of provided values
-value_address_fbs = "my-py-nodes/my-fbs"
-value_address_str = "my-py-nodes/my-string"
+address_base = "sdk-py-datalayer-provider/"
 
 
 def main():
@@ -60,23 +60,23 @@ def main():
         #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
         #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
 
-        connectionProvider = "tcp://boschrexroth:boschrexroth@127.0.0.1:2070"
+        connectionProvider = "tcp://boschrexroth:boschrexroth@10.0.2.2:2070"
 
         if 'SNAP' in os.environ:
             connectionProvider = "ipc://"
 
         print("Connecting", connectionProvider)
         with datalayer_system.factory().create_provider(connectionProvider) as provider:
+            
+            print("Starting provider")
             result = provider.start()
             if result is not datalayer.variant.Result.OK:
                 print("ERROR Starting Data Layer Provider failed with:", result)
                 return
 
-            provider_node_fbs = provide_fbs(provider, bfbs_file)
-            provider_node_str = provide_string(provider)
+            provider_node_fbs = provide_fbs(provider, "inertial-value", bfbs_file)
+            provider_node_str = provide_string(provider, "string-value")
 
-            print("Start provider")
-            provider.start()
             print("Running endless loop...")
             while provider.is_connected():
                 time.sleep(1.0)  # Seconds
@@ -87,36 +87,31 @@ def main():
             result = provider.stop()
             print(result)
 
-            print("Unregister provider Type", type_address, end=" ")
-            result = provider.unregister_type(type_address)
+            print("Unregistering provider Type", type_address_fbs, end=" ")
+            result = provider.unregister_type(type_address_fbs)
             print(result)
 
-            print("Unregister provider Node", value_address_fbs, end=" ")
-            result = provider.unregister_node(value_address_fbs)
-            print(result)
-
-            print("Unregister provider Node", value_address_str, end=" ")
-            result = provider.unregister_node(value_address_str)
-            print(result)
-
+            provider_node_fbs.unregister_node()
             del provider_node_fbs
+
+            provider_node_str.unregister_node()
             del provider_node_str
 
         datalayer_system.stop(True)
 
 
-def provide_fbs(provider: datalayer.provider, bfbs_file: str):
+def provide_fbs(provider: datalayer.provider, name : str, bfbs_file: str):
     # Path to sampleSchema.bfbs (Flatbuffers)
     snap_path = os.getenv('SNAP')
     if snap_path is None:
         # Debug environment
-        bfbs_path = os.path.join("bin/", bfbs_file)
+        bfbs_path = os.path.join("bfbs/", bfbs_file)
     else:
         # snap environment
         bfbs_path = os.path.join(snap_path, bfbs_file)
 
     # Register type with binary flatbuffers schema file: sampleSchema.bfbs (auto generated from sampleSchema.fbs by flatc compiler)
-    result = provider.register_type(type_address, bfbs_path)
+    result = provider.register_type(type_address_fbs, bfbs_path)
     print("Registering Type with address=", bfbs_path, "result=", result)
 
     # Create `FlatBufferBuilder`instance. Initial Size 1024 bytes (grows automatically if needed)
@@ -140,21 +135,31 @@ def provide_fbs(provider: datalayer.provider, bfbs_file: str):
     # Create and register flatbuffers provider node
     print("Creating flatbuffers provider node")
     provider_node_fbs = MyProviderNode(
-        provider, value_address_fbs, variantFlatbuffers)
-    provider_node_fbs.create_metadata(type_address)
+        provider, 
+        type_address_fbs,
+        address_base + name, 
+        name,
+        "g",
+        "Simple flatbuffers variable", 
+        variantFlatbuffers)
     provider_node_fbs.register_node()
 
     return provider_node_fbs
 
 
-def provide_string(provider: datalayer.provider):
+def provide_string(provider: datalayer.provider, name : str):
     # Create and register simple string provider node
     print("Creating string  provider node")
     variantString = Variant()
     variantString.set_string("myString")
     provider_node_str = MyProviderNode(
-        provider, value_address_str, variantString)
-    provider_node_str.create_metadata()
+        provider, 
+        type_address_string,
+        address_base +  name,
+        name,
+        "-",
+        "String variable", 
+        variantString)
     provider_node_str.register_node()
 
     return provider_node_str

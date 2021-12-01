@@ -6,15 +6,15 @@ add_library( ${TARGET_PROJECT_NAME_SHARED} SHARED
   ./../impl/hello_motion.cpp
 )
 
-message( STATUS "MOTION_DEPENDENCY_DIR=${MOTION_DEPENDENCY_DIR}" )
-
 target_include_directories( ${TARGET_PROJECT_NAME_SHARED}
   PRIVATE ${LIBRARY_INCLUDES}
   PRIVATE ./../impl
   PRIVATE ./../impl/linux
   PRIVATE ${USER_DEPENDENCY_DIR}/include/motion.core
+  PRIVATE ${USER_DEPENDENCY_DIR}/include/motion.lib.base
   PRIVATE ${USER_DEPENDENCY_DIR}/include/motion.lib.common
   PRIVATE ${USER_DEPENDENCY_DIR}/include/motion.lib.commands
+  PRIVATE ${USER_DEPENDENCY_DIR}/include/motion.lib.jobs
 )
 
 # don't set RPATH in shared library of activator because possibility wrong build paths in *.so

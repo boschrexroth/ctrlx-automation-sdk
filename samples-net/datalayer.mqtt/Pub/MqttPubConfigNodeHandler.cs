@@ -68,10 +68,19 @@ namespace Samples.Datalayer.MQTT.Pub
         public override DLR_RESULT Start()
         {
             //Create, register and add the handled nodes here
+
+            //Folder (self)
+            var (result, node) = Root.Provider.CreateBranchNode(this, BaseAddress, Name, true);
+            if (result.IsBad())
+            {
+                return DLR_RESULT.DL_FAILED;
+            }
+            Nodes.Add(node.Address, node);
+
             //...
 
             //topic
-            var (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Topic, new Variant(MqttClientWrapper.DefaultTopic));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Topic, new Variant(MqttClientWrapper.DefaultTopic));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -82,7 +91,7 @@ namespace Samples.Datalayer.MQTT.Pub
             //framework/metrics/system/memused-percent
             //framework/metrics/system/memused-mb
             //framework/metrics/system/cpu-utilisation-percent
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.SourceAddress, new Variant("framework/metrics/system/cpu-utilisation-percent"));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.SourceAddress, new Variant("framework/metrics/system/cpu-utilisation-percent"));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -90,7 +99,7 @@ namespace Samples.Datalayer.MQTT.Pub
             Nodes.Add(node.Address, node);
 
             //publish-interval-millis
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.PublishIntervalMillis, new Variant(1_000));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.PublishIntervalMillis, new Variant(1_000));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -98,7 +107,7 @@ namespace Samples.Datalayer.MQTT.Pub
             Nodes.Add(node.Address, node);
 
             //quality-of-service
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.QualityOfService, new Variant((int)MqttQualityOfServiceLevel.AtLeastOnce));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.QualityOfService, new Variant((int)MqttQualityOfServiceLevel.AtLeastOnce));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -106,7 +115,7 @@ namespace Samples.Datalayer.MQTT.Pub
             Nodes.Add(node.Address, node);
 
             //message-expiry-interval-millis
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.MessageExpiryIntervalMillis, new Variant(TimeSpan.FromMinutes(60).TotalMilliseconds));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.MessageExpiryIntervalMillis, new Variant(TimeSpan.FromMinutes(60).TotalMilliseconds));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -114,15 +123,7 @@ namespace Samples.Datalayer.MQTT.Pub
             Nodes.Add(node.Address, node);
 
             //retain
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Retain, Variant.False);
-            if (result.IsBad())
-            {
-                return DLR_RESULT.DL_FAILED;
-            }
-            Nodes.Add(node.Address, node);
-
-            //remove        
-            (result, node) = Root.Provider.CreateNode(this, FullAddress, Names.Remove, Variant.False);
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Retain, Variant.False);
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -302,35 +303,28 @@ namespace Samples.Datalayer.MQTT.Pub
 
                     wrappedNode.Value = writeValue;
                     break;
-
-                //remove
-                case Names.Remove:
-                    if (!writeValue.IsBool)
-                    {
-                        result.SetResult(DLR_RESULT.DL_FAILED);
-                        return;
-                    }
-
-                    //Check for write value 'true'
-                    if (!writeValue.ToBool())
-                    {
-                        result.SetResult(DLR_RESULT.DL_FAILED);
-                        return;
-                    }
-
-                    //Stop the handler
-                    if (Stop().IsBad())
-                    {
-                        result.SetResult(DLR_RESULT.DL_FAILED);
-                        return;
-                    }
-
-                    //Remove from parent
-                    Parent.Handlers.Remove(this);
-                    break;
             }
 
             //Success
+            result.SetResult(DLR_RESULT.DL_OK);
+        }
+
+        /// <summary>
+        /// OnRemove handler
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="result"></param>
+        public override void OnRemove(string address, IProviderNodeResult result)
+        {
+            //Stop the handler
+            if (Stop().IsBad())
+            {
+                result.SetResult(DLR_RESULT.DL_FAILED);
+                return;
+            }
+
+            //Remove from parent
+            Parent.Handlers.Remove(this);
             result.SetResult(DLR_RESULT.DL_OK);
         }
 

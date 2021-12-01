@@ -1,0 +1,13 @@
+{
+  "name": "datalayer-provider",
+  "version": "1.0.0",
+  "description": "Simple nodejs datalayer provider sample for ctrlX",
+  "bin": {
+    "main": "main.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ctrlx-datalayer-nodejs": "file:ctrlx-datalayer-nodejs.tgz"
+  }
+}

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include "datalayerclient .h"
+#include "datalayerclient.h"
 
 int main(int ac, char *av[])
 {

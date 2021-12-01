@@ -3,13 +3,13 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
-name: diaglogbook
-version: "0.0.1"
+name: sdk-cpp-diaglogbook
+version: "2.0.0"
 grade: stable
 summary: Writes messages to journald and the ctrlX logbook
 description: |
   This is a simple App to show how messages with different log levels are written to journald and the ctrlX logbook.
-base: core18
+base: core20
 confinement: strict
 
 # define how apps & services are exposed to host system

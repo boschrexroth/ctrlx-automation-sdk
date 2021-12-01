@@ -1,0 +1,13 @@
+__pycache__
+_*.sh
+
+*/*.egg-info/
+*/build/
+*/dist/
+*/parts/
+*/prime/
+*/snap/.snapcraft
+*/squashfs-root/
+*/stage/
+*/venv/
+*/*.whl

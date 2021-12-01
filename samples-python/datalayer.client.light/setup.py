@@ -1,9 +1,10 @@
-from distutils.core import setup
+from setuptools import setup
 
-setup(name = "sdk-py-datalayer-client-light",
-      version = "1.0.0",
-      description = "Light Data Layer client",
-      author = "SDK Team",
+setup(name = 'sdk-py-client-light',
+      version='2.0.0',
+      description = 'Lightweight Data Layer client',
+      author = 'SDK Team',
+      install_requires = ['ctrlx-datalayer', 'ctrlx-fbs'],
       scripts = ['main.py'],
-      license = "Copyright (c) 2021 Bosch Rexroth AG, Licensed under MIT License"
+      license = 'Copyright (c) 2021 Bosch Rexroth AG, Licensed under MIT License'
 )

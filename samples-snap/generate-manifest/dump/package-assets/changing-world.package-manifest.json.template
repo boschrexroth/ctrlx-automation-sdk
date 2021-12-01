@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.schema.json",
+  "version": "1.0.0",
+  "id": "changing-world",
+  "menus": {
+    "sidebar": [
+      {
+        "id": "changing-world",
+        "title": "",
+        "icon": "bosch-ic-automation",
+        "link": "https://www.google.com/"
+      }
+    ]
+  }
+}

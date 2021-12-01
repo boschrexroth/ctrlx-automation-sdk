@@ -13,7 +13,7 @@
       "problemMatcher": [
         "$gcc"
       ],
-      "command": "cmake -DCMAKE_BUILD_KIT='${input:buildKit}' -DBUILD_SNAP=ON ..; make install; make clean; cd ..; snapcraft clean; rm -rf ./generated/build",
+      "command": "cmake -DCMAKE_BUILD_KIT='${input:buildKit}' -DBUILD_SNAP=ON ..; make install; make clean; cd ..; snapcraft clean --destructive-mode; rm -rf ./generated/build",
       "options": {
         "cwd": "${workspaceFolder}/build/"
       },
@@ -25,10 +25,10 @@
       "type": "pickString",
       "description": "CMake Build Kit",
       "options":[
-        "GCC for x86_64-linux-gnu 7.4.0",
-        "GCC for aarch64-linux-gnu 7.4.0"
+        "GCC x86_64-linux-gnu",
+        "GCC aarch64-linux-gnu"
       ],
-      "default": "GCC for x86_64-linux-gnu 7.4.0"
+      "default": "GCC x86_64-linux-gnu"
       // type specific configuration attributes
     }
   ]

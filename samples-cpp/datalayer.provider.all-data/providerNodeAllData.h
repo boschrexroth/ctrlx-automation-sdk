@@ -29,7 +29,6 @@ class ProviderNodeAllData : public comm::datalayer::IProviderNode
 {
 
 protected:
-
   // List of DataContainer instances ('virtual nodes')
   std::vector<DataContainer *> _dataContainers;
 
@@ -45,17 +44,22 @@ protected:
   // Root path combined with 'static' or 'dynamic'
   std::string _addressBase;
 
+  //metadata for the providerNode
+  comm::datalayer::Variant _metadata;
+
   // Search an existing DataContainer instance for this address
   DataContainer *getDataContainer(const std::string &address);
 
   // Create a DataContainer instance for this address with that data
-  bool createDataContainer(const std::string &address, const comm::datalayer::Variant &data);
+  comm::datalayer::DlResult createDataContainer(const std::string &address, const comm::datalayer::Variant &data);
 
   // Create a DataContainer instance for this address with that data if setValueResult is DL_OK
   void createDataContainer(comm::datalayer::DlResult setValueResult, const std::string &addressNode, const comm::datalayer::Variant &data);
 
-public:
+  // Create Metadata instance for the address with the data
+  comm::datalayer::Variant createMetadata(const comm::datalayer::Variant &data, const std::string &address);
 
+public:
   // Constructor
   ProviderNodeAllData(comm::datalayer::IProvider *provider, const std::string &addressRoot, bool dynamic);
 
@@ -98,7 +102,8 @@ public:
       const comm::datalayer::IProviderNode::ResponseCallback &callback);
 };
 
-static const char* snap_path() {
+static const char *snap_path()
+{
   return std::getenv("SNAP");
 }
 
@@ -106,6 +111,5 @@ static bool is_snap()
 {
   return snap_path() != nullptr;
 }
-
 
 #endif

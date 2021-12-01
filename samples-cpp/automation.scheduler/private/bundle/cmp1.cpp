@@ -87,19 +87,19 @@ void Cmp1::cppSchedulerServiceRemoved(common::scheduler::IScheduler* service)
 
 }
 
-void Cmp1::cppRtTraceServiceStateChanged(common::log::trace::IRegistrationRealTime* service)
+void Cmp1::cppRtTraceServiceStateChanged(common::log::trace::IRegistrationRealTime2* service)
 {
   TRACE_MSG("Trace Service changed");
 }
 
-void Cmp1::cppRtTraceServiceAdded(common::log::trace::IRegistrationRealTime* service)
+void Cmp1::cppRtTraceServiceAdded(common::log::trace::IRegistrationRealTime2* service)
 {
   m_rtTraceSrv = service;
   automation::scheduler::g_rt_trace.attachTrace(service);
   
 }
 
-void Cmp1::cppRtTraceServiceRemoved(common::log::trace::IRegistrationRealTime* service)
+void Cmp1::cppRtTraceServiceRemoved(common::log::trace::IRegistrationRealTime2* service)
 {
   automation::scheduler::g_rt_trace.detachTrace(service);
   m_rtTraceSrv = nullptr;

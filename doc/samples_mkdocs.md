@@ -12,10 +12,13 @@
 * ["ctrlX Data Layer RegisterNode"](./samples-cpp/datalayer.register.node/README.md)
 * ["ctrlX Automation Bundle"](./samples-cpp/automation.bundle/README.md) includes motion commands for axis and kinematics
 * ["ctrlX Automation Scheduler"](./samples-cpp/automation.scheduler/README.md)
+* ["ctrlX Automation Diagnosis"](./samples-cpp/automation.diagnosis/README.md)
+* ["ctrlX Automation Trace"](./samples-cpp/automation.trace/README.md)
 * ["ctrlX Data Layer EtherCAT I/O's"](./samples-cpp/datalayer.ecat.io/README.md)
 * ["ctrlX Data Layer Realtime"](./samples-cpp/datalayer.realtime/README.md)
 * ["ctrlX Data Layer All Data Provider"](./samples-cpp/datalayer.provider.all-data/README.md)
 * ["ctrlX Diagnostics Logbook"](./samples-cpp/diagnostics.logbook/README.md)
+* ["ctrlX Data Layer Diagnosis"](./samples-cpp/datalayer.diagnosis/README.md)
 
 
 ### GO-Samples
@@ -25,6 +28,7 @@
 
 * ["Hello Webserver"](./samples-go/hello.webserver/README.md)
 * ["AppData File Storage"](./samples-go/appdata/README.md)
+* ["TPM2.SRK"](./samples-go/tpm2.srk/README.md)
 
  
 ### Python-Samples
@@ -37,10 +41,12 @@
 * ["ctrlX Data Layer Client Subscription"](./samples-python/datalayer.client.sub/README.md)
 * ["ctrlX Data Layer Provider"](./samples-python/datalayer.provider/README.md)
 * ["ctrlX Data Layer Provider All Data"](./samples-python/datalayer.provider.all-data/README.md)
-* ["ctrlX Diagnostics Logbook"](./samples-python/python.logbook/README.md)
-* ["ctrlX Data Layer Calculation operations"](./samples-python/datalayer.calc/README.md)
-* ["ctrlX Data Layer + Webserver"](./samples-python/python.webserver/README.md)
+* ["ctrlX Diagnostics Logbook"](./samples-python/logbook/README.md)
+* ["ctrlX Data Layer Calculation Operations"](./samples-python/datalayer.calc/README.md)
+* ["ctrlX Data Layer + Webserver"](./samples-python/webserver/README.md)
 * ["AppData File Storage"](./samples-python/appdata/README.md)
+* ["ctrlX Data Layer Remote Debug"](./samples-python/datalayer.remote.debug/README.md)
+
 
 
 ### .NET Samples
@@ -58,10 +64,25 @@
 * ["ctrlX Diagnostics Logbook"](./samples-net/diagnostics.logbook/README.md)
 * ["AppData File Storage"](./samples-net/appdata/README.md)
 
+
+### Nodejs Samples
+
+![Nodejs](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/120px-Node.js_logo.svg.png)
+
+* ["Hello World"](./samples-node/hello-world/README.md)
+* ["ctrlX Data Layer Client"](./samples-node/datalayer.client/README.md)
+
+
 ### Shell Based Samples
 
 
 * [TPM2 Consumer](./samples-sh/tpm2.consumer/README.md)
+
+
+### Snap Samples
+
+
+* [Generate Manifest](./samples-snap/generate-manifest/README.md)
 
 
 ## Build and install

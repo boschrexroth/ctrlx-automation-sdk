@@ -1,8 +1,10 @@
-# ctrlX Data Layer Calculator Sample in Python 
+# ctrlX Data Layer Calculation operations 
+
+## Introduction
 
 This app is a ctrlX Data Layer Provider and Client written in Python.
 
-## Introduction
+## Function Description
 
 The app reads two Data Layer values and calculates the output value 'out'. All values are float64 value types.
 
@@ -17,7 +19,7 @@ How the out value is calculated can be configured as string value of the node 'm
 - *
 - /
 
-## Design 
+## Implementation Description 
 
 There are two Python scripts:
 
@@ -46,71 +48,7 @@ It is a Data Layer Provider for four nodes:
 
 With the address values of in1 and in2 a subscription is started. Everytime when new values are published the value of out is recalculated.
 
-## Getting Started
-
-As Integrated Development Environment (IDE) we recommend Visual Studio Code.
-Therefor the folder .vscode contains configuration files.
-
-### Install Virtual Environment
-
-We recommend to create and activate a virtual environment. Start a terminal in the project directory (workspaceFolder) and enter:
-
-    virtualenv -p python3 venv
-    source venv/bin/activate
-
-### Install Wheels
-
-Install the required packages:
-
-    pip3 install -r requirements.txt
-    pip3 install ../../whl/ctrlx_datalayer*
-    pip3 install ../../whl/ctrlx_fbs-*
-
-### Start IDE
-
-Start your IDE, open main.py and start the program.
-
-## Build an AMD64 Snap
-
-Check your snapcraft version with the command:
-
-    snapcraft --version
-
-For cleaning and building snaps see according chapter.
-
-### Version 2.43
-
-To clean the previous snap build results use:
-
-    snapcraft clean
-
-Build the snap with:
-
-    snapcraft
-
-### Version 4.x or higher
-
-To clean the previous snap build results use:
-
-    snapcraft clean --destructive-mode
-
-Build the snap with:
-
-    snapcraft --destructive-mode
-
-__Important:__  To build an ARM64 (AARCH64) snap use a native ARM64 computer or a virtual machine emulating the ARM64 CPU e.g. with QEMU.
-
-### Install the Snap on the ctrlX
-
-* Open the ctrlX CORE Home page, select Settings - Apps, click on 'Service mode' and confirm.
-* Click on the Settings icon and select 'Allow installation from unknown source'
-* Select tab 'Local storage', click the + icon, upload and install the snap.
-* Switch to Operation mode
-
-
-## Support
-
-If you've any questions visit the [ctrlX AUTOMATION Communitiy](https://developer.community.boschrexroth.com/)
+___
 
 ## License
 
