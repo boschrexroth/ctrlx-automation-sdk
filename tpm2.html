@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/tpm2.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.6">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.cd566b2a.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.9204c3b2.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -42,10 +42,9 @@
     
       <link rel="stylesheet" href="stylesheets/sdk.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?".":"."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-
 
     
     
@@ -63,7 +62,7 @@
   
     
     
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -1906,20 +1905,20 @@
 </div>
 <p>More details on the Trusted Software Stack (TSS) below.</p>
 <h3 id="example-snapcraftyaml">Example snapcraft.yaml<a class="headerlink" href="#example-snapcraftyaml" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nt">plugs</span><span class="p">:</span>
-  <span class="nt">tpm2-socket</span><span class="p">:</span>
-    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">content</span>
-    <span class="nt">content</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tpm2-socket</span>
-    <span class="nt">target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$SNAP_DATA/tpm2-socket</span>
-  <span class="nt">system-configuration</span><span class="p">:</span>
-    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">content</span>
-    <span class="nt">content</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">system-configuration</span>
-    <span class="nt">target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$SNAP_DATA/system-configuration</span>
+<div class="highlight"><pre><span></span><code><span class="nt">plugs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">tpm2-socket</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content</span><span class="w"></span>
+<span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tpm2-socket</span><span class="w"></span>
+<span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$SNAP_DATA/tpm2-socket</span><span class="w"></span>
+<span class="w">  </span><span class="nt">system-configuration</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content</span><span class="w"></span>
+<span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">system-configuration</span><span class="w"></span>
+<span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$SNAP_DATA/system-configuration</span><span class="w"></span>
 
-<span class="nt">apps</span><span class="p">:</span>
-  <span class="nt">example-app</span><span class="p">:</span>
-    <span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
-    <span class="nt">plugs</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">tpm2-socket</span><span class="p p-Indicator">,</span> <span class="nv">system-configuration</span><span class="p p-Indicator">,</span> <span class="nv">network</span><span class="p p-Indicator">]</span>
+<span class="nt">apps</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">example-app</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">plugs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">tpm2-socket</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">system-configuration</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">network</span><span class="p p-Indicator">]</span><span class="w"></span>
 </code></pre></div>
 <h3 id="integration-with-certificate-manager">Integration with Certificate Manager<a class="headerlink" href="#integration-with-certificate-manager" title="Permanent link">&para;</a></h3>
 <p>If you provide the package-certificate slots, and use the appropriate directory structure, TPM2 usage perfectly integrates into Certificate Manager.</p>
@@ -1946,25 +1945,25 @@ tpm2_createprimary <span class="se">\</span>
     --unique-data<span class="o">=</span>unique.dat
 </code></pre></div>
 <p>In Golang, use following template:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="s">&quot;github.com/google/go-tpm/tpm2&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/google/go-tpm/tpm2&quot;</span><span class="w"></span>
 
-<span class="kd">var</span> <span class="nx">DefaultSrkTemplate</span> <span class="p">=</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">Public</span><span class="p">{</span>
-        <span class="nx">Type</span><span class="p">:</span>       <span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgRSA</span><span class="p">,</span>
-        <span class="nx">NameAlg</span><span class="p">:</span>    <span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgSHA256</span><span class="p">,</span>
-        <span class="nx">Attributes</span><span class="p">:</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagFixedTPM</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagFixedParent</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagSensitiveDataOrigin</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagUserWithAuth</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagNoDA</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagRestricted</span> <span class="p">|</span> <span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagDecrypt</span><span class="p">,</span>
-        <span class="nx">AuthPolicy</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
-        <span class="nx">RSAParameters</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">RSAParams</span><span class="p">{</span>
-            <span class="nx">Symmetric</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">SymScheme</span><span class="p">{</span>
-                <span class="nx">Alg</span><span class="p">:</span>     <span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgAES</span><span class="p">,</span>
-                <span class="nx">KeyBits</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
-                <span class="nx">Mode</span><span class="p">:</span>    <span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgCFB</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="nx">Sign</span><span class="p">:</span>        <span class="kc">nil</span><span class="p">,</span>
-            <span class="nx">KeyBits</span><span class="p">:</span>     <span class="mi">2048</span><span class="p">,</span>
-            <span class="nx">ExponentRaw</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="nx">ModulusRaw</span><span class="p">:</span>  <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
-        <span class="p">},</span>
-    <span class="p">}</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">DefaultSrkTemplate</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">Public</span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">Type</span><span class="p">:</span><span class="w">       </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgRSA</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">NameAlg</span><span class="p">:</span><span class="w">    </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgSHA256</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">Attributes</span><span class="p">:</span><span class="w"> </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagFixedTPM</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagFixedParent</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagSensitiveDataOrigin</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagUserWithAuth</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagNoDA</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagRestricted</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">FlagDecrypt</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">AuthPolicy</span><span class="p">:</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">RSAParameters</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">RSAParams</span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nx">Symmetric</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">SymScheme</span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nx">Alg</span><span class="p">:</span><span class="w">     </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgAES</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nx">KeyBits</span><span class="p">:</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nx">Mode</span><span class="p">:</span><span class="w">    </span><span class="nx">tpm2</span><span class="p">.</span><span class="nx">AlgCFB</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+<span class="w">            </span><span class="nx">Sign</span><span class="p">:</span><span class="w">        </span><span class="kc">nil</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nx">KeyBits</span><span class="p">:</span><span class="w">     </span><span class="mi">2048</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nx">ExponentRaw</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nx">ModulusRaw</span><span class="p">:</span><span class="w">  </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <p>For further details for golang, please see the <a href="samples-go/tpm2.srk/index.html">Golang example</a>.</p>
 <h3 id="trusted-software-stack">Trusted Software Stack<a class="headerlink" href="#trusted-software-stack" title="Permanent link">&para;</a></h3>
@@ -2056,10 +2055,10 @@ tpm2_createprimary <span class="se">\</span>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.01824240.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.22074ed6.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="assets/javascripts/bundle.1514a9a0.min.js"></script>
       
     
   </body>

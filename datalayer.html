@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/datalayer.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.6">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.cd566b2a.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.9204c3b2.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -42,10 +42,9 @@
     
       <link rel="stylesheet" href="stylesheets/sdk.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?".":"."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-
 
     
     
@@ -63,7 +62,7 @@
   
     
     
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -2738,33 +2737,33 @@ Out of a .fbs file you have to generate different files:</p>
 <p>To build your <code>.fbs</code> files using CMake include following lines in your CMakeLists.txt.</p>
 <p>To use the right flatbuffer compiler use these lines:</p>
 <div class="highlight"><pre><span></span><code><span class="c"># set flatbuffer root folder</span>
-<span class="nb">set</span><span class="p">(</span><span class="s">FLATBUFFER_ROOT</span> <span class="o">${</span><span class="nv">DEPENDENCIES_ROOT</span><span class="o">}</span><span class="s">/appflatbuffers</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">FLATBUFFER_ROOT</span><span class="w"> </span><span class="o">${</span><span class="nv">DEPENDENCIES_ROOT</span><span class="o">}</span><span class="s">/appflatbuffers</span><span class="p">)</span>
 
 <span class="c"># expand binary search path for flatbuffer compiler</span>
 <span class="nb">if</span> <span class="p">(</span><span class="s">WIN32</span><span class="p">)</span>
-  <span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_PROGRAM_PATH</span> <span class="o">${</span><span class="nv">CMAKE_PROGRAM_PATH</span><span class="o">}</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/win-msvc-x86/release</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_PROGRAM_PATH</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_PROGRAM_PATH</span><span class="o">}</span><span class="w"> </span><span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/win-msvc-x86/release</span><span class="p">)</span>
 <span class="nb">else</span><span class="p">()</span>
-  <span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_PROGRAM_PATH</span> <span class="o">${</span><span class="nv">CMAKE_PROGRAM_PATH</span><span class="o">}</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/linux-gcc-x64/release</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_PROGRAM_PATH</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_PROGRAM_PATH</span><span class="o">}</span><span class="w"> </span><span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/linux-gcc-x64/release</span><span class="p">)</span>
 
-  <span class="c"># set executable attributes for flatbuffer compiler</span>
-  <span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span> <span class="s">chmod</span> <span class="s">+x</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/linux-gcc-x64/debug/flatc</span><span class="p">)</span>
-  <span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span> <span class="s">chmod</span> <span class="s">+x</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/linux-gcc-x64/release/flatc</span><span class="p">)</span>
+<span class="w">  </span><span class="c"># set executable attributes for flatbuffer compiler</span>
+<span class="w">  </span><span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span><span class="w"> </span><span class="s">chmod</span><span class="w"> </span><span class="s">+x</span><span class="w"> </span><span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/linux-gcc-x64/debug/flatc</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span><span class="w"> </span><span class="s">chmod</span><span class="w"> </span><span class="s">+x</span><span class="w"> </span><span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/bin/linux-gcc-x64/release/flatc</span><span class="p">)</span>
 <span class="nb">endif</span><span class="p">()</span>
 
 <span class="c"># include flatbuffer cmake functions</span>
 <span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/CMake/FindFlatBuffers.cmake</span><span class="p">)</span>
 </code></pre></div>
 <p>To compile your <code>.fbs</code> files, use these lines:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_INCLUDE_PATH</span> <span class="o">${</span><span class="nv">CMAKE_INCLUDE_PATH</span><span class="o">}</span> <span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/include</span> <span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_INCLUDE_PATH</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_INCLUDE_PATH</span><span class="o">}</span><span class="w"> </span><span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/include</span><span class="w"> </span><span class="p">)</span>
 <span class="nb">include</span><span class="p">(</span><span class="o">${</span><span class="nv">FLATBUFFER_ROOT</span><span class="o">}</span><span class="s">/public/CMake/FindFlatBuffers.cmake</span><span class="p">)</span>
 
-<span class="nb">SET</span> <span class="p">(</span> <span class="s">IDL_FILES</span> <span class="o">${</span><span class="nv">IDL_FILES</span><span class="o">}</span>
-  <span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/mockups/Interpolator.fbs</span>
-  <span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/mockups/AllDataTypes.fbs</span>
-  <span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/motion/axis.fbs</span>
+<span class="nb">SET</span> <span class="p">(</span><span class="w"> </span><span class="s">IDL_FILES</span><span class="w"> </span><span class="o">${</span><span class="nv">IDL_FILES</span><span class="o">}</span>
+<span class="w">  </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/mockups/Interpolator.fbs</span>
+<span class="w">  </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/mockups/AllDataTypes.fbs</span>
+<span class="w">  </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/motion/axis.fbs</span>
 <span class="p">)</span>
 
-<span class="nb">build_flatbuffers</span><span class="p">(</span> <span class="s2">&quot;${IDL_FILES}&quot;</span> <span class="s2">&quot;&quot;</span> <span class="s">BuildFlatbuffers</span> <span class="s2">&quot;&quot;</span> <span class="s2">&quot;${CMAKE_CURRENT_BINARY_DIR}&quot;</span> <span class="s2">&quot;${CMAKE_CURRENT_BINARY_DIR}&quot;</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">build_flatbuffers</span><span class="p">(</span><span class="w"> </span><span class="s2">&quot;${IDL_FILES}&quot;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="s">BuildFlatbuffers</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="s2">&quot;${CMAKE_CURRENT_BINARY_DIR}&quot;</span><span class="w"> </span><span class="s2">&quot;${CMAKE_CURRENT_BINARY_DIR}&quot;</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>This will generate an additional buildtarget <code>BuildFlatbuffers</code>. You can add this build target to your dependencies.</p>
 <h3 id="tips-and-tricks">Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Permanent link">&para;</a></h3>
@@ -2997,10 +2996,10 @@ false to disable startup of broker in your system.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.01824240.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.22074ed6.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="assets/javascripts/bundle.1514a9a0.min.js"></script>
       
     
   </body>

@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/persistdata.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.6">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.cd566b2a.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.9204c3b2.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -42,10 +42,9 @@
     
       <link rel="stylesheet" href="stylesheets/sdk.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?".":"."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-
 
     
     
@@ -63,7 +62,7 @@
   
     
     
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -2239,11 +2238,11 @@ Persistence handling is done by the Solutions App (app.solutions), which is an e
 <h2 id="2-get-access-to-the-solutions-storage">2 Get access to the Solutions storage<a name="access"></a><a class="headerlink" href="#2-get-access-to-the-solutions-storage" title="Permanent link">&para;</a></h2>
 <p>The Solutions app exports the base directory of the storage location as a slot using a content interface. Your app must provide a plug that connects to the slot so that the $SNAP_COMMON/solutions directory becomes visible in your file system:</p>
 <p><strong>snapcraft.yaml:</strong>
-<div class="highlight"><pre><span></span><code><span class="nt">plugs</span><span class="p">:</span>
-  <span class="nt">active-solution</span><span class="p">:</span>
-    <span class="nt">interface</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">content</span>
-    <span class="nt">content</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">solutions</span>
-    <span class="nt">target</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$SNAP_COMMON/solutions</span>
+<div class="highlight"><pre><span></span><code><span class="nt">plugs</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">active-solution</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content</span><span class="w"></span>
+<span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solutions</span><span class="w"></span>
+<span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$SNAP_COMMON/solutions</span><span class="w"></span>
 </code></pre></div>
 The <code>$SNAP_COMMON/solution</code> directory contains an <code>activeConfiguration</code> symlink. Use this symlink to get the path to the appdata directory which contains the currently active app data: <code>$SNAP_COMMON/solutions/activeConfiguration</code> → <code>$SNAP_COMMON/solutions/DefaultSolution/configurations/appdata/</code></p>
 <blockquote>
@@ -2272,16 +2271,16 @@ The <code>$SNAP_COMMON/solution</code> directory contains an <code>activeConfigu
 <p><img alt="image" src="images/How-To-Persist-app-data-Fig02_configuation-screenshot.png" /></p>
 <p>You should also explicitly declare ownership of your app directories in your package manifest. The following example shows the declaration of the PLC base directory.</p>
 <p><strong>package-manifest.json:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nt">&quot;appDirectories&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;plc&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;PLC&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;bosch-ic-components&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;copyOnLoad&quot;</span><span class="p">:</span> <span class="kc">true</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;appDirectories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plc&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PLC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bosch-ic-components&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;copyOnLoad&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <ul>
 <li><strong>name</strong> (required): The name or path of the app directory</li>
@@ -2302,24 +2301,24 @@ Your app can specify "private files" inside your appdata directories in order to
 <h2 id="4-register-for-saving-and-loading">4 Register for saving and loading<a name="register"></a><a class="headerlink" href="#4-register-for-saving-and-loading" title="Permanent link">&para;</a></h2>
 <p>In order to participate in the save and load operations triggered by the Solutions app, your app must register its own save and load commands. The following example shows how to register a save and a load command for Motion settings by adding the respective command declarations to the package manifest:</p>
 <p><strong>package-manifest.json:</strong>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;commands&quot;</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nt">&quot;activeConfiguration&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;save&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="p">{</span>
-        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;motion&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;motion settings&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/automation/api/v1/motion/admin/cfg/save&quot;</span>
-      <span class="p">}</span>
-    <span class="p">],</span>
-    <span class="nt">&quot;load&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="p">{</span>
-        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;motion&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;motion settings&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/automation/api/v1/motion/admin/cfg/load&quot;</span>
-      <span class="p">}</span>
-    <span class="p">],</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;activeConfiguration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;save&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motion&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;subject&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motion settings&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/automation/api/v1/motion/admin/cfg/save&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;load&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motion&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;subject&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motion settings&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/automation/api/v1/motion/admin/cfg/load&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 For each command, the following elements must be specified:</p>
 <ul>
@@ -2364,11 +2363,11 @@ For each command, the following elements must be specified:</p>
 <li><strong>phase</strong>: specifies the current processing phase of a save or load operation; one of the phases described in section "Processing sequences"; e.g., "load"</li>
 </ul>
 <p>The request parameters are provided in the request body as a JSON object with the following structure (using the sample values from above):
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nt">&quot;configurationPath&quot;</span><span class="p">:</span> <span class="s2">&quot;solutions/DefaultSolution/configurations/&lt;configuration&gt;&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;282xy5&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;phase&quot;</span><span class="p">:</span> <span class="s2">&quot;load&quot;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;configurationPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;solutions/DefaultSolution/configurations/&lt;configuration&gt;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;282xy5&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;phase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;load&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div></p>
 <h3 id="expected-behavior">Expected behavior<a class="headerlink" href="#expected-behavior" title="Permanent link">&para;</a></h3>
 <p>Participants must consider the following conditions and constraints in their command implementations.</p>
@@ -2486,14 +2485,14 @@ a/g
 </code></pre></div>
 
 <p><strong>Result showing which directories would be copied (and why):</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="n">a</span><span class="o">:</span> <span class="kc">true</span> <span class="o">(</span><span class="k">default</span><span class="o">,</span> <span class="k">as</span> <span class="n">not</span> <span class="n">declared</span><span class="o">)</span>
-<span class="n">b</span><span class="o">:</span> <span class="kc">false</span> <span class="o">(</span><span class="n">declared</span><span class="o">)</span>
-<span class="n">c</span><span class="o">:</span> <span class="kc">true</span> <span class="o">(</span><span class="n">declared</span><span class="o">)</span>
-<span class="n">d</span><span class="o">:</span> <span class="kc">true</span> <span class="o">(</span><span class="n">inherited</span> <span class="n">from</span> <span class="n">c</span><span class="o">)</span>
-<span class="n">h</span><span class="o">:</span> <span class="kc">false</span> <span class="o">(</span><span class="n">declared</span><span class="o">)</span>
-<span class="n">e</span><span class="o">:</span> <span class="kc">false</span> <span class="o">(</span><span class="n">inherited</span> <span class="n">from</span> <span class="n">b</span><span class="o">)</span>
-<span class="n">f</span><span class="o">:</span> <span class="kc">false</span> <span class="o">(</span><span class="n">inherited</span> <span class="n">from</span> <span class="n">e</span><span class="o">)</span>
-<span class="n">g</span><span class="o">:</span> <span class="kc">true</span> <span class="o">(</span><span class="n">inherited</span> <span class="n">from</span> <span class="n">a</span><span class="o">)</span>
+<div class="codehilite"><pre><span></span><code><span class="n">a</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">(</span><span class="k">default</span><span class="o">,</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">declared</span><span class="o">)</span><span class="w"></span>
+<span class="n">b</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="o">(</span><span class="n">declared</span><span class="o">)</span><span class="w"></span>
+<span class="n">c</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">(</span><span class="n">declared</span><span class="o">)</span><span class="w"></span>
+<span class="n">d</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">(</span><span class="n">inherited</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">c</span><span class="o">)</span><span class="w"></span>
+<span class="n">h</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="o">(</span><span class="n">declared</span><span class="o">)</span><span class="w"></span>
+<span class="n">e</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="o">(</span><span class="n">inherited</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">b</span><span class="o">)</span><span class="w"></span>
+<span class="n">f</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="o">(</span><span class="n">inherited</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">e</span><span class="o">)</span><span class="w"></span>
+<span class="n">g</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">(</span><span class="n">inherited</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">a</span><span class="o">)</span><span class="w"></span>
 </code></pre></div>
 
 <p>However, an app might improve the load functionality by evaluating the changes to be applied during load. The app may determine that state changes (e.g., stopping the PLC for loading) are actually not required depending on the kind of data to load. Some participants may even be able to skip a load operation completely if their part of the configuration has not changed.</p>
@@ -2519,114 +2518,114 @@ For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is execu
 <h3 id="problem-schema-definition">Problem schema definition<a class="headerlink" href="#problem-schema-definition" title="Permanent link">&para;</a></h3>
 <p>Failure responses to command requests must adhere to the following schema:</p>
 <p><strong>Problem.yaml</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nt">Problem</span><span class="p">:</span>
-  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
-  <span class="nt">x-version</span><span class="p">:</span> <span class="s">&#39;1.0.0&#39;</span>
-  <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">&gt;</span>
-    <span class="no">This document defines a &quot;problem detail&quot; as a way</span>
-    <span class="no">to carry machine-readable details of errors in a</span>
-    <span class="no">HTTP response to avoid the need to define new error</span>
-    <span class="no">response formats for HTTP APIs.</span>
-  <span class="nt">required</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">type</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">title</span>
-  <span class="nt">properties</span><span class="p">:</span>
-    <span class="nt">type</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-      <span class="nt">format</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">uri</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">A URI reference [RFC3986] that identifies the problem type.</span>
-        <span class="no">This specification encourages that, when dereferenced,</span>
-        <span class="no">it provide human-readable documentation for the problem type</span>
-        <span class="no">(e.g., using HTML [W3C.REC-html5-20141028]). When this member</span>
-        <span class="no">is not present, its value is assumed to be &quot;about:blank&quot;.</span>
-      <span class="nt">default</span><span class="p">:</span> <span class="s">&#39;about:blank&#39;</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="s">&#39;https://example.com/probs/out-of-credit&#39;</span>
-    <span class="nt">title</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">A short, human-readable summary of the problem type.</span>
-        <span class="no">It SHOULD NOT change from occurrence to occurrence of the problem,</span>
-        <span class="no">except for purposes of localization (e.g., using proactive content</span>
-        <span class="no">negotiation; see [RFC7231], Section 3.4).</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">You do not have enough credit.</span>
-    <span class="nt">status</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
-      <span class="nt">format</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">int32</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">The HTTP status code ([RFC7231], Section 6) generated by the</span>
-        <span class="no">origin server for this occurrence of the problem.</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">403</span>
-    <span class="nt">detail</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">A human-readable explanation specific to this occurrence of the problem.</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Your current balance is 30, but that costs 50.</span>
-    <span class="nt">instance</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">A URI reference that identifies the specific occurrence of the problem.</span>
-        <span class="no">It may or may not yield further information if dereferenced.</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/account/12345/msgs/abc</span>
-    <span class="nt">code</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-      <span class="nt">deprecated</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">An error code issued by the system that caused the original problem.</span>
-        <span class="no">This code can be used to track down the root cause of the error.</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">F360001</span>
-    <span class="nt">mainDiagnosisCode</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">The main diagnosis code is issued by the system that caused the problem.</span>
-        <span class="no">This code can be used to track down the root cause and source of the error.</span>
-        <span class="no">It can be used to search in the documentation for a solution.</span>
-        <span class="no">It SHOULD NOT change from occurrence to occurrence of the same problem.</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">080F0100</span>
-    <span class="nt">detailedDiagnosisCode</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">The detailed diagnosis code issued by the system that caused the problem.</span>
-        <span class="no">This code can be used to track down the detailed cause and source of the error.</span>
-        <span class="no">It can be used to search in the documentation for a solution.</span>
-        <span class="no">The detailed diagnosis code gives additional information about the cause of the error.</span>
-        <span class="no">It SHOULD NOT change from occurrence to occurrence of the same problem.</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="s">&#39;00666001&#39;</span>
-    <span class="nt">dynamicDescription</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">A dynamic description gives detailed information about the occurrence of a problem.</span>
-        <span class="no">It can change between different occurrences of the same error.</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">value = -4.5</span>
-    <span class="nt">severity</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="s">&#39;</span>
-        <span class="s">Severity</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">problem</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">defined</span><span class="nv"> </span><span class="s">RFC5424</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Syslog</span><span class="nv"> </span><span class="s">standard,</span><span class="nv"> </span><span class="s">see</span><span class="nv"> </span><span class="s">https://tools.ietf.org/html/rfc5424&#39;</span>
-      <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Error</span>
-      <span class="nt">enum</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Emergency</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Alert</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Critical</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Error</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Warning</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Notice</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Informational</span>
-        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Debug</span>
-    <span class="nt">links</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
-      <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-        <span class="no">Collection of links to fix the problem. E.g. links to online user manual,</span>
-        <span class="no">to an online community (using tags) or a developer chat (e.g. Slack).</span>
-      <span class="nt">items</span><span class="p">:</span>
-        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
-        <span class="nt">format</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">uri</span>
-        <span class="nt">example</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://stackoverflow.com/questions/tagged/boschrexroth+controlx+f360001</span>
-    <span class="nt">moreInfo</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
-      <span class="nt">additionalProperties</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">example</span><span class="p">:</span>
-        <span class="nt">trace</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ExampleClass.cpp#452 Null pointer exception</span>
-        <span class="nt">class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ExampleClass</span>
+<div class="highlight"><pre><span></span><code><span class="nt">Problem</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span><span class="w"></span>
+<span class="w">  </span><span class="nt">x-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1.0.0&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="no">This document defines a &quot;problem detail&quot; as a way</span><span class="w"></span>
+<span class="w">    </span><span class="no">to carry machine-readable details of errors in a</span><span class="w"></span>
+<span class="w">    </span><span class="no">HTTP response to avoid the need to define new error</span><span class="w"></span>
+<span class="w">    </span><span class="no">response formats for HTTP APIs.</span><span class="w"></span>
+<span class="w">  </span><span class="nt">required</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">title</span><span class="w"></span>
+<span class="w">  </span><span class="nt">properties</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uri</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">A URI reference [RFC3986] that identifies the problem type.</span><span class="w"></span>
+<span class="w">        </span><span class="no">This specification encourages that, when dereferenced,</span><span class="w"></span>
+<span class="w">        </span><span class="no">it provide human-readable documentation for the problem type</span><span class="w"></span>
+<span class="w">        </span><span class="no">(e.g., using HTML [W3C.REC-html5-20141028]). When this member</span><span class="w"></span>
+<span class="w">        </span><span class="no">is not present, its value is assumed to be &quot;about:blank&quot;.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;about:blank&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://example.com/probs/out-of-credit&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">A short, human-readable summary of the problem type.</span><span class="w"></span>
+<span class="w">        </span><span class="no">It SHOULD NOT change from occurrence to occurrence of the problem,</span><span class="w"></span>
+<span class="w">        </span><span class="no">except for purposes of localization (e.g., using proactive content</span><span class="w"></span>
+<span class="w">        </span><span class="no">negotiation; see [RFC7231], Section 3.4).</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">You do not have enough credit.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">status</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span><span class="w"></span>
+<span class="w">      </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int32</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">The HTTP status code ([RFC7231], Section 6) generated by the</span><span class="w"></span>
+<span class="w">        </span><span class="no">origin server for this occurrence of the problem.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">403</span><span class="w"></span>
+<span class="w">    </span><span class="nt">detail</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">A human-readable explanation specific to this occurrence of the problem.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Your current balance is 30, but that costs 50.</span><span class="w"></span>
+<span class="w">    </span><span class="nt">instance</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">A URI reference that identifies the specific occurrence of the problem.</span><span class="w"></span>
+<span class="w">        </span><span class="no">It may or may not yield further information if dereferenced.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/account/12345/msgs/abc</span><span class="w"></span>
+<span class="w">    </span><span class="nt">code</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">deprecated</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">An error code issued by the system that caused the original problem.</span><span class="w"></span>
+<span class="w">        </span><span class="no">This code can be used to track down the root cause of the error.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">F360001</span><span class="w"></span>
+<span class="w">    </span><span class="nt">mainDiagnosisCode</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">The main diagnosis code is issued by the system that caused the problem.</span><span class="w"></span>
+<span class="w">        </span><span class="no">This code can be used to track down the root cause and source of the error.</span><span class="w"></span>
+<span class="w">        </span><span class="no">It can be used to search in the documentation for a solution.</span><span class="w"></span>
+<span class="w">        </span><span class="no">It SHOULD NOT change from occurrence to occurrence of the same problem.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">080F0100</span><span class="w"></span>
+<span class="w">    </span><span class="nt">detailedDiagnosisCode</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">The detailed diagnosis code issued by the system that caused the problem.</span><span class="w"></span>
+<span class="w">        </span><span class="no">This code can be used to track down the detailed cause and source of the error.</span><span class="w"></span>
+<span class="w">        </span><span class="no">It can be used to search in the documentation for a solution.</span><span class="w"></span>
+<span class="w">        </span><span class="no">The detailed diagnosis code gives additional information about the cause of the error.</span><span class="w"></span>
+<span class="w">        </span><span class="no">It SHOULD NOT change from occurrence to occurrence of the same problem.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;00666001&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">dynamicDescription</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">A dynamic description gives detailed information about the occurrence of a problem.</span><span class="w"></span>
+<span class="w">        </span><span class="no">It can change between different occurrences of the same error.</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value = -4.5</span><span class="w"></span>
+<span class="w">    </span><span class="nt">severity</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="s">Severity</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">problem</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">defined</span><span class="nv"> </span><span class="s">RFC5424</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Syslog</span><span class="nv"> </span><span class="s">standard,</span><span class="nv"> </span><span class="s">see</span><span class="nv"> </span><span class="s">https://tools.ietf.org/html/rfc5424&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Error</span><span class="w"></span>
+<span class="w">      </span><span class="nt">enum</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Emergency</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Alert</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Critical</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Error</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Warning</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Notice</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Informational</span><span class="w"></span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Debug</span><span class="w"></span>
+<span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span><span class="w"></span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span><span class="w"></span>
+<span class="w">        </span><span class="no">Collection of links to fix the problem. E.g. links to online user manual,</span><span class="w"></span>
+<span class="w">        </span><span class="no">to an online community (using tags) or a developer chat (e.g. Slack).</span><span class="w"></span>
+<span class="w">      </span><span class="nt">items</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span><span class="w"></span>
+<span class="w">        </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uri</span><span class="w"></span>
+<span class="w">        </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://stackoverflow.com/questions/tagged/boschrexroth+controlx+f360001</span><span class="w"></span>
+<span class="w">    </span><span class="nt">moreInfo</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span><span class="w"></span>
+<span class="w">      </span><span class="nt">additionalProperties</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">trace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExampleClass.cpp#452 Null pointer exception</span><span class="w"></span>
+<span class="w">        </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExampleClass</span><span class="w"></span>
 </code></pre></div>
 <h3 id="app-private-files">App-private files<a class="headerlink" href="#app-private-files" title="Permanent link">&para;</a></h3>
 <p>(Supported from XCR-V-0112)</p>
@@ -2634,21 +2633,21 @@ For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is execu
 <p>An app can specify such files using the "appPrivateFiles" element in the configuration section of its manifest. The element value is an array of strings where each string represents a regular expression following the RE2 syntax (https://golang.org/s/re2syntax). The expressions describe paths and names of files to be considered as private and are checked case-insensitively.</p>
 <p>The following example shows the declaration of "appPrivateFiles" with 3 regular expressions and the declaration of the app's root directory:</p>
 <p><strong>package-manifest.json</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
-  <span class="nt">&quot;appPrivateFiles&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&quot;^my-app/private/&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;^my-app/mixed/[^/]+\\.bak&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;^my-app/mixed/$&quot;</span>
-  <span class="p">],</span>
-  <span class="nt">&quot;appDirectories&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-      <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;my-app&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;My app&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;icon&quot;</span><span class="p">:</span> <span class="s2">&quot;bosch-ic-components&quot;</span><span class="p">,</span>
-      <span class="nt">&quot;copyOnLoad&quot;</span><span class="p">:</span> <span class="kc">true</span>
-    <span class="p">}</span>
-  <span class="p">]</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;appPrivateFiles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;^my-app/private/&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;^my-app/mixed/[^/]+\\.bak&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;^my-app/mixed/$&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;appDirectories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-app&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My app&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bosch-ic-components&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;copyOnLoad&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <p>Apps should only specify private files in their own app directories. Therefore, it is a good practice to start each regular expression with "^my-app/" where my-app is a root app directory of the app.</p>
 <p>Hints for the regular expressions: The characters "[]().\^\$|?*+{}" have special meanings and must be escaped with "\" to be used uninterpreted. "^" matches the start of the string, "$" matches the end of the string. To provide "\\" in the manifest file which is in JSON format, you have to double it because the backslash is an escape character in JSON too.</p>
@@ -2766,10 +2765,10 @@ For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is execu
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.01824240.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.22074ed6.min.js"}</script>
     
     
-      <script src="assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="assets/javascripts/bundle.1514a9a0.min.js"></script>
       
     
   </body>

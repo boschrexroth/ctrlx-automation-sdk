@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/automation.scheduler/index.html">
       
       <link rel="icon" href="../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.6">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.816931ca.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.cd566b2a.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -42,10 +42,9 @@
     
       <link rel="stylesheet" href="../../stylesheets/sdk.css">
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-
 
     
     
@@ -63,7 +62,7 @@
   
     
     
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)</script>
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -2019,26 +2018,26 @@ You can add each callable to a task, to run it.</p>
 <h2 id="using-rest-interface-to-run-callable">Using REST-Interface to run callable<a class="headerlink" href="#using-rest-interface-to-run-callable" title="Permanent link">&para;</a></h2>
 <p>Each REST-Call have to be done with the IP-adress of the ctlrX CORE e.g. <code>192.168.1.1</code> and an authorized user for example the default username <code>boschrexroth</code> and password <code>boschrexroth</code>.</p>
 <h3 id="1-get-access-token">1. Get access-token<a class="headerlink" href="#1-get-access-token" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="err">POST</span> <span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/ide</span><span class="kc">nt</span><span class="err">i</span><span class="kc">t</span><span class="err">y</span><span class="mi">-</span><span class="err">ma</span><span class="kc">na</span><span class="err">ger/api/v</span><span class="mi">1</span><span class="err">/au</span><span class="kc">t</span><span class="err">h/</span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span>
-<span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;boschrexroth&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;boschrexroth&quot;</span>
-<span class="p">}</span>
+<p><div class="highlight"><pre><span></span><code><span class="err">POST</span><span class="w"> </span><span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/ide</span><span class="kc">nt</span><span class="err">i</span><span class="kc">t</span><span class="err">y</span><span class="mi">-</span><span class="err">ma</span><span class="kc">na</span><span class="err">ger/api/v</span><span class="mi">1</span><span class="err">/au</span><span class="kc">t</span><span class="err">h/</span><span class="kc">t</span><span class="err">oke</span><span class="kc">n</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boschrexroth&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boschrexroth&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 The response should be look like:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-        <span class="nt">&quot;access_token&quot;</span><span class="p">:</span> <span class="s2">&quot;eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM2MzQ2NDMsImlhdCI6MTU5MzYwNTg0MywiaWQiOiIxMDAxIiwibmFtZSI6ImJvc2NocmV4cm90aCIsIm5vbmNlIjoiOTI2OThhOTctYzk2My00M2IwLTk5NDMtODc5NjYzNjU2M2Q1IiwicGxjaGFuZGxlIjowLCJzY29wZSI6WyJyZXhyb3RoLWRldmljZS5hbGwucnd4Il19.fEtE_4yL2uOcZPcG6XkB6-0eHGZIuMbk1HHpx6B1dPeMxMVyzg6pqw28lv3yJfVdtnOY7G9P4IQjCHQyrMk8ImHLBWjW-3cf-XECajfMJISIgx5vmQ-tdk7rxsKOZjs0GjdD-vbCzoD93HwMwvksFb_-W6wLs8LsKErwPWbf_PotajXTDInG5Vyit4NlzLk1ZQWkn8V8FNWgFoXKd5gsHn44IrmR6MPqKXvg_jPxaw_-CDu7tCgvRpCGRR5_Sq3d0AC5sLPh5SJ1w9Mg-m2O7Ec2CCvWYF08VbRo_CEEDbcT2X6nkrzi7vyo6j1YWOc8RCBOB08z6GlHrg_IPipbRBzptRvTKD_4oHfEASInExEu7cxp2Oz0u9Nt7oZEFes3M47CDQJB9qhLweUbS9W_ZK5GQmDuVYA8eY3JUA_rOwcBeBzqZwb8mJpSJUYSofI8JXw37P8GUbj2YQwEAPnFkqbgSd_JIbAILVE7UtIQhmPETb1FpwId78cPbOzObfyJMM3gRdQo5XLSS5qPkz5KJqw2orJBkHC9Ysd9hcSSIl-eJoEBlsngvN4KfWqD5OvV2FHG1PVpEJX-TRLtb18jxnUHLM6Lr55wmLWy2cEFFtUnqPw2uGeF7Wlj6othiWliApZmF1sFjm6wt-Bdn07VIKWhka4klGoTZgP8OytWTc0&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;token_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer&quot;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTM2MzQ2NDMsImlhdCI6MTU5MzYwNTg0MywiaWQiOiIxMDAxIiwibmFtZSI6ImJvc2NocmV4cm90aCIsIm5vbmNlIjoiOTI2OThhOTctYzk2My00M2IwLTk5NDMtODc5NjYzNjU2M2Q1IiwicGxjaGFuZGxlIjowLCJzY29wZSI6WyJyZXhyb3RoLWRldmljZS5hbGwucnd4Il19.fEtE_4yL2uOcZPcG6XkB6-0eHGZIuMbk1HHpx6B1dPeMxMVyzg6pqw28lv3yJfVdtnOY7G9P4IQjCHQyrMk8ImHLBWjW-3cf-XECajfMJISIgx5vmQ-tdk7rxsKOZjs0GjdD-vbCzoD93HwMwvksFb_-W6wLs8LsKErwPWbf_PotajXTDInG5Vyit4NlzLk1ZQWkn8V8FNWgFoXKd5gsHn44IrmR6MPqKXvg_jPxaw_-CDu7tCgvRpCGRR5_Sq3d0AC5sLPh5SJ1w9Mg-m2O7Ec2CCvWYF08VbRo_CEEDbcT2X6nkrzi7vyo6j1YWOc8RCBOB08z6GlHrg_IPipbRBzptRvTKD_4oHfEASInExEu7cxp2Oz0u9Nt7oZEFes3M47CDQJB9qhLweUbS9W_ZK5GQmDuVYA8eY3JUA_rOwcBeBzqZwb8mJpSJUYSofI8JXw37P8GUbj2YQwEAPnFkqbgSd_JIbAILVE7UtIQhmPETb1FpwId78cPbOzObfyJMM3gRdQo5XLSS5qPkz5KJqw2orJBkHC9Ysd9hcSSIl-eJoEBlsngvN4KfWqD5OvV2FHG1PVpEJX-TRLtb18jxnUHLM6Lr55wmLWy2cEFFtUnqPw2uGeF7Wlj6othiWliApZmF1sFjm6wt-Bdn07VIKWhka4klGoTZgP8OytWTc0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;token_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bearer&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <p>Add the token to your authorization header with type <code>Bearer</code> to each of the following https-requests.</p>
 <h3 id="2-create-a-new-task-scheduler-state-must-be-in-config">2. Create a new task (scheduler state must be in config)<a class="headerlink" href="#2-create-a-new-task-scheduler-state-must-be-in-config" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="err">POST</span> <span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/au</span><span class="kc">t</span><span class="err">oma</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/scheduler/</span><span class="kc">tas</span><span class="err">ks/</span>
-<span class="p">{</span>
-    <span class="nt">&quot;cycletime&quot;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
-    <span class="nt">&quot;event&quot;</span><span class="p">:</span> <span class="s2">&quot;cyclic&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;HelloCallable&quot;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="err">POST</span><span class="w"> </span><span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/au</span><span class="kc">t</span><span class="err">oma</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/scheduler/</span><span class="kc">tas</span><span class="err">ks/</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;cycletime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cyclic&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HelloCallable&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <p>Only the name is required.
 The possible task configurations are: </p>
@@ -2052,13 +2051,13 @@ The possible task configurations are: </p>
      }
 </code></pre></div>
 <h3 id="3-add-the-callable-to-a-task">3. Add the callable to a task<a class="headerlink" href="#3-add-the-callable-to-a-task" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="err">POST</span> <span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/au</span><span class="kc">t</span><span class="err">oma</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/scheduler/</span><span class="kc">tas</span><span class="err">ks/HelloCallable/program/</span>
-<span class="p">{</span>
-    <span class="nt">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">],</span>
-    <span class="nt">&quot;index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;HelloCallableFactory&quot;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="err">POST</span><span class="w"> </span><span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/au</span><span class="kc">t</span><span class="err">oma</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/scheduler/</span><span class="kc">tas</span><span class="err">ks/HelloCallable/program/</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;arguments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HelloCallableFactory&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <p>The argumentlist is not necceassary and can be empty.</p>
 <div class="highlight"><pre><span></span><code>Callable {
@@ -2069,10 +2068,10 @@ The possible task configurations are: </p>
 </code></pre></div>
 <p>The response contains the information about the program index:</p>
 <p>Response: </p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;scheduler/tasks/HelloCallable/program/2/&quot;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;scheduler/tasks/HelloCallable/program/2/&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <h3 id="additional-task-informations-are-located-in-the-ctrlx-data-layer">Additional task informations are located in the ctrlX Data Layer<a class="headerlink" href="#additional-task-informations-are-located-in-the-ctrlx-data-layer" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>|-- scheduler
@@ -2089,10 +2088,10 @@ The possible task configurations are: </p>
 |-- ...
 </code></pre></div>
 <p>To delete a callable from a task, use:</p>
-<div class="highlight"><pre><span></span><code><span class="err">DELETE</span> <span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/au</span><span class="kc">t</span><span class="err">oma</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/scheduler/</span><span class="kc">tas</span><span class="err">ks/HelloCallable/program/</span><span class="mi">2</span>
+<div class="highlight"><pre><span></span><code><span class="err">DELETE</span><span class="w"> </span><span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/au</span><span class="kc">t</span><span class="err">oma</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/scheduler/</span><span class="kc">tas</span><span class="err">ks/HelloCallable/program/</span><span class="mi">2</span><span class="w"></span>
 </code></pre></div>
 <p>To delete a task use:</p>
-<div class="highlight"><pre><span></span><code><span class="err">DELETE</span> <span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/au</span><span class="kc">t</span><span class="err">oma</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/scheduler/</span><span class="kc">tas</span><span class="err">ks/HelloCallable</span>
+<div class="highlight"><pre><span></span><code><span class="err">DELETE</span><span class="w"> </span><span class="err">h</span><span class="kc">tt</span><span class="err">ps</span><span class="p">:</span><span class="err">//</span><span class="mf">192.168.1.1</span><span class="err">/au</span><span class="kc">t</span><span class="err">oma</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/scheduler/</span><span class="kc">tas</span><span class="err">ks/HelloCallable</span><span class="w"></span>
 </code></pre></div>
 <h2 id="screenshots">Screenshots<a class="headerlink" href="#screenshots" title="Permanent link">&para;</a></h2>
 <p><img alt="Callable-Factory" src="docs/images/automation.scheduler/callable.png" />
@@ -2209,10 +2208,10 @@ SOFTWARE.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.22074ed6.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.ff0eccb3.min.js"></script>
+      <script src="../../assets/javascripts/bundle.1514a9a0.min.js"></script>
       
     
   </body>
