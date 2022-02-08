@@ -33,4 +33,6 @@ jobs:
           ls -alh
           rsync -am --include='README.md' --include='*/' --include='/samples-*/' --exclude='*' ./ ./doc
           rsync -am --include='*.png' --include='*/' --include='/samples-*/' --exclude='*' ./ ./doc
+          mkdir ./doc/scripts
+          cp ./scripts/environment/*.md ./doc/scripts/
           mkdocs gh-deploy --force
