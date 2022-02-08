@@ -400,4 +400,19 @@
          <lastmod>2022-02-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
+    <url>
+         <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/scripts/1-README.html</loc>
+         <lastmod>2022-02-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/scripts/2-README-win10.html</loc>
+         <lastmod>2022-02-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/scripts/3-README-linux.html</loc>
+         <lastmod>2022-02-08</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
 </urlset>
