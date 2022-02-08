@@ -74,7 +74,6 @@ namespace Hello.Web.Asp.services
                 Address = address,
                 Value = string.Format(CultureInfo.InvariantCulture, "{0}", variant.Value),
                 Type = variant.JsonDataType,
-                Timestamp = variant.Timestamp,
                 Result = result.ToString()
             };
 

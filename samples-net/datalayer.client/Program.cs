@@ -123,7 +123,7 @@ namespace Samples.Datalayer.Client
                     var (readResultMemUsed, valueMemUsed) = client.Read(address: memUsed);
                     if (readResultMemUsed.IsGood())
                     {
-                        Console.WriteLine($"{valueMemUsed.Timestamp}, {memUsed}: {valueMemUsed.ToFloat()} (single read)");
+                        Console.WriteLine($"{memUsed}: {valueMemUsed.ToFloat()} (single read)");
                     }
                 }
                 else

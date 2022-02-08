@@ -9,7 +9,7 @@
             },
             "type": "shell",
             "problemMatcher": [],
-            "command": "ln -s -v -f ${workspaceFolder}/../../nodejs/ctrlx-datalayer-nodejs-1.0.1.tgz ctrlx-datalayer-nodejs.tgz",
+            "command": "ln -s -v -f ${workspaceFolder}/../../nodejs/ctrlx-datalayer-nodejs-1.0.2.tgz ctrlx-datalayer-nodejs.tgz",
             "options": {
                 "cwd": "${workspaceFolder}/src"
             }

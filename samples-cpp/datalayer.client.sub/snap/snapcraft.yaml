@@ -34,7 +34,7 @@ parts:
   
   deb:
     plugin: dump
-    source: ../../deb/ctrlx-datalayer-1.7.4.deb
+    source: ../../deb/ctrlx-datalayer-1.7.5.deb
 
 # describes which interface slots are supported by defining the plugs
 plugs:
