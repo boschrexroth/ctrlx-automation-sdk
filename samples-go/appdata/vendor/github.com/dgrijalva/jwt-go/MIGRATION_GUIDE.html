@@ -12,21 +12,21 @@
         <meta name="author" content="Bosch Rexroth AG">
       
       
-        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/scripts/1-README.html">
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/appdata/vendor/github.com/dgrijalva/jwt-go/MIGRATION_GUIDE.html">
       
-      <link rel="icon" href="../assets/favicon.png">
+      <link rel="icon" href="../../../../../../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.10">
     
     
       
-        <title>Use QEMU Virtual Machines to work with the ctrlX SDK - Software Development Kit</title>
+        <title>MIGRATION GUIDE - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.d6be258b.min.css">
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.d6be258b.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
+        <link rel="stylesheet" href="../../../../../../assets/stylesheets/palette.e6a45f82.min.css">
         
       
     
@@ -40,9 +40,9 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/sdk.css">
+      <link rel="stylesheet" href="../../../../../../stylesheets/sdk.css">
     
-    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#use-qemu-virtual-machines-to-work-with-the-ctrlx-sdk" class="md-skip">
+        <a href="#migration-guide-from-v2-v3" class="md-skip">
           Skip to content
         </a>
       
@@ -84,7 +84,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="../../../../../../index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -103,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Use QEMU Virtual Machines to work with the ctrlX SDK
+              MIGRATION GUIDE
             
           </span>
         </div>
@@ -191,7 +191,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../index.html" class="md-tabs__link">
+    <a href="../../../../../../index.html" class="md-tabs__link">
       Home
     </a>
   </li>
@@ -206,7 +206,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../overview.html" class="md-tabs__link">
+      <a href="../../../../../../overview.html" class="md-tabs__link">
         Getting Started
       </a>
     </li>
@@ -222,7 +222,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../setup_overview.html" class="md-tabs__link">
+      <a href="../../../../../../setup_overview.html" class="md-tabs__link">
         Setup
       </a>
     </li>
@@ -238,7 +238,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../samples_mkdocs.html" class="md-tabs__link">
+      <a href="../../../../../../samples_mkdocs.html" class="md-tabs__link">
         Samples
       </a>
     </li>
@@ -254,7 +254,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../references.html" class="md-tabs__link">
+      <a href="../../../../../../references.html" class="md-tabs__link">
         References
       </a>
     </li>
@@ -267,7 +267,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../about.html" class="md-tabs__link">
+    <a href="../../../../../../about.html" class="md-tabs__link">
       About
     </a>
   </li>
@@ -294,7 +294,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="../../../../../../index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -325,7 +325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../index.html" class="md-nav__link">
+      <a href="../../../../../../index.html" class="md-nav__link">
         Home
       </a>
     </li>
@@ -366,7 +366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../overview.html" class="md-nav__link">
+      <a href="../../../../../../overview.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -380,7 +380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctrlx_automation.html" class="md-nav__link">
+      <a href="../../../../../../ctrlx_automation.html" class="md-nav__link">
         ctrlX AUTOMATION
       </a>
     </li>
@@ -422,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../package-manifest.html" class="md-nav__link">
+      <a href="../../../../../../package-manifest.html" class="md-nav__link">
         Package Manifest
       </a>
     </li>
@@ -436,7 +436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../appdevguide.html" class="md-nav__link">
+      <a href="../../../../../../appdevguide.html" class="md-nav__link">
         Developer Guideline
       </a>
     </li>
@@ -450,7 +450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../persistdata.html" class="md-nav__link">
+      <a href="../../../../../../persistdata.html" class="md-nav__link">
         Data Persistance
       </a>
     </li>
@@ -464,7 +464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../licensing.html" class="md-nav__link">
+      <a href="../../../../../../licensing.html" class="md-nav__link">
         Licensemanagement
       </a>
     </li>
@@ -513,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../changelog.html" class="md-nav__link">
+      <a href="../../../../../../changelog.html" class="md-nav__link">
         Changelog
       </a>
     </li>
@@ -568,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_overview.html" class="md-nav__link">
+      <a href="../../../../../../setup_overview.html" class="md-nav__link">
         Setup Overview
       </a>
     </li>
@@ -582,7 +582,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_qemu_ubuntu.html" class="md-nav__link">
+      <a href="../../../../../../setup_qemu_ubuntu.html" class="md-nav__link">
         Setup a QEMU VM
       </a>
     </li>
@@ -596,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
+      <a href="../../../../../../setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
         Setup a VirtualBox VM
       </a>
     </li>
@@ -610,7 +610,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_ubuntu.html" class="md-nav__link">
+      <a href="../../../../../../setup_ubuntu.html" class="md-nav__link">
         Setup a Real Machine
       </a>
     </li>
@@ -624,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_windows_wsl_ubuntu.html" class="md-nav__link">
+      <a href="../../../../../../setup_windows_wsl_ubuntu.html" class="md-nav__link">
         Setup WSL
       </a>
     </li>
@@ -666,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vscode.html" class="md-nav__link">
+      <a href="../../../../../../vscode.html" class="md-nav__link">
         Visual Studio Code
       </a>
     </li>
@@ -680,7 +680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dotnet.html" class="md-nav__link">
+      <a href="../../../../../../dotnet.html" class="md-nav__link">
         .NET
       </a>
     </li>
@@ -694,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../debug.html" class="md-nav__link">
+      <a href="../../../../../../debug.html" class="md-nav__link">
         Remote Debugging
       </a>
     </li>
@@ -749,7 +749,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples_mkdocs.html" class="md-nav__link">
+      <a href="../../../../../../samples_mkdocs.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -791,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/hello.world/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/hello.world/index.html" class="md-nav__link">
         Hello World
       </a>
     </li>
@@ -805,7 +805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/hello.plc/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/hello.plc/index.html" class="md-nav__link">
         Hello PLC
       </a>
     </li>
@@ -819,7 +819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/datalayer.client/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/datalayer.client/index.html" class="md-nav__link">
         ctrlX Data Layer Client
       </a>
     </li>
@@ -833,7 +833,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/datalayer.register.node/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/datalayer.register.node/index.html" class="md-nav__link">
         ctrlX Data Layer RegisterNode
       </a>
     </li>
@@ -847,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/automation.bundle/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/automation.bundle/index.html" class="md-nav__link">
         ctrlX Automation Bundle
       </a>
     </li>
@@ -861,7 +861,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/automation.scheduler/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/automation.scheduler/index.html" class="md-nav__link">
         ctrlX Automation Scheduler
       </a>
     </li>
@@ -875,7 +875,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/automation.diagnosis/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/automation.diagnosis/index.html" class="md-nav__link">
         ctrlX Automation Diagnosis
       </a>
     </li>
@@ -889,7 +889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/automation.trace/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/automation.trace/index.html" class="md-nav__link">
         ctrlX Automation Trace
       </a>
     </li>
@@ -903,7 +903,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/datalayer.ecat.io/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/datalayer.ecat.io/index.html" class="md-nav__link">
         ctrlX Data Layer EtherCAT I/O's
       </a>
     </li>
@@ -917,7 +917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/datalayer.realtime/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/datalayer.realtime/index.html" class="md-nav__link">
         ctrlX Data Layer Realtime
       </a>
     </li>
@@ -931,7 +931,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/datalayer.provider.all-data/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/datalayer.provider.all-data/index.html" class="md-nav__link">
         ctrlX Data Layer All Data Provider
       </a>
     </li>
@@ -945,7 +945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/diagnostics.logbook/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/diagnostics.logbook/index.html" class="md-nav__link">
         Diagnostics Logbook
       </a>
     </li>
@@ -959,7 +959,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/datalayer.diagnosis/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-cpp/datalayer.diagnosis/index.html" class="md-nav__link">
         ctrlX Data Layer Diagnosis
       </a>
     </li>
@@ -1008,7 +1008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-go/hello.webserver/index.html" class="md-nav__link">
+      <a href="../../../../../hello.webserver/index.html" class="md-nav__link">
         Hello Webserver
       </a>
     </li>
@@ -1022,7 +1022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-go/appdata/index.html" class="md-nav__link">
+      <a href="../../../../index.html" class="md-nav__link">
         AppData File Storage
       </a>
     </li>
@@ -1036,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-go/tpm2.srk/index.html" class="md-nav__link">
+      <a href="../../../../../tpm2.srk/index.html" class="md-nav__link">
         TPM2.SRK
       </a>
     </li>
@@ -1085,7 +1085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/datalayer.client.light/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/datalayer.client.light/index.html" class="md-nav__link">
         ctrlX Data Layer Client
       </a>
     </li>
@@ -1099,7 +1099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/datalayer.client/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/datalayer.client/index.html" class="md-nav__link">
         ctrlX Data Layer Client (complex)
       </a>
     </li>
@@ -1113,7 +1113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/datalayer.client.sub/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/datalayer.client.sub/index.html" class="md-nav__link">
         ctrlX Data Layer Client Subscription
       </a>
     </li>
@@ -1127,7 +1127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/datalayer.provider/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/datalayer.provider/index.html" class="md-nav__link">
         ctrlX Data Layer Provider
       </a>
     </li>
@@ -1141,7 +1141,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/datalayer.provider.all-data/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/datalayer.provider.all-data/index.html" class="md-nav__link">
         ctrlX Data Layer Provider All Data
       </a>
     </li>
@@ -1155,7 +1155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/datalayer.client.browse/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/datalayer.client.browse/index.html" class="md-nav__link">
         ctrlX Data Layer Browse
       </a>
     </li>
@@ -1169,7 +1169,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/datalayer.calc/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/datalayer.calc/index.html" class="md-nav__link">
         ctrlX Data Layer Calculation operations
       </a>
     </li>
@@ -1183,7 +1183,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/python.logbook/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/python.logbook/index.html" class="md-nav__link">
         Diagnostics Logbook
       </a>
     </li>
@@ -1197,7 +1197,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/appdata/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/appdata/index.html" class="md-nav__link">
         AppData File Storage
       </a>
     </li>
@@ -1211,7 +1211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/datalayer.remote.debug/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-python/datalayer.remote.debug/index.html" class="md-nav__link">
         ctrlX Data Layer Remote Debug
       </a>
     </li>
@@ -1260,7 +1260,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/hello.world/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-net/hello.world/index.html" class="md-nav__link">
         Hello World
       </a>
     </li>
@@ -1274,7 +1274,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/datalayer.client/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-net/datalayer.client/index.html" class="md-nav__link">
         ctrlX Data Layer Client
       </a>
     </li>
@@ -1288,7 +1288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/datalayer.client.browse/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-net/datalayer.client.browse/index.html" class="md-nav__link">
         ctrlX Data Layer Client Browse
       </a>
     </li>
@@ -1302,7 +1302,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/datalayer.client.browse/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-net/datalayer.client.browse/index.html" class="md-nav__link">
         ctrlX Data Layer Browse
       </a>
     </li>
@@ -1316,7 +1316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/datalayer.provider/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-net/datalayer.provider/index.html" class="md-nav__link">
         ctrlX Data Layer Provider
       </a>
     </li>
@@ -1330,7 +1330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/datalayer.provider.alldata/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-net/datalayer.provider.alldata/index.html" class="md-nav__link">
         ctrlX Data Layer All Data Provider
       </a>
     </li>
@@ -1344,7 +1344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/datalayer.provider.virtual/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-net/datalayer.provider.virtual/index.html" class="md-nav__link">
         ctrlX Data Layer Provider Virtual
       </a>
     </li>
@@ -1358,7 +1358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/datalayer.mqtt/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-net/datalayer.mqtt/index.html" class="md-nav__link">
         ctrlX Data Layer MQTT
       </a>
     </li>
@@ -1372,7 +1372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/diagnostics.logbook/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-net/diagnostics.logbook/index.html" class="md-nav__link">
         Diagnostics Logbook
       </a>
     </li>
@@ -1421,7 +1421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-node/hello-world/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-node/hello-world/index.html" class="md-nav__link">
         Hello World
       </a>
     </li>
@@ -1435,7 +1435,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-node/datalayer.client/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-node/datalayer.client/index.html" class="md-nav__link">
         ctrlX Data Layer Client
       </a>
     </li>
@@ -1484,7 +1484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-sh/tpm2.consumer/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-sh/tpm2.consumer/index.html" class="md-nav__link">
         TPM2 Consumer
       </a>
     </li>
@@ -1533,7 +1533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-snap/generate-manifest/index.html" class="md-nav__link">
+      <a href="../../../../../../samples-snap/generate-manifest/index.html" class="md-nav__link">
         Generate Manifest
       </a>
     </li>
@@ -1588,7 +1588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../references.html" class="md-nav__link">
+      <a href="../../../../../../references.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1750,7 +1750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../about.html" class="md-nav__link">
+      <a href="../../../../../../about.html" class="md-nav__link">
         About
       </a>
     </li>
@@ -1774,8 +1774,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1784,105 +1782,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#migration-guide-from-v2-v3" class="md-nav__link">
+    Migration Guide from v2 -&gt; v3
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#amd64-or-aarch64-guest-system" class="md-nav__link">
-    AMD64 or AARCH64 Guest System
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setup-and-start-the-qemu-vm" class="md-nav__link">
-    Setup and Start the QEMU VM
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#first-boot-of-the-qemu-vm" class="md-nav__link">
-    First Boot of the QEMU VM
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-snaps-after-first-boot" class="md-nav__link">
-    Install Snaps after First Boot
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#working-with-your-qemu-vm" class="md-nav__link">
-    Working with your QEMU VM
-  </a>
-  
-    <nav class="md-nav" aria-label="Working with your QEMU VM">
+    <nav class="md-nav" aria-label="Migration Guide from v2 -&gt; v3">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#using-ssh" class="md-nav__link">
-    Using ssh
-  </a>
-  
-    <nav class="md-nav" aria-label="Using ssh">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#remote-ssh-connection" class="md-nav__link">
-    Remote ssh Connection
+  <a href="#tokenclaims-is-now-an-interface-type" class="md-nav__link">
+    Token.Claims is now an interface type
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-ssh-authentification-with-key-pair" class="md-nav__link">
-    Install ssh Authentification with Key Pair
+  <a href="#parsefromrequest-has-been-moved" class="md-nav__link">
+    ParseFromRequest has been moved
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rsa-signing-methods-no-longer-accept-byte-keys" class="md-nav__link">
+    RSA signing methods no longer accept []byte keys
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#connection-to-ctrlx-core-controls" class="md-nav__link">
-    Connection to ctrlX CORE controls
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#shutdown" class="md-nav__link">
-    Shutdown
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting-tips" class="md-nav__link">
-    Troubleshooting, Tips
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    License
-  </a>
   
 </li>
       
@@ -1898,146 +1827,82 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/scripts/1-README.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/samples-go/appdata/vendor/github.com/dgrijalva/jwt-go/MIGRATION_GUIDE.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
-<h1 id="use-qemu-virtual-machines-to-work-with-the-ctrlx-sdk">Use QEMU Virtual Machines to work with the ctrlX SDK<a class="headerlink" href="#use-qemu-virtual-machines-to-work-with-the-ctrlx-sdk" title="Permanent link">&para;</a></h1>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>To develop and test ctrlX applications with the ctrlX SDK you need a Linux operating system. </p>
-<p>The usage of a virtual machine therefor has some advantages:</p>
+  <h1>MIGRATION GUIDE</h1>
+
+<h2 id="migration-guide-from-v2-v3">Migration Guide from v2 -&gt; v3<a class="headerlink" href="#migration-guide-from-v2-v3" title="Permanent link">&para;</a></h2>
+<p>Version 3 adds several new, frequently requested features.  To do so, it introduces a few breaking changes.  We've worked to keep these as minimal as possible.  This guide explains the breaking changes and how you can quickly update your code.</p>
+<h3 id="tokenclaims-is-now-an-interface-type"><code>Token.Claims</code> is now an interface type<a class="headerlink" href="#tokenclaims-is-now-an-interface-type" title="Permanent link">&para;</a></h3>
+<p>The most requested feature from the 2.0 verison of this library was the ability to provide a custom type to the JSON parser for claims. This was implemented by introducing a new interface, <code>Claims</code>, to replace <code>map[string]interface{}</code>.  We also included two concrete implementations of <code>Claims</code>: <code>MapClaims</code> and <code>StandardClaims</code>.</p>
+<p><code>MapClaims</code> is an alias for <code>map[string]interface{}</code> with built in validation behavior.  It is the default claims type when using <code>Parse</code>.  The usage is unchanged except you must type cast the claims property.</p>
+<p>The old example for parsing a token looked like this..</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">Parse</span><span class="p">(</span><span class="nx">tokenString</span><span class="p">,</span><span class="w"> </span><span class="nx">keyLookupFunc</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Token for user %v expires %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Claims</span><span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">],</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Claims</span><span class="p">[</span><span class="s">&quot;exp&quot;</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>is now directly mapped to...</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">Parse</span><span class="p">(</span><span class="nx">tokenString</span><span class="p">,</span><span class="w"> </span><span class="nx">keyLookupFunc</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">claims</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Claims</span><span class="p">.(</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">MapClaims</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Token for user %v expires %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">claims</span><span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">],</span><span class="w"> </span><span class="nx">claims</span><span class="p">[</span><span class="s">&quot;exp&quot;</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><code>StandardClaims</code> is designed to be embedded in your custom type.  You can supply a custom claims type with the new <code>ParseWithClaims</code> function.  Here's an example of using a custom claims type.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="kd">type</span><span class="w"> </span><span class="nx">MyCustomClaims</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">User</span><span class="w"> </span><span class="kt">string</span><span class="w"></span>
+<span class="w">        </span><span class="o">*</span><span class="nx">StandardClaims</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">ParseWithClaims</span><span class="p">(</span><span class="nx">tokenString</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">MyCustomClaims</span><span class="p">{},</span><span class="w"> </span><span class="nx">keyLookupFunc</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">claims</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Claims</span><span class="p">.(</span><span class="o">*</span><span class="nx">MyCustomClaims</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Token for user %v expires %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">claims</span><span class="p">.</span><span class="nx">User</span><span class="p">,</span><span class="w"> </span><span class="nx">claims</span><span class="p">.</span><span class="nx">StandardClaims</span><span class="p">.</span><span class="nx">ExpiresAt</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="parsefromrequest-has-been-moved"><code>ParseFromRequest</code> has been moved<a class="headerlink" href="#parsefromrequest-has-been-moved" title="Permanent link">&para;</a></h3>
+<p>To keep this library focused on the tokens without becoming overburdened with complex request processing logic, <code>ParseFromRequest</code> and its new companion <code>ParseFromRequestWithClaims</code> have been moved to a subpackage, <code>request</code>.  The method signatues have also been augmented to receive a new argument: <code>Extractor</code>.</p>
+<p><code>Extractors</code> do the work of picking the token string out of a request.  The interface is simple and composable.</p>
+<p>This simple parsing example:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">ParseFromRequest</span><span class="p">(</span><span class="nx">tokenString</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">keyLookupFunc</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Token for user %v expires %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Claims</span><span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">],</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Claims</span><span class="p">[</span><span class="s">&quot;exp&quot;</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>is directly mapped to:</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">request</span><span class="p">.</span><span class="nx">ParseFromRequest</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">request</span><span class="p">.</span><span class="nx">OAuth2Extractor</span><span class="p">,</span><span class="w"> </span><span class="nx">keyLookupFunc</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">claims</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Claims</span><span class="p">.(</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">MapClaims</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Token for user %v expires %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">claims</span><span class="p">[</span><span class="s">&quot;user&quot;</span><span class="p">],</span><span class="w"> </span><span class="nx">claims</span><span class="p">[</span><span class="s">&quot;exp&quot;</span><span class="p">])</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>There are several concrete <code>Extractor</code> types provided for your convenience:</p>
 <ul>
-<li>The Linux VM be run on a Windows host.</li>
-<li>The VM does not affect the host operating system.</li>
-<li>More than one VMs can run simultanously.</li>
-<li>Snapshots from a VM can be created and saved.</li>
+<li><code>HeaderExtractor</code> will search a list of headers until one contains content.</li>
+<li><code>ArgumentExtractor</code> will search a list of keys in request query and form arguments until one contains content.</li>
+<li><code>MultiExtractor</code> will try a list of <code>Extractors</code> in order until one returns content.</li>
+<li><code>AuthorizationHeaderExtractor</code> will look in the <code>Authorization</code> header for a <code>Bearer</code> token.</li>
+<li><code>OAuth2Extractor</code> searches the places an OAuth2 token would be specified (per the spec): <code>Authorization</code> header and <code>access_token</code> argument</li>
+<li><code>PostExtractionFilter</code> wraps an <code>Extractor</code>, allowing you to process the content before it's parsed.  A simple example is stripping the <code>Bearer</code> text from a header</li>
 </ul>
-<p>With the scripts and files provided here you can install and run <strong>Ubuntu20.04 LTS Server</strong> in a QEMU virtual machine (<strong>QEMU VM</strong>). </p>
-<p>As host operating system Windows 10 and Linux are supported. The host operating specific parts are described in different files - see below.</p>
-<p><strong>Important:</strong> For both host operating system you need admin rights!</p>
-<h2 id="amd64-or-aarch64-guest-system">AMD64 or AARCH64 Guest System<a class="headerlink" href="#amd64-or-aarch64-guest-system" title="Permanent link">&para;</a></h2>
-<p>For most development purpuses you can use an AMD64 virtual machine. On an AMD64 host with hardware virtualization extension this is a very performant solution.</p>
-<p><strong>Important</strong>:</p>
-<p>An AARCH64 (ARM64) virtual machine on an AMD64 host system will be emulated by QEMU. Because this emulated VM will have lesser performance it should only be used for programming languages where cross build is not supported. For example building a snap for a ctrlX CORE M3/4 from a Python project.</p>
-<p>To improve the installation and boot process of an AARCH64 VM it has a reduced scope of installation. For details see cloud-config-aarch64.</p>
-<h2 id="setup-and-start-the-qemu-vm">Setup and Start the QEMU VM<a class="headerlink" href="#setup-and-start-the-qemu-vm" title="Permanent link">&para;</a></h2>
-<p>If you have a Windows host continue reading <a href="2-README-win10.html">here.</a></p>
-<p>If you have a Linux host continue reading <a href="3-README-linux.html">here.</a></p>
-<p>The following chapters are relevant for both host systems.</p>
-<h2 id="first-boot-of-the-qemu-vm">First Boot of the QEMU VM<a class="headerlink" href="#first-boot-of-the-qemu-vm" title="Permanent link">&para;</a></h2>
-<p>During the first boot of your <strong>QEMU VM</strong> a lot of software components are installed - this takes a while.</p>
-<p>When the installation is finished the <strong>QEMU VM</strong> will automatically shutdown.</p>
-<p>Now the <strong>QEMU VM</strong> can be used - please restart the the VM with the according launch script or bat file.</p>
-<h2 id="install-snaps-after-first-boot">Install Snaps after First Boot<a class="headerlink" href="#install-snaps-after-first-boot" title="Permanent link">&para;</a></h2>
-<p>During the setup process on first boot the installation of snaps fails but when the VM is restarted it will succeed.</p>
-<p>Please install snapcraft as snap using this command:</p>
-<div class="codehilite"><pre><span></span><code>cd ~
-./install-snapcraft.sh
-</code></pre></div>
+<h3 id="rsa-signing-methods-no-longer-accept-byte-keys">RSA signing methods no longer accept <code>[]byte</code> keys<a class="headerlink" href="#rsa-signing-methods-no-longer-accept-byte-keys" title="Permanent link">&para;</a></h3>
+<p>Due to a <a href="https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries/">critical vulnerability</a>, we've decided the convenience of accepting <code>[]byte</code> instead of <code>rsa.PublicKey</code> or <code>rsa.PrivateKey</code> isn't worth the risk of misuse.</p>
+<p>To replace this behavior, we've added two helper methods: <code>ParseRSAPrivateKeyFromPEM(key []byte) (*rsa.PrivateKey, error)</code> and <code>ParseRSAPublicKeyFromPEM(key []byte) (*rsa.PublicKey, error)</code>.  These are just simple helpers for unpacking PEM encoded PKCS1 and PKCS8 keys. If your keys are encoded any other way, all you need to do is convert them to the <code>crypto/rsa</code> package's types.</p>
+<div class="highlight"><pre><span></span><code><span class="w">    </span><span class="kd">func</span><span class="w"> </span><span class="nx">keyLookupFunc</span><span class="p">(</span><span class="o">*</span><span class="nx">Token</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kd">interface</span><span class="p">{},</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Don&#39;t forget to validate the alg is what you expect:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Method</span><span class="p">.(</span><span class="o">*</span><span class="nx">jwt</span><span class="p">.</span><span class="nx">SigningMethodRSA</span><span class="p">);</span><span class="w"> </span><span class="p">!</span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;Unexpected signing method: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">.</span><span class="nx">Header</span><span class="p">[</span><span class="s">&quot;alg&quot;</span><span class="p">])</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-<p>The dotnet-sdk is only neccessary for AMD64 VMs using the ctrlX AUTOMATION SDK for developing applications in .NET. Install it as snap using:</p>
-<div class="codehilite"><pre><span></span><code>cd ~
-./install-dotnet-sdk.sh
-</code></pre></div>
+<span class="w">        </span><span class="c1">// Look up key </span><span class="w"></span>
+<span class="w">        </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">lookupPublicKey</span><span class="p">(</span><span class="nx">token</span><span class="p">.</span><span class="nx">Header</span><span class="p">[</span><span class="s">&quot;kid&quot;</span><span class="p">])</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-<p>Optional: Install node.js and npm:</p>
-<div class="codehilite"><pre><span></span><code>cd ~
-./install-nodejs-npm.sh
+<span class="w">        </span><span class="c1">// Unpack key from PEM encoded PKCS8</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jwt</span><span class="p">.</span><span class="nx">ParseRSAPublicKeyFromPEM</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 </code></pre></div>
-
-<h2 id="working-with-your-qemu-vm">Working with your QEMU VM<a class="headerlink" href="#working-with-your-qemu-vm" title="Permanent link">&para;</a></h2>
-<p>In the user-data files a default user defined. The credentials are:</p>
-<p>User: <strong>boschrexroth</strong></p>
-<p>Password: <strong>boschrexroth</strong></p>
-<h3 id="using-ssh">Using ssh<a class="headerlink" href="#using-ssh" title="Permanent link">&para;</a></h3>
-<p>Per default <strong>port 10022 of your host</strong> is forwarded to <strong>port 22 (the ssh port) of your guest system</strong>.</p>
-<p>If port 10022 is not free on your host or if you want to use further VMs simultaneously can change this in the launch.bat/launch.sh script in the entries 'hostfwd=tcp::10022-:22'. </p>
-<h4 id="remote-ssh-connection">Remote ssh Connection<a class="headerlink" href="#remote-ssh-connection" title="Permanent link">&para;</a></h4>
-<p>Do not use the VMs console window directly because it is buggy. Use a remote ssh connection instead.</p>
-<p>Enter this command on your host you to start a remote ssh connection to your VM:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">ssh</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mi">10022</span><span class="w"> </span><span class="n">boschrexroth</span><span class="nv">@localhost</span><span class="w"></span>
-</code></pre></div>
-
-<p>With the scp command on your host you can copy files to and from the guest system.</p>
-<p>From host to guest:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">scp</span><span class="w"> </span><span class="o">-</span><span class="n">P</span><span class="w"> </span><span class="mi">10022</span><span class="w"> </span><span class="k">host</span><span class="o">-</span><span class="k">file</span><span class="w"> </span><span class="n">boschrexroth</span><span class="nv">@localhost</span><span class="err">:</span><span class="o">~/</span><span class="n">guest</span><span class="o">-</span><span class="n">dir</span><span class="o">/</span><span class="n">guest</span><span class="o">-</span><span class="k">file</span><span class="w"></span>
-</code></pre></div>
-
-<p>From guest to host:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">scp</span><span class="w"> </span><span class="o">-</span><span class="n">P</span><span class="w"> </span><span class="mi">10022</span><span class="w"> </span><span class="n">boschrexroth</span><span class="nv">@localhost</span><span class="err">:</span><span class="o">~/</span><span class="n">guest</span><span class="o">-</span><span class="n">dir</span><span class="o">/</span><span class="n">guest</span><span class="o">-</span><span class="k">file</span><span class="w"> </span><span class="k">host</span><span class="o">-</span><span class="k">file</span><span class="w"></span>
-</code></pre></div>
-
-<p><strong>Hints</strong>: 
-* The option P of the scp command must be a <strong>capital letter</strong>.
-* Consider to use a tool combining shell and copy functions e.g. <a href="https://mobaxterm.mobatek.net/">MobaXterm</a></p>
-<h4 id="install-ssh-authentification-with-key-pair">Install ssh Authentification with Key Pair<a class="headerlink" href="#install-ssh-authentification-with-key-pair" title="Permanent link">&para;</a></h4>
-<p>To avoid frequently entering the user/password combination we recommend to use a RSA key pair.</p>
-<p>The following commands can be used on Linux and also on Windows but starting a bash shell:</p>
-<p>If you don't have a private/public key pair create it on your host system:</p>
-<div class="codehilite"><pre><span></span><code>ssh-keygen -t rsa
-</code></pre></div>
-
-<p>Then copy the public key to your guest system:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">ssh</span><span class="o">-</span><span class="n">copy</span><span class="o">-</span><span class="n">id</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mi">10022</span><span class="w"> </span><span class="n">boschrexroth</span><span class="nv">@localhost</span><span class="w"></span>
-</code></pre></div>
-
-<h3 id="connection-to-ctrlx-core-controls">Connection to ctrlX CORE controls<a class="headerlink" href="#connection-to-ctrlx-core-controls" title="Permanent link">&para;</a></h3>
-<p>Your QEMU VM is running in so called User Networking mode. In this mode QEMU provides internally (between host and guest operating system) a DHCP, a Gateway, a DNS and a SMB server. Further informations see chapter <code>User Networking (SLIRP)</code> on <a href="https://wiki.qemu.org/Documentation/Networking#User_Networking_.28SLIRP.29">QEMU Documentation/Networking</a>.</p>
-<p>TCP/IP packages from a component within the VM to a ctrlX are forwarded via the Gateway server to the host operating system. So the connection to a hardware based ctrlX COREs as well as to a ctrlX CORE virtual are possible.</p>
-<p>Here some examples of connection strings for a Datalayer provider:
-1. ctrlX CORE or ctrlX CORE virtual with network adapter: tcp://boschrexroth:boschrexroth@192.168.1.1:2070
-2. ctrlX CORE virtual with port forwarding: tcp://boschrexroth:boschrexroth@10.0.2.2:2070</p>
-<p>Explanation:</p>
-<p>192.168.1.1: The VM routs TCP/IP packages to the gateway server of QEMU. Here they are sent to the host operating system. This will sent them directly or also via its gateway to the control.</p>
-<p>10.0.2.2: The VM routs TCP/IP packages to the gateway server of QEMU. It substitutes the IP with 127.0.0.1 and sents them to the host operating system. Via port forwarding (2070:2070) the packages are routed to the ctrlX virtual.</p>
-<h3 id="shutdown">Shutdown<a class="headerlink" href="#shutdown" title="Permanent link">&para;</a></h3>
-<p>It's very important to shutdown the <strong>QEMU VM</strong> properly.
-So initiate a shutdown e.g. with this command:</p>
-<div class="codehilite"><pre><span></span><code>sudo poweroff
-</code></pre></div>
-
-<h2 id="troubleshooting-tips">Troubleshooting, Tips<a class="headerlink" href="#troubleshooting-tips" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Deactivate all other virtual machines on your host to avoid performance disadvantages.</li>
-<li>An emulated <em>AARCH64</em> guest system is slow - be patient.</li>
-<li>
-<p>Check the http/https access of your host to the internet - respectively to the Ubuntu sites e.g. with:</p>
-<p>wget -p http://ports.ubuntu.com/ubuntu-ports</p>
-</li>
-</ul>
-<p>If failed check your DNS settings and server(s).</p>
-<ul>
-<li>
-<p>Check the <a href="https://status.snapcraft.io/">Snap Store Status</a> if snaps cannot be installed.</p>
-</li>
-<li>
-<p>Read error messages carefully, search in the internet for these messages and hints for troubleshooting.</p>
-</li>
-<li>
-<p>On your Windows host you can use <a href="https://winscp.net/">WinSCP</a> combined with <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html">PuTTy</a> instead of the Windows ssh and scp.</p>
-</li>
-</ul>
-<p>Important web sites:
-- <a href="https://wiki.ubuntu.com/ARM64/QEMU">QEMU</a> </p>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
-<p>MIT License</p>
-<p>Copyright (c) 2021 Bosch Rexroth AG</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
 
               
             </article>
@@ -2094,10 +1959,10 @@ SOFTWARE.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../../../../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../../../../assets/javascripts/workers/search.092fa1f6.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.e3b2bf44.min.js"></script>
+      <script src="../../../../../../assets/javascripts/bundle.e3b2bf44.min.js"></script>
       
     
   </body>
