@@ -2,16 +2,43 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "link package",
+            "label": "build snap amd64",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "build-snap-amd64.sh"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build snap arm64",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "build-snap-arm64.sh"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
+            "label": "npm clean",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "type": "shell",
             "problemMatcher": [],
-            "command": "ln -s -v -f ${workspaceFolder}/../../nodejs/ctrlx-datalayer-nodejs-1.0.2.tgz ctrlx-datalayer-nodejs.tgz",
+            "command": "rm -rf node_modules",
             "options": {
-                "cwd": "${workspaceFolder}/src"
+                "cwd": "${workspaceFolder}"
             }
         },
         {
@@ -24,120 +51,11 @@
             "problemMatcher": [],
             "command": "npm install",
             "options": {
-                "cwd": "${workspaceFolder}/src"
-            },
-            "dependsOn": [
-                "link package"
-            ]
-        },
-        {
-            "label": "npm clean",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "type": "shell",
-            "problemMatcher": [],
-            "command": "rm -rf node_modules",
-            "options": {
-                "cwd": "${workspaceFolder}/src"
-            }
-        },
-        {
-            "label": "snapcraft clean",
-            "type": "shell",
-            "command": "snapcraft clean --destructive-mode",
-            "problemMatcher": [],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-        },
-        {
-            "label": "snapcraft",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "type": "shell",
-            "problemMatcher": [],
-            "command": "snapcraft --destructive-mode",
-            "options": {
                 "cwd": "${workspaceFolder}"
             },
             "dependsOn": [
-                "link package",
-                "snapcraft clean"
+                "npm clean"
             ]
         },
-        {
-            "label": "flatc class (x64)",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "type": "shell",
-            "problemMatcher": [],
-            "command": "${workspaceFolder}/../../bin/oss.flatbuffers/ubuntu20-gcc-x64/release/flatc",
-            "args": [
-                "--js",
-                "sampleSchema.fbs"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/src"
-            },
-        },
-        {
-            "label": "flatc binary (x64)",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "type": "shell",
-            "problemMatcher": [],
-            "command": "${workspaceFolder}/../../bin/oss.flatbuffers/ubuntu20-gcc-x64/release/flatc",
-            "args": [
-                "-b",
-                "--schema",
-                "sampleSchema.fbs"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/src"
-            }
-        },
-        {
-            "label": "flatc class (arm64)",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "type": "shell",
-            "problemMatcher": [],
-            "command": "${workspaceFolder}/../../bin/oss.flatbuffers/ubuntu20-gcc-aarch64/release/flatc",
-            "args": [
-                "--js",
-                "sampleSchema.fbs"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/src"
-            },
-        },
-        {
-            "label": "flatc binary (arm64)",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "type": "shell",
-            "problemMatcher": [],
-            "command": "${workspaceFolder}/../../bin/oss.flatbuffers/ubuntu20-gcc-aarch64/release/flatc",
-            "args": [
-                "-b",
-                "--schema",
-                "sampleSchema.fbs"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}/src"
-            }
-        }
     ]
 }

@@ -1,18 +1,18 @@
 /**
  * MIT License
- * 
+ *
  * Copyright (c) 2021 Bosch Rexroth AG
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,17 +29,15 @@
 #include "comm/datalayer/sub_properties_generated.h"
 
 #include "datalayerclientsub.h"
-DataLayerClientSub::DataLayerClientSub(const comm::datalayer::DatalayerSystem &datalayerSystem, const std::string &connectionClient)
+DataLayerClientSub::DataLayerClientSub(const comm::datalayer::DatalayerSystem &datalayerSystem)
 {
   _datalayerSystem = datalayerSystem;
-  _connectionClient = connectionClient;
 }
 
-comm::datalayer::DlResult DataLayerClientSub::connect()
+comm::datalayer::DlResult DataLayerClientSub::connect(const std::string &clientConnection)
 {
-
-  std::cout << "_datalayerSystem.factory()->createClient2: " << _connectionClient << std::endl;
-  _datalayerClient = _datalayerSystem.factory()->createClient2(_connectionClient);
+  std::cout << "_datalayerSystem.factory()->createClient2: " << clientConnection << std::endl;
+  _datalayerClient = _datalayerSystem.factory()->createClient2(clientConnection);
   if (_datalayerClient == nullptr)
   {
     std::cout << "ERROR: Could not create datalayer client instance" << std::endl;
@@ -51,10 +49,8 @@ comm::datalayer::DlResult DataLayerClientSub::connect()
 
 comm::datalayer::DlResult DataLayerClientSub::isConnected()
 {
-
-  if (_datalayerClient->isConnected() == false)
+  if (_datalayerClient == nullptr || _datalayerClient->isConnected() == false)
   {
-    std::cout << "ERROR: Connection failed: " << _connectionClient << std::endl;
     return DL_CLIENT_NOT_CONNECTED;
   }
 
@@ -92,14 +88,14 @@ comm::datalayer::PublishCallback DataLayerClientSub::publishCallback()
   {
     std::cout << "--------------- Data has been changed! Result: " << result.toString() << std::endl;
 
-    //check if datalayer-exess was ok
+    // check if datalayer-exess was ok
     if (result != DL_OK)
     {
       std::cout << "DL Error" << std::endl;
       return;
     }
 
-    //check if items is not a nullpointer
+    // check if items is not a nullpointer
     if (items.empty())
     {
       std::cout << "No items" << std::endl;
@@ -135,7 +131,7 @@ comm::datalayer::PublishCallback DataLayerClientSub::publishCallback()
         continue;
       }
 
-      auto info = comm::datalayer::GetNotifyInfo(items[n].info.getData()); //GetNotifyData is generated out of .fbs file
+      auto info = comm::datalayer::GetNotifyInfo(items[n].info.getData()); // GetNotifyData is generated out of .fbs file
       std::cout << "  address: " << info->node()->c_str() << std::endl;
       std::cout << "  timestamp: " << info->timestamp() << std::endl;
       std::cout << "  notifyType: " << comm::datalayer::EnumNamesNotifyType()[info->notifyType()] << std::endl;

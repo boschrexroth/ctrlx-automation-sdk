@@ -29,6 +29,19 @@ parts:
   simple-webserver:
     source: .
     plugin: go
+    override-build: |
+      case $SNAPCRAFT_ARCH_TRIPLET in
+        aarch64-linux-gnu)
+          export GOARCH=arm64
+          export GOARM=7
+          export CGO_ENABLED=0
+          GO111MODULE=on
+          ;;
+        amd64)
+          export GOARCH=amd64
+          ;;
+      esac
+      go build -o ../install/bin/ ./...
     
   configs:
     source: ./configs

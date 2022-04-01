@@ -28,7 +28,6 @@ using Samples.Datalayer.MQTT.Pub;
 using Samples.Datalayer.MQTT.Sub;
 using Samples.Datalayer.MQTT.Test;
 using System;
-using System.Net;
 
 using System.Threading;
 
@@ -39,23 +38,17 @@ namespace Samples.Datalayer.MQTT.Base
     /// </summary>
     internal class MqttRootNodeHandler : MqttBaseNodeHandler
     {
-        //Consts
-
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!! CHANGE THIS TO YOUR ENVIRONMENT !!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        private static readonly IPAddress IpAddress = IPAddress.Parse("192.168.1.1");
-        private static readonly string Username = "boschrexroth";
-        private static readonly string Password = "boschrexroth";
 
         /// <summary>
         /// Creates a handler
         /// </summary>
         /// <param name="baseAddress"></param>
         /// <param name="name"></param>
-        public MqttRootNodeHandler(string baseAddress, string name) :
+        public MqttRootNodeHandler(IClient client, IProvider provider, string baseAddress, string name) :
                 base(baseAddress, name)
         {
+            Client = client;
+            Provider = provider;
         }
 
         #region Properties
@@ -64,11 +57,6 @@ namespace Samples.Datalayer.MQTT.Base
         /// Gets the application lock
         /// </summary>
         public ManualResetEvent Lock { get; } = new(false);
-
-        /// <summary>
-        /// Gets the DatalayerSystem
-        /// </summary>
-        public DatalayerSystem System { get; } = new();
 
         /// <summary>
         /// Gets the Data Layer provider
@@ -100,26 +88,6 @@ namespace Samples.Datalayer.MQTT.Base
         /// <returns></returns>
         public override DLR_RESULT Start()
         {
-            // Check if the process is running inside a snap 
-            var isSnapped = IsSnapped;
-            Console.WriteLine(value: $"Running inside snap: {isSnapped}");
-
-            //Starts the Data Layer system without a new broker (startBroker = false), because one broker is already running on ctrlX device
-            System.Start(startBroker: false);
-
-            if (!System.IsStarted)
-            {
-                Console.WriteLine("Data Layer could not be started!");
-                return DLR_RESULT.DL_FAILED;
-            }
-
-            //Create a client with inter - process communication(ipc) protocol if running in snap, otherwise tcp
-            Client = isSnapped
-                ? System.Factory.CreateIpcClient()
-                : System.Factory.CreateTcpClient(IpAddress,
-                    DatalayerSystem.DefaultClientPort,
-                    Username,
-                    Password);
 
             //Wait until client connected
             if (WaitUntilConnected(Client, TimeoutMillis).IsBad())
@@ -128,13 +96,6 @@ namespace Samples.Datalayer.MQTT.Base
                 return DLR_RESULT.DL_FAILED;
             }
 
-            //Create a provider with inter-process communication (ipc) protocol if running in snap, otherwise tcp
-            Provider = isSnapped
-                ? System.Factory.CreateIpcProvider()
-                : System.Factory.CreateTcpProvider(IpAddress,
-                    DatalayerSystem.DefaultProviderPort,
-                    Username,
-                    Password);
 
             //Create child handlers and add
             Handlers.Add(new MqttClientNodeHandler(this, this));
@@ -174,9 +135,6 @@ namespace Samples.Datalayer.MQTT.Base
             var result = Provider.Stop();
             Console.Write(value: $"Provider stopped: {result}");
 
-            // Stop the Data Layer system
-            System.Stop();
-            Console.WriteLine("Data Layer system stopped");
 
             //Unlock application
             Lock.Set();

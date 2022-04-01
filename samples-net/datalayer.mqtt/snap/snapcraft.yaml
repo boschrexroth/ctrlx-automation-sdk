@@ -3,7 +3,7 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-dotnet-datalayer-mqtt
-version: '2.0.0'
+version: '1.0.0'
 summary: Data Layer MQTT sample written in .NET for ctrlX.
 description: |
   MQTT sample showing PUB/SUB with Data Layer in full interaction.

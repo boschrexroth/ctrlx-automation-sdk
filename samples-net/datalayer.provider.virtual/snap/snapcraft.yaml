@@ -3,7 +3,7 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-dotnet-datalayer-provider-virtual
-version: '2.0.0'
+version: '1.0.0'
 summary: Data Layer provider virtual sample written in .NET for ctrlX.
 description: |
   This .NET sample demonstrates how to write a light-weight provider, listing to a wildcard address and managing virtual nodes.

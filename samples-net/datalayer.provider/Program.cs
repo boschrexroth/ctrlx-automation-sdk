@@ -39,23 +39,29 @@ namespace Samples.Datalayer.Provider
     /// </summary>
     internal class Program
     {
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!! CHANGE THIS TO YOUR ENVIRONMENT !!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        /// <summary>
-        /// Defines the IpAddress.
-        /// </summary>
-        private static readonly IPAddress IpAddress = IPAddress.Parse("192.168.1.1");// IPAddress.Loopback
+        // This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:DATALAYER_PORT?sslport=SSL_PORT
+        // Please check and change according your environment:
+        // - USER:        Enter your user name here - default is boschrexroth
+        // - PASSWORD:    Enter your password here - default is boschrexroth
+        // - IP_ADDRESS:
+        //   127.0.0.1    If you develop on your (Windows) host and you want to connect to a ctrlX CORE virtual with port forwarding
+        //   10.0.2.2     If you develop on a VM (QEMU, Virtual Box) and you want to connect to a ctrlX virtual with port forwarding
+        //   192.168.1.1  If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
+        // - DATALAYER_PORT:
+        //   2069         The ctrlX Data Layer client port
+        //   2070         The ctrlX Data Layer provider port
+        // - SSL_PORT:
+        //   443          Default SSL Port if you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
+        //   8443         Default forwarded SSL Port if you are using a ctrlX CORE virtual
 
-        /// <summary>
-        /// Defines the Username.
-        /// </summary>
-        private static readonly string Username = "boschrexroth";
+        // Please change the following constants according to your environment
+        private const string USER = "boschrexroth";
+        private const string PASSWORD = "boschrexroth";
+        private const string IP_ADDRESS = "10.0.2.2";
+        private const int SSL_PORT = 8443;
 
-        /// <summary>
-        /// Defines the Password.
-        /// </summary>
-        private static readonly string Password = "boschrexroth";
+        // Please define the node root folder in ctrlX Data Layer
+        private const string ROOT = "samples/dotnet";
 
         /// <summary>
         /// The Main.
@@ -77,27 +83,25 @@ namespace Samples.Datalayer.Provider
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Create the provider with inter-process communication (ipc) protocol if running in snap, otherwise tcp
-            using var provider = isSnapped
-                ? system.Factory.CreateIpcProvider()
-                : system.Factory.CreateTcpProvider(IpAddress,
-                    DatalayerSystem.DefaultProviderPort,
-                    Username,
-                    Password);
+            // Set remote connection string for provider with inter-process communication (ipc) protocol if running in snap, otherwise tcp
+            var remote = isSnapped ? "ipc://" : $"tcp://{USER}:{PASSWORD}@{IP_ADDRESS}:2070?sslport={SSL_PORT}";
+
+            // Create the provider with remote connection string
+            using var provider = system.Factory.CreateProvider(remote);
             Console.WriteLine("ctrlX Data Layer provider created.");
 
             // Create and register node on given address and read-only callbacks.
-            var myIntNode = CreateReadOnlyNode("samples/myInt", "types/datalayer/int32", "MyInt Description", new Variant(42));
+            var myIntNode = CreateReadOnlyNode($"{ROOT}/myInt", "types/datalayer/int32", "MyInt Description", new Variant(42));
             var (resultMyInt, _) = provider.RegisterNode(myIntNode.Address, new ReadOnlyNodeHandler(myIntNode));
             Console.WriteLine($"Registering Node with address='{myIntNode.Address}', result='{resultMyInt}'");
 
             // Create and register node on given address and read-only callbacks.
-            var myDoubleNode = CreateReadOnlyNode("samples/myDouble", "types/datalayer/float64", "MyDouble Description", new Variant(Math.PI));
+            var myDoubleNode = CreateReadOnlyNode($"{ROOT}/myDouble", "types/datalayer/float64", "MyDouble Description", new Variant(Math.PI));
             var (resultMyDouble, _) = provider.RegisterNode(myDoubleNode.Address, new ReadOnlyNodeHandler(myDoubleNode));
             Console.WriteLine($"Registering Node with address='{myDoubleNode.Address}', result='{resultMyDouble}'");
 
             // Create and register node on given address and read-write callbacks.
-            var myStringNode = CreateReadWriteNode("samples/myString", "types/datalayer/string", "MyDouble Description", new Variant("Hello ctrlX"));
+            var myStringNode = CreateReadWriteNode($"{ROOT}/myString", "types/datalayer/string", "MyDouble Description", new Variant("Hello ctrlX"));
             var (resultMyString, _) = provider.RegisterNode(myStringNode.Address, new ReadWriteNodeHandler(myStringNode));
             Console.WriteLine($"Registering Node with address='{myStringNode.Address}', result='{resultMyString}'");
 
@@ -113,7 +117,7 @@ namespace Samples.Datalayer.Provider
             var variantFlatbuffers = new Variant(builder);
 
             // Create and register node on given address and read-only callbacks.
-            var myFlatbuffersNode = CreateReadOnlyNode("samples/inertial-value", typeAddressInertialValue, "My Inertial Value Description", variantFlatbuffers);
+            var myFlatbuffersNode = CreateReadOnlyNode($"{ROOT}/inertial-value", typeAddressInertialValue, "My Inertial Value Description", variantFlatbuffers);
             var (resultMyFlatbuffers, _) = provider.RegisterNode(myFlatbuffersNode.Address, new ReadOnlyNodeHandler(myFlatbuffersNode));
             Console.WriteLine($"Registering Node with address='{myFlatbuffersNode.Address}', result='{resultMyFlatbuffers}'");
 
@@ -165,11 +169,9 @@ namespace Samples.Datalayer.Provider
         /// <returns>The <see cref="Node"/>.</returns>
         public static Node CreateReadOnlyNode(string address, string targetAddress, string description, IVariant value)
         {
-            var metaData = new MetadataBuilder()
+            var metaData = new MetadataBuilder(AllowedOperationFlags.Read, description)
                 .SetNodeClass(NodeClass.Variable)
-                .SetDescription(description)
-                .SetAllowedOperations(read: true, write: false, create: false, delete: false, browse: false)
-                .AddReference("readType", targetAddress)
+                .AddReference(ReferenceType.ReadType, targetAddress)
                 .Build();
 
             return new Node(address, value, metaData);
@@ -185,12 +187,10 @@ namespace Samples.Datalayer.Provider
         /// <returns>The <see cref="Node"/>.</returns>
         public static Node CreateReadWriteNode(string address, string targetAddress, string description, IVariant value)
         {
-            var metaData = new MetadataBuilder()
+            var metaData = new MetadataBuilder(AllowedOperationFlags.Read | AllowedOperationFlags.Write, description)
                 .SetNodeClass(NodeClass.Variable)
-                .SetDescription(description)
-                .SetAllowedOperations(read: true, write: true, create: false, delete: false, browse: false)
-                .AddReference("readType", targetAddress)
-                .AddReference("writeType", targetAddress)
+                .AddReference(ReferenceType.ReadType, targetAddress)
+                .AddReference(ReferenceType.WriteType, targetAddress)
                 .Build();
 
             return new Node(address, value, metaData);

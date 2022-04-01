@@ -3,7 +3,7 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-dotnet-datalayer-client
-version: '2.0.0'
+version: '1.0.0'
 summary: Data Layer client sample written in .NET for ctrlX.
 description: |
   The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console. 

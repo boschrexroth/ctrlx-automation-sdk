@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2020-2021 Bosch Rexroth AG
+# Copyright (c) 2020-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,13 @@ import typing
 from datetime import datetime
 
 # C-interfaces
-import datalayer
-import datalayer.subscription
-from datalayer.client import Client
-from datalayer.variant import Result, Variant
+import ctrlxdatalayer
+import ctrlxdatalayer.subscription
+from ctrlxdatalayer.client import Client
+from ctrlxdatalayer.variant import Result, Variant
 
 
-def rncb(result: Result, items: typing.List[datalayer.subscription.NotifyItem], userdata: datalayer.clib.userData_c_void_p):
+def rncb(result: Result, items: typing.List[ctrlxdatalayer.subscription.NotifyItem], userdata: ctrlxdatalayer.clib.userData_c_void_p):
 
     now = datetime.now().time()
     print(now, "----------------------------------------------------------")
@@ -53,7 +53,7 @@ def rncb(result: Result, items: typing.List[datalayer.subscription.NotifyItem], 
         print("  type:", item.get_data().get_type())
         print("  value:", item.get_data().get_float32())
         print("  timestamp:", item.get_timestamp())
-        print("  datetime:", datalayer.subscription.to_datetime(
+        print("  datetime:", ctrlxdatalayer.subscription.to_datetime(
             item.get_timestamp()))
         n = n + 1
 

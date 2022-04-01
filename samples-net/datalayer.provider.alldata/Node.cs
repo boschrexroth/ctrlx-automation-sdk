@@ -26,6 +26,7 @@ using Datalayer;
 
 namespace Samples.Datalayer.Provider.Alldata
 {
+    using FlatBuffers;
     using sample.schema;
     using System;
     using System.Linq;
@@ -207,7 +208,7 @@ namespace Samples.Datalayer.Provider.Alldata
                 case DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_FLATBUFFERS:
                     {
                         var oldInertialValue = InertialValue.GetRootAsInertialValue(Value.ToFlatbuffers());
-                        Value = Factory.CreateInertialValue(
+                        Value = CreateInertialValue(
                             (short)(oldInertialValue.X + 1),
                             (short)(oldInertialValue.Y + 2),
                             (short)(oldInertialValue.Z + 3));
@@ -232,6 +233,14 @@ namespace Samples.Datalayer.Provider.Alldata
             var number = uint.Parse(postfix);
 
             return $"{prefix}{separator}{++number}";
+        }
+
+        private static Variant CreateInertialValue(short x, short y, short z)
+        {
+            var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
+            var offset = InertialValue.CreateInertialValue(builder, x, y, z);
+            builder.Finish(offset.Value);
+            return new Variant(builder);
         }
     }
 }

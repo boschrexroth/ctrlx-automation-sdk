@@ -4,16 +4,45 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "snapcraft clean",
+            "label": "0 Install venv and packages",
             "type": "shell",
-            "command": "snapcraft clean --destructive-mode",
+            "command": "bash",
+            "args": ["install-venv.sh"],
             "problemMatcher": []
         },
         {
-            "label": "snapcraft",
+            "label": "build snap amd64",
             "type": "shell",
-            "command": "snapcraft --destructive-mode",
-            "problemMatcher": []
+            "command": "bash",
+            "args": ["build-snap-amd64.sh"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build snap arm64",
+            "type": "shell",
+            "command": "bash",
+            "args": ["build-snap-arm64.sh"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            // https://snapcraft.io/docs/remote-build#heading--using
+            "label": "",
+            "type": "shell",
+            "command": "bash",
+            "args": ["build-snaps-remote.sh"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

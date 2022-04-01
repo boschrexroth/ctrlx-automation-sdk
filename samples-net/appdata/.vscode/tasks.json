@@ -2,7 +2,33 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build snap amd64",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "build-snap-amd64.sh"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build snap arm64",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "build-snap-arm64.sh"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build project",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -14,104 +40,11 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "clean",
+            "label": "clean project",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "clean",
-                "${workspaceFolder}/appdata.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish amd64",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "-c",
-                "Release",
-                "-r",
-                "linux-x64",
-                "-o",
-                "${workspaceFolder}/publish/amd64",
-                "--self-contained",
-                "true",
-                "${workspaceFolder}/appdata.csproj",
-                "/property:GenerateFullPaths=true",
-                "/property:PublishSingleFile=true",
-                "/property:PublishTrimmed=true",
-                "/property:DebugType=None",
-                "/property:DebugSymbols=false",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish arm64",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "-c",
-                "Release",
-                "-r",
-                "linux-arm64",
-                "-o",
-                "${workspaceFolder}/publish/arm64",
-                "--self-contained",
-                "true",
-                "${workspaceFolder}/appdata.csproj",
-                "/property:GenerateFullPaths=true",
-                "/property:PublishSingleFile=true",
-                "/property:PublishTrimmed=true",
-                "/property:DebugType=None",
-                "/property:DebugSymbols=false",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "snap amd64",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "type": "shell",
-            "problemMatcher": [],
-            "command": "snapcraft clean --destructive-mode && snapcraft --destructive-mode",
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "dependsOn": [
-                "publish amd64"
-            ]
-        },
-        {
-            "label": "snap arm64",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "type": "shell",
-            "problemMatcher": [],
-            "command": "snapcraft clean --destructive-mode && snapcraft --destructive-mode --enable-experimental-target-arch --target-arch arm64",
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "dependsOn": [
-                "publish arm64"
-            ]
-        },
-        {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
                 "${workspaceFolder}/appdata.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"

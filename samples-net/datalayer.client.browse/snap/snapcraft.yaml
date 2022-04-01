@@ -3,7 +3,7 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-dotnet-datalayer-client-browse
-version: '2.0.0'
+version: '1.0.0'
 summary: Data Layer browse sample written in .NET for ctrlX.
 description: |
   The sample app shows how to browse the Data Layer tree.

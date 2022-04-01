@@ -28,7 +28,6 @@ using FlatBuffers;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
-using System.Net;
 using System.Threading;
 
 namespace Samples.Datalayer.Provider.Virtual
@@ -38,12 +37,6 @@ namespace Samples.Datalayer.Provider.Virtual
     /// </summary>
     internal class VirtualNodeHandler : IProviderNodeHandler
     {
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!! CHANGE THIS TO YOUR ENVIRONMENT !!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        private static readonly IPAddress IpAddress = IPAddress.Parse("192.168.1.1");
-        private static readonly string Username = "boschrexroth";
-        private static readonly string Password = "boschrexroth";
 
         // If we know how many items we want to insert into the ConcurrentDictionary,
         // set the initial capacity to some prime number above that, to ensure that
@@ -81,11 +74,6 @@ namespace Samples.Datalayer.Provider.Virtual
         public ManualResetEvent Lock { get; } = new(false);
 
         /// <summary>
-        /// Gets the DatalayerSystem
-        /// </summary>
-        public DatalayerSystem System { get; } = new();
-
-        /// <summary>
         /// Gets the Data Layer provider
         /// </summary>
         public IProvider Provider { get; private set; }
@@ -112,8 +100,9 @@ namespace Samples.Datalayer.Provider.Virtual
         /// </summary>
         /// <param name="baseAddress"></param>
         /// <param name="name"></param>
-        public VirtualNodeHandler(string baseAddress, string name)
+        public VirtualNodeHandler(IProvider provider, string baseAddress, string name)
         {
+            Provider = provider;
             BaseAddress = baseAddress ?? throw new ArgumentNullException(nameof(baseAddress));
             Name = name ?? throw new ArgumentNullException(nameof(name));
 
@@ -128,26 +117,6 @@ namespace Samples.Datalayer.Provider.Virtual
         /// <returns></returns>
         public DLR_RESULT Start()
         {
-            // Check if the process is running inside a snap 
-            var isSnapped = IsSnapped;
-            Console.WriteLine($"Running inside snap: {isSnapped}");
-
-            //Starts the Data Layer system without a new broker (startBroker = false), because one broker is already running on ctrlX device
-            System.Start(startBroker: false);
-
-            if (!System.IsStarted)
-            {
-                Console.WriteLine("Data Layer could not be started!");
-                return DLR_RESULT.DL_FAILED;
-            }
-
-            //Create a provider with inter-process communication (ipc) protocol if running in snap, otherwise tcp
-            Provider = isSnapped
-                ? System.Factory.CreateIpcProvider()
-                : System.Factory.CreateTcpProvider(IpAddress,
-                    DatalayerSystem.DefaultProviderPort,
-                    Username,
-                    Password);
 
             //We just listen to our base address using a wildcard on '{FullAddress}/**'
             var (result, _) = Provider.CreateNode(FullAddress, "**", this);
@@ -185,9 +154,6 @@ namespace Samples.Datalayer.Provider.Virtual
             var result = Provider.Stop();
             Console.Write(value: $"Provider stopped: {result}");
 
-            // Stop the Data Layer system
-            System.Stop();
-            Console.WriteLine("Data Layer system stopped");
 
             // Clear our nodes
             _nodes.Clear();

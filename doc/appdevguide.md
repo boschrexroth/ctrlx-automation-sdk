@@ -153,7 +153,7 @@ They can also be sure that the app contributes to the basic ctrlX CORE security 
 
 Basic app information:
 
-- App artifacts (“Executables” for ctrlX CORE and ctrlX CORE virtual and basic technical information)
+- App artifacts (“Executables” for ctrlX CORE and ctrlX CORE<sup>virtual</sup> and basic technical information)
 
 - App documentation / user manual and release notes
 
@@ -308,7 +308,7 @@ ctrlX currently supports the amd64 and the arm64 processor architecture. The cor
 
 - **"{TechnicalAppName}_{version}_arm64.snap" (<span style="color:red;">**MANDATORY**</span>)** - Snap that runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX CORE hardware.
 
-- **"{TechnicalAppName}_{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE virtual. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
+- **"{TechnicalAppName}_{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE<sup>virtual</sup>. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
 
 
 

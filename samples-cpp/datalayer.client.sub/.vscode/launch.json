@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "configurations": [
         {
-            "name": "x64 builder debug",
+            "name": "x64 Build Environment (local)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/datalayerClientSub",
@@ -29,7 +29,7 @@
             ]
         },
         {
-            "name": "aarch64-ctrlX",
+            "name": "aarch64 ctrlX (remote)",
             "type": "cppdbg",
             "request": "launch",
             "program": "~/remote-debug/datalayerClient",

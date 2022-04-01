@@ -35,17 +35,15 @@ class DataLayerClientSub
 private:
   comm::datalayer::DatalayerSystem _datalayerSystem;
 
-  std::string _connectionClient;
-
   comm::datalayer::IClient2 *_datalayerClient;
 
   comm::datalayer::PublishCallback publishCallback();
 
 public:
 
-  DataLayerClientSub(const comm::datalayer::DatalayerSystem &datalayerSystem, const std::string &connectionClient);
+  DataLayerClientSub(const comm::datalayer::DatalayerSystem &datalayerSystem);
 
-  comm::datalayer::DlResult connect();
+  comm::datalayer::DlResult connect(const std::string &clientConnection);
 
   comm::datalayer::DlResult isConnected();
 

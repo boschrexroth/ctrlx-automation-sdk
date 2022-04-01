@@ -2,7 +2,7 @@
 
 # MIT License
 #
-# Copyright (c) 2021 Bosch Rexroth AG
+# Copyright (c) 2021-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,54 +22,47 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
-
-import datalayer
+import sys
 
 from comm.datalayer import Metadata
-from datalayer.variant import (Result, VariantType)
+
+import ctrlxdatalayer
+from ctrlxdatalayer.variant import Result, VariantType
+
+from helper.ctrlx_datalayer_helper import get_client
 
 
 def main():
 
-    with datalayer.system.System("") as datalayer_system:
+    with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
-        # This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:PORT
-        # Please check and change according your environment:
-        # - USER:       Enter your user name here - default is boschrexroth
-        # - PASSWORD:   Enter your password here - default is boschrexroth
-        # - IP_ADDRESS: 127.0.0.1   If you develop in WSL and you want to connect to a ctrlX CORE virtual with port forwarding
-        #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
-        #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
+        datalayer_client, datalayer_client_connection_string = get_client(
+            datalayer_system)
+        if datalayer_client is None:
+            print("ERROR Connecting", datalayer_client_connection_string, "failed.")
+            sys.exit(1)
 
-        connectionClient = "tcp://boschrexroth:boschrexroth@10.0.2.2:2069"
-
-        if 'SNAP' in os.environ:
-            connectionClient = "ipc://"
-
-        print("Connecting", connectionClient)
-        with datalayer_system.factory().create_client(connectionClient) as datalayer_client:
-
-            print("Data Layer Client created")
-
-            # Check if client is connected
-            print("Client connected:", datalayer_client.is_connected())
+        with datalayer_client:  # datalayer_client is closed automatically when leaving with block
 
             # If not connected exit and retry with app daemon restart-delay (see snapcraft.yaml)
             if datalayer_client.is_connected() is False:
 
-                print("Restarting app after restart-delay of 10 s ...")
-                return
+                print("ERROR Not connected to", datalayer_client_connection_string,
+                      "- restarting app after a delay of 10 s ...")
+                sys.exit(2)
 
             # Browse the whole ctrlX Data Layer tree
             print("Browsing and reading nodes...")
             browse_tree(datalayer_client, datalayer_system.json_converter())
 
-        print("datalayer_system.stop(..)",  datalayer_system.stop(True))
+        print("Stopping Datalayer System")
+        # Attention: Doesn't return if any provider or client instance is still running
+        stop_ok = datalayer_system.stop(False)
+        print("System Stop", stop_ok)
 
 
-def browse_tree(client: datalayer.client.Client, converter: datalayer.system.Converter, address=""):
+def browse_tree(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.system.Converter, address=""):
 
     # print current address and get value of node
     node_value = get_value(client, converter, address)
@@ -90,7 +83,7 @@ def browse_tree(client: datalayer.client.Client, converter: datalayer.system.Con
             browse_tree(client, converter, address + "/" + node)
 
 
-def get_value(client: datalayer.client.Client, converter: datalayer.system.Converter, address: str):
+def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.system.Converter, address: str):
 
     # get data with read sync
     result, data = client.read_sync(address)
@@ -155,7 +148,8 @@ def get_value(client: datalayer.client.Client, converter: datalayer.system.Conve
                 return
 
             # Convert variant flatbuffers data to json type
-            result, json = converter.converter_generate_json_complex(data, typeVar, -1)
+            result, json = converter.converter_generate_json_complex(
+                data, typeVar, -1)
             if result != Result.OK:
                 print("ERROR Converting json failed with: ", result)
                 return
@@ -195,18 +189,19 @@ def get_value(client: datalayer.client.Client, converter: datalayer.system.Conve
         if vt == VariantType.UINT8:
             return data.get_uint8()
 
-        print("WARNING Unknow Variant Type:", vt)
+        print("WARNING Unknown Variant Type:", vt)
         return None
 
 
-def get_typeaddress(client: datalayer.client.Client, address: str):
+def get_typeaddress(client: ctrlxdatalayer.client.Client, address: str):
 
     result, metadata = client.metadata_sync(address)
     if result != Result.OK:
         print("ERROR Reading metadata of ", address, " failed with: ", result)
         return
 
-    metadata_root = Metadata.Metadata.GetRootAsMetadata(metadata.get_flatbuffers())
+    metadata_root = Metadata.Metadata.GetRootAsMetadata(
+        metadata.get_flatbuffers())
 
     if metadata_root.ReferencesLength() == 0:
         print("ERROR Metadata references are empty")

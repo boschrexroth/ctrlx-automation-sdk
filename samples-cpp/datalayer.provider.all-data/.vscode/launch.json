@@ -6,7 +6,7 @@
     "configurations": [
 
         {
-            "name": "x64",
+            "name": "x64 Build Environment (local)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/allDataProvider",
@@ -23,7 +23,6 @@
                 },
                 {
                     "description": "Set path variable to .",
-                    //"text": "set solib-search-path ${workspaceFolder}/generated/ubuntu20-gcc-x64/debug/usr/lib/",
                     "text": "set env LD_LIBRARY_PATH=${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/usr/lib/",
                     "ignoreFailures": false
                 },
@@ -35,7 +34,7 @@
             ]
         },
         {
-            "name": "aarch64",
+            "name": "aarch64 ctrlX (remote)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-aarch64/Debug/allDataProvider",

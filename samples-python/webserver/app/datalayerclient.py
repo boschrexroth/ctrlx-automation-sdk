@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2020-2021 Bosch Rexroth AG
+# Copyright (c) 2020-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,9 @@
 import os
 import time
 
-import datalayer
+import ctrlxdatalayer
 from comm.datalayer import Metadata
-from datalayer.variant import (Result, VariantType)
+from ctrlxdatalayer.variant import (Result, VariantType)
 
 
 def get_client_connection_string():
@@ -37,8 +37,7 @@ def get_client_connection_string():
     # Please check and change according your environment:
     # - USER:       Enter your user name here - default is boschrexroth
     # - PASSWORD:   Enter your password here - default is boschrexroth
-    # - IP_ADDRESS: 127.0.0.1   If you develop in WSL and you want to connect to a ctrlX CORE virtual with port forwarding
-    #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
+    # - IP_ADDRESS: 10.0.2.2    If you develop on a VM (QEMU, Virtual Box) and you want to connect to a ctrlX virtual with port forwarding
     #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
 
     return "tcp://boschrexroth:boschrexroth@10.0.2.2:2069"
@@ -46,7 +45,7 @@ def get_client_connection_string():
 
 def read_node(address: str):
 
-    with datalayer.system.System("") as datalayer_system:
+    with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
         connectionClient = get_client_connection_string()
@@ -77,7 +76,7 @@ def read_node(address: str):
 
 def write_node(address: str, value: str):
 
-    with datalayer.system.System("") as datalayer_system:
+    with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
         connectionClient = get_client_connection_string()
@@ -105,7 +104,7 @@ def write_node(address: str, value: str):
         return result.name
 
 
-def get_value(client: datalayer.client.Client, converter: datalayer.system.Converter, address):
+def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.system.Converter, address):
 
     # get data with read sync
     result, data = client.read_sync(address)
@@ -213,7 +212,7 @@ def get_value(client: datalayer.client.Client, converter: datalayer.system.Conve
         return None
 
 
-def get_typeaddress(client: datalayer.client.Client, address: str):
+def get_typeaddress(client: ctrlxdatalayer.client.Client, address: str):
 
     result, metadata = client.metadata_sync(address)
     if result != Result.OK:
@@ -239,7 +238,7 @@ def get_typeaddress(client: datalayer.client.Client, address: str):
     return read_typeaddress
 
 
-def set_value(client: datalayer.client.Client, address, value):
+def set_value(client: ctrlxdatalayer.client.Client, address, value):
 
     # get data with read sync
     result, data = client.read_sync(address)

@@ -2,8 +2,6 @@
 
 The remote debugging of snaps written in Python is described here [Debugging](../../doc/debug.md), chapter "Python". 
 
-This documentation provides additional informations about this sample project.
-
 ## Enabling Remote Debugging
 
 Remote debugging is enabled when the app is called with a command line parameter --debug-port=....
@@ -17,7 +15,7 @@ We use the Python package __debugpy__ for remote debugging.
 
 To simplify the usage of this package the debugging code is outsourced into the script debugging.py.
 
-To use debugpy and the script in your own Python projects too install the package into your project enviroment, copy the script debugging.py into your project folder and add the function calls into your code.
+To use debugpy and the script in your own Python projects too install the package into your project environment, copy the script debugging.py into your project folder and add the function calls into your code.
 
 ___
 
@@ -25,7 +23,7 @@ ___
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

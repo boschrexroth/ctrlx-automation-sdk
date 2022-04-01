@@ -2,7 +2,7 @@
 
 # MIT License
 #
-# Copyright (c) 2021 Bosch Rexroth AG
+# Copyright (c) 2021-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,42 +22,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
 import sys
 
 import faulthandler
 import time
 
-import datalayer
-from datalayer.variant import Result
+import ctrlxdatalayer
 
 from calculations.basic_arithmetic_operations import BasicArithmeticOperations
-
-# Do NOT change these values
-connection_ipc = "ipc://"
-port_client = ":2069"
-port_provider = ":2070"
+from helper.ctrlx_datalayer_helper import get_client, get_provider
 
 addr_root = "sdk-py-calc"
 
-# This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS
-# Please check and change according your environment:
-# - USER:       Enter your user name here - default is boschrexroth
-# - PASSWORD:   Enter your password here - default is boschrexroth
-# - IP_ADDRESS: 127.0.0.1   If you develop in WSL and you want to connect to a ctrlX CORE virtual with port forwarding
-#               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
-#               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-
-connection_tcp = "tcp://boschrexroth:boschrexroth@10.0.2.2"
-
-
-def is_snap() -> bool:
-    return 'SNAP' in os.environ
-
 
 def start_new_basic_arithmetic_operation(
-        provider: datalayer.provider.Provider,
-        client: datalayer.client.Client,
+        provider: ctrlxdatalayer.provider.Provider,
+        client: ctrlxdatalayer.client.Client,
         id: str,
         mode: str):
 
@@ -65,9 +45,9 @@ def start_new_basic_arithmetic_operation(
         provider, client, addr_root, id, mode)
     basicArithmeticOperation.register_nodes()
 
-    while basicArithmeticOperation.subscribe() != Result.OK:
+    while basicArithmeticOperation.subscribe() != ctrlxdatalayer.variant.Result.OK:
         basicArithmeticOperation.unsubscribe()
-        print("WARN Starting Data Layer subsciptions for",
+        print("WARN Starting Data Layer subscriptions for",
               addr_root + "/" + id, "failed with: " + str(result))
         print("INFO Retry in 5s")
         time.sleep(5.0)
@@ -80,7 +60,7 @@ if __name__ == '__main__':
     print("===========================================================================")
     print("ctrlX Application in Python:")
     print("- Reads Data Layer values per subscription.")
-    print("- Runs a algorithmn")
+    print("- Runs a algorithm")
     print("- Provides result as Data Layer Node")
     print()
     print("Will be restarted by the snap system on error.")
@@ -89,37 +69,64 @@ if __name__ == '__main__':
 
     faulthandler.enable()
 
-    system = datalayer.system.System("")
+    system = ctrlxdatalayer.system.System("")
     system.start(False)
 
-    if is_snap():
-        connection_client = connection_ipc
-        connection_provider = connection_ipc
-    else:
-        connection_client = connection_tcp + port_client
-        connection_provider = connection_tcp + port_provider
-
-    client = system.factory().create_client(connection_client)
-    client.set_timeout(datalayer.client.TimeoutSetting.PING, 5000)
-
-    provider = system.factory().create_provider(connection_provider)
-    result = provider.start()
-    if result != Result.OK:
-        print("ERROR Starting Data Layer provider failed with: " + str(result))
+    # Here default argument values are used: ip="192.168.1.1", user="boschrexroth", password="boschrexroth", ssl_port=443
+    # Enter ip, user, password etc. if they differ from your application.
+    client, client_connection_string = get_client(system)
+    if client is None:
+        print("ERROR Could get ctrlX Datalayer client connection:", client_connection_string)
+        system.stop(False)
         sys.exit(1)
+    print("INFO ctrlX Datalayer client connection succeeded:", client_connection_string)
 
-    bao_plus = start_new_basic_arithmetic_operation(provider, client, "plus", "+")
+    # Here default argument values are used: ip="192.168.1.1", user="boschrexroth", password="boschrexroth", ssl_port=443
+    # Enter ip, user, password etc. if they differ from your application.
+    provider, provider_connection_string = get_provider(system)
+    if provider is None:
+        print("ERROR Could get ctrlX Datalayer provider connection:", provider_connection_string)
+        provider.close()
+        client.close()
+        system.stop(False)
+        sys.exit(2)
+
+    print("INFO ctrlX Datalayer provider connection succeeded:", provider_connection_string)
+
+    update_time = 1.0
+    bao = BasicArithmeticOperations(
+        provider, client, addr_root, "1", "+", int(update_time)*1000)
+    bao.register_nodes()
+
+    result = bao.subscribe()
+    if result != ctrlxdatalayer.variant.Result.OK:
+        print("ERROR Subscribing values failed with", str(result))
+        provider.close()
+        client.close()
+        system.stop(False)
+        sys.exit(2)
 
     # Endless loop
-    while client.is_connected():
-        time.sleep(10.0)
+    while client.is_connected() & provider.is_connected():
 
-    print("ERROR Data Layer client is disconnected - exiting application. Will be restarted automatically.")
+        if bao.subscription_changed:
+            bao.unsubscribe()
+            bao.subscribe()
 
-    bao_plus.unsubscribe()
+        if bao.value_changed:
+            bao.calc()  # call calc() here to be able to debug
 
+        time.sleep(update_time)
+
+    print("ERROR Client connection", client_connection_string,
+          "disconnected - exiting application. Will be restarted automatically.")
+
+    bao.unsubscribe()
+    provider.close()
     client.close()
 
-    system.stop(True)
+    # Attention: Doesn't return if any provider or client instance is still running
+    stop_ok = system.stop(False)
+    print("System Stop", stop_ok)
 
     sys.exit(3)

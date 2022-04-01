@@ -13,11 +13,11 @@ All samples generate Apps (snaps) for the targets
 + ctrlX CORE<sup>virtual</sup> (amd64)
 + ctrlX CORE (arm64)
 
-## Pre-requisites
+## Prerequisites
 
 In this chapter we describe how to install the necessary components on a development environment based on a QEMU VM.
 
-How you can create a QEMU VM is described [here](setup_qemu_ubuntu.md).
+How you can create and run a QEMU VM is described [here](setup_qemu_ubuntu.md).
 
 ### Installation of .NET SDK on the QEMU VM
 
@@ -40,13 +40,13 @@ Check your Runtime:
       dotnet --list-runtimes
 
 
-### Install the VS Code extension from Marketplace
+### Install the Visual Studio Code Extension from Marketplace
 
 We recommend to use __Microsoft Visual Studio Code__ on your host computer as IDE - [see here](vscode.md).
 
 To develop and test .NET application for the ctrlX we have to install the C# extension in the VM.
 
-* Start your VS Code IDE and connect it with the QEMU VM.
+* Start Visual Studio Code and connect it with the QEMU VM.
 * Select the extension icon in the left side bar and enter c#
 * Select this extension and click 'Install in SSH'
 
@@ -58,19 +58,18 @@ To develop and test .NET application for the ctrlX we have to install the C# ext
 
 If you're behing a corporate proxy, you have to configure the __NuGet Proxy__ in configuration file:
 
-      /home/{USERNAME}/.nuget/NuGet/NuGet.Config
+      /home/${USER}/.nuget/NuGet/NuGet.Config
 
-Edit the NuGet configuration file with your preferred editor or with VS Code and add a _config_ section containing the __http_proxy__ and __https_proxy__ inside the _configuration_ section like shown below.
+Edit the NuGet configuration file with your preferred editor or with Visual Studio Code and add a _config_ section containing the __http_proxy__ and __https_proxy__ inside the _configuration_ section like shown below.
 
 __Example:__
 
-The following sample uses the [Px Proxy](https://pypi.org/project/px-proxy) at address http://127.0.0.1:3128.
-for example:
+The following sample uses the [Px Proxy](https://pypi.org/project/px-proxy) running on the host computer. From the VM's point of view, this proxy can be reached with the URL http://10.0.2.2:3128.
 
       <configuration>
             <config>
-                  <add key="http_proxy" value="http://127.0.0.1:3128" />
-                  <add key="https_proxy" value="http://127.0.0.1:3128" />
+                  <add key="http_proxy" value="http://10.0.2.2:3128" />
+                  <add key="https_proxy" value="http://10.0.2.2:3128" />
             </config>
       ...
       </configuration>
@@ -106,7 +105,7 @@ Each .NET sample provides a rich set of tasks for your convenience.
 
 ## Debugging
 
-### Debug on WSL
+### Debug on QEMU VM
 
 Just press __F5__ or
 
@@ -114,21 +113,23 @@ Just press __F5__ or
 + Choose Run -> __.NET Core Launch (console)__.
 + Press the green  __Play__ button.
 
-### Debug snap on ctrlXVirtual
+### Debug snap on ctrlX CORE<sup>virtual</sup>
 
 + Click on Terminal -> __Run Task__.
 + Choose any Task __make snap amd64__.
-+ Install snap on ctrlXVirtual via ctrlX web interface
++ Install snap on ctrlX CORE<sup>virtual</sup> via ctrlX web interface
 + For debugging snaps see [here](https://snapcraft.io/docs/debug-snaps)
 
-### Debug snap on ctrlX
+### Debug snap on ctrlX CORE
 
 + Click on Terminal -> __Run Task__.
 + Choose any Task __make snap arm64__.
-+ Install snap on ctrlX via ctrlX web interface
++ Install snap on ctrlX CORE via ctrlX web interface
 + For debugging snaps see [here](https://snapcraft.io/docs/debug-snaps)
 
-Now you're ready to code .NET on ctrlX! Please open any sample directory in WSL using the Remote Explorer and see documentations how to 
+Now you're ready to code .NET on ctrlX! 
+
+Please open any sample directory in WSL using the Remote Explorer and see documentations how to 
 
 ## Best Practise
 
@@ -242,8 +243,8 @@ Let' say we just wan't to increment a __sbyte__ Variant value by keeping the dat
 
 + Please see [here](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators) for more informations.
 
- 
 ## Support
+
 ### Developer Community
 
 Please join the [Developer Community](https://developer.community.boschrexroth.com/)
@@ -255,8 +256,6 @@ Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctr
 ### Issues
 
 If you've found an error in these sample, please [file an issue](https://github.com/boschrexroth)
-
-
 
 ## License
 

@@ -11,7 +11,7 @@ The ctrlX Data Layer tree is browsed recursively and the data of the nodes are l
 ## Implementation Description
 
 
-Module __main.py__ creates a Data Layer client connection and calls the function browse_tree(). This function tries to read and list the value of the (root) node. Then it scanns recursively through all sub nodes. When all nodes are listed the app ends.
+Module __main.py__ creates a Data Layer client connection and calls the function browse_tree(). This function tries to read and list the value of the (root) node. Then it scans recursively through all sub nodes. When all nodes are listed the app ends.
 
 The app is restarted automatically ny snapd because of its restart option in snap/snapcraft.yaml.
 
@@ -21,7 +21,7 @@ ___
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

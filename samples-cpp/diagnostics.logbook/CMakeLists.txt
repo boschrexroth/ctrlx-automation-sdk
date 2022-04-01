@@ -29,7 +29,7 @@ MESSAGE( STATUS "######################################")
 # Compiler setting
 #
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
@@ -88,7 +88,8 @@ endif(BUILD_SNAP)
 #
 # Set target link libraries
 #
-TARGET_LINK_LIBRARIES ( ${TARGET_PROJECT_NAME}
+target_link_libraries(${TARGET_PROJECT_NAME} -Wl,--no-undefined)
+target_link_libraries(${TARGET_PROJECT_NAME}
   systemd
 )
 
@@ -103,8 +104,8 @@ COMMAND make install
 if (BUILD_SNAP)
   add_custom_command( TARGET ${TARGET_PROJECT_NAME}
     POST_BUILD
+    COMMAND snapcraft clean --destructive-mode
     COMMAND snapcraft --enable-experimental-target-arch --target-arch=${SNAP_ARCH} --destructive-mode
-	COMMAND snapcraft clean --destructive-mode
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
   )
 endif(BUILD_SNAP)

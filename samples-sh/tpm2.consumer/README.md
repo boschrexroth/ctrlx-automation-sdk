@@ -2,7 +2,7 @@
 
 The sample app __tpm2.consumer__ shows the basic usage of a TPM2 inside your application.
 
-Also see ["TPM2"](./../tpm2.md).
+Also see ["TPM2"](./tpm2.md).
 
 ## Introduction
 
@@ -15,19 +15,20 @@ It demonstrates how you can use the TPM2.0 of the ctrlX CORE or the emulated TPM
 
 ## Pre-requisites
 
-* Buildenvironment WSL or Virtual Box
+* Recommended: ctrlX WORKS App Build Environment (QEMU Virtual Machine) - see Setup
 * ctrlX AUTOMATION SDK Version 1.
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE
 
 ## Getting Started
 
-1. Launch IDE (VSCode for example)
+1. Launch Visual Studio Code
 2. Open the sample directory `samples-sh/tpm2.consumer`
 3. Build and install the snap as described in `Setup` section
 4. Go to the webinterface -> Settings -> Certificate & Keys -> TPM2 Webserver
 5. Create a key named "webserver" as RSA 2048 and "HSM protected"
 6. Create a certificate signing request (CSR), download
 7. Create a certificate (webserver.crt) with help of the CSR on your PC or CA
+
 ```bash
 # For example, create yourself a CA
 mkdir ca

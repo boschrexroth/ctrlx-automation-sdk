@@ -7,12 +7,12 @@ The sample __hello-webserver__ contains simple webserver.
 
 ## Pre-requisites
 
-* Buildenvironment WSL or Virtual Box 
+* Recommended: ctrlX WORKS App Build Environment (QEMU Virtual Machine) - see Setup
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE
 
 ## Getting Started
 
-1. Launch IDE (VSCode for example)
+1. Launch Visual Studio Code
 2. Open the sample directory `samples-go/hello-webserver`
 3. Build and install the snap as described in `Setup` section
 4. Check output in the web interface
@@ -38,7 +38,7 @@ ___
 
 MIT License
 
-Copyright (c) 2020, Bosch Rexroth AG
+Copyright (c) 2020 - 2021, Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -1,4 +1,4 @@
-# Generate package-manifest during installation
+# Generate Package Manifest during Installation
 
 ## Goal
 

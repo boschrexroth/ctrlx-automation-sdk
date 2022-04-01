@@ -1,69 +1,40 @@
 # README datalayer.register.node
 
-The sample app __datalayer.register.node__ creates a new provider with node '__sdk-cpp-registernode__' and different type elements to the ctrlX Data Layer.
-
 ## Introduction
 
-It demonstrates how you can create a node with data elements to ctrlX CORE or ctrlx CORE Virtual Data Layer. These elements can be accessed by a client app (e.g. sample app datalayer.client)
+The sample app __datalayer.register.node__ creates a new provider with node '__sdk-cpp-registernode__' and different type elements to the ctrlX Data Layer.
 
-* a data provider -> registernode (snap name)
-* a data client -> datalayerclient (snap name) can be used to change the values of provided nodes of datalayer.register.node
+## Functional Description
 
-## Prerequisites
+It demonstrates how you can create Data Layer nodes with different data types.
+These nodes can be accessed by a Data Layer client app e.g. ctrlX-Node-RED.
 
-* Build environment - we recommend a QEMU virtual machine
-* ctrlX AUTOMATION SDK archive
-* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
+## Implementation Description
 
-### Prerequisites for Building the cpp Samples on the Build Environment
+All actions are implemented in main.cpp:
 
-* Start your build environment
-* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
-
-    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
-
-* Open a SSH shell on your build environment:
-
-    ssh -p 10022 boschrexroth@localhost
-
-* Unzip the archive
-
-    unzip -XK com.boschrexroth.sdk.control-*.zip
-
-* Change to SDK directory public
-* Set x flag: 
-
-    chmod +x bin\oss.flatbuffers\u*\release\flatc
-
-* If installed remove older ctrlx-datalayer package
-
-    sudo dpkg -r ctrlx-datalayer 
-
-* Install newest ctrlx-datalayer package
-
-    sudo dpkg -i deb/ctrlx-datalayer*.deb
-
-## Getting Started
-
-1. Launch IDE (VSCode for example)
-2. Open the sample directory `samples-cpp/datalayer.register.node`
-3. Build and install the snap as described `Setup` section
-4. Check output in the web interface
+* Start Data Layer system
+* Connect as Data Layer provider
+* Register a flatbuffers schema
+* Register several Data Layer nodes
+* Endless loop where the Data Layer connection is observed
+* Shutdown if the Data Layer connection is broken
 
 
-## Screenshots
+!!! important
+    If the app is running as snap on a ctrlX CORE it will be restarted if it has exited on error. 
+
+## Build and Install the Snap
+
+Build and install the snap like described [here](../README.md).
+
+## Test the Snap
+
+* Open the web interface of your ctrlX CORE
+* Check output in the web interface
 
 ![Output in diagnosis logbook](docs/images/datalayer.register.node/messages.in.logbook.png)
 ![Data Layer tree](docs/images/datalayer.register.node/datalayer.register.node.png)
-
-## Troubleshooting
-
-All automatically created files are located in folders `build` and `generated`.  
-If there are unclear messages during the build process, it might help to delete the folders `build` and `generated` and restart the build process.
-
-## Support
-
-If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 

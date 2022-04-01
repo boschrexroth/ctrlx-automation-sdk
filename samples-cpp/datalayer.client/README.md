@@ -1,62 +1,43 @@
 # README datalayer.client
 
-The sample app __datalayer.client__ performs Data Layer operations in cpp.
-
 ## Introduction
 
-It demonstrates how values of existing nodes at the Data Layer of ctrlX CORE or ctrlX CORE Virtual can be accessed.
-The sample requires that datalayer.provider.all-data is running or installed first on ctrlX CORE device.
+The sample app __datalayer.client__ performs Data Layer operations in cpp. 
 
 ## Prerequisites
 
-* Build environment - we recommend a QEMU virtual machine
-* ctrlX AUTOMATION SDK archive
-* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
+The sample requires that the app datalayer.provider.all-data is running in the SDK build environment or as snap on the crlX CORE. 
 
-### Prerequisites for Building the cpp Samples on the Build Environment
+## Function Description
 
-* Start your build environment
-* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
+The app reads demonstrates how values of existing nodes of the ctrlX Data Layer can be accessed.
 
-    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
+## Implementation Description 
 
-* Open a SSH shell on your build environment:
+ctrlx_datalayer_helper.h Cpontains helper methods for creating ctrlX Datalayer Client and/or Provider instances.
 
-    ssh -p 10022 boschrexroth@localhost
+datalayerclient.cpp und datalayerclient.h are defining a class which manages the Data Layer client access:
 
-* Unzip the archive
-
-    unzip -XK com.boschrexroth.sdk.control-*.zip
-
-* Change to SDK directory public
-* Set x flag: 
-
-    chmod +x bin\oss.flatbuffers\u*\release\flatc
-
-* If installed remove older ctrlx-datalayer package
-
-    sudo dpkg -r ctrlx-datalayer 
-
-* Install newest ctrlx-datalayer package
-
-    sudo dpkg -i deb/ctrlx-datalayer*.deb
-
-## Getting Started
-
-1. Launch IDE (VSCode for example)
-2. Open the sample directory `samples-cpp/datalayer.client`
-3. Build and install the snap as described in `Setup` section
-4. Check output in the web interface
+* Starting/stopping the Data Layer access
+* Access of Data Layer nodes of different data type
+* Callback methods for Data Layer access
 
 
-## Troubleshooting
+In main.cpp an endless loop is running:
 
-All automatically created files are located in folders `build` and `generated`.  
-If there are unclear messages during the build process, it might help to delete the folders `build` and `generated` and restart the build process.
+* An instance of the class DataLayerClient is created
+* The instance is called to do Data Layer access
+* The instance is deleted
+* Sleep some time
 
-## Support
+## Build and Install the Snap
 
-If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
+Build and install the snap like described [here](../README.md).
+
+## Test the Snap
+
+* Open a SSH connection to your ctrlX CORE
+* Check trace output: `sudo snap logs -f sdk-cpp-client`
 
 ___
 
@@ -64,7 +45,7 @@ ___
 
 MIT License
 
-Copyright (c) 2020-2021 Bosch Rexroth AG
+Copyright (c) 2020-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

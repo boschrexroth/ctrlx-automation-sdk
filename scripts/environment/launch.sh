@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-# amd64 Host 
-
-# $1 CPU Archtiecture Guest System: amd64, arm64/aarch64 (EMULATED)
-# $2 proxy/no-proxy
+# $1 CPU Architecture Guest System: amd64 (default), aarch64
+# $2 proxy (default), no-proxy
 
 source ./build.sh $1 $2
 
-# EMULATED aarch64 (arm64) Guest System:  -cpu cortex-a57
+# EMULATED aarch64 Guest System:  -cpu cortex-a57
 if grep -q "ar" <<<${ARCH}
 then
   qemu-system-aarch64 \

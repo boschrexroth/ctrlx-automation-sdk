@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build solution",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/datalayer.client/bin/Debug/net5.0/datalayer.client.dll",
+            "program": "${workspaceFolder}/datalayer.client/bin/Debug/net6.0/datalayer.client.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
@@ -23,7 +23,7 @@
             "request": "launch",
             "preLaunchTask": "build solution",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/datalayer.client.browse/bin/Debug/net5.0/datalayer.client.browse.dll",
+            "program": "${workspaceFolder}/datalayer.client.browse/bin/Debug/net6.0/datalayer.client.browse.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
@@ -36,7 +36,7 @@
             "request": "launch",
             "preLaunchTask": "build solution",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/datalayer.provider/bin/Debug/net5.0/datalayer.provider.dll",
+            "program": "${workspaceFolder}/datalayer.provider/bin/Debug/net6.0/datalayer.provider.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
@@ -49,7 +49,7 @@
             "request": "launch",
             "preLaunchTask": "build solution",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/datalayer.provider.alldata/bin/Debug/net5.0/datalayer.provider.alldata.dll",
+            "program": "${workspaceFolder}/datalayer.provider.alldata/bin/Debug/net6.0/datalayer.provider.alldata.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
@@ -62,7 +62,7 @@
             "request": "launch",
             "preLaunchTask": "build solution",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/hello.world/bin/Debug/net5.0/hello.world.dll",
+            "program": "${workspaceFolder}/hello.world/bin/Debug/net6.0/hello.world.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console

@@ -46,7 +46,10 @@ It is a Data Layer Provider for four nodes:
 3. mode: string, specifies the operation
 4. out: float64, the result
 
-With the address values of in1 and in2 a subscription is started. Everytime when new values are published the value of out is recalculated.
+!!! important
+    The operands have to be 'double' values (FLOAT64)!
+    
+With the address values of in1 and in2 a subscription is started. Every time when new values are published the value of out is recalculated.
 
 ___
 
@@ -54,7 +57,7 @@ ___
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

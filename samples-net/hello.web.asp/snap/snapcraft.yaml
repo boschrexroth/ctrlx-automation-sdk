@@ -4,7 +4,7 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-dotnet-hello-web-asp
 
-version: '2.0.0'
+version: '1.0.0'
 summary: Hello World sample written in ASP.NET for ctrlX
 description: |
    The sample provides a web page written in ASP.NET that shows some data layer values. 

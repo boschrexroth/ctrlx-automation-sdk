@@ -4,7 +4,7 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
 name: sdk-cpp-dlecatio
-version: "2.0.0"
+version: "2.1.0"
 grade: stable
 summary: Sample app for processing rt data from EtherCAT
 description: |
@@ -30,10 +30,12 @@ parts:
   datalayerecatio:
     plugin: dump
     source: ./generated/build
+    stage-packages:
+      - libzmq5
 
   deb:
     plugin: dump
-    source: ../../deb/ctrlx-datalayer-1.7.5.deb
+    source: ../../deb/ctrlx-datalayer-1.7.13.deb
 
 # describes which interface slots are supported by defining the plugs
 plugs:

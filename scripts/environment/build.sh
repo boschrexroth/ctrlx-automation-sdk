@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Parameters
-#   CPU Architecture: amd64 (default) | arm64 | aarch64 
+#   CPU Architecture: amd64 (default) | aarch64 
 #   Use proxy server: proxy (default) | noproxy
-#   Info: info
-#   Help: help
+#   Info: Print infos during run
+#   Help: Print help informations and exit
 
 
 # Set script variables ########################################################
@@ -19,7 +19,7 @@ INFO=""
 for PARAM in "$@"
 do
   if grep -q "ar" <<<${PARAM}; then
-    ARCH=arm64
+    ARCH=aarch64
   fi
 
   if grep -q "no" <<<${PARAM}; then
@@ -33,7 +33,7 @@ do
   if grep -q "help" <<<${PARAM}; then
     echo Downloads/builds all files needed to lauch a QEMU VM
     echo "Parameters:"
-    echo "   CPU Architecture:  amd64 (default) | arm64 | aarch64"
+    echo "   CPU Architecture:  amd64 (default) | aarch64"
     echo "   Use proxy server:  proxy (default) | noproxy"
     echo "   Print info:        info"
     echo "   Help (this info):  help"
@@ -49,12 +49,16 @@ OS=ubuntu-20.04-server
 # Ubuntu cloud image name -----------------------------------------------------
 # The Ubunt version name
 U=${OS}-cloudimg
-# Combined with architecture e.g. ubuntu-20.04-server-cloudimg-arm64
+# Combined with architecture e.g. ubuntu-20.04-server-cloudimg-aarch64
 UA=${U}-${ARCH}
 
 # Name of the Ubuntu cloud image file to be downloaded
-# e.g. ubuntu-20.04-server-cloudimg-arm64.img
-IMG=${UA}.img
+if grep -q "ar" <<<${ARCH}
+then
+  IMG=${U}-arm64.img
+else
+  IMG=${U}-amd64.img
+fi
 
 # Architecture independent snapshot from cloud image 
 # e.g. ubuntu-20.04-server-cloudimg-snapshot.qcow2 

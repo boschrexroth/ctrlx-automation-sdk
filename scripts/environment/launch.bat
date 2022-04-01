@@ -1,5 +1,9 @@
 @echo off
 
+rem Parameters
+rem %1 CPU Architecture Guest System: amd64 (default), aarch64
+rem $2 Proxy usage: proxy (default), no-proxy
+
 call build.bat %1 %2
 
 set P22FW=10022-:22

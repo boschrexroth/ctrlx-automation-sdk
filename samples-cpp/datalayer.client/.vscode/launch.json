@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "configurations": [
         {
-            "name": "DatalayerClient x64",
+            "name": "x64 Build Environment (local)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/datalayerClient",
@@ -30,7 +30,7 @@
             ]
         },
         {
-            "name": "DatalayerClient aarch64",
+            "name": "aarch64 ctrlX (remote)",
             "type": "cppdbg",
             "request": "launch",
             "program": "~/remote-debug/datalayerClient",
@@ -47,7 +47,6 @@
                     "boschrexroth@192.168.1.1"
                 ],
                 "pipeCwd": "${workspaceFolder}",
-                
             },
             "MIMode": "gdb",
             "setupCommands": [
@@ -60,7 +59,7 @@
                     "description": "Set path variable to .",
                     "text": "set env LD_LIBRARY_PATH=/home/boschrexroth/remote-debug/usr/lib/",
                     "ignoreFailures": false
-                } 
+                }
             ]
         }
     ]

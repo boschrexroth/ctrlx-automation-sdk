@@ -4,7 +4,7 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
 name: sdk-cpp-registernode
-version: "2.0.0"
+version: "2.1.0"
 grade: stable
 summary: Sample app in cpp to register a Data Layer branch with several nodes
 description: |
@@ -29,6 +29,8 @@ parts:
   registernode:
     plugin: dump
     source: ./generated/build
+    stage-packages:
+      - libzmq5
 
   flatbuffers:
     plugin: dump
@@ -36,7 +38,7 @@ parts:
 
   deb:
     plugin: dump
-    source: ../../deb/ctrlx-datalayer-1.7.5.deb
+    source: ../../deb/ctrlx-datalayer-1.7.13.deb
 
 # describes which interface slots are supported by defining the plugs
 plugs:

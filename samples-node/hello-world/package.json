@@ -1,0 +1,24 @@
+{
+    "name": "hello-world",
+    "version": "1.0.0",
+    "description": "Hello World Node.js sample for ctrlX",
+    "bin": {
+        "app": "dist/app.js"
+    },
+    "author": "",
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "devDependencies": {
+        "@types/node": "^17.0.21",
+        "@typescript-eslint/parser": "^5.13.0",
+        "eslint": "^8.10.0",
+        "typescript": "^4.6.2",
+        "ts-node": "^10.6.0"
+    },
+    "scripts": {
+        "prepare": "npm run tsc",
+        "tsc": "tsc"
+    }
+}

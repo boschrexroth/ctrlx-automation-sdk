@@ -135,7 +135,7 @@ func handler(response http.ResponseWriter, request *http.Request) {
 	err = decoder.Decode(&appdataRequest)
 	if err != nil {
 		fmt.Printf("Error decoding json payload: %s", err.Error())
-		response.WriteHeader(http.StatusInternalServerError)
+		response.WriteHeader(http.StatusBadRequest)
 		return
 	}
 

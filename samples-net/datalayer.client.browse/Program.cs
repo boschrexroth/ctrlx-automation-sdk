@@ -25,18 +25,31 @@ SOFTWARE.
 using Datalayer;
 using System;
 using System.Diagnostics;
-using System.Net;
 
 namespace Samples.Datalayer.Client.Browse
 {
     class Program
     {
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!! CHANGE THIS TO YOUR ENVIRONMENT !!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        private static readonly IPAddress IpAddress = IPAddress.Parse("192.168.1.1"); // IPAddress.Loopback
-        private static readonly string Username = "boschrexroth";
-        private static readonly string Password = "boschrexroth";
+        // This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:DATALAYER_PORT?sslport=SSL_PORT
+        // Please check and change according your environment:
+        // - USER:        Enter your user name here - default is boschrexroth
+        // - PASSWORD:    Enter your password here - default is boschrexroth
+        // - IP_ADDRESS:
+        //   127.0.0.1    If you develop on your (Windows) host and you want to connect to a ctrlX CORE virtual with port forwarding
+        //   10.0.2.2     If you develop on a VM (QEMU, Virtual Box) and you want to connect to a ctrlX virtual with port forwarding
+        //   192.168.1.1  If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
+        // - DATALAYER_PORT:
+        //   2069         The ctrlX Data Layer client port
+        //   2070         The ctrlX Data Layer provider port
+        // - SSL_PORT:
+        //   443          Default SSL Port if you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
+        //   8443         Default forwarded SSL Port if you are using a ctrlX CORE virtual
+
+        // Please change the following constants according to your environment
+        private const string USER = "boschrexroth";
+        private const string PASSWORD = "boschrexroth";
+        private const string IP_ADDRESS = "10.0.2.2";
+        private const int SSL_PORT = 8443;
 
 
         static void Main(string[] args)
@@ -44,9 +57,6 @@ namespace Samples.Datalayer.Client.Browse
             //Add app exit handler to handle optional clean up
             AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
 
-            // Check if the process is running inside a snap 
-            var isSnapped = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP"));
-            Console.WriteLine($"Running inside snap: {isSnapped}");
 
             // Create a new ctrlX Data Layer system
             using var system = new DatalayerSystem();
@@ -55,13 +65,16 @@ namespace Samples.Datalayer.Client.Browse
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Create the client with inter-process communication (ipc) protocol if running in snap, otherwise tcp
-            using var client = isSnapped
-                ? system.Factory.CreateIpcClient()
-                : system.Factory.CreateTcpClient(IpAddress,
-                    DatalayerSystem.DefaultClientPort,
-                    Username,
-                    Password);
+
+            // Check if the process is running inside a snap 
+            var isSnapped = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP"));
+            Console.WriteLine($"Running inside snap: {isSnapped}");
+
+            // Set remote connection string with ipc protocol if running in snap, otherwise with tcp protocol
+            var remote = isSnapped ? "ipc://" : $"tcp://{USER}:{PASSWORD}@{IP_ADDRESS}:2069?sslport={SSL_PORT}";
+
+            // Create the client with remote connection string
+            using var client = system.Factory.CreateClient(remote);
             Console.WriteLine("ctrlX Data Layer client created.");
 
             // Check if client is connected.

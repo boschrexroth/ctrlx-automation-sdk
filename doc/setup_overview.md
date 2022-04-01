@@ -2,16 +2,19 @@
 
 ## Indroduction
 
-For the development of apps you need a Linux development environment based on Ubuntu 20.04 LTS. 
+To develop ctrlX CORE applications with the ctrlX AUTOMATION SDK we need a so called App Build Environment which is a Ubuntu 20.04 Linux operating system with a special set of software packages and certain settings.
 
-All software packages required for app development must be installed on this operating system. In addition, certain settings must be made.
+There are several alternatives for such an enviroment:
 
-The following pages show different alternatives for installation and setup of your Linux development environment.
- 
-Choose your setup:
+## QEMU Virtual Machine as App Build Environemnt
 
-* __Recommended:__ [Automatically installed virtual machine based on QEMU](./setup_qemu_ubuntu.md)
-* [Manually installed virtual machine based on Virtual Box](./setup_windows_virtualbox_ubuntu.md)
-* [Manually installed real machine](./setup_ubuntu.md)
-* Deprecated: [Manually installed virtual machine based on Windows Subsystem for Linux (WSL1)](./setup_windows_wsl_ubuntu.md)
+We recommend to use a QEMU Virtual Machine as App Build Environment. There are two ways to install, setup and run such a VM: 
+
+1. __Recommended:__ [ctrlX WORKS integrated feature App Build Environment](./setup_qemu_ctrlx_works.md)
+2. [Script based installation for both Windows and Linux host](./setup_qemu_ubuntu.md)
+
+## Further Alternatives
+
+* [Manually installed virtual machine based on Virtual Box (SDK VirtualBox VM)](./setup_windows_virtualbox_ubuntu.md)
+* [Manually installed native Ubuntu environment](./setup_ubuntu.md)
 

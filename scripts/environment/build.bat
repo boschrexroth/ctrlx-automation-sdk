@@ -1,5 +1,9 @@
 @echo off
 
+rem Parameters
+rem   CPU Architecture: amd64 (default), aarch64 
+rem   Use proxy usage: proxy (default), noproxy
+
 REM Remove 'REM' in the next two lines if you are using Px.exe as proxy server
 REM set https_proxy=localhost:3128
 REM set http_proxy=localhost:3128
@@ -15,7 +19,7 @@ set NO=no
 rem https://stackoverflow.com/questions/7005951/batch-file-find-if-substring-is-in-string-not-in-a-file
 for %%x in (%*) do (
     echo %%x
-    echo %%x | FINDSTR /C:%AR% >nul && ( set ARCH=arm64)    
+    echo %%x | FINDSTR /C:%AR% >nul && ( set ARCH=aarch64)    
     echo %%x | FINDSTR /C:%NO% >nul && ( set PROXY=noproxy)    
 )
 
@@ -26,6 +30,9 @@ set IMG=%UA%.img
 set QCOW2=%UA%-snapshot-%PROXY%.qcow2
 set UDIMG=%UA%-user-data-%PROXY%.img
 
+IF "%ARCH%" == "aarch64" (
+set IMG=%U%-arm64.img
+)
 if not exist %IMG% (
     call wget.bat https://cloud-images.ubuntu.com/releases/focal/release/%IMG% %IMG%
 )

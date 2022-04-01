@@ -1,19 +1,42 @@
 #!/usr/bin/env bash
 
-if [ -z $1 ]
+# $1 amd64 | aarch64
+# $2 proxy | noproxy
+# $3 Destination directory
+
+ARCH=$1
+if [ -z "$ARCH" ]
 then
-      echo "Parameter 1 (destination path) is empty"
-      exit 1
+      ARCH=amd64
 fi
 
-if [ -z $2 ]
+PROXY=$2
+if [ -z "$PROXY" ]
 then
-      echo "Parameter 2 (destination path) is empty"
-      exit 1
+      PROXY=proxy
+fi
+
+DIR=$3
+if [ -z "$DIR" ]
+then
+      DIR=qemu-vm-${ARCH}-${PROXY}
+fi
+
+if [ -d "$DIR" ]
+then
+  echo "ERROR Destination directory ${DIR} exists!"
+  exit 1
 fi
 
 # Create destination directory
-mkdir -p "$1" 
+mkdir -p "$DIR" 
 
-# Install neccessary files
-rsync --files-from=$2 ./ "$1"/
+cp README.md "$DIR" 
+cp build.sh "$DIR" 
+cp install-kvm-on-host.sh "$DIR" 
+cp install-qemu-on-host.sh "$DIR" 
+cp launch.sh "$DIR" 
+
+cp launch-${ARCH}-${PROXY}.sh "$DIR"
+cp ubuntu-20.04-server-cloudimg-${ARCH}-user-data-${PROXY}.img "$DIR"
+

@@ -1,0 +1,67 @@
+name: sdk-go-provider 
+base: core20 
+version: '0.1' 
+summary: ctrlX Data Layer provider sample written in Go
+description: |
+  This sample shows how to provide data to the ctrlX Data Layer
+
+grade: stable 
+confinement: strict
+
+apps:
+  provider:
+    command: bin/provider
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    restart-condition: always
+    passthrough:   
+      restart-delay: 10s
+
+parts:
+  provider:
+    plugin: go
+    source: .
+    build-snaps: ['go/1.17/stable']
+    build-packages:
+      - libsystemd-dev
+      - libzmq3-dev
+      - pkg-config
+    override-build: |
+      case $SNAPCRAFT_ARCH_TRIPLET in
+        aarch64-linux-gnu)
+          export GOARCH=arm64
+          export GOARM=7
+          export CGO_ENABLED=1
+          export CC=aarch64-linux-gnu-gcc
+          ;;
+        amd64)
+          export GOARCH=amd64
+          ;;
+      esac
+      go build -o ../install/bin/ ./...
+      
+  datalayerdeb:
+    plugin: dump
+    source: ./tmp/ctrlx-datalayer.deb
+    source-type: deb
+    stage-packages:
+      - libzmq5
+    override-pull: |
+      mkdir -p ../../../tmp/
+      cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
+      snapcraftctl pull
+    override-prime: |
+      rm -rf ../tmp
+      snapcraftctl prime
+
+  bfbs:
+    plugin: dump
+    source: ./bfbs 
+
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer

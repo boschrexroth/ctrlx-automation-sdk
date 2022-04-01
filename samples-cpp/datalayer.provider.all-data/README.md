@@ -15,48 +15,6 @@ The static branch and its nodes cannot be changed by Data Layer Client interacti
 
 The dynamic branch however is changeable. Nodes can be written or even deleted by clients. Furthermore new nodes or whole sub branches can be created.
 
-
-## Prerequisites
-
-* Build environment - we recommend a QEMU virtual machine
-* ctrlX AUTOMATION SDK archive
-* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
-
-### Prerequisites for Building the cpp Samples on the Build Environment
-
-* Start your build environment
-* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
-
-    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
-
-* Open a SSH shell on your build environment:
-
-    ssh -p 10022 boschrexroth@localhost
-
-* Unzip the archive
-
-    unzip -XK com.boschrexroth.sdk.control-*.zip
-
-* Change to SDK directory public
-* Set x flag: 
-
-    chmod +x bin\oss.flatbuffers\u*\release\flatc
-
-* If installed remove older ctrlx-datalayer package
-
-    sudo dpkg -r ctrlx-datalayer 
-
-* Install newest ctrlx-datalayer package
-
-    sudo dpkg -i deb/ctrlx-datalayer*.deb
-
-## Getting Started
-
-1. Launch IDE (VSCode for example)
-2. Open the sample directory `public/samples-cpp/datalayer.provider.all-data`
-3. Build and install the snap as described in `Setup` section
-4. Check output in the web interface
-
 ## Implementation
 
 ### main.cpp
@@ -82,16 +40,15 @@ ProviderNodeAllData is a IProviderNode implementation and provides a Data Layer 
 Static means that the values of the nodes and the structure of he branch  cannot be changed by Data Layer clients. In a dynmic branch everthing kann be changed.
 
 All nodes of such a sub branch are 'virtual' because the node behind is always the same ProviderNodeAllData instance. Therefore it registers itself with a wildcard address (e.g. all-data/dynamic/\*\*) at the Data Layer. The 'seen' nodes are DataContainer instances managed in a list and accessed by the on... callback functions of the ProviderNodeAllData class. 
-  
-  
-## Troubleshooting
+ 
+## Build and Install the Snap
 
-All automatically created files are located in folders `build` and `generated`.  
-If there are unclear messages during the build process, it might help to delete the folders `build` and `generated` and restart the build process.
+Build and install the snap like described [here](../README.md).
 
-## Support
+## Test the Snap
 
-If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
+* Open the web interface of your ctrlX CORE
+* Check output in the web interface
 
 ___
 
@@ -99,7 +56,7 @@ ___
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

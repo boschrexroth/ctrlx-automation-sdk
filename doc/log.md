@@ -26,9 +26,9 @@ __Be carefull with level EMERGENCY: Messages with this level are sent to all con
 
 In these folders of ctrlX SDK logging samples for different programming languages are provided:
 
-- public/samples-cpp/diagnostics.logbook
-- public/samples-net/diagnostics.logbook
-- public/samples-python/python.logbook 
+- samples-cpp/diagnostics.logbook
+- samples-net/diagnostics.logbook
+- samples-python/python.logbook 
 
 
 ## Support

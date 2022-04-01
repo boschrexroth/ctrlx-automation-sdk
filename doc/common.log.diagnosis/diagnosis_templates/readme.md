@@ -32,32 +32,46 @@ For the structure (definition of the individual bits) of the main and detailed d
 #### Get diagnostics bundle interfaces
 * Add component "common.log.diagnosis" to your component.
 #### Handle JSON File for un-/registration of diagnostics
+* The file contains all main and detailed diagnostic numbers and texts for the default language (which will also always appear in journald).
 * Create a JSON file for the diagnostics you want to use:
-  * For Bosch developers, use the export mechanism of the common database.
+  * For Bosch developers:
+    * For Bosch projects/components it is mandatory to use English texts for the default language.
+    * Use the export mechanism of the common database. Details see https://inside-docupedia.bosch.com/confluence/x/dY4ucw.
+    * It is necessary to provide the exported JSON file within your bundle. Therefore adapt your bundle CMakeLists.txt:
+      @code
+      celix_bundle_files(${BUNDLEX_NAME}
+        ${DIAGNOSTICS_FILES_DEPENDENCY_DIR}/public/src/common_log_diagnosis_diagnostics_en-US.json
+        DESTINATION "resources/diagnostics"
+      )
+      @endcode
+    * The path to the JSON file which is needed for un-/registration of the diagnostics is composed of the bundle path (gotten from Celix) and your chosen file location in your provided bundle and your chosen file name, e.g. matching the above definition:
+      @code
+      std::string pathToJsonFile = m_bundlePath + "/resources/diagnostics/" + "<YOUR_COMPONENT_NAME>_diagnostics_en-US.json";
+      @endcode
   * For OEMs, partners and customers:
-    * The common.log.diagnosis component provides a file ("public/src/diagnosis_templates/TEMPLATE_diagnostics_en-US.json") which can be used as a template for your diagnostics.
-      * The keys "language", "product" and "component" are optional.
-  * The file contains all main and detailed diagnostic numbers and texts for the default language (which will also always appear in journald).
-    * It is recommended to use English texts for the default language, for Bosch projects/components it is mandatory to use English.
+    * It is recommended to use English texts for the default language.
+    * The common.log.diagnosis component provides a file ("public/src/diagnosis_templates/TEMPLATE.diagnostics.en-US.json") which can be used as a template for your diagnostics.
+      * The key "product" is optional.
     * Recommendation for file location in your component: ./private/src/impl/resources/diagnostics/
-    * For OEMs, partners and customers:
-      * Keep in mind: special characters in your json text strings (like backslash or double quotes) have to be escaped by an additional backslash in front of the special character
-      * The language identifier has to be part of the file name, e.g. \<NAME\>_en-US.json. Definitions see https://en.wikipedia.org/wiki/Language_localisation#Language_tags_and_codes
-      * Recommendation for file name: \<your_component_name\>_diagnostics_\<language\>.json, e.g. "your_component_diagnostics_en-US.json"
-* It is necessary to provide the JSON file within your bundle. Therefore, adapt your bundle CMakeLists.txt:
-  @code
-  celix_bundle_files(${BUNDLEX_NAME}
-    ${CMAKE_SOURCE_DIR}/private/src/impl/resources
-    DESTINATION ""
-  )
-  @endcode
-* The path to the JSON file which is needed for un-/registration of the diagnostics is composed of the bundle path (gotten from Celix) and your chosen file location in your provided bundle and your chosen file name, e.g. matching the above definition:
-  @code
-  std::string pathToJsonFile = m_bundlePath + "/resources/diagnostics/" + "<YOUR_COMPONENT_NAME>_diagnostics_en-US.json";
-  @endcode
+    * It is necessary to provide the JSON file within your bundle. Therefore adapt your bundle CMakeLists.txt:
+      @code
+      celix_bundle_files(${BUNDLEX_NAME}
+        ${CMAKE_SOURCE_DIR}/private/src/impl/resources
+        DESTINATION ""
+      )
+      @endcode
+    * Hints:
+      * Keep in mind: special characters in your json text strings (like backslash or double quotes) have to be escaped by an additional backslash in front of the special character.
+      * The language identifier has to be part of the file name, e.g. \<NAME\>.en-US.json. Definitions see https://en.wikipedia.org/wiki/Language_localisation#Language_tags_and_codes.
+      * Recommendation for file name: \<your_component_name\>_diagnostics_\<language\>.json, e.g. "your_component.diagnostics.en-US.json".
+    * The path to the JSON file which is needed for un-/registration of the diagnostics is composed of the bundle path (gotten from Celix) and your chosen file location in your provided bundle and your chosen file name, e.g. matching the above definition:
+      @code
+      std::string pathToJsonFile = m_bundlePath + "/resources/diagnostics/" + "<YOUR_COMPONENT_NAME>.diagnostics.en-US.json";
+      @endcode
 #### Handle declaration of diagnostics in C++ header file
-  * For sending logs to the diagnosis system, it is necessary to use the main and detailed diagnostic numbers. Therefore, it is recommended to create a header file with the declaration of symbolic constants of all your numbers in it.
-  * The common.log.diagnosis component provides a file ("public/src/diagnosis_templates/TEMPLATE_diagnostics.h") which can be used as a template for your diagnostics.
+* For sending logs to the diagnosis system, it is necessary to use the main and detailed diagnostic numbers. Therefore, it is recommended to create a header file with the declaration of symbolic constants of all your numbers in it.
+* For Bosch developers: use the header file of the export mechanism of the common database. Details see https://inside-docupedia.bosch.com/confluence/x/dY4ucw.
+* For OEMs, partners and customers: the common.log.diagnosis component provides a file ("public/src/diagnosis_templates/TEMPLATE.diagnostics.h") which can be used as a template for your diagnostics.
 
 
 <br/><br/>
@@ -95,11 +109,6 @@ ToDo
  * Add in CMAKE .cpp files to source files (section SOURCE_FILES) with full path (recommendation: add in private/src/lib/CMakeLists.txt).
  * Include one/both header file(s) in the c/cpp-file where diagnosis numbers are used (e.g. \#include "common_mycomponent_main_diag.h").
  * If not done before, continue as usual e.g. with adding the diagnosis library to your component/project and the diagnosis functions to your code.
- * Examples: To see how the files should look like at the end, take a look at the diagnosis internal diagnosis files in public/src/diagnsosis:
-    * [common_log_diagnosis_detailed_diag.cpp](../diagnosis/common_log_diagnosis_detailed_diag.cpp)
-    * [common_log_diagnosis_detailed_diag.h](../diagnosis/common_log_diagnosis_detailed_diag.h)
-    * [common_log_diagnosis_main_diag.cpp](../diagnosis/common_log_diagnosis_main_diag.cpp)
-    * [common_log_diagnosis_main_diag.h](../diagnosis/common_log_diagnosis_main_diag.h)
 
 ## <a name="link_headline_general_steps"></a>General steps when adding/changing a diagnosis
 

@@ -1,6 +1,6 @@
 __pycache__
 _*.sh
-
+sdk-py-*64*.txt
 */*.egg-info/
 */build/
 */dist/
@@ -11,3 +11,4 @@ _*.sh
 */stage/
 */venv/
 */*.whl
+*.whl

@@ -1,5 +1,5 @@
 
-# Setup ctrlX AUTOMATION Development Environment using VirtualBox
+# Setting up a VirtualBox Virtual Machine as SDK Build Environment
 
 ## Overview
 
@@ -119,7 +119,7 @@ Or use the integrated software downloader of Ubuntu.
 ![Install VSCode](images/setup_vscode_install_ubuntu.png)
 
 In order to compile all examples of the SDK you will need to install additional extensions. 
-This can be done easily from within VS Code as soon as you open a project. In the extension windows you can search for extensions.
+This can be done easily from within Visual Studio Code as soon as you open a project. In the extension windows you can search for extensions.
 
 ![vscode_remote_extensions](./images/vscode_remote_extensions.png)
 

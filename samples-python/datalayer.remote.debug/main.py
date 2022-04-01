@@ -2,7 +2,7 @@
 
 # MIT License
 #
-# Copyright (c) 2021 Bosch Rexroth AG
+# Copyright (c) 2021-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,58 +22,42 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
 import sys
-import getopt
+
 import time
 from datetime import datetime
 from typing import List
 import flatbuffers
 
-import datalayer
-from datalayer.variant import Result, Variant
+import ctrlxdatalayer
+from ctrlxdatalayer.variant import Result, Variant
 from comm.datalayer import SubscriptionProperties
 
 import debugging
 
+from helper.ctrlx_datalayer_helper import get_client
+
 def main():
 
-    # This is the Data Layer client connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:2069
-    # Please check and change according your environment:
-    # - USER:       Enter your user name here - default is boschrexroth
-    # - PASSWORD:   Enter your password here - default is boschrexroth
-    # - IP_ADDRESS: 10.0.2.2    If you develop in a VM (QEMU, Virtual Box, ...) and you want to connect to a ctrlX CORE virtual with port forwarding
-    #               192.168.1.1 If you are using a virtual with TAP adpater or a ctrlX with this IP address
-    #               aaa.bbb.ccc.ddd If you are using a ctrlX CORE with this IP address
-
     debugging.breakpoint()
-
-    connectionClient = "tcp://boschrexroth:boschrexroth@10.0.2.2:2069"
-
-    if 'SNAP' in os.environ:
-        connectionClient = "ipc://"
 
     print()
     print("========================================================================")
     print("sdk-py-datalayer-client - A ctrlX Data Layer Client App in Python")
 
-    with datalayer.system.System("") as datalayer_system:
-        print("INFO Starting Data Layer system")
+    with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
-        # Create Data Layer client connection
-        print("INFO Creating Data Layer Client connection to ctrlX with",
-              connectionClient)
-        with datalayer_system.factory().create_client(connectionClient) as datalayer_client:
+        client, connection_string = get_client(datalayer_system)
+        if client is None:
+            print("ERROR Connecting", connection_string, "failed.")
+            sys.exit(1)
 
-            # Check if client is connected
-            print("INFO Client connected:", datalayer_client.is_connected())
-            if datalayer_client.is_connected() is False:
-                return
+        with client:
 
             # Define the subscription properties by using Flatbuffers class SubscriptionProperties
             builder = flatbuffers.Builder(1024)
-            id = builder.CreateString("sdk-py-sub")
+            id = builder.CreateString("sdk-py-remote-debug")
             SubscriptionProperties.SubscriptionPropertiesStart(builder)
             SubscriptionProperties.SubscriptionPropertiesAddId(builder, id)
             SubscriptionProperties.SubscriptionPropertiesAddKeepaliveInterval(
@@ -90,7 +74,7 @@ def main():
 
             # Create subscription
             print("INFO Creating subscription")
-            result, sub = datalayer_client.create_subscription_sync(
+            result, sub = client.create_subscription_sync(
                 sub_prop, cb_subscription_sync)
             if result is not Result.OK:
                 print("ERROR Creating subscription failed:", result)
@@ -102,43 +86,14 @@ def main():
             if result is not Result.OK:
                 print("ERROR Adding subscription node failed:", result)
 
-            while datalayer_client.is_connected():
+            while client.is_connected():
 
                 dt_str = datetime.now().strftime("%d/%m/%Y %H:%M:%S.%f")
 
                 addr = "framework/metrics/system/memused-percent"
-                result, read_var = datalayer_client.read_sync(addr)
+                result, read_var = client.read_sync(addr)
                 val = read_var.get_float64()
                 print("INFO read_sync: %s, %s: %f" % (dt_str, addr, val))
-
-                '''
-                addr = "scheduler/admin/state"
-                dt_str = datetime.now().strftime("%d/%m/%Y %H:%M:%S.%f")
-                conv = datalayer_system.json_converter()
-                result, read_var = datalayer_client.read_json_sync(
-                    conv, "scheduler/admin/state", 0)
-                state = read_var.get_string()
-                print("INFO read_json_sync: %s, %s: %s" %
-                      (dt_str, addr, state))
-
-                if 'RUN' in state:
-                    state = state.replace('RUN', 'CONFIG')
-                else:
-                    state = state.replace('CONFIG', 'RUN')
-
-                print("New state: ", state)
-
-                # Result.OK expected
-                result, error = datalayer_client.write_json_sync(
-                    conv, addr, state)
-                print("write_json_sync Result:", result)
-
-                # Result.INVALID_ADDRESS expected
-                result, error = datalayer_client.write_json_sync(
-                    conv, addr+"x", state)
-                print("write_json_sync with invalid address Result:",
-                      result, "Error:", error.get_string())
-                '''
 
                 time.sleep(5.0)
 
@@ -151,7 +106,7 @@ def main():
 
 
 # Response notify callback function
-def cb_subscription_sync(result: Result, items: List[datalayer.subscription.NotifyItem], userdata):
+def cb_subscription_sync(result: Result, items: List[ctrlxdatalayer.subscription.NotifyItem], userdata):
     if result is not Result.OK:
         print("ERROR notify subscription:", result)
         return

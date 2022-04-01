@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2021 Bosch Rexroth AG
+# Copyright (c) 2021-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -42,13 +42,16 @@ class AppDataControl():
             self.common_path = os.getenv("SNAP_COMMON")
         else:
             self.common_path = os.getcwd()
-        self.base_storage_location = os.path.join(self.common_path, "solutions", "activeConfiguration")
+        self.base_storage_location = os.path.join(
+            self.common_path, "solutions", "activeConfiguration")
 
         # Gets the application data storage location
-        self.storage_location = os.path.join(self.base_storage_location, self.storage_folder_name)
+        self.storage_location = os.path.join(
+            self.base_storage_location, self.storage_folder_name)
 
         # Gets the application data storage file
-        self.storage_file = os.path.join(self.storage_location, self.storage_file_name)
+        self.storage_file = os.path.join(
+            self.storage_location, self.storage_file_name)
 
         self.appdata = {
             "hostname": "",
@@ -78,13 +81,16 @@ class AppDataControl():
             result = AppDataControl.set_appdata(self, json_data)
 
             if result is True:
-                print("INFO Loaded application data from file", path, "successfully")
+                print("INFO Loaded application data from file",
+                      path, "successfully")
                 return True
             else:
-                print("ERROR Loading application data from file", path, "failed! Data type missmatch")
+                print("ERROR Loading application data from file",
+                      path, "failed! Data type missmatch")
                 return False
         else:
-            print("ERROR Loading application data from file", path, "failed! Data type is not dict")
+            print("ERROR Loading application data from file",
+                  path, "failed! Data type is not dict")
             return False
 
     def save(self):
@@ -130,13 +136,12 @@ class AppDataControl():
             for i in range(4):
                 print("INFO Check if content interface is mounted")
                 if os.path.isdir(solutions_path) is False:
-                    print("ERROR Content interface is not mounted: Attempt",i+1)
+                    print("ERROR Content interface is not mounted: Attempt", i+1)
                     time.sleep(1.0)
                     if i >= 4:
                         return False
                 else:
                     print("INFO Content interface is mounted")
-                
 
         if os.path.isdir(path) is False:
             try:

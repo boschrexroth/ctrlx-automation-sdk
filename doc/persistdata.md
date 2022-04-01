@@ -157,9 +157,9 @@ For each command, the following elements must be specified:
 
 By default there is no defined order of command execution. Starting with version XCR-V-0112, a command may declare that it needs to be executed **after** other commands. If this is required (which should be the exception), add an after element to your command declaration with an array containing the IDs of the predecessor commands.
 
->**Note: Hint for developers providing datalayer endpoints for loading and saving**
+>**Note: Hint for developers providing Data Layer endpoints for loading and saving**
 >
->In order to make the Datalayer endpoints for saving and loading a configuration consistent, the respective URLs should adhere to the following pattern:
+>In order to make the Data Layer endpoints for saving and loading a configuration consistent, the respective URLs should adhere to the following pattern:
 >
 >\<datalayer-basepath\>/\<**technology**\>/admin/cfg/\<operation\>
 >

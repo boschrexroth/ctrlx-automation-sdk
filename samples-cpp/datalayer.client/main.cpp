@@ -1,7 +1,7 @@
 /**
  * MIT License
  * 
- * Copyright (c) 2020-2021 Bosch Rexroth AG
+ * Copyright (c) 2020-2022 Bosch Rexroth AG
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,16 +24,27 @@
 
 #include "datalayerclient.h"
 
-int main(int ac, char *av[])
+int main()
 {
+#ifdef MY_DEBUG
+  std::cout << "Raising SIGSTOP" << std::endl;
+  raise(SIGSTOP);
+  std::cout << "... Continue..." << std::endl;
+#endif
 
   int counter = 1;
   for (;;)
   {
     std::cout << "Loop #" << counter++ << std::endl;
-    auto dataLayerClient = new DataLayerClient();
+
+    // ctrlX CORE or ctrlX CORE virtual with network adapter: 
+    auto dataLayerClient = new DataLayerClient("192.168.1.1", "boschrexroth", "boschrexroth", 443); 
+    // ctrlX CORE virtual with port forwarding: 
+    // auto dataLayerClient = new DataLayerClient("10.0.2.2", "boschrexroth", "boschrexroth", 8443); 
+    
     dataLayerClient->Run();
     delete dataLayerClient; // Callback are no more called
+    
     std::cout << "Sleeping..." << std::endl;
     sleep(2);
   }

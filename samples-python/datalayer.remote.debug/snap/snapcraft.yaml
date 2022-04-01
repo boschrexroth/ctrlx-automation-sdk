@@ -1,5 +1,5 @@
 name: sdk-py-remote-debug
-version: 2.0.0
+version: 2.1.0
 summary: Data Layer client sample written in Python enables remote debugging on a ctrlX
 title: sdk-py-remote-debug
 description: |

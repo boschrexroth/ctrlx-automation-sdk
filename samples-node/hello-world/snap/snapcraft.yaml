@@ -2,9 +2,9 @@
 # See https://snapcraft.io/docs/getting-started
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-version: "2.0.0"
+version: "1.0.0"
 name: ctrlx-node-hello-world
-summary: Hello World sample written in node.js for ctrlX.
+summary: Hello World sample written in Node.js for ctrlX.
 description: |
   Programm is prompting "Hello World" to standard output. Enter 'sudo snap logs ctrlx-node-hello-world.app -f | more' to see the output.
 confinement: strict
@@ -16,16 +16,48 @@ type: app
 
 apps:
   app:
-    command: bin/hello-world
+    command: bin/app
     daemon: simple
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: [network]
     restart-condition: always
     passthrough:
       restart-delay: 10s
-    plugs:
-      - network
 
 parts:
   app:
-    source: ./src
-    plugin: npm
-    npm-node-version: "14.17.6"
+    source: .
+    build-environment:
+    # Set the node version here. We recommend to use the latest LTS version.
+      - NODE_VERSION: "16.14.2"    
+    
+    # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
+    # plugin: npm
+    # npm-node-version: "16.14.2"
+    plugin: nil 
+    override-build: |
+      # set target arch
+      if [ $SNAPCRAFT_TARGET_ARCH == "arm64" ]; then
+          arch="arm64"
+      else 
+          arch="x64"
+      fi     
+
+      # fetch node
+      node_uri="https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${arch}.tar.gz"
+      echo fetching: $node_uri
+
+      if [ ! -f "${SNAPCRAFT_PART_INSTALL}/bin/node" ]; then
+          curl $node_uri | tar xzf - -C $SNAPCRAFT_PART_INSTALL/ --no-same-owner --strip-components=1
+      fi
+
+       # setup npm
+      npm config set unsafe-perm true
+      
+      # install the app (full) to compile (tsc -> ./dist)
+      npm install
+
+      # pack and install the app (only production)
+      npm install -g --prefix $SNAPCRAFT_PART_INSTALL $(npm pack . | tail -1) --only=prod --production --no-fund
+
+    

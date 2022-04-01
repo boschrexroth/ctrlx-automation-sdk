@@ -8,63 +8,22 @@ It demonstrate how it is possible to read inputs and write outputs. It starts to
 
 ## Prerequisites
 
-* Build environment QEMU VM or Virtual Box VM
-* ctrlX AUTOMATION SDK
-* ctrlX CORE 
 * ctrlX EtherCAT Master App
 * ctrlX I/O Engineering
 * S20-EC-BK
 * S20-DI-16
 * S20-DO-16
 
-### Prerequisites for Building the cpp Samples on the Build Environment
+## Build and Install the Snap
 
-* Start your build environment
-* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
+Build and install the snap like described [here](../README.md).
 
-    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
+## Test the Snap
 
-* Open a SSH shell on your build environment:
-
-    ssh -p 10022 boschrexroth@localhost
-
-* Unzip the archive
-
-    unzip -XK com.boschrexroth.sdk.control-*.zip
-
-* Change to SDK directory public
-* Set x flag: 
-
-    chmod +x bin\oss.flatbuffers\u*\release\flatc
-
-* If installed remove older ctrlx-datalayer package
-
-    sudo dpkg -r ctrlx-datalayer 
-
-* Install newest ctrlx-datalayer package
-
-    sudo dpkg -i deb/ctrlx-datalayer*.deb
-
-
-## Getting Started
-
-1. Launch IDE (VSCode for example)
-2. Open the sample directory `samples-cpp/datalayer.ecat.io`
-3. Build and install the snap as described `Setup` section
-4. Check the I/O's
-
-## Screenshots
+* Open the web interface of your ctrlX CORE
+* Check output in the web interface
 
 ![Output in diagnosis logbook](docs/images/datalayer.ecat.io/logbook.png)
-
-## Troubleshooting
-
-All automatically created files are located in folders `build` and `generated`.  
-If there are unclear messages during the build process, it might help to delete the folders `build` and `generated` and restart the build process.
-
-## Support
-
-If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 
@@ -72,7 +31,7 @@ ___
 
 MIT License
 
-Copyright (c) 2020-2021 Bosch Rexroth AG
+Copyright (c) 2020-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

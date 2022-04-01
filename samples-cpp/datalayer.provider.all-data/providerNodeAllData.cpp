@@ -264,9 +264,9 @@ void ProviderNodeAllData::RegisterNodes()
   // https://chromium.googlesource.com/external/github.com/google/flatbuffers/+/refs/tags/v1.5.0/docs/source/CppUsage.md
   // https://github.com/google/flatbuffers/blob/master/samples/sample_binary.cpp
   flatbuffers::FlatBufferBuilder builder;
-  short x = 1;
-  short y = 2;
-  short z = 3;
+  short x = 123;
+  short y = 234;
+  short z = 345;
   auto inertialValue = sample::schema::CreateInertialValue(builder, x, y, z);
   builder.Finish(inertialValue);
   result = data.shareFlatbuffers(builder);

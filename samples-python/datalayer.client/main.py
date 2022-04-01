@@ -2,7 +2,7 @@
 
 # MIT License
 #
-# Copyright (c) 2020-2021 Bosch Rexroth AG
+# Copyright (c) 2020-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,31 +22,20 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
+import sys
 import faulthandler
 import time
 
-import datalayer
-from datalayer.variant import Result
+import ctrlxdatalayer
 
 from app.call_datalayer_client import CallDataLayerClient
+
+from helper.ctrlx_datalayer_helper import get_client
+
 
 if __name__ == '__main__':
 
     faulthandler.enable()
-
-    # This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:PORT
-    # Please check and change according your environment:
-    # - USER:       Enter your user name here - default is boschrexroth
-    # - PASSWORD:   Enter your password here - default is boschrexroth
-    # - IP_ADDRESS: 127.0.0.1   If you develop in WSL and you want to connect to a ctrlX CORE virtual with port forwarding
-    #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
-    #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-
-    connectionClient = "tcp://boschrexroth:boschrexroth@10.0.2.2:2069"
-
-    if 'SNAP' in os.environ:
-        connectionClient = "ipc://"
 
     print()
     print("========================================================================")
@@ -62,45 +51,34 @@ if __name__ == '__main__':
     print("  metadata_..")
     print()
     print("Precondition:")
-    print("Build and install the snap 'alldataprovider' from the SDK folder")
-    print("sdk.control/public/samples-cpp/datalayer.provider.all-data")
+    print("Build and install the snap 'sdk-cpp-alldata' from the SDK folder")
+    print("samples-cpp/datalayer.provider.all-data")
     print("========================================================================")
     print()
 
-    with datalayer.system.System("") as datalayer_system:
+    with ctrlxdatalayer.system.System("") as datalayer_system:
         print("INFO Starting Data Layer system")
         datalayer_system.start(False)
 
-        print("INFO Creating Data Layer Client connection to ctrlX with", connectionClient)
-        with datalayer_system.factory().create_client(connectionClient) as datalayer_client:
+        datalayer_client, connection_string = get_client(datalayer_system)
+        if datalayer_client is None:
+            print("WARNING Connecting", connection_string, "failed.")
+            datalayer_system.stop(False)
+            sys.exit(1)
 
-            print("INFO Pausing while connection will be established")
-            time.sleep(1.0)
+        print("INFO Connecting", connection_string, "succeeded.")
 
-            print("INFO Testing connection")
-            while datalayer_client.is_connected() is False:
-                print()
-                print("ERROR Data Layer Client is - NOT - connected")
-                print("INFO Ensure that ctrlX is running and in Operation Mode")
-                print("INFO Sleeping for 5s...")
-                print()
-                time.sleep(5.0)
-
-            print("INFO Setting Data Layer Client timeout")
-            result = datalayer_client.set_timeout(datalayer.client.TimeoutSetting.PING, 5000)
-            if result != Result.OK:
-                print("ERROR Setting Data Layer Client timeout failed with", result)
+        with datalayer_client: # datalayer_client is closed automatically when leaving with block
 
             print("INFO Creating Python Data Layer Client instance")
             calldatalayerclient = CallDataLayerClient(datalayer_client)
 
             while datalayer_client.is_connected():
                 calldatalayerclient.run()
-                print(
-                    "Sleeping --------------------------------------------------------------------------")
                 time.sleep(1.0)
 
             print("ERROR Data Layer is NOT connected")
 
         print("INFO Stopping Data Layer system")
-        datalayer_system.stop(True)
+        stop_ok = datalayer_system.stop(False)  # Attention: Doesn't return if any provider or client instance is still runnning
+        print("System Stop", stop_ok)

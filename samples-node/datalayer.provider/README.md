@@ -1,12 +1,12 @@
-# README node.js datalayer.provider
+# README Node.js datalayer.provider
 
-This node.js sample provides some registered nodes to the ctrlX Data Layer tree. 
+This Node.js sample provides some registered nodes to the ctrlX Data Layer tree. 
 
 __IMPORTANT__:
 
 The sample creates and registers all nodes individually, which is recommended for _small_ to _medium_ sized set of nodes to handle. If you're dealing with a _large_ set of nodes (big data provider) or any _dynamic node hierarchy_, we recommend to use a _virtual provider_ approach, listening just to any _wildcarded address_ ( e.g. myRoot/**) and using _self-managed virtual nodes_, just returned in _OnBrowse()_ method, which is more efficient.
 
-Please read the _Best Practise_ section in common node.js documentation for more details and recommended samples.
+Please read the _Best Practise_ section in common Node.js documentation for more details and recommended samples.
 
 ## Introduction
 
@@ -28,24 +28,24 @@ The sample demonstrates
 
 ## Prerequisites
 
-Please read the common node.js docs [here](./../README.md), first.
+Please read the common Node.js docs [here](./../README.md), first.
 
 ## Compile Flatbuffers Schema
 
-This app uses a flatbuffer defined in the schema file sampleSchema.fbs. From this schema file we have to create a binary file which is registered on the ctrlX and a node.js class to create and access the defined flatbuffer data. These tasks can be done with the command line tool flatc.
+This app uses a flatbuffer defined in the schema file sampleSchema.fbs. From this schema file we have to create a binary file which is registered on the ctrlX and a Node.js class to create and access the defined flatbuffer data. These tasks can be done with the command line tool flatc.
 
 This tool is provided by this SDK under /bin/oss.flatbuffers/..insert OS version here../release/
 
 Do following steps
 
-* Create a binary flatbuffers file with VSCode tasks:
+* Create a binary flatbuffers file with Visual Studio Code tasks:
 
    - "flatc binary (x64)"
    - "flatc binary (arm64)"
 
    The generated file is stored in src/sampleSchema.bfbs
 
-* Generate the nodejs class with VSCode tasks:
+* Generate the Node.js class with Visual Studio Code tasks:
 
     - "flatc class (x64)"
     - "flatc class (arm64)"
@@ -54,7 +54,7 @@ Do following steps
 
 ## Getting Started
 
-1. Launch VSCode
+1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
 3. Choose __Open Folder in QEMU VM__.
 4. Open the directory __datalayer.provider__.
@@ -103,7 +103,7 @@ If you've found an error in these sample, please [file an issue](https://github.
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -23,7 +23,7 @@ namespace Hello.Web.Asp.services
         /// <param name="ip">The ip<see cref="IPAddress"/>.</param>
         /// <param name="user">The user<see cref="string"/>.</param>
         /// <param name="password">The password<see cref="string"/>.</param>
-        public DataLayerService(IPAddress ip, string user, string password)
+        public DataLayerService(string ip, string user, string password)
         {
             Client = CreateClient(ip, user, password);
         }
@@ -35,7 +35,7 @@ namespace Hello.Web.Asp.services
         /// <param name="user">The user<see cref="string"/>.</param>
         /// <param name="password">The password<see cref="string"/>.</param>
         /// <returns>The <see cref="IClient"/>.</returns>
-        private static IClient CreateClient(IPAddress ip, string user, string password)
+        private static IClient CreateClient(string ip, string user, string password)
         {
             // Check if the process is running inside a snap 
             var isSnapped = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP"));
@@ -48,14 +48,11 @@ namespace Hello.Web.Asp.services
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Create the client with inter-process communication (ipc) protocol if running in snap, otherwise tcp
-            var client = isSnapped
-                ? system.Factory.CreateIpcClient()
-                : system.Factory.CreateTcpClient(ip,
-                    DatalayerSystem.DefaultClientPort,
-                    user,
-                    password);
+            // Set remote connection string with ipc protocol if running in snap, otherwise with tcp protocol
+            var remote = isSnapped ? "ipc://" : $"tcp://{Config.USER}:{Config.PASSWORD}@{Config.IP_ADDRESS}:2069?sslport={Config.SSL_PORT}";
 
+            // Create the client with remote connection string
+            using var client = system.Factory.CreateClient(remote);
             Console.WriteLine("ctrlX Data Layer client created.");
 
             return client;

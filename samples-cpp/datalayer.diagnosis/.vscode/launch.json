@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "configurations": [
       {
-        "name": "x64 Builder VM",
+        "name": "x64 Build Environment (local)",
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/datalayerDiagnosis",
@@ -30,7 +30,7 @@
         ]
       },
       {
-        "name": "aarch64 ctrlX",
+        "name": "aarch64 ctrlX (remote)",
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/generated/ubuntu20-gcc-aarch64/Debug/datalayerDiagnosis",
@@ -50,7 +50,7 @@
         ]
       },
       {
-        "name": "x64 ctrlX virt. Network Adapter",
+        "name": "x64 ctrlX virt. Network Adapter (remote)",
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/datalayerDiagnosis",
@@ -70,7 +70,7 @@
         ]
       },
       {
-        "name": "x64 ctrlX virt. Port Forwarding",
+        "name": "x64 ctrlX virt. Port Forwarding (remote)",
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/datalayerDiagnosis",

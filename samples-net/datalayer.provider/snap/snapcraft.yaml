@@ -3,7 +3,7 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-dotnet-datalayer-provider
-version: '2.0.0'
+version: '1.0.0'
 summary: Data Layer provider sample written in .NET for ctrlX.
 description: |
   The sample demonstrates how to provide nodes to the ctrlX Data Layer tree. 

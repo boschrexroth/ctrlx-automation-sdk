@@ -1,4 +1,4 @@
-# README datalayer.diagnosis
+# ctrlX Data Layer Diagnosis
 
 This sample app uses some Data Layer addresses to handle with diagnostics.
 
@@ -15,56 +15,19 @@ It demonstrates how to
 
 ## Prerequisites
 
-* Build environment - we recommend a QEMU virtual machine
-* ctrlX AUTOMATION SDK archive
-* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
+* Installed app rexroth-automationcore
 
-### Prerequisites for Building the cpp Samples on the Build Environment
+## Build and Install the Snap
 
-* Start your build environment
-* Copy the ctrlX AUTOMATION SDK archive from your host computer to your build environment:
+Build and install the snap like described [here](../README.md).
 
-    scp -P 10022 com.boschrexroth.sdk.control-*.zip boschrexroth@localhost:~
+## Test the Snap
 
-* Open a SSH shell on your build environment:
+* Open the web interface of your ctrlX CORE
+* Check output in the web interface
 
-    ssh -p 10022 boschrexroth@localhost
-
-* Unzip the archive
-
-    unzip -XK com.boschrexroth.sdk.control-*.zip
-
-* Change to SDK directory public
-* Set x flag: 
-
-    chmod +x bin\oss.flatbuffers\u*\release\flatc
-
-* If installed remove older ctrlx-datalayer package
-
-    sudo dpkg -r ctrlx-datalayer 
-
-* Install newest ctrlx-datalayer package
-
-    sudo dpkg -i deb/ctrlx-datalayer*.deb
-
-## Getting Started
-
-1. Launch IDE (VSCode for example)
-2. Open the sample directory `samples-cpp/datalayer.diagnosis`
-3. Build and install the snap as described `Setup` section
-
-## Screenshots
 
 ![Output in diagnosis logbook](docs/images/datalayer.diagnosis/datalayer_tree_diagnosis.png)
-
-## Troubleshooting
-
-All automatically created files are located in folders `build` and `generated`.  
-If there are unclear messages during the build process, it might help to delete the folders `build` and `generated` and restart the build process.
-
-## Support
-
-If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 
@@ -72,7 +35,7 @@ ___
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

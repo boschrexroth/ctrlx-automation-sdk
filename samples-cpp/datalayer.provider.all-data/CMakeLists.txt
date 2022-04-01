@@ -7,7 +7,7 @@ cmake_minimum_required( VERSION 3.9 )
 # Project information
 # Set project, VERSION should be same as snap version
 #
-set(VERSION 2.0.0)
+set(VERSION 2.1.0)
 project( alldataprovider_snap_project VERSION ${VERSION} )
 
 #
@@ -19,8 +19,6 @@ set(TARGET_PROJECT_NAME allDataProvider)
 # User dependency directories
 #
 set (USER_DEPENDENCY_DIR ${CMAKE_CURRENT_LIST_DIR}/../../)
-set (DATALAYER_DEP_DIR ${USER_DEPENDENCY_DIR}/bin/comm.datalayer/)
-set (ZMQ_DEP_DIR ${USER_DEPENDENCY_DIR}/bin/zmq/)
 
 #
 # Option to Build the Snap
@@ -36,7 +34,7 @@ MESSAGE( STATUS "######################################")
 # Compiler setting
 #
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DMY_DEBUG")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
@@ -73,18 +71,25 @@ SET ( PRIVATE_INCLUDE_DIRS
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_LIST_DIR}/include
   ${USER_DEPENDENCY_DIR}/include
+  ${USER_DEPENDENCY_DIR}/include/oss.flatbuffers.1.12
   ${USER_DEPENDENCY_DIR}/include/comm.datalayer
   )
 
 #
 # Flatbuffers
 #
-set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers/ubuntu20-gcc-x64/release/flatc)
-set (FLATBUFFERS_INCLUDE_DIR ${USER_DEPENDENCY_DIR}/include/oss.flatbuffers/oss.flatbuffers)
-include (${USER_DEPENDENCY_DIR}/cmake/oss.flatbuffers/FindFlatBuffers.cmake)
+execute_process(COMMAND uname -a OUTPUT_VARIABLE HOST_SYSTEM_ARCH)
+IF( ${HOST_SYSTEM_ARCH} MATCHES "aarch64")
+  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers.1.12/ubuntu20-gcc-aarch64/release/flatc)
+ELSE()
+  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers.1.12/ubuntu20-gcc-x64/release/flatc)
+ENDIF()
+set (FLATBUFFERS_INCLUDE_DIR ${USER_DEPENDENCY_DIR}/include/oss.flatbuffers.1.12)
+include (${USER_DEPENDENCY_DIR}/cmake/oss.flatbuffers.1.12/FindFlatBuffers.cmake)
 set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-object-api")
+set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--no-warnings")
+set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-compare")
 
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/bfbs")
 build_flatbuffers("sampleSchema.fbs" "" "alldataproviderflatbuffers" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}/bfbs" "")
 
 #
@@ -117,11 +122,12 @@ target_include_directories ( ${TARGET_PROJECT_NAME}
 #
 # Set target link libraries
 #
-TARGET_LINK_LIBRARIES ( ${TARGET_PROJECT_NAME}
+target_link_libraries(${TARGET_PROJECT_NAME} -Wl,--no-undefined)
+target_link_libraries(${TARGET_PROJECT_NAME}
   libcomm_datalayer.so
   pthread
   systemd
-  ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so
+  zmq
   ssl
   crypto
 )
@@ -136,12 +142,6 @@ install( TARGETS ${TARGET_PROJECT_NAME}
   COMPONENT ${BUNDLE_PROJECT_NAME}
 ) 
 
-#
-# Set destination paths of user dependency files for installation
-#
-install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}/usr/lib)
-install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so.5 DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}/usr/lib)
-
 if (BUILD_SNAP)
   #
   # Set destination paths for installation
@@ -153,11 +153,6 @@ if (BUILD_SNAP)
     COMPONENT ${BUNDLE_PROJECT_NAME}
   ) 
 
-  #
-  # Set destination paths of user dependency files for installation
-  #
-  install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build/usr/lib)
-  install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so.5 DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build/usr/lib)
 endif(BUILD_SNAP)
 
 #
@@ -171,8 +166,8 @@ COMMAND make install
 if (BUILD_SNAP)
   add_custom_command( TARGET ${TARGET_PROJECT_NAME}
     POST_BUILD
-    COMMAND snapcraft --enable-experimental-target-arch --target-arch=${SNAP_ARCH} --destructive-mode
     COMMAND snapcraft clean --destructive-mode
+    COMMAND snapcraft --enable-experimental-target-arch --target-arch=${SNAP_ARCH} --destructive-mode
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
   )
 endif(BUILD_SNAP)

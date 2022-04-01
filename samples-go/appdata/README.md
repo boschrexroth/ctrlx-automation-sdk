@@ -6,10 +6,10 @@ This sample shows how to load and save data according to the ctrlx storage conce
 
 ## Getting Started
 
-1. Launch VSCode on your host computer.
+1. Launch Visual Studio Code.
 2. Click on the __Remote Explorer__ from the menu.
 3. Connect via SSH to your Ubuntu development environment.
-4. In the menu item File - Open Folder select the folder public/samples-go/__appdata__.
+4. In the menu item File - Open Folder select the folder samples-go/__appdata__.
 
 ## Build a Snap
 

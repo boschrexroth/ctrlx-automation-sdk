@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-source create-new-vm.sh ${1} ./files-amd64-noproxy.txt
+source create-new-vm.sh amd64 noproxy ${1}

@@ -7,7 +7,7 @@ cmake_minimum_required( VERSION 3.9 )
 # Project information
 # Set project, VERSION should be same as snap version
 #
-set(VERSION 2.0.0)
+set(VERSION 2.1.0)
 project( datalayer_realtime_owner_snap_project VERSION ${VERSION} )
 
 #
@@ -20,8 +20,7 @@ set(TARGET_PROJECT_USER_NAME datalayerRealtimeUser)
 # User dependency directories
 #
 set (USER_DEPENDENCY_DIR ${CMAKE_CURRENT_LIST_DIR}/../../)
-set (DATALAYER_DEP_DIR ${USER_DEPENDENCY_DIR}/bin/comm.datalayer/)
-set (ZMQ_DEP_DIR ${USER_DEPENDENCY_DIR}/bin/zmq/)
+
 
 #
 # Option to Build the Snap
@@ -37,7 +36,7 @@ MESSAGE( STATUS "######################################")
 # Compiler setting
 #
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DMY_DEBUG")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
@@ -118,22 +117,24 @@ target_include_directories ( ${TARGET_PROJECT_USER_NAME}
 #
 # Set target link libraries
 #
-TARGET_LINK_LIBRARIES ( ${TARGET_PROJECT_OWNER_NAME}
+#target_link_libraries(${TARGET_PROJECT_NAME} -Wl,--no-undefined)
+target_link_libraries(${TARGET_PROJECT_OWNER_NAME}
       general
         libcomm_datalayer.so
         pthread
         systemd
-        ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so
+        zmq
         ssl
         crypto
     )
 
-TARGET_LINK_LIBRARIES ( ${TARGET_PROJECT_USER_NAME}
+#target_link_libraries(${TARGET_PROJECT_NAME} -Wl,--no-undefined)
+target_link_libraries(${TARGET_PROJECT_USER_NAME}
       general
         libcomm_datalayer.so
         pthread
         systemd
-        ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so
+        zmq
         ssl
         crypto
     )
@@ -155,13 +156,6 @@ install( TARGETS ${TARGET_PROJECT_USER_NAME}
   COMPONENT ${BUNDLE_PROJECT_NAME}
 )  
 
-
-#
-# Set destination paths of user dependency files for installation
-#
-install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}/usr/lib)
-install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so.5 DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}/usr/lib)
-
 if (BUILD_SNAP)
   #
   # Set destination paths for installation
@@ -178,12 +172,6 @@ if (BUILD_SNAP)
     ARCHIVE DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build
     COMPONENT ${BUNDLE_PROJECT_NAME}
   )  
-
-  #
-  # Set destination paths of user dependency files for installation
-  #
-  install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build/usr/lib)
-  install(FILES ${ZMQ_DEP_DIR}/${PLATFORM_NAME}/release/libzmq.so.5 DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build/usr/lib)
 endif(BUILD_SNAP)
 
 #
@@ -202,8 +190,8 @@ add_custom_command(TARGET ${TARGET_PROJECT_OWNER_NAME}
 if (BUILD_SNAP)
   add_custom_command( TARGET ${TARGET_PROJECT_USER_NAME}
     POST_BUILD
-    COMMAND snapcraft --enable-experimental-target-arch --target-arch=${SNAP_ARCH} --destructive-mode
     COMMAND snapcraft clean --destructive-mode
+    COMMAND snapcraft --enable-experimental-target-arch --target-arch=${SNAP_ARCH} --destructive-mode
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
   )
 endif(BUILD_SNAP)

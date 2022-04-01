@@ -2,13 +2,25 @@
 
 ## Softwaredevelopment Kit for ctrlX AUTOMATION
 
+### Version 1.14.0 <small>_ March 30, 2022</small>
+
+* Add Golang samples for ctrlX Data Layer Provider and Client
+* Add Service 2 Service Authentication guide
+* Use flatbuffers version 1.12 for c/c++ projects
+* Use flatc 2.0
+* Remove RT Bundles from SDK
+* Restructured sample projects docu
+* Quick Start Guide
+* Using ctrlX WORKS function 'App Building Environments'
+* Using Snapcraft Remote Build from Canonical
+
 ### Version 1.12.0 <small>_ November 22, 2021</small>
 
 * Change samples to Ubuntu20
 * Add QEMU as new recommended build environment
-* Added node-package for ctrlX Data Layer
-* Added nodejs `Hello-Webserver` sample
-* Added nodejs `ctrlX Data Layer Client`
+* Added node-package
+* Added Node.js `Hello-Webserver` sample
+* Added Node.js `ctrlX Data Layer Client`
 * Added C++ `Automation Diagnosis`
 * Added C++ `Automation Trace`
 * Added C++ `ctrlX Data Layer Diagnosis`
@@ -16,7 +28,6 @@
 * Added Developer Guidline
 * Added description to adapt licensing mechanism
 * Added `Bundle Description (doxygen)` for trace/diagnosis
-* Improve Documentation
 
 ### Version 1.10.0 <small>_ July 15, 2021</small>
 

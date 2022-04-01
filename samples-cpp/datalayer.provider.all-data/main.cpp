@@ -1,18 +1,18 @@
 /**
  * MIT License
- * 
- * Copyright (c) 2020-2021 Bosch Rexroth AG
- * 
+ *
+ * Copyright (c) 2020-2022 Bosch Rexroth AG
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,20 +26,10 @@
 #include <thread>
 #include <string>
 
+#include "ctrlx_datalayer_helper.h"
 #include "providerNodeAllData.h"
 
 static std::string dl_addr_base = "sdk-cpp-alldata/"; // snap/snapcraft.yaml name:
-
-static std::string getConnection()
-{
-  if (is_snap())
-  {
-    return DL_IPC_AUTO; // ipc://datalayer/backend
-  }
-
-  // 10.0.2.2 - build environment is VM and target is ctrlX virtual with port forwarding
-  return DL_TCP + std::string("boschrexroth:boschrexroth@10.0.2.2:") + std::to_string(DL_TCP_BACKEND_FIRST_PORT);
-}
 
 // Add some signal Handling so we are able to abort the program with sending sigint
 bool endProcess = false;
@@ -48,11 +38,30 @@ static void sigHandler(int sig, siginfo_t *siginfo, void *context)
   endProcess = true;
 }
 
-int main(int ac, char *av[])
+static void shutdownMessage(const std::string &providerConnection)
 {
-  #ifdef MY_DEBUG
+  std::cout << "ERROR Connection '" + providerConnection + "' failed." << std::endl;
+
+  std::cout << "Check network connection!" << std::endl;
+  std::cout << "Further checks:" << std::endl;
+  std::cout << "- If ctrlX CORE virtual via port forwarding: Is port 2070 set?" << std::endl;
+  std::cout << "- If ctrlX CORE virtual with network adapter or real: Is IP address correct? " << std::endl;
+  std::cout << "- Is ctrlX in Operation mode? " << std::endl;
+  std::cout << std::endl;
+
+  std::cout << "Shutting down!" << std::endl;
+  if (getenv("SNAP") != nullptr)
+  {
+    std::cout << " Restarting automatically..." << std::endl;
+  }
+}
+
+int main()
+{
+
+#ifdef MY_DEBUG
   std::cout << "Raising SIGSTOP" << std::endl;
-  //  raise(SIGSTOP);
+  //raise(SIGSTOP);
   std::cout << "... Continue..." << std::endl;
 #endif
 
@@ -63,71 +72,46 @@ int main(int ac, char *av[])
   act.sa_flags = SA_SIGINFO;
   sigaction(SIGINT, &act, NULL);
 
-  std::cout << "INFO Creating Data Layer System" << std::endl;
   comm::datalayer::DatalayerSystem datalayerSystem;
-  std::cout << "INFO Starting Data Layer System" << std::endl;
   datalayerSystem.start(false);
 
-  // Creates a provider instance at Data Layer backend to provide data to Data Layer clients
-  std::string providerConnection = getConnection();
-  std::cout << "INFO Creating Data Layer Provider, using connection " + providerConnection << std::endl;
-  auto *dlProvider = datalayerSystem.factory()->createProvider(providerConnection);
-
-  std::cout << "INFO Starting Data Layer Provider" << std::endl;
-  auto result = dlProvider->start();
-
-  if (STATUS_FAILED(result))
+  auto providerConnectionString = getConnectionString();
+  std::cout << "INFO Creating Data Layer Provider" << std::endl;
+  auto *provider = getProvider(datalayerSystem);
+  if (provider == nullptr)
   {
-    std::cout << "FATAL Starting Data Layer Provider failed with " << result.toString() << std::endl;
-    return -1;
+    shutdownMessage(providerConnectionString);
+    datalayerSystem.stop(false);
+    return 1;
   }
-  std::cout << "INFO Data Layer Provider started" << std::endl;
-
-  std::cout << "INFO Pause 1s while Data Layer Provider connection will be established" << std::endl;
-  std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // Pause until dlProvider->isConnected() is called
 
   std::cout << "INFO Creating Data Layer branch " << dl_addr_base << std::endl;
-  auto providerNodeStatic = new ProviderNodeAllData(dlProvider, dl_addr_base, false);
+  auto providerNodeStatic = new ProviderNodeAllData(provider, dl_addr_base, false);
   providerNodeStatic->RegisterNodes();
 
-  auto providerNodeDynamic = new ProviderNodeAllData(dlProvider, dl_addr_base, true);
+  auto providerNodeDynamic = new ProviderNodeAllData(provider, dl_addr_base, true);
   providerNodeDynamic->RegisterNodes();
 
   std::cout << "INFO Running endless loop - end with Ctrl+C" << std::endl;
-  bool providerConnectionError = false;
   while (endProcess == false)
   {
-    if (dlProvider->isConnected() == false)
+    if (provider->isConnected() == false)
     {
-      if (providerConnectionError == false)
-      {
-        providerConnectionError = true; // Logg only once
-        std::cout << "ERROR Data Layer Provider connection " + providerConnection + " is interrupted" << std::endl;
-      }
-    }
-    else
-    {
-      if (providerConnectionError)
-      {
-        providerConnectionError = false;
-        std::cout << "INFO Data Layer Provider connection " + providerConnection + " is reconnected" << std::endl;
-      }
+      shutdownMessage(providerConnectionString);
+      break;
     }
 
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
   }
 
   delete providerNodeStatic;
-  providerNodeStatic = NULL;
 
   delete providerNodeDynamic;
-  providerNodeDynamic = NULL;
 
-  dlProvider->stop();
-  delete dlProvider;
-  dlProvider = NULL;
+  provider->stop();
+  delete provider;
 
-  datalayerSystem.stop(false);
+  datalayerSystem.stop(false); // Attention: Doesn't return if any provider or client instance is still runnning
 
-  return 0;
+  return endProcess ? 0 : 1;
 }

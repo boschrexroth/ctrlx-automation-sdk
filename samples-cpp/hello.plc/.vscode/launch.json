@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "HelloPlc",
+            "name": "x64 Build Environment (local)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/helloPlc",
@@ -29,7 +29,7 @@
             ]
         },
         {
-            "name": "HelloPlc aarch64",
+            "name": "aarch64 ctrlX (remote)",
             "type": "cppdbg",
             "request": "launch",
             "program": "~/remote-debug/helloplc",
@@ -46,7 +46,6 @@
                     "boschrexroth@192.168.1.2"
                 ],
                 "pipeCwd": "${workspaceFolder}",
-                
             },
             "MIMode": "gdb",
             "setupCommands": [
@@ -59,7 +58,7 @@
                     "description": "Set path variable to .",
                     "text": "set env LD_LIBRARY_PATH=/home/boschrexroth/remote-debug/usr/lib/",
                     "ignoreFailures": false
-                } 
+                }
             ]
         }
     ]

@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "configurations": [
         {
-            "name": "DatalayerECatIO x64",
+            "name": "x64 Build Environment (local)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/datalayerEcatio",
@@ -29,6 +29,5 @@
                 }
             ]
         }
-        
     ]
 }

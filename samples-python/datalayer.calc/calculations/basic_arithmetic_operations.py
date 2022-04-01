@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2021 Bosch Rexroth AG
+# Copyright (c) 2021-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,53 +22,60 @@
 
 import typing
 
-import flatbuffers
-from comm.datalayer import Metadata, NodeClass, AllowedOperations, Reference
+from comm.datalayer import NodeClass
 
-import datalayer
-from datalayer.provider import Provider
-from datalayer.client import Client
-from datalayer.provider_node import ProviderNodeCallbacks, NodeCallback
-from datalayer.variant import Result, Variant, VariantType
+import ctrlxdatalayer
+from ctrlxdatalayer.provider import Provider
+from ctrlxdatalayer.client import Client
+from ctrlxdatalayer.provider_node import ProviderNodeCallbacks, NodeCallback
+from ctrlxdatalayer.variant import Result, Variant, VariantType
+
+from calculations.convert import Convert
 
 type_address_string = "types/datalayer/string"
 
+
 class BasicArithmeticOperations:
 
-    def __init__(self, provider: Provider, client: Client,  addressRoot: str, id: str, mode : str):
+    def __init__(self, provider: Provider, client: Client,  addressRoot: str, id: str, mode: str, update_time: int):
 
         self.provider = provider
         self.client = client
 
         self.addressRoot = addressRoot + "/" + id + "/"
-
+       
         self.in1_address = Variant()
         self.in1_address.set_string(
             "framework/metrics/system/cpu-utilisation-percent")
         self.in1_value = Variant()
-        data = self.create_metadata(type_address_string, id, "", "Enter address of input value 1 here", True)
-        self.in1_metadata = Variant()
-        self.in1_metadata.set_flatbuffers(data)
+        self.in1_metadata = self.create_metadata(
+            type_address_string, id, "", "Enter address of input value 1 here", True)
 
         self.in2_address = Variant()
         self.in2_address.set_string(
             "framework/metrics/system/cpu-utilisation-percent")
         self.in2_value = Variant()
-        data = self.create_metadata(type_address_string, id, "", "Enter address of input value 2 here", True)
-        self.in2_metadata = Variant()
-        self.in2_metadata.set_flatbuffers(data)
+        self.in2_metadata = self.create_metadata(
+            type_address_string, id, "", "Enter address of input value 2 here", True)
 
         self.mode = Variant()
         self.mode.set_string(mode)
-        data = self.create_metadata(type_address_string, id, "", "Enter the operation mode here: + - / *", True)
-        self.mode_metadata = Variant()
-        self.mode_metadata.set_flatbuffers(data)
+        self.mode_metadata = self.create_metadata(
+            type_address_string, id, "", "Enter the operation mode here: + - / *", True)
 
         self.out = Variant()
-        data = self.create_metadata(type_address_string, id, "", "The result of the operation", False)
-        self.out_metadata = Variant()
-        self.out_metadata.set_flatbuffers(data)
+        self.out_metadata = self.create_metadata(
+            type_address_string, id, "", "The result of the operation", False)
+
+        self.subscription_properties = ctrlxdatalayer.subscription.create_properties(
+            "python-datalayer-client-sub", publish_interval=update_time)
+
+        self.subscription_changed = False
+
+        self.value_changed = False
+
         self.out_error = True
+        self.out_error_text = ""
 
         self.cbs = ProviderNodeCallbacks(
             self.__on_create,
@@ -79,126 +86,164 @@ class BasicArithmeticOperations:
             self.__on_metadata
         )
 
-        self.providerNode = datalayer.provider_node.ProviderNode(self.cbs)
+        self.providerNode = ctrlxdatalayer.provider_node.ProviderNode(self.cbs)
 
-    def rncb(self, result: Result, items: typing.List[datalayer.subscription.NotifyItem], userdata: datalayer.clib.userData_c_void_p):
+    def response_notify_callback(self, result: Result, items: typing.List[ctrlxdatalayer.subscription.NotifyItem],
+                                 userdata: ctrlxdatalayer.clib.userData_c_void_p):
 
         if result != Result.OK:
-            # TODO Error
-            self.out_error = True
-            return
-
-        if items is None:
-            # TODO Warn
-            self.out_error = True
-            return
-
-        if len(items) <= 0:
-            # TODO Warn
+            print("response_notify_callback parameter result:", result)
             self.out_error = True
             return
 
         for item in items:
-            '''
-            print("  address:", item.get_address())
-            print("  type:", item.get_data().get_type())
-            print("  value:", item.get_data().get_float32())
-            print("  timestamp:", item.get_timestamp())
-            print("  datetime:", datalayer.subscription.to_datetime(
-                item.get_timestamp()))
-            '''
+
+            print()
+            print("Notification -------------------------")
+            print("address:", item.get_address())
+            print("type:", item.get_data().get_type())
+            print("value:", item.get_data().get_float64())
+            print("timestamp:", item.get_timestamp())
 
             if item.get_address() == self.in1_address.get_string():
-                self.in1_value = item.get_data()
+                self.in1_value.close()  # Avoid mem. leak
+                # Clone item because variant is only valid in callback function
+                print("--> in1")
+                _, v = item.get_data().clone()
+                self.in1_value = v
+                self.value_changed = True
 
             if item.get_address() == self.in2_address.get_string():
-                self.in2_value = item.get_data()
+                self.in2_value.close()  # Avoid mem. leak
+                print("--> in2")
+                # Clone item because variant is only valid in callback function
+                _, v = item.get_data().clone()
+                self.in2_value = v
+                self.value_changed = True
 
-        self.calc()
+    def get_float64_safe(self, v: Variant):
 
-        print("INFO", self.in1_value.get_float64(), self.mode.get_string(),
-              self.in2_value.get_float64(), "=", self.out.get_float64())
+        if v.get_type() == VariantType.FLOAT64:
+            return v.get_float64()
+
+        if v.get_type() == VariantType.FLOAT32:
+            self.float64_value.set_float64( v.get_float32())
+            return self.float64_value.get_float64()
+
+        if v.get_type() == VariantType.INT64:
+            self.float64_value.set_float64( v.get_int64())
+            return self.float64_value.get_float64()
+
+        if v.get_type() == VariantType.INT32:
+            self.float64_value.set_float64( v.get_int32())
+            return self.float64_value.get_float64()
+
+        if v.get_type() == VariantType.INT16:
+            self.float64_value.set_float64( v.get_int16())
+            return self.float64_value.get_float64()
+
+        if v.get_type() == VariantType.INT8:
+            self.float64_value.set_float64( v.get_int8())
+            return self.float64_value.get_float64()
+
+        return None
 
     def calc(self):
-        if self.in1_value.get_type() != VariantType.FLOAT64:
-            self.out_error = True
-            return
 
-        if self.in2_value.get_type() != VariantType.FLOAT64:
-            self.out_error = True
-            return
+        self.calc_internal()
+
+        print()
+        print("Result ###################################")
+        if self.out_error:
+            print("ERROR", self.out_error_text)
+        else:
+            print(self.in1_value.get_float64(), self.mode.get_string(),
+                  self.in2_value.get_float64(), "=", self.out.get_float64())
+
+    def calc_internal(self):
 
         self.out_error = False
+
+        v1 = Convert.get_float64(self.in1_value)
+        if v1 is None:
+            self.out_error_text = "Converting in1 to float64 failed"
+            self.out_error = True
+            return
+        self.in1_value.set_float64(v1)
+        
+        v2 = Convert.get_float64(self.in2_value)
+        if v2 is None:
+            self.out_error_text = "Converting in2 to float64 failed"
+            self.out_error = True
+            return
+        
+        self.in2_value.set_float64(v2)
 
         mode = self.mode.get_string()
 
         if "+" in mode:
-            self.out.set_float64(
-                self.in1_value.get_float64() + self.in2_value.get_float64())
+            self.out.set_float64(v1 + v2)
             return
 
         if "-" in mode:
-            self.out.set_float64(
-                self.in1_value.get_float64() - self.in2_value.get_float64())
+            self.out.set_float64(v1 - v2)
             return
 
         if "*" in mode:
-            self.out.set_float64(self.in1_value.get_float64()
-                                 * self.in2_value.get_float64())
+            self.out.set_float64(v1 * v2)
             return
 
-        if "/" in mode:
-            self.division()
-            return
-
-        if ":" in mode:
-            self.division()
+        if "/" in mode | ":" in mode:
+            try:
+                self.out.set_float64(v1 / v2)
+            except ZeroDivisionError:
+                self.out_error = True
+                self.out_error_text = "ZeroDivisionError"
             return
 
         if "in1" in mode:
-            self.out.set_float64(self.in1_value.get_float64())
+            self.out.set_float64(v1)
             return
 
         if "in2" in mode:
-            self.out.set_float64(self.in2_value.get_float64())
+            self.out.set_float64(v2)
             return
 
         # Warning
-        err = "UNSUPPORTED"
-        if self.mode.get_string().startswith(err) == False:
-            self.mode.set_string(err + " MODE: " + self.mode.get_string())
-        self.out.set_float64(self.in1_value.get_float64())
+        self.out_error_text = "Unsupported mode"
+        self.out_error = True
 
-    def division(self):
-        try:
-            self.out.set_float64(
-                self.in1_value.get_float64() / self.in2_value.get_float64())
-        except ZeroDivisionError:
-            self.out_error = True
+    def register_node(self, name: str):
+        address = self.addressRoot + name
+        print("Registering node", address)
+        self.provider.register_node(
+            address, self.providerNode)
 
     def register_nodes(self):
-        self.provider.register_node(
-            self.addressRoot + "in1", self.providerNode)
-        self.provider.register_node(
-            self.addressRoot + "in2", self.providerNode)
-        self.provider.register_node(
-            self.addressRoot + "mode", self.providerNode)
-        self.provider.register_node(
-            self.addressRoot + "out", self.providerNode)
+        self.register_node("in1")
+        self.register_node("in2")
+        self.register_node("mode")
+        self.register_node("out")
 
     def subscribe(self):
-        subscription_properties = datalayer.subscription.create_properties(
-            "python-datalayer-client-sub", publish_interval=100)
 
-        if subscription_properties is None:
+        self.subscription_changed = False
+
+        if self.subscription_properties is None:
             return Result.FAILED
 
         addressList = []
-        addressList.append(self.in1_address.get_string())
-        addressList.append(self.in2_address.get_string())
+
+        address = self.in1_address.get_string()
+        print("Subscribing", address)
+        addressList.append(address)
+
+        address = self.in2_address.get_string()
+        print("Subscribing", address)
+        addressList.append(address)
 
         result, self.subscription = self.client.create_subscription_sync(
-            subscription_properties, self.rncb)
+            self.subscription_properties, self.response_notify_callback)
         if result != Result.OK:
             return result
 
@@ -208,92 +253,31 @@ class BasicArithmeticOperations:
         return self.subscription.subscribe_multi(addressList)
 
     def unsubscribe(self):
-        if self.subscription is not None:
-            self.subscription.unsubscribe_all()
+        if self.subscription is None:
+            return Result.OK
 
-    def create_metadata(self, typeAddress: str, name: str, unit: str, description: str, allowWrite : bool):
+        return self.subscription.unsubscribe_all()
 
-        # Create `FlatBufferBuilder`instance. Initial Size 1024 bytes (grows automatically if needed)
-        builder = flatbuffers.Builder(1024)
+    def create_metadata(self, typeAddress: str, name: str, unit: str, description: str, allowWrite: bool):
 
-        # Serialize AllowedOperations data
-        AllowedOperations.AllowedOperationsStart(builder)
-        AllowedOperations.AllowedOperationsAddRead(builder, True)
-        AllowedOperations.AllowedOperationsAddWrite(builder, allowWrite)
-        AllowedOperations.AllowedOperationsAddCreate(builder, False)
-        AllowedOperations.AllowedOperationsAddDelete(builder, False)
-        operations = AllowedOperations.AllowedOperationsEnd(builder)
+        return ctrlxdatalayer.metadata_utils.MetadataBuilder.create_metadata(
+            name, description, unit, description+"_url", NodeClass.NodeClass.Variable,
+            read_allowed=True, write_allowed=allowWrite, create_allowed=False, delete_allowed=False, browse_allowed=True,
+            type_path="dummy")
 
-        # Metadata description strings
-        descriptionBuilderString = builder.CreateString(description)
-        urlBuilderString = builder.CreateString("tbd")
-        displayNameString = builder.CreateString(name)
-        unitString = builder.CreateString(unit)
-
-        # Store string parameter into builder
-        readTypeBuilderString = builder.CreateString("readType")
-        writeTypeBuilderString = builder.CreateString("writeType")
-        #createTypeBuilderString = builder.CreateString("createType")
-        targetAddressBuilderString = builder.CreateString(typeAddress)
-
-        # Serialize Reference data (for read operation)
-        Reference.ReferenceStart(builder)
-        Reference.ReferenceAddType(builder, readTypeBuilderString)
-        Reference.ReferenceAddTargetAddress(
-            builder, targetAddressBuilderString)
-        reference_read = Reference.ReferenceEnd(builder)
-
-        # Serialize Reference data (for write operation)
-        Reference.ReferenceStart(builder)
-        Reference.ReferenceAddType(builder, writeTypeBuilderString)
-        Reference.ReferenceAddTargetAddress(
-            builder, targetAddressBuilderString)
-        reference_write = Reference.ReferenceEnd(builder)
-
-        # Serialize Reference data (for create operation)
-        # Reference.ReferenceStart(builder)
-        #Reference.ReferenceAddType(builder, createTypeBuilderString)
-        #Reference.ReferenceAddTargetAddress(builder, targetAddressBuilderString)
-        #reference_create = Reference.ReferenceEnd(builder)
-
-        # Create FlatBuffer vector and prepend reference data. Note: Since we prepend the data, prepend them in reverse order.
-        Metadata.MetadataStartReferencesVector(builder, 2)
-        # builder.PrependSOffsetTRelative(reference_create)
-        builder.PrependSOffsetTRelative(reference_write)
-        builder.PrependSOffsetTRelative(reference_read)
-        references = builder.EndVector(2)
-
-        # Serialize Metadata data
-        Metadata.MetadataStart(builder)
-        Metadata.MetadataAddNodeClass(builder, NodeClass.NodeClass.Variable)
-        Metadata.MetadataAddOperations(builder, operations)
-        Metadata.MetadataAddDescription(builder, descriptionBuilderString)
-        Metadata.MetadataAddDescriptionUrl(builder, urlBuilderString)
-        Metadata.MetadataAddDisplayName(builder, displayNameString)
-        Metadata.MetadataAddUnit(builder, unitString)
-
-        # Metadata reference table
-        Metadata.MetadataAddReferences(builder, references)
-        metadata = Metadata.MetadataEnd(builder)
-
-        # Closing operation
-        builder.Finish(metadata)
-        return builder.Output()
-
-
-    def __on_create(self, userdata: datalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
+    def __on_create(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
         cb(Result.OK, None)
 
-    def __on_remove(self, userdata: datalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
+    def __on_remove(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
         # Not implemented because no wildcard is registered
         cb(Result.UNSUPPORTED, None)
 
-    def __on_browse(self, userdata: datalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
+    def __on_browse(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
         new_data = Variant()
         new_data.set_array_string([])
         cb(Result.OK, new_data)
 
-    def __on_read(self, userdata: datalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
+    def __on_read(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
 
         if address.endswith("in1"):
             cb(Result.OK, self.in1_address)
@@ -321,7 +305,7 @@ class BasicArithmeticOperations:
 
         cb(Result.INVALID_ADDRESS, None)
 
-    def __on_write(self, userdata: datalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
+    def __on_write(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
 
         if data.get_type() != VariantType.STRING:
             cb(Result.TYPE_MISMATCH, None)
@@ -329,11 +313,13 @@ class BasicArithmeticOperations:
 
         if address.endswith("in1"):
             self.in1_address.set_string(data.get_string())
+            self.subscription_changed = True
             cb(Result.OK, data)
             return
 
         if address.endswith("in2"):
             self.in2_address.set_string(data.get_string())
+            self.subscription_changed = True
             cb(Result.OK, data)
             return
 
@@ -344,7 +330,7 @@ class BasicArithmeticOperations:
 
         cb(Result.INVALID_ADDRESS, None)
 
-    def __on_metadata(self, userdata: datalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
+    def __on_metadata(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
         if address.endswith("in1"):
             cb(Result.OK, self.in1_metadata)
             return

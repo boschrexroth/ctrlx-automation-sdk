@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "configurations": [
         {
-            "name": "x64 Builder VM",
+            "name": "x64 Build Environment (local)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/registerNode",
@@ -23,14 +23,13 @@
                 },
                 {
                     "description": "Set path variable to .",
-                    //"text": "set solib-search-path ${workspaceFolder}/generated/ubuntu20-gcc-x64/debug/usr/lib/",
                     "text": "set env LD_LIBRARY_PATH=${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/usr/lib/",
                     "ignoreFailures": false
                 }
             ]
         },
         {
-            "name": "aarch64 ctrlX",
+            "name": "aarch64 ctrlX (remote)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-aarch64/Debug/registerNode",
@@ -50,7 +49,7 @@
             ]
         },
         {
-            "name": "x64 ctrlX virt. Network Adapter",
+            "name": "x64 ctrlX virt. Network Adapter (remote)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/registerNode",
@@ -70,13 +69,13 @@
             ]
         },
         {
-            "name": "x64 ctrlX virt. Port Forwarding",
+            "name": "x64 ctrlX virt. Port Forwarding (remote)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/registerNode",
             "cwd": "${workspaceFolder}",
             "miDebuggerPath": "/usr/bin/gdb-multiarch",
-            "miDebuggerServerAddress": "127.0.0.1:12345",
+            "miDebuggerServerAddress": "10.0.2.2:12345",
             "stopAtEntry": true,
             "targetArchitecture": "x64",
             "externalConsole": false,

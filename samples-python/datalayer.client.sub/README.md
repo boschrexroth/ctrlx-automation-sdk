@@ -11,12 +11,12 @@ The app uses a single node and a multi node subscription.
 
 First the single node subscription is started. It will be stopped after a short period of time. 
 
-Then the multi node subscription is started. It will run until a connection break to the Data Layer is detected. In this case the app unsubscribes the multi node subsciption and ends. The app is restarted automatically by snapd.
+Then the multi node subscription is started. It will run until a connection break to the Data Layer is detected. In this case the app unsubscribes the multi node subscription and ends. The app is restarted automatically by snapd.
 
 
 ## Implementation Description
 
-__main.py__ is the single module. It has follwing tasks:
+__main.py__ is the single module. It has following tasks:
 * Create a Data Layer client connection
 * Subscribe/unsubscribe a Data Layer single node subscription
 * Subscribe/unsubscribe a Data Layer multi node subscription
@@ -28,7 +28,7 @@ ___
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

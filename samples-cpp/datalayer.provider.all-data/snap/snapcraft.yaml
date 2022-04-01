@@ -4,7 +4,7 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
 name: sdk-cpp-alldata
-version: "2.0.0"
+version: "2.1.0"
 grade: stable
 summary: SDK sample app in cpp - provides Data Layer nodes with different data types
 description: |
@@ -33,6 +33,8 @@ parts:
   alldataprovider:
     plugin: dump
     source: ./generated/build
+    stage-packages:
+      - libzmq5
 
   flatbuffers:
     plugin: dump
@@ -40,7 +42,18 @@ parts:
   
   deb:
     plugin: dump
-    source: ../../deb/ctrlx-datalayer-1.7.5.deb
+    source: ./tmp/ctrlx-datalayer.deb
+    source-type: deb
+    stage-packages:
+      - libzmq5
+    override-pull: |
+      mkdir -p ../../../tmp/
+      cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
+      snapcraftctl pull
+    override-prime: |
+      rm -rf ../tmp
+      snapcraftctl prime
+
 
 # describes which interface slots are supported by defining the plugs
 plugs:

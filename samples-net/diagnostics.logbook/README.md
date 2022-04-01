@@ -23,9 +23,9 @@ Please read the common .NET docs [here](./../README.md), first.
 
 ## Getting Started
 
-1. Launch VSCode
+1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
-3. Choose __Open Folder in WSL__.
+3. Choose __Open Folder__.
 4. Open the directory __diagnostics.logbook__.
 5. Build and install snap as described [here](./../README.md).
 6. Check the output using __Diagnostics__:
@@ -40,9 +40,9 @@ Please read the common .NET docs [here](./../README.md), first.
 
 8. If you have root permissions, you can also watch the output on any ssh console with the command:
    ```bash
-   sudo snap logs ctrlx-dotnet-logbook.app -f | more
-   
- ## Screenshot
+      sudo snap logs ctrlx-dotnet-logbook.app -f | more
+   ```
+## Screenshot
 
 ![ctrlX Logbook](./docs/images/diagnostics.logbook/logbook.png)
 

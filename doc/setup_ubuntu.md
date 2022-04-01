@@ -1,9 +1,9 @@
 
-# Setup ctrlX AUTOMATION Development Environment using a Real Machine with Ubuntu
+# Setting up a Native Ubuntu as SDK Build Environment
 
-You can install a Ubuntu Desktop or Ubuntu Server on your real machine, depending on your requirements.
+You can install an Ubuntu Desktop or Ubuntu Server operating system on your computer, depending on your requirements.
 
-The setup of your real machine is similar to the setup of a VirtualBox VM. So here we will refer to the corresponding chapters of this setup document and explain the changes.
+The setup is very similar to the setup of a SDK VirtualBox VM. So here we will refer to the corresponding chapters of this setup document and explain the changes.
 
 * __Setup Corporate Proxy (Optional)__: Instead of 'http://10.0.2.2:3128/' use your specific settings for http and https
 * __Setup Packages__: No changes here

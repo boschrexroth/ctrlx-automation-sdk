@@ -1,14 +1,14 @@
 # README node hello.world
 
-This node sample prints out "Hello World from node.js!" to the console.
+This node sample prints out "Hello World from Node.js!" to the console.
 
 ## Introduction
 
-Programm is prompting "Hello World from node.js!" to standard output.
+Programm is prompting "Hello World from Node.js!" to standard output.
 
 ## Description
 
-The samples demonstrates how to snap a simple node.js script with the snapcraft [npm plugin](https://snapcraft.io/docs/npm-plugin).
+The samples demonstrates how to snap a simple Node.js script with the snapcraft [npm plugin](https://snapcraft.io/docs/npm-plugin).
 
 ## Prerequisites
 
@@ -16,9 +16,9 @@ Please read the common node docs [here](./../README.md), first.
 
 ## Getting Started
 
-1. Launch VSCode
+1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
-3. Choose __Open Folder in WSL__.
+3. Choose __Open Folder__.
 4. Open the directory __datalayer.browse__.
 5. Build and install snap as described [here](./../README.md).
 6. Check the output using __Diagnostics__:
@@ -37,11 +37,11 @@ Please read the common node docs [here](./../README.md), first.
     ```
 ## Console Output
 ```bash
-Hello World from node.js! Thu, 07 Oct 2021 11:35:08 GMT
-Hello World from node.js! Thu, 07 Oct 2021 11:35:09 GMT
-Hello World from node.js! Thu, 07 Oct 2021 11:35:10 GMT
-Hello World from node.js! Thu, 07 Oct 2021 11:35:11 GMT
-Hello World from node.js! Thu, 07 Oct 2021 11:35:12 GMT
+Hello World from Node.js! Thu, 07 Oct 2021 11:35:08 GMT
+Hello World from Node.js! Thu, 07 Oct 2021 11:35:09 GMT
+Hello World from Node.js! Thu, 07 Oct 2021 11:35:10 GMT
+Hello World from Node.js! Thu, 07 Oct 2021 11:35:11 GMT
+Hello World from Node.js! Thu, 07 Oct 2021 11:35:12 GMT
  ```
 
 ## Install the App
@@ -68,7 +68,7 @@ If you've found an error in these sample, please [file an issue](https://github.
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

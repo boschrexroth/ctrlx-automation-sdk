@@ -2,7 +2,7 @@
 
 # MIT License
 #
-# Copyright (c) 2021 Bosch Rexroth AG
+# Copyright (c) 2021-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,48 +22,39 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
+import sys
 import time
 from datetime import datetime
 from typing import List
 import flatbuffers
 
-import datalayer
-from datalayer.variant import Result, Variant
+import ctrlxdatalayer
+from ctrlxdatalayer.variant import Result, Variant
 from comm.datalayer import SubscriptionProperties
 
+from helper.ctrlx_datalayer_helper import get_client
 
 def main():
 
-    # This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:PORT
-    # Please check and change according your environment:
-    # - USER:       Enter your user name here - default is boschrexroth
-    # - PASSWORD:   Enter your password here - default is boschrexroth
-    # - IP_ADDRESS: 127.0.0.1   If you develop in WSL and you want to connect to a ctrlX CORE virtual with port forwarding
-    #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
-    #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-
-    connectionClient = "tcp://boschrexroth:boschrexroth@10.0.2.2:2069"
-
-    if 'SNAP' in os.environ:
-        connectionClient = "ipc://"
-
     print()
-    print("========================================================================")
+    print("=================================================================")
     print("sdk-py-datalayer-client - A ctrlX Data Layer Client App in Python")
+    print("=================================================================")
 
-    with datalayer.system.System("") as datalayer_system:
-        print("INFO Starting Data Layer system")
+    with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
-        # Create Data Layer client connection
-        print("INFO Creating Data Layer Client connection to ctrlX with", connectionClient)
-        with datalayer_system.factory().create_client(connectionClient) as datalayer_client:
+        datalayer_client, datalayer_client_connection_string = get_client(datalayer_system)
+        if datalayer_client is None:
+            print("ERROR Connecting", datalayer_client_connection_string, "failed.")
+            sys.exit(1)
 
-            # Check if client is connected
-            print("INFO Client connected:", datalayer_client.is_connected())
+        with datalayer_client: # datalayer_client is closed automatically when leaving with block
+
             if datalayer_client.is_connected() is False:
-                return
+                print("ERROR Data Layer is NOT connected:", datalayer_client_connection_string)
+                sys.exit(2)
+
 
             # Define the subscription properties by using Flatbuffers class SubscriptionProperties
             builder = flatbuffers.Builder(1024)
@@ -99,43 +90,19 @@ def main():
                 result, read_var = datalayer_client.read_sync(addr)
                 val = read_var.get_float64()
                 print("INFO read_sync: %s, %s: %f" % (dt_str, addr, val))
-
-                '''
-                addr = "scheduler/admin/state"
-                dt_str = datetime.now().strftime("%d/%m/%Y %H:%M:%S.%f")
-                conv = datalayer_system.json_converter()
-                result, read_var = datalayer_client.read_json_sync(conv, "scheduler/admin/state", 0)
-                state = read_var.get_string()
-                print("INFO read_json_sync: %s, %s: %s" % (dt_str, addr, state))
-
-                if 'RUN' in state:
-                    state = state.replace('RUN', 'CONFIG')
-                else:
-                    state = state.replace('CONFIG', 'RUN')
-
-                print("New state: ", state)
-
-                # Result.OK expected
-                result, error = datalayer_client.write_json_sync(conv, addr, state)
-                print("write_json_sync Result:", result)
-
-                # Result.INVALID_ADDRESS expected
-                result, error = datalayer_client.write_json_sync(conv, addr+"x", state)
-                print("write_json_sync with invalid address Result:", result, "Error:", error.get_string())
-                '''
-                
+               
                 time.sleep(5.0)
 
-            print("ERROR Data Layer connection")
-            print("INFO Close subscription")
+            print("ERROR Data Layer is NOT connected")
+            print("INFO Closing subscription")
             sub.close()
 
-        print("INFO Stopping Data Layer system")
-        datalayer_system.stop(True)
+        stop_ok = datalayer_system.stop(False)  # Attention: Doesn't return if any provider or client instance is still running
+        print("System Stop", stop_ok)
 
 
 # Response notify callback function
-def cb_subscription_sync(result: Result, items: List[datalayer.subscription.NotifyItem], userdata):
+def cb_subscription_sync(result: Result, items: List[ctrlxdatalayer.subscription.NotifyItem], userdata):
     if result is not Result.OK:
         print("ERROR notify subscription:", result)
         return

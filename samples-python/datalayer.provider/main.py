@@ -2,7 +2,7 @@
 
 # MIT License
 #
-# Copyright (c) 2021 Bosch Rexroth AG
+# Copyright (c) 2021-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,14 @@
 # SOFTWARE.
 
 import os
+import sys
 import time
 import flatbuffers
 
-import datalayer
-from datalayer.variant import Variant
+import ctrlxdatalayer
+from ctrlxdatalayer.variant import Variant
+
+from helper.ctrlx_datalayer_helper import get_provider
 
 from app.my_provider_node import MyProviderNode
 from sample.schema.InertialValue import InertialValueAddX
@@ -40,41 +43,36 @@ from sample.schema.InertialValue import InertialValueStart
 bfbs_file = "sampleSchema.bfbs"
 
 # Type address of sampleSchema
-type_address_fbs = "types/sample-py/schema/inertial-value"
+type_address_fbs = "types/sdk-py-provider/schema/inertial-value"
 type_address_string = "types/datalayer/string"
 
 # addresses of provided values
-address_base = "sdk-py-datalayer-provider/"
+address_base = "sdk-py-provider/"
 
 
 def main():
 
-    with datalayer.system.System("") as datalayer_system:
+    with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
-        # This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:PORT
-        # Please check and change according your environment:
-        # - USER:       Enter your user name here - default is boschrexroth
-        # - PASSWORD:   Enter your password here - default is boschrexroth
-        # - IP_ADDRESS: 127.0.0.1   If you develop in WSL and you want to connect to a ctrlX CORE virtual with port forwarding
-        #               10.0.2.2    If you develop in a VM (Virtual Box, QEMU,...) and you want to connect to a ctrlX virtual with port forwarding
-        #               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
+        # Try SSL port 8443
+        provider, connection_string = get_provider(datalayer_system)
+        if provider is None:
+            print("ERROR Connecting", connection_string, "failed.")
+            sys.exit(1)
 
-        connectionProvider = "tcp://boschrexroth:boschrexroth@10.0.2.2:2070"
+        print("INFO Connecting", connection_string, "succeeded.")
 
-        if 'SNAP' in os.environ:
-            connectionProvider = "ipc://"
+        with provider:  # provider.close() is called automatically when leaving with block
 
-        print("Connecting", connectionProvider)
-        with datalayer_system.factory().create_provider(connectionProvider) as provider:
-            
             print("Starting provider")
             result = provider.start()
-            if result is not datalayer.variant.Result.OK:
+            if result is not ctrlxdatalayer.variant.Result.OK:
                 print("ERROR Starting Data Layer Provider failed with:", result)
                 return
 
-            provider_node_fbs = provide_fbs(provider, "inertial-value", bfbs_file)
+            provider_node_fbs = provide_fbs(
+                provider, "inertial-value", bfbs_file)
             provider_node_str = provide_string(provider, "string-value")
 
             print("Running endless loop...")
@@ -83,24 +81,26 @@ def main():
 
             print("ERROR Data Layer Provider is disconnected")
 
-            print("Stopping Data Layer Provider: ", end=" ")
-            result = provider.stop()
-            print(result)
-
-            print("Unregistering provider Type", type_address_fbs, end=" ")
-            result = provider.unregister_type(type_address_fbs)
-            print(result)
-
             provider_node_fbs.unregister_node()
             del provider_node_fbs
 
             provider_node_str.unregister_node()
             del provider_node_str
 
-        datalayer_system.stop(True)
+            print("Unregistering provider Type", type_address_fbs, end=" ")
+            result = provider.unregister_type(type_address_fbs)
+            print(result)
+
+            print("Stopping Data Layer Provider: ", end=" ")
+            result = provider.stop()
+            print(result)
+
+        # Attention: Doesn't return if any provider or client instance is still running
+        stop_ok = datalayer_system.stop(False)
+        print("System Stop", stop_ok)
 
 
-def provide_fbs(provider: datalayer.provider, name : str, bfbs_file: str):
+def provide_fbs(provider: ctrlxdatalayer.provider, name: str, bfbs_file: str):
     # Path to sampleSchema.bfbs (Flatbuffers)
     snap_path = os.getenv('SNAP')
     if snap_path is None:
@@ -128,39 +128,45 @@ def provide_fbs(provider: datalayer.provider, name : str, bfbs_file: str):
     builder.Finish(inertialvalue)
     variantFlatbuffers = Variant()
     result = variantFlatbuffers.set_flatbuffers(builder.Output())
-    if result != datalayer.variant.Result.OK:
+    if result != ctrlxdatalayer.variant.Result.OK:
         print("ERROR creating variant flatbuffers failed with:", result)
         return
 
     # Create and register flatbuffers provider node
-    print("Creating flatbuffers provider node")
+    print("Creating flatbuffers provider node " + address_base + name)
     provider_node_fbs = MyProviderNode(
-        provider, 
+        provider,
         type_address_fbs,
-        address_base + name, 
+        address_base + name,
         name,
         "g",
-        "Simple flatbuffers variable", 
+        "Simple flatbuffers variable",
         variantFlatbuffers)
-    provider_node_fbs.register_node()
+    result = provider_node_fbs.register_node()
+    if result != ctrlxdatalayer.variant.Result.OK:
+        print("ERROR Registering node " + address_base +
+              name + " failed with:", result)
 
     return provider_node_fbs
 
 
-def provide_string(provider: datalayer.provider, name : str):
+def provide_string(provider: ctrlxdatalayer.provider, name: str):
     # Create and register simple string provider node
-    print("Creating string  provider node")
+    print("Creating string  provider node " + address_base + name)
     variantString = Variant()
     variantString.set_string("myString")
     provider_node_str = MyProviderNode(
-        provider, 
+        provider,
         type_address_string,
-        address_base +  name,
+        address_base + name,
         name,
         "-",
-        "String variable", 
+        "String variable",
         variantString)
-    provider_node_str.register_node()
+    result = provider_node_str.register_node()
+    if result != ctrlxdatalayer.variant.Result.OK:
+        print("ERROR Registering node " + address_base +
+              name + " failed with:", result)
 
     return provider_node_str
 

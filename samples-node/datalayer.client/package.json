@@ -1,0 +1,28 @@
+{
+    "name": "datalayer-client",
+    "version": "1.0.0",
+    "description": "Simple Node.js datalayer client sample for ctrlX",
+    "bin": {
+        "app": "dist/app.js"
+    },
+    "author": "",
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "devDependencies": {
+        "@types/node": "^17.0.21",
+        "@typescript-eslint/parser": "^5.13.0",
+        "eslint": "^8.10.0",
+        "typescript": "^4.6.2",
+        "ts-node": "^10.6.0"
+    },
+    "dependencies": {
+        "ctrlx-datalayer": "1.3.1",
+        "ctrlx-datalayer-flatbuffers": "1.14.2"
+    },
+    "scripts": {
+        "prepare": "npm run tsc",
+        "tsc": "tsc"
+    }
+}

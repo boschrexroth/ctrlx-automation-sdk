@@ -1,1 +1,1 @@
-call create-new-vm.bat %1 files-aarch64-proxy-win.txt
+call create-new-vm.bat aarch64 proxy %1

@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This Python app provides ctrlX Data Layer nodes represending different data types. 
+This Python app provides ctrlX Data Layer nodes representing different data types. 
 
 ## Function Description
 
@@ -14,7 +14,7 @@ The values of the nodes in the 'dynamic' subtree can be changed (written) by cli
 
 ## Implementation Description
 
-__main.py__ starts the Data Layer system and the Data Layer provider. Furthermore two instances of the class ProviderNodeAllData are created. One instance is called for creating static (immutable) Data Layer nodes. The other instance is called for creating dynamic (changable) Data Layer nodes.
+__main.py__ starts the Data Layer system and the Data Layer provider. Furthermore two instances of the class ProviderNodeAllData are created. One instance is called for creating static (immutable) Data Layer nodes. The other instance is called for creating dynamic (changeable) Data Layer nodes.
 
 The package __datalayerprovider__ contains the classes for data storage, configuration and Data Layer handling.
 
@@ -24,7 +24,7 @@ ___
 
 MIT License
 
-Copyright (c) 2020-2021 Bosch Rexroth AG
+Copyright (c) 2020-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

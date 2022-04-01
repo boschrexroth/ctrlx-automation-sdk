@@ -2,12 +2,6 @@
 
 The sample App __diaglogbook__ demonstates how messages are sent to journald and the CtrlX Diagnostics Logbook.
 
-## Prerequisites
-
-* Build environment WSL or Virtual Box
-* ctrlX AUTOMATION SDK
-* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
-
 ## The using of Linux Kernel  Log Levels
 
 We recommend to use Linux log levels to define the severity of a log message.
@@ -26,23 +20,16 @@ There are eight log levels defined by the Linux kernel:
 __Be carefull with level EMERGENCY: Messages with this level are sent to all consoles!__
 
 
-## Getting Started
+## Build and Install the Snap
 
-1. Launch IDE (VSCode for example)
-2. Open the sample directory `samples-cpp/diagnostics.logbook`
-3. Build and install the snap as described `Setup` section
-4. Check output in the web interface
+Build and install the snap like described [here](../README.md).
+
+## Test the Snap
+
+* Open the web interface of your ctrlX CORE
+* Check the output of the diagnosis logbook
 
 ![Output in diagnosis logbook](docs/images/diagnostics.logbook/messages.in.logbook.png)
-
-## Troubleshooting
-
-All automatically created files are located in folders `build` and `generated`.  
-If there are unclear messages during the build process, it might help to delete the folders `build` and `generated` and restart the build process.
-
-## Support
-
-If you've any questions visit the [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com/)
 
 ___
 

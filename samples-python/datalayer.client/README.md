@@ -6,7 +6,7 @@ This python app runs Data Layer client operations like read, write and so on. It
 
 ## Function Description
 
-This Python app depends from the C++ sample public/samples-cpp/datalayer.provider.all-data. 
+This Python app depends from the C++ sample samples-cpp/datalayer.provider.all-data. 
 It handles the Data Layer nodes created by the C++ sample.
 
 ## Implementation Description 
@@ -20,7 +20,7 @@ ___
 
 MIT License
 
-Copyright (c) 2020-2021 Bosch Rexroth AG
+Copyright (c) 2020-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

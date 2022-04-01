@@ -1,18 +1,18 @@
 /**
  * MIT License
- * 
- * Copyright (c) 2021 Bosch Rexroth AG
- * 
+ *
+ * Copyright (c) 2021-2022 Bosch Rexroth AG
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -40,8 +40,10 @@
 #include "common/log/diagnosis/get_detailed_text_generated.h"
 #include "common/log/diagnosis/event_type_1_generated.h"
 #include "common/log/diagnosis/event_type_2_generated.h"
+#include "common/log/diagnosis/pending_diagnostic_state_generated.h"
 #include "common/log/diagnosis/i_log2.h"
 
+#include "ctrlx_datalayer_helper.h"
 
 comm::datalayer::PublishCallback eventsCallback()
 {
@@ -54,127 +56,136 @@ comm::datalayer::PublishCallback eventsCallback()
       std::cerr << "  Status: " << status.toString() << std::endl;
       return;
     }
-    else
-    {
-      std::cout << "  Status: " << status.toString() << std::endl;
-    }
 
     for (auto item = items.begin(); item != items.end(); item++)
     {
       auto info = comm::datalayer::GetNotifyInfo(item->info.getData());
 
       std::cout << "  Got notification '" << comm::datalayer::EnumNameNotifyType(info->notifyType()) << "' for node '" << info->node()->c_str() << "'." << std::endl;
-      if (comm::datalayer::NotifyType_Data == info->notifyType())
+      if (comm::datalayer::NotifyType_Data != info->notifyType())
       {
-        comm::datalayer::Variant value = item->data;
-
-        std::string nodeAdress = info->node()->c_str();
-        if (0 == nodeAdress.compare("diagnosis/events/message-set"))
+        continue;
+      }
+      comm::datalayer::Variant value = item->data;
+      std::string nodeAdress = info->node()->c_str();
+      if (0 == nodeAdress.compare("diagnosis/events/message-set"))
+      {
+        if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
         {
-          if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
-          {
-            std::cerr << "  Invalid argument type for data" << std::endl;
-            return;
-          }
-
-          auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
-          std::cout << "  Event counter (diagnosis/events/message-set): " << eventData->eventCounter() << std::endl;
+          std::cerr << "  Invalid argument type for data" << std::endl;
+          return;
         }
-        else if (0 == nodeAdress.compare("diagnosis/events/warning-set"))
+
+        auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
+        std::cout << "  Event counter (diagnosis/events/message-set): " << eventData->eventCounter() << std::endl;
+        continue;
+      }
+
+      if (0 == nodeAdress.compare("diagnosis/events/warning-set"))
+      {
+        if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
         {
-          if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
-          {
-            std::cerr << "  Invalid argument type for data" << std::endl;
-            return;
-          }
-
-          auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
-          std::cout << "  Event counter (diagnosis/events/warning-set): " << eventData->eventCounter() << std::endl;
+          std::cerr << "  Invalid argument type for data" << std::endl;
+          return;
         }
-        else if (0 == nodeAdress.compare("diagnosis/events/error-set-F0"))
+
+        auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
+        std::cout << "  Event counter (diagnosis/events/warning-set): " << eventData->eventCounter() << std::endl;
+        continue;
+      }
+
+      if (0 == nodeAdress.compare("diagnosis/events/error-set-F0"))
+      {
+        if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
         {
-          if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
-          {
-            std::cerr << "  Invalid argument type for data" << std::endl;
-            return;
-          }
-
-          auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
-          std::cout << "  Event counter (diagnosis/events/error-set-F0): " << eventData->eventCounter() << std::endl;
+          std::cerr << "  Invalid argument type for data" << std::endl;
+          return;
         }
-        else if (0 == nodeAdress.compare("diagnosis/events/error-set-F2"))
+
+        auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
+        std::cout << "  Event counter (diagnosis/events/error-set-F0): " << eventData->eventCounter() << std::endl;
+        continue;
+      }
+
+      if (0 == nodeAdress.compare("diagnosis/events/error-set-F2"))
+      {
+        if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
         {
-          if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
-          {
-            std::cerr << "  Invalid argument type for data" << std::endl;
-            return;
-          }
-
-          auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
-          std::cout << "  Event counter (diagnosis/events/error-set-F2): " << eventData->eventCounter() << std::endl;
+          std::cerr << "  Invalid argument type for data" << std::endl;
+          return;
         }
-        else if (0 == nodeAdress.compare("diagnosis/events/error-set-F6"))
+
+        auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
+        std::cout << "  Event counter (diagnosis/events/error-set-F2): " << eventData->eventCounter() << std::endl;
+        continue;
+      }
+
+      if (0 == nodeAdress.compare("diagnosis/events/error-set-F6"))
+      {
+        if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
         {
-          if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
-          {
-            std::cerr << "  Invalid argument type for data" << std::endl;
-            return;
-          }
-
-          auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
-          std::cout << "  Event counter (diagnosis/events/error-set-F6): " << eventData->eventCounter() << std::endl;
+          std::cerr << "  Invalid argument type for data" << std::endl;
+          return;
         }
-        else if (0 == nodeAdress.compare("diagnosis/events/highest-pending-log-none"))
+
+        auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
+        std::cout << "  Event counter (diagnosis/events/error-set-F6): " << eventData->eventCounter() << std::endl;
+        continue;
+      }
+      if (0 == nodeAdress.compare("diagnosis/events/highest-pending-log-none"))
+      {
+        if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
         {
-          if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
-          {
-            std::cerr << "  Invalid argument type for data" << std::endl;
-            return;
-          }
-
-          auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
-          std::cout << "  Event counter (diagnosis/events/highest-pending-log-none): " << eventData->eventCounter() << std::endl;
+          std::cerr << "  Invalid argument type for data" << std::endl;
+          return;
         }
-        else if (0 == nodeAdress.compare("diagnosis/events/highest-pending-log-warning"))
+
+        auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
+        std::cout << "  Event counter (diagnosis/events/highest-pending-log-none): " << eventData->eventCounter() << std::endl;
+        continue;
+      }
+      if (0 == nodeAdress.compare("diagnosis/events/highest-pending-log-warning"))
+      {
+        if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
         {
-          if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
-          {
-            std::cerr << "  Invalid argument type for data" << std::endl;
-            return;
-          }
-
-          auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
-          std::cout << "  Event counter (diagnosis/events/highest-pending-log-warning): " << eventData->eventCounter() << std::endl;
+          std::cerr << "  Invalid argument type for data" << std::endl;
+          return;
         }
-        else if (0 == nodeAdress.compare("diagnosis/events/highest-pending-log-error"))
+
+        auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
+        std::cout << "  Event counter (diagnosis/events/highest-pending-log-warning): " << eventData->eventCounter() << std::endl;
+        continue;
+      }
+
+      if (0 == nodeAdress.compare("diagnosis/events/highest-pending-log-error"))
+      {
+        if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
         {
-          if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType1Buffer)))
-          {
-            std::cerr << "  Invalid argument type for data" << std::endl;
-            return;
-          }
-
-          auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
-          std::cout << "  Event counter (diagnosis/events/highest-pending-log-error): " << eventData->eventCounter() << std::endl;
+          std::cerr << "  Invalid argument type for data" << std::endl;
+          return;
         }
-        else if (0 == nodeAdress.compare("diagnosis/events/reset-all-pending"))
+
+        auto eventData = common::log::diagnosis::fbs::GetEventType1(value.getData());
+        std::cout << "  Event counter (diagnosis/events/highest-pending-log-error): " << eventData->eventCounter() << std::endl;
+        continue;
+      }
+
+      if (0 == nodeAdress.compare("diagnosis/events/reset-all-pending"))
+      {
+        if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType2Buffer)))
         {
-          if (comm::datalayer::STATUS_FAILED(value.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyEventType2Buffer)))
-          {
-            std::cerr << "  Invalid argument type for data" << std::endl;
-            return;
-          }
-
-          auto eventData = common::log::diagnosis::fbs::GetEventType2(value.getData());
-          std::cout << "  Event counter (diagnosis/events/reset-all-pending): " << eventData->eventCounter() << std::endl;
+          std::cerr << "  Invalid argument type for data" << std::endl;
+          return;
         }
+
+        auto eventData = common::log::diagnosis::fbs::GetEventType2(value.getData());
+        std::cout << "  Event counter (diagnosis/events/reset-all-pending): " << eventData->eventCounter() << std::endl;
       }
     }
   };
 }
 
-
-int main(int ac, char* av[])
+int main()
 {
 #ifdef MY_DEBUG
   std::cout << "Raising SIGSTOP" << std::endl;
@@ -185,29 +196,13 @@ int main(int ac, char* av[])
   comm::datalayer::DatalayerSystem datalayer;
   datalayer.start(false);
 
-  // connect to client
-  // * in process communication (runs as bundle of rexroth-automation) use factory()->createClient()
-  // * inter process communication (runs on same target) use factory()->createClient(DL_IPC_AUTO)
-  // * on other device use  factory()->createClient("tcp://<user>:<password>@<ip>:2069")
-  //comm::datalayer::IClient* client = datalayer.factory()->createClient(DL_IPC_AUTO);
-  //comm::datalayer::IClient* client = datalayer.factory()->createClient("tcp://boschrexroth:boschrexroth@192.168.6.110:2069");
-  auto clientConnection = getenv("SNAP") != nullptr ? DL_IPC_AUTO : "tcp://boschrexroth:boschrexroth@10.0.2.2:2069";
-  comm::datalayer::IClient2* client = datalayer.factory()->createClient2(clientConnection);
-
-  if (client->isConnected())
+  auto clientConnectionString = getConnectionString();
+  comm::datalayer::IClient2 *client = datalayer.factory()->createClient2(clientConnectionString);
+  if (client->isConnected() == false)
   {
-    std::cout << "Client connected" << std::endl;
-  }
-  else
-  {
-    std::cout << "Client not connected" << std::endl;
-
-    if (client)
-    {
-      delete client;
-      client = nullptr;
-    }
-
+    std::cout << "ERROR Client connection " << clientConnectionString << " failed" << std::endl;
+    delete client;
+    client = nullptr;
     datalayer.stop();
 
     return 1;
@@ -217,28 +212,33 @@ int main(int ac, char* av[])
   std::cout << "Register diagnostics" << std::endl;
   //////////////////////////////////////////////////////////////////////////////////
 
-  //std::cout << "Register diagnostics with file path on ctrlX CORE (Alternative 1)" << std::endl;
-  //// For this variant it is necessary to upload the json file to a path on control that is accessible. It is possible to upload an configuration with the json file, e.g.:
+  // std::cout << "Register diagnostics with file path on ctrlX CORE (Alternative 1)" << std::endl;
+  //// For this variant it is necessary to upload the json file to a path on control that is accessible.
+  //// It is possible to upload the file via WebDAV to the active configuration:
+  //// - Create the folder "diagnostics" in the root of the active configuration.
+  //// - Upload the json file (sdk_diagnosis_datalayer.diagnostics.en-US.json) to the folder "diagnostics".
+  //// - If you followed all steps of the description, it is sufficient to only declare the file name for the registration via Data Layer. See example below.
+  //// It is also possible to upload a complete configuration with the json file, e.g.:
   //// - Save actual configuration and upload to PC.
   //// - Unzip the configuration file.
-  //// - Add the json file to configuration (e.g. create folder "diagnosis" and copy the json file (sdk_diagnosis_datalayer_diagnostics_en-US.json) to it).
+  //// - Add the json file to configuration (e.g. create folder "diagnostics" and copy the json file (sdk_diagnosis_datalayer.diagnostics.en-US.json) to it).
   //// - Upload the configuration and load the configuration.
-  //// - The resulting accessible path of the json file should be "/var/snap/rexroth-solutions/common/solutions/DefaultSolution/configurations/appdata/diagnosis/sdk_diagnosis_datalayer_diagnostics_en-US.json".
-  //// - Features supported later:
-  ////   - Upload of a single file to the active configuration via WebDAV.
-  ////   - Upload of a single file to the active configuration via configuration web interface.
-  //comm::datalayer::Variant registrationPathData;
-  //registrationPathData.setValue("/var/snap/rexroth-solutions/common/solutions/DefaultSolution/configurations/appdata/diagnosis/sdk_diagnosis_datalayer_diagnostics_en-US.json");
-  //comm::datalayer::DlResult dlResult = dlClient->writeSync("diagnosis/registration/register-file", &registrationPathData);
-  //if (comm::datalayer::STATUS_FAILED(dlResult))
-  //{
-  //  std::cerr << "Register diagnostics failed with error code" << dlResult.toString() << std::endl;
-  //  return 1;
-  //}
+  //// - The resulting accessible path of the json file should be "/var/snap/rexroth-solutions/common/solutions/DefaultSolution/configurations/appdata/diagnostics/sdk_diagnosis_datalayer.diagnostics.en-US.json".
+  //// Features supported later:
+  //// - Upload of a single file to the active configuration via configuration web interface.
+  // comm::datalayer::Variant registrationPathData;
+  // registrationPathData.setValue("sdk_diagnosis_datalayer.diagnostics.en-US.json");
+  //// registrationPathData.setValue("/var/snap/rexroth-solutions/common/solutions/DefaultSolution/configurations/appdata/diagnostics/sdk_diagnosis_datalayer.diagnostics.en-US.json");
+  // comm::datalayer::DlResult dlResult = dlClient->writeSync("diagnosis/registration/register-file", &registrationPathData);
+  // if (comm::datalayer::STATUS_FAILED(dlResult))
+  // {
+  //   std::cerr << "Register diagnostics failed with error code" << dlResult.toString() << std::endl;
+  //   return 1;
+  // }
 
   std::cout << "Register diagnostics with file path on PC or with file path in own app for interprocess communication (Alternative 2)" << std::endl;
   char workingDirectory[512];
-  char* buffer = getcwd(workingDirectory, 512);
+  char *buffer = getcwd(workingDirectory, 512);
   if (nullptr == buffer)
   {
     if (client)
@@ -252,14 +252,14 @@ int main(int ac, char* av[])
     return 1;
   }
 
-  const std::string bfbsPath = std::string(workingDirectory) + "/../../bfbs/common.log.diagnosis/common/log/diagnosis/registration_file.bfbs";
+  std::string registrationFilePath = std::string(workingDirectory) + "/resources/diagnostics/sdk_diagnosis_datalayer.diagnostics.en-US.json";
   comm::datalayer::MetadataHelper metadataHelper;
-  comm::datalayer::Variant dataTypeFlatBuffer;
+  comm::datalayer::Variant binaryFileContent;
 
-  comm::datalayer::DlResult dlResult = metadataHelper.getFileContent(bfbsPath, dataTypeFlatBuffer);
+  comm::datalayer::DlResult dlResult = metadataHelper.getFileContent(registrationFilePath, binaryFileContent);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-    std::cerr << "Failed to get type information of file " << bfbsPath << ", error code: " << dlResult.toString() << std::endl;
+    std::cerr << "Failed to get type information of file " << registrationFilePath << ", error code: " << dlResult.toString() << std::endl;
 
     if (client)
     {
@@ -268,65 +268,10 @@ int main(int ac, char* av[])
     }
 
     datalayer.stop();
-
     return 1;
   }
 
-  std::string registrationFilePath = std::string(workingDirectory) + "/resources/diagnostics/sdk_diagnosis_datalayer_diagnostics_en-US.json";
-  std::ifstream registrationFileStream(registrationFilePath);
-  if (!registrationFileStream)
-  {
-    std::cerr << "Could not evaluate file stream of file '" << registrationFilePath << "'.Maybe the file does not exist." << std::endl;
-
-    if (client)
-    {
-      delete client;
-      client = nullptr;
-    }
-
-    datalayer.stop();
-
-    return 1;
-  }
-
-  std::string jsonString((std::istreambuf_iterator<char>(registrationFileStream)), std::istreambuf_iterator<char>());
-  registrationFileStream.close();
-
-  comm::datalayer::Variant registrationData;
-  std::string detailedError;
-  dlResult = datalayer.jsonConverter()->parseJson(jsonString, dataTypeFlatBuffer, &registrationData, &detailedError);
-  if (comm::datalayer::STATUS_FAILED(dlResult))
-  {
-    std::cerr << "Failed to parse json string from file '" << registrationFilePath << "', error code: " << dlResult.toString() << ", detailed error: " << detailedError << std::endl;
-
-    if (client)
-    {
-      delete client;
-      client = nullptr;
-    }
-
-    datalayer.stop();
-
-    return 1;
-  }
-
-  // Check for correct flatbuffer data type.
-  if (comm::datalayer::STATUS_FAILED(registrationData.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyRegistrationFileBuffer)))
-  {
-    std::cerr << "Invalid argument type for registrationData" << std::endl;
-
-    if (client)
-    {
-      delete client;
-      client = nullptr;
-    }
-
-    datalayer.stop();
-
-    return 1;
-  }
-
-  dlResult = client->writeSync("diagnosis/registration/register", &registrationData);
+  dlResult = client->writeSync("diagnosis/registration/register-file-content", &binaryFileContent);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
     std::cerr << "Register diagnostics failed with error code " << dlResult.toString() << std::endl;
@@ -338,7 +283,6 @@ int main(int ac, char* av[])
     }
 
     datalayer.stop();
-
     return 1;
   }
 
@@ -398,7 +342,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/set/set-active", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "set-active failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "set-active failed with error code " << dlResult.toString() << std::endl;
   }
 
   std::cout << "Set active error (0E0F2001, 00000001, motion/axs/z3)" << std::endl;
@@ -410,7 +354,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/set/set-active", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "set-active failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "set-active failed with error code " << dlResult.toString() << std::endl;
   }
 
   std::cout << "Set and reset error (0E0F0001, 00000001, devices/io)" << std::endl;
@@ -422,7 +366,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/set/set-and-reset", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "set-and-reset failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "set-and-reset failed with error code " << dlResult.toString() << std::endl;
   }
 
   std::cout << "Reset error (0E0F2001, 00000001, motion/axs/z3)" << std::endl;
@@ -434,7 +378,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/set/reset-active", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "reset-active failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "reset-active failed with error code " << dlResult.toString() << std::endl;
   }
 
   std::cout << "Reset warning (0E0E0001, 00000001, diagnosis/temperature)" << std::endl;
@@ -446,7 +390,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/set/reset-active", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "reset-active failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "reset-active failed with error code " << dlResult.toString() << std::endl;
   }
 
   std::cout << "Set active error (0E0F6001, 00000001, -)" << std::endl;
@@ -458,7 +402,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/set/set-active", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "set-active failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "set-active failed with error code " << dlResult.toString() << std::endl;
   }
 
   std::cout << "Set active warning (0E0E0003, 00000001, scheduler/watchdog)" << std::endl;
@@ -470,7 +414,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/set/set-active", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "set-active failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "set-active failed with error code " << dlResult.toString() << std::endl;
   }
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -534,6 +478,52 @@ int main(int ac, char* av[])
   }
 
   //////////////////////////////////////////////////////////////////////////////////
+  std::cout << "Verify logs in pending diagnostics list" << std::endl;
+  //////////////////////////////////////////////////////////////////////////////////
+
+  struct DiagIdentification
+  {
+    std::string mainDiag;
+    std::string detailedDiag;
+    std::string entity;
+  };
+
+  std::vector<DiagIdentification> listDiagnosisIdentification =
+      {
+          {"0E0E0003", "00000001", "scheduler/watchdog"},
+          {"0E0F2001", "00000001", "motion/axs/z3"},
+          {"0E0F6001", "00000001", "notExisting"},
+      };
+
+  for (const auto &listElement : listDiagnosisIdentification)
+  {
+    std::cout << "Verify state of log {" << listElement.mainDiag << "," << listElement.detailedDiag << "," << listElement.entity << "}: ";
+
+    comm::datalayer::Variant dataVerifyLog;
+    auto diagnosisIdentification = common::log::diagnosis::fbs::CreateDiagnosisIdentificationDirect(builder, listElement.mainDiag.c_str(), listElement.detailedDiag.c_str(), listElement.entity.c_str());
+
+    builder.Finish(diagnosisIdentification);
+    dataVerifyLog.shareFlatbuffers(builder);
+
+    dlResult = client->readSync("diagnosis/get/actual/list/verify-log", &dataVerifyLog);
+    if (comm::datalayer::STATUS_FAILED(dlResult))
+    {
+      std::cerr << "Verify specific log failed with error code " << dlResult.toString() << std::endl;
+    }
+    else
+    {
+      if (comm::datalayer::STATUS_FAILED(dataVerifyLog.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyPendingDiagnosticStateBuffer)))
+      {
+        std::cerr << "Invalid data type for dataVerifyLog. Expected flatbuffer type PendingDiagnosticState." << std::endl;
+      }
+      else
+      {
+        std::cout << common::log::diagnosis::fbs::EnumNameState(common::log::diagnosis::fbs::GetPendingDiagnosticState(dataVerifyLog.getData())->pendingDiagnosticState()) << std::endl;
+      }
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////
   std::cout << "Confirm errors" << std::endl;
   //////////////////////////////////////////////////////////////////////////////////
 
@@ -541,7 +531,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/confirm/all-errors", nullptr);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "Confirm all errors failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "Confirm all errors failed with error code " << dlResult.toString() << std::endl;
   }
 
   std::cout << "Confirm specific error (but before: reset error (0E0F6001, 00000001, -), so that it is able to confirm)" << std::endl;
@@ -553,7 +543,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/set/reset-active", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "reset-active failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "reset-active failed with error code " << dlResult.toString() << std::endl;
   }
 
   auto diagnosisIdentification = common::log::diagnosis::fbs::CreateDiagnosisIdentificationDirect(builder, "0E0F6001", "00000001", "");
@@ -564,7 +554,7 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/confirm/error", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "Confirm specific error failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "Confirm specific error failed with error code " << dlResult.toString() << std::endl;
   }
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -588,7 +578,7 @@ int main(int ac, char* av[])
   }
   else
   {
-	  std::string diagnosisText = static_cast<const char*>(dataGetText);
+    std::string diagnosisText = static_cast<const char *>(dataGetText);
     std::cout << "Diagnosis text of main diagnosis number " << mainDiagnosisNumber << ":" << diagnosisText << std::endl;
   }
 
@@ -605,7 +595,7 @@ int main(int ac, char* av[])
   }
   else
   {
-	  std::string diagnosisText = static_cast<const char*>(dataGetText);
+    std::string diagnosisText = static_cast<const char *>(dataGetText);
     std::cout << "Diagnosis text of detailed diagnosis number " << detailedDiagnosisNumber << " with related main diagnosis number " << mainDiagnosisNumber << ":" << diagnosisText << std::endl;
   }
 
@@ -622,45 +612,26 @@ int main(int ac, char* av[])
   dlResult = client->writeSync("diagnosis/set/reset-active", &dataSet);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-	  std::cerr << "reset-active failed with error code " << dlResult.toString() << std::endl;
+    std::cerr << "reset-active failed with error code " << dlResult.toString() << std::endl;
   }
 
-  //log(L"\nUnregister diagnostics with file path on ctrlX CORE (Alternative 1)");
-  //registrationPathData.setValue("/var/snap/rexroth-solutions/common/solutions/DefaultSolution/configurations/appdata/diagnosis/sdk_diagnosis_datalayer_diagnostics_en-US.json");
-  //dlResult = dlClient->writeSync("diagnosis/registration/unregister-file", &registrationPathData);
-  //if (comm::datalayer::STATUS_FAILED(dlResult))
-  //{
-  //  error(L"Unregister diagnostics failed with error code %ls", A2W16(dlResult.toString()));
-  //}
-
   std::cout << "Unregister diagnostics with file path on PC or with file path in own app for interprocess communication (Alternative 2)" << std::endl;
-  dlResult = datalayer.jsonConverter()->parseJson(jsonString, dataTypeFlatBuffer, &registrationData, &detailedError);
+  dlResult = metadataHelper.getFileContent(registrationFilePath, binaryFileContent);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
-    std::cerr << "Failed to parse json string from file '" << registrationFilePath << "', error code: " << dlResult.toString() << ", detailed error : " << detailedError << "." << std::endl;
+    std::cerr << "Failed to get type information of file " << registrationFilePath << ", error code: " << dlResult.toString() << std::endl;
   }
   else
   {
-    // Check for correct flatbuffer data type.
-    if (comm::datalayer::STATUS_FAILED(registrationData.verifyFlatbuffers(common::log::diagnosis::fbs::VerifyRegistrationFileBuffer)))
+    dlResult = client->writeSync("diagnosis/registration/unregister-file-content", &binaryFileContent);
+    if (comm::datalayer::STATUS_FAILED(dlResult))
     {
-      std::cerr << "Invalid argument type for registrationData." << std::endl;
-    }
-    else
-    {
-      dlResult = client->writeSync("diagnosis/registration/unregister", &registrationData);
-      if (comm::datalayer::STATUS_FAILED(dlResult))
-      {
-        std::cerr << "Unregister diagnostics failed with error code" << dlResult.toString() << std::endl;
-      }
+      std::cerr << "Unregister diagnostics failed with error code " << dlResult.toString() << std::endl;
     }
   }
 
-  if (client)
-  {
-    delete client;
-    client = nullptr;
-  }
+  delete client;
+  client = nullptr;
 
   datalayer.stop();
 

@@ -1,0 +1,69 @@
+{
+  "product": "XCR-V-0114",
+  "mainDiagnostics": {
+    "0E0A0001": {
+      "text": "Successfully finished boot process",
+      "version": 1,
+      "detailedDiagnostics": {
+        "00000001": {
+          "text": "Finished boot process without errors",
+          "version": 1
+        }
+      }
+    },
+    "0E0E0001": {
+      "text": "Temperature problem of control detected",
+      "version": 1,
+      "detailedDiagnostics": {
+        "00000001": {
+          "text": "Temperature exceeded maximum temperature"
+        },
+        "00000002": {
+          "text": "Defect of temperature sensor"
+        }
+      }
+    },
+    "0E0E0002": {
+      "text": "User id was changed",
+      "version": 2
+    },
+    "0E0E0003": {
+      "text": "Watchdog occured",
+      "detailedDiagnostics": {
+        "00000001": {
+          "text": "Unsafe machine state DEBUG"
+        }
+      }
+    },
+    "0E0F0001": {
+      "text": "Connection to I/O is not possible",
+      "version": 1,
+      "detailedDiagnostics": {
+        "00000001": {
+          "text": "The cable is not plugged",
+          "version": 1
+        }
+      }
+    },
+    "0E0F2001": {
+      "text": "General axis command error",
+      "version": 1,
+      "detailedDiagnostics": {
+        "00000001": {
+          "text": "Axis for axis command was not found",
+          "version": 1
+        }
+      }
+    },
+    "0E0F6001": {
+      "text": "Fatal axis command error",
+      "version": 1,
+      "detailedDiagnostics": {
+        "00000001": {
+          "text": "Stop commissioning of all axes",
+          "version": 1
+        }
+      }
+    }
+  }
+}

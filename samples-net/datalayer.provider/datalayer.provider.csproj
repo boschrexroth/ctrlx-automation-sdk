@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Samples.Datalayer.Provider</RootNamespace>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ctrlX-DataLayer" Version="2.2.1" />
-    <PackageReference Include="ctrlX-DataLayer.Flatbuffers" Version="1.12.0" />
+    <PackageReference Include="ctrlX-DataLayer" Version="2.4.1" />
+    <PackageReference Include="ctrlX-DataLayer.Flatbuffers" Version="1.14.0" />
     <PackageReference Include="FlatBuffers.Core" Version="1.12.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
   </ItemGroup>

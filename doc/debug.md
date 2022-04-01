@@ -1,4 +1,4 @@
-# Remote Debugging
+# Debugging Snaps
 
 ## Overview
 
@@ -16,11 +16,12 @@ Then each following chapter describes for one programming language the  language
 
 From the build environment ctrlX CORE devices are connected via TCP/IP. Assuming we are using a (QEMU) virtual machine as build environment the different kind of ctrlX CORE devices are reachable over these IP addresses:
 
-1. ctrlX CORE virtual with port forwarding: 10.0.2.2 
-2. ctrlX CORE virtual with network adapter: 192.168.1.1
+1. ctrlX CORE<sup>virtual</sup> with port forwarding: 10.0.2.2 
+2. ctrlX CORE<sup>virtual</sup> with network adapter: 192.168.1.1
 3. ctrlX CORE: real IP address
 
-To point 1.: From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE virtual has no own IP address. The connections to the control are realized via port forwarding.
+To point 1.: 
+From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE<sup>virtual</sup> has no own IP address. The connections to the control are realized via port forwarding.
 
 ### Set up SSH Public Key Authentication
 
@@ -29,7 +30,7 @@ Debugging is based on SSH, so SSH should be set up between the debugger client o
 For this kind of authorization a private / public key pair is generated. The private key is stored into a file kept secret on your host computer. The content of the public key is appended to the file ~/.ssh/authorized_keys in your home directory of the ctrlX CORE (remote computer).
 
 !!! important
-You need an account with root rights and a home directory on the ctrlX CORE.
+    You need an account with root rights and a home directory on the ctrlX CORE.
 
 Creating the key pair and the installation both on the host computer and on the ctrlX CORE (remote computer) is described here 
 
@@ -52,6 +53,13 @@ Additional hints:
 We recommend to test your application extensively in the build environment. Debugging an application running in it's confined Ubuntu Core snap enviroment should be the last step to find issues during development and test.
 
 Common information about debugging snaps are provided here: [Debugging snaps](https://snapcraft.io/docs/debug-snaps)
+
+!!! important
+    The log output of a snap can be checked with `sudo snap logs -f snapname`
+
+Start a SSH session and enter e.g.
+
+        sudo snap logs -f sdk-cpp-alldata
 
 
 ## C++
@@ -86,17 +94,14 @@ These are the basics points:
 
 ### Prerequisites
 
-In the following chapters configuration and starting C++ sanp application debugging is explained assuming that VisualStudio Code (VSCode) is used as IDE.
+In the following chapters configuration and starting C++ snap application debugging is explained assuming that Visual Studio Code is used as IDE.
 
-Furthermore we assume that a hardware based ctrlX CORE (aarch64) with the iP address 192.168.1.1 is used and that there is an user with the name  `rootsshuser` installed whow has root and ssh permissions.
-
-The default user boschrexroth  (password boschrexroth) with full access permissions (but no root access) must also be installed.
+Furthermore we assume that a hardware based ctrlX CORE (aarch64) with the IP address 192.168.1.1 is used and that there is an user with the name  `rootsshuser` installed whow has root and ssh permissions.
 
 #### Prerequisites for the ctrlX
 
 * Snapd > 2.46.1
 * User `rootsshuser` with __root__ and __ssh__ access to the device.
-* Default user boschrexroth/boschrexroth
 
 #### Prerequisites for the Linux Build Environment
 
@@ -106,9 +111,9 @@ The default user boschrexroth  (password boschrexroth) with full access permissi
 
 ### Getting Started
 
-The code and configuration examples are from the SDK sample in public/samples-cpp/datalayer.register.node
+The code and configuration examples are from the SDK sample in __samples-cpp/datalayer.register.node__
 
-So start VSCode, connect to your build enviroment and open this folder.
+So start Visual Studio Code, connect to your build enviroment and open this folder.
 
 #### Raising SIGSTOP in the C++ Code
 
@@ -122,18 +127,20 @@ In main.cpp at the beginning of the 'int main()' function the code for raising t
 
 #### Build the Debug Snap
 
-* Select the VSCode extension CMake in the sidebar. At the top of the explorer window click on '...' (Views and more actions) and select 'Clean all Projects'.
-* In the status bar at the bottom of the VSCode window click on the CMake field and select 'Debug' as build variant in the options drop box.
+* Select the Visual Studio Code extension CMake in the sidebar. At the top of the explorer window click on '...' (Views and more actions) and select 'Clean all Projects'.
+* In the status bar at the bottom of the Visual Studio Code window click on the CMake field and select 'Debug' as build variant in the options drop box.
 * In the main menu click 'Run Build Task' and select the CMake Build Kit (compiler). For our ctrlX CORE select 'GCC for aarch64...'. The build will start and create a debug mode snap 'registernode_..._arm64.snap'.
 * Right click this file and select 'Download...'
 
 #### Install the Debug Snap
 
-Install the debug snap on your ctrlX CORE. The application will be started but stops immediately because of the SIGSTOP signal.
+Install the debug snap on your ctrlX CORE. The application will be started but stops immediately because of raising the SIGSTOP signal at the beginning of the main function.
 
 #### Configuring Remote Debugging in VisualStudio Code
 
-From VSCode we want to start the application with the snap run command. For this the file __tasks.json__ contains the task `Launch Remote GDB Server`
+From Visual Studio Code we want to start the application with the snap run command. 
+
+For this the file __tasks.json__ contains the task `Launch Remote GDB Server`
 
     {
       "label": "Launch Remote GDB Server",
@@ -144,13 +151,13 @@ From VSCode we want to start the application with the snap run command. For this
 
 The tag 'command' starts the application under the gdb server via ssh.
 
-As second action we want to start the gdb debugger in remote mode so that he connects to the remote gdb server. Therefor in __launch.json__ the configuration set `RegisterNode aarch64` is stored.
+As second action we want to start the gdb debugger in remote mode so that he connects to the remote gdb server. Therefor in __launch.json__ the configuration set `aarch64 ctrlX (remote)` is stored.
 
     {
-        "name": "aarch64 ctrlX",
+        "name": "aarch64 ctrlX (remote)",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/generated/linux-gcc-aarch64/Debug/registerNode",
+        "program": "${workspaceFolder}/generated/ubuntu20-gcc-aarch64/Debug/registerNode",
         "cwd": "${workspaceFolder}",
         "miDebuggerPath": "/usr/bin/gdb-multiarch",
         "miDebuggerServerAddress": "192.168.1.1:12345",
@@ -186,17 +193,17 @@ In the Terminal window a wellcome message will appear:
 
 The gdb server has started the application which stops because of SIGSTOP. We are ready to connect with the gdb debugger.
 
-#### Start Snap Debugging with the VisualStudio Code
+#### Start Snap Debugging with the Visual Studio Code
 
 !!! important
-Attaching to the snap application succeeds only when there are no breakpoints active!
+    Attaching to the snap application succeeds only when there are no breakpoints active!
 
-* Select main menu Run --> Remove All Breakpoints
-* Select the 'Run and Debug' icon in the extension side bar.
-* Select 'aarch64 ctrlX' in the top line of the explorer window
-* Click the green start icon
+    * Select main menu Run --> Remove All Breakpoints
+    * Select the 'Run and Debug' icon in the extension side bar.
+    * Select 'aarch64 ctrlX' in the top line of the explorer window
+    * Click the green start icon
 
-Now gdb is started and connected to the gdb server. With the DEBUG CONSOLE window VSCode provides an output area and a command line to enter gdb commands - see green area in picture below.
+Now gdb is started and connected to the gdb server. With the DEBUG CONSOLE window Visual Studio Code provides an output area and a command line to enter gdb commands - see green area in picture below.
 
 * Click into the gdb command line (green area in the picture above) and enter `-exec info b`
 * All active breakpoints are listed. Each breakpoint has an number (see cloumn 'Num')
@@ -208,30 +215,29 @@ Now you can add further breakpoints and continue debugging in the known way.
 
 ### Screenshots
 
-![Debug](./doc/../images/debug_app.png)
+![Debug](./images/debug_app.png)
 
 ## Python
 
 This chapter describes remote debugging of snap written in Python.
 
-In the sample project [datalayer.remote.debug](public/samples-python/datalayer.remote.debug) all the features described in this chapter have been implemented.
+In the sample project [datalayer.remote.debug](samples-python/datalayer.remote.debug) all the features described in this chapter have been implemented.
 
 ### Using Visual Studio Code - Additional Tasks in launch.json
 
 On the host computer Visual Studio Code is used as Integrated Development Environment (IDE). 
 
-TODO: m.E. findet man hier irreführende Informationen !!!
-For general informations regarding Python debugging in VS Code see [https://code.visualstudio.com/docs/python/debugging](https://code.visualstudio.com/docs/python/debugging), chapter "Debugging by attaching over a network connection".
+For general informations regarding Python debugging in Visual Studio Code see [https://code.visualstudio.com/docs/python/debugging](https://code.visualstudio.com/docs/python/debugging), chapter "Debugging by attaching over a network connection".
 
 
-The Python VS Code extension has a Python debug client. For a remote debugging session we have add a configuration set with these parameters/values:
+The Python Visual Studio Code extension has a Python debug client. For a remote debugging session we have add a configuration set with these parameters/values:
 
 * The request type is __"attach"__: "request": "attach",
 * The IP address of the ctrlX CORE has to be provided e.g.: "host": "192.168.2.61",
-* The port number where the debug server is listening has to be provided e.g.: "port": 15678,
+* The port number where the debug server is listening has to be provided e.g.: "port": 12345,
 * and a link to the exe
 
-Here you can find the complete file: public/samples-python/datalayer.remote.debug/.vscode/launch.json
+Here you can find the complete file: samples-python/datalayer.remote.debug/.vscode/launch.json
 
 There are three launch configurations for remote debugging:
 * "Remote ctrlX CORE virtual - Port forwarding"
@@ -240,7 +246,7 @@ There are three launch configurations for remote debugging:
 
 ### Preparing your Python Project for Remote Debugging
 
-Installing the required Python packages into your build environment ist described here: public/samples-python/python.md
+Installing the required Python packages into your build environment ist described here: samples-python/python.md
 
 In our sample project the Python package  __debugpy__ is used for remote debugging of Python code. 
 
@@ -252,7 +258,7 @@ The configuration of the debug connection and the start of the debug server have
 
 Setting breakpoints by program code is optional.
 
-To make the usage of debugpy easier the essential function calls are extracted and provided in the script public/samples-python/datalayer.remote.debug/debugging.py.
+To make the usage of debugpy easier the essential function calls are extracted and provided in the script samples-python/datalayer.remote.debug/debugging.py.
 
 * debugging.init() scans the applications parameter list for --debug-port=... If this parameter is not found remote debugging will be not enabled. Usage see main.py.
 * debugging.wait_for_client(port: int) is an internal function called by init(). It configures the remote debug connections and starts the debug server. The application is stopped until a debug client connects. 
@@ -270,7 +276,7 @@ Start a terminal and enter
     snapcraft --destructive-mode
 
 !!! important
-To create a snap for a ctrlX CORE you need an aarch64 (arm64) building environment e.g. a QEMU VM with aarch64 emulation.
+    To create a snap for a ctrlX CORE you need an aarch64 (arm64) building environment e.g. a QEMU VM with aarch64 emulation.
 
 Install the snap on your ctrlX CORE. 
 
@@ -285,30 +291,30 @@ Stop the snap:
     sudo snap stop sdk-py-remote-debug
 
 Start the app providing a debug port as command line parameter:
+    
+    sudo snap run sdk-py-remote-debug.app --debug-port=12345
 
 !!! important
-Ensure that the port number is the same as configured in launch.json.
-
-    sudo snap run sdk-py-remote-debug.app --debug-port=15678
-    
+    Ensure that the port number is the same as configured in launch.json.
 
 Now the app holds on startup and waits for a debug client to connect.
 
 ### Do Remote Debugging with Visual Studio Code
 
-In VS Code 
+In Visual Studio Code 
 * Click the 'Run and Debug' icon in the side bar,
 * select the according launch configuration for remote debugging
 * and enter F5
 
-The VS Code will connect to the debug server on the ctrlX CORE and attach to the process. 
+Visual Studio Code will connect to the debug server on the ctrlX CORE and attach to the process. 
 
 Breakpoints can be set within the Python editor. Furthermore breakpoints set programatically are active.
 
 ### Using Python Package debugpy in your own Projects
 
 To use remote debugging in your own projects just do following steps:
-* Copy the script public/samples-python/datalayer.remote.debug/debugging.py into your project folder
+
+* Copy the script samples-python/datalayer.remote.debug/debugging.py into your project folder
 * Install debugpy into your development environment e.g. by adding 'debugpy' into the file requirerequirements.txt
 * Add debugpy to the list of parameter install_requires=[...]
 

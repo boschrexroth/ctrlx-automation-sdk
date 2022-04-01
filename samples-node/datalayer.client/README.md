@@ -1,6 +1,6 @@
-# README node.js datalayer.client
+# README Node.js datalayer.client
 
-This node.js sample reads values from ctrlX Data Layer. 
+This Node.js sample reads values from ctrlX Data Layer. 
 
 ## Introduction
 
@@ -18,11 +18,11 @@ The sample __datalayer.client__ demonstrates
 
 ## Prerequisites
 
-Please read the common node.js docs [here](./../README.md), first.
+Please read the common Node.js docs [here](./../README.md), first.
 
 ## Getting Started
 
-1. Launch VSCode
+1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
 3. Choose __Open Folder in QEMU VM__.
 4. Open the directory __datalayer.client__.
@@ -44,7 +44,7 @@ Please read the common node.js docs [here](./../README.md), first.
 ## Console Output
 ```bash
 running inside snap: false
-client remote address: tcp://boschrexroth:boschrexroth@10.0.2.2:2069
+client remote address: tcp://boschrexroth:boschrexroth@10.0.2.2
 framework/metrics/system/cpu-utilisation-percent:{"value":1.9,"type":"double","timestamp":"2021-10-20T13:40:45.892Z"}
 framework/metrics/system/memavailable-mb:{"value":680.578125,"type":"double","timestamp":"2021-10-20T13:40:45.896Z"}
 framework/metrics/system/membuffers-mb:{"value":119.00390625,"type":"double","timestamp":"2021-10-20T13:40:45.902Z"}
@@ -79,7 +79,7 @@ If you've found an error in these sample, please [file an issue](https://github.
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

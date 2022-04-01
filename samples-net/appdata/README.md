@@ -1,7 +1,7 @@
 # README .NET appdata
 
 This .NET sample shows how to persist application data in ctrlX environment using an
-HTTP Listener. Please read the available _HOW-TO persist your app data_ documention for details.
+HTTP Listener. Please read the available [HOW-TO persist your app data](./../../doc/persistdata.md) documention for details.
 
 ## Introduction
 
@@ -17,9 +17,9 @@ Please read the common .NET docs [here](./../README.md), first.
 
 ## Getting Started
 
-1. Launch VSCode
+1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
-3. Choose __Open Folder in WSL__.
+3. Choose __Open Folder__.
 4. Open the directory __appdata__.
 5. Build and install snap as described [here](./../README.md).
 6. Checkout ctrlX Data Layer web frontend (System | Data Layer) 

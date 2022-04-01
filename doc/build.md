@@ -1,28 +1,40 @@
-# Build and install
+# Build Projects and Install Snaps
 
-## Build program C++
+## Prerequisites
 
-To select the build target change the settings in Visual Studio status bar.
+### Data Layer and libzmq
 
-![Visual Studio Code status bar](images/vsc-state-bar.png)  
+Change to directory deb/ and install the Data Layer package:
 
-* Click on (1): Select __Release__ for creating a snap afterwards or __Debug__ when you can debug in Visual Studio Code.
-* Select compiler kit: Click on (2) "No Kit Selected". Select
-  * __"GCC for aarch64-linux-gnu..."__ for __ctrlX CORE__
-  * __"GCC for x86_64_linux-gnu..."__ for __ctrlX CORE__ Virtual
-* Build program. Click on (3) or press __F7__
+    sudo dpkg -i *.deb
 
-### Create snap
+If you are using a SDK QEMU VM the package libzmq is installed yet, otherwise run
 
-Start task `CMake Build Snap` by selecting the following command of the menu bar in Visual Studio Code Editor:  
-__Terminal > Run Build Task__  or press __Ctrl-P__ and enter __task CMake Build Snap__. Select the target for which you want to create the snap.
+    sudo apt-get -y install libzmq3-dev:amd64
+    sudo apt-get -y install libzmq3-dev:arm64
 
-Now you should have one snap file generated:  
-e.g `./helloworld_1.0.0_amd64.snap`
+### Snapcraft
 
-## Build program golang
+Snapcraft is the software tool to build snaps. Ensure that the newest version of snapcraft is installed:
 
-### Create Snap
+    sudo apt remove snapcraft
+    sudo snap install snapcraft --classic
+
+### Visual Studio Code
+
+We recommend to use Visual Studio Code to work with the sample projects and of course with your own projects.
+
+* For editing and compiling your projects you have to install programing language specific extensions in your SSH build environment -see [Setup Visual Studio Code to work with the ctrlX AUTOMATION SDK](.(vscode.md))
+
+* To work with a project select menu item File - Open Folder and select your project folder.
+
+## C++ Project
+
+Building of a debug executable and a snap from a C/C++ project is described in details here ["C/C++ Samples"](./samples-cpp/README.md)
+
+## Go Project
+
+### Create a Snap
 
 Start task `Snapcraft` by selecting the following command of the menu bar in Visual Studio Code Editor:  
 __Terminal > Run Build Task__  or press __Ctrl-P__ and enter __task CMake Build Snap__. Select the target for which you want to create the snap.
@@ -31,16 +43,16 @@ Use `amd64` for __ctrlX CORE<sup>virtual</sup>__ and `arm64` for __ctrlX CORE__
 Now you should have one snap file generated:  
 e.g `./hello-webserver_1.0.0_amd64.snap`
 
-# Install the snap
+## Python Project
 
-Open the web interface of your control. Switch to (1) __Service Mode__
 
-![Service-Mode](images/service-mode.png)
+# Install a Snap
 
- (2) and allow to install snaps from __untrusted source__ 
- 
- ![Untrusted-source](images/untrusted-source.png) 
+* Open the web interface of your control. 
+* Select "Install an app" from the Home screen.
+* Click the "Service mode" field to switch to __Service Mode__
+* Click the "Settings" icon in the gray header field, activated "Alow installation from unknown source" and click Save
+* Click "Install from file" icon in the gray header field, in the upcomming dialog select your downloaded snap file 
+* When the upload and installation process is finished click "Operation mode"
 
-go to __Local Storage__ and install the file `*.snap` for the correct architecture. `*amd64.snap` for ctrlX CORE Virtual or `*arm64.snap` for ctrlX CORE.
-
-In the examples, the apps are starting automatically as a daemon (line __daemon: simple__ in `snapcraft.yaml`).  
+For information about snap debugging see [Debugging](./debug.md).

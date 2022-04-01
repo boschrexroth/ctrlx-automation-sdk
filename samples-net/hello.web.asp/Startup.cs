@@ -7,7 +7,6 @@ namespace Hello.Web.Asp
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using System.Net;
 
     /// <summary>
     /// Defines the <see cref="Startup" />.
@@ -23,7 +22,7 @@ namespace Hello.Web.Asp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton(new GreetService("Hello Web powered by ASP.NET!"));
-            services.AddSingleton(new DataLayerService(IPAddress.Parse("127.0.0.1"), "boschrexroth", "boschrexroth"));
+            services.AddSingleton(new DataLayerService(Config.IP_ADDRESS, Config.PASSWORD, Config.IP_ADDRESS));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

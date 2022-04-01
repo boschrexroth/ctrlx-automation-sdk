@@ -4,20 +4,9 @@ The sample __hello.world__ print out "Hello World" on CtrlX CORE.
 
 ## Introduction
 
-This sample demonstrates how you can build your first c/c++ snap. The project __hello.world__ provides a simple application example to print out "Hello World" in CtrlX CORE devices: CtrlX CORE or CtrlX CORE Virtual.  
+This sample demonstrates how you can build your first C/C++ snap. 
 
-## Prerequisites
-
-* Buildenvironment WSL or Virtual Box
-* ctrlX AUTOMATION SDK Version 1.2
-* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
-
-## Getting Started
-
-1. Launch IDE (VSCode for example)
-2. Open the sample directory `samples-cpp/hello.world`
-3. Build and install the snap as described `Setup` section
-4. Check output in the web interface
+The project __hello.world__ provides a simple application example to print out "Hello World" in ctrlX CORE devices: ctrlX CORE or ctrlX CORE <sup>virtual</sup>.  
 
 ![Output in diagnosis logbook](docs/images/hello.world/messages.in.logbook.png)
 

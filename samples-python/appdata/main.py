@@ -38,15 +38,14 @@ def main():
         webserver = create_webserver_tcp()
 
     webserver.serve_forever()
-    
-    print(time.asctime(), 'Server DOWN')
 
+    print(time.asctime(), 'Server DOWN')
 
 
 def create_webserver_tcp():
     serverPort = 1234
     hostname = 'localhost'
-    
+
     webserver = HTTPServer(('', serverPort), Server)
     print(time.asctime(), 'Server UP -TCP/IP- ', hostname, ':', serverPort)
     return webserver
@@ -65,6 +64,7 @@ def create_webserver_unixsock():
     webserver = UnixSocketHttpServer(sock_file, Server)
     print(time.asctime(), 'Server UP -UNIX SOCKET- ', sock_file)
     return webserver
+
 
 if __name__ == '__main__':
     main()
