@@ -15,15 +15,15 @@
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/setup_qemu_ubuntu.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.10">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
     
     
       
-        <title>Setup a QEMU VM - Software Development Kit</title>
+        <title>QEMU Virtual Machine - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.d6be258b.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.644de097.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.e6a45f82.min.css">
@@ -34,8 +34,9 @@
     
       
         
+        
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -70,7 +71,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#setup-ctrlx-automation-development-environment-using-qemu" class="md-skip">
+        <a href="#setting-up-a-qemu-virtual-machine-as-app-build-environment" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Setup a QEMU VM
+              QEMU Virtual Machine
             
           </span>
         </div>
@@ -160,10 +161,10 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     boschrexroth/ctrlx-automation-sdk
@@ -240,7 +241,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="samples_mkdocs.html" class="md-tabs__link">
+      <a href="samples.html" class="md-tabs__link">
         Samples
       </a>
     </li>
@@ -306,10 +307,10 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     boschrexroth/ctrlx-automation-sdk
@@ -467,7 +468,21 @@
   
     <li class="md-nav__item">
       <a href="licensing.html" class="md-nav__link">
-        Licensemanagement
+        License Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="s2sauth.html" class="md-nav__link">
+        Service-to-Service Authentication
       </a>
     </li>
   
@@ -584,6 +599,34 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="quick-start-guide.html" class="md-nav__link">
+        Quick Start Guide
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_qemu_ctrlx_works.html" class="md-nav__link">
+        ctrlX WORKS App Build Environment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -596,12 +639,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Setup a QEMU VM
+          QEMU Virtual Machine
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="setup_qemu_ubuntu.html" class="md-nav__link md-nav__link--active">
-        Setup a QEMU VM
+        QEMU Virtual Machine
       </a>
       
         
@@ -627,6 +670,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#preparations" class="md-nav__link">
+    Preparations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#install-qemu" class="md-nav__link">
     Install QEMU
   </a>
@@ -635,16 +685,63 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-qemu-on-a-linuxbsd-host-operating-system" class="md-nav__link">
-    Install QEMU on a Linux/BSD Host Operating System
+  <a href="#linux-host" class="md-nav__link">
+    Linux Host
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux Host">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-qemu-on-linux-host" class="md-nav__link">
+    Install QEMU on Linux Host
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-qemu-on-a-windows-10-operating-system" class="md-nav__link">
-    Install QEMU on a Windows 10 Operating System
+  <a href="#install-kvm-on-linux-host" class="md-nav__link">
+    Install KVM on Linux Host
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-10-host" class="md-nav__link">
+    Windows 10 Host
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows 10 Host">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-qemu-on-windows-10-host" class="md-nav__link">
+    Install QEMU on Windows 10 Host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-windows-hypervisor-platform" class="md-nav__link">
+    Install Windows Hypervisor Platform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-pxexe-as-local-proxy-server" class="md-nav__link">
+    Install Px.exe as Local Proxy Server
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -657,6 +754,26 @@
   <a href="#create-an-instance-of-a-qemu-virtual-machine" class="md-nav__link">
     Create an Instance of a QEMU Virtual Machine
   </a>
+  
+    <nav class="md-nav" aria-label="Create an Instance of a QEMU Virtual Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amd64-or-aarch64-qemu-virtual-machine" class="md-nav__link">
+    AMD64 or AARCH64 QEMU Virtual Machine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-to-create-an-instance" class="md-nav__link">
+    Scripts to Create an Instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -683,22 +800,70 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-additional-software-after-first-boot" class="md-nav__link">
-    Install Additional Software After First Boot
+  <a href="#install-the-ctrlx-automation-sdk-and-additional-software-after-first-boot" class="md-nav__link">
+    Install the ctrlX AUTOMATION SDK and Additional Software After First Boot
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-the-sdk-on-the-qemu-virtual-machine" class="md-nav__link">
-    Install the SDK on the QEMU Virtual Machine
+  <a href="#shutdown" class="md-nav__link">
+    Shutdown
   </a>
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#qemu-virtual-machine-networking" class="md-nav__link">
     QEMU Virtual Machine Networking
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-tips" class="md-nav__link">
+    Troubleshooting, Tips
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting, Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httphttps-access" class="md-nav__link">
+    http/https Access
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snap-store-status" class="md-nav__link">
+    Snap Store Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#winscp-and-putty" class="md-nav__link">
+    WinSCP and Putty
   </a>
   
 </li>
@@ -724,7 +889,7 @@
   
     <li class="md-nav__item">
       <a href="setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
-        Setup a VirtualBox VM
+        VirtualBox Virtual Machine
       </a>
     </li>
   
@@ -738,21 +903,7 @@
   
     <li class="md-nav__item">
       <a href="setup_ubuntu.html" class="md-nav__link">
-        Setup a Real Machine
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="setup_windows_wsl_ubuntu.html" class="md-nav__link">
-        Setup WSL
+        Native Ubuntu 20.04
       </a>
     </li>
   
@@ -770,22 +921,64 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_6" type="checkbox" id="__nav_3_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_7" type="checkbox" id="__nav_3_7" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_3_6">
+        <label class="md-nav__link" for="__nav_3_7">
           Toolchain
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Toolchain" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_6">
+        <label class="md-nav__title" for="__nav_3_7">
           <span class="md-nav__icon md-icon"></span>
           Toolchain
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="px.html" class="md-nav__link">
+        Using Px.exe as Proxy on a Windows Host
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="connecting_qemu_vm_ctrlx.html" class="md-nav__link">
+        Connecting SDK QEMU VMs and ctrlX CORE
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ssh_connection.html" class="md-nav__link">
+        SSH Connection
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -821,8 +1014,8 @@
   
   
     <li class="md-nav__item">
-      <a href="debug.html" class="md-nav__link">
-        Remote Debugging
+      <a href="remote-build.html" class="md-nav__link">
+        Using Snapcraft Remote Build from Canonical
       </a>
     </li>
   
@@ -876,7 +1069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="samples_mkdocs.html" class="md-nav__link">
+      <a href="samples.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -889,37 +1082,9 @@
   
   
   
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_2">
-          Samples C/C++
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Samples C/C++" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_2">
-          <span class="md-nav__icon md-icon"></span>
-          Samples C/C++
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
     <li class="md-nav__item">
-      <a href="samples-cpp/hello.world/index.html" class="md-nav__link">
-        Hello World
+      <a href="samples-cpp/index.html" class="md-nav__link">
+        Samples C/C++
       </a>
     </li>
   
@@ -932,8 +1097,8 @@
   
   
     <li class="md-nav__item">
-      <a href="samples-cpp/hello.plc/index.html" class="md-nav__link">
-        Hello PLC
+      <a href="samples-go/index.html" class="md-nav__link">
+        Samples Go
       </a>
     </li>
   
@@ -946,8 +1111,8 @@
   
   
     <li class="md-nav__item">
-      <a href="samples-cpp/datalayer.client/index.html" class="md-nav__link">
-        ctrlX Data Layer Client
+      <a href="samples-python/index.html" class="md-nav__link">
+        Samples Python
       </a>
     </li>
   
@@ -960,8 +1125,8 @@
   
   
     <li class="md-nav__item">
-      <a href="samples-cpp/datalayer.register.node/index.html" class="md-nav__link">
-        ctrlX Data Layer RegisterNode
+      <a href="samples-net/index.html" class="md-nav__link">
+        Samples .NET
       </a>
     </li>
   
@@ -974,8 +1139,8 @@
   
   
     <li class="md-nav__item">
-      <a href="samples-cpp/automation.bundle/index.html" class="md-nav__link">
-        ctrlX Automation Bundle
+      <a href="samples-node/index.html" class="md-nav__link">
+        Samples Nodejs
       </a>
     </li>
   
@@ -988,8 +1153,8 @@
   
   
     <li class="md-nav__item">
-      <a href="samples-cpp/automation.scheduler/index.html" class="md-nav__link">
-        ctrlX Automation Scheduler
+      <a href="samples-sh/index.html" class="md-nav__link">
+        Samples Shell
       </a>
     </li>
   
@@ -1002,8 +1167,8 @@
   
   
     <li class="md-nav__item">
-      <a href="samples-cpp/automation.diagnosis/index.html" class="md-nav__link">
-        ctrlX Automation Diagnosis
+      <a href="samples-snap/index.html" class="md-nav__link">
+        Samples Snap
       </a>
     </li>
   
@@ -1016,8 +1181,8 @@
   
   
     <li class="md-nav__item">
-      <a href="samples-cpp/automation.trace/index.html" class="md-nav__link">
-        ctrlX Automation Trace
+      <a href="build.html" class="md-nav__link">
+        Build And Install
       </a>
     </li>
   
@@ -1030,646 +1195,9 @@
   
   
     <li class="md-nav__item">
-      <a href="samples-cpp/datalayer.ecat.io/index.html" class="md-nav__link">
-        ctrlX Data Layer EtherCAT I/O's
+      <a href="debug.html" class="md-nav__link">
+        Debugging
       </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-cpp/datalayer.realtime/index.html" class="md-nav__link">
-        ctrlX Data Layer Realtime
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-cpp/datalayer.provider.all-data/index.html" class="md-nav__link">
-        ctrlX Data Layer All Data Provider
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-cpp/diagnostics.logbook/index.html" class="md-nav__link">
-        Diagnostics Logbook
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-cpp/datalayer.diagnosis/index.html" class="md-nav__link">
-        ctrlX Data Layer Diagnosis
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_3">
-          Samples Golang
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Samples Golang" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_3">
-          <span class="md-nav__icon md-icon"></span>
-          Samples Golang
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-go/hello.webserver/index.html" class="md-nav__link">
-        Hello Webserver
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-go/appdata/index.html" class="md-nav__link">
-        AppData File Storage
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-go/tpm2.srk/index.html" class="md-nav__link">
-        TPM2.SRK
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_4">
-          Samples Python
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Samples Python" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_4">
-          <span class="md-nav__icon md-icon"></span>
-          Samples Python
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/datalayer.client.light/index.html" class="md-nav__link">
-        ctrlX Data Layer Client
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/datalayer.client/index.html" class="md-nav__link">
-        ctrlX Data Layer Client (complex)
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/datalayer.client.sub/index.html" class="md-nav__link">
-        ctrlX Data Layer Client Subscription
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/datalayer.provider/index.html" class="md-nav__link">
-        ctrlX Data Layer Provider
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/datalayer.provider.all-data/index.html" class="md-nav__link">
-        ctrlX Data Layer Provider All Data
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/datalayer.client.browse/index.html" class="md-nav__link">
-        ctrlX Data Layer Browse
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/datalayer.calc/index.html" class="md-nav__link">
-        ctrlX Data Layer Calculation operations
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/python.logbook/index.html" class="md-nav__link">
-        Diagnostics Logbook
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/appdata/index.html" class="md-nav__link">
-        AppData File Storage
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-python/datalayer.remote.debug/index.html" class="md-nav__link">
-        ctrlX Data Layer Remote Debug
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5" type="checkbox" id="__nav_4_5" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_5">
-          Samples .NET
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Samples .NET" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_5">
-          <span class="md-nav__icon md-icon"></span>
-          Samples .NET
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-net/hello.world/index.html" class="md-nav__link">
-        Hello World
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-net/datalayer.client/index.html" class="md-nav__link">
-        ctrlX Data Layer Client
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-net/datalayer.client.browse/index.html" class="md-nav__link">
-        ctrlX Data Layer Client Browse
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-net/datalayer.client.browse/index.html" class="md-nav__link">
-        ctrlX Data Layer Browse
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-net/datalayer.provider/index.html" class="md-nav__link">
-        ctrlX Data Layer Provider
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-net/datalayer.provider.alldata/index.html" class="md-nav__link">
-        ctrlX Data Layer All Data Provider
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-net/datalayer.provider.virtual/index.html" class="md-nav__link">
-        ctrlX Data Layer Provider Virtual
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-net/datalayer.mqtt/index.html" class="md-nav__link">
-        ctrlX Data Layer MQTT
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-net/diagnostics.logbook/index.html" class="md-nav__link">
-        Diagnostics Logbook
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_6" type="checkbox" id="__nav_4_6" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_6">
-          Samples Nodejs
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Samples Nodejs" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_6">
-          <span class="md-nav__icon md-icon"></span>
-          Samples Nodejs
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-node/hello-world/index.html" class="md-nav__link">
-        Hello World
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-node/datalayer.client/index.html" class="md-nav__link">
-        ctrlX Data Layer Client
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_7" type="checkbox" id="__nav_4_7" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_7">
-          Samples Shell
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Samples Shell" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_7">
-          <span class="md-nav__icon md-icon"></span>
-          Samples Shell
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-sh/tpm2.consumer/index.html" class="md-nav__link">
-        TPM2 Consumer
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_4_8">
-          Samples Snap
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Samples Snap" data-md-level="2">
-        <label class="md-nav__title" for="__nav_4_8">
-          <span class="md-nav__icon md-icon"></span>
-          Samples Snap
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="samples-snap/generate-manifest/index.html" class="md-nav__link">
-        Generate Manifest
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
     </li>
   
 
@@ -1757,20 +1285,6 @@
   
   
     <li class="md-nav__item">
-      <a href="https://apps.boschrexroth.com/docs/ctrlx/comm.datalayer/html/index.html" class="md-nav__link">
-        c/c++
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="https://apps.boschrexroth.com/docs/ctrlx/csharp/html/index.html" class="md-nav__link">
         c#
       </a>
@@ -1787,69 +1301,6 @@
     <li class="md-nav__item">
       <a href="https://apps.boschrexroth.com/docs/ctrlx/python/html/index.html" class="md-nav__link">
         python
-      </a>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
-      
-      
-      
-      
-        <label class="md-nav__link" for="__nav_5_3">
-          Bundle Reference
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" aria-label="Bundle Reference" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_3">
-          <span class="md-nav__icon md-icon"></span>
-          Bundle Reference
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="https://apps.boschrexroth.com/docs/ctrlx/diagnosis/html/index.html" class="md-nav__link">
-        Diagnosis
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="https://apps.boschrexroth.com/docs/ctrlx/trace/html/index.html" class="md-nav__link">
-        Trace
       </a>
     </li>
   
@@ -1918,6 +1369,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#preparations" class="md-nav__link">
+    Preparations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#install-qemu" class="md-nav__link">
     Install QEMU
   </a>
@@ -1926,16 +1384,63 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-qemu-on-a-linuxbsd-host-operating-system" class="md-nav__link">
-    Install QEMU on a Linux/BSD Host Operating System
+  <a href="#linux-host" class="md-nav__link">
+    Linux Host
+  </a>
+  
+    <nav class="md-nav" aria-label="Linux Host">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-qemu-on-linux-host" class="md-nav__link">
+    Install QEMU on Linux Host
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-qemu-on-a-windows-10-operating-system" class="md-nav__link">
-    Install QEMU on a Windows 10 Operating System
+  <a href="#install-kvm-on-linux-host" class="md-nav__link">
+    Install KVM on Linux Host
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows-10-host" class="md-nav__link">
+    Windows 10 Host
+  </a>
+  
+    <nav class="md-nav" aria-label="Windows 10 Host">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-qemu-on-windows-10-host" class="md-nav__link">
+    Install QEMU on Windows 10 Host
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-windows-hypervisor-platform" class="md-nav__link">
+    Install Windows Hypervisor Platform
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-pxexe-as-local-proxy-server" class="md-nav__link">
+    Install Px.exe as Local Proxy Server
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1948,6 +1453,26 @@
   <a href="#create-an-instance-of-a-qemu-virtual-machine" class="md-nav__link">
     Create an Instance of a QEMU Virtual Machine
   </a>
+  
+    <nav class="md-nav" aria-label="Create an Instance of a QEMU Virtual Machine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#amd64-or-aarch64-qemu-virtual-machine" class="md-nav__link">
+    AMD64 or AARCH64 QEMU Virtual Machine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scripts-to-create-an-instance" class="md-nav__link">
+    Scripts to Create an Instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1974,22 +1499,70 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-additional-software-after-first-boot" class="md-nav__link">
-    Install Additional Software After First Boot
+  <a href="#install-the-ctrlx-automation-sdk-and-additional-software-after-first-boot" class="md-nav__link">
+    Install the ctrlX AUTOMATION SDK and Additional Software After First Boot
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-the-sdk-on-the-qemu-virtual-machine" class="md-nav__link">
-    Install the SDK on the QEMU Virtual Machine
+  <a href="#shutdown" class="md-nav__link">
+    Shutdown
   </a>
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#qemu-virtual-machine-networking" class="md-nav__link">
     QEMU Virtual Machine Networking
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting-tips" class="md-nav__link">
+    Troubleshooting, Tips
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting, Tips">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general" class="md-nav__link">
+    General
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httphttps-access" class="md-nav__link">
+    http/https Access
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snap-store-status" class="md-nav__link">
+    Snap Store Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#winscp-and-putty" class="md-nav__link">
+    WinSCP and Putty
   </a>
   
 </li>
@@ -2016,27 +1589,60 @@
 </a>
 
 
-<h1 id="setup-ctrlx-automation-development-environment-using-qemu">Setup ctrlX AUTOMATION Development Environment using QEMU<a class="headerlink" href="#setup-ctrlx-automation-development-environment-using-qemu" title="Permanent link">&para;</a></h1>
+
+<h1 id="setting-up-a-qemu-virtual-machine-as-app-build-environment">Setting up a QEMU Virtual Machine as App Build Environment<a class="headerlink" href="#setting-up-a-qemu-virtual-machine-as-app-build-environment" title="Permanent link">&para;</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This guide shows how to use an <a href="https://ubuntu.com/server">Ubuntu Server operating system</a> running in a virtual machine using the <a href="https://www.qemu.org/">QEMU virtualizer</a> to develop ctrlX AUTOMATION Apps.</p>
-<p>QEMU supports both Windows 10 and Linux/BSD host systems. Furthermore it provides an emulator for a large list of machines and architectures especially AARCH64 (ARM64).</p>
-<p>To simplify the setup of a new virtual machine we use the <a href="https://cloud-init.io/">Ubuntu Cloud-Init Technology</a> which installs the default user <strong>boschrexroth/boschrexroth</strong> and all necessary tools on first boot.</p>
-<p>All necessary files and scripts for Windows 10 and Linux are stored in the SDK folder <strong>public/scripts/environment</strong></p>
+<p>To simplify the setup of a new QEMU VM we use the <a href="https://cloud-init.io/">Ubuntu Cloud-Init Technology</a> which installs the default user <strong>boschrexroth/boschrexroth</strong> and all necessary tools on first boot.</p>
+<p>As standard constellation the QEMU software should be installed and run on an <strong>AMD64</strong> based host. QEMU supports both Windows 10 and Linux host systems.</p>
+<p>For the QEMU virtual machine (QEMU VM) we can select</p>
+<ul>
+<li>AMD64 CPU architecture - this provides the best performance.</li>
+<li>AARCH64 (ARM64) CPU architecture - only necessary for special purposes - see below.</li>
+</ul>
+<p>The installation of QEMU, further required tools and QEMU virtual machines is described in the next chapters.</p>
+<h2 id="preparations">Preparations<a class="headerlink" href="#preparations" title="Permanent link">&para;</a></h2>
+<p>Download the archive ctrlX AUTOMATION SDK from <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/releases">github boschrexroth/ctrlx-automation-sdk/releases</a> to your host computer and unpack at least the folder  <strong>public/scripts/environment</strong>.</p>
+<p>This folder contains all necessary files and scripts for both Windows 10 and Linux hosts.</p>
 <h2 id="install-qemu">Install QEMU<a class="headerlink" href="#install-qemu" title="Permanent link">&para;</a></h2>
-<p>The installation of QEMU varies depending on the host operating system.</p>
-<h3 id="install-qemu-on-a-linuxbsd-host-operating-system">Install QEMU on a Linux/BSD Host Operating System<a class="headerlink" href="#install-qemu-on-a-linuxbsd-host-operating-system" title="Permanent link">&para;</a></h3>
-<p>Detailed information regarding installation and usage of QEMU VM on Linux hosts are describes here: <a href="scripts/environment/3-README-linux.html">QEMU - Linux</a>.</p>
-<p>Because the newest QEMU software is not provided as Debian package we have to download the source files, compile the project and install the binaries. This is done automatically by the script <strong>public/scripts/environment/install-qemu-on-host.sh</strong></p>
+<h3 id="linux-host">Linux Host<a class="headerlink" href="#linux-host" title="Permanent link">&para;</a></h3>
+<p>Change to the SDK folder public/scripts/environment and set x file permissions:</p>
+<div class="codehilite"><pre><span></span><code>$ chmod a+x *.sh
+</code></pre></div>
+
+<h4 id="install-qemu-on-linux-host">Install QEMU on Linux Host<a class="headerlink" href="#install-qemu-on-linux-host" title="Permanent link">&para;</a></h4>
+<p>Because the newest QEMU software is not provided as Debian package we have to download the source files, compile the project and install the binaries. This is done automatically by the script <strong>install-qemu-on-host.sh</strong> stored in the SDK folder <strong>public/scripts/environment/</strong>.</p>
 <p>To install QEMU do following steps:</p>
 <ul>
-<li>Copy the script into a tempory folder on your Linux host computer.</li>
-<li>Start the script whith admin rights: $ sudo ./install-qemu-on-host.sh</li>
+<li>
+<p>Copy the script install-qemu-on-host.sh into a tempory folder on your Linux host computer.</p>
+</li>
+<li>
+<p>Change to the temporary folder and start these commands: </p>
+<p>$ chmod a+x install-qemu-on-host.sh
+$ sudo ./install-qemu-on-host.sh</p>
+</li>
 </ul>
-<p>This procedure will take some time.</p>
-<h3 id="install-qemu-on-a-windows-10-operating-system">Install QEMU on a Windows 10 Operating System<a class="headerlink" href="#install-qemu-on-a-windows-10-operating-system" title="Permanent link">&para;</a></h3>
-<p>Detailed information regarding installation and usage of QEMU VM on Windows 10 hosts are describes here: <a href="scripts/environment/2-README-win10.html">QEMU - Windows 10</a>.</p>
+<p>This procedure will take some time - at the end QEMU is installed.</p>
+<h4 id="install-kvm-on-linux-host">Install KVM on Linux Host<a class="headerlink" href="#install-kvm-on-linux-host" title="Permanent link">&para;</a></h4>
+<p>We recommend to install KVM (Kernel-based Virtual Machine) on your host sytem.</p>
+<p>Change to the SDK folder public/scripts/environment and start</p>
+<div class="codehilite"><pre><span></span><code>./install-kvm-on-host.sh
+</code></pre></div>
+
+<p>See here for further informations:</p>
+<p><a href="https://linuxize.com/post/how-to-install-kvm-on-ubuntu-20-04/">How to Install Kvm on Ubuntu 20.04</a></p>
+<p><a href="https://www.linux-kvm.org/page/Documents">linux-kvm</a></p>
+<h3 id="windows-10-host">Windows 10 Host<a class="headerlink" href="#windows-10-host" title="Permanent link">&para;</a></h3>
+<h4 id="install-qemu-on-windows-10-host">Install QEMU on Windows 10 Host<a class="headerlink" href="#install-qemu-on-windows-10-host" title="Permanent link">&para;</a></h4>
 <p>To install QEMU download and install the newes version for Windows from <a href="https://qemu.weilnetz.de/w64/">https://qemu.weilnetz.de/w64/</a>.</p>
-<p>We recommend to install Windows Hypervisor Platform: </p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Add the installation path of your qemu software to the system environment varaible %PATH%.</p>
+<p>See <a href="https://www.java.com/en/download/help/path.html">How do I set or change the PATH system variable?</a></p>
+</div>
+<h4 id="install-windows-hypervisor-platform">Install Windows Hypervisor Platform<a class="headerlink" href="#install-windows-hypervisor-platform" title="Permanent link">&para;</a></h4>
+<p>We recommend to install <strong>Windows Hypervisor Platform</strong>: </p>
 <ul>
 <li>Right click on the Windows button and select ‘Apps and Features’.</li>
 <li>Select Programs and Features on the right under related settings.</li>
@@ -2044,74 +1650,117 @@
 <li>Select Windows Hypervisor Platform - NOT Hyper-V.</li>
 <li>Close dialog with OK.</li>
 </ul>
-<p><strong>Hints:</strong> Hyper-V is automatically disabled. If you use Virtual Box also please enable the internal Hyper-V option for each virtual machine.</p>
-<p>If your host system is behind a proxy we recommend <strong>Px.exe</strong> as local proxy running on the Windows host - see <a href="https://github.com/genotrance/px">https://github.com/genotrance/px</a></p>
+<p>This feature can also be installed via command line:</p>
+<ul>
+<li>Start cmd.exe as administrator (run as ...)</li>
+<li>
+<p>Enter </p>
+<p><strong>dism /online /Enable-Feature /FeatureName:HypervisorPlatform /All</strong></p>
+</li>
+</ul>
+<p><strong>Hints:</strong> </p>
+<ul>
+<li>After enabling Windows Hypervisor Platform a system restart may be required.</li>
+<li>The feature Hyper-V is automatically disabled.</li>
+<li>
+<p>You can disable the feature with:</p>
+<p>dism /online /Disable-Feature /FeatureName:HypervisorPlatform</p>
+</li>
+<li>
+<p>If you use Virtual Box also please enable the internal Hyper-V option for each virtual machine.</p>
+</li>
+<li>
+<p>If Windows Hypervisor Platform cannot be installed for any reason, we recommend using the Intel Hardware Accelerated Execution Manager (HAXM). The installation is described here <a href="https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/hardware-acceleration?pivots=windows#installing-haxm">Installing HAXM</a></p>
+</li>
+</ul>
+<h4 id="install-pxexe-as-local-proxy-server">Install Px.exe as Local Proxy Server<a class="headerlink" href="#install-pxexe-as-local-proxy-server" title="Permanent link">&para;</a></h4>
+<p>See <a href="px.html">Use PX.exe as Local Proxy on a Windows Host</a>.</p>
 <h2 id="create-an-instance-of-a-qemu-virtual-machine">Create an Instance of a QEMU Virtual Machine<a class="headerlink" href="#create-an-instance-of-a-qemu-virtual-machine" title="Permanent link">&para;</a></h2>
+<h3 id="amd64-or-aarch64-qemu-virtual-machine">AMD64 or AARCH64 QEMU Virtual Machine<a class="headerlink" href="#amd64-or-aarch64-qemu-virtual-machine" title="Permanent link">&para;</a></h3>
+<p>On an AMD64 host computer an AMD64 QEMU VM has a very good performance.</p>
+<p><strong>Only if the desired programming language for developing ctrlX apps doesn't support cross compiling an AARCH64 QEMU VM should be used.</strong></p>
+<p>This currently applies to <strong>Python and Node.js</strong>. </p>
+<p>Another reason can be the building of Node-RED packages when Node.js code has to be complied to native CPU machine code.</p>
+<h3 id="scripts-to-create-an-instance">Scripts to Create an Instance<a class="headerlink" href="#scripts-to-create-an-instance" title="Permanent link">&para;</a></h3>
 <p>A virtual machine should be installed and started within a separate folder on your host computer. To support you the SDK folder <strong>public/scripts/environment</strong> contains these scripts:</p>
 <ul>
-<li><strong>create-new-vm-aarch64-noproxy.bat, .sh</strong>: AARCH64 VM with direct internet access</li>
-<li><strong>create-new-vm-aarch64-proxy.bat, .sh</strong>: AARCH64 VM using a proxy server</li>
-<li><strong>create-new-vm-amd64-noproxy.bat, .sh</strong>: AMD64 VM with direct internet access</li>
-<li><strong>create-new-vm-amd64-proxy.bat, .sh</strong>: AMD64 VM using a proxy server</li>
+<li><strong>create-new-vm-aarch64-noproxy.bat, .sh</strong>: creates an AARCH64 VM with direct internet access</li>
+<li><strong>create-new-vm-aarch64-proxy.bat, .sh</strong>: creates an AARCH64 VM using a proxy server</li>
+<li><strong>create-new-vm-amd64-noproxy.bat, .sh</strong>: creates an AMD64 VM with direct internet access</li>
+<li><strong>create-new-vm-amd64-proxy.bat, .sh</strong>: creates an AMD64 VM using a proxy server</li>
 </ul>
+<p><strong>These scripts are expecting the destination folder of your new VM as argument.</strong></p>
 <p>To create e.g. a new amd64 VM instance with proxy usage on a Windows host do following steps:</p>
 <ul>
 <li>Create a separate folder on your host computer D:\qemuvm\amd64-proxy-1</li>
-<li>Copy the SDK folder <strong>public/scripts/environment</strong> to a folder on your host computer e.g. D:\ctrlx-sdk\public\scripts\environment</li>
 <li>Start cmd.exe</li>
-<li>Change to this directory D:\ctrlx-sdk\public\scripts\environment</li>
+<li>Change to the SDK folder <strong>public/scripts/environment</strong></li>
 <li>Call create-new-vm-amd64-proxy.bat D:\qemuvm\amd64-proxy-1</li>
 </ul>
 <p>All neccessary files for this new VM are copied into the destination folder.</p>
 <h2 id="running-a-qemu-virtual-machine">Running a QEMU Virtual Machine<a class="headerlink" href="#running-a-qemu-virtual-machine" title="Permanent link">&para;</a></h2>
 <h3 id="start-the-qemu-virtual-machine">Start the QEMU Virtual Machine<a class="headerlink" href="#start-the-qemu-virtual-machine" title="Permanent link">&para;</a></h3>
-<p>To start the VM instance change to its installation folder and call the according launch script:</p>
+<p>To start the QEMU VM instance change to its installation folder.</p>
+<p>You should find one of this scripts according your VM properties (architecture, proxy usage or not):</p>
 <ul>
 <li><strong>launch-aarch64-noproxy.bat, .sh</strong>: AARCH64 VM with direct internet access</li>
 <li><strong>launch-aarch64-proxy.bat, .sh</strong>: AARCH64 VM using a proxy server</li>
 <li><strong>launch-amd64-noproxy.bat, .sh</strong>: AMD64 VM with direct internet access</li>
 <li><strong>launch-amd64-proxy.bat, .sh</strong>: AMD64 VM using a proxy server</li>
 </ul>
+<p>In our Windows example start:</p>
+<div class="codehilite"><pre><span></span><code>launch-amd64-proxy.bat
+</code></pre></div>
+
 <p>The VM is started as console application, you can see the trace output.</p>
 <p>We recomment to <strong>not use this console directly</strong> because a lot of shell functions are not supported.</p>
 <p>During first boot a lot of software will be installed - so please be patient.</p>
 <p>If this process is finished the VM will shutdown.</p>
 <h3 id="network-connection-to-your-qemu-virtual-machine">Network Connection to your QEMU Virtual Machine<a class="headerlink" href="#network-connection-to-your-qemu-virtual-machine" title="Permanent link">&para;</a></h3>
-<p>From the point of view of your host computer, the VM does not have its own network interface card. Services running on the VM are available via <strong>port forwarding</strong>.</p>
+<p>From the point of view of your host computer, the VM does not have own network interface cards. Services running on the VM are available via <strong>port forwarding</strong>.</p>
 <p>This port forwarding is configured in the launch... script, per default only port 22 (SSH) is forwarded:</p>
 <p>-netdev user,id=eth0,<strong>hostfwd=tcp::10022-:22</strong></p>
-<p>Port 10022 of the host is forwarded to port 22 (SSH) of the VM. If port 10022 is used the VM will not start, so please enter a free host port in the launch script e.g. 20022</p>
+<p>Port 10022 of the host is forwarded to port 22 (SSH) of the VM. If port 10022 is used on the host the VM will not start. In this case please enter a free host port number in the launch script e.g. 20022.</p>
 <p>Further ports can be forwarded just extend this line e.g. -netdev user,id=eth0,hostfwd=tcp::10022-:22,<strong>hostfwd=tcp::502-:502</strong></p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>From your host computer a SSH connection can be established using <strong>127.0.0.1:10022</strong></p>
 </div>
-<p>During the first connection with VSCode enter: <strong>ssh -p 10022 boschrexroth@127.0.0.1</strong> password is <strong>boschrexroth</strong></p>
-<h3 id="install-additional-software-after-first-boot">Install Additional Software After First Boot<a class="headerlink" href="#install-additional-software-after-first-boot" title="Permanent link">&para;</a></h3>
+<p>During the first connection with Visual Studio Code enter: <strong>ssh -p 10022 boschrexroth@127.0.0.1</strong> password is <strong>boschrexroth</strong></p>
+<h3 id="install-the-ctrlx-automation-sdk-and-additional-software-after-first-boot">Install the ctrlX AUTOMATION SDK and Additional Software After First Boot<a class="headerlink" href="#install-the-ctrlx-automation-sdk-and-additional-software-after-first-boot" title="Permanent link">&para;</a></h3>
 <p>Because some necessary software components cannot be installed during first boot they have to be installed manually. </p>
 <p>So restart your VM, login with <strong>boschrexroth/boschrexroth</strong> and start these scripts:</p>
 <ul>
 <li>install-snapcraft.sh</li>
 <li>optional if you need the dotnet-sdk: install-dotnet-sdk.sh</li>
-<li>optional if you need node.js and npm: install-nodejs-npm.sh</li>
+<li>optional if you need Node.js and npm: install-nodejs-npm.sh</li>
+<li><strong>install-sdk-sh</strong></li>
 </ul>
-<h3 id="install-the-sdk-on-the-qemu-virtual-machine">Install the SDK on the QEMU Virtual Machine<a class="headerlink" href="#install-the-sdk-on-the-qemu-virtual-machine" title="Permanent link">&para;</a></h3>
-<p>Download the ctrlX AUTOMATION SDK archive from <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/releases">github boschrexroth/ctrlx-automation-sdk/releases</a> to your VM.</p>
-<p>Here e.g. version 1.12.0:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">boschrexroth</span><span class="o">/</span><span class="n">ctrlx</span><span class="o">-</span><span class="n">automation</span><span class="o">-</span><span class="n">sdk</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="mf">1.12</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">ctrlx</span><span class="o">-</span><span class="n">automation</span><span class="o">-</span><span class="n">sdk</span><span class="o">-</span><span class="mf">1.12</span><span class="o">.</span><span class="mf">0.</span><span class="n">zip</span><span class="w"></span>
+<p>The script <strong>install-sdk-sh</strong> downloads, unpacks and preconfigures the ctrlX AUTOMATION SDK archive <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/releases">github boschrexroth/ctrlx-automation-sdk/releases</a>.</p>
+<p>Therefor do following steps:</p>
+<ul>
+<li>
+<p>Create a new folder</p>
+<p>mkdir ctrlx</p>
+<p>chdir ctrlx</p>
+</li>
+<li>
+<p>Call the install script</p>
+<p>~/install-sdk.sh</p>
+</li>
+</ul>
+<h3 id="shutdown">Shutdown<a class="headerlink" href="#shutdown" title="Permanent link">&para;</a></h3>
+<p>It's very important to shutdown the <strong>QEMU VM</strong> properly. So initiate a shutdown e.g. with this command:</p>
+<div class="codehilite"><pre><span></span><code>sudo poweroff
 </code></pre></div>
 
-<p>Extract this archive:</p>
-<div class="codehilite"><pre><span></span><code>unzip -XK ctrlx-automation-sdk-1.12.0.zip
-</code></pre></div>
-
-<h3 id="qemu-virtual-machine-networking">QEMU Virtual Machine Networking<a class="headerlink" href="#qemu-virtual-machine-networking" title="Permanent link">&para;</a></h3>
+<h2 id="qemu-virtual-machine-networking">QEMU Virtual Machine Networking<a class="headerlink" href="#qemu-virtual-machine-networking" title="Permanent link">&para;</a></h2>
 <p>The QEMU software represents a virtual network between the host operating system and the virtual machine. </p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>This virtual network is <strong>only seen by the virtual machine</strong> NOT by the host operating system.</p>
 </div>
-<p>Furthermor QEMU provides a gateway, DNS and an optional SMB server for its VM. </p>
+<p>Furthermore QEMU provides a gateway, a DNS and an optional SMB server for its VM. </p>
 <p>Per default this virtual network has the subnet 10.0.2.0/24 and from the perspective of the QEMU VM these IP addresses are assigned:</p>
 <ul>
 <li>10.0.2.15 IP address of the VM itself</li>
@@ -2120,6 +1769,22 @@
 <li>10.0.2.4  SMB server</li>
 </ul>
 <p>For deeper information visit <a href="https://wiki.qemu.org/Documentation/Networking">QEMU Documentation/Networking</a></p>
+<h2 id="troubleshooting-tips">Troubleshooting, Tips<a class="headerlink" href="#troubleshooting-tips" title="Permanent link">&para;</a></h2>
+<h3 id="general">General<a class="headerlink" href="#general" title="Permanent link">&para;</a></h3>
+<p>Read error messages carefully, search in the internet for these messages and hints for troubleshooting.</p>
+<h3 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h3>
+<p>Deactivate all other virtual machines on your host to avoid performance disadvantages.</p>
+<p>An emulated <em>AARCH64</em> QEMU VM is slow - be patient.</p>
+<h3 id="httphttps-access">http/https Access<a class="headerlink" href="#httphttps-access" title="Permanent link">&para;</a></h3>
+<p>Check the http/https access of your host to the internet - respectively to the Ubuntu sites e.g. with:</p>
+<div class="codehilite"><pre><span></span><code>wget -p http://ports.ubuntu.com/ubuntu-ports
+</code></pre></div>
+
+<p>If failed check your DNS settings and server(s).</p>
+<h3 id="snap-store-status">Snap Store Status<a class="headerlink" href="#snap-store-status" title="Permanent link">&para;</a></h3>
+<p>Check the <a href="https://status.snapcraft.io/">Snap Store Status</a> if snaps cannot be installed.</p>
+<h3 id="winscp-and-putty">WinSCP and Putty<a class="headerlink" href="#winscp-and-putty" title="Permanent link">&para;</a></h3>
+<p>On your Windows host you can use <a href="https://winscp.net/">WinSCP</a> combined with <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html">PuTTy</a> instead of the Windows ssh and scp.</p>
 
               
             </article>
@@ -2133,7 +1798,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="setup_overview.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Setup Overview" rel="prev">
+        <a href="setup_qemu_ctrlx_works.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: ctrlX WORKS App Build Environment" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -2142,20 +1807,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Setup Overview
+              ctrlX WORKS App Build Environment
             </div>
           </div>
         </a>
       
       
         
-        <a href="setup_windows_virtualbox_ubuntu.html" class="md-footer__link md-footer__link--next" aria-label="Next: Setup a VirtualBox VM" rel="next">
+        <a href="setup_windows_virtualbox_ubuntu.html" class="md-footer__link md-footer__link--next" aria-label="Next: VirtualBox Virtual Machine" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Setup a VirtualBox VM
+              VirtualBox Virtual Machine
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -2189,7 +1854,7 @@
       
     
     <a href="https://github.com/boschrexroth" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
     </a>
   
     
@@ -2198,7 +1863,7 @@
       
     
     <a href="https://twitter.com/boschrexroth" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
     </a>
   
 </div>
@@ -2211,10 +1876,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.e3b2bf44.min.js"></script>
+      <script src="assets/javascripts/bundle.c44cc438.min.js"></script>
       
     
   </body>
