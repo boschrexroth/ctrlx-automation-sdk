@@ -20,7 +20,7 @@ Any use of the source code and related documents of this repository in applicati
 
 ## About
 
-Copyright © 2020-2021 Bosch Rexroth AG. All rights reserved.
+Copyright © 2020-2022 Bosch Rexroth AG. All rights reserved.
 
 Please note that any trademarks, logos and pictures contained or linked to in this Software are owned by or copyright © Bosch Rexroth AG 2021 and not licensed under the Software's license terms.
 
