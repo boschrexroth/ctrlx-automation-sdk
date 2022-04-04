@@ -1,8 +1,0 @@
-1-README.md
-3-README-linux.md
-build.sh
-cloud-config-amd64
-install-kvm-on-host.sh
-launch.sh
-launch-amd64-noproxy.sh
-cloud-config-amd64-noproxy-generated
