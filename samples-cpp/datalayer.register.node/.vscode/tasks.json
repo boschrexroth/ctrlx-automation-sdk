@@ -33,7 +33,7 @@
       "label": "Launch Remote GDB Server",
       "type": "shell",
       "problemMatcher": "$gcc",
-      "command": "ssh ${input:Root-User}@${input:Target-IP}  \"sudo snap run --experimental-gdbserver=:12345 registernode.registerNode\" ",
+      "command": "ssh ${input:Root-User}@${input:Target-IP}  \"sudo snap run --experimental-gdbserver=:12345 cpp-sdk-registernode.registerNode\" ",
     },
   ],
   "inputs": [
