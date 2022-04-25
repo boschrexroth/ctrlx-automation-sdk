@@ -18,8 +18,8 @@
         "ts-node": "^10.6.0"
     },
     "dependencies": {
-        "ctrlx-datalayer": "1.3.4",
-        "ctrlx-datalayer-flatbuffers": "1.14.4"
+        "ctrlx-datalayer": "^1.3.4",
+        "ctrlx-datalayer-flatbuffers": "^1.14.4"
     },
     "scripts": {
         "prepare": "npm run tsc",
