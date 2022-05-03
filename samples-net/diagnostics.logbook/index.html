@@ -1225,11 +1225,15 @@
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>The project <strong>diagnostics.logbook</strong> provides a simple application example to log messages to the logbook of ctrlX.  </p>
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
-<p>The following code shows the main method with inline documentation:</p>
-<p><a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/diagnostics.logbook/Program.cs">Program.cs</a></p>
-<p>The class KernelLogger writes kernel log messages with the linux command 'logger':
-The enum KernelLogLevel defines the log levels supported by the logbook:</p>
-<p><a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/diagnostics.logbook/KernelLogger.cs">KernelLogger.cs</a></p>
+<p>The implementation shows different ways to write messages to ctrlX logbook.</p>
+<ul>
+<li>
+<p>The class <strong>KernelLoggerSample</strong> writes kernel log messages with the linux system command 'logger'.</p>
+</li>
+<li>
+<p>The class <strong>MicrosoftLoggerSample</strong> uses the nuget package extension <strong>Microsoft.Extensions.Logging</strong> to write logs to logbook.</p>
+</li>
+</ul>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>Please read the common .NET docs <a href="../index.html">here</a>, first.</p>
 <h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>

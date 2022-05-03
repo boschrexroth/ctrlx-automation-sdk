@@ -1225,10 +1225,12 @@
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>The sample demonstrates how to traverse the whole ctrlX Data Layer tree. The values of the nodes if readable are printed out to console as human readable strings. Also complex values with structure (encoded by <a href="https://google.github.io/flatbuffers/">FlatBuffers</a>) are written as JSON string to console.</p>
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
-<p>The following code shows the main method with inline documentation:</p>
-<p><a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.client.browse/Program.cs">Program.cs</a></p>
-<p>The class ClientExtensions extends the client with methods for browsing all nodes and print out the corresponding values:</p>
-<p><a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.client.browse/ClientExtensions.cs">ClientExtensions.cs</a></p>
+<p>The implementation include the following steps:</p>
+<ul>
+<li>Create and start the 'DatalayerSystem' service</li>
+<li>Create a client with 'tcp' protocol for remote connection or 'ipc' protocol if running inside snap.</li>
+<li>Browse recursively through the whole DataLayer tree and write out the nodes with values to console</li>
+</ul>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>Please read the common .NET docs <a href="../index.html">here</a>, first.</p>
 <h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
