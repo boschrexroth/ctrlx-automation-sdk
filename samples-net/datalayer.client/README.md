@@ -8,9 +8,13 @@ The sample demonstrates how to read values from ctrlX Data Layer tree and write 
 
 ## Description
 
-The following code shows the main method with inline documentation:
+The implementation include the following steps:
 
-[Program.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.client/Program.cs)
++ Create and start the 'DatalayerSystem' service
++ Create a client with 'tcp' protocol for remote connection or 'ipc' protocol if running inside snap.
++ Create a subscription with publish interval of 1 s
++ Write data change notification of subscription to console with timestamp, node and value
++ Read value with client via single read once and in an endless loop every 10 s
 
 ## Prerequisites
 

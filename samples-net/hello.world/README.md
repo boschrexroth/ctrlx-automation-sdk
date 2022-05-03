@@ -4,13 +4,13 @@ This .NET sample prints out "Hello World" to the console.
 
 ## Introduction
 
-Programm is prompting "Hello World" to standard output.
+The app is prompting "Hello World" to standard output.
 
 ## Description
 
-The following code shows the main method with inline documentation:
+The implementation include the following steps:
 
-[Program.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/hello.world/Program.cs)
++ Write 'Hello World' to console in an endless loop every second.
 
 ## Prerequisites
 
