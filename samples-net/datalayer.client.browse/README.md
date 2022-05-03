@@ -8,13 +8,11 @@ The sample demonstrates how to traverse the whole ctrlX Data Layer tree. The val
 
 ## Description
 
-The following code shows the main method with inline documentation:
+The implementation include the following steps:
 
-[Program.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.client.browse/Program.cs)
-
-The class ClientExtensions extends the client with methods for browsing all nodes and print out the corresponding values:
-
-[ClientExtensions.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/datalayer.client.browse/ClientExtensions.cs)
++ Create and start the 'DatalayerSystem' service
++ Create a client with 'tcp' protocol for remote connection or 'ipc' protocol if running inside snap.
++ Browse recursively through the whole DataLayer tree and write out the nodes with values to console
 
 ## Prerequisites
 

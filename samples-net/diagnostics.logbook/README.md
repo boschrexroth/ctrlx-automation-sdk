@@ -8,14 +8,11 @@ The project __diagnostics.logbook__ provides a simple application example to log
 
 ## Description
 
-The following code shows the main method with inline documentation:
+The implementation shows different ways to write messages to ctrlX logbook.
 
-[Program.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/diagnostics.logbook/Program.cs)
++ The class __KernelLoggerSample__ writes kernel log messages with the linux system command 'logger'.
 
-The class KernelLogger writes kernel log messages with the linux command 'logger':
-The enum KernelLogLevel defines the log levels supported by the logbook:
-
-[KernelLogger.cs](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/develop/samples-net/diagnostics.logbook/KernelLogger.cs)
++ The class __MicrosoftLoggerSample__ uses the nuget package extension __Microsoft.Extensions.Logging__ to write logs to logbook.
 
 ## Prerequisites
 
