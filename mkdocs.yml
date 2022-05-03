@@ -92,7 +92,7 @@ nav:
       - Guidelines:
         - Package Manifest: package-manifest.md
         - Developer Guideline: appdevguide.md
-        - Data Persistance: persistdata.md
+        - Data Persistence: persistdata.md
         - License Management: licensing.md
         - Service-to-Service Authentication: s2sauth.md
       - Releases:
