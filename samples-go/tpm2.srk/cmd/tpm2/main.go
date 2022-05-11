@@ -159,7 +159,7 @@ func loadKey() error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	defer pubFile.Close()
 
 	byteValueTpmPub, err := ioutil.ReadAll(pubFile)
 	if err != nil {
