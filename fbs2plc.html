@@ -12,23 +12,65 @@
         <meta name="author" content="Bosch Rexroth AG">
       
       
-        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/samples_mkdocs.html">
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/fbs2plc.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.16">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>Samples - Software Development Kit</title>
+        <title>Fbs2plc - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.1c3799f8.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.cc9b2e1e.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
         
       
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 0 1 .25-.25h5.025a.25.25 0 0 1 .177.073l6.25 6.25a.25.25 0 0 1 0 .354l-5.025 5.025a.25.25 0 0 1-.354 0l-6.25-6.25a.25.25 0 0 1-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775zM6 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 0 1 .25-.25h8.5a.25.25 0 0 1 .25.25v7.736a.75.75 0 1 0 1.5 0V1.75A1.75 1.75 0 0 0 11.25 0h-8.5A1.75 1.75 0 0 0 1 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 0 0 0-1.5H2.75a.25.25 0 0 1-.25-.25V1.75zM4.75 4a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5zM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75zm11.774 3.537a.75.75 0 0 0-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 0 0-1.062 1.058l1.943 1.95a.75.75 0 0 0 1.055.008l4.557-4.45z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm6.5-.25A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75zM8 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.489 4.489 0 0 1-.563-1.191 3.833 3.833 0 0 1-.05-2.063 4.636 4.636 0 0 1-2.025-.293.75.75 0 1 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.748.748 0 0 1 1.06 0 .75.75 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.404 2.404 0 0 1-.507-.441 3.063 3.063 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.753.753 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768a85.08 85.08 0 0 0-.317-.265c-.814-.68-1.75-1.462-2.692-2.619a3.74 3.74 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.92 6.085c.081-.16.19-.299.34-.398.145-.097.371-.187.74-.187.28 0 .553.087.738.225A.613.613 0 0 1 9 6.25c0 .177-.04.264-.077.318a.956.956 0 0 1-.277.245c-.076.051-.158.1-.258.161l-.007.004a7.728 7.728 0 0 0-.313.195 2.416 2.416 0 0 0-.692.661.75.75 0 0 0 1.248.832.956.956 0 0 1 .276-.245 6.3 6.3 0 0 1 .26-.16l.006-.004c.093-.057.204-.123.313-.195.222-.149.487-.355.692-.662.214-.32.329-.702.329-1.15 0-.76-.36-1.348-.863-1.725A2.76 2.76 0 0 0 8 4c-.631 0-1.155.16-1.572.438-.413.276-.68.638-.849.977a.75.75 0 1 0 1.342.67z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575L6.457 1.047zM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25-5.25a.75.75 0 0 0-1.5 0v2.5a.75.75 0 0 0 1.5 0v-2.5z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.404 12.596a6.5 6.5 0 1 1 9.192-9.192 6.5 6.5 0 0 1-9.192 9.192zM2.344 2.343a8 8 0 1 0 11.313 11.314A8 8 0 0 0 2.343 2.343zM6.03 4.97a.75.75 0 0 0-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 1 0 1.06 1.06L8 9.06l1.97 1.97a.75.75 0 1 0 1.06-1.06L9.06 8l1.97-1.97a.75.75 0 1 0-1.06-1.06L8 6.94 6.03 4.97z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.561 1.5a.016.016 0 0 0-.01.004L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.02.02 0 0 0-.004-.009.02.02 0 0 0-.006-.006L10.56 1.5zM9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.25 1.25 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.492 3.492 0 0 1 2.441 0l.999-1a.75.75 0 1 1 1.06 1.061l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.013 5.013 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.684 1.684 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06zM6.173 5h3.654A.173.173 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173zM5.25 6.5a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75h-5.5z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 0 1-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 0 1 9.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 0 1-.633 1.153H3.233a.75.75 0 0 1-.633-1.153z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.75 2.5a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5H1.75zm4 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zM2.5 7.75a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 1.5 0v-6z"/></svg>');}</style>
+
     
     
     
@@ -71,7 +113,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#samples" class="md-skip">
+        <a href="#prerequisites" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +146,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Samples
+              Fbs2plc
             
           </span>
         </div>
@@ -423,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="package-manifest.html" class="md-nav__link">
+      <a href="package-manifest.md" class="md-nav__link">
         Package Manifest
       </a>
     </li>
@@ -584,7 +626,7 @@
   
     <li class="md-nav__item">
       <a href="setup_overview.html" class="md-nav__link">
-        Setup Overview
+        Setup overview
       </a>
     </li>
   
@@ -932,7 +974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="build.html" class="md-nav__link">
+      <a href="build.md" class="md-nav__link">
         Build And Install
       </a>
     </li>
@@ -1103,8 +1145,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1113,58 +1153,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#samples-included-in-ctrlx-sdk" class="md-nav__link">
-    Samples included in ctrlX SDK
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
   </a>
   
-    <nav class="md-nav" aria-label="Samples included in ctrlX SDK">
+    <nav class="md-nav" aria-label="Prerequisites">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#cc-samples" class="md-nav__link">
-    C/C++ Samples
+  <a href="#1-ctrlx-works" class="md-nav__link">
+    1. ctrlX WORKS
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#go-samples" class="md-nav__link">
-    GO-Samples
+  <a href="#2-ctrlx-automation-sdk" class="md-nav__link">
+    2. ctrlX AUTOMATION SDK
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#python-samples" class="md-nav__link">
-    Python-Samples
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#net-samples" class="md-nav__link">
-    .NET Samples
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nodejs-samples" class="md-nav__link">
-    Nodejs Samples
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#shell-based-samples" class="md-nav__link">
-    Shell Based Samples
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#snap-samples" class="md-nav__link">
-    Snap Samples
+  <a href="#3-sdk-cpp-alldata-as-provider" class="md-nav__link">
+    3. sdk-cpp-alldata as Provider
   </a>
   
 </li>
@@ -1175,16 +1187,91 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#build-and-install" class="md-nav__link">
-    Build and install
+  <a href="#from-fbs-file-to-a-plc-library" class="md-nav__link">
+    From fbs File to a PLC library
   </a>
+  
+    <nav class="md-nav" aria-label="From fbs File to a PLC library">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-working-directory" class="md-nav__link">
+    1. Working Directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-ctrlx-plc-engineering" class="md-nav__link">
+    2. ctrlX PLC Engineering
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-prepare-startbat" class="md-nav__link">
+    3. Prepare start.bat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-run-startbat" class="md-nav__link">
+    4. Run start.bat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-check-imported-code" class="md-nav__link">
+    5. Check Imported Code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#ctrlx-automation-community" class="md-nav__link">
-    ctrlX AUTOMATION Community
+  <a href="#using-the-plc-library-in-a-plc-project" class="md-nav__link">
+    Using the PLC library in a PLC Project
   </a>
+  
+    <nav class="md-nav" aria-label="Using the PLC library in a PLC Project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-create-a-new-plc-project" class="md-nav__link">
+    1. Create a new PLC Project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-add-library" class="md-nav__link">
+    2. Add Library
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-import-plc-code" class="md-nav__link">
+    3. Import PLC Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-check-the-flatbuffer-access" class="md-nav__link">
+    4. Check the Flatbuffer Access
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1200,89 +1287,128 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/samples_mkdocs.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/fbs2plc.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="samples">Samples<a class="headerlink" href="#samples" title="Permanent link">&para;</a></h1>
-<h2 id="samples-included-in-ctrlx-sdk">Samples included in ctrlX SDK<a class="headerlink" href="#samples-included-in-ctrlx-sdk" title="Permanent link">&para;</a></h2>
-<h3 id="cc-samples">C/C++ Samples<a class="headerlink" href="#cc-samples" title="Permanent link">&para;</a></h3>
-<p><img alt="C++" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png" /></p>
+  <h1>Fbs2plc</h1>
+
+<p>The ctrlX Data Layer provides nodes containing structured data in the <a href="https://google.github.io/flatbuffers/">Flatbuffers</a> format.</p>
+<p>Hereby in a Flatbuffer schema file (fbs file) the data structure is defined. The  FlatBuffers compiler <a href="https://google.github.io/flatbuffers/flatbuffers_guide_tutorial.html">flatc</a> is able to compile such a fbs file into code for several programming languages including IEC 61131-3 Structured Text (ST).</p>
+<p>This guide describes how a fbs file can be compiled into IEC 61131-3 ST code and how this code can be imported and used in your IEC 61131-3 project to handle Flatbuffers.</p>
+<p>The described workflow and the tools are currently running <strong>only under Windows 10</strong>.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h3 id="1-ctrlx-works">1. ctrlX WORKS<a class="headerlink" href="#1-ctrlx-works" title="Permanent link">&para;</a></h3>
+<p>Install ctrlX WORKS &gt;= 1.14 with the functions 'ctrlX PLC Engineering' and 'App Build Environment'. </p>
+<p>As installation path we recommend to use <strong>"C:\Program Files\Rexroth\ctrlX WORKS"</strong></p>
+<p>If you did so the path to ctrlX PLC Engineering is <strong>"C:\Program Files\Rexroth\ctrlX WORKS\Studio\Common\ctrlX-PLC-Engineering.exe"</strong> </p>
+<h3 id="2-ctrlx-automation-sdk">2. ctrlX AUTOMATION SDK<a class="headerlink" href="#2-ctrlx-automation-sdk" title="Permanent link">&para;</a></h3>
+<p>Download the <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/releases">ctrlX AUTOMATION SDK</a> and extract it to <strong>c:\ctrlx-automation-sdk</strong></p>
+<p>The extracted archive contains two executables. Add the storage locations of these tools to the environment variable PATH. </p>
+<p>For flatc.exe:</p>
+<div class="codehilite"><pre><span></span><code>setx &quot;%PATH%;c:\ctrlx-automation-sdk\bin\oss.flatbuffers\win-msvc-x64\release&quot;
+</code></pre></div>
+
+<p>For fbs2plc.exe:</p>
+<div class="codehilite"><pre><span></span><code>setx &quot;%PATH%;c:\ctrlx-automation-sdk\bin\fbs2plc\win-x64&quot;
+</code></pre></div>
+
+<h3 id="3-sdk-cpp-alldata-as-provider">3. sdk-cpp-alldata as Provider<a class="headerlink" href="#3-sdk-cpp-alldata-as-provider" title="Permanent link">&para;</a></h3>
+<p>Reading and writing a Flatbuffer Data Layer node within our IEC 61131-3 code requires an instance which provides this node to the ctrlX Data Layer. Therefor we use the snap sdk-cpp-alldata deployed by the ctrlX AUTOMATION SDK in the folder <strong>samples-cpp/datalayer.provider.all-data</strong>. </p>
+<p>This snap has to be build and installed in the ctrlX CORE, see:</p>
 <ul>
-<li><a href="samples-cpp/hello.world/index.html">"Hello World"</a> recommendation -&gt; start with this example</li>
-<li><a href="samples-cpp/hello.plc/index.html">"Hello PLC"</a></li>
-<li><a href="samples-cpp/datalayer.client/index.html">"ctrlX Data Layer Client"</a></li>
-<li><a href="samples-cpp/datalayer.register.node/index.html">"ctrlX Data Layer RegisterNode"</a></li>
-<li><a href="./samples-cpp/automation.bundle/README.md">"ctrlX Automation Bundle"</a> includes motion commands for axis and kinematics</li>
-<li><a href="./samples-cpp/automation.scheduler/README.md">"ctrlX Automation Scheduler"</a></li>
-<li><a href="./samples-cpp/automation.diagnosis/README.md">"ctrlX Automation Diagnosis"</a></li>
-<li><a href="./samples-cpp/automation.trace/README.md">"ctrlX Automation Trace"</a></li>
-<li><a href="samples-cpp/datalayer.ecat.io/index.html">"ctrlX Data Layer EtherCAT I/O's"</a></li>
-<li><a href="samples-cpp/datalayer.realtime/index.html">"ctrlX Data Layer Realtime"</a></li>
-<li><a href="samples-cpp/datalayer.provider.all-data/index.html">"ctrlX Data Layer All Data Provider"</a></li>
-<li><a href="samples-cpp/diagnostics.logbook/index.html">"ctrlX Diagnostics Logbook"</a></li>
-<li><a href="samples-cpp/datalayer.diagnosis/index.html">"ctrlX Data Layer Diagnosis"</a></li>
+<li><a href="setup_qemu_ctrlx_works.html">Quick Start Guide</a></li>
+<li><a href="samples.html">Building Snaps</a></li>
 </ul>
-<h3 id="go-samples">GO-Samples<a class="headerlink" href="#go-samples" title="Permanent link">&para;</a></h3>
-<p><img alt="Go" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/120px-Go_Logo_Blue.svg.png" /></p>
+<p>If the snap is installed and the ctrlX CORE is in Operation Mode it will provide a Flatbuffer variable with this Data Layer path:  <strong>sdk-cpp-alldata/dynamic/fbs</strong></p>
+<p>This node can be read, changed and written by our IEC 61131-3 sample code.</p>
+<h2 id="from-fbs-file-to-a-plc-library">From fbs File to a PLC library<a class="headerlink" href="#from-fbs-file-to-a-plc-library" title="Permanent link">&para;</a></h2>
+<h3 id="1-working-directory">1. Working Directory<a class="headerlink" href="#1-working-directory" title="Permanent link">&para;</a></h3>
+<p>Start a Windows the console app cmd.exe and create a working directory.</p>
+<div class="codehilite"><pre><span></span><code>c: &amp; mkdir \fbs2plc &amp; cd \fbs2plc
+</code></pre></div>
+
+<p>Copy the start.bat file from the ctrlX AUTOMATION SDK into this directory</p>
+<div class="codehilite"><pre><span></span><code>copy c:\ctrlx-automation-sdk\samples-iec61131\fbs-read-write\start.bat .
+</code></pre></div>
+
+<p>Copy the sampleSchema.fbs file from the ctrlX AUTOMATION SDK into this directory</p>
+<div class="codehilite"><pre><span></span><code>copy c:\ctrlx-automation-sdk\samples-cpp\datalayer.provider.all-data\sampleSchema.fbs .
+</code></pre></div>
+
+<h3 id="2-ctrlx-plc-engineering">2. ctrlX PLC Engineering<a class="headerlink" href="#2-ctrlx-plc-engineering" title="Permanent link">&para;</a></h3>
+<p>Open ctrlX WORKS, select Engineering Tools and open ctrlX PLC Engineering.</p>
+<p>Within ctrlX PLC Engineering:</p>
 <ul>
-<li><a href="samples-go/hello.webserver/index.html">"Hello Webserver"</a></li>
-<li><a href="samples-go/appdata/index.html">"AppData File Storage"</a></li>
-<li><a href="samples-go/tpm2.srk/index.html">"TPM2.SRK"</a></li>
+<li>Create a new empty library with the name sampleSchema</li>
+<li>Store it under c:\fbs2plc</li>
 </ul>
-<h3 id="python-samples">Python-Samples<a class="headerlink" href="#python-samples" title="Permanent link">&para;</a></h3>
-<p><img alt="Python" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/120px-Python-logo-notext.svg.png" /></p>
+<h3 id="3-prepare-startbat">3. Prepare start.bat<a class="headerlink" href="#3-prepare-startbat" title="Permanent link">&para;</a></h3>
+<p>The batch file start.bat calls the executable fbs2plc.exe stored in c:\ctrlx-automation-sdk\bin\fbs2plc\win-x64
+Open start.bat with a txt editor, check/change the parameter values below and save the file</p>
+<div class="codehilite"><pre><span></span><code>-title &quot;Flatbuffer sampleSchema Handling&quot; ^
+-company &quot;Bosch Rexroth AG&quot; ^
+-version 1.0.0.1 ^
+-released ^
+-author &quot;Bosch Rexroth AG&quot; ^
+-placeHolder &quot;SampleSchema&quot; ^
+-description &quot;Makes sampleSchema.fbs available in PLC code&quot; ^
+-defaultNamespace sampleSchema ^
+</code></pre></div>
+
+<p>*) If you do not want to release your library at once set this line under comment: </p>
+<p><code>REM -released ^</code></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Do not delete the ^ character at the end of each line!</p>
+</div>
+<h3 id="4-run-startbat">4. Run start.bat<a class="headerlink" href="#4-run-startbat" title="Permanent link">&para;</a></h3>
+<p>Within the working directory launch the start.bat file: </p>
+<div class="codehilite"><pre><span></span><code>start.bat
+</code></pre></div>
+
+<p>This file starts the fbs2plc executable. From here flatc is called to create ST code, which is then imported into the opened PLC library.</p>
+<p>You can watch the progress in the trace output. If an error occurs the execution is stopped. Warnings can be ignored.</p>
+<h3 id="5-check-imported-code">5. Check Imported Code<a class="headerlink" href="#5-check-imported-code" title="Permanent link">&para;</a></h3>
+<p>In ctrlX PLC Engineering check all imported content under the tab page <strong>POUs</strong>.</p>
+<p>If everything is OK save the library: Main menu time <strong>File: Store project and install in library system</strong></p>
+<h2 id="using-the-plc-library-in-a-plc-project">Using the PLC library in a PLC Project<a class="headerlink" href="#using-the-plc-library-in-a-plc-project" title="Permanent link">&para;</a></h2>
+<h3 id="1-create-a-new-plc-project">1. Create a new PLC Project<a class="headerlink" href="#1-create-a-new-plc-project" title="Permanent link">&para;</a></h3>
+<p>In ctrlX PLC Engineering</p>
 <ul>
-<li><a href="samples-python/datalayer.client.light/index.html">"ctrlX Data Layer Client"</a></li>
-<li><a href="samples-python/datalayer.client/index.html">"ctrlX Data Layer Client (complex)"</a></li>
-<li><a href="samples-python/datalayer.client.browse/index.html">"ctrlX Data Layer Client Browse"</a></li>
-<li><a href="samples-python/datalayer.client.sub/index.html">"ctrlX Data Layer Client Subscription"</a></li>
-<li><a href="samples-python/datalayer.provider/index.html">"ctrlX Data Layer Provider"</a></li>
-<li><a href="samples-python/datalayer.provider.all-data/index.html">"ctrlX Data Layer Provider All Data"</a></li>
-<li><a href="samples-python/logbook/index.html">"ctrlX Diagnostics Logbook"</a></li>
-<li><a href="samples-python/datalayer.calc/index.html">"ctrlX Data Layer Calculation Operations"</a></li>
-<li><a href="samples-python/webserver/index.html">"ctrlX Data Layer + Webserver"</a></li>
-<li><a href="samples-python/appdata/index.html">"AppData File Storage"</a></li>
-<li><a href="samples-python/datalayer.remote.debug/index.html">"ctrlX Data Layer Remote Debug"</a></li>
+<li>Create a new Project,</li>
+<li>Use an according ctrlX CORE template.</li>
+<li>Name : sampleSchema </li>
+<li>Save it under c:\fbs2plc</li>
 </ul>
-<h3 id="net-samples">.NET Samples<a class="headerlink" href="#net-samples" title="Permanent link">&para;</a></h3>
-<p><img alt=".NET5" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.NET_Logo.svg/120px-.NET_Logo.svg.png" /></p>
+<h3 id="2-add-library">2. Add Library<a class="headerlink" href="#2-add-library" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="samples-net/hello.world/index.html">"Hello World"</a></li>
-<li><a href="samples-net/datalayer.client.browse/index.html">"ctrlX Data Layer Browse"</a></li>
-<li><a href="samples-net/datalayer.client/index.html">"ctrlX Data Layer Client"</a></li>
-<li><a href="samples-net/datalayer.provider/index.html">"ctrlX Data Layer Provider"</a></li>
-<li><a href="samples-net/datalayer.provider.alldata/index.html">"ctrlX Data Layer Provider All Data"</a></li>
-<li><a href="samples-net/datalayer.provider.virtual/index.html">"ctrlX Data Layer Provider Virtual"</a></li>
-<li><a href="samples-net/datalayer.mqtt/index.html">"ctrlX Data Layer MQTT"</a></li>
-<li><a href="samples-net/diagnostics.logbook/index.html">"ctrlX Diagnostics Logbook"</a></li>
-<li><a href="samples-net/appdata/index.html">"AppData File Storage"</a></li>
+<li>Double click Libray Manager</li>
+<li>Select Add Library</li>
+<li>Search the generated library: Flatbuffer sampleSchema Handling</li>
 </ul>
-<h3 id="nodejs-samples">Nodejs Samples<a class="headerlink" href="#nodejs-samples" title="Permanent link">&para;</a></h3>
-<p><img alt="Nodejs" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/120px-Node.js_logo.svg.png" /></p>
+<h3 id="3-import-plc-code">3. Import PLC Code<a class="headerlink" href="#3-import-plc-code" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="samples-node/hello-world/index.html">"Hello World"</a></li>
-<li><a href="samples-node/datalayer.client/index.html">"ctrlX Data Layer Client"</a></li>
+<li>Select main menu item Project: Import</li>
+<li>Select the file <strong>c:\ctrlx-automation-sdk\samples-iec61131\fbs-read-write\ctrlxVirtual.export </strong></li>
+<li>Click the Login icon in the tool bar (Alt + F8)</li>
+<li>The project will be complied and downloaded into the PLC runtime system of the ctrlX CORE - an existing PLC application in the ctrlX CORE will be overwritten.</li>
+<li>Start the PLC application with the start icon of the tool bar.</li>
 </ul>
-<h3 id="shell-based-samples">Shell Based Samples<a class="headerlink" href="#shell-based-samples" title="Permanent link">&para;</a></h3>
+<p>The PLC program should run without failure.</p>
+<h3 id="4-check-the-flatbuffer-access">4. Check the Flatbuffer Access<a class="headerlink" href="#4-check-the-flatbuffer-access" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="samples-sh/tpm2.consumer/index.html">TPM2 Consumer</a></li>
+<li>From a web browser login into your ctrlX CORE Web UI</li>
+<li>Select Settings - Data Layer</li>
+<li>Expand the Data Layer tree: sdk-cpp-alldata/dynamic/fbs</li>
 </ul>
-<h3 id="snap-samples">Snap Samples<a class="headerlink" href="#snap-samples" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="samples-snap/generate-manifest/index.html">Generate Manifest</a></li>
-</ul>
-<h2 id="build-and-install">Build and install<a class="headerlink" href="#build-and-install" title="Permanent link">&para;</a></h2>
-<p>To build the samples and create the first snap see
-<a href="build.html">Build</a></p>
-<hr />
-<h2 id="ctrlx-automation-community">ctrlX AUTOMATION Community<a class="headerlink" href="#ctrlx-automation-community" title="Permanent link">&para;</a></h2>
-<p><a href="https://developer.community.boschrexroth.com">ctrlX AUTOMATION Community</a></p>
+<p>The values of the x, y, z variables should be changed by our PLC program.</p>
 
               
             </article>
+            
           </div>
         </div>
         
@@ -1336,10 +1462,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.3a4b43e5.min.js"></script>
+      <script src="assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

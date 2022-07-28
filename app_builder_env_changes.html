@@ -12,23 +12,65 @@
         <meta name="author" content="Bosch Rexroth AG">
       
       
-        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/appdata/vendor/github.com/dgrijalva/jwt-go/index.html">
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/app_builder_env_changes.html">
       
-      <link rel="icon" href="../../../../../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.16">
+      <link rel="icon" href="assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>jwt-go - Software Development Kit</title>
+        <title>App builder env changes - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.1c3799f8.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../../assets/stylesheets/palette.cc9b2e1e.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
         
       
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 0 1 .25-.25h5.025a.25.25 0 0 1 .177.073l6.25 6.25a.25.25 0 0 1 0 .354l-5.025 5.025a.25.25 0 0 1-.354 0l-6.25-6.25a.25.25 0 0 1-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775zM6 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 0 1 .25-.25h8.5a.25.25 0 0 1 .25.25v7.736a.75.75 0 1 0 1.5 0V1.75A1.75 1.75 0 0 0 11.25 0h-8.5A1.75 1.75 0 0 0 1 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 0 0 0-1.5H2.75a.25.25 0 0 1-.25-.25V1.75zM4.75 4a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5zM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75zm11.774 3.537a.75.75 0 0 0-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 0 0-1.062 1.058l1.943 1.95a.75.75 0 0 0 1.055.008l4.557-4.45z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm6.5-.25A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75zM8 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.489 4.489 0 0 1-.563-1.191 3.833 3.833 0 0 1-.05-2.063 4.636 4.636 0 0 1-2.025-.293.75.75 0 1 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.748.748 0 0 1 1.06 0 .75.75 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.404 2.404 0 0 1-.507-.441 3.063 3.063 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.753.753 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768a85.08 85.08 0 0 0-.317-.265c-.814-.68-1.75-1.462-2.692-2.619a3.74 3.74 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.92 6.085c.081-.16.19-.299.34-.398.145-.097.371-.187.74-.187.28 0 .553.087.738.225A.613.613 0 0 1 9 6.25c0 .177-.04.264-.077.318a.956.956 0 0 1-.277.245c-.076.051-.158.1-.258.161l-.007.004a7.728 7.728 0 0 0-.313.195 2.416 2.416 0 0 0-.692.661.75.75 0 0 0 1.248.832.956.956 0 0 1 .276-.245 6.3 6.3 0 0 1 .26-.16l.006-.004c.093-.057.204-.123.313-.195.222-.149.487-.355.692-.662.214-.32.329-.702.329-1.15 0-.76-.36-1.348-.863-1.725A2.76 2.76 0 0 0 8 4c-.631 0-1.155.16-1.572.438-.413.276-.68.638-.849.977a.75.75 0 1 0 1.342.67z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575L6.457 1.047zM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25-5.25a.75.75 0 0 0-1.5 0v2.5a.75.75 0 0 0 1.5 0v-2.5z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.404 12.596a6.5 6.5 0 1 1 9.192-9.192 6.5 6.5 0 0 1-9.192 9.192zM2.344 2.343a8 8 0 1 0 11.313 11.314A8 8 0 0 0 2.343 2.343zM6.03 4.97a.75.75 0 0 0-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 1 0 1.06 1.06L8 9.06l1.97 1.97a.75.75 0 1 0 1.06-1.06L9.06 8l1.97-1.97a.75.75 0 1 0-1.06-1.06L8 6.94 6.03 4.97z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.561 1.5a.016.016 0 0 0-.01.004L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.02.02 0 0 0-.004-.009.02.02 0 0 0-.006-.006L10.56 1.5zM9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.25 1.25 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.492 3.492 0 0 1 2.441 0l.999-1a.75.75 0 1 1 1.06 1.061l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.013 5.013 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.684 1.684 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06zM6.173 5h3.654A.173.173 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173zM5.25 6.5a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75h-5.5z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 0 1-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 0 1 9.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 0 1-.633 1.153H3.233a.75.75 0 0 1-.633-1.153z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.75 2.5a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5H1.75zm4 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zM2.5 7.75a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 1.5 0v-6z"/></svg>');}</style>
+
     
     
     
@@ -41,9 +83,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../../stylesheets/sdk.css">
+      <link rel="stylesheet" href="stylesheets/sdk.css">
     
-    <script>__md_scope=new URL("../../../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -71,7 +113,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#jwt-go" class="md-skip">
+        <a href="#software-development-kit-for-ctrlx-automation" class="md-skip">
           Skip to content
         </a>
       
@@ -85,7 +127,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../../../index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -104,7 +146,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              jwt-go
+              App builder env changes
             
           </span>
         </div>
@@ -192,7 +234,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../../../../index.html" class="md-tabs__link">
+    <a href="index.html" class="md-tabs__link">
       Home
     </a>
   </li>
@@ -207,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../../../overview.html" class="md-tabs__link">
+      <a href="overview.html" class="md-tabs__link">
         Getting Started
       </a>
     </li>
@@ -223,7 +265,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../../../setup_overview.html" class="md-tabs__link">
+      <a href="setup_overview.html" class="md-tabs__link">
         Setup
       </a>
     </li>
@@ -239,7 +281,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../../../samples.html" class="md-tabs__link">
+      <a href="samples.html" class="md-tabs__link">
         Samples
       </a>
     </li>
@@ -255,7 +297,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../../../references.html" class="md-tabs__link">
+      <a href="references.html" class="md-tabs__link">
         References
       </a>
     </li>
@@ -268,7 +310,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../../../../about.html" class="md-tabs__link">
+    <a href="about.html" class="md-tabs__link">
       About
     </a>
   </li>
@@ -295,7 +337,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../../../index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -326,7 +368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../index.html" class="md-nav__link">
+      <a href="index.html" class="md-nav__link">
         Home
       </a>
     </li>
@@ -367,7 +409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../overview.html" class="md-nav__link">
+      <a href="overview.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -381,7 +423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../ctrlx_automation.html" class="md-nav__link">
+      <a href="ctrlx_automation.html" class="md-nav__link">
         ctrlX AUTOMATION
       </a>
     </li>
@@ -423,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../package-manifest.html" class="md-nav__link">
+      <a href="package-manifest.md" class="md-nav__link">
         Package Manifest
       </a>
     </li>
@@ -437,7 +479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../appdevguide.html" class="md-nav__link">
+      <a href="appdevguide.html" class="md-nav__link">
         Developer Guideline
       </a>
     </li>
@@ -451,7 +493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../persistdata.html" class="md-nav__link">
+      <a href="persistdata.html" class="md-nav__link">
         Data Persistence
       </a>
     </li>
@@ -465,7 +507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../licensing.html" class="md-nav__link">
+      <a href="licensing.html" class="md-nav__link">
         License Management
       </a>
     </li>
@@ -479,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../s2sauth.html" class="md-nav__link">
+      <a href="s2sauth.html" class="md-nav__link">
         Service-to-Service Authentication
       </a>
     </li>
@@ -528,7 +570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../changelog.html" class="md-nav__link">
+      <a href="changelog.html" class="md-nav__link">
         Changelog
       </a>
     </li>
@@ -583,8 +625,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_overview.html" class="md-nav__link">
-        Setup Overview
+      <a href="setup_overview.html" class="md-nav__link">
+        Setup overview
       </a>
     </li>
   
@@ -597,7 +639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../quick-start-guide.html" class="md-nav__link">
+      <a href="quick-start-guide.html" class="md-nav__link">
         Quick Start Guide
       </a>
     </li>
@@ -611,7 +653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_qemu_ctrlx_works.html" class="md-nav__link">
+      <a href="setup_qemu_ctrlx_works.html" class="md-nav__link">
         ctrlX WORKS App Build Environment
       </a>
     </li>
@@ -625,7 +667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_qemu_ubuntu.html" class="md-nav__link">
+      <a href="setup_qemu_ubuntu.html" class="md-nav__link">
         QEMU Virtual Machine
       </a>
     </li>
@@ -639,7 +681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
+      <a href="setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
         VirtualBox Virtual Machine
       </a>
     </li>
@@ -653,7 +695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_ubuntu.html" class="md-nav__link">
+      <a href="setup_ubuntu.html" class="md-nav__link">
         Native Ubuntu 20.04
       </a>
     </li>
@@ -695,7 +737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../px.html" class="md-nav__link">
+      <a href="px.html" class="md-nav__link">
         Using Px.exe as Proxy on a Windows Host
       </a>
     </li>
@@ -709,7 +751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../connecting_qemu_vm_ctrlx.html" class="md-nav__link">
+      <a href="connecting_qemu_vm_ctrlx.html" class="md-nav__link">
         Connecting SDK QEMU VMs and ctrlX CORE
       </a>
     </li>
@@ -723,7 +765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../ssh_connection.html" class="md-nav__link">
+      <a href="ssh_connection.html" class="md-nav__link">
         SSH Connection
       </a>
     </li>
@@ -737,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../vscode.html" class="md-nav__link">
+      <a href="vscode.html" class="md-nav__link">
         Visual Studio Code
       </a>
     </li>
@@ -751,7 +793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../dotnet.html" class="md-nav__link">
+      <a href="dotnet.html" class="md-nav__link">
         .NET
       </a>
     </li>
@@ -765,7 +807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../remote-build.html" class="md-nav__link">
+      <a href="remote-build.html" class="md-nav__link">
         Using Snapcraft Remote Build from Canonical
       </a>
     </li>
@@ -820,7 +862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples.html" class="md-nav__link">
+      <a href="samples.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -834,7 +876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-cpp/index.html" class="md-nav__link">
+      <a href="samples-cpp/index.html" class="md-nav__link">
         Samples C/C++
       </a>
     </li>
@@ -848,7 +890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../index.html" class="md-nav__link">
+      <a href="samples-go/index.html" class="md-nav__link">
         Samples Go
       </a>
     </li>
@@ -862,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-python/index.html" class="md-nav__link">
+      <a href="samples-python/index.html" class="md-nav__link">
         Samples Python
       </a>
     </li>
@@ -876,7 +918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-net/index.html" class="md-nav__link">
+      <a href="samples-net/index.html" class="md-nav__link">
         Samples .NET
       </a>
     </li>
@@ -890,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-node/index.html" class="md-nav__link">
+      <a href="samples-node/index.html" class="md-nav__link">
         Samples Nodejs
       </a>
     </li>
@@ -904,7 +946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-sh/index.html" class="md-nav__link">
+      <a href="samples-sh/index.html" class="md-nav__link">
         Samples Shell
       </a>
     </li>
@@ -918,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-snap/index.html" class="md-nav__link">
+      <a href="samples-snap/index.html" class="md-nav__link">
         Samples Snap
       </a>
     </li>
@@ -932,7 +974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../build.html" class="md-nav__link">
+      <a href="build.md" class="md-nav__link">
         Build And Install
       </a>
     </li>
@@ -946,7 +988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../debug.html" class="md-nav__link">
+      <a href="debug.html" class="md-nav__link">
         Debugging
       </a>
     </li>
@@ -994,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../references.html" class="md-nav__link">
+      <a href="references.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1079,7 +1121,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../about.html" class="md-nav__link">
+      <a href="about.html" class="md-nav__link">
         About
       </a>
     </li>
@@ -1103,8 +1145,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1113,92 +1153,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-the-heck-is-a-jwt" class="md-nav__link">
-    What the heck is a JWT?
+  <a href="#software-development-kit-for-ctrlx-automation" class="md-nav__link">
+    Software Development Kit for ctrlX AUTOMATION
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#whats-in-the-box" class="md-nav__link">
-    What's in the box?
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    Examples
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extensions" class="md-nav__link">
-    Extensions
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compliance" class="md-nav__link">
-    Compliance
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-status-versioning" class="md-nav__link">
-    Project Status &amp; Versioning
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage-tips" class="md-nav__link">
-    Usage Tips
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage Tips">
+    <nav class="md-nav" aria-label="Software Development Kit for ctrlX AUTOMATION">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#signing-vs-encryption" class="md-nav__link">
-    Signing vs Encryption
+  <a href="#version-1160-july-15-2022" class="md-nav__link">
+    Version 1.16.0  July 15, 2022
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#choosing-a-signing-method" class="md-nav__link">
-    Choosing a Signing Method
+  <a href="#common" class="md-nav__link">
+    Common
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#signing-methods-and-key-types" class="md-nav__link">
-    Signing Methods and Key Types
+  <a href="#installation-scripts" class="md-nav__link">
+    Installation scripts
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#jwt-and-oauth" class="md-nav__link">
-    JWT and OAuth
+  <a href="#additionally-installed-packages" class="md-nav__link">
+    Additionally installed packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-1140-march-15-2022" class="md-nav__link">
+    Version 1.14.0  March 15, 2022
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation-scripts_1" class="md-nav__link">
+    Installation scripts
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additionally-installed-packages_1" class="md-nav__link">
+    Additionally installed packages
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#more" class="md-nav__link">
-    More
-  </a>
   
 </li>
       
@@ -1214,80 +1226,56 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/samples-go/appdata/vendor/github.com/dgrijalva/jwt-go/README.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/app_builder_env_changes.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="jwt-go">jwt-go<a class="headerlink" href="#jwt-go" title="Permanent link">&para;</a></h1>
-<p><a href="https://travis-ci.org/dgrijalva/jwt-go"><img alt="Build Status" src="https://travis-ci.org/dgrijalva/jwt-go.svg?branch=master" /></a>
-<a href="https://godoc.org/github.com/dgrijalva/jwt-go"><img alt="GoDoc" src="https://godoc.org/github.com/dgrijalva/jwt-go?status.svg" /></a></p>
-<p>A <a href="http://www.golang.org">go</a> (or 'golang' for search engine friendliness) implementation of <a href="http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html">JSON Web Tokens</a></p>
-<p><strong>NEW VERSION COMING:</strong> There have been a lot of improvements suggested since the version 3.0.0 released in 2016. I'm working now on cutting two different releases: 3.2.0 will contain any non-breaking changes or enhancements. 4.0.0 will follow shortly which will include breaking changes. See the 4.0.0 milestone to get an idea of what's coming. If you have other ideas, or would like to participate in 4.0.0, now's the time. If you depend on this library and don't want to be interrupted, I recommend you use your dependency mangement tool to pin to version 3. </p>
-<p><strong>SECURITY NOTICE:</strong> Some older versions of Go have a security issue in the cryotp/elliptic. Recommendation is to upgrade to at least 1.8.3. See issue #216 for more detail.</p>
-<p><strong>SECURITY NOTICE:</strong> It's important that you <a href="https://auth0.com/blog/2015/03/31/critical-vulnerabilities-in-json-web-token-libraries/">validate the <code>alg</code> presented is what you expect</a>. This library attempts to make it easy to do the right thing by requiring key types match the expected alg, but you should take the extra step to verify it in your usage.  See the examples provided.</p>
-<h2 id="what-the-heck-is-a-jwt">What the heck is a JWT?<a class="headerlink" href="#what-the-heck-is-a-jwt" title="Permanent link">&para;</a></h2>
-<p>JWT.io has <a href="https://jwt.io/introduction">a great introduction</a> to JSON Web Tokens.</p>
-<p>In short, it's a signed JSON object that does something useful (for example, authentication).  It's commonly used for <code>Bearer</code> tokens in Oauth 2.  A token is made of three parts, separated by <code>.</code>'s.  The first two parts are JSON objects, that have been <a href="http://tools.ietf.org/html/rfc4648">base64url</a> encoded.  The last part is the signature, encoded the same way.</p>
-<p>The first part is called the header.  It contains the necessary information for verifying the last part, the signature.  For example, which encryption method was used for signing and what key was used.</p>
-<p>The part in the middle is the interesting bit.  It's called the Claims and contains the actual stuff you care about.  Refer to <a href="http://self-issued.info/docs/draft-jones-json-web-token.html">the RFC</a> for information about reserved keys and the proper way to add your own.</p>
-<h2 id="whats-in-the-box">What's in the box?<a class="headerlink" href="#whats-in-the-box" title="Permanent link">&para;</a></h2>
-<p>This library supports the parsing and verification as well as the generation and signing of JWTs.  Current supported signing algorithms are HMAC SHA, RSA, RSA-PSS, and ECDSA, though hooks are present for adding your own.</p>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<p>See <a href="https://godoc.org/github.com/dgrijalva/jwt-go">the project documentation</a> for examples of usage:</p>
+  <h1>App builder env changes</h1>
+
+<h2 id="software-development-kit-for-ctrlx-automation">Software Development Kit for ctrlX AUTOMATION<a class="headerlink" href="#software-development-kit-for-ctrlx-automation" title="Permanent link">&para;</a></h2>
+<h3 id="version-1160-july-15-2022">Version 1.16.0 <small> July 15, 2022</small><a class="headerlink" href="#version-1160-july-15-2022" title="Permanent link">&para;</a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The newest App Builder Environment is always provided with ctrlX WORKS. </p>
+</div>
+<p>Only the AMD64 version is supported because for every programing language supported by the ctrlX AUTOMATION SDK cross build capability is provided.</p>
+<h3 id="common">Common<a class="headerlink" href="#common" title="Permanent link">&para;</a></h3>
 <ul>
-<li><a href="https://godoc.org/github.com/dgrijalva/jwt-go#example-Parse--Hmac">Simple example of parsing and validating a token</a></li>
-<li><a href="https://godoc.org/github.com/dgrijalva/jwt-go#example-New--Hmac">Simple example of building and signing a token</a></li>
-<li><a href="https://godoc.org/github.com/dgrijalva/jwt-go#pkg-examples">Directory of Examples</a></li>
+<li>hostname: app-builder-amd64</li>
+<li>User boschrexroth is created in the last step of the setup workflow</li>
+<li>Poweroff instead of reboot if setup is finished</li>
 </ul>
-<h2 id="extensions">Extensions<a class="headerlink" href="#extensions" title="Permanent link">&para;</a></h2>
-<p>This library publishes all the necessary components for adding your own signing methods.  Simply implement the <code>SigningMethod</code> interface and register a factory method using <code>RegisterSigningMethod</code>.  </p>
-<p>Here's an example of an extension that integrates with the Google App Engine signing tools: https://github.com/someone1/gcp-jwt-go</p>
-<h2 id="compliance">Compliance<a class="headerlink" href="#compliance" title="Permanent link">&para;</a></h2>
-<p>This library was last reviewed to comply with <a href="http://www.rfc-editor.org/info/rfc7519">RTF 7519</a> dated May 2015 with a few notable differences:</p>
+<h3 id="installation-scripts">Installation scripts<a class="headerlink" href="#installation-scripts" title="Permanent link">&para;</a></h3>
 <ul>
-<li>In order to protect against accidental use of <a href="http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html#UnsecuredJWT">Unsecured JWTs</a>, tokens using <code>alg=none</code> will only be accepted if the constant <code>jwt.UnsafeAllowNoneSignatureType</code> is provided as the key.</li>
+<li><strong>install-dotnet-sdk.sh</strong>: Install as Debian package</li>
+<li><strong>install-nodejs-npm.sh</strong>: Add proxy infos to ~/.npmrc</li>
+<li><strong>install-sdk.sh</strong>: Install Debian package ctrlx-datalayer-*.deb</li>
 </ul>
-<h2 id="project-status-versioning">Project Status &amp; Versioning<a class="headerlink" href="#project-status-versioning" title="Permanent link">&para;</a></h2>
-<p>This library is considered production ready.  Feedback and feature requests are appreciated.  The API should be considered stable.  There should be very few backwards-incompatible changes outside of major version updates (and only with good reason).</p>
-<p>This project uses <a href="http://semver.org">Semantic Versioning 2.0.0</a>.  Accepted pull requests will land on <code>master</code>.  Periodically, versions will be tagged from <code>master</code>.  You can find all the releases on <a href="https://github.com/dgrijalva/jwt-go/releases">the project releases page</a>.</p>
-<p>While we try to make it obvious when we make breaking changes, there isn't a great mechanism for pushing announcements out to users.  You may want to use this alternative package include: <code>gopkg.in/dgrijalva/jwt-go.v3</code>.  It will do the right thing WRT semantic versioning.</p>
-<p><strong>BREAKING CHANGES:</strong>* 
-* Version 3.0.0 includes <em>a lot</em> of changes from the 2.x line, including a few that break the API.  We've tried to break as few things as possible, so there should just be a few type signature changes.  A full list of breaking changes is available in <code>VERSION_HISTORY.md</code>.  See <code>MIGRATION_GUIDE.md</code> for more information on updating your code.</p>
-<h2 id="usage-tips">Usage Tips<a class="headerlink" href="#usage-tips" title="Permanent link">&para;</a></h2>
-<h3 id="signing-vs-encryption">Signing vs Encryption<a class="headerlink" href="#signing-vs-encryption" title="Permanent link">&para;</a></h3>
-<p>A token is simply a JSON object that is signed by its author. this tells you exactly two things about the data:</p>
+<h3 id="additionally-installed-packages">Additionally installed packages<a class="headerlink" href="#additionally-installed-packages" title="Permanent link">&para;</a></h3>
 <ul>
-<li>The author of the token was in the possession of the signing secret</li>
-<li>The data has not been modified since it was signed</li>
+<li><strong>ssh, curl</strong>: Removed because they are installed in the base image.</li>
+<li><strong>build-essential</strong>: New</li>
 </ul>
-<p>It's important to know that JWT does not provide encryption, which means anyone who has access to the token can read its contents. If you need to protect (encrypt) the data, there is a companion spec, <code>JWE</code>, that provides this functionality. JWE is currently outside the scope of this library.</p>
-<h3 id="choosing-a-signing-method">Choosing a Signing Method<a class="headerlink" href="#choosing-a-signing-method" title="Permanent link">&para;</a></h3>
-<p>There are several signing methods available, and you should probably take the time to learn about the various options before choosing one.  The principal design decision is most likely going to be symmetric vs asymmetric.</p>
-<p>Symmetric signing methods, such as HSA, use only a single secret. This is probably the simplest signing method to use since any <code>[]byte</code> can be used as a valid secret. They are also slightly computationally faster to use, though this rarely is enough to matter. Symmetric signing methods work the best when both producers and consumers of tokens are trusted, or even the same system. Since the same secret is used to both sign and validate tokens, you can't easily distribute the key for validation.</p>
-<p>Asymmetric signing methods, such as RSA, use different keys for signing and verifying tokens. This makes it possible to produce tokens with a private key, and allow any consumer to access the public key for verification.</p>
-<h3 id="signing-methods-and-key-types">Signing Methods and Key Types<a class="headerlink" href="#signing-methods-and-key-types" title="Permanent link">&para;</a></h3>
-<p>Each signing method expects a different object type for its signing keys. See the package documentation for details. Here are the most common ones:</p>
+<h3 id="version-1140-march-15-2022">Version 1.14.0 <small> March 15, 2022</small><a class="headerlink" href="#version-1140-march-15-2022" title="Permanent link">&para;</a></h3>
+<h3 id="installation-scripts_1">Installation scripts<a class="headerlink" href="#installation-scripts_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>The <a href="https://godoc.org/github.com/dgrijalva/jwt-go#SigningMethodHMAC">HMAC signing method</a> (<code>HS256</code>,<code>HS384</code>,<code>HS512</code>) expect <code>[]byte</code> values for signing and validation</li>
-<li>The <a href="https://godoc.org/github.com/dgrijalva/jwt-go#SigningMethodRSA">RSA signing method</a> (<code>RS256</code>,<code>RS384</code>,<code>RS512</code>) expect <code>*rsa.PrivateKey</code> for signing and <code>*rsa.PublicKey</code> for validation</li>
-<li>The <a href="https://godoc.org/github.com/dgrijalva/jwt-go#SigningMethodECDSA">ECDSA signing method</a> (<code>ES256</code>,<code>ES384</code>,<code>ES512</code>) expect <code>*ecdsa.PrivateKey</code> for signing and <code>*ecdsa.PublicKey</code> for validation</li>
+<li><strong>install-snapcraft.sh</strong>: Improve robustness</li>
+<li><strong>install-nodejs-npm.sh</strong>: Install as snap</li>
+<li><strong>install-go.sh</strong>: Install as snap</li>
+<li><strong>install-go.sh</strong>: New</li>
 </ul>
-<h3 id="jwt-and-oauth">JWT and OAuth<a class="headerlink" href="#jwt-and-oauth" title="Permanent link">&para;</a></h3>
-<p>It's worth mentioning that OAuth and JWT are not the same thing. A JWT token is simply a signed JSON object. It can be used anywhere such a thing is useful. There is some confusion, though, as JWT is the most common type of bearer token used in OAuth2 authentication.</p>
-<p>Without going too far down the rabbit hole, here's a description of the interaction of these technologies:</p>
+<h3 id="additionally-installed-packages_1">Additionally installed packages<a class="headerlink" href="#additionally-installed-packages_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>OAuth is a protocol for allowing an identity provider to be separate from the service a user is logging in to. For example, whenever you use Facebook to log into a different service (Yelp, Spotify, etc), you are using OAuth.</li>
-<li>OAuth defines several options for passing around authentication data. One popular method is called a "bearer token". A bearer token is simply a string that <em>should</em> only be held by an authenticated user. Thus, simply presenting this token proves your identity. You can probably derive from here why a JWT might make a good bearer token.</li>
-<li>Because bearer tokens are used for authentication, it's important they're kept secret. This is why transactions that use bearer tokens typically happen over SSL.</li>
+<li><strong>pkg-config</strong>: New</li>
+<li><strong>libzmq3-dev:amd64</strong>: New</li>
+<li><strong>libzmq3-dev:arm64</strong>: New</li>
 </ul>
-<h2 id="more">More<a class="headerlink" href="#more" title="Permanent link">&para;</a></h2>
-<p>Documentation can be found <a href="http://godoc.org/github.com/dgrijalva/jwt-go">on godoc.org</a>.</p>
-<p>The command line utility included in this project (cmd/jwt) provides a straightforward example of token creation and parsing as well as a useful tool for debugging your own integration. You'll also find several implementation examples in the documentation.</p>
 
               
             </article>
+            
           </div>
         </div>
         
@@ -1341,10 +1329,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../../../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "../../../../../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../../../../../assets/javascripts/bundle.3a4b43e5.min.js"></script>
+      <script src="assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

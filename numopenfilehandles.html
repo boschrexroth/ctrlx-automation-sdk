@@ -12,23 +12,65 @@
         <meta name="author" content="Bosch Rexroth AG">
       
       
-        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/setup_windows_wsl_ubuntu.html">
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/numopenfilehandles.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.16">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>Setup ctrlX AUTOMATION Development Environment using Windows WSL - Software Development Kit</title>
+        <title>How to Configure the maximal Number of Open File Handles - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.1c3799f8.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.cc9b2e1e.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
         
       
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 0 1 .25-.25h5.025a.25.25 0 0 1 .177.073l6.25 6.25a.25.25 0 0 1 0 .354l-5.025 5.025a.25.25 0 0 1-.354 0l-6.25-6.25a.25.25 0 0 1-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775zM6 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 0 1 .25-.25h8.5a.25.25 0 0 1 .25.25v7.736a.75.75 0 1 0 1.5 0V1.75A1.75 1.75 0 0 0 11.25 0h-8.5A1.75 1.75 0 0 0 1 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 0 0 0-1.5H2.75a.25.25 0 0 1-.25-.25V1.75zM4.75 4a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5zM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75zm11.774 3.537a.75.75 0 0 0-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 0 0-1.062 1.058l1.943 1.95a.75.75 0 0 0 1.055.008l4.557-4.45z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm6.5-.25A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75zM8 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.489 4.489 0 0 1-.563-1.191 3.833 3.833 0 0 1-.05-2.063 4.636 4.636 0 0 1-2.025-.293.75.75 0 1 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.748.748 0 0 1 1.06 0 .75.75 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.404 2.404 0 0 1-.507-.441 3.063 3.063 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.753.753 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768a85.08 85.08 0 0 0-.317-.265c-.814-.68-1.75-1.462-2.692-2.619a3.74 3.74 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.92 6.085c.081-.16.19-.299.34-.398.145-.097.371-.187.74-.187.28 0 .553.087.738.225A.613.613 0 0 1 9 6.25c0 .177-.04.264-.077.318a.956.956 0 0 1-.277.245c-.076.051-.158.1-.258.161l-.007.004a7.728 7.728 0 0 0-.313.195 2.416 2.416 0 0 0-.692.661.75.75 0 0 0 1.248.832.956.956 0 0 1 .276-.245 6.3 6.3 0 0 1 .26-.16l.006-.004c.093-.057.204-.123.313-.195.222-.149.487-.355.692-.662.214-.32.329-.702.329-1.15 0-.76-.36-1.348-.863-1.725A2.76 2.76 0 0 0 8 4c-.631 0-1.155.16-1.572.438-.413.276-.68.638-.849.977a.75.75 0 1 0 1.342.67z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575L6.457 1.047zM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25-5.25a.75.75 0 0 0-1.5 0v2.5a.75.75 0 0 0 1.5 0v-2.5z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.404 12.596a6.5 6.5 0 1 1 9.192-9.192 6.5 6.5 0 0 1-9.192 9.192zM2.344 2.343a8 8 0 1 0 11.313 11.314A8 8 0 0 0 2.343 2.343zM6.03 4.97a.75.75 0 0 0-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 1 0 1.06 1.06L8 9.06l1.97 1.97a.75.75 0 1 0 1.06-1.06L9.06 8l1.97-1.97a.75.75 0 1 0-1.06-1.06L8 6.94 6.03 4.97z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.561 1.5a.016.016 0 0 0-.01.004L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.02.02 0 0 0-.004-.009.02.02 0 0 0-.006-.006L10.56 1.5zM9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.25 1.25 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.492 3.492 0 0 1 2.441 0l.999-1a.75.75 0 1 1 1.06 1.061l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.013 5.013 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.684 1.684 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06zM6.173 5h3.654A.173.173 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173zM5.25 6.5a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75h-5.5z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 0 1-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 0 1 9.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 0 1-.633 1.153H3.233a.75.75 0 0 1-.633-1.153z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.75 2.5a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5H1.75zm4 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zM2.5 7.75a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 1.5 0v-6z"/></svg>');}</style>
+
     
     
     
@@ -71,7 +113,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#setup-ctrlx-automation-development-environment-using-windows-wsl" class="md-skip">
+        <a href="#how-to-configure-the-maximal-number-of-open-file-handles" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +146,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Setup ctrlX AUTOMATION Development Environment using Windows WSL
+              How to Configure the maximal Number of Open File Handles
             
           </span>
         </div>
@@ -423,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="package-manifest.html" class="md-nav__link">
+      <a href="package-manifest.md" class="md-nav__link">
         Package Manifest
       </a>
     </li>
@@ -584,7 +626,7 @@
   
     <li class="md-nav__item">
       <a href="setup_overview.html" class="md-nav__link">
-        Setup Overview
+        Setup overview
       </a>
     </li>
   
@@ -932,7 +974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="build.html" class="md-nav__link">
+      <a href="build.md" class="md-nav__link">
         Build And Install
       </a>
     </li>
@@ -1113,117 +1155,23 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
-  </a>
-  
-    <nav class="md-nav" aria-label="Overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-wsl" class="md-nav__link">
-    Install WSL
+  <a href="#indroduction" class="md-nav__link">
+    Indroduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-distribution-1804" class="md-nav__link">
-    Install Distribution ( 18.04)
-  </a>
-  
-    <nav class="md-nav" aria-label="Install Distribution ( 18.04)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setup-corporate-proxy-optional" class="md-nav__link">
-    Setup Corporate Proxy (Optional)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#setup-packages" class="md-nav__link">
-    Setup Packages
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dependencies-for-crossbuild-multiarch" class="md-nav__link">
-    Dependencies for Crossbuild (Multiarch)
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-visual-studio-code" class="md-nav__link">
-    Install Visual Studio Code
-  </a>
-  
-    <nav class="md-nav" aria-label="Install Visual Studio Code">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setup-wsl-remote-compilation" class="md-nav__link">
-    Setup WSL Remote Compilation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-the-sdk" class="md-nav__link">
-    Install the SDK
+  <a href="#solution" class="md-nav__link">
+    Solution
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#open-a-project" class="md-nav__link">
-    Open a Project
+  <a href="#complete-example-snap" class="md-nav__link">
+    Complete Example Snap
   </a>
-  
-    <nav class="md-nav" aria-label="Open a Project">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#open-from-the-wsl-terminal" class="md-nav__link">
-    Open from the WSL terminal
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#open-vs-code" class="md-nav__link">
-    Open VS Code
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1239,146 +1187,61 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/setup_windows_wsl_ubuntu.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/numopenfilehandles.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="setup-ctrlx-automation-development-environment-using-windows-wsl">Setup ctrlX AUTOMATION Development Environment using Windows WSL<a class="headerlink" href="#setup-ctrlx-automation-development-environment-using-windows-wsl" title="Permanent link">&para;</a></h1>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Setting up a WSL virtual machine is deprecated because WSL1 does support only Ubuntu 18.04.</p>
-</div>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>This guide shows how to use the Windows Subsystem for Linux (WSL) as an development environment to develop ctrlX AUTOMATION Apps. It allows you to use Visual Studio Code for Windows as your IDE and to compile your program in the WSL running on Windows. This setup gives you a seamless development environment for Linux applications from within you Windows environment.
-This guide is based on Microsoft WSL1. </p>
-<p>For more information about WSL see: <a href="https://docs.microsoft.com/en-us/windows/wsl/">https://docs.microsoft.com/en-us/windows/wsl/</a></p>
-<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<h1 id="how-to-configure-the-maximal-number-of-open-file-handles">How to Configure the maximal Number of Open File Handles<a class="headerlink" href="#how-to-configure-the-maximal-number-of-open-file-handles" title="Permanent link">&para;</a></h1>
+<h2 id="indroduction">Indroduction<a class="headerlink" href="#indroduction" title="Permanent link">&para;</a></h2>
+<p>The maximum number of open file/socket handles is by default limited to 1024. This is not enough for some apps (e.g. connectivity apps or databases).</p>
+<p>The actual settings can be shown with:</p>
+<div class="codehilite"><pre><span></span><code>ulimit -a
+</code></pre></div>
+
+<p>Maximum file handles:</p>
+<div class="codehilite"><pre><span></span><code>cat /proc/sys/fs/file-max
+</code></pre></div>
+
+<p>Allocated, allocated but unused, maximum number of file handles:</p>
+<div class="codehilite"><pre><span></span><code>cat /proc/sys/fs/file-nr
+</code></pre></div>
+
+<h2 id="solution">Solution<a class="headerlink" href="#solution" title="Permanent link">&para;</a></h2>
+<p>For a lot of apps the number of 1024 maximal opened file handles is sufficient.</p>
+<p>If a larger number of opened file handles is required this can be done with the command <code>ulimit</code>, for example:</p>
+<div class="codehilite"><pre><span></span><code>ulimit -n 16384
+</code></pre></div>
+
+<p>Your app should run this command in the startup phase of your app.</p>
+<p>Therefor we recommend to:</p>
 <ul>
-<li>You need to have admin rights on your Windows system to be able to install WSL.</li>
-<li>Windows 10 with all updates.</li>
+<li>Create a script in a sub folder e.g. ulimit-snap/ of your project.</li>
+<li>And to add into your snapcraft.yaml file a daemon entry to call this script at startup.</li>
 </ul>
-<h2 id="install-wsl">Install WSL<a class="headerlink" href="#install-wsl" title="Permanent link">&para;</a></h2>
-<p>Enable Admin access and run PowerShell with Administrator privileges.</p>
-<div class="codehilite"><pre><span></span><code>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+<p><strong>Script to call ulimit:</strong></p>
+<div class="highlight"><pre><span></span><code>#!/bin/sh
+ulimit -n 16384
 </code></pre></div>
+<p><strong>Additional daemon in your snapcraft.yaml file:</strong></p>
+<div class="highlight"><pre><span></span><code>parts:
+  ulimit-script:
+    plugin: dump
+    source: ./ulimit-snap
 
-<p>Follow the instructions and reboot. For troubleshooting, see the official Microsoft documentation: <a href="https://docs.microsoft.com/de-de/windows/wsl/install-win10">https://docs.microsoft.com/de-de/windows/wsl/install-win10</a>  </p>
-<h2 id="install-distribution-1804">Install Distribution ( 18.04)<a class="headerlink" href="#install-distribution-1804" title="Permanent link">&para;</a></h2>
-<p>Download your desired Distribution (Ubuntu 18.04 recommended) from <a href="https://docs.microsoft.com/en-us/windows/wsl/install-manual">https://docs.microsoft.com/en-us/windows/wsl/install-manual</a> and install the archive by executing it from the windows host.</p>
-<p>Wait for the application to install.</p>
-<h3 id="setup-corporate-proxy-optional">Setup Corporate Proxy (Optional)<a class="headerlink" href="#setup-corporate-proxy-optional" title="Permanent link">&para;</a></h3>
-<p>If you are in a corporate environment, which uses a http-Proxy, then you may want to set the proxy configuration to be able to download software from within your distribution.
-For this, you want to run a proxy on your Windows environment and redirect the distribution to this proxy running on localhost. If you are directly connected to a router or the internet, then this step can be skipped.</p>
-<p>A recommended proxy program to be used on your Windows host system is px (<a href="https://github.com/genotrance/px">https://github.com/genotrance/px</a>). Get the latest release of Px for Windows <a href="https://github.com/genotrance/px/releases">https://github.com/genotrance/px/releases</a>. Once the download is finished, run px.exe directly from windows command prompt. Hint: Use flag <code>--install</code> to add Px to the Windows registry to run on startup.</p>
-<p>To set the environment variable in the distribution use:</p>
-<div class="codehilite"><pre><span></span><code>sudo nano /etc/environment
+apps:
+  ulimit:
+    daemon: simple
+    command: increase-ulimit.sh
 </code></pre></div>
-
-<p>Add the following variables:</p>
-<div class="codehilite"><pre><span></span><code>http_proxy=&quot;http://127.0.0.1:3128&quot;
-https_proxy=&quot;http://127.0.0.1:3128&quot;
-HTTP_PROXY=&quot;http://127.0.0.1:3128&quot;
-HTTPS_PROXY=&quot;http://127.0.0.1:3128&quot;
-</code></pre></div>
-
-<p>You need to set this configuration also for <code>wget</code>.</p>
-<div class="codehilite"><pre><span></span><code>sudo nano /etc/wgetrc
-</code></pre></div>
-
-<p>Search for the http proxy settings and make sure you configure:</p>
-<div class="codehilite"><pre><span></span><code>https_proxy = http://127.0.0.1:3128/
-http_proxy = http://127.0.0.1:3128/
-use_proxy = on
-</code></pre></div>
-
-<h3 id="setup-packages">Setup Packages<a class="headerlink" href="#setup-packages" title="Permanent link">&para;</a></h3>
-<p>You might want to update your distribution and install essential packages for development.</p>
-<div class="codehilite"><pre><span></span><code>sudo apt update
-sudo apt upgrade
-sudo apt install ssh zip unzip git curl cifs-utils apt-transport-https ca-certificates openssh-client
-</code></pre></div>
-
-<p>The following packages are needed for software development of ctrlX AUTOMATION apps.</p>
-<div class="codehilite"><pre><span></span><code>sudo apt install crossbuild-essential-arm64 cmake snapcraft gcc gdb
-</code></pre></div>
-
-<p>For Python install the additional python packages.</p>
-<div class="codehilite"><pre><span></span><code>sudo apt-get install python3
-sudo apt-get install python3-pip
-</code></pre></div>
-
-<p>Furthermore, we recommend to use virtual python environments when you are developing python apps. Therefore, you need to install virtualenv:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt-get install virtualenv
-</code></pre></div>
-
-<h3 id="dependencies-for-crossbuild-multiarch">Dependencies for Crossbuild (Multiarch)<a class="headerlink" href="#dependencies-for-crossbuild-multiarch" title="Permanent link">&para;</a></h3>
-<p>Multiarch lets you install library packages from multiple architectures on the some machine. This is useful in various ways, but the most common is installing 64 and 32-bit software on the same machine and having dependencies correctly resolved automatically. In our way, we use multiple architectures. In general, you can have libraries of more than one architecture installed together and applications from one architecture or another installed as alternatives. Additional information can be found here <a href="https://wiki.ubuntu.com/MultiarchSpec">Multiarch</a>.</p>
-<p>Be sure that apt can connect to the internet.</p>
-<p>Run the commands below as root user:</p>
-<div class="codehilite"><pre><span></span><code>sudo dpkg --add-architecture arm64
-sudo sh -c &#39;echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ bionic main restricted universe&quot; &gt;&gt; /etc/apt/sources.list.d/multiarch-libs.list&#39;
-sudo sh -c &#39;echo &quot;deb [arch=arm64] http://ports.ubuntu.com/ bionic-updates main restricted universe&quot; &gt;&gt; /etc/apt/sources.list.d/multiarch-libs.list&#39;
-sudo apt-get clean
-sudo apt-get update
-</code></pre></div>
-
-<p>After apt-get update you might get some warnings like: <code>Failed to fetch http://de.archive.ubuntu.com/ubuntu/dists/bionic/universe/binary-arm64/Packages</code>.
-To avoid it add the vendor with the host architecture <code>[arch=i386,amd64]</code> to all sources of your sources list <code>/etc/apt/sources.list</code>.</p>
-<p>For example:
-<code>deb [arch=i386,amd64] http://de.archive.ubuntu.com/ubuntu/ bionic main restricted</code></p>
-<p>Now it is possible to download packages for other architectures. For building the examples, you need to install additional libraries:</p>
-<div class="codehilite"><pre><span></span><code>sudo apt-get install libsystemd-dev:arm64
-sudo apt-get install libsystemd-dev:amd64
-sudo apt-get install libssl-dev:amd64
-sudo apt-get install libssl-dev:arm64
-</code></pre></div>
-
-<h2 id="install-visual-studio-code">Install Visual Studio Code<a class="headerlink" href="#install-visual-studio-code" title="Permanent link">&para;</a></h2>
-<p>Install Visual Studio Code on your windows environment as described here: https://code.visualstudio.com/</p>
-<h3 id="setup-wsl-remote-compilation">Setup WSL Remote Compilation<a class="headerlink" href="#setup-wsl-remote-compilation" title="Permanent link">&para;</a></h3>
-<p>In order to be able to develop in Windows, but to compile in the WSL you need to install the following extension locally in VS Code: 
-https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack</p>
-<p>To compile all examples of the SDK you will need to install additional extensions on the remote backend. 
-This can be done easily from within VS Code as soon as you open a project. In the extension windows you can press <code>install in WSL</code>.</p>
-<p><img alt="vscode_remote_extensions" src="images/vscode_remote_extensions.png" /></p>
-<p>The extensions you need to install depending on the programming language you want to use. 
-Go to the sample subpage of this documentation to find the required extensions of your preferred programming language.</p>
-<h2 id="install-the-sdk">Install the SDK<a class="headerlink" href="#install-the-sdk" title="Permanent link">&para;</a></h2>
-<p>Copy the complete contents of this SDK into your WSL system. It is recommended to copy the SDK to the <code>home</code> directory of your user. For example: <code>cp -r /mnt/c/sdk.control ~/</code></p>
-<h2 id="open-a-project">Open a Project<a class="headerlink" href="#open-a-project" title="Permanent link">&para;</a></h2>
-<h3 id="open-from-the-wsl-terminal">Open from the WSL terminal<a class="headerlink" href="#open-from-the-wsl-terminal" title="Permanent link">&para;</a></h3>
-<p>Opening a folder inside the Windows Subsystem for Linux in VS Code is very similar to opening up a Windows folder from the command prompt or PowerShell.</p>
-<ol>
-<li>Open a WSL terminal window (using the start menu item or by typing <code>wsl</code> from a command prompt / PowerShell).</li>
-<li>Navigate to a folder you'd like to open in VS Code. For example: <code>cd ~/sdk.control/public/samples-cpp/hello.world</code> </li>
-<li>Type <code>code</code> in the terminal. When doing this for the first time, you should see VS Code fetching components needed to run in WSL. This should only take a short while and is only needed once.</li>
-</ol>
-<h3 id="open-vs-code">Open VS Code<a class="headerlink" href="#open-vs-code" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Start VS Code.</li>
-<li>Press F1, select Remote-WSL: New Window for the default distro or Remote-WSL: New Window using Distro for a specific distro.</li>
-<li>Use the File menu to open your folder.</li>
-</ol>
-<h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
-<h2 id="permissionerror-errno-13-permission-denied-when-calling-snapcraft">PermissionError: [Errno 13] Permission denied when calling snapcraft<a class="headerlink" href="#permissionerror-errno-13-permission-denied-when-calling-snapcraft" title="Permanent link">&para;</a></h2>
-<p>When calling snapcraft in WSL1, there might occur errors regarding file permissions. This happens, when snapcraft is called from a directory which is mounted from the windows host file system (e.g. <code>mnt/c/</code>).
-This is a known problem with the WSL1 files system implementation and will probably be fixed with Microsoft WSL2. Meanwhile, the only solution is to call snapcraft from a subdirectory within your home directory. Therefore
-you might want to copy the sdk to your home directory and compile the projects from there.</p>
-<div class="codehilite"><pre><span></span><code>mkdir -p ~/ctrlx_sdk &amp;&amp; cp -r /mnt/c/path/to/sdk ~/ctrlx_sdk
-</code></pre></div>
-
-<h2 id="no-connection-using-pip3-install-behind-proxy">No connection using pip3 install behind proxy<a class="headerlink" href="#no-connection-using-pip3-install-behind-proxy" title="Permanent link">&para;</a></h2>
-<p>Within the WSL there is a bug using the environment Variables like http_proxy and https_proxy.</p>
-<p>It is possible to solve this with a modified ~/.bashrc
-Add the proxy variables to the .bashrc file in your home directory:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">http_proxy</span><span class="o">=</span><span class="s2">&quot;http://127.0.0.1:3128&quot;</span><span class="w"></span>
-<span class="k">export</span><span class="w"> </span><span class="n">https_proxy</span><span class="o">=</span><span class="s2">&quot;http://127.0.0.1:3128&quot;</span><span class="w"></span>
-</code></pre></div>
+<h2 id="complete-example-snap">Complete Example Snap<a class="headerlink" href="#complete-example-snap" title="Permanent link">&para;</a></h2>
+<p>In this SDK an complete example project creating a demo snap is stored under samples-sh/ulimit-snap.</p>
+<p>The sample project folder also contains a README.md file with further informations.</p>
 
               
             </article>
+            
           </div>
         </div>
         
@@ -1432,10 +1295,10 @@ Add the proxy variables to the .bashrc file in your home directory:</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.3a4b43e5.min.js"></script>
+      <script src="assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>

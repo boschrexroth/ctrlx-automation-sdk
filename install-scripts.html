@@ -12,23 +12,65 @@
         <meta name="author" content="Bosch Rexroth AG">
       
       
-        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/appdata/vendor/github.com/dgrijalva/jwt-go/VERSION_HISTORY.html">
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/install-scripts.html">
       
-      <link rel="icon" href="../../../../../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.16">
+      <link rel="icon" href="assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>VERSION HISTORY - Software Development Kit</title>
+        <title>Install scripts - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.1c3799f8.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../../assets/stylesheets/palette.cc9b2e1e.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
         
       
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 0 1 .25-.25h5.025a.25.25 0 0 1 .177.073l6.25 6.25a.25.25 0 0 1 0 .354l-5.025 5.025a.25.25 0 0 1-.354 0l-6.25-6.25a.25.25 0 0 1-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775zM6 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M2.5 1.75a.25.25 0 0 1 .25-.25h8.5a.25.25 0 0 1 .25.25v7.736a.75.75 0 1 0 1.5 0V1.75A1.75 1.75 0 0 0 11.25 0h-8.5A1.75 1.75 0 0 0 1 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 0 0 0-1.5H2.75a.25.25 0 0 1-.25-.25V1.75zM4.75 4a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5zM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75zm11.774 3.537a.75.75 0 0 0-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 0 0-1.062 1.058l1.943 1.95a.75.75 0 0 0 1.055.008l4.557-4.45z"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm6.5-.25A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75zM8 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.489 4.489 0 0 1-.563-1.191 3.833 3.833 0 0 1-.05-2.063 4.636 4.636 0 0 1-2.025-.293.75.75 0 1 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.748.748 0 0 1 1.06 0 .75.75 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.404 2.404 0 0 1-.507-.441 3.063 3.063 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.753.753 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768a85.08 85.08 0 0 0-.317-.265c-.814-.68-1.75-1.462-2.692-2.619a3.74 3.74 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 1.06-1.06L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.92 6.085c.081-.16.19-.299.34-.398.145-.097.371-.187.74-.187.28 0 .553.087.738.225A.613.613 0 0 1 9 6.25c0 .177-.04.264-.077.318a.956.956 0 0 1-.277.245c-.076.051-.158.1-.258.161l-.007.004a7.728 7.728 0 0 0-.313.195 2.416 2.416 0 0 0-.692.661.75.75 0 0 0 1.248.832.956.956 0 0 1 .276-.245 6.3 6.3 0 0 1 .26-.16l.006-.004c.093-.057.204-.123.313-.195.222-.149.487-.355.692-.662.214-.32.329-.702.329-1.15 0-.76-.36-1.348-.863-1.725A2.76 2.76 0 0 0 8 4c-.631 0-1.155.16-1.572.438-.413.276-.68.638-.849.977a.75.75 0 1 0 1.342.67z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.22 1.754a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368L8.22 1.754zm-1.763-.707c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575L6.457 1.047zM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-.25-5.25a.75.75 0 0 0-1.5 0v2.5a.75.75 0 0 0 1.5 0v-2.5z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M3.404 12.596a6.5 6.5 0 1 1 9.192-9.192 6.5 6.5 0 0 1-9.192 9.192zM2.344 2.343a8 8 0 1 0 11.313 11.314A8 8 0 0 0 2.343 2.343zM6.03 4.97a.75.75 0 0 0-1.06 1.06L6.94 8 4.97 9.97a.75.75 0 1 0 1.06 1.06L8 9.06l1.97 1.97a.75.75 0 1 0 1.06-1.06L9.06 8l1.97-1.97a.75.75 0 1 0-1.06-1.06L8 6.94 6.03 4.97z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.561 1.5a.016.016 0 0 0-.01.004L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.02.02 0 0 0-.004-.009.02.02 0 0 0-.006-.006L10.56 1.5zM9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.25 1.25 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.492 3.492 0 0 1 2.441 0l.999-1a.75.75 0 1 1 1.06 1.061l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.013 5.013 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.684 1.684 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06zM6.173 5h3.654A.173.173 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173zM5.25 6.5a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75h-5.5z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458L5 5.782zM9.5 2.5h-3V6a.75.75 0 0 1-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 0 1 9.5 6V2.5zm-6.9 9.847L3.775 10.5h8.45l1.175 1.847a.75.75 0 0 1-.633 1.153H3.233a.75.75 0 0 1-.633-1.153z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.75 2.5a.75.75 0 0 0 0 1.5h10.5a.75.75 0 0 0 0-1.5H1.75zm4 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zm0 5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5zM2.5 7.75a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 1.5 0v-6z"/></svg>');}</style>
+
     
     
     
@@ -41,9 +83,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../../stylesheets/sdk.css">
+      <link rel="stylesheet" href="stylesheets/sdk.css">
     
-    <script>__md_scope=new URL("../../../../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -71,7 +113,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#jwt-go-version-history" class="md-skip">
+        <a href="#install-sdksh" class="md-skip">
           Skip to content
         </a>
       
@@ -85,7 +127,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../../../index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -104,7 +146,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              VERSION HISTORY
+              Install scripts
             
           </span>
         </div>
@@ -192,7 +234,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../../../../index.html" class="md-tabs__link">
+    <a href="index.html" class="md-tabs__link">
       Home
     </a>
   </li>
@@ -207,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../../../overview.html" class="md-tabs__link">
+      <a href="overview.html" class="md-tabs__link">
         Getting Started
       </a>
     </li>
@@ -223,7 +265,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../../../setup_overview.html" class="md-tabs__link">
+      <a href="setup_overview.html" class="md-tabs__link">
         Setup
       </a>
     </li>
@@ -239,7 +281,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../../../samples.html" class="md-tabs__link">
+      <a href="samples.html" class="md-tabs__link">
         Samples
       </a>
     </li>
@@ -255,7 +297,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../../../references.html" class="md-tabs__link">
+      <a href="references.html" class="md-tabs__link">
         References
       </a>
     </li>
@@ -268,7 +310,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../../../../../about.html" class="md-tabs__link">
+    <a href="about.html" class="md-tabs__link">
       About
     </a>
   </li>
@@ -295,7 +337,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../../../index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -326,7 +368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../index.html" class="md-nav__link">
+      <a href="index.html" class="md-nav__link">
         Home
       </a>
     </li>
@@ -367,7 +409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../overview.html" class="md-nav__link">
+      <a href="overview.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -381,7 +423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../ctrlx_automation.html" class="md-nav__link">
+      <a href="ctrlx_automation.html" class="md-nav__link">
         ctrlX AUTOMATION
       </a>
     </li>
@@ -423,7 +465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../package-manifest.html" class="md-nav__link">
+      <a href="package-manifest.md" class="md-nav__link">
         Package Manifest
       </a>
     </li>
@@ -437,7 +479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../appdevguide.html" class="md-nav__link">
+      <a href="appdevguide.html" class="md-nav__link">
         Developer Guideline
       </a>
     </li>
@@ -451,7 +493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../persistdata.html" class="md-nav__link">
+      <a href="persistdata.html" class="md-nav__link">
         Data Persistence
       </a>
     </li>
@@ -465,7 +507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../licensing.html" class="md-nav__link">
+      <a href="licensing.html" class="md-nav__link">
         License Management
       </a>
     </li>
@@ -479,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../s2sauth.html" class="md-nav__link">
+      <a href="s2sauth.html" class="md-nav__link">
         Service-to-Service Authentication
       </a>
     </li>
@@ -528,7 +570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../changelog.html" class="md-nav__link">
+      <a href="changelog.html" class="md-nav__link">
         Changelog
       </a>
     </li>
@@ -583,8 +625,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_overview.html" class="md-nav__link">
-        Setup Overview
+      <a href="setup_overview.html" class="md-nav__link">
+        Setup overview
       </a>
     </li>
   
@@ -597,7 +639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../quick-start-guide.html" class="md-nav__link">
+      <a href="quick-start-guide.html" class="md-nav__link">
         Quick Start Guide
       </a>
     </li>
@@ -611,7 +653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_qemu_ctrlx_works.html" class="md-nav__link">
+      <a href="setup_qemu_ctrlx_works.html" class="md-nav__link">
         ctrlX WORKS App Build Environment
       </a>
     </li>
@@ -625,7 +667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_qemu_ubuntu.html" class="md-nav__link">
+      <a href="setup_qemu_ubuntu.html" class="md-nav__link">
         QEMU Virtual Machine
       </a>
     </li>
@@ -639,7 +681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
+      <a href="setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
         VirtualBox Virtual Machine
       </a>
     </li>
@@ -653,7 +695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../setup_ubuntu.html" class="md-nav__link">
+      <a href="setup_ubuntu.html" class="md-nav__link">
         Native Ubuntu 20.04
       </a>
     </li>
@@ -695,7 +737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../px.html" class="md-nav__link">
+      <a href="px.html" class="md-nav__link">
         Using Px.exe as Proxy on a Windows Host
       </a>
     </li>
@@ -709,7 +751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../connecting_qemu_vm_ctrlx.html" class="md-nav__link">
+      <a href="connecting_qemu_vm_ctrlx.html" class="md-nav__link">
         Connecting SDK QEMU VMs and ctrlX CORE
       </a>
     </li>
@@ -723,7 +765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../ssh_connection.html" class="md-nav__link">
+      <a href="ssh_connection.html" class="md-nav__link">
         SSH Connection
       </a>
     </li>
@@ -737,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../vscode.html" class="md-nav__link">
+      <a href="vscode.html" class="md-nav__link">
         Visual Studio Code
       </a>
     </li>
@@ -751,7 +793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../dotnet.html" class="md-nav__link">
+      <a href="dotnet.html" class="md-nav__link">
         .NET
       </a>
     </li>
@@ -765,7 +807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../remote-build.html" class="md-nav__link">
+      <a href="remote-build.html" class="md-nav__link">
         Using Snapcraft Remote Build from Canonical
       </a>
     </li>
@@ -820,7 +862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples.html" class="md-nav__link">
+      <a href="samples.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -834,7 +876,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-cpp/index.html" class="md-nav__link">
+      <a href="samples-cpp/index.html" class="md-nav__link">
         Samples C/C++
       </a>
     </li>
@@ -848,7 +890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../index.html" class="md-nav__link">
+      <a href="samples-go/index.html" class="md-nav__link">
         Samples Go
       </a>
     </li>
@@ -862,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-python/index.html" class="md-nav__link">
+      <a href="samples-python/index.html" class="md-nav__link">
         Samples Python
       </a>
     </li>
@@ -876,7 +918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-net/index.html" class="md-nav__link">
+      <a href="samples-net/index.html" class="md-nav__link">
         Samples .NET
       </a>
     </li>
@@ -890,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-node/index.html" class="md-nav__link">
+      <a href="samples-node/index.html" class="md-nav__link">
         Samples Nodejs
       </a>
     </li>
@@ -904,7 +946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-sh/index.html" class="md-nav__link">
+      <a href="samples-sh/index.html" class="md-nav__link">
         Samples Shell
       </a>
     </li>
@@ -918,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../samples-snap/index.html" class="md-nav__link">
+      <a href="samples-snap/index.html" class="md-nav__link">
         Samples Snap
       </a>
     </li>
@@ -932,7 +974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../build.html" class="md-nav__link">
+      <a href="build.md" class="md-nav__link">
         Build And Install
       </a>
     </li>
@@ -946,7 +988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../debug.html" class="md-nav__link">
+      <a href="debug.html" class="md-nav__link">
         Debugging
       </a>
     </li>
@@ -994,7 +1036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../references.html" class="md-nav__link">
+      <a href="references.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1079,7 +1121,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../../about.html" class="md-nav__link">
+      <a href="about.html" class="md-nav__link">
         About
       </a>
     </li>
@@ -1111,113 +1153,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#jwt-go-version-history" class="md-nav__link">
-    jwt-go Version History
-  </a>
-  
-    <nav class="md-nav" aria-label="jwt-go Version History">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#320" class="md-nav__link">
-    3.2.0
+  <a href="#install-sdksh" class="md-nav__link">
+    install-sdk.sh
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#310" class="md-nav__link">
-    3.1.0
+      
+        <li class="md-nav__item">
+  <a href="#install-debsh" class="md-nav__link">
+    install-deb.sh
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#300" class="md-nav__link">
-    3.0.0
+      
+        <li class="md-nav__item">
+  <a href="#install-gosh" class="md-nav__link">
+    install-go.sh
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#270" class="md-nav__link">
-    2.7.0
+      
+        <li class="md-nav__item">
+  <a href="#install-dotnetsh" class="md-nav__link">
+    install-dotnet.sh
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#260" class="md-nav__link">
-    2.6.0
+      
+        <li class="md-nav__item">
+  <a href="#install-nodejs-npmsh" class="md-nav__link">
+    install-nodejs-npm.sh
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#250" class="md-nav__link">
-    2.5.0
+      
+        <li class="md-nav__item">
+  <a href="#install-snapcraftsh" class="md-nav__link">
+    install-snapcraft.sh
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#240" class="md-nav__link">
-    2.4.0
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#230" class="md-nav__link">
-    2.3.0
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#220" class="md-nav__link">
-    2.2.0
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#210" class="md-nav__link">
-    2.1.0
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#200" class="md-nav__link">
-    2.0.0
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#102" class="md-nav__link">
-    1.0.2
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#101" class="md-nav__link">
-    1.0.1
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#100" class="md-nav__link">
-    1.0.0
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1233,142 +1206,61 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/samples-go/appdata/vendor/github.com/dgrijalva/jwt-go/VERSION_HISTORY.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/install-scripts.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-  <h1>VERSION HISTORY</h1>
+  <h1>Install scripts</h1>
 
-<h2 id="jwt-go-version-history"><code>jwt-go</code> Version History<a class="headerlink" href="#jwt-go-version-history" title="Permanent link">&para;</a></h2>
-<h4 id="320">3.2.0<a class="headerlink" href="#320" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Added method <code>ParseUnverified</code> to allow users to split up the tasks of parsing and validation</li>
-<li>HMAC signing method returns <code>ErrInvalidKeyType</code> instead of <code>ErrInvalidKey</code> where appropriate</li>
-<li>Added options to <code>request.ParseFromRequest</code>, which allows for an arbitrary list of modifiers to parsing behavior. Initial set include <code>WithClaims</code> and <code>WithParser</code>. Existing usage of this function will continue to work as before.</li>
-<li>Deprecated <code>ParseFromRequestWithClaims</code> to simplify API in the future.</li>
-</ul>
-<h4 id="310">3.1.0<a class="headerlink" href="#310" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Improvements to <code>jwt</code> command line tool</li>
-<li>Added <code>SkipClaimsValidation</code> option to <code>Parser</code></li>
-<li>Documentation updates</li>
-</ul>
-<h4 id="300">3.0.0<a class="headerlink" href="#300" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>Compatibility Breaking Changes</strong>: See MIGRATION_GUIDE.md for tips on updating your code<ul>
-<li>Dropped support for <code>[]byte</code> keys when using RSA signing methods.  This convenience feature could contribute to security vulnerabilities involving mismatched key types with signing methods.</li>
-<li><code>ParseFromRequest</code> has been moved to <code>request</code> subpackage and usage has changed</li>
-<li>The <code>Claims</code> property on <code>Token</code> is now type <code>Claims</code> instead of <code>map[string]interface{}</code>.  The default value is type <code>MapClaims</code>, which is an alias to <code>map[string]interface{}</code>.  This makes it possible to use a custom type when decoding claims.</li>
-</ul>
-</li>
-<li>Other Additions and Changes<ul>
-<li>Added <code>Claims</code> interface type to allow users to decode the claims into a custom type</li>
-<li>Added <code>ParseWithClaims</code>, which takes a third argument of type <code>Claims</code>.  Use this function instead of <code>Parse</code> if you have a custom type you'd like to decode into.</li>
-<li>Dramatically improved the functionality and flexibility of <code>ParseFromRequest</code>, which is now in the <code>request</code> subpackage</li>
-<li>Added <code>ParseFromRequestWithClaims</code> which is the <code>FromRequest</code> equivalent of <code>ParseWithClaims</code></li>
-<li>Added new interface type <code>Extractor</code>, which is used for extracting JWT strings from http requests.  Used with <code>ParseFromRequest</code> and <code>ParseFromRequestWithClaims</code>.</li>
-<li>Added several new, more specific, validation errors to error type bitmask</li>
-<li>Moved examples from README to executable example files</li>
-<li>Signing method registry is now thread safe</li>
-<li>Added new property to <code>ValidationError</code>, which contains the raw error returned by calls made by parse/verify (such as those returned by keyfunc or json parser)</li>
-</ul>
-</li>
-</ul>
-<h4 id="270">2.7.0<a class="headerlink" href="#270" title="Permanent link">&para;</a></h4>
-<p>This will likely be the last backwards compatible release before 3.0.0, excluding essential bug fixes.</p>
-<ul>
-<li>Added new option <code>-show</code> to the <code>jwt</code> command that will just output the decoded token without verifying</li>
-<li>Error text for expired tokens includes how long it's been expired</li>
-<li>Fixed incorrect error returned from <code>ParseRSAPublicKeyFromPEM</code></li>
-<li>Documentation updates</li>
-</ul>
-<h4 id="260">2.6.0<a class="headerlink" href="#260" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Exposed inner error within ValidationError</li>
-<li>Fixed validation errors when using UseJSONNumber flag</li>
-<li>Added several unit tests</li>
-</ul>
-<h4 id="250">2.5.0<a class="headerlink" href="#250" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Added support for signing method none.  You shouldn't use this.  The API tries to make this clear.</li>
-<li>Updated/fixed some documentation</li>
-<li>Added more helpful error message when trying to parse tokens that begin with <code>BEARER</code></li>
-</ul>
-<h4 id="240">2.4.0<a class="headerlink" href="#240" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Added new type, Parser, to allow for configuration of various parsing parameters<ul>
-<li>You can now specify a list of valid signing methods.  Anything outside this set will be rejected.</li>
-<li>You can now opt to use the <code>json.Number</code> type instead of <code>float64</code> when parsing token JSON</li>
-</ul>
-</li>
-<li>Added support for <a href="https://travis-ci.org/dgrijalva/jwt-go">Travis CI</a></li>
-<li>Fixed some bugs with ECDSA parsing</li>
-</ul>
-<h4 id="230">2.3.0<a class="headerlink" href="#230" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Added support for ECDSA signing methods</li>
-<li>Added support for RSA PSS signing methods (requires go v1.4)</li>
-</ul>
-<h4 id="220">2.2.0<a class="headerlink" href="#220" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Gracefully handle a <code>nil</code> <code>Keyfunc</code> being passed to <code>Parse</code>.  Result will now be the parsed token and an error, instead of a panic.</li>
-</ul>
-<h4 id="210">2.1.0<a class="headerlink" href="#210" title="Permanent link">&para;</a></h4>
-<p>Backwards compatible API change that was missed in 2.0.0.</p>
-<ul>
-<li>The <code>SignedString</code> method on <code>Token</code> now takes <code>interface{}</code> instead of <code>[]byte</code></li>
-</ul>
-<h4 id="200">2.0.0<a class="headerlink" href="#200" title="Permanent link">&para;</a></h4>
-<p>There were two major reasons for breaking backwards compatibility with this update.  The first was a refactor required to expand the width of the RSA and HMAC-SHA signing implementations.  There will likely be no required code changes to support this change.</p>
-<p>The second update, while unfortunately requiring a small change in integration, is required to open up this library to other signing methods.  Not all keys used for all signing methods have a single standard on-disk representation.  Requiring <code>[]byte</code> as the type for all keys proved too limiting.  Additionally, this implementation allows for pre-parsed tokens to be reused, which might matter in an application that parses a high volume of tokens with a small set of keys.  Backwards compatibilty has been maintained for passing <code>[]byte</code> to the RSA signing methods, but they will also accept <code>*rsa.PublicKey</code> and <code>*rsa.PrivateKey</code>.</p>
-<p>It is likely the only integration change required here will be to change <code>func(t *jwt.Token) ([]byte, error)</code> to <code>func(t *jwt.Token) (interface{}, error)</code> when calling <code>Parse</code>.</p>
-<ul>
-<li><strong>Compatibility Breaking Changes</strong><ul>
-<li><code>SigningMethodHS256</code> is now <code>*SigningMethodHMAC</code> instead of <code>type struct</code></li>
-<li><code>SigningMethodRS256</code> is now <code>*SigningMethodRSA</code> instead of <code>type struct</code></li>
-<li><code>KeyFunc</code> now returns <code>interface{}</code> instead of <code>[]byte</code></li>
-<li><code>SigningMethod.Sign</code> now takes <code>interface{}</code> instead of <code>[]byte</code> for the key</li>
-<li><code>SigningMethod.Verify</code> now takes <code>interface{}</code> instead of <code>[]byte</code> for the key</li>
-</ul>
-</li>
-<li>Renamed type <code>SigningMethodHS256</code> to <code>SigningMethodHMAC</code>.  Specific sizes are now just instances of this type.<ul>
-<li>Added public package global <code>SigningMethodHS256</code></li>
-<li>Added public package global <code>SigningMethodHS384</code></li>
-<li>Added public package global <code>SigningMethodHS512</code></li>
-</ul>
-</li>
-<li>Renamed type <code>SigningMethodRS256</code> to <code>SigningMethodRSA</code>.  Specific sizes are now just instances of this type.<ul>
-<li>Added public package global <code>SigningMethodRS256</code></li>
-<li>Added public package global <code>SigningMethodRS384</code></li>
-<li>Added public package global <code>SigningMethodRS512</code></li>
-</ul>
-</li>
-<li>Moved sample private key for HMAC tests from an inline value to a file on disk.  Value is unchanged.</li>
-<li>Refactored the RSA implementation to be easier to read</li>
-<li>Exposed helper methods <code>ParseRSAPrivateKeyFromPEM</code> and <code>ParseRSAPublicKeyFromPEM</code></li>
-</ul>
-<h4 id="102">1.0.2<a class="headerlink" href="#102" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Fixed bug in parsing public keys from certificates</li>
-<li>Added more tests around the parsing of keys for RS256</li>
-<li>Code refactoring in RS256 implementation.  No functional changes</li>
-</ul>
-<h4 id="101">1.0.1<a class="headerlink" href="#101" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Fixed panic if RS256 signing method was passed an invalid key</li>
-</ul>
-<h4 id="100">1.0.0<a class="headerlink" href="#100" title="Permanent link">&para;</a></h4>
-<ul>
-<li>First versioned release</li>
-<li>API stabilized</li>
-<li>Supports creating, signing, parsing, and validating JWT tokens</li>
-<li>Supports RS256 and HS256 signing methods</li>
-</ul>
+<p>An App Build Environment instance created by ctrlX WORKS or based on the scripts under the SDK folder public/scripts/environment has a set of important install scripts in the directory <strong>/home/boschrexroth/.</strong></p>
+<h2 id="install-sdksh">install-sdk.sh<a class="headerlink" href="#install-sdksh" title="Permanent link">&para;</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Starting this script must be the first step using a new App Build Environment. </p>
+</div>
+<p>This script downloads the ctrlX AUTOMATION SDK archive from github, extracts the content into the actual directory, sets some x permission flags and installs the ctrlx-datalayer debian package.</p>
+<p>Also snapcraft is installed because in the initialization phase during the first boot this snap cannot be installed.</p>
+<p>Here the archive is directly installed into the home directory:</p>
+<div class="codehilite"><pre><span></span><code>cd 
+./install-sdk.sh
+cd ctrlx-automation-sdk
+</code></pre></div>
+
+<h2 id="install-debsh">install-deb.sh<a class="headerlink" href="#install-debsh" title="Permanent link">&para;</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Calling this script once is mandatory for architectural cross-builds of C++ apps.</p>
+<p>cd
+./install-deb.sh</p>
+</div>
+<p>Important libraries for the Data Layer communication are installed for both amd64 and arm64 (aarch64) architecture.</p>
+<h2 id="install-gosh">install-go.sh<a class="headerlink" href="#install-gosh" title="Permanent link">&para;</a></h2>
+<p>If you want to develop apps in golang call this script:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">cd</span><span class="w"></span>
+<span class="p">.</span><span class="o">/</span><span class="n">install</span><span class="o">-</span><span class="k">go</span><span class="p">.</span><span class="n">sh</span><span class="w"></span>
+</code></pre></div>
+
+<h2 id="install-dotnetsh">install-dotnet.sh<a class="headerlink" href="#install-dotnetsh" title="Permanent link">&para;</a></h2>
+<p>If you want to develop apps in C# call this script:</p>
+<div class="codehilite"><pre><span></span><code>cd
+./install-dotnet.sh
+</code></pre></div>
+
+<h2 id="install-nodejs-npmsh">install-nodejs-npm.sh<a class="headerlink" href="#install-nodejs-npmsh" title="Permanent link">&para;</a></h2>
+<p>If you want to develop apps in Node.js call this script:</p>
+<div class="codehilite"><pre><span></span><code>cd
+./install-nodejs-npm.sh
+</code></pre></div>
+
+<p>The Node.js snap inclusively the Node Package Manager npm ist installed.</p>
+<h2 id="install-snapcraftsh">install-snapcraft.sh<a class="headerlink" href="#install-snapcraftsh" title="Permanent link">&para;</a></h2>
+<p>This script installs snapcraft, it is called implicitly by the other scripts.</p>
 
               
             </article>
+            
           </div>
         </div>
         
@@ -1422,10 +1314,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../../../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "../../../../../../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../../../../../assets/javascripts/bundle.3a4b43e5.min.js"></script>
+      <script src="assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>
