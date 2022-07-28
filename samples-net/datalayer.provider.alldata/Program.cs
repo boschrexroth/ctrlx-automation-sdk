@@ -30,7 +30,6 @@ namespace Samples.Datalayer.Provider.Alldata
     using FlatBuffers;
     using sample.schema;
     using System;
-    using System.Diagnostics;
     using System.IO;
     using System.Threading;
 
@@ -39,45 +38,17 @@ namespace Samples.Datalayer.Provider.Alldata
     /// </summary>
     internal class Program
     {
-        // This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:DATALAYER_PORT?sslport=SSL_PORT
-        // Please check and change according your environment:
-        // - USER:        Enter your user name here - default is boschrexroth
-        // - PASSWORD:    Enter your password here - default is boschrexroth
-        // - IP_ADDRESS:
-        //   127.0.0.1    If you develop on your (Windows) host and you want to connect to a ctrlX CORE virtual with port forwarding
-        //   10.0.2.2     If you develop on a VM (QEMU, Virtual Box) and you want to connect to a ctrlX virtual with port forwarding
-        //   192.168.1.1  If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-        // - DATALAYER_PORT:
-        //   2069         The ctrlX Data Layer client port
-        //   2070         The ctrlX Data Layer provider port
-        // - SSL_PORT:
-        //   443          Default SSL Port if you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-        //   8443         Default forwarded SSL Port if you are using a ctrlX CORE virtual
-
-        // Please change the following constants according to your environment
-        private const string USER = "boschrexroth";
-        private const string PASSWORD = "boschrexroth";
-        private const string IP_ADDRESS = "10.0.2.2";
-        private const int SSL_PORT = 8443;
-
         // Please define node folder names in ctrlX Data Layer
         private const string ROOT = "samples/dotnet/all-data";
         private const string STATIC = "static";
         private const string DYNAMIC = "dynamic";
 
         /// <summary>
-        /// The Main.
+        /// The Main method is the entry point of an executable app.
         /// </summary>
         /// <param name="args">The args<see cref="string[]"/>.</param>
         internal static void Main(string[] args)
         {
-            //Add app exit handler to handle optional clean up
-            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
-
-            // Check if the process is running inside a snap 
-            var isSnapped = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP"));
-            Console.WriteLine($"Running inside snap: {isSnapped}");
-
             // Create a new ctrlX Data Layer system
             using var system = new DatalayerSystem();
 
@@ -85,33 +56,36 @@ namespace Samples.Datalayer.Provider.Alldata
             system.Start();
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Set remote connection string for provider with inter-process communication (ipc) protocol if running in snap, otherwise tcp
-            var remote = isSnapped ? "ipc://" : $"tcp://{USER}:{PASSWORD}@{IP_ADDRESS}?sslport={SSL_PORT}";
+            // Create a connection string with the parameters according to your environment (see DatalayerHelper class)
+            var connectionString = DatalayerHelper.GetConnectionString(ip: "192.168.1.1", sslPort: 443);
 
             // Create the provider with remote connection string
-            using var provider = system.Factory.CreateProvider(remote);
+            using var provider = system.Factory.CreateProvider(connectionString);
 
             // Register type with binary flatbuffers schema file: sampleSchema.bfbs (auto generated from sampleSchema.fbs by flatc compiler)
             var resultRegisterType = provider.RegisterType(DataTypes.InertialValue.Address, Path.Combine(AppContext.BaseDirectory, "sampleSchema.bfbs"));
             Console.WriteLine($"Registering Type with address='{DataTypes.InertialValue.Address}', result='{resultRegisterType}'");
 
+            var utcNow = DateTime.UtcNow;
 
             // Create the static nodes
             var staticNodes = new[]
             {
-               CreateStaticNode( new Variant(false), DataTypes.Bool8),
-               CreateStaticNode( new Variant(sbyte.MaxValue), DataTypes.Int8),
-               CreateStaticNode( new Variant(byte.MaxValue), DataTypes.Uint8),
+               CreateStaticNode(new Variant(false), DataTypes.Bool8),
+               CreateStaticNode(new Variant(sbyte.MaxValue), DataTypes.Int8),
+               CreateStaticNode(new Variant(byte.MaxValue), DataTypes.Uint8),
                CreateStaticNode(new Variant(short.MaxValue), DataTypes.Int16),
-               CreateStaticNode( new Variant(ushort.MaxValue), DataTypes.Uint16),
-               CreateStaticNode( new Variant(int.MaxValue), DataTypes.Int32),
-               CreateStaticNode( new Variant(uint.MaxValue), DataTypes.Uint32),
-               CreateStaticNode( new Variant(long.MaxValue), DataTypes.Int64),
-               CreateStaticNode( new Variant(ulong.MaxValue), DataTypes.Uint64),
-               CreateStaticNode( new Variant(float.MaxValue), DataTypes.Float32),
-               CreateStaticNode( new Variant(double.MaxValue), DataTypes.Float64),
-               CreateStaticNode( new Variant("String_0"), DataTypes.String),
-               CreateStaticNode( CreateInertialValue(30, -442, 911), DataTypes.InertialValue),
+               CreateStaticNode(new Variant(ushort.MaxValue), DataTypes.Uint16),
+               CreateStaticNode(new Variant(int.MaxValue), DataTypes.Int32),
+               CreateStaticNode(new Variant(uint.MaxValue), DataTypes.Uint32),
+               CreateStaticNode(new Variant(long.MaxValue), DataTypes.Int64),
+               CreateStaticNode(new Variant(ulong.MaxValue), DataTypes.Uint64),
+               CreateStaticNode(new Variant(float.MaxValue), DataTypes.Float32),
+               CreateStaticNode(new Variant(double.MaxValue), DataTypes.Float64),
+               CreateStaticNode(new Variant("String_0"), DataTypes.String),
+               CreateStaticNode(new Variant(utcNow), DataTypes.Timestamp),
+               CreateStaticNode(CreateInertialValue(30, -442, 911), DataTypes.InertialValue),
+
                CreateStaticNode(new Variant(new bool[] {true, false, true}), DataTypes.ArrayOfBool8),
                CreateStaticNode(new Variant(new sbyte[] { sbyte.MinValue, -1, 0, sbyte.MaxValue }), DataTypes.ArrayOfInt8),
                CreateStaticNode(new Variant(new byte[] {byte.MinValue, byte.MaxValue}), DataTypes.ArrayOfUint8),
@@ -123,7 +97,8 @@ namespace Samples.Datalayer.Provider.Alldata
                CreateStaticNode(new Variant(new ulong[]{ ulong.MinValue, ulong.MaxValue }), DataTypes.ArrayOfUint64),
                CreateStaticNode(new Variant(new float[] {float.MinValue, -1.0f, 0.0f, float.MaxValue}), DataTypes.ArrayOfFloat32),
                CreateStaticNode(new Variant(new double[]{ double.MinValue, -1.0, 0.0, double.MaxValue }), DataTypes.ArrayOfFloat64),
-               CreateStaticNode(new Variant(new string[] { "Blue", "Red", "Orange", "Yellow" }), DataTypes.ArrayOfString)
+               CreateStaticNode(new Variant(new string[] { "Blue", "Red", "Orange", "Yellow" }), DataTypes.ArrayOfString),
+               CreateStaticNode(new Variant(new DateTime[] { utcNow, DateTime.Now, DateTime.Today }), DataTypes.ArrayOfTimestamp)
             };
 
             // Register all static nodes with ReadOnlyNodeHandler
@@ -148,6 +123,7 @@ namespace Samples.Datalayer.Provider.Alldata
                 CreateDynamicNode(new Variant(0f), DataTypes.Float32),
                 CreateDynamicNode(new Variant(0.0), DataTypes.Float64),
                 CreateDynamicNode(new Variant("String_0"), DataTypes.String),
+                CreateDynamicNode(new Variant(utcNow), DataTypes.Timestamp),
                 CreateDynamicNode(CreateInertialValue(0,0,0), DataTypes.InertialValue),
                 CreateDynamicNode(new Variant(new bool[] {true, false, true, false, true, false, true, false, true, false }), DataTypes.ArrayOfBool8),
                 CreateDynamicNode(new Variant(new sbyte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }), DataTypes.ArrayOfInt8),
@@ -160,7 +136,8 @@ namespace Samples.Datalayer.Provider.Alldata
                 CreateDynamicNode(new Variant(new ulong[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }), DataTypes.ArrayOfUint64),
                 CreateDynamicNode(new Variant(new float[] {0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f }), DataTypes.ArrayOfFloat32),
                 CreateDynamicNode(new Variant(new double[] {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 }), DataTypes.ArrayOfFloat64),
-                CreateDynamicNode(new Variant(new string[] { "String_0", "String_1", "String_2", "String_3", "String_4", "String_5", "String_6", "String_7", "String_8", "String_9" }), DataTypes.ArrayOfString)
+                CreateDynamicNode(new Variant(new string[] { "String_0", "String_1", "String_2", "String_3", "String_4", "String_5", "String_6", "String_7", "String_8", "String_9" }), DataTypes.ArrayOfString),
+                CreateDynamicNode(new Variant(new DateTime[] { utcNow, utcNow, utcNow, utcNow, utcNow, utcNow, utcNow, utcNow }), DataTypes.ArrayOfTimestamp)
             };
 
             // Register all dynamic nodes with ReadWriteNodeHandler
@@ -188,21 +165,16 @@ namespace Samples.Datalayer.Provider.Alldata
             // Just keep the process running
             while (true)
             {
-                if (provider.IsConnected)
-                {
-                    var sw = Stopwatch.StartNew();
-                    sw.Start();
-                    // Change dynamic nodes value every 1000 milliseconds.
-                    foreach (var node in dynamicNodes)
-                    {
-                        node.ChangeValue();
-                    }
-                    sw.Stop();
-                    Console.WriteLine($"Change value elapsed ms: {sw.Elapsed.TotalMilliseconds}");
-                }
-                else
+                if (!provider.IsConnected)
                 {
                     Console.WriteLine("Provider is disconnected: skip changing values of dynamic nodes.");
+                    continue;
+                }
+
+                // Change dynamic nodes value every 1000 milliseconds.
+                foreach (var node in dynamicNodes)
+                {
+                    node.ChangeValue(utcNow);
                 }
 
                 Thread.Sleep(1000);
@@ -211,7 +183,7 @@ namespace Samples.Datalayer.Provider.Alldata
 
 
         /// <summary>
-        /// The CreateStaticNode.
+        /// Creates a static node.
         /// </summary>
         /// <param name="value">The value<see cref="IVariant"/>.</param>
         /// <param name="dataType">The dataType<see cref="DataType"/>.</param>
@@ -231,7 +203,7 @@ namespace Samples.Datalayer.Provider.Alldata
         }
 
         /// <summary>
-        /// The CreateDynamicNode.
+        /// Creates a dynamic node.
         /// </summary>
         /// <param name="value">The value<see cref="IVariant"/>.</param>
         /// <param name="dataType">The dataType<see cref="DataType"/>.</param>
@@ -240,7 +212,7 @@ namespace Samples.Datalayer.Provider.Alldata
             var address = $"{ROOT}/{DYNAMIC}/{dataType.Name}";
             var description = $"{DYNAMIC} data with type {dataType.Name}";
 
-            var metaData = new MetadataBuilder(AllowedOperationFlags.Read , description)
+            var metaData = new MetadataBuilder(AllowedOperationFlags.Read, description)
                   .SetNodeClass(NodeClass.Variable)
                   .AddReference(ReferenceType.ReadType, dataType.Address)
                   .Build();
@@ -249,7 +221,7 @@ namespace Samples.Datalayer.Provider.Alldata
         }
 
         /// <summary>
-        /// The CreateInertialValue.
+        /// Creates an InertialValue flatbuffers.
         /// </summary>
         /// <param name="x">The x<see cref="short"/>.</param>
         /// <param name="y">The y<see cref="short"/>.</param>
@@ -261,16 +233,6 @@ namespace Samples.Datalayer.Provider.Alldata
             var offset = InertialValue.CreateInertialValue(builder, x, y, z);
             builder.Finish(offset.Value);
             return new Variant(builder);
-        }
-
-        /// <summary>
-        /// The CurrentDomain_ProcessExit.
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object"/>.</param>
-        /// <param name="e">The e<see cref="EventArgs"/>.</param>
-        private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
-        {
-            Console.WriteLine("Application exit");
         }
     }
 }

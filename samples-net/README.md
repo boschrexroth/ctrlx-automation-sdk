@@ -1,4 +1,3 @@
-# .NET Samples
 ![.NET](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.NET_Logo.svg/120px-.NET_Logo.svg.png)
 
 ## Find out the supported samples
@@ -14,4 +13,6 @@
 * [Diagnostics Logbook](./diagnostics.logbook/README.md)
 * [Hello ASP.NET](./hello.web.asp/README.md)
 
+## Build a Snap
 
+See [Samples Overview](../samples.md)

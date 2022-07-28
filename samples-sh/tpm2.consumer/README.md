@@ -2,7 +2,7 @@
 
 The sample app __tpm2.consumer__ shows the basic usage of a TPM2 inside your application.
 
-Also see ["TPM2"](./tpm2.md).
+Also see [TPM2](../../tpm2.md).
 
 ## Introduction
 

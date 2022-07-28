@@ -10,12 +10,16 @@ class InertialValue(object):
     __slots__ = ['_tab']
 
     @classmethod
-    def GetRootAsInertialValue(cls, buf, offset=0):
+    def GetRootAs(cls, buf, offset=0):
         n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, offset)
         x = InertialValue()
         x.Init(buf, n + offset)
         return x
 
+    @classmethod
+    def GetRootAsInertialValue(cls, buf, offset=0):
+        """This method is deprecated. Please switch to GetRootAs."""
+        return cls.GetRootAs(buf, offset)
     # InertialValue
     def Init(self, buf, pos):
         self._tab = flatbuffers.table.Table(buf, pos)
@@ -42,7 +46,54 @@ class InertialValue(object):
         return 0
 
 def InertialValueStart(builder): builder.StartObject(3)
+def Start(builder):
+    return InertialValueStart(builder)
 def InertialValueAddX(builder, x): builder.PrependInt16Slot(0, x, 0)
+def AddX(builder, x):
+    return InertialValueAddX(builder, x)
 def InertialValueAddY(builder, y): builder.PrependInt16Slot(1, y, 0)
+def AddY(builder, y):
+    return InertialValueAddY(builder, y)
 def InertialValueAddZ(builder, z): builder.PrependInt16Slot(2, z, 0)
+def AddZ(builder, z):
+    return InertialValueAddZ(builder, z)
 def InertialValueEnd(builder): return builder.EndObject()
+def End(builder):
+    return InertialValueEnd(builder)
+
+class InertialValueT(object):
+
+    # InertialValueT
+    def __init__(self):
+        self.x = 0  # type: int
+        self.y = 0  # type: int
+        self.z = 0  # type: int
+
+    @classmethod
+    def InitFromBuf(cls, buf, pos):
+        inertialValue = InertialValue()
+        inertialValue.Init(buf, pos)
+        return cls.InitFromObj(inertialValue)
+
+    @classmethod
+    def InitFromObj(cls, inertialValue):
+        x = InertialValueT()
+        x._UnPack(inertialValue)
+        return x
+
+    # InertialValueT
+    def _UnPack(self, inertialValue):
+        if inertialValue is None:
+            return
+        self.x = inertialValue.X()
+        self.y = inertialValue.Y()
+        self.z = inertialValue.Z()
+
+    # InertialValueT
+    def Pack(self, builder):
+        InertialValueStart(builder)
+        InertialValueAddX(builder, self.x)
+        InertialValueAddY(builder, self.y)
+        InertialValueAddZ(builder, self.z)
+        inertialValue = InertialValueEnd(builder)
+        return inertialValue

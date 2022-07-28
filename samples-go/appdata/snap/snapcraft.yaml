@@ -41,7 +41,7 @@ parts:
           export GOARCH=amd64
           ;;
       esac
-      go build -o ../install/bin/ ./...
+      go build -buildvcs=false -o ../install/bin/ ./...
       
   configs:
     source: ./configs

@@ -32,9 +32,6 @@ namespace Samples.Appdata
     {
         static void Main(string[] args)
         {
-            //Add app exit handler to handle optional clean up
-            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
-
             //Create the application
             var myApplication = new MyApplication();
 
@@ -54,21 +51,6 @@ namespace Samples.Appdata
             //Stop the application
             myApplication.Stop();
             Console.WriteLine($"App exiting");
-        }
-        private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
-        {
-            Console.WriteLine("Application exit");
-
-            //The EventHandler for this event can perform termination activities, such as closing files, releasing storage and so on, before the process ends.
-
-            //Note:
-            //In.NET Framework, the total execution time of all ProcessExit event handlers is limited,
-            //just as the total execution time of all finalizers is limited at process shutdown.
-            //The default is two seconds. An unmanaged host can change this execution time by calling the ICLRPolicyManager::SetTimeout method with the OPR_ProcessExit enumeration value.
-            //This time limit does not exist in .NET Core.
-
-            // Your optional clean up code goes here ... 
-            //...
         }
     }
 }

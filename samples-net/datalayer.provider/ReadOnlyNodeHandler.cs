@@ -48,7 +48,7 @@ namespace Samples.Datalayer.Provider
         }
 
         /// <summary>
-        /// The OnCreate.
+        /// The OnCreate callback handler.
         /// </summary>
         /// <param name="address">The address<see cref="string"/>.</param>
         /// <param name="args">The args<see cref="IVariant"/>.</param>
@@ -60,7 +60,7 @@ namespace Samples.Datalayer.Provider
         }
 
         /// <summary>
-        /// The OnRemove.
+        /// The OnRemove callback handler.
         /// </summary>
         /// <param name="address">The address<see cref="string"/>.</param>
         /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
@@ -71,7 +71,7 @@ namespace Samples.Datalayer.Provider
         }
 
         /// <summary>
-        /// The OnBrowse.
+        /// The OnBrowse callback handler.
         /// </summary>
         /// <param name="address">The address<see cref="string"/>.</param>
         /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>
@@ -82,7 +82,7 @@ namespace Samples.Datalayer.Provider
         }
 
         /// <summary>
-        /// The OnRead.
+        /// The OnRead callback handler.
         /// </summary>
         /// <param name="address">The address<see cref="string"/>.</param>
         /// <param name="args">The args<see cref="IVariant"/>.</param>
@@ -94,7 +94,7 @@ namespace Samples.Datalayer.Provider
         }
 
         /// <summary>
-        /// The OnWrite.
+        /// The OnWrite callback handler.
         /// </summary>
         /// <param name="address">The address<see cref="string"/>.</param>
         /// <param name="writeValue">The writeValue<see cref="IVariant"/>.</param>
@@ -106,7 +106,7 @@ namespace Samples.Datalayer.Provider
         }
 
         /// <summary>
-        /// The OnMetadata.
+        /// The OnMetadata callback handler.
         /// </summary>
         /// <param name="address">The address<see cref="string"/>.</param>
         /// <param name="result">The result<see cref="IProviderNodeResult"/>.</param>

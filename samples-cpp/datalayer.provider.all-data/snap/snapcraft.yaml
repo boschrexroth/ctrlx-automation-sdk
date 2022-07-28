@@ -9,7 +9,7 @@ grade: stable
 summary: SDK sample app in cpp - provides Data Layer nodes with different data types
 description: |
   This app provides two Data Layer branches, each branch initialy has nodes with all simple data types and one flatbuffers type.
-  The 'static' branch allows only read access. 
+  The 'static' branch allows only read access.
   The 'dynamic' branch allows read and write access of each node.
   Furthermore nodes can be added.
 title: sdk-cpp-alldata
@@ -21,13 +21,13 @@ apps:
   allDataProvider:
     command: allDataProvider
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: 
+    plugs:
       - network
       - datalayer
     daemon: simple
     passthrough:
       restart-condition: always
-      restart-delay: 10s 
+      restart-delay: 10s
 
 parts:
   alldataprovider:
@@ -39,25 +39,24 @@ parts:
   flatbuffers:
     plugin: dump
     source: ./bfbs
-  
-  deb:
-    plugin: dump
-    source: ./tmp/ctrlx-datalayer.deb
-    source-type: deb
-    stage-packages:
-      - libzmq5
-    override-pull: |
-      mkdir -p ../../../tmp/
-      cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
-      snapcraftctl pull
-    override-prime: |
-      rm -rf ../tmp
-      snapcraftctl prime
 
+  deb:
+      plugin: dump
+      source: ./tmp/ctrlx-datalayer.deb
+      source-type: deb
+      stage-packages:
+        - libzmq5
+      override-pull: |
+        mkdir -p ../../../tmp/
+        cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
+        snapcraftctl pull
+      override-prime: |
+        rm -rf ../tmp
+        snapcraftctl prime
 
 # describes which interface slots are supported by defining the plugs
 plugs:
   datalayer:
     interface: content
     content: datalayer
-    target: $SNAP_DATA/.datalayer 
+    target: $SNAP_DATA/.datalayer

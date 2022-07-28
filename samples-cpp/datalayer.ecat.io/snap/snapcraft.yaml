@@ -17,14 +17,14 @@ apps:
   datalayerecatio:
     command: datalayerEcatio
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: 
+    plugs:
       - network
       - datalayer
       - system-files
     daemon: simple
     passthrough:
       restart-condition: always
-      restart-delay: 10s 
+      restart-delay: 10s
 
 parts:
   datalayerecatio:
@@ -34,15 +34,25 @@ parts:
       - libzmq5
 
   deb:
-    plugin: dump
-    source: ../../deb/ctrlx-datalayer-1.7.13.deb
+      plugin: dump
+      source: ./tmp/ctrlx-datalayer.deb
+      source-type: deb
+      stage-packages:
+        - libzmq5
+      override-pull: |
+        mkdir -p ../../../tmp/
+        cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
+        snapcraftctl pull
+      override-prime: |
+        rm -rf ../tmp
+        snapcraftctl prime
 
 # describes which interface slots are supported by defining the plugs
 plugs:
   datalayer:
     interface: content
     content: datalayer
-    target: $SNAP_DATA/.datalayer 
+    target: $SNAP_DATA/.datalayer
 
   system-files:
     interface: system-files

@@ -1,0 +1,3 @@
+address;nodeClass;operations.read;operations.write;operations.create;operations.remove;operations.browse;description;descriptionURL;displayName;displayFormat;unit;references.readType;references.writeType;references.createType;comment
+sdk-py-provider/string-value;Variable;true;true;false;false;true;String value;;;;;types/datalayer/string;types/datalayer/string;;
+sdk-py-provider/inertial-value;Variable;true;true;false;false;true;Flatbuffer 'Inertial Value';;;;;types/sampleSchema/inertialValue;types/sampleSchema/inertialValue;;

@@ -3,19 +3,19 @@
 
 /**
  * MIT License
- * 
- * Copyright (c) 2020-2021 Bosch Rexroth AG
- * 
+ *
+ * Copyright (c) 2020-2022 Bosch Rexroth AG
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -48,15 +48,17 @@ comm::datalayer::DlResult ProviderNodeAllData::createDataContainer(
 {
   if (getDataContainer(address) != nullptr)
   {
-    std::cout << "ERROR - Node exists: " << address;
-    return comm::datalayer::DlResult::DL_CREATION_FAILED;
+    // We return NO error here
+    return comm::datalayer::DlResult::DL_OK;
   }
 
   auto metadata = createMetadata(data, address);
   auto dataContainer = new DataContainer(address, data, metadata);
-  
+
   _dataContainers.emplace_back(dataContainer);
 
+  // We register the address of our datacontainer now so that the Data Layer will show it as "virtual node".
+  // The "virtual node" has as provider this instance.
   return _provider->registerNode(address, this);
 }
 
@@ -71,14 +73,15 @@ void ProviderNodeAllData::createDataContainer(
     std::cout << "ERROR - Data could not be set: " << address;
     return;
   }
-  if (createDataContainer(address, data) != comm::datalayer::DlResult::DL_OK){
-     std::cout << "ERROR - DataContainer could not be created: " << address;
+  if (createDataContainer(address, data) != comm::datalayer::DlResult::DL_OK)
+  {
+    std::cout << "ERROR - DataContainer could not be created: " << address;
   }
 }
 
 comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalayer::Variant &data, const std::string &address)
 {
-  
+
   flatbuffers::FlatBufferBuilder builder;
   auto description = builder.CreateString("This is a description for " + address);
   comm::datalayer::NodeClass nodeClass = comm::datalayer::NodeClass_Variable;
@@ -86,7 +89,7 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
   bool isBaseFolder = address == _addressBase;
   if (isBaseFolder)
   {
-    nodeClass = comm::datalayer::NodeClass_Folder; 
+    nodeClass = comm::datalayer::NodeClass_Folder;
   }
 
   comm::datalayer::AllowedOperationsBuilder allowedOperations(builder);
@@ -95,7 +98,6 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
   allowedOperations.add_create(!isBaseFolder && _dynamic);
   allowedOperations.add_delete_(!isBaseFolder && _dynamic);
   auto operations = allowedOperations.Finish();
-
 
   flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<comm::datalayer::Reference>>> references;
   if (data.getType() == comm::datalayer::VariantType::FLATBUFFERS)
@@ -121,7 +123,6 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
     }
   }
 
-  
   // Create metadata
   comm::datalayer::MetadataBuilder metadata(builder);
   metadata.add_nodeClass(nodeClass);
@@ -157,7 +158,7 @@ void ProviderNodeAllData::RegisterNodes()
 {
   comm::datalayer::DlResult result;
   result = _provider->registerNode(_addressBase + "**", this);
-  
+
   comm::datalayer::Variant data;
 
   result = data.setValue(true);
@@ -195,6 +196,18 @@ void ProviderNodeAllData::RegisterNodes()
 
   result = data.setValue("This is a string");
   createDataContainer(result, "string", data);
+
+  result = data.setTimestamp(116444736000000000);
+  createDataContainer(result, "timestamp-1970-01-01-unix", data);
+
+  result = data.setTimestamp(87790176000000000);
+  createDataContainer(result, "timestamp-1879-03-14-einstein", data);
+
+  result = data.setTimestamp(13256352000000000);
+  createDataContainer(result, "timestamp-1643-01-04-newton", data);
+
+  result = data.setTimestamp(116444736000000000);
+  createDataContainer(result, "timestamp-2014-07-13-germany-soccer-world-champion", data);
 
   // Arrays ----------------------
   bool a_bool[] = {true, false, true};
@@ -344,29 +357,20 @@ void ProviderNodeAllData::onWrite(
   DataContainer *dataContainer = getDataContainer(address);
   if (nullptr == dataContainer)
   {
-    result = comm::datalayer::DlResult::DL_INVALID_ADDRESS;
-    std::cout << "onWrite(): " << address << " ";
-    std::cout << data;
-    std::cout << " " << result.toString() << std::endl;
-    callback(result, nullptr);
-    return;
+    // A virtual node which is not registered should be written.
+    // We a creating and registering the virtual node now. This makes Data Layer usage easy for a client.
+    result = createDataContainer(address, *data);
+    std::cout << "onWrite() CREATE: " << address << " " << result.toString() << std::endl;
   }
-
-  if (data->getType() != dataContainer->Data.getType())
+  else
   {
-    result = comm::datalayer::DlResult::DL_TYPE_MISMATCH;
-    std::cout << "onWrite(): " << address << " ";
-    std::cout << data;
-    std::cout << " " << result.toString() << std::endl;
-    callback(result, nullptr);
-    return;
+    // The virtual node is already registered.
+    result = comm::datalayer::DlResult::DL_OK;
+    // We are take the data without data type check.
+    dataContainer->Data = *data;
+    std::cout << "onWrite(): " << address << " OK" << std::endl;
   }
 
-  result = comm::datalayer::DlResult::DL_OK;
-  dataContainer->Data = *data;
-  std::cout << "onWrite(): " << address << " ";
-  std::cout << data;
-  std::cout << " " << result.toString() << std::endl;
   callback(result, data);
 }
 
@@ -420,10 +424,11 @@ void ProviderNodeAllData::onMetadata(
     const comm::datalayer::IProviderNode::ResponseCallback &callback)
 {
   comm::datalayer::DlResult result;
-  DataContainer *dataContainer = getDataContainer(address); // For .../dynamic or .../static we get also nullptr 
+  DataContainer *dataContainer = getDataContainer(address); // For .../dynamic or .../static we get also nullptr
   if (nullptr == dataContainer)
   {
-    if(address +"/" == _addressBase){
+    if (address + "/" == _addressBase)
+    {
       callback(comm::datalayer::DlResult::DL_OK, &_metadata);
       return;
     }

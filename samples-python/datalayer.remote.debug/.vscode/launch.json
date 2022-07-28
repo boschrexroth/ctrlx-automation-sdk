@@ -10,7 +10,8 @@
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
             "args": ["--debug-port=15678"],
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "justMyCode": false
         },
         {
             "name": "Remote ctrlX CORE virtual - Port forwarding",

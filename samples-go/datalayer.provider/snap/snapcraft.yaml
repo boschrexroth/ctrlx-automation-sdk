@@ -25,9 +25,14 @@ parts:
     source: .
     build-snaps: ['go/1.17/stable']
     build-packages:
-      - libsystemd-dev
-      - libzmq3-dev
-      - pkg-config
+      - on amd64:
+        - libsystemd-dev
+        - libzmq3-dev
+        - pkg-config
+      - on arm64:
+        - libsystemd-dev:arm64
+        - libzmq3-dev:arm64
+        #- pkg-config:arm64
     override-build: |
       case $SNAPCRAFT_ARCH_TRIPLET in
         aarch64-linux-gnu)
@@ -40,7 +45,7 @@ parts:
           export GOARCH=amd64
           ;;
       esac
-      go build -o ../install/bin/ ./...
+      go build -buildvcs=false -o ../install/bin/ ./...
       
   datalayerdeb:
     plugin: dump

@@ -45,7 +45,7 @@ As mentioned a VM running on a host without direct internet access has to use a 
 
 For the VM Px on the host is reachable via the URL __http://10.0.2.2:3128__
 
-Note: 10.0.2.2 is the IP address of the host from the prospective of the VM.
+Note: 10.0.2.2 is the IP address of the host from the perspective of the VM. See also [QEMU Virtual Machine Networking](setup_qemu_ubuntu.md#qemu-virtual-machine-networking)
 
 For your information only - do not change if not necessary:
 

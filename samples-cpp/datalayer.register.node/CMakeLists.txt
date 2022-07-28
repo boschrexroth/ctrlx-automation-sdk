@@ -7,8 +7,8 @@ cmake_minimum_required( VERSION 3.9 )
 # Project information
 # Set project, VERSION should be same as snap version
 #
-set(VERSION 2.1.0)
-project( register_node_snap_project VERSION ${VERSION} )
+set(VERSION 2.2.0)
+project( register_node_project VERSION ${VERSION} )
 
 #
 # Set TARGET_PROJECT_NAME for each executable (same as snap "app name" =ExeName)
@@ -20,6 +20,14 @@ set(TARGET_PROJECT_NAME registerNode)
 #
 set (USER_DEPENDENCY_DIR ${CMAKE_CURRENT_LIST_DIR}/../../)
 
+#
+# Metadata Database
+#
+include(${USER_DEPENDENCY_DIR}/cmake/BuildMDDB.cmake)
+
+set(MDDB_FILES  ${CMAKE_CURRENT_LIST_DIR}/metadata.csv)
+build_mddb(registernodemddb "${MDDB_FILES}" ${CMAKE_CURRENT_LIST_DIR}/compiled "")
+  
 #
 # Option to Build the Snap
 #
@@ -89,7 +97,7 @@ set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-object-api")
 set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--no-warnings")
 set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-compare")
 
-build_flatbuffers("sampleSchema.fbs" "" "registernodeflatbuffers" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}/bfbs" "")
+build_flatbuffers("sampleSchema.fbs" "" "registernodeflatbuffers" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}/compiled" "")
 
 #
 # Set link directories
@@ -107,7 +115,10 @@ add_executable( ${TARGET_PROJECT_NAME}
 	${SOURCE_FILES_REGISTERNODE}
   )
 
-add_dependencies(${TARGET_PROJECT_NAME} registernodeflatbuffers)
+add_dependencies(${TARGET_PROJECT_NAME} 
+  registernodeflatbuffers 
+  registernodemddb
+  )
 
 #
 # Set target include directories

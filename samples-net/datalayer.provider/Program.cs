@@ -31,7 +31,6 @@ namespace Samples.Datalayer.Provider
     using sample.schema;
     using System;
     using System.IO;
-    using System.Net;
     using System.Threading;
 
     /// <summary>
@@ -39,43 +38,15 @@ namespace Samples.Datalayer.Provider
     /// </summary>
     internal class Program
     {
-        // This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:DATALAYER_PORT?sslport=SSL_PORT
-        // Please check and change according your environment:
-        // - USER:        Enter your user name here - default is boschrexroth
-        // - PASSWORD:    Enter your password here - default is boschrexroth
-        // - IP_ADDRESS:
-        //   127.0.0.1    If you develop on your (Windows) host and you want to connect to a ctrlX CORE virtual with port forwarding
-        //   10.0.2.2     If you develop on a VM (QEMU, Virtual Box) and you want to connect to a ctrlX virtual with port forwarding
-        //   192.168.1.1  If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-        // - DATALAYER_PORT:
-        //   2069         The ctrlX Data Layer client port
-        //   2070         The ctrlX Data Layer provider port
-        // - SSL_PORT:
-        //   443          Default SSL Port if you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-        //   8443         Default forwarded SSL Port if you are using a ctrlX CORE virtual
-
-        // Please change the following constants according to your environment
-        private const string USER = "boschrexroth";
-        private const string PASSWORD = "boschrexroth";
-        private const string IP_ADDRESS = "10.0.2.2";
-        private const int SSL_PORT = 8443;
-
         // Please define the node root folder in ctrlX Data Layer
         private const string ROOT = "samples/dotnet";
 
         /// <summary>
-        /// The Main.
+        /// The Main method is the entry point of an executable app.
         /// </summary>
         /// <param name="args">The args<see cref="string[]"/>.</param>
         internal static void Main(string[] args)
         {
-            //Add app exit handler to handle optional clean up
-            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
-
-            // Check if the process is running inside a snap 
-            var isSnapped = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP"));
-            Console.WriteLine(value: $"Running inside snap: {isSnapped}");
-
             // Create a new ctrlX Data Layer system
             using var system = new DatalayerSystem();
 
@@ -83,11 +54,11 @@ namespace Samples.Datalayer.Provider
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Set remote connection string for provider with inter-process communication (ipc) protocol if running in snap, otherwise tcp
-            var remote = isSnapped ? "ipc://" : $"tcp://{USER}:{PASSWORD}@{IP_ADDRESS}:2070?sslport={SSL_PORT}";
+            // Create a connection string with the parameters according to your environment (see DatalayerHelper class)
+            var connectionString = DatalayerHelper.GetConnectionString(ip: "192.168.1.1", sslPort: 443);
 
             // Create the provider with remote connection string
-            using var provider = system.Factory.CreateProvider(remote);
+            using var provider = system.Factory.CreateProvider(connectionString);
             Console.WriteLine("ctrlX Data Layer provider created.");
 
             // Create and register node on given address and read-only callbacks.
@@ -147,16 +118,6 @@ namespace Samples.Datalayer.Provider
 
                 Thread.Sleep(millisecondsTimeout: 1000);
             }
-        }
-
-        /// <summary>
-        /// The CurrentDomain_ProcessExit.
-        /// </summary>
-        /// <param name="sender">The sender<see cref="object"/>.</param>
-        /// <param name="e">The e<see cref="EventArgs"/>.</param>
-        private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
-        {
-            Console.WriteLine("Application exit");
         }
 
         /// <summary>

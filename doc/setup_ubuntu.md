@@ -1,12 +1,6 @@
 
-# Setting up a Native Ubuntu as SDK Build Environment
+You can use a bare-metal machine with an Ubuntu Desktop or Ubuntu Server operating system to develop apps with the ctrlX AUTOMATION SDK.
 
-You can install an Ubuntu Desktop or Ubuntu Server operating system on your computer, depending on your requirements.
+The installation of the required packages, the SDK itself and some of the programming language installation scripts is equal to the procedure for a VirtualBox Virtual Machine.
 
-The setup is very similar to the setup of a SDK VirtualBox VM. So here we will refer to the corresponding chapters of this setup document and explain the changes.
-
-* __Setup Corporate Proxy (Optional)__: Instead of 'http://10.0.2.2:3128/' use your specific settings for http and https
-* __Setup Packages__: No changes here
-* __Dependencies for Crossbuild (Multiarch)__: No changes here
-* __Install Visual Studio Code__: Only if you are using Ubuntu Desktop
-
+You can find the informations in [VirtualBox Virtual Machine](setup_windows_virtualbox_ubuntu.md) from chapter 'Setup Standard Packages' to the end of the document.

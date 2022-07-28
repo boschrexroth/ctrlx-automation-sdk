@@ -1,12 +1,14 @@
-### Licensing
+ctrlX World Partners must use the licensing manager service that is operated by the Bosch Rexroth AG. 
 
-ctrlX World Partners must use the licensing manager service that is operated by the Bosch Rexroth AG. Licenses are issued by the Bosch Rexroth Licensing Center [https://licensing.boschrexroth.com](https://licensing.boschrexroth.com). There a user can assign licenses to devices and can download a capability response, containing all assigned licenses for a specific device. The downloaded capability response can than be deployed on the corresponding device.
+Licenses are issued by the Bosch Rexroth Licensing Center [https://licensing.boschrexroth.com](https://licensing.boschrexroth.com). 
+
+There a user can assign licenses to devices and can download a capability response, containing all assigned licenses for a specific device. The downloaded capability response can than be deployed on the corresponding device.
 
 On every ctrlX CORE we offer a UI to upload the provided capability response and to check the currently available licenses on the device. The license manager feature on the ctrlX CORE provides a restful API via an internal unix domain socket, that can be used by apps to request and release a specific license.
 
-In order to integrate license enforcement into your application follow the instructions below:
+In order to integrate license enforcement into your application follow the instructions below.
 
-### Add content plug to snapcraft.yaml
+## Add Content Plug to snapcraft.yaml
 To get access to the unix domain socket that provides the restful API add the following content plug to the snapcraft.yaml:
 
 ```yaml
@@ -19,7 +21,8 @@ plugs:
 
 This will create a folder "license-service" during installation of the app on the ctrlX CORE and provide access to the unix domain socket "licensing-service.sock".
 
-### Use the restful API to enforce licenses:
+## Use REST API to Enforce Licenses
+
 The description of the API is avaiable on GitHub: [https://boschrexroth.github.io/rest-api-description](https://boschrexroth.github.io/rest-api-description)
 
 Every device has its own license pool. If an app wants to enforce a license, it has to aquire one license out of the pool. This can be done by POST command to the path /license-manager/api/v1/license.
@@ -32,10 +35,10 @@ It is recommend to return the license back to the pool to aquire it again from t
 
 
 
-## Licensing modes 
+## Licensing Modes 
 To ensure the useablity the licensing mechanism on the device has two special modes to reduce potential down time of an appliance. 
 
-### Temporary usage rights
+### Temporary Usage Rights
 The user of the ctrlX CORE has the possibility to activate a special mode that is called "Temporary usage right" in the license manager. This mode is active for 10 days and allows the user to use any software on the device. This mode can only activated once and is meant for a disaster recovery on a new hardware. This method reduces the down time. The user has to add licenses to the device or move the licenses from the broken to new device within this 10 days.
 
 The applications are informed due the set "tampered" flag in the response when acquiring such a license from the license manager. 

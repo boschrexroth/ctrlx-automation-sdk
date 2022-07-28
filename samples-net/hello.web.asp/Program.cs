@@ -9,7 +9,7 @@ namespace Hello.Web.Asp
     public class Program
     {
         /// <summary>
-        /// The Main.
+        /// The Main method is the entry point of an executable app.
         /// </summary>
         /// <param name="args">The args<see cref="string[]"/>.</param>
         public static void Main(string[] args)

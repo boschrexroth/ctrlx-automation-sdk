@@ -7,7 +7,7 @@ name: sdk-cpp-realtime
 version: "2.1.0"
 grade: stable
 summary: Example app for ctrlX Data Layer realtime
-description: | 
+description: |
   The example project datalayer.realtime shows the realtime access to the ctrlX Data Layer as
   - a data provider - mem owner - creates some memory 'input' and 'output'
   - a data consumer - mem user - can read 'input' and write 'output'
@@ -20,13 +20,13 @@ apps:
   datalayerRealtimeOwner:
     command: datalayerRealtimeOwner
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: 
+    plugs:
       - network
       - datalayer
     daemon: simple
     passthrough:
       restart-condition: always
-      restart-delay: 10s 
+      restart-delay: 10s
 
   datalayerRealtimeUser:
     command: datalayerRealtimeUser
@@ -37,7 +37,7 @@ apps:
     daemon: simple
     passthrough:
       restart-condition: always
-      restart-delay: 10s 
+      restart-delay: 10s
 
 #  describes how to import, and potentially build, each required part of the snap:
 parts:
@@ -48,8 +48,18 @@ parts:
       - libzmq5
 
   deb:
-    plugin: dump
-    source: ../../deb/ctrlx-datalayer-1.7.13.deb
+      plugin: dump
+      source: ./tmp/ctrlx-datalayer.deb
+      source-type: deb
+      stage-packages:
+        - libzmq5
+      override-pull: |
+        mkdir -p ../../../tmp/
+        cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
+        snapcraftctl pull
+      override-prime: |
+        rm -rf ../tmp
+        snapcraftctl prime
 
 # describes which interface slots are supported by defining the plugs
 plugs:

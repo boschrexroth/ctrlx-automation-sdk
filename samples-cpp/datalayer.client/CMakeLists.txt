@@ -84,6 +84,7 @@ IF( ${HOST_SYSTEM_ARCH} MATCHES "aarch64")
 ELSE()
   set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers.1.12/ubuntu20-gcc-x64/release/flatc)
 ENDIF()
+execute_process(COMMAND chmod +x ${FLATBUFFERS_FLATC_EXECUTABLE})
 set (FLATBUFFERS_INCLUDE_DIR ${USER_DEPENDENCY_DIR}/include/oss.flatbuffers.1.12)
 include (${USER_DEPENDENCY_DIR}/cmake/oss.flatbuffers.1.12/FindFlatBuffers.cmake)
 set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-object-api")
@@ -97,7 +98,7 @@ build_flatbuffers("sampleSchema.fbs" "" "sampleSchemaflatbuffers" "${CMAKE_CURRE
 #
 MESSAGE( STATUS "Libraries directory: ${LIBRARY_DIR}")
 link_directories(
-  ${LIBRARY_DIR} 
+  ${LIBRARY_DIR}
   ${LIBRARY_DEP_DIR}
   )
 
@@ -141,7 +142,7 @@ install( TARGETS ${TARGET_PROJECT_NAME}
   LIBRARY DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}
   ARCHIVE DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}
   COMPONENT ${BUNDLE_PROJECT_NAME}
-) 
+)
 
 if (BUILD_SNAP)
   #
@@ -152,7 +153,7 @@ if (BUILD_SNAP)
     LIBRARY DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build
     ARCHIVE DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build
     COMPONENT ${BUNDLE_PROJECT_NAME}
-  ) 
+  )
 endif(BUILD_SNAP)
 
 #

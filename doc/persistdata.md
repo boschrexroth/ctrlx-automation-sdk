@@ -230,11 +230,21 @@ Participants must consider the following conditions and constraints in their com
   - detailedDiagnosisCode and detail
   - dynamicDescription incl. the id of the save or load operation (see example below)
 
-The dynamicDescription field can provide specific information for the user, like the cause of the failure and hints how to resolve it (if cause and hint are not already provided through the main and detailed diagnosis). The field may contain “\n“ to separate cause and hint in the result output of the UI, e.g.
+The dynamicDescription field can provide specific information for the user, like the cause of the failure and hints how to resolve it (if cause and hint are not already provided through the main and detailed diagnosis).
+The field may contain “\n“ to separate cause and hint in the result output of the UI, e.g. “Format error in X.json.\nAdapt file or use motion editor to fix/recreate axis. [282xy5]”
 
-- “Failed to load plc runtime data” <=> DynamicDescription: “PLC is running.\nStop PLC before loading. [282xy5]”
-- “Failed to load motion settings” <=> DynamicDescription: “Axes in run mode.\nSwitch axes to configuration mode. [282xy5]”
-- “Failed to load motion settings” <=> DynamicDescription: “Format error in X.json.\nAdapt file or use motion editor to fix/recreate axis. [282xy5]”
+> **Common response if app requires Setup state for loading (since XCR-V-0116)**
+> 
+> If a participant gets a load request, but requires Setup state for loading, it should
+> 
+> - Respond with status code 409 (Conflict)
+> - Return a Problem object with
+>   - the common mainDiagnosisCode **080F0E00** ("Loading configuration not possible in current state")
+>   - a participant-specific detailed diagnostic which references the common main diagnostic and explains the cause of
+>     the problem and how to resolve it
+> - Not write diagnoses to the Logbook in the query phase
+>  
+> Limitation: The described approach is only applicable to Rexroth apps. 
 
 #### Diagnostic messages
 

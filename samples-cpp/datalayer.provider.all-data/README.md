@@ -37,7 +37,7 @@ DataContainer is a simple data container class representing the data and error s
 ### ProviderNodeAllData Class
 
 ProviderNodeAllData is a IProviderNode implementation and provides a Data Layer sub branch. The sub branch can be static or dynamic.
-Static means that the values of the nodes and the structure of he branch  cannot be changed by Data Layer clients. In a dynmic branch everthing kann be changed.
+Static means that the values of the nodes and the structure of he branch  cannot be changed by Data Layer clients. In a dynamic branch everything can be changed.
 
 All nodes of such a sub branch are 'virtual' because the node behind is always the same ProviderNodeAllData instance. Therefore it registers itself with a wildcard address (e.g. all-data/dynamic/\*\*) at the Data Layer. The 'seen' nodes are DataContainer instances managed in a list and accessed by the on... callback functions of the ProviderNodeAllData class. 
  

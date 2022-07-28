@@ -1,3 +1,5 @@
 autopep8
 flake8
 PyJWT
+ctrlx-datalayer
+ctrlx-fbs

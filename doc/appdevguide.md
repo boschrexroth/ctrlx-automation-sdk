@@ -1,5 +1,3 @@
-# ctrlX CORE App Development Guideline
-
 **Liability** The information in this guideline is intended for product description purposes only and shall not be deemed to be of a warranty nature, unless expressly stipulated by contract. All rights are reserved with respect to the content of this documentation and the availability of the product.
 
 ### **Table of Contents**

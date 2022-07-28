@@ -29,7 +29,7 @@
  *
  *     Remarks:
  *     10.0.2.2 is the IP address of the host from the point of view of the app build environment (QEMU VM).
- *     8443 is the host port which is forwarded to the SSL port (=22) of the ctrlX CORE virtual
+ *     8443 is the host port which is forwarded to the SSL port (=433) of the ctrlX CORE virtual
  *
  *
  * IMPORTANT:
@@ -47,16 +47,16 @@
 #include "comm/datalayer/datalayer.h"
 #include "comm/datalayer/datalayer_system.h"
 
-//! Retrieve environment variable SNAP
-static const char *snapPath()
+ //! Retrieve environment variable SNAP
+static const char* snapPath()
 {
-  return std::getenv("SNAP");
+    return std::getenv("SNAP");
 }
 
 //! Test if code is runnning in snap environment
 static bool isSnap()
 {
-  return snapPath() != nullptr;
+    return snapPath() != nullptr;
 }
 
 //! Get Datalayer connection string
@@ -66,24 +66,24 @@ static bool isSnap()
 //! @param[in] sslPort  The port number for SSL: 8443 if ctrlX CORE virtual with port forwarding 8443:443
 //! @result Connection string
 static std::string getConnectionString(
-    const std::string &ip = "192.168.1.1",
-    const std::string &user = "boschrexroth",
-    const std::string &password = "boschrexroth",
+    const std::string& ip = "192.168.1.1",
+    const std::string& user = "boschrexroth",
+    const std::string& password = "boschrexroth",
     int sslPort = 443)
 {
-  if (isSnap())
-  {
-    return DL_IPC;
-  }
+    if (isSnap())
+    {
+        return DL_IPC;
+    }
 
-  std::string connectionString = DL_TCP + user + std::string(":") + password + std::string("@") + ip;
+    std::string connectionString = DL_TCP + user + std::string(":") + password + std::string("@") + ip;
 
-  if (443 == sslPort)
-  {
-    return connectionString;
-  }
+    if (443 == sslPort)
+    {
+        return connectionString;
+    }
 
-  return connectionString + std::string("?sslport=") + std::to_string(sslPort);
+    return connectionString + std::string("?sslport=") + std::to_string(sslPort);
 }
 
 //! Get Datalayer Client instance
@@ -93,21 +93,21 @@ static std::string getConnectionString(
 //! @param[in] password The password
 //! @param[in] sslPort  The port number for SSL: 8443 if ctrlX CORE virtual with port forwarding 8443:443
 //! @result IClient instance or nullptr on error
-static comm::datalayer::IClient *getClient(comm::datalayer::DatalayerSystem &datalayerSystem,
-                                           const std::string &ip = "192.168.1.1",
-                                           const std::string &user = "boschrexroth",
-                                           const std::string &password = "boschrexroth", int sslPort = 443)
+static comm::datalayer::IClient* getClient(comm::datalayer::DatalayerSystem& datalayerSystem,
+                                           const std::string& ip = "192.168.1.1",
+                                           const std::string& user = "boschrexroth",
+                                           const std::string& password = "boschrexroth", int sslPort = 443)
 {
-  std::string connectionString = getConnectionString(ip, user, password, sslPort);
-  comm::datalayer::IClient *client = datalayerSystem.factory()->createClient(connectionString);
-  if (client->isConnected())
-  {
-    return client;
-  }
+    std::string connectionString = getConnectionString(ip, user, password, sslPort);
+    comm::datalayer::IClient* client = datalayerSystem.factory()->createClient(connectionString);
+    if (client->isConnected())
+    {
+        return client;
+    }
 
-  delete client;
+    delete client;
 
-  return nullptr;
+    return nullptr;
 }
 
 //! Get Datalayer Provider instance
@@ -117,20 +117,21 @@ static comm::datalayer::IClient *getClient(comm::datalayer::DatalayerSystem &dat
 //! @param[in] password The password
 //! @param[in] sslPort  The port number for SSL: 8443 if ctrlX CORE virtual with port forwarding 8443:443
 //! @result IProvider instance or nullptr on error
-static comm::datalayer::IProvider *getProvider(comm::datalayer::DatalayerSystem &datalayerSystem,
-                                           const std::string &ip = "192.168.1.1",
-                                           const std::string &user = "boschrexroth",
-                                           const std::string &password = "boschrexroth", int sslPort = 443)
+static comm::datalayer::IProvider* getProvider(comm::datalayer::DatalayerSystem& datalayerSystem,
+                                               const std::string& ip = "192.168.1.1",
+                                               const std::string& user = "boschrexroth",
+                                               const std::string& password = "boschrexroth", int sslPort = 443)
 {
-  std::string connectionString = getConnectionString(ip, user, password, sslPort);
-  comm::datalayer::IProvider *provider = datalayerSystem.factory()->createProvider(connectionString);
-  if (provider->start() == DL_OK && provider->isConnected())  {
-    return provider;
-  }
+    std::string connectionString = getConnectionString(ip, user, password, sslPort);
+    comm::datalayer::IProvider* provider = datalayerSystem.factory()->createProvider(connectionString);
+    if (provider->start() == DL_OK && provider->isConnected())
+    {
+        return provider;
+    }
 
-  delete provider;
+    delete provider;
 
-  return nullptr;
+    return nullptr;
 }
 
 #endif

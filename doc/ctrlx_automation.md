@@ -1,5 +1,3 @@
-# ctrlX AUTOMATION
-
 ## What is ctrlX AUTOMATION?
 
 ctrlX AUTOMATION surmounts the classic boundaries between machine control, the IT world and the Internet of Things. With a Linux real-time operating system, consistently open standards, app programming technology, web-based engineering and a comprehensive IoT connection.

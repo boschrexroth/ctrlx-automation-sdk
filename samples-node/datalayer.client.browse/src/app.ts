@@ -19,28 +19,14 @@
 // SOFTWARE.
 
 import DatalayerSystem from 'ctrlx-datalayer/dist/datalayersystem';
+import DatalayerHelper from './datalayerhelper';
 
 import Browser from './browser';
 
 // The main function
 async function main() {
 
-    // This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:PORT
-    // Please check and change according your environment:
-    // - USER:       Enter your user name here - default is boschrexroth
-    // - PASSWORD:   Enter your password here - default is boschrexroth
-    // - IP_ADDRESS: 127.0.0.1   If you develop on your (Windows) host and you want to connect to a ctrlX CORE virtual with port forwarding
-    //               10.0.2.2    If you develop on a VM (QEMU, Virtual Box) and you want to connect to a ctrlX virtual with port forwarding
-    //               192.168.1.1 If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-    const connectionTcp = 'tcp://boschrexroth:boschrexroth@10.0.2.2';
 
-    // Please use the connection string for Inter Process Communication
-    // for performance reasons when running inside a snap:
-    const connectionIpc = DatalayerSystem.protocolSchemeIpc;
-
-    // Check if the process is running inside a snap 
-    const isSnapped = isSnap();
-    console.log('running inside snap:', isSnapped)
 
     // Create a new ctrlX Data Layer system
     const system = new DatalayerSystem('');
@@ -48,12 +34,12 @@ async function main() {
     // Starts the ctrlX Data Layer system without a new broker (startBroker = false) because one broker is already running on ctrlX device
     await system.start(false);
 
-    // Set the remote address to inter-process communication (ipc) protocol if running in snap, otherwise tcp
-    const remote = isSnapped ? connectionIpc : connectionTcp;
-    console.log('client remote address:', remote)
+    // Create a connection string with the parameters according to your environment (see DatalayerHelper class)
+    const connectionString = DatalayerHelper.getConnectionString({ ip: "192.168.1.1", sslPort: 443 })
+    console.log('connection string:', connectionString)
 
     // Create the client with the given remote address
-    const client = await system.createClient(remote);
+    const client = await system.createClient(connectionString);
 
     // Check if client is connected.
     if (client.isConnected() === false) {

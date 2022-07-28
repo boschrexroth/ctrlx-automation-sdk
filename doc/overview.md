@@ -1,9 +1,5 @@
-# Overview
-
-## Introduction
-
 The ctrlX AUTOMATION SDK is the Software Development Kit of [ctrlX AUTOMATION](https://www.ctrlx-automation.com). 
-With this SDK software applications (apps) can be developed for the linux based ctrlX AUTOMATION CORE devices in various high level languages.
+With this SDK software applications (apps) can be developed for the Linux based ctrlX AUTOMATION CORE devices in various high level languages.
 
 A short introduction into ctrlX AUTOMATION you can find here: [ctrlX AUTOMATION](ctrlx_automation.md).
  
@@ -20,7 +16,7 @@ Use the following sections of this documentation to learn more about the content
 
 ### Setup App Build Environment
 
-How to setup a Linux Ubuntu app build environment using a virtual or a real machine is described here: [Setup overview](setup_overview.md)
+How to setup a Linux Ubuntu app build environment using a virtual or a bare-metal machine is described here: [Setup Overview](setup_overview.md)
 
 ### Samples
 
@@ -34,8 +30,8 @@ How to setup a Linux Ubuntu app build environment using a virtual or a real mach
 
 ## Additional Information
 
-You can find additional documentation, help and support which goes beyond the scope of this SDK here:
+Here you can find additional documentation, help and support which goes beyond the scope of this SDK:
 
 * [Online Product Information](https://docs.automation.boschrexroth.com)
-* [Rexroth Developer Community](https://developer.community.boschrexroth.com)
+* [ctrlX AUTOMATION Community](https://developer.community.boschrexroth.com)
 

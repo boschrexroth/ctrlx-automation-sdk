@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# THIS IS JUST A DUMMY PRODUCTION APP TO BE OBSERVED FOR IT'S HEALTH
+
+while :
+do
+    echo The health monitored dummy app says: Hello, everything is OK.
+    sleep 10s
+done
+

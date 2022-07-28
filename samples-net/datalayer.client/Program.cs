@@ -24,40 +24,20 @@ SOFTWARE.
 
 using comm.datalayer;
 using Datalayer;
-using FlatBuffers;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Samples.Datalayer.Client
 {
     class Program
     {
-        // This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:DATALAYER_PORT?sslport=SSL_PORT
-        // Please check and change according your environment:
-        // - USER:        Enter your user name here - default is boschrexroth
-        // - PASSWORD:    Enter your password here - default is boschrexroth
-        // - IP_ADDRESS:
-        //   127.0.0.1    If you develop on your (Windows) host and you want to connect to a ctrlX CORE virtual with port forwarding
-        //   10.0.2.2     If you develop on a VM (QEMU, Virtual Box) and you want to connect to a ctrlX virtual with port forwarding
-        //   192.168.1.1  If you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-        // - DATALAYER_PORT:
-        //   2069         The ctrlX Data Layer client port
-        //   2070         The ctrlX Data Layer provider port
-        // - SSL_PORT:
-        //   443          Default SSL Port if you are using a ctrlX CORE or ctrlX CORE virtual with TAP adpater
-        //   8443         Default forwarded SSL Port if you are using a ctrlX CORE virtual
-
-        // Please change the following constants according to your environment
-        private const string USER = "boschrexroth";
-        private const string PASSWORD = "boschrexroth";
-        private const string IP_ADDRESS = "10.0.2.2";
-        private const int SSL_PORT = 8443;
-
-        static void Main(string[] args)
+        /// <summary>
+        /// The Main method is the entry point of an executable app.
+        /// </summary>
+        /// <param name="args">The args<see cref="string"/>.</param>
+        static async Task Main(string[] args)
         {
-            //Add app exit handler to handle optional clean up
-            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
-
             // Create a new ctrlX Data Layer system
             using var system = new DatalayerSystem();
 
@@ -65,36 +45,39 @@ namespace Samples.Datalayer.Client
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Check if the process is running inside a snap 
-            var isSnapped = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP"));
-            Console.WriteLine($"Running inside snap: {isSnapped}");
-
-            // Set remote connection string with ipc protocol if running in snap, otherwise with tcp protocol
-            var remote = isSnapped ? "ipc://" : $"tcp://{USER}:{PASSWORD}@{IP_ADDRESS}:2069?sslport={SSL_PORT}";
+            // Create a connection string with the parameters according to your environment (see DatalayerHelper class)
+            var connectionString = DatalayerHelper.GetConnectionString(ip: "192.168.1.1", sslPort: 443);
 
             // Create the client with remote connection string
-            using var client = system.Factory.CreateClient(remote);
+            using var client = system.Factory.CreateClient(connectionString);
             Console.WriteLine("ctrlX Data Layer client created.");
 
-            if (WaitUntilConnected(client, 10000).IsBad())
+            // Check if client is connected
+            if (!client.IsConnected)
             {
-                //if not we exit and retry after app daemon restart-delay (see snapcraft.yaml)
-                Console.WriteLine($"Restarting app after restart-delay of 10 s ...");
+                // We exit and retry after app daemon restart-delay (see snapcraft.yaml)
+                Console.WriteLine($"Client is not connected -> exit");
                 return;
             }
-            // Check if client is connected
-            Console.WriteLine($"Client connected: {client.IsConnected}");
+
+            // Define the subscription properties by using helper class SubscriptionPropertiesBuilder.
+            var propertiesFlatbuffers = new SubscriptionPropertiesBuilder("mySubscription")
+                .SetKeepAliveIntervalMillis(10000)
+                .SetPublishIntervalMillis(1000)
+                .SetErrorIntervalMillis(1000)
+                .Build();
+
 
             // Define the subscription properties by using Flatbuffers class SubscriptionProperties. 
-            var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
-            var properties = SubscriptionProperties.CreateSubscriptionProperties(
-                builder: builder,
-                idOffset: builder.CreateString("mySubscription"),
-                keepaliveInterval: 10000,
-                publishInterval: 1000,
-                errorInterval: 10000);
-            builder.Finish(properties.Value);
-            var propertiesFlatbuffers = new Variant(builder);
+            // var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
+            // var properties = SubscriptionProperties.CreateSubscriptionProperties(
+            //    builder: builder,
+            //    idOffset: builder.CreateString("mySubscription"),
+            //    keepaliveInterval: 10000,
+            //    publishInterval: 1000,
+            //    errorInterval: 10000);
+            // builder.Finish(properties.Value);
+            // var propertiesFlatbuffers = new Variant(builder);
 
             // Create the subscription
             var (createResult, subscription) = client.CreateSubscription(propertiesFlatbuffers, userData: null);
@@ -126,67 +109,22 @@ namespace Samples.Datalayer.Client
             {
                 if (client.IsConnected)
                 {
-                    // The node with address 'framework/metrics/system/memused-percent' we want to read without subscription
+                    // Read a node with address 'framework/metrics/system/memused-percent' without subscription (single read)
                     const string memUsed = "framework/metrics/system/memused-percent";
 
-                    // Read value of the node 'memUsed' about every 10 s.
-                    var (readResultMemUsed, valueMemUsed) = client.Read(address: memUsed);
-                    if (readResultMemUsed.IsGood())
+                    //We're using the async read method just for demonstration here.
+                    //Hint: If you're not using any async calls, you can remove async keyword from the Main() method signature.
+                    var task = client.ReadAsync(address: memUsed);
+                    var taskResult = await task;
+
+                    if (taskResult.Result.IsGood())
                     {
-                        Console.WriteLine($"{memUsed}: {valueMemUsed.ToFloat()} (single read)");
+                        Console.WriteLine($"{memUsed}: {taskResult.Value.ToFloat()} (single read)");
                     }
-                }
-                else
-                {
-                    Console.WriteLine("Client is disconnected: skip reading value.");
                 }
 
                 Thread.Sleep(10000);
             }
         }
-
-        private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
-        {
-            Console.WriteLine("Application exit");
-
-            //The EventHandler for this event can perform termination activities, such as closing files, releasing storage and so on, before the process ends.
-
-            //Note:
-            //In.NET Framework, the total execution time of all ProcessExit event handlers is limited,
-            //just as the total execution time of all finalizers is limited at process shutdown.
-            //The default is two seconds. An unmanaged host can change this execution time by calling the ICLRPolicyManager::SetTimeout method with the OPR_ProcessExit enumeration value.
-            //This time limit does not exist in .NET Core.
-
-            // Your optional clean up code goes here ... 
-            //...
-        }
-
-        #region Private
-
-        /// <summary>
-        /// Waits until the client is connected
-        /// </summary>
-        /// <param name="client"></param>
-        /// <param name="timeoutMillis"></param>
-        private static DLR_RESULT WaitUntilConnected(IClient client, uint timeoutMillis)
-        {
-            //Wait until connected
-            var start = DateTime.Now;
-
-            while (!client.IsConnected)
-            {
-                Thread.Sleep(100);
-
-                if (DateTime.Now.Subtract(start).TotalMilliseconds > timeoutMillis)
-                {
-                    Console.WriteLine("Timeout waiting for client connection!");
-                    return DLR_RESULT.DL_TIMEOUT;
-                }
-            }
-
-            return DLR_RESULT.DL_OK;
-        }
-
-        #endregion
     }
 }

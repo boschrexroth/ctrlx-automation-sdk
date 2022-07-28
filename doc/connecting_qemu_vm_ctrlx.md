@@ -1,10 +1,6 @@
-# Connecting SDK QEMU VMs to a ctrlX CORE
-
-## Indroduction
-
 This document describes how SDK QEMU VMs and a ctrlX CORE can be connected.
 
-In our examples we are asuming a Windows 10 host with px.exe as local proxy.
+In our examples we are assuming a Windows 10 host with px.exe as local proxy.
 
 ## Connections between Host and SDK QEMU VMs
 
@@ -32,41 +28,37 @@ There are three ways to connect ctrlX controls:
 
 Like the SDK VMs the ctrlX CORE<sup>virtual</sup> is connected via port forwarding which is configured in ctrlX WORKS. When the ctrlX CORE<sup>virtual</sup> is started port forwarding is done by an internally started QEMU instance.
 
-![ctrlX CORE virtual with port forwarding](./images/ctrlx-sdk-port-forwarding.png)
-
-!!! important
-    To enable remote Data Layer access from a SDK VM to the ctrlX add forwarding of port __2069__ and __2070__ in ctrlX WORKS. 
-    
-    If port 8443 of the host is forwarded to port 443 of the ctrlX (default) add sslport=8443 to the TCP connection string. Otherwise change forwarding to 443:443.
-
-To develop apps and test Data Layer access in the SDK VM use these URLs:
-
-    Data Layer access as client: tcp://boschrexroth:boschrexroth@10.0.2.2:2069?sslport=8443
-    Data Layer access as provider: tcp://boschrexroth:boschrexroth@10.0.2.2:2070?sslport=8443
-
+![ctrlX with port forwarding](images/ctrlx-sdk-port-forwarding.png)
 
 In the picture above port 12345 is used for C++ remote debugging and its forwarding has to be configured in ctrlX WORKS too.
 
+!!! important
+    If port 8443 of the host is forwarded to port 443 of the ctrlX (default) add sslport=8443 to the TCP connection string: 
+    
+In this case the connection string has this suffix __?sslport=8443__:
+
+    tcp://boschrexroth:boschrexroth@10.0.2.0?sslport=8443
+    
+Otherwise change port forwarding to 443:443.
+
+
 ### ctrlX CORE<sup>virtual</sup> with Network Adapter
 
-In this case a ctrlX CORE<sup>virtual</sup> is provided by ctrlX WORKS and its internal QEMU instance with a virtual network adapter. The  IP address of this adapter is 192.168.1.1.
+In this case a ctrlX CORE<sup>virtual</sup> is provided by ctrlX WORKS and its internal QEMU instance with a virtual network adapter. The default IP address of this adapter is 192.168.1.1.
 
 To connect the Windows host with the ctrlX CORE<sup>virtual</sup> a so called TAP Windows Adapter v9 is created by ctrlX WORKS.
 
-![ctrlX CORE virtual with network adapater](./images/ctrlx-sdk.png)
+![ctrlX CORE](images/ctrlx-sdk.png)
 
+The connection string for Data Layer access in this case is:
 
-To develop apps and test Data Layer access in the SDK VM use these URLs:
-
-    Data Layer access as client: tcp://boschrexroth:boschrexroth@192.168.1.1:2069
-    Data Layer access as provider: tcp://boschrexroth:boschrexroth@192.168.1.1:2070
-
+    tcp://boschrexroth:boschrexroth@192.168.1.1
 
 ### ctrlX CORE
 
-The ctrlX CORE is connected to the Windows host via its network adapter. The IP address of this adapater can be used directly in the SDK VMs e.g.:
+The ctrlX CORE is connected to the Windows host via its network adapter. 
 
-    Data Layer access as client: tcp://boschrexroth:boschrexroth@10.52.244.123:2069
-    Data Layer access as provider: tcp://boschrexroth:boschrexroth@10.52.244.123:2070
+The connection string for Data Layer access e.g. is:
 
+    tcp://boschrexroth:boschrexroth@10.52.244.123
 

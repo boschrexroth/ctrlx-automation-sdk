@@ -1,5 +1,5 @@
 name: rexroth-tpm2-webserver
-base: core18
+base: core20
 version: '0.0.1'
 summary: A snap containing a tpm2 based openssl server
 description: |
@@ -43,79 +43,54 @@ parts:
       - LDFLAGS: "$LDFLAGS -Wl,-rpath-link,$SNAPCRAFT_STAGE/lib"
     source: https://github.com/tpm2-software/tpm2-tools
     source-type: git
-    source-tag: "5.0"
+    source-tag: "5.2"
     build-packages:
     - pandoc
     - pkg-config
+    - autoconf-archive
+    - autoconf
     - to amd64:
-      - autoconf
-      - autoconf-archive
       - libcmocka-dev
       - libcurl4-openssl-dev
       - libssl-dev
       - libtool
       - uuid-dev
     - to arm64:
-      - autoconf
-      - autoconf-archive
-      - libcmocka-dev
-      - libcurl4-openssl-dev
-      - libssl-dev
-      - libtool
-      - uuid-dev
+      - libcmocka-dev:arm64
+      - libcurl4-openssl-dev:arm64
+      - libssl-dev:arm64
+      - libtool:arm64
+      - uuid-dev:arm64
     stage-packages:
     - to amd64:
-      - libasn1-8-heimdal
       - libcurl4
-      - libgssapi3-heimdal
-      - libhcrypto4-heimdal
-      - libheimbase1-heimdal
-      - libheimntlm0-heimdal
-      - libhx509-5-heimdal
-      - libkrb5-26-heimdal
-      - libldap-2.4-2
-      - libnghttp2-14
-      - libpsl5
-      - libroken18-heimdal
-      #- librtmp1
-      #- libsasl2-2
-      - libwind0-heimdal
-      - libuuid1
     - to arm64:
-      - libasn1-8-heimdal
-      - libcurl4
-      - libgssapi3-heimdal
-      - libhcrypto4-heimdal
-      - libheimbase1-heimdal
-      - libheimntlm0-heimdal
-      - libhx509-5-heimdal
-      - libkrb5-26-heimdal
-      - libldap-2.4-2
-      - libnghttp2-14
-      - libpsl5
-      - libroken18-heimdal
-      #- librtmp1
-      #- libsasl2-2
-      - libwind0-heimdal
-      - libuuid1
+      - libcurl4:arm64
     prime:
       - -include
     after:
       - tpm2-tss
+    override-build: |
+      ACLOCAL_PATH="/usr/share/gnulib/m4" ./bootstrap
+      ./configure --prefix=$SNAPCRAFT_PART_INSTALL/usr/ --host=$SNAPCRAFT_ARCH_TRIPLET
+      #snapcraftctl build
+      # Run all tests shipped by default
+      make check -j$(nproc)
+      make install
 
   tpm2-tss:
-    plugin: autotools
+    plugin: make
     source: https://github.com/tpm2-software/tpm2-tss
     source-type: git
-    source-tag: 3.0.3
+    source-tag: 3.2.0
     build-packages:
     - gcc
     - g++
     - doxygen
     - pkg-config
+    - autoconf
+    - autoconf-archive
     - to amd64:
-      - autoconf
-      - autoconf-archive
       - libtool
       - libltdl-dev
       - libjson-c-dev
@@ -124,52 +99,45 @@ parts:
       - libcurl4-openssl-dev
       - libssl-dev
     - to arm64:
-      - autoconf
-      - autoconf-archive
-      - libtool
-      - libltdl-dev
-      - libjson-c-dev
-      - libgcrypt20-dev
-      - liburiparser-dev
-      - libcurl4-openssl-dev
-      - libssl-dev
-    stage-packages:
-      - to amd64:
-        - libgcrypt20
-        - libssl1.1
-        - libgpg-error0
-        - libjson-c3
-        - libcurl4
-      - to arm64:
-        - libgcrypt20
-        - libssl1.1
-        - libgpg-error0
-        - libjson-c3
-        - libcurl4
+      - libtool:arm64
+      - libltdl-dev:arm64
+      - libjson-c-dev:arm64
+      - libgcrypt20-dev:arm64
+      - liburiparser-dev:arm64
+      - libcurl4-openssl-dev:arm64
+      - libssl-dev:arm64
     prime:
       - -include
+    override-build: |
+      ACLOCAL_PATH="/usr/share/gnulib/m4" ./bootstrap #https://github.com/tpm2-software/tpm2-tss/commit/d1106347ef2f8e7296f1bd6af7aa6e046f6a5a38
+      ./configure --prefix=$SNAPCRAFT_PART_INSTALL/usr/ --host=$SNAPCRAFT_ARCH_TRIPLET
+      make check -j$(nproc) || cat ./test-suite.log
+      make install
+      #chmod g-s $SNAPCRAFT_PART_INSTALL/usr/var/run/tpm2-tss/eventlog
+      #chmod g-s $SNAPCRAFT_PART_INSTALL/usr/var/lib/tpm2-tss/system/keystore #https://github.com/tpm2-software/tpm2-tss/commit/811e451c9
 
   tpm2-tss-engine:
     plugin: autotools
+    autotools-configure-parameters:
+      - --prefix=/usr
+      - --host=$SNAPCRAFT_ARCH_TRIPLET
     build-environment:
       - LDFLAGS: "$LDFLAGS -Wl,-rpath-link,$SNAPCRAFT_STAGE/lib"
     source: https://github.com/tpm2-software/tpm2-tss-engine
     source-type: git
-    source-branch: "master"
+    source-tag: v1.1.0
     build-packages:
       - pandoc
       - pkg-config
       - gcc
+      - autoconf-archive
+      - autoconf
       - to amd64:
-        - autoconf
-        - autoconf-archive
         - libtool
         - libssl-dev
       - to arm64:
-        - autoconf
-        - autoconf-archive
-        - libtool
-        - libssl-dev
+        - libtool:arm64
+        - libssl-dev:arm64
     after:
       - tpm2-tss
 

@@ -205,6 +205,7 @@ The gdb server has started the application which stops because of SIGSTOP. We ar
 
 Now gdb is started and connected to the gdb server. With the DEBUG CONSOLE window Visual Studio Code provides an output area and a command line to enter gdb commands - see green area in picture below.
 
+![Debug](images/debug_app.png)
 * Click into the gdb command line (green area in the picture above) and enter `-exec info b`
 * All active breakpoints are listed. Each breakpoint has an number (see cloumn 'Num')
 * Delete all listed breakpoints specified by their number, beginning with 1: `-exec delete 1`

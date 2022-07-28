@@ -11,7 +11,6 @@ The project __diagnostics.logbook__ provides a simple application example to log
 The implementation shows different ways to write messages to ctrlX logbook.
 
 + The class __KernelLoggerSample__ writes kernel log messages with the linux system command 'logger'.
-
 + The class __MicrosoftLoggerSample__ uses the nuget package extension __Microsoft.Extensions.Logging__ to write logs to logbook.
 
 ## Prerequisites

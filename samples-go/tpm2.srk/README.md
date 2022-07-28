@@ -2,7 +2,7 @@
 
 The sample app __tpm2.srk__ shows the basic usage of a TPM2 in Golang with go-tpm and go-tpm-tools.
 
-Also see ["TPM2"](./../tpm2.md).
+Also see ["TPM2"](../../tpm2.md).
 
 ## Introduction
 

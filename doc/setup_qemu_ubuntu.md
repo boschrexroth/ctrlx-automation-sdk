@@ -1,17 +1,15 @@
-# Setting up a QEMU Virtual Machine as App Build Environment
+!!! important
+    We recommend to use ctrlX WORKS setting up and operating an App Build Environment. This guide is only for use cases where ctrlX WORKS cannot be used.
 
-## Overview
+Creating and running an App Build Environment for the ctrlX AUTOMATION SDK is possible because the SDK archive contains all configuration and script files.
 
-This guide shows how to use an [Ubuntu Server operating system](https://ubuntu.com/server) running in a virtual machine using the [QEMU virtualizer](https://www.qemu.org/) to develop ctrlX AUTOMATION Apps.
+This is the recommended constellation:
 
-To simplify the setup of a new QEMU VM we use the [Ubuntu Cloud-Init Technology](https://cloud-init.io/) which installs the default user __boschrexroth/boschrexroth__ and all necessary tools on first boot.
+* The QEMU software should be run on an __AMD64__ based host computer with hardware acceleration. QEMU supports both Windows 10 and Linux host systems.
 
-As standard constellation the QEMU software should be installed and run on an __AMD64__ based host. QEMU supports both Windows 10 and Linux host systems.
+* For the QEMU virtual machine also __AMD64__ should be selected as CPU architecture.
 
-For the QEMU virtual machine (QEMU VM) we can select
-
-* AMD64 CPU architecture - this provides the best performance.
-* AARCH64 (ARM64) CPU architecture - only necessary for special purposes - see below.
+This combination provides best performance conditions.
 
 The installation of QEMU, further required tools and QEMU virtual machines is described in the next chapters.
 
@@ -64,10 +62,10 @@ See here for further informations:
 
 #### Install QEMU on Windows 10 Host
 
-To install QEMU download and install the newes version for Windows from [https://qemu.weilnetz.de/w64/](https://qemu.weilnetz.de/w64/).
+Download and install the newest version of QEMU for Windows from [https://qemu.weilnetz.de/w64/](https://qemu.weilnetz.de/w64/).
 
 !!! important
-    Add the installation path of your qemu software to the system environment varaible %PATH%.
+    Add the installation path of your qemu software to the system environment variable %PATH%.
 
     See [How do I set or change the PATH system variable?](https://www.java.com/en/download/help/path.html)
 
@@ -101,29 +99,14 @@ __Hints:__
 * If Windows Hypervisor Platform cannot be installed for any reason, we recommend using the Intel Hardware Accelerated Execution Manager (HAXM). The installation is described here [Installing HAXM](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/hardware-acceleration?pivots=windows#installing-haxm)
 
 
-
 #### Install Px.exe as Local Proxy Server 
 
 See [Use PX.exe as Local Proxy on a Windows Host](./px.md).
 
-## Create an Instance of a QEMU Virtual Machine
+## Create an Instance of an AMD64 QEMU Virtual Machine
 
-### AMD64 or AARCH64 QEMU Virtual Machine
+A virtual machine should be installed and started within a separate folder on your host computer. Therefor SDK folder __public/scripts/environment__ contains these scripts:
 
-On an AMD64 host computer an AMD64 QEMU VM has a very good performance.
-
-__Only if the desired programming language for developing ctrlX apps doesn't support cross compiling an AARCH64 QEMU VM should be used.__
-
-This currently applies to __Python and Node.js__. 
-
-Another reason can be the building of Node-RED packages when Node.js code has to be complied to native CPU machine code.
-
-### Scripts to Create an Instance
-
-A virtual machine should be installed and started within a separate folder on your host computer. To support you the SDK folder __public/scripts/environment__ contains these scripts:
-
-* __create-new-vm-aarch64-noproxy.bat, .sh__: creates an AARCH64 VM with direct internet access
-* __create-new-vm-aarch64-proxy.bat, .sh__: creates an AARCH64 VM using a proxy server
 * __create-new-vm-amd64-noproxy.bat, .sh__: creates an AMD64 VM with direct internet access
 * __create-new-vm-amd64-proxy.bat, .sh__: creates an AMD64 VM using a proxy server
 
@@ -136,44 +119,42 @@ To create e.g. a new amd64 VM instance with proxy usage on a Windows host do fol
 * Change to the SDK folder __public/scripts/environment__
 * Call create-new-vm-amd64-proxy.bat D:\qemuvm\amd64-proxy-1
 
-All neccessary files for this new VM are copied into the destination folder.
+All necessary files for this new VM are copied into the destination folder.
+
+Notice:
+
+The aarch64 .bat/.sh__ files are obsolete and should not be used.
 
 ## Running a QEMU Virtual Machine
 
 ### Start the QEMU Virtual Machine
 
-To start the QEMU VM instance change to its installation folder.
+To start the QEMU VM instance change to its installation folder and run one of these script files:
 
-You should find one of this scripts according your VM properties (architecture, proxy usage or not):
-
-* __launch-aarch64-noproxy.bat, .sh__: AARCH64 VM with direct internet access
-* __launch-aarch64-proxy.bat, .sh__: AARCH64 VM using a proxy server
-* __launch-amd64-noproxy.bat, .sh__: AMD64 VM with direct internet access
-* __launch-amd64-proxy.bat, .sh__: AMD64 VM using a proxy server
-
-In our Windows example start:
-
-    launch-amd64-proxy.bat
+* __launch-amd64-noproxy.bat, .sh__: If the VM has direct internet access
+* __launch-amd64-proxy.bat, .sh__: If the VM has to use a proxy server on the host computer
 
 The VM is started as console application, you can see the trace output.
 
-We recomment to __not use this console directly__ because a lot of shell functions are not supported.
+We recommend to __not use this console directly__ because a lot of shell functions are not supported.
 
 During first boot a lot of software will be installed - so please be patient.
 
-If this process is finished the VM will shutdown.
+If this process is finished the VM will shutdown. Just run the launch script to restart the VM.
 
 ### Network Connection to your QEMU Virtual Machine
 
 From the point of view of your host computer, the VM does not have own network interface cards. Services running on the VM are available via __port forwarding__.
 
-This port forwarding is configured in the launch... script, per default only port 22 (SSH) is forwarded:
+This port forwarding is configured in the launch... script with one or more __hostfwd=__ settings e.g.:
 
--netdev user,id=eth0,__hostfwd=tcp::10022-:22__
+    -netdev user,id=eth0,hostfwd=tcp::10022-:22
 
-Port 10022 of the host is forwarded to port 22 (SSH) of the VM. If port 10022 is used on the host the VM will not start. In this case please enter a free host port number in the launch script e.g. 20022.
+Here port 10022 of the host is forwarded to port 22 (SSH) of the VM. If port 10022 is used on the host the VM will not start. In this case please enter a free host port number in the launch script e.g. 20022.
 
-Further ports can be forwarded just extend this line e.g. -netdev user,id=eth0,hostfwd=tcp::10022-:22,__hostfwd=tcp::502-:502__
+For forwarding further ports e.g. __502 (Modbus)__ just extend this line e.g.:
+
+    -netdev user,id=eth0,hostfwd=tcp::10022-:22,hostfwd=tcp::502-:502
 
 !!! Important
     From your host computer a SSH connection can be established using __127.0.0.1:10022__
@@ -182,33 +163,13 @@ During the first connection with Visual Studio Code enter: __ssh -p 10022 boschr
 
 ### Install the ctrlX AUTOMATION SDK and Additional Software After First Boot
 
-Because some necessary software components cannot be installed during first boot they have to be installed manually. 
+Start your VM, from your host start a SSH session and login with __boschrexroth/boschrexroth__.
 
-So restart your VM, login with __boschrexroth/boschrexroth__ and start these scripts:
-
-* install-snapcraft.sh
-* optional if you need the dotnet-sdk: install-dotnet-sdk.sh
-* optional if you need Node.js and npm: install-nodejs-npm.sh
-* __install-sdk-sh__
-
-The script __install-sdk-sh__ downloads, unpacks and preconfigures the ctrlX AUTOMATION SDK archive [github boschrexroth/ctrlx-automation-sdk/releases](https://github.com/boschrexroth/ctrlx-automation-sdk/releases).
-
-Therefor do following steps:
-
-* Create a new folder
-
-    mkdir ctrlx
-    
-    chdir ctrlx
-
-* Call the install script
-
-    ~/install-sdk.sh
-
+Please regard instructions in chapter [Important Install Scripts](install-scripts.md).
 	
 ### Shutdown
 
-It's very important to shutdown the __QEMU VM__ properly. So initiate a shutdown e.g. with this command:
+It's very important to shutdown the __QEMU VM__ properly. So initiate a shutdown e.g. with this command on your VM console:
 
     sudo poweroff
 	

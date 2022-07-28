@@ -1,41 +1,43 @@
-
-# Setting up a VirtualBox Virtual Machine as SDK Build Environment
-
-## Overview
-
-This guide shows how to use an [Ubuntu Desktop](https://ubuntu.com/desktop/developers) running in a virtual machine using the [ORACLE VM VirtualBox](https://www.virtualbox.org/) on a Windows 10 host system as a development environment to develop ctrlX AUTOMATION Apps.
-This setup gives you a seamless development environment for Linux applications when you don't have the possibility to setup a native Linux Operating System on your PC (e.g. if you are in a Windows based corporate network). 
+This guide shows how to use an [Ubuntu Desktop](https://ubuntu.com/desktop/developers) running in a virtual machine using the [VirtualBox](https://www.virtualbox.org/) on a Windows 10 host system as a development environment to develop ctrlX AUTOMATION apps.
 
 ### Prerequisites
 
-* You need to have admin rights on your Windows system to be able to install the software.
-* Windows 10 with all updates.
+* Can only be installed on AMD64/Intel64 host computer systems.
+* You need to have admin rights on your host to be able to install the software.
 
-## Install ORACLE VM VirtualBox
+## Install VirtualBox
 
-Install [ORACLE VM VirtualBox](https://www.virtualbox.org/). The software can be downloaded from here: <https://www.virtualbox.org/.>
+The software can be downloaded from here: <https://www.virtualbox.org/.>
 
-## Setup Virtual Machine and install Ubuntu Distribution
+## Setup Virtual Machine and install Ubuntu Desktop 20.04 LTS
 
-Once installed setup a new virtual machine to host your Ubuntu guest system. For the installation of the Ubuntu Operating System, download an iso-Image.
+Download an iso-image from <https://old-releases.ubuntu.com/releases/focal/>
 
-It is recommended to use Ubuntu Desktop 20.04 LTS from here: <https://old-releases.ubuntu.com/releases/focal/>
+Create a virtual machine, select these settings:
 
-* Create a virtual machine running the Ubuntu, recommendation:
-* min 8 Gb Ram
-  * min 15 Gb Disk, VDI Type
-  * all processors
-  * insert Ubuntu *.iso into virtual CD Drive
-  * Map free internet connection via network settings (Adapter 1, Bridged Adapter)
-  * Map real/virtual control via network settings (Adapter 2, Bridged Adapter)
-* Start machine and follow installation instructions
-* Install Virtual Box GuestAdditions
-* Configure IP Address to connect to your control
+* min 8 GB Ram
+* min. 15 GB Disk, VDI Type
+* all processors
+* insert Ubuntu *.iso into virtual CD Drive
+* Map free internet connection via network settings (Adapter 1, Bridged Adapter)
+* Map real/virtual control via network settings (Adapter 2, Bridged Adapter)
+
+Start machine and follow installation instructions.
+
+Install Virtual Box GuestAdditions.
+
+Configure IP Address to connect to your control.
+
+## Running the Virtual Machine
+
+Start a SSH session and login into your virtual machine.
 
 ### Setup Corporate Proxy (Optional)
 
-If you are in a corporate environment, which uses a http-Proxy, then you may want to set the proxy configuration to be able to download software from within your distribution.
-For this, you want to run a proxy on your Windows environment and redirect the distribution to this proxy running on localhost. If you are directly connected to a router or the internet, then this step can be skipped.
+If you are in a corporate environment, which uses a http/https-Proxy, then you may want to set the proxy configuration to be able to download software from within your VM.
+
+For this, you need to run a proxy on your Windows environment and redirect the distribution to this proxy running on localhost. If you are directly connected to a router or the internet, then this step can be skipped.
+
 A recommended proxy program to be used on your Windows host system is <https://github.com/genotrance/px>.
 
 To set the environment variable in the distribution use:
@@ -59,74 +61,58 @@ Search for the http proxy settings and make sure you configure:
     http_proxy = http://10.0.2.2:3128/
     use_proxy = on
 
-### Setup Packages
-
 You might want to update your distribution and install essential packages for development.
 
     sudo apt update
     sudo apt upgrade
-    sudo apt install ssh zip unzip git curl cifs-utils apt-transport-https ca-certificates openssh-client
 
-The following packages are needed for software development of ctrlX AUTOMATION apps.
+### Setup Standard Packages
 
-    sudo apt install crossbuild-essential-arm64 cmake snapcraft gcc gdb
+Packages in QEMU based VMs created by ctrlX WORKS are installed automatically. In the configuration file [cloud-config-amd64](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config-amd64) these packages are listed under the section __packages:__
 
-For Python install the additional python packages:
+You can copy the list and create an install command, e.g.
 
-    sudo apt-get install python3
-    sudo apt-get install python3-pip
+packages: - ssh - zip - unzip ...
 
-Furthermore, we recommend to use virtual python environments when you are developing python apps. Therefore, you need to install virtualenv:
+    sudo apt-get install -y ssh zip unzip ...
 
-    sudo apt-get install virtualenv
-
+!!! important
+    Install ALL listed packages.
 
 ### Dependencies for Crossbuild (Multiarch)
 
-Multiarch lets you install library packages from multiple architectures on the some machine. This is useful in various ways, but the most common is installing 64 and 32-bit software on the same machine and having dependencies correctly resolved automatically. In our way we use multiple architectures. In general, you can have libraries of more than one architecture installed together and applications from one architecture or another installed as alternatives. Additional information can be found here [Multiarch](https://wiki.ubuntu.com/MultiarchSpec).
+[Multiarch](https://wiki.ubuntu.com/MultiarchSpec) lets you install library packages from multiple architectures on the some machine. In our case we use the architectures amd64 and arm64.
 
-Be sure that apt can connect to the internet.
+The according commands are also available in [cloud-config-amd64](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config-amd64).
 
-Run the commands below as root user:
-
+Therefor copy the commands under section runcmd: subtitle '# https://wiki.ubuntu.com/MultiarchSpec' and '# Qualify architecture'
 
     sudo dpkg --add-architecture arm64
-    sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ focal main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
-    sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ focal-updates main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
-    sudo apt-get clean
-    sudo apt-get update
+    ...
 
+!!! important
+    Run ALL listed commands.
 
-After apt-get update, you might get some warnings like: `Failed to fetch http://de.archive.ubuntu.com/ubuntu/dists/focal/universe/binary-arm64/Packages`. To avoid it add the vendor with the host architecture `[arch=i386,amd64]` to your sources list `/etc/apt/sources.list`.
+Furthermore run:
 
-For example:
-`deb [arch=i386,amd64] http://de.archive.ubuntu.com/ubuntu/ focal main restricted`
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    sudo apt-get -y install libsystemd-dev:arm64
+    sudo apt-get -y install libsystemd-dev:amd64
+    sudo apt-get -y install libssl-dev:amd64
+    sudo apt-get -y install libssl-dev:arm64
+    sudo apt-get -y install libzmq3-dev:amd64
+    sudo apt-get -y install libzmq3-dev:arm64
 
-Now it is possible to download packages for other architectures. For building the examples, you need to install additional libraries
+### Important Install Scripts
 
+In chapter [Important Install Scripts](install-scripts.md) all install scripts of a QEMU VM created by ctrlX WORKS are explained.
 
-    sudo apt-get install libsystemd-dev:arm64
-    sudo apt-get install libsystemd-dev:amd64
-    sudo apt-get install libssl-dev:amd64
-    sudo apt-get install libssl-dev:arm64
+These scripts can be copied from the file [cloud-config-amd64](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config-amd64).
 
+Open this file with a web browser by clicking the link, copy the according lines into new script files on your VM, set the x permission and run them.
 
-## Install Visual Studio Code
+Each script file in cloud-config-amd64 is identified with a comment e.g. # install-sdk.sh, skip the line `- content:` and copy all lines until `# Create in /tmp ...`
 
-Install Visual Studio Code on your windows environment as described here: https://code.visualstudio.com.
-Or use the integrated software downloader of Ubuntu.
-
-![Install VSCode](images/setup_vscode_install_ubuntu.png)
-
-In order to compile all examples of the SDK you will need to install additional extensions. 
-This can be done easily from within Visual Studio Code as soon as you open a project. In the extension windows you can search for extensions.
-
-![vscode_remote_extensions](./images/vscode_remote_extensions.png)
-
-Make sure to have at least the following extensions installed.
-
-![vscode_remote_extensions](./images/vscode_remote_extensions_installed.png)
-
-## Install the SDK
-
-Copy the complete contents of this SDK into your Ubuntu Desktop system. It is recommended to copy the SDK to the `home` directory of your user.
+!!! important
+    Running install-sdk.sh is mandatory.

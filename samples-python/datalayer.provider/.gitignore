@@ -1,8 +1,0 @@
-venv/
-parts/
-prime/
-stage/
-snap/.snapcraft
-squashfs-root/
-bin/
-sample/schema/__pycache__

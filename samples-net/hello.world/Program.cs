@@ -28,32 +28,17 @@ namespace Samples.HelloWorld
 {
     class Program
     {
+        /// <summary>
+        /// The Main method is the entry point of an executable app.
+        /// </summary>
+        /// <param name="args">The args<see cref="string"/>.</param>
         static void Main(string[] args)
         {
-            //Add app exit handler to handle optional clean up
-            AppDomain.CurrentDomain.ProcessExit += CurrentDomain_ProcessExit;
-
             while (true)
             {
                 Console.WriteLine("Hello World! {0}", DateTime.Now);
                 System.Threading.Thread.Sleep(1000);
             }
-        }
-
-        private static void CurrentDomain_ProcessExit(object sender, EventArgs e)
-        {
-            Console.WriteLine("Application exit");
-
-            //The EventHandler for this event can perform termination activities, such as closing files, releasing storage and so on, before the process ends.
-
-            //Note:
-            //In.NET Framework, the total execution time of all ProcessExit event handlers is limited,
-            //just as the total execution time of all finalizers is limited at process shutdown.
-            //The default is two seconds. An unmanaged host can change this execution time by calling the ICLRPolicyManager::SetTimeout method with the OPR_ProcessExit enumeration value.
-            //This time limit does not exist in .NET Core.
-
-            // Your optional clean up code goes here ... 
-            //...
         }
     }
 }

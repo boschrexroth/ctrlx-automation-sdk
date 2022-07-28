@@ -33,20 +33,20 @@ static std::string dl_addr_base = "sdk-cpp-alldata/"; // snap/snapcraft.yaml nam
 
 // Add some signal Handling so we are able to abort the program with sending sigint
 bool endProcess = false;
-static void sigHandler(int sig, siginfo_t *siginfo, void *context)
+static void sigHandler(int sig, siginfo_t* siginfo, void* context)
 {
   endProcess = true;
 }
 
-static void shutdownMessage(const std::string &providerConnection)
+static void shutdownMessage()
 {
-  std::cout << "ERROR Connection '" + providerConnection + "' failed." << std::endl;
+  std::cout << "ERROR Connection to ctrlX CORE failed." << std::endl;
 
-  std::cout << "Check network connection!" << std::endl;
-  std::cout << "Further checks:" << std::endl;
-  std::cout << "- If ctrlX CORE virtual via port forwarding: Is port 2070 set?" << std::endl;
-  std::cout << "- If ctrlX CORE virtual with network adapter or real: Is IP address correct? " << std::endl;
-  std::cout << "- Is ctrlX in Operation mode? " << std::endl;
+  std::cout << "Check physical network connection!" << std::endl;
+  std::cout << "Check connection parameters:" << std::endl;
+  std::cout << "ctrlX CORE virtual via port forwarding: IP=10.0.2.2, is port 2070 forwarded?" << std::endl;
+  std::cout << "ctrlX CORE virtual with network adapter or real: Is IP address correct?" << std::endl;
+  std::cout << "Is ctrlX CORE in Operation mode? " << std::endl;
   std::cout << std::endl;
 
   std::cout << "Shutting down!" << std::endl;
@@ -75,12 +75,12 @@ int main()
   comm::datalayer::DatalayerSystem datalayerSystem;
   datalayerSystem.start(false);
 
-  auto providerConnectionString = getConnectionString();
-  std::cout << "INFO Creating Data Layer Provider" << std::endl;
-  auto *provider = getProvider(datalayerSystem);
+  // ip="192.168.1.1" or any other IP address if a ctrlX CORE or ctrlX CORE virtual
+  // ip="10.0.2.2"    ctrlX CORE virtual with port forwarding
+  auto* provider = getProvider(datalayerSystem);
   if (provider == nullptr)
   {
-    shutdownMessage(providerConnectionString);
+    shutdownMessage();
     datalayerSystem.stop(false);
     return 1;
   }
@@ -97,7 +97,7 @@ int main()
   {
     if (provider->isConnected() == false)
     {
-      shutdownMessage(providerConnectionString);
+      shutdownMessage();
       break;
     }
 

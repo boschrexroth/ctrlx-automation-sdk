@@ -5,7 +5,7 @@
 Regardless of whether you want to connect to a VM or a real machine, "Secure Shell" (SSH) is used. 
 
 The SSH address of a virtual machine running with default port forwarding is __localhost:10022__
-Here port 10022 of the host is forwarded to port 22 of the virtaul machine (guest)).
+Here port 10022 of the host is forwarded to port 22 of the virtual machine (guest)).
 
 The address of real machine is __IP:22__ e.g. 192.168.1.1:22
 

@@ -38,6 +38,19 @@ parts:
     plugin: dump
     source: ./www
 
+  datalayerdeb:
+    plugin: dump
+    source: ./tmp/ctrlx-datalayer.deb
+    source-type: deb
+    stage-packages:
+      - libzmq5
+    override-pull: |
+      mkdir -p ../../../tmp/
+      cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
+      snapcraftctl pull
+    override-prime: |
+      rm -rf ../tmp
+      snapcraftctl prime
 
 slots:
   package-assets:

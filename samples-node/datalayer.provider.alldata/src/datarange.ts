@@ -41,13 +41,16 @@ class DataRange implements IDataRange {
      */
     private max: any;
 
+    /** 
+     * Creates a new instance of the DataRange class
+     */
     constructor(min: any, max: any) {
         this.min = min;
         this.max = max;
     }
 
     /**
-     * Creates a data range.
+     * Factory to create a new instance of the DataRange class.
      * @param min 
      * @param max 
      * @returns 

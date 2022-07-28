@@ -8,9 +8,9 @@ version: "2.1.0"
 grade: stable
 summary: SDK sample app in cpp - subscribes Data Layer nodes
 description: |
-  This sample demonstrates how to use Data Layer subscriptions on Datalayer. 
+  This sample demonstrates how to use Data Layer subscriptions on Datalayer.
   It subscribes the nodes: framework/metrics/system/cpu-utilisation-percent and .../memavailable-mb.
-  If a value of a node has changed it writes the new value to the console.  
+  If a value of a node has changed it writes the new value to the console.
 base: core20
 confinement: strict
 
@@ -19,13 +19,13 @@ apps:
   datalayerClientSub:
     command: datalayerClientSub
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: 
+    plugs:
       - network
       - datalayer
     daemon: simple
     passthrough:
       restart-condition: always
-      restart-delay: 10s 
+      restart-delay: 10s
 
 parts:
   datalayerclientsub:
@@ -33,14 +33,24 @@ parts:
     source: ./generated/build
     stage-packages:
       - libzmq5
-  
+
   deb:
-    plugin: dump
-    source: ../../deb/ctrlx-datalayer-1.7.13.deb
+      plugin: dump
+      source: ./tmp/ctrlx-datalayer.deb
+      source-type: deb
+      stage-packages:
+        - libzmq5
+      override-pull: |
+        mkdir -p ../../../tmp/
+        cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
+        snapcraftctl pull
+      override-prime: |
+        rm -rf ../tmp
+        snapcraftctl prime
 
 # describes which interface slots are supported by defining the plugs
 plugs:
   datalayer:
     interface: content
     content: datalayer
-    target: $SNAP_DATA/.datalayer 
+    target: $SNAP_DATA/.datalayer

@@ -1,0 +1,39 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+version: '1.0.0'
+name: ctrlx-monitor-health
+summary: App health monitoring demo app
+description: |
+  This app demonstrates how you can add health monitoring capability to your app.
+confinement: strict 
+#confinement: devmode 
+#icon: assets/icons/ICONHERE.png
+grade: stable  # must be 'stable' to release into candidate/stable channels
+base: core20
+type: app
+
+apps:
+  check-health:
+    command: check-health  
+    daemon: simple
+    restart-condition: on-failure
+    passthrough:   
+      restart-delay: 10s
+
+  app:
+    command: dummy-app
+    daemon: simple
+    restart-condition: always
+    passthrough:   
+      restart-delay: 10s
+ 
+parts:
+  check-health:
+    plugin: dump
+    source: ./health
+    
+  app:
+    plugin: dump
+    source: ./app

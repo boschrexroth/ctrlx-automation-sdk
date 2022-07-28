@@ -53,6 +53,9 @@ class MyProviderNode : public IProviderNode
 {
 private:
   comm::datalayer::Variant _data;
+
+  /* Keep this comment section - it can be used as a sample for creating metadata programmatically.
+
   comm::datalayer::Variant _metaData;
 
   void createMetadata()
@@ -97,12 +100,13 @@ private:
 
     _metaData.shareFlatbuffers(builder);
   }
+*/
 
 public:
   MyProviderNode(comm::datalayer::Variant data)
   {
     _data = data;
-    createMetadata();
+    //createMetadata();
   };
 
   virtual ~MyProviderNode() override{};
@@ -148,7 +152,11 @@ public:
   // Read function of metadata of an object. Function will be called whenever a node should be written.
   virtual void onMetadata(const std::string &address, const comm::datalayer::IProviderNode::ResponseCallback &callback) override
   {
-    callback(comm::datalayer::DlResult::DL_OK, &_metaData);
+    // Keep this comment! Can be used as sample creating metadata programmatically.
+    // callback(comm::datalayer::DlResult::DL_OK, &_metaData);
+
+    // Take metadata from metadata.mddb
+    callback(comm::datalayer::DlResult::DL_FAILED, nullptr);
   }
 };
 
@@ -172,7 +180,7 @@ int main()
   std::cout << "INFO Register 'sdk-cpp-registernode' as root element with 4 nodes 'myFlatbuffer', 'myFloat', 'myString' and 'myInt64'" << std::endl;
 
   comm::datalayer::IProvider *provider = getProvider(datalayerSystem); // ctrlX CORE (virtual)
-  // comm::datalayer::IProvider *provider = getProvider(datalayerSystem, "10.0.2.2", "boschrexroth", "boschrexroth", 8443); // ctrlX CORE virtual with portforwarding
+  //comm::datalayer::IProvider *provider = getProvider(datalayerSystem, "10.0.2.2", "boschrexroth", "boschrexroth", 8443); // ctrlX CORE virtual with port forwarding
   if (provider == nullptr)
   {
     std::cout << "ERROR Getting provider connection failed." << std::endl;
@@ -214,17 +222,24 @@ int main()
   auto snapDir = snapPath();
   std::filesystem::path dir;
   if (snapDir == nullptr)
-    dir = "bfbs"; // Build environment: bfbs file is stored in sub directory bfbs
+    dir = "compiled"; // Build environment: Compiled files are stored into that sub directory
   else
-    dir = snapDir; // Snap environment: bfbs file is stored in $SNAP directory
+    dir = snapDir; // Snap environment: Compiled files are stored into the $SNAP directory
 
-  std::filesystem::path file = dir / "sampleSchema.bfbs";
+  std::filesystem::path fileBfbs = dir / "sampleSchema.bfbs";
 
-  std::cout << "INFO Register type 'types/sampleSchema/inertialValue' " << file << std::endl;
-  result = provider->registerType("types/sampleSchema/inertialValue", file);
+  std::cout << "INFO Register type 'types/sampleSchema/inertialValue' " << fileBfbs << std::endl;
+  result = provider->registerType("types/sampleSchema/inertialValue", fileBfbs);
   if (STATUS_FAILED(result))
   {
-    std::cout << "WARN Register type 'types/sampleSchema/inertialValue' " << file << " failed with: " << result.toString() << std::endl;
+    std::cout << "WARN Register type 'types/sampleSchema/inertialValue' " << fileBfbs << " failed with: " << result.toString() << std::endl;
+  }
+
+  std::filesystem::path fileMddb = dir / "metadata.mddb";
+  result = provider->registerType("datalayer", fileMddb);
+  if (STATUS_FAILED(result))
+  {
+    std::cout << "WARN Register " << fileBfbs << " failed with: " << result.toString() << std::endl;
   }
 
   // Register a node as flatbuffer value

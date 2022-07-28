@@ -2,12 +2,13 @@
 
 ## Introduction
 
-The sample app __datalayer.register.node__ creates a new provider with node '__sdk-cpp-registernode__' and different type elements to the ctrlX Data Layer.
+The sample app __datalayer.register.node__ creates a new Data Layer folder '__sdk-cpp-registernode__' with nodes of different datatypes.
 
 ## Functional Description
 
 It demonstrates how you can create Data Layer nodes with different data types.
 These nodes can be accessed by a Data Layer client app e.g. ctrlX-Node-RED.
+The metadata of the nodes are provides by a metadata database.
 
 ## Implementation Description
 
@@ -16,6 +17,7 @@ All actions are implemented in main.cpp:
 * Start Data Layer system
 * Connect as Data Layer provider
 * Register a flatbuffers schema
+* Register metadata database
 * Register several Data Layer nodes
 * Endless loop where the Data Layer connection is observed
 * Shutdown if the Data Layer connection is broken
@@ -42,7 +44,7 @@ ___
 
 MIT License
 
-Copyright (c) 2020-2021 Bosch Rexroth AG
+Copyright (c) 2020-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

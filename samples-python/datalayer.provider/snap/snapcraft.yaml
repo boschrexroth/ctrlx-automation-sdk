@@ -24,10 +24,14 @@ parts:
     plugin: python
     source: .
 
-  files:
+  bfbs:
     plugin: dump
     source: ./bfbs 
 
+  mddb:
+    plugin: dump
+    source: ./mddb 
+      
   datalayerdeb:
       plugin: dump
       source: ./tmp/ctrlx-datalayer.deb

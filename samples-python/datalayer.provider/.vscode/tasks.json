@@ -4,10 +4,17 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "0 Install venv and packages",
+            "label": "Install venv and requirements",
             "type": "shell",
             "command": "bash",
             "args": ["install-venv.sh"],
+            "problemMatcher": []
+        },
+        {
+            "label": "make bfbs mddb",
+            "type": "shell",
+            "command": "bash",
+            "args": ["make-bfbs-mddb.sh"],
             "problemMatcher": []
         },
         {

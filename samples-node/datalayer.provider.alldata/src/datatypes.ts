@@ -87,6 +87,11 @@ const DataTypes = {
     string: DataType.create('string', VariantTypes.string, 'types/datalayer/string'),
 
     /**
+     * timestamp (Date)
+     */
+    timestamp: DataType.create('timestamp', VariantTypes.string, 'types/datalayer/timestamp'),
+
+    /**
      * flatbuffers
      */
     inertialValue: DataType.create('inertial-value', VariantTypes.flatbuffers, 'types/samples/nodejs/schema/inertial-value'),
@@ -150,6 +155,11 @@ const DataTypes = {
      * array of string (UTF-8)
      */
     arstring: DataType.create('array-of-string', VariantTypes.arstring, 'types/datalayer/array-of-string'),
+
+    /**
+     * array of timestamp (Date)
+     */
+    artimestamp: DataType.create('array-of-timestamp', VariantTypes.arstring, 'types/datalayer/array-of-timestamp'),
 }
 
 export = DataTypes;

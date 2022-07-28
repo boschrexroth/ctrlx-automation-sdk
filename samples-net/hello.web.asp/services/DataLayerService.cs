@@ -3,8 +3,8 @@
 namespace Hello.Web.Asp.services
 {
     using Datalayer;
+    using Samples.Datalayer;
     using System;
-    using System.Net;
     using System.Text.Json;
 
     /// <summary>
@@ -20,26 +20,17 @@ namespace Hello.Web.Asp.services
         /// <summary>
         /// Initializes a new instance of the <see cref="DataLayerService"/> class.
         /// </summary>
-        /// <param name="ip">The ip<see cref="IPAddress"/>.</param>
-        /// <param name="user">The user<see cref="string"/>.</param>
-        /// <param name="password">The password<see cref="string"/>.</param>
-        public DataLayerService(string ip, string user, string password)
+        public DataLayerService()
         {
-            Client = CreateClient(ip, user, password);
+            Client = CreateClient();
         }
 
         /// <summary>
         /// The CreateClient.
         /// </summary>
-        /// <param name="ip">The ip<see cref="IPAddress"/>.</param>
-        /// <param name="user">The user<see cref="string"/>.</param>
-        /// <param name="password">The password<see cref="string"/>.</param>
         /// <returns>The <see cref="IClient"/>.</returns>
-        private static IClient CreateClient(string ip, string user, string password)
+        private static IClient CreateClient()
         {
-            // Check if the process is running inside a snap 
-            var isSnapped = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP"));
-            Console.WriteLine($"Running inside snap: {isSnapped}");
 
             // Create a new ctrlX Data Layer system
             var system = new DatalayerSystem();
@@ -48,11 +39,11 @@ namespace Hello.Web.Asp.services
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Set remote connection string with ipc protocol if running in snap, otherwise with tcp protocol
-            var remote = isSnapped ? "ipc://" : $"tcp://{Config.USER}:{Config.PASSWORD}@{Config.IP_ADDRESS}:2069?sslport={Config.SSL_PORT}";
+            // Create a connection string with the parameters according to your environment (see DatalayerHelper class)
+            var connectionString = DatalayerHelper.GetConnectionString(ip: "192.168.1.1", sslPort: 443);
 
             // Create the client with remote connection string
-            using var client = system.Factory.CreateClient(remote);
+            using var client = system.Factory.CreateClient(connectionString);
             Console.WriteLine("ctrlX Data Layer client created.");
 
             return client;

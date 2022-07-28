@@ -6,3 +6,4 @@
 /**/publish
 /**/TestResults
 *.DotSettings
+*.DotSettings.user

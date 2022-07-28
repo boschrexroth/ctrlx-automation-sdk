@@ -1,5 +1,3 @@
-# About
-
 Copyright © 2020-2022 Bosch Rexroth AG. All rights reserved.
 
 Please note that any trademarks, logos and pictures contained or linked to in this Software are owned by or copyright © Bosch Rexroth AG 2021 and not licensed under the Software's license terms.
@@ -20,7 +18,7 @@ In order to download and use the binary packages of the ctrlX AUTOMATION Softwar
 
 MIT License
 
-Copyright (c) 2020-2021 Bosch Rexroth AG
+Copyright (c) 2020-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

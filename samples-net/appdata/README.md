@@ -1,7 +1,7 @@
 # README .NET appdata
 
 This .NET sample shows how to persist application data in ctrlX environment using an
-HTTP Listener. Please read the available [HOW-TO persist your app data](./../../doc/persistdata.md) documention for details.
+HTTP Listener. Please read the available [HOW-TO persist your app data](../../persistdata.md) documention for details.
 
 ## Introduction
 
@@ -13,7 +13,7 @@ Use the ctrlX App Data storage for your application data persistence.
 
 ## Prerequisites
 
-Please read the common .NET docs [here](./../README.md), first.
+Please read the common .NET docs [here](../README.md), first.
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ Please read the common .NET docs [here](./../README.md), first.
 2. Click on the __Remote Explorer__ from the menu.
 3. Choose __Open Folder__.
 4. Open the directory __appdata__.
-5. Build and install snap as described [here](./../README.md).
+5. Build and install snap as described [here](../README.md).
 6. Checkout ctrlX Data Layer web frontend (System | Data Layer) 
 7. Check the output using __Diagnostics__:
 
@@ -62,7 +62,7 @@ If you've found an error in these sample, please [file an issue](https://github.
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

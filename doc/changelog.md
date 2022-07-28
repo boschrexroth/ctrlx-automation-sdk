@@ -1,11 +1,17 @@
-# Changelog
+## Software Development Kit for ctrlX AUTOMATION
 
-## Softwaredevelopment Kit for ctrlX AUTOMATION
+### Version 1.16.0 <small> July 15, 2022</small>
 
-### Version 1.14.0 <small>_ March 30, 2022</small>
+* Increase maximum numbers of opened files: Docu and sample project
+* Convert Flatbuffers Schema Files to IEC61131 Code: Chapter in documentation Getting Started, PLC sample in samples-iec61131/fbs2plc
+* Metadata database examples added to samples-cpp/datalayer.register.node and samples-python/datalayer.provider
+* Revisions regarding Virtual Box and Native Ubuntu 20.04
+* Deploy fbs only in namepaces
 
-* Add Golang samples for ctrlX Data Layer Provider and Client
-* Add Service 2 Service Authentication guide
+See also [Changes of the App Build Environment ](app_builder_env_changes.md)
+
+### Version 1.14.0 <small> March 15, 2022</small>
+
 * Use flatbuffers version 1.12 for c/c++ projects
 * Use flatc 2.0
 * Remove RT Bundles from SDK
@@ -14,7 +20,7 @@
 * Using ctrlX WORKS function 'App Building Environments'
 * Using Snapcraft Remote Build from Canonical
 
-### Version 1.12.0 <small>_ November 22, 2021</small>
+### Version 1.12.0 <small> November 22, 2021</small>
 
 * Change samples to Ubuntu20
 * Add QEMU as new recommended build environment
@@ -29,7 +35,7 @@
 * Added description to adapt licensing mechanism
 * Added `Bundle Description (doxygen)` for trace/diagnosis
 
-### Version 1.10.0 <small>_ July 15, 2021</small>
+### Version 1.10.0 <small> July 15, 2021</small>
 
 * Added python `appdata` sample 
 * Added python `ctrlX Data Layer Browse` sample 
@@ -49,7 +55,7 @@
 * Added C++ Sample with different Loglevels
 * Remove REST API's from package (available online)
 
-### Version 1.8.0 <small>_ March 25, 2021</small>
+### Version 1.8.0 <small> March 25, 2021</small>
 
 * Added .NET 5 (.NET Core) `hello.world` sample (self-contained)
 * Added .NET 5 (.NET Core) `ctrlX Data Layer Browse` sample (self-contained)
@@ -61,7 +67,7 @@
 * Added python API Documentation
 * Added .NET 5 (.NET Core) API Documentation
 
-### Version 1.6.0 <small>_ November 15, 2020</small>
+### Version 1.6.0 <small> November 15, 2020</small>
 
 * Changed license from BSD3 to MIT
 * Refactored hello.webserver sample
@@ -71,6 +77,6 @@
 * Prepared experimental remote snap debugging
 * Added `datalayer.realtime` sample (share real time data)
 
-### Version 1.4.0 <small>_ July 15, 2020</small>
+### Version 1.4.0 <small> July 15, 2020</small>
 
 * Prepare first release

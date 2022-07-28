@@ -51,7 +51,7 @@ Here some examples:
 
     Remarks: 
     10.0.2.2 is the IP address of the host from the point of view of the app build environment (QEMU VM).
-    8443 is the host port which is forwarded to the SSL port (=22) of the ctrlX CORE virtual
+    8443 is the host port which is forwarded to the SSL port (=433) of the ctrlX CORE virtual
 
 
 IMPORTANT:

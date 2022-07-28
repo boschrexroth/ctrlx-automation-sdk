@@ -413,7 +413,7 @@ void DataLayerClient::ping()
   waitForResponseCallback(10);
 }
 
-void DataLayerClient::readSync(const std::string node)
+void DataLayerClient::readSync(const std::string &node)
 {
   std::string address = "sdk-cpp-alldata/static/" + node;
   _result = _client->readSync(address, &_data);
@@ -482,7 +482,7 @@ void DataLayerClient::read()
   readSync("array-of-uint64");
 }
 
-void DataLayerClient::createSync(const std::string node)
+void DataLayerClient::createSync(const std::string &node)
 {
   std::string address = "/sdk-cpp-alldata/dynamic/_cpp/" + node;
   _client->removeSync(address); // First remove - may be node exists
@@ -593,7 +593,7 @@ void DataLayerClient::browse()
   waitForResponseCallback(10);
 }
 
-void DataLayerClient::writeSync(const std::string node)
+void DataLayerClient::writeSync(const std::string &node)
 {
   std::string address = "sdk-cpp-alldata/dynamic/" + node;
 

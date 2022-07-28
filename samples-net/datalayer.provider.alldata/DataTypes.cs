@@ -66,6 +66,11 @@
         public static DataType String = new("string", "types/datalayer/string");
 
         /// <summary>
+        /// Defines the Timestamp.
+        /// </summary>
+        public static DataType Timestamp = new("timestamp", "types/datalayer/timestamp");
+
+        /// <summary>
         /// Defines the ArrayOfBool8.
         /// </summary>
         public static DataType ArrayOfBool8 = new("array-of-bool8", "types/datalayer/array-of-bool8");
@@ -124,6 +129,11 @@
         /// Defines the ArrayOfString.
         /// </summary>
         public static DataType ArrayOfString = new("array-of-string", "types/datalayer/array-of-string");
+
+        /// <summary>
+        /// Defines the ArrayOfTimestamp.
+        /// </summary>
+        public static DataType ArrayOfTimestamp = new("array-of-timestamp", "types/datalayer/array-of-timestamp");
 
         /// <summary>
         /// Defines the InertialValue.
