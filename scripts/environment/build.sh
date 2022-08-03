@@ -124,7 +124,6 @@ fi
 # Create user-data-image
 cloud-localds -v ${UDIMG} $CCG
 
-
 # Download QEMU_EFI.fd ####################################################
 if grep -q "ar" <<<${ARCH}
 then

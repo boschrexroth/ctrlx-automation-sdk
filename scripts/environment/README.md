@@ -1,4 +1,4 @@
-# QEMU VM with Ubuntu Server as ctrlX AUTOMATION Development Environment
+# QEMU VM with Ubuntu Server as ctrlX Application Build Environment
 
 ## Indroduction
 
@@ -32,10 +32,10 @@ For informations on the content of cloud-config files see [Cloud config examples
 
 ### Creating a QEMU Virtual Machine instance
 
-Scripts/bat files starting with create-new... are creating a new folder and coppying all necessary files into it:
+Files starting with create-new... are creating a new folder and copying all necessary files into it:
 
-* create-new-vm-ARCH-PROXY.bat/sh   Creates a new VM where ARCH is amd64 or aarch64, PROXY is proxy or noproxy
-* create-new-vm.bat/sh  Bat/sh file file called as subroutine
+* create-new-vm-ARCH-PROXY.bat Creates a new VM where ARCH is amd64 or aarch64, PROXY is proxy or noproxy
+* create-new-vm.bat Called as subroutine
  
 ### Helper Scripts to Install Packages on Linux (Ubuntu) Host Operating Systems
 
@@ -44,10 +44,14 @@ The scripts has to be started on the host system:
 * install-kvm-on-host.sh    Install the kvm package
 * install-qemu-on-host.sh   Download, build and install QEMU
 
-### Script/bat Files to start a QEMU VM
+### Start a QEMU VM
 
-* launch.bat/sh Generic script/bat file to start an VMFiles to start a QEMU VM
-* launch-ARCH-PROXY.bat/sh  Helper scripts to start launch.bat/sh with the right parameters.
+* launch.bat Generic bat file to start an VM
+* launch-ARCH-PROXY.bat Helper Calls launch.bat with the parameters ARCH and PROXY.
+
+### Script Files to be started in the QEMU VM
+
+* install-nodejs-npm-from-binary-archive.sh Uninstall snap node, install node and npm from https://nodejs.org
 
 ### User Image Files
 
@@ -58,15 +62,31 @@ Instead of compiling a cloud-config file __on Windows host systems one of the pr
 * ubuntu-20.04-server-cloudimg-aarch64-user-data-proxy.img    aarch64 VM with proxy usage
 * ubuntu-20.04-server-cloudimg-aarch64-user-data-noproxy.img  aarch64 VM without proxy usage
 
-### Windows Helper Batch 
+### Windows Helper Batchs
 
-* wget.bat  Calls PowerShell to dowmload files
+#### ssh-keygen-copy-id.bat
+
+Enables login without password by adding .ssh\id_rsa.pub of the host to ~/.authorized_keys of the QM VM.
+
+!!! important
+    We recommend to use this script instead of always signing in with the password.
+
+#### shrink-qcow2.bat
+
+Shrinks the qcow2 snapshot file.
+
+!!! important
+    This action takes some time, do not interrupt.
+
+#### wget.bat  
+
+Calls PowerShell to download files.
 
 ## License
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

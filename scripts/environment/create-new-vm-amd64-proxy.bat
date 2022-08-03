@@ -1,1 +1,1 @@
-call create-new-vm.bat amd64 proxy %1
+(call create-new-vm.bat amd64 proxy %1)

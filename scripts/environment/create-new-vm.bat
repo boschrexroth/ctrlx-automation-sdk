@@ -4,34 +4,22 @@ rem %1 amd | aarch64
 rem %2 proxy | noproxy
 rem %3 Destination directory
 
-SET ARCH=%1
-IF DEFINED ARCH GOTO LPROXY
-SET ARCH=amd64
+set ARCH=%~1
+If not defined ARCH (set ARCH=amd64)
 
-:LPROXY
-SET PROXY=%2
-IF DEFINED PROXY GOTO LDIR
-SET PROXY=proxy
+set PROXY=%~2
+If not defined PROXY (set PROXY=proxy)
 
-:LDIR
-SET DIR=%3
-IF DEFINED DIR GOTO LCHECK
-SET DIR=qemu-vm-%ARCH%-%PROXY%
+set DIR=%~3
+If not defined DIR (set DIR=%ARCH%-%PROXY%)
 
-:LCHECK
-IF EXIST %DIR%\NUL GOTO LEXISTS
+(mkdir %DIR%)
 
-mkdir %DIR%
+(xcopy /Y README.md %DIR%\)
+(xcopy /Y build.bat %DIR%\)
+(xcopy /Y launch.bat %DIR%\) 
+(xcopy /Y wget.* %DIR%\)
 
-xcopy README.md %DIR%\
-xcopy build.bat %DIR%\ 
-xcopy launch.bat %DIR%\ 
-xcopy wget.bat %DIR%\
 
-xcopy launch-%ARCH%-%PROXY%.bat %DIR%\
-xcopy ubuntu-20.04-server-cloudimg-%ARCH%-user-data-%PROXY%.img %DIR%\
-
-exit 0 /B
-
-:LEXISTS
-echo Destination directory %DIR% exists!
+(xcopy /Y launch-%ARCH%-%PROXY%.bat %DIR%\)
+(xcopy /Y ubuntu-20.04-server-cloudimg-%ARCH%-user-data-%PROXY%.img %DIR%\)

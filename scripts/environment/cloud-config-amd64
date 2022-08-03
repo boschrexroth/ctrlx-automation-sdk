@@ -1,25 +1,13 @@
 #cloud-config
-hostname: ctrlX-sdk-amd64
+hostname: app-builder-amd64
 chpasswd: { expire: False }
 ssh_pwauth: True
-
-users:
-  - name: boschrexroth
-    gecos: Default user for ctrlX AUTOMATION SDK builder VM
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    lock_passwd: false
-    # $ mkpasswd --method=SHA-512 --rounds=4096 boschrexroth
-    passwd: $6$rounds=4096$C1jBPhpkzCeT7$n2KxrcOhTBhYXKAUVMxB2yOup.HVJaijyVwdkSLS4GYsL8hNAp.pqYivGHS1/L9bxyAFdtfBLXBaZvjXK6kQ8/
-    #ssh-authorized-keys:
-    # Add YOUR ssh public key from ~/.ssh/id_rsa.pub here:
-    #  - ssh-rsa ...
-    shell: /bin/bash
 
 write_files:
   # install-snapcraft.sh
   - content: |
       #!/usr/bin/env bash     
-      sudo snap install snapcraft --classic 2>/dev/null
+      sudo snap install snapcraft --classic
     # Create in /tmp because /home/boschrexroth doesn't exists at this moment
     path: /tmp/cloud-config/install-snapcraft.sh
     permissions: '0755'
@@ -27,10 +15,25 @@ write_files:
   # install-dotnet-sdk
   - content: |
       #!/usr/bin/env bash
-      sudo snap install snapcraft --classic 2>/dev/null
-      sudo snap install dotnet-sdk --classic 
-      sudo ln -sv /snap/dotnet-sdk/current/dotnet /usr/local/bin/dotnet
-      sh -c 'echo "export DOTNET_ROOT=/snap/dotnet-sdk/current" >> /home/boschrexroth/.bashrc'
+      sudo snap install snapcraft --classic
+
+      # Install as snap
+      #sudo snap install dotnet-sdk --classic 
+      #sudo snap alias dotnet-sdk.dotnet dotnet
+      #sh -c 'echo "export DOTNET_ROOT=/snap/dotnet-sdk/current" >> /home/boschrexroth/.bashrc'
+      #export DOTNET_ROOT=/snap/dotnet-sdk/current
+      #sudo ln -sv /snap/dotnet-sdk/current/dotnet /usr/local/bin/dotnet
+
+      # Install as Debian Package
+      wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+      sudo dpkg -i packages-microsoft-prod.deb
+      rm packages-microsoft-prod.deb
+      sudo apt-get update
+      sudo apt-get install -y apt-transport-https
+      sudo apt-get update
+      sudo apt-get install -y dotnet-sdk-6.0
+      dotnet --version
+
     # Create in /tmp because /home/boschrexroth doesn't exists at this moment
     path: /tmp/cloud-config/install-dotnet-sdk.sh
     permissions: '0755'
@@ -38,9 +41,15 @@ write_files:
   # install-nodejs-npm.sh
   - content: |
       #!/usr/bin/env bash
-      sudo snap install snapcraft --classic 2>/dev/null
+      sudo snap install snapcraft --classic
+
       sudo snap install node --classic
       npm config set prefix ${HOME}/npm
+      echo proxy=http://10.0.2.2:3128/ >> ~/.npmrc
+      echo https-proxy=http://10.0.2.2:3128/ >> ~/.npmrc
+      node --version
+      npm --version
+
     # Create in /tmp because /home/boschrexroth doesn't exists at this moment
     path: /tmp/cloud-config/install-nodejs-npm.sh
     permissions: '0755'
@@ -48,7 +57,8 @@ write_files:
   # install-go.sh
   - content: |
       #!/usr/bin/env bash
-      sudo snap install snapcraft --classic 2>/dev/null
+      sudo snap install snapcraft --classic
+      
       sudo snap install go --classic
     # Create in /tmp because /home/boschrexroth doesn't exists at this moment
     path: /tmp/cloud-config/install-go.sh
@@ -57,36 +67,67 @@ write_files:
   # install-sdk.sh
   - content: |
       #!/usr/bin/env bash
-      sudo snap install snapcraft --classic 2>/dev/null
+      sudo snap install snapcraft --classic
+      source install-deb.sh
+      
+      sudo apt-get install jq -y
 
-      wget https://github.com/boschrexroth/ctrlx-automation-sdk/releases/download/1.12.0/ctrlx-automation-sdk.1.12.0.zip
-      unzip -XK ctrlx-automation-sdk.1.12.0.zip
-      rm ctrlx-automation-sdk.1.12.0.zip
+      rm ctrlx-automation-sdk-*.zip*
+      rm ctrlx-datalayer-*.deb*
 
-      sudo dpkg -i ctrlX-automation-sdk/deb/*.deb
+      LATEST=$(curl -s https://api.github.com/repos/boschrexroth/ctrlx-automation-sdk/releases/latest)
+            
+      for i in {0..1}
+      do
+        FILTER=.assets[$i].browser_download_url
+        DOWNLOAD_URL=$(echo $LATEST | jq -r $FILTER)
+        wget $DOWNLOAD_URL
+      done
 
-      chmod a+x ctrlX-automation-sdk/bin/oss.flatbuffers/ubuntu20-gcc-aarch64/release/flatc 
-      chmod a+x ctrlX-automation-sdk/bin/oss.flatbuffers/ubuntu20-gcc-x64/release/flatc
+      unzip -XK $(ls ctrlx-automation-sdk-*.zip)
+      chmod a+x ctrlx-automation-sdk/bin/oss.flatbuffers*/ubuntu20-gcc-*/release/flatc 
+      chmod a+x ctrlx-automation-sdk/bin/framework/ubuntu20-gcc-*/rexroth-automation-frame
+      find ctrlx-automation-sdk/ -name '*.sh' -exec chmod +x {} \;
+      
+      sudo dpkg -r ctrlx-datalayer
+      sudo dpkg -i ctrlx-datalayer-*.deb
     # Create in /tmp because /home/boschrexroth doesn't exists at this moment
     path: /tmp/cloud-config/install-sdk.sh
     permissions: '0755'
 
+  # install-deb.sh
+  - content: |
+      #!/usr/bin/env bash
+      sudo apt-get -y update
+      sudo apt-get -y upgrade
+      sudo apt-get -y install libsystemd-dev:arm64
+      sudo apt-get -y install libsystemd-dev:amd64
+      sudo apt-get -y install libssl-dev:amd64
+      sudo apt-get -y install libssl-dev:arm64
+      sudo apt-get -y install libzmq3-dev:amd64
+      sudo apt-get -y install libzmq3-dev:arm64
+      
+    # Create in /tmp because /home/boschrexroth doesn't exists at this moment
+    path: /tmp/cloud-config/install-deb.sh
+    permissions: '0755'
 
 # Proxy settings for apt                                                          #Remove-if-noproxy
 apt:                                                                              #Remove-if-noproxy
   http_proxy: http://10.0.2.2:3128/                                               #Remove-if-noproxy
   https_proxy: http://10.0.2.2:3128/                                              #Remove-if-noproxy
 
+package_update: true
+package_upgrade: true
+
 # Install neccessary packages, will automatically set package_update: true, package_upgrade: true
 packages:
-  - ssh
   - zip
   - unzip
   - p7zip-full
   - git
-  - curl
   - cifs-utils
   - apt-transport-https
+  - build-essential
   - crossbuild-essential-arm64
   - gcc
   - gdb-multiarch
@@ -99,46 +140,40 @@ packages:
 
 # Run commands on first boot  
 runcmd:
-  # Proxy settings for wget                                                       #Remove-if-noproxy
-  - sudo sh -c 'echo http_proxy = http://10.0.2.2:3128/ >> /etc/wgetrc'           #Remove-if-noproxy
-  - sudo sh -c 'echo https_proxy = http://10.0.2.2:3128/ >> /etc/wgetrc'          #Remove-if-noproxy
-  - sudo sh -c 'echo use_proxy = on >> /etc/wgetrc'                               #Remove-if-noproxy
+  # Proxy settings for wget                                            #Remove-if-noproxy
+  - echo "http_proxy = http://10.0.2.2:3128/" >> /etc/wgetrc           #Remove-if-noproxy
+  - echo "https_proxy = http://10.0.2.2:3128/" >> /etc/wgetrc          #Remove-if-noproxy
+  - echo "use_proxy = on" >> /etc/wgetrc                               #Remove-if-noproxy
 
-  # Proxy settings for environment                                                #Remove-if-noproxy
-  - sudo sh -c 'echo http_proxy=\"http://10.0.2.2:3128\" >> /etc/environment'     #Remove-if-noproxy
-  - sudo sh -c 'echo https_proxy=\"http://10.0.2.2:3128\" >> /etc/environment'    #Remove-if-noproxy
-  - sudo sh -c 'echo HTTP_PROXY=\"http://10.0.2.2:3128\" >> /etc/environment'     #Remove-if-noproxy
-  - sudo sh -c 'echo HTTPS_PROXY=\"http://10.0.2.2:3128\" >> /etc/environment'    #Remove-if-noproxy
-  - sudo sh -c 'echo no_proxy=localhost,127.0.0.1,.local >> /etc/environment'     #Remove-if-noproxy
+  # Proxy settings for environment                                     #Remove-if-noproxy
+  - echo "http_proxy=\"http://10.0.2.2:3128\"" >> /etc/environment     #Remove-if-noproxy
+  - echo "https_proxy=\"http://10.0.2.2:3128\"" >> /etc/environment    #Remove-if-noproxy
+  - echo "HTTP_PROXY=\"http://10.0.2.2:3128\"" >> /etc/environment     #Remove-if-noproxy
+  - echo "HTTPS_PROXY=\"http://10.0.2.2:3128\"" >> /etc/environment    #Remove-if-noproxy
+  - echo "no_proxy=localhost,127.0.0.1,10.0.2.2,.local" >> /etc/environment     #Remove-if-noproxy
 
   # https://wiki.ubuntu.com/MultiarchSpec
-  - sudo dpkg --add-architecture arm64
-  - sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ focal main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
-  - sudo sh -c 'echo "deb [arch=arm64] http://ports.ubuntu.com/ focal-updates main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list'
+  - dpkg --add-architecture arm64
+  - echo "deb [arch=arm64] http://ports.ubuntu.com/ focal main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list
+  - echo "deb [arch=arm64] http://ports.ubuntu.com/ focal-updates main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list
   # Qualify architecture
-  - sudo sed -i 's/deb http:/deb [arch=amd64] http:/g' /etc/apt/sources.list
+  - sed -i 's/deb http:/deb [arch=amd64] http:/g' /etc/apt/sources.list
 
-  # Update sources lists
-  - sudo apt-get clean
-  - sudo apt-get update
-
-  # Install neccessary libs
-  - sudo apt-get -y install libsystemd-dev:arm64
-  - sudo apt-get -y install libsystemd-dev:amd64
-  - sudo apt-get -y install libssl-dev:amd64
-  - sudo apt-get -y install libssl-dev:arm64
-  - sudo apt-get -y install libzmq3-dev:amd64
-  - sudo apt-get -y install libzmq3-dev:arm64
+  # We create the user boschrexroth here in the very latest step of the initialization phase
+  # to avoid a too early login.
+  # Create user boschrexroth with password boschrexroth, home directory and sudo rights
+  - useradd -m -p $(openssl passwd -1 boschrexroth) -s /bin/bash -G sudo boschrexroth
+  # Enable sudo commands via SSH
+  - echo "boschrexroth ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/boschrexroth
 
   # Now move install scripts to /home/boschrexroth and change owner and group
-  - sudo mv /tmp/cloud-config/install-*.sh /home/boschrexroth
-  - sudo chown boschrexroth:boschrexroth /home/boschrexroth/install-*.sh
+  - mv /tmp/cloud-config/install-*.sh /home/boschrexroth
+  - chown boschrexroth:boschrexroth /home/boschrexroth/install-*.sh
 
-# Delayed reboot after installation
+# Necessary because snapcraft cannot be installed directly after init phase
 power_state:
-  delay: "+1"
-  mode: reboot
-  message: ======================== Installation Finished - System will reboot ========================
-  timeout: 60
+  mode: poweroff
+  message: ======================== Installation Finished ========================
+  timeout: 30
   condition: True
     

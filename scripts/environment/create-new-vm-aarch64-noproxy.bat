@@ -1,1 +1,1 @@
-call create-new-vm.bat aarch64 noproxy %1
+(call create-new-vm.bat aarch64 noproxy %1)

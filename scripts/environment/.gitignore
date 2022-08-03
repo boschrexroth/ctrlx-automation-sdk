@@ -1,7 +1,5 @@
-qemu-*/
+*/
 *-generated
-bak/
-qemu/
 *64.img
 *.qcow2
 QEMU_EFI.fd
@@ -9,3 +7,4 @@ QEMU_EFI.fd
 *copy
 *copy.*
 -pure.*
+wget-log*
