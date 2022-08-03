@@ -19,7 +19,7 @@
     
     
       
-        <title>QEMU VM with Ubuntu Server as ctrlX AUTOMATION Development Environment - Software Development Kit</title>
+        <title>QEMU VM with Ubuntu Server as ctrlX Application Build Environment - Software Development Kit</title>
       
     
     
@@ -113,7 +113,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#qemu-vm-with-ubuntu-server-as-ctrlx-automation-development-environment" class="md-skip">
+        <a href="#qemu-vm-with-ubuntu-server-as-ctrlx-application-build-environment" class="md-skip">
           Skip to content
         </a>
       
@@ -146,7 +146,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              QEMU VM with Ubuntu Server as ctrlX AUTOMATION Development Environment
+              QEMU VM with Ubuntu Server as ctrlX Application Build Environment
             
           </span>
         </div>
@@ -1331,8 +1331,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scriptbat-files-to-start-a-qemu-vm" class="md-nav__link">
-    Script/bat Files to start a QEMU VM
+  <a href="#start-a-qemu-vm" class="md-nav__link">
+    Start a QEMU VM
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-files-to-be-started-in-the-qemu-vm" class="md-nav__link">
+    Script Files to be started in the QEMU VM
   </a>
   
 </li>
@@ -1345,9 +1352,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#windows-helper-batch" class="md-nav__link">
-    Windows Helper Batch
+  <a href="#windows-helper-batchs" class="md-nav__link">
+    Windows Helper Batchs
   </a>
+  
+    <nav class="md-nav" aria-label="Windows Helper Batchs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-keygen-copy-idbat" class="md-nav__link">
+    ssh-keygen-copy-id.bat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shrink-qcow2bat" class="md-nav__link">
+    shrink-qcow2.bat
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wgetbat" class="md-nav__link">
+    wget.bat
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1381,7 +1415,7 @@
 
 
 
-<h1 id="qemu-vm-with-ubuntu-server-as-ctrlx-automation-development-environment">QEMU VM with Ubuntu Server as ctrlX AUTOMATION Development Environment<a class="headerlink" href="#qemu-vm-with-ubuntu-server-as-ctrlx-automation-development-environment" title="Permanent link">&para;</a></h1>
+<h1 id="qemu-vm-with-ubuntu-server-as-ctrlx-application-build-environment">QEMU VM with Ubuntu Server as ctrlX Application Build Environment<a class="headerlink" href="#qemu-vm-with-ubuntu-server-as-ctrlx-application-build-environment" title="Permanent link">&para;</a></h1>
 <h2 id="indroduction">Indroduction<a class="headerlink" href="#indroduction" title="Permanent link">&para;</a></h2>
 <p>This folder contains configuration files and scripts to build and launch <a href="https://wiki.ubuntu.com/ARM64/QEMU">QEMU</a> virtual machines running Ubuntu Server guest operating system on Windows 10 or Linux host operating systems.</p>
 <p><strong>Important</strong>: The host operating system must be amd64 based.</p>
@@ -1407,10 +1441,10 @@
 </ul>
 <p>For informations on the content of cloud-config files see <a href="https://cloudinit.readthedocs.io/en/latest/topics/examples.html">Cloud config examples</a>.</p>
 <h3 id="creating-a-qemu-virtual-machine-instance">Creating a QEMU Virtual Machine instance<a class="headerlink" href="#creating-a-qemu-virtual-machine-instance" title="Permanent link">&para;</a></h3>
-<p>Scripts/bat files starting with create-new... are creating a new folder and coppying all necessary files into it:</p>
+<p>Files starting with create-new... are creating a new folder and copying all necessary files into it:</p>
 <ul>
-<li>create-new-vm-ARCH-PROXY.bat/sh   Creates a new VM where ARCH is amd64 or aarch64, PROXY is proxy or noproxy</li>
-<li>create-new-vm.bat/sh  Bat/sh file file called as subroutine</li>
+<li>create-new-vm-ARCH-PROXY.bat Creates a new VM where ARCH is amd64 or aarch64, PROXY is proxy or noproxy</li>
+<li>create-new-vm.bat Called as subroutine</li>
 </ul>
 <h3 id="helper-scripts-to-install-packages-on-linux-ubuntu-host-operating-systems">Helper Scripts to Install Packages on Linux (Ubuntu) Host Operating Systems<a class="headerlink" href="#helper-scripts-to-install-packages-on-linux-ubuntu-host-operating-systems" title="Permanent link">&para;</a></h3>
 <p>The scripts has to be started on the host system:</p>
@@ -1418,10 +1452,14 @@
 <li>install-kvm-on-host.sh    Install the kvm package</li>
 <li>install-qemu-on-host.sh   Download, build and install QEMU</li>
 </ul>
-<h3 id="scriptbat-files-to-start-a-qemu-vm">Script/bat Files to start a QEMU VM<a class="headerlink" href="#scriptbat-files-to-start-a-qemu-vm" title="Permanent link">&para;</a></h3>
+<h3 id="start-a-qemu-vm">Start a QEMU VM<a class="headerlink" href="#start-a-qemu-vm" title="Permanent link">&para;</a></h3>
 <ul>
-<li>launch.bat/sh Generic script/bat file to start an VMFiles to start a QEMU VM</li>
-<li>launch-ARCH-PROXY.bat/sh  Helper scripts to start launch.bat/sh with the right parameters.</li>
+<li>launch.bat Generic bat file to start an VM</li>
+<li>launch-ARCH-PROXY.bat Helper Calls launch.bat with the parameters ARCH and PROXY.</li>
+</ul>
+<h3 id="script-files-to-be-started-in-the-qemu-vm">Script Files to be started in the QEMU VM<a class="headerlink" href="#script-files-to-be-started-in-the-qemu-vm" title="Permanent link">&para;</a></h3>
+<ul>
+<li>install-nodejs-npm-from-binary-archive.sh Uninstall snap node, install node and npm from https://nodejs.org</li>
 </ul>
 <h3 id="user-image-files">User Image Files<a class="headerlink" href="#user-image-files" title="Permanent link">&para;</a></h3>
 <p>Instead of compiling a cloud-config file <strong>on Windows host systems one of the precompiled user image file has to be used</strong>:</p>
@@ -1431,13 +1469,24 @@
 <li>ubuntu-20.04-server-cloudimg-aarch64-user-data-proxy.img    aarch64 VM with proxy usage</li>
 <li>ubuntu-20.04-server-cloudimg-aarch64-user-data-noproxy.img  aarch64 VM without proxy usage</li>
 </ul>
-<h3 id="windows-helper-batch">Windows Helper Batch<a class="headerlink" href="#windows-helper-batch" title="Permanent link">&para;</a></h3>
-<ul>
-<li>wget.bat  Calls PowerShell to dowmload files</li>
-</ul>
+<h3 id="windows-helper-batchs">Windows Helper Batchs<a class="headerlink" href="#windows-helper-batchs" title="Permanent link">&para;</a></h3>
+<h4 id="ssh-keygen-copy-idbat">ssh-keygen-copy-id.bat<a class="headerlink" href="#ssh-keygen-copy-idbat" title="Permanent link">&para;</a></h4>
+<p>Enables login without password by adding .ssh\id_rsa.pub of the host to ~/.authorized_keys of the QM VM.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>We recommend to use this script instead of always signing in with the password.</p>
+</div>
+<h4 id="shrink-qcow2bat">shrink-qcow2.bat<a class="headerlink" href="#shrink-qcow2bat" title="Permanent link">&para;</a></h4>
+<p>Shrinks the qcow2 snapshot file.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This action takes some time, do not interrupt.</p>
+</div>
+<h4 id="wgetbat">wget.bat<a class="headerlink" href="#wgetbat" title="Permanent link">&para;</a></h4>
+<p>Calls PowerShell to download files.</p>
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
 <p>MIT License</p>
-<p>Copyright (c) 2021 Bosch Rexroth AG</p>
+<p>Copyright (c) 2021-2022 Bosch Rexroth AG</p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
