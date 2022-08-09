@@ -12,21 +12,21 @@
         <meta name="author" content="Bosch Rexroth AG">
       
       
-        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/datalayer.mqtt/index.html">
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/working-with-app-builder-envs.html">
       
-      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="icon" href="assets/favicon.png">
       <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
     
     
       
-        <title>README .NET datalayer.mqtt - Software Development Kit</title>
+        <title>Working with App Builder Environments (QEMU VMs) - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.1d29e8d0.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
@@ -83,9 +83,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/sdk.css">
+      <link rel="stylesheet" href="stylesheets/sdk.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -113,7 +113,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#readme-net-datalayermqtt" class="md-skip">
+        <a href="#best-practice-working-with-app-builder-environments" class="md-skip">
           Skip to content
         </a>
       
@@ -127,7 +127,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -146,7 +146,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              README .NET datalayer.mqtt
+              Working with App Builder Environments (QEMU VMs)
             
           </span>
         </div>
@@ -234,7 +234,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../index.html" class="md-tabs__link">
+    <a href="index.html" class="md-tabs__link">
       Home
     </a>
   </li>
@@ -249,7 +249,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../overview.html" class="md-tabs__link">
+      <a href="overview.html" class="md-tabs__link">
         Getting Started
       </a>
     </li>
@@ -259,13 +259,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../setup_overview.html" class="md-tabs__link">
+      <a href="setup_overview.html" class="md-tabs__link md-tabs__link--active">
         Setup
       </a>
     </li>
@@ -281,7 +283,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../samples.html" class="md-tabs__link">
+      <a href="samples.html" class="md-tabs__link">
         Samples
       </a>
     </li>
@@ -297,7 +299,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../references.html" class="md-tabs__link">
+      <a href="references.html" class="md-tabs__link">
         References
       </a>
     </li>
@@ -310,7 +312,7 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../about.html" class="md-tabs__link">
+    <a href="about.html" class="md-tabs__link">
       About
     </a>
   </li>
@@ -337,7 +339,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -368,7 +370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../index.html" class="md-nav__link">
+      <a href="index.html" class="md-nav__link">
         Home
       </a>
     </li>
@@ -409,7 +411,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../overview.html" class="md-nav__link">
+      <a href="overview.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -423,7 +425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ctrlx_automation.html" class="md-nav__link">
+      <a href="ctrlx_automation.html" class="md-nav__link">
         ctrlX AUTOMATION
       </a>
     </li>
@@ -465,7 +467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../package-assets.html" class="md-nav__link">
+      <a href="package-assets.html" class="md-nav__link">
         Package Assets
       </a>
     </li>
@@ -479,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../appdevguide.html" class="md-nav__link">
+      <a href="appdevguide.html" class="md-nav__link">
         App Developer Guideline
       </a>
     </li>
@@ -493,7 +495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../persistdata.html" class="md-nav__link">
+      <a href="persistdata.html" class="md-nav__link">
         Data Persistance
       </a>
     </li>
@@ -507,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../licensing.html" class="md-nav__link">
+      <a href="licensing.html" class="md-nav__link">
         License Management
       </a>
     </li>
@@ -521,7 +523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../s2sauth.html" class="md-nav__link">
+      <a href="s2sauth.html" class="md-nav__link">
         Service-to-Service Authentication
       </a>
     </li>
@@ -535,7 +537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fbs2plc.html" class="md-nav__link">
+      <a href="fbs2plc.html" class="md-nav__link">
         Using Flatbuffers in IEC 61131-3 Code
       </a>
     </li>
@@ -549,7 +551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../numopenfilehandles.html" class="md-nav__link">
+      <a href="numopenfilehandles.html" class="md-nav__link">
         Configure maximal Number of Open File Handles
       </a>
     </li>
@@ -598,7 +600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../changelog.html" class="md-nav__link">
+      <a href="changelog.html" class="md-nav__link">
         Changelog
       </a>
     </li>
@@ -625,12 +627,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       
       
@@ -653,7 +657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup_overview.html" class="md-nav__link">
+      <a href="setup_overview.html" class="md-nav__link">
         Setup Overview
       </a>
     </li>
@@ -667,7 +671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../quick-start-guide.html" class="md-nav__link">
+      <a href="quick-start-guide.html" class="md-nav__link">
         Quick Start Guide
       </a>
     </li>
@@ -681,7 +685,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup_qemu_ctrlx_works.html" class="md-nav__link">
+      <a href="setup_qemu_ctrlx_works.html" class="md-nav__link">
         ctrlX WORKS App Build Environment
       </a>
     </li>
@@ -695,7 +699,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install-scripts.html" class="md-nav__link">
+      <a href="install-scripts.html" class="md-nav__link">
         Important Installation Scripts
       </a>
     </li>
@@ -709,7 +713,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup_qemu_ubuntu.html" class="md-nav__link">
+      <a href="setup_qemu_ubuntu.html" class="md-nav__link">
         QEMU Virtual Machine
       </a>
     </li>
@@ -723,7 +727,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
+      <a href="setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
         VirtualBox Virtual Machine
       </a>
     </li>
@@ -737,7 +741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup_ubuntu.html" class="md-nav__link">
+      <a href="setup_ubuntu.html" class="md-nav__link">
         Native Ubuntu 20.04
       </a>
     </li>
@@ -749,14 +753,16 @@
               
   
   
+    
+  
   
     
       
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_8" type="checkbox" id="__nav_3_8" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_8" type="checkbox" id="__nav_3_8" checked>
       
       
       
@@ -779,7 +785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../px.html" class="md-nav__link">
+      <a href="px.html" class="md-nav__link">
         Px.exe as Proxy on a Windows Host
       </a>
     </li>
@@ -793,7 +799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../connecting_qemu_vm_ctrlx.html" class="md-nav__link">
+      <a href="connecting_qemu_vm_ctrlx.html" class="md-nav__link">
         Connecting QEMU VMs and ctrlX CORE
       </a>
     </li>
@@ -805,11 +811,55 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../working-with-app-builder-envs.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Working with App Builder Environments (QEMU VMs)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="working-with-app-builder-envs.html" class="md-nav__link md-nav__link--active">
         Working with App Builder Environments (QEMU VMs)
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#best-practice-working-with-app-builder-environments" class="md-nav__link">
+    Best Practice working with App Builder Environments
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-backup-of-your-app-builder-environment" class="md-nav__link">
+    Create a Backup of your App Builder Environment
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -821,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ssh_connection.html" class="md-nav__link">
+      <a href="ssh_connection.html" class="md-nav__link">
         SSH Connection
       </a>
     </li>
@@ -835,7 +885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../vscode.html" class="md-nav__link">
+      <a href="vscode.html" class="md-nav__link">
         Visual Studio Code
       </a>
     </li>
@@ -849,7 +899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dotnet.html" class="md-nav__link">
+      <a href="dotnet.html" class="md-nav__link">
         .NET
       </a>
     </li>
@@ -863,7 +913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../remote-build.html" class="md-nav__link">
+      <a href="remote-build.html" class="md-nav__link">
         Using Snapcraft Remote Build from Canonical
       </a>
     </li>
@@ -918,7 +968,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../samples.html" class="md-nav__link">
+      <a href="samples.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -932,7 +982,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../samples-cpp/index.html" class="md-nav__link">
+      <a href="samples-cpp/index.html" class="md-nav__link">
         Samples C/C++
       </a>
     </li>
@@ -946,7 +996,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../samples-go/index.html" class="md-nav__link">
+      <a href="samples-go/index.html" class="md-nav__link">
         Samples Go
       </a>
     </li>
@@ -960,7 +1010,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../samples-python/index.html" class="md-nav__link">
+      <a href="samples-python/index.html" class="md-nav__link">
         Samples Python
       </a>
     </li>
@@ -974,7 +1024,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../index.html" class="md-nav__link">
+      <a href="samples-net/index.html" class="md-nav__link">
         Samples .NET
       </a>
     </li>
@@ -988,7 +1038,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../samples-node/index.html" class="md-nav__link">
+      <a href="samples-node/index.html" class="md-nav__link">
         Samples Nodejs
       </a>
     </li>
@@ -1002,7 +1052,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../samples-sh/index.html" class="md-nav__link">
+      <a href="samples-sh/index.html" class="md-nav__link">
         Samples Shell
       </a>
     </li>
@@ -1016,7 +1066,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../samples-snap/index.html" class="md-nav__link">
+      <a href="samples-snap/index.html" class="md-nav__link">
         Samples Snap
       </a>
     </li>
@@ -1030,7 +1080,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../samples-iec61131/index.html" class="md-nav__link">
+      <a href="samples-iec61131/index.html" class="md-nav__link">
         Samples IEC 61131-3
       </a>
     </li>
@@ -1044,7 +1094,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../debug.html" class="md-nav__link">
+      <a href="debug.html" class="md-nav__link">
         Debugging Snaps
       </a>
     </li>
@@ -1092,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../references.html" class="md-nav__link">
+      <a href="references.html" class="md-nav__link">
         Overview
       </a>
     </li>
@@ -1268,7 +1318,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../about.html" class="md-nav__link">
+      <a href="about.html" class="md-nav__link">
         About
       </a>
     </li>
@@ -1292,8 +1342,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1302,91 +1350,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
+  <a href="#best-practice-working-with-app-builder-environments" class="md-nav__link">
+    Best Practice working with App Builder Environments
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    Description
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites_1" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting Started
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-the-app" class="md-nav__link">
-    Install the App
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#gratulations-were-finished-lets-start-coding" class="md-nav__link">
-    Gratulations - We're finished - Let's start coding!
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#support" class="md-nav__link">
-    Support
-  </a>
-  
-    <nav class="md-nav" aria-label="Support">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#developer-community" class="md-nav__link">
-    Developer Community
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sdk-forum" class="md-nav__link">
-    SDK Forum
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#issues" class="md-nav__link">
-    Issues
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    License
+  <a href="#create-a-backup-of-your-app-builder-environment" class="md-nav__link">
+    Create a Backup of your App Builder Environment
   </a>
   
 </li>
@@ -1403,113 +1375,48 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/samples-net/datalayer.mqtt/README.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/working-with-app-builder-envs.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="readme-net-datalayermqtt">README .NET datalayer.mqtt<a class="headerlink" href="#readme-net-datalayermqtt" title="Permanent link">&para;</a></h1>
-<p>This .NET sample connects the <strong>Data Layer</strong> to a <strong>MQTT 5</strong> broker.
-The sample is based on <a href="https://github.com/chkr1011/MQTTnet">MQTT.net</a>.</p>
-<p><strong>IMPORTANT</strong>:</p>
-<p>The sample creates and registers all nodes individually, which is recommended for <em>small</em> to <em>medium</em> sized set of nodes to handle. If you're dealing with a <em>large</em> set of nodes (big data provider) or any <em>dynamic node hierarchy</em>, we recommend to use a <em>virtual provider</em> approach, listening just to any <em>wildcarded address</em> ( e.g. myRoot/**) and using <em>self-managed virtual nodes</em>, just returned in <em>OnBrowse()</em> method, which is more efficient.</p>
-<p>Please read the <em>Best Practise</em> section in common .NET documentation for more details and recommended samples.</p>
-<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>MQTT sample showing PUB/SUB with Data Layer in full interaction.</p>
-<p>Connect Datalayer to any MQTT Broker for data synchronization (SUB) or publishing (PUB) or even full broker synchronisation (<strong>Topic Scanner</strong>).</p>
-<p>A simple use-case could be any kind of M2M or M2Cloud communication as an light-weight alternative to full stack OPC UA Pub/Sub.</p>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<p>Please use this sample in conjunction with any MQTT Broker supporting <strong>MQTT 5</strong>.
-We recommend to use <a href="https://mosquitto.org/download/">mosquitto MQTT Broker</a>, which can be also installed on a <em>ctrlX</em> as snap</p>
-<div class="codehilite"><pre><span></span><code>snap install mosquitto
+  <h1>Working with App Builder Environments (QEMU VMs)</h1>
+
+<p>This document describes how to work with App Builder Environments (QEMU based VMs).</p>
+<h2 id="best-practice-working-with-app-builder-environments">Best Practice working with App Builder Environments<a class="headerlink" href="#best-practice-working-with-app-builder-environments" title="Permanent link">&para;</a></h2>
+<p>We recommend to use App Builder Environments (QEMU VMs) as follows:</p>
+<ol>
+<li>Create a new App Builder Environment with ctrlX WORKS and start it (the newest version of Ubuntu 20.04 LTS is automatically downloaded).</li>
+<li>After first boot login and install only necessary additional software components using the install scripts in /home/boschrexroth/e.g.: install-sdk.sh, install-deb.sh and install-go.sh</li>
+<li>We recommend to work with the  free and open source distributed version control system <strong>git</strong>: Create a repository for your project and clone it into your App Buiulder Environment.</li>
+<li>Create a new branch for your working package.</li>
+<li>Do your work within this branch, commit and push your changes as often as it makes sense.</li>
+<li>If your work is done and all changes are pushed remove your App Builder Environment.</li>
+</ol>
+<p><strong>Working in such a manner ensures that you are always working with the latest software components and avoids problems with the file size of your App Builder Environment. Furthermore creating backups is superfluous.</strong></p>
+<h2 id="create-a-backup-of-your-app-builder-environment">Create a Backup of your App Builder Environment<a class="headerlink" href="#create-a-backup-of-your-app-builder-environment" title="Permanent link">&para;</a></h2>
+<p>The file system of an App Builder Environment is loaded from two files.</p>
+<p>The first one is the Ubuntu cloud image file <strong>ubuntu-20.04-server-cloudimg-amd64.img</strong> originally downloaded from which has a file size of about 600MB. This file is static - no changes are made during runtime or shutdown of your VM. So there is no need to handle it. </p>
+<p>The second one is the so called snapshot file <strong>ubuntu-20.04-server-cloudimg-amd64-snapshot-proxy.qcow2</strong>. This file can be very big (30 GB and more). 
+All changes are stored into the snapshot files. Our backup procedure handles this file.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Shutdown your App Builder Environment before you backup the qcow2 file.</p>
+</div>
+<p><strong>Prerequisites:</strong> The tool qemu-ing is installed by ctrlX WORKS. We assume that ctrlX WORKS is installed in "c:\Program Files\Rexroth\ctrlX WORKS\". If not use your specific installation path to call qemu-ing.</p>
+<p>Open the storage location of your App Builder Environment.</p>
+<p>Rename the actual qcow2 file:</p>
+<div class="codehilite"><pre><span></span><code>ren ubuntu-20.04-server-cloudimg-amd64-snapshot-noproxy.qcow2 ubuntu-20.04-server-cloudimg-amd64-snapshot-noproxy.qcow2.bak
 </code></pre></div>
 
-<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
-<p>The MQTT sample demonstrates </p>
-<ul>
-<li>
-<p>How easy it is to interact <strong>Data Layer with MQTT</strong></p>
-</li>
-<li>
-<p>A proposal to organize a set of logical grouped provided nodes using a handler hierarchy and how to populate nodes using some <strong>level node handlers</strong> , responsible for it's own set of children nodes </p>
-</li>
-<li>
-<p>How to create an <strong>light-weight node handler</strong>, returning just his own managed <em>virtual</em> nodes on <em>OnBrowse()</em> without the need of registering all nodes one-by-one which is very efficient for a large set of dynamically created nodes.</p>
-</li>
-<li>
-<p>A concept of creating configurable <strong>PUB configurations</strong>, publishing the value of a Data Layer source address to a MQTT topic.</p>
-</li>
-<li>
-<p>A concept of creating configurable <strong>SUB configurations</strong>, subscribing a MQTT topic (wildcards supported) and writing it back to a Data Layer target address. </p>
-</li>
-<li>
-<p>On top a fully functional <strong>Topic Scanner</strong>, scanning all topics present on the broker and revealing it into the address space of the Data Layer, which is very handy for other Data Layer clients to access MQTT related data <em>immediately</em> without connecting to MQTT itself. The most recent message of the topic will be memory-persisted as and accessible via a simple Data Layer address.</p>
-</li>
-</ul>
-<p><strong>Notes</strong>: </p>
-<ul>
-<li>The sample uses <em>unsecure</em> MQTT communication. Please use a MQTT TLS setup in any production environment. See broker documentation for details.</li>
-<li>The sample <em>does not provide any persistence</em> of created PUB or SUB configurations.</li>
-</ul>
-<h2 id="prerequisites_1">Prerequisites<a class="headerlink" href="#prerequisites_1" title="Permanent link">&para;</a></h2>
-<p>Please read the common .NET docs <a href="../index.html">here</a>, first.</p>
-<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Launch Visual Studio Code</li>
-<li>Click on the <strong>Remote Explorer</strong> from the menu.</li>
-<li>Choose <strong>Open Folder</strong>.</li>
-<li>Open the directory <strong>datalayer.mqtt</strong>.</li>
-<li>Build and install snap as described <a href="../index.html">here</a>.</li>
-<li>Checkout ctrlX Data Layer web frontend (System | Data Layer) </li>
-<li>
-<p>Check the output using <strong>Diagnostics</strong>:</p>
-</li>
-<li>
-<p>Login into your ctrlX</p>
-</li>
-<li>Navigate to <strong>Diagnostics -&gt; Logbook</strong></li>
-<li>Click <strong>Settings</strong> on the right top corner</li>
-<li>Enable <strong>Show system messages</strong></li>
-<li>Navigate to <strong>Filter -&gt; Units</strong> and check your <strong>snap.ctrlx-dotnet-datalayer-mqtt.app.service</strong></li>
-<li>Now you should the see the app output diagnostics.</li>
-<li>
-<p>Press <strong>Refresh</strong> to update.</p>
-</li>
-<li>
-<p>If you have root permissions, you can also watch the output on any ssh console with the command:
-   ```bash
-   sudo snap logs ctrlx-dotnet-datalayer-mqtt.app -f | more</p>
-</li>
-</ol>
-<h2 id="install-the-app">Install the App<a class="headerlink" href="#install-the-app" title="Permanent link">&para;</a></h2>
-<p>Login into ctrlX and install the App (Apps).</p>
-<h2 id="gratulations-were-finished-lets-start-coding">Gratulations - We're finished - Let's start coding!<a class="headerlink" href="#gratulations-were-finished-lets-start-coding" title="Permanent link">&para;</a></h2>
-<h2 id="support">Support<a class="headerlink" href="#support" title="Permanent link">&para;</a></h2>
-<h3 id="developer-community">Developer Community<a class="headerlink" href="#developer-community" title="Permanent link">&para;</a></h3>
-<p>Please join the <a href="https://developer.community.boschrexroth.com/">Developer Community</a> </p>
-<h3 id="sdk-forum">SDK Forum<a class="headerlink" href="#sdk-forum" title="Permanent link">&para;</a></h3>
-<p>Please visit the <a href="https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/">SDK Forum</a> </p>
-<h3 id="issues">Issues<a class="headerlink" href="#issues" title="Permanent link">&para;</a></h3>
-<p>If you've found an error in these sample, please <a href="https://github.com/boschrexroth">file an issue</a></p>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
-<p>MIT License</p>
-<p>Copyright (c) 2021 Bosch Rexroth AG</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+<p>Convert the bak file to the new qcow2 file:</p>
+<div class="codehilite"><pre><span></span><code>&quot;c:\Program Files\Rexroth\ctrlX WORKS\qemu\qemu-img.exe&quot; convert ubuntu-20.04-server-cloudimg-amd64-snapshot-noproxy.qcow2.bak -O qcow2 ubuntu-20.04-server-cloudimg-amd64-snapshot-proxy.qcow2
+</code></pre></div>
+
+<p>Be patient this process takes some times.</p>
+<p>The convert process also removes unused blocks - so the new qcow2 file should be smaller than the bak file.</p>
+<p>Start the App Builder Environment to test the new qcow2 file.</p>
 
               
             </article>
@@ -1520,6 +1427,42 @@ SOFTWARE.</p>
       </main>
       
         <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="connecting_qemu_vm_ctrlx.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Connecting QEMU VMs and ctrlX CORE" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Connecting QEMU VMs and ctrlX CORE
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="ssh_connection.html" class="md-footer__link md-footer__link--next" aria-label="Next: SSH Connection" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              SSH Connection
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -1567,10 +1510,10 @@ SOFTWARE.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      <script src="assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
     
   </body>
