@@ -109,7 +109,8 @@ nav:
       - Native Ubuntu 20.04: setup_ubuntu.md
       - Toolchain:
         - Px.exe as Proxy on a Windows Host: px.md
-        - Connecting QEMU VMs and ctrlX CORE: connecting_qemu_vm_ctrlx.md 
+        - Connecting QEMU VMs and ctrlX CORE: connecting_qemu_vm_ctrlx.md
+        - Working with App Builder Environments (QEMU VMs): working-with-app-builder-envs.md
         - SSH Connection: ssh_connection.md
         - Visual Studio Code: vscode.md
         - .NET: dotnet.md
@@ -124,7 +125,7 @@ nav:
       - Samples Shell: samples-sh/README.md
       - Samples Snap: samples-snap/README.md
       - Samples IEC 61131-3: samples-iec61131/README.md
-      - Debugging: debug.md
+      - Debugging Snaps: debug.md
     - References: 
         - Overview: references.md
         - Api Reference:
