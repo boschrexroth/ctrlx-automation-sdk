@@ -75,7 +75,6 @@ The "required" flag indicates whether a license is mandatory to use the applicat
       "required": false
     }
   ],
-
   ```
 
 
