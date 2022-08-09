@@ -1678,21 +1678,21 @@
 <h2 id="32-adapt-package-manifestjson">3.2 Adapt package-manifest.json (<a name="manifest"></a>)<a class="headerlink" href="#32-adapt-package-manifestjson" title="Permanent link">&para;</a></h2>
 <p>The app shall provide information in the package-manifest about each license that is supported. Description and title shall be human readable.
 The "required" flag indicates whether a license is mandatory to use the application. Set the flag to true when the license is required and to false, when the license is optional. </p>
-<p><code>json
-"licenses": [
-    {
-      "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",
-      "title": "ctrlX CORE - Foobar License",
-      "description": "Unlock the App's functionality.",
-      "required": true
-    },
-    {
-      "name": "SWL-XCx-FRW-ADVANCED_FOOBAR",
-      "title": "ctrlX CORE - Foobar License Extension",
-      "description": "This license extends the functionality of the App.",
-      "required": false
-    }
-  ],</code></p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;licenses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SWL-XCx-FRW-BASIC_FOOBAR-NNNN&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ctrlX CORE - Foobar License&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Unlock the App&#39;s functionality.&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SWL-XCx-FRW-ADVANCED_FOOBAR&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ctrlX CORE - Foobar License Extension&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This license extends the functionality of the App.&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+</code></pre></div>
 <h2 id="33-use-rest-api-to-enforce-licenses">3.3 Use REST API to enforce licenses <a name="rest"></a><a class="headerlink" href="#33-use-rest-api-to-enforce-licenses" title="Permanent link">&para;</a></h2>
 <h3 id="331-license-integration">3.3.1 License Integration<a class="headerlink" href="#331-license-integration" title="Permanent link">&para;</a></h3>
 <p>How an app reacts when no license is present or the license is removed during runtime, can be freely chosen by the app. Nevertheless, to provide a unique user experience across multiple apps, the following best practices are recommended.</p>
