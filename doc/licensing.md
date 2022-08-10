@@ -75,8 +75,7 @@ The "required" flag indicates whether a license is mandatory to use the applicat
       "required": false
     }
   ],
-
-  ```
+```
 
 
 ## 3.3 Use REST API to enforce licenses <a name="rest"></a>
