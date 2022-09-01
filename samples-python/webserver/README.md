@@ -29,7 +29,7 @@ The integration of the app inside ctrlX Core webpage (sidebar and overview integ
 The app has these modules:
 
 * __main.py__ starts the web server. In snap environment an Unix socket connection is established otherwise a TCP/IP connectin.
-* __web/webserver.py__ contains the web server implementation. Internally he Python package http.server is used.
+* __web/webserver.py__ contains the web server implementation. Internally the Python package http.server is used.
 * __web/webtoken.py__  decodes the token string using the Python package jwt
 * __app/datalayerclient.py__ handles the Data Layer node data access.
 ___
@@ -38,7 +38,7 @@ ___
 
 MIT License
 
-Copyright (c) 2020-2021 Bosch Rexroth AG
+Copyright (c) 2020-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
