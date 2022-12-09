@@ -1,5 +1,11 @@
 ## Software Development Kit for ctrlX AUTOMATION
 
+### Version 1.18.0 <small> November 30, 2022</small>
+
+* Adapt bulk operation from ctrlX Data Layer
+* Add new samples for bulk operations
+* Update documentation
+
 ### Version 1.16.0 <small> July 15, 2022</small>
 
 * Increase maximum numbers of opened files: Docu and sample project
