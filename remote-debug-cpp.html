@@ -12,21 +12,21 @@
         <meta name="author" content="Bosch Rexroth AG">
       
       
-        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/debug.html">
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/remote-debug-cpp.html">
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.6">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Debugging Snaps - Software Development Kit</title>
+        <title>Remote Debugging Snaps C++ - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.20d9efc8.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.975780f9.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.2505c338.min.css">
         
       
       
@@ -115,7 +115,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#debugging-snaps" class="md-skip">
+        <a href="#remote-debugging-snaps-c" class="md-skip">
           Skip to content
         </a>
       
@@ -148,7 +148,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Debugging Snaps
+              Remote Debugging Snaps C++
             
           </span>
         </div>
@@ -157,6 +157,7 @@
     
       <form class="md-header__option" data-md-component="palette">
         
+          
           
           
           <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
@@ -208,7 +209,7 @@
         <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     boschrexroth/ctrlx-automation-sdk
@@ -277,15 +278,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="samples.html" class="md-tabs__link md-tabs__link--active">
+      <a href="samples.html" class="md-tabs__link">
         Samples
       </a>
     </li>
@@ -354,7 +353,7 @@
       <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     boschrexroth/ctrlx-automation-sdk
@@ -894,14 +893,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
       
       
       
@@ -1048,277 +1045,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Debugging Snaps
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="debug.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="debug.md" class="md-nav__link">
         Debugging Snaps
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connecting-ctrlx-core-devices" class="md-nav__link">
-    Connecting ctrlX CORE devices
-  </a>
-  
-    <nav class="md-nav" aria-label="Connecting ctrlX CORE devices">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ip-address-of-a-ctrlx-core" class="md-nav__link">
-    IP Address of a ctrlX CORE
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-up-ssh-public-key-authentication" class="md-nav__link">
-    Set up SSH Public Key Authentication
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#snap-debugging-in-general" class="md-nav__link">
-    Snap Debugging in General
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
-    C++
-  </a>
-  
-    <nav class="md-nav" aria-label="C++">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overview_1" class="md-nav__link">
-    Overview
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-    <nav class="md-nav" aria-label="Prerequisites">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites-for-the-ctrlx" class="md-nav__link">
-    Prerequisites for the ctrlX
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites-for-the-linux-build-environment" class="md-nav__link">
-    Prerequisites for the Linux Build Environment
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting Started
-  </a>
-  
-    <nav class="md-nav" aria-label="Getting Started">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#raising-sigstop-in-the-c-code" class="md-nav__link">
-    Raising SIGSTOP in the C++ Code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#build-the-debug-snap" class="md-nav__link">
-    Build the Debug Snap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-the-debug-snap" class="md-nav__link">
-    Install the Debug Snap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuring-remote-debugging-in-visualstudio-code" class="md-nav__link">
-    Configuring Remote Debugging in VisualStudio Code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#starting-the-application-with-visualstudio-code" class="md-nav__link">
-    Starting the Application with VisualStudio Code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-snap-debugging-with-the-visual-studio-code" class="md-nav__link">
-    Start Snap Debugging with the Visual Studio Code
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#screenshots" class="md-nav__link">
-    Screenshots
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#python" class="md-nav__link">
-    Python
-  </a>
-  
-    <nav class="md-nav" aria-label="Python">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#using-visual-studio-code-additional-tasks-in-launchjson" class="md-nav__link">
-    Using Visual Studio Code - Additional Tasks in launch.json
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#preparing-your-python-project-for-remote-debugging" class="md-nav__link">
-    Preparing your Python Project for Remote Debugging
-  </a>
-  
-    <nav class="md-nav" aria-label="Preparing your Python Project for Remote Debugging">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-python-package-debugpy" class="md-nav__link">
-    The Python Package debugpy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#packing-debugpy-into-your-snap" class="md-nav__link">
-    Packing debugpy into your snap
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#creating-and-installing-a-snap" class="md-nav__link">
-    Creating and Installing a snap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-your-python-app-in-remote-debugging-mode" class="md-nav__link">
-    Start your Python App in Remote Debugging Mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-remote-debugging-with-visual-studio-code" class="md-nav__link">
-    Do Remote Debugging with Visual Studio Code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#using-python-package-debugpy-in-your-own-projects" class="md-nav__link">
-    Using Python Package debugpy in your own Projects
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1594,18 +1325,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#snap-debugging-in-general" class="md-nav__link">
-    Snap Debugging in General
+  <a href="#remote-debugging-c" class="md-nav__link">
+    Remote Debugging C++
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#c" class="md-nav__link">
-    C++
-  </a>
-  
-    <nav class="md-nav" aria-label="C++">
+    <nav class="md-nav" aria-label="Remote Debugging C++">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1716,81 +1440,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#python" class="md-nav__link">
-    Python
-  </a>
-  
-    <nav class="md-nav" aria-label="Python">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#using-visual-studio-code-additional-tasks-in-launchjson" class="md-nav__link">
-    Using Visual Studio Code - Additional Tasks in launch.json
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#preparing-your-python-project-for-remote-debugging" class="md-nav__link">
-    Preparing your Python Project for Remote Debugging
-  </a>
-  
-    <nav class="md-nav" aria-label="Preparing your Python Project for Remote Debugging">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-python-package-debugpy" class="md-nav__link">
-    The Python Package debugpy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#packing-debugpy-into-your-snap" class="md-nav__link">
-    Packing debugpy into your snap
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#creating-and-installing-a-snap" class="md-nav__link">
-    Creating and Installing a snap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-your-python-app-in-remote-debugging-mode" class="md-nav__link">
-    Start your Python App in Remote Debugging Mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-remote-debugging-with-visual-studio-code" class="md-nav__link">
-    Do Remote Debugging with Visual Studio Code
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#using-python-package-debugpy-in-your-own-projects" class="md-nav__link">
-    Using Python Package debugpy in your own Projects
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1805,17 +1454,16 @@
                 
                   
 
-  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/debug.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/remote-debug-cpp.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="debugging-snaps">Debugging Snaps<a class="headerlink" href="#debugging-snaps" title="Permanent link">&para;</a></h1>
+<h1 id="remote-debugging-snaps-c">Remote Debugging Snaps C++<a class="headerlink" href="#remote-debugging-snaps-c" title="Permanent link">&para;</a></h1>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>This document describes how applications can be debugged if they are running in the confined Ubuntu Core snap environment of a ctrlX CORE.</p>
+<p>This document describes how applications can be debugged if they are running in the confined Ubuntu Core snap environment of a ctrlX CORE (Remote Debugging).</p>
 <p>In this document first is briefly described how ctrlX CORE instances are connected over TCP/IP and SSH.</p>
-<p>One chapter provides a general overview regarding debugging of snaps.</p>
 <p>Then each following chapter describes for one programming language the  language-dependent features of snap debugging.</p>
 <h2 id="connecting-ctrlx-core-devices">Connecting ctrlX CORE devices<a class="headerlink" href="#connecting-ctrlx-core-devices" title="Permanent link">&para;</a></h2>
 <h3 id="ip-address-of-a-ctrlx-core">IP Address of a ctrlX CORE<a class="headerlink" href="#ip-address-of-a-ctrlx-core" title="Permanent link">&para;</a></h3>
@@ -1843,18 +1491,7 @@ From the point of view of the virtual machine this is the IP address of the host
 - On the host computer set the (UNIX) permissions attributes for &quot;id_rsa&quot; to 600 (-rw-------)
 - On the host computer use the file &quot;~/.ssh/config&quot; to configure several ssh connections to different ctrlX CORE devices.
 </code></pre></div>
-<h2 id="snap-debugging-in-general">Snap Debugging in General<a class="headerlink" href="#snap-debugging-in-general" title="Permanent link">&para;</a></h2>
-<p>We recommend to test your application extensively in the build environment. Debugging an application running in it's confined Ubuntu Core snap enviroment should be the last step to find issues during development and test.</p>
-<p>Common information about debugging snaps are provided here: <a href="https://snapcraft.io/docs/debug-snaps">Debugging snaps</a></p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>The log output of a snap can be checked with <code>sudo snap logs -f snapname</code></p>
-</div>
-<p>Start a SSH session and enter e.g.</p>
-<div class="codehilite"><pre><span></span><code>    sudo snap logs -f sdk-cpp-alldata
-</code></pre></div>
-
-<h2 id="c">C++<a class="headerlink" href="#c" title="Permanent link">&para;</a></h2>
+<h2 id="remote-debugging-c">Remote Debugging C++<a class="headerlink" href="#remote-debugging-c" title="Permanent link">&para;</a></h2>
 <h3 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h3>
 <p>Debugging C++ applications in their snap environment is done by two debugging tools:
 1. The <strong>gdb server</strong> is running on the remote target. During a debug session he will attach to the running process to be debugged.
@@ -1974,89 +1611,16 @@ From the point of view of the virtual machine this is the IP address of the host
 </ul>
 </div>
 <p>Now gdb is started and connected to the gdb server. With the DEBUG CONSOLE window Visual Studio Code provides an output area and a command line to enter gdb commands - see green area in picture below.</p>
-<p><img alt="Debug" src="images/debug_app.png" />
-* Click into the gdb command line (green area in the picture above) and enter <code>-exec info b</code>
-* All active breakpoints are listed. Each breakpoint has an number (see cloumn 'Num')
-* Delete all listed breakpoints specified by their number, beginning with 1: <code>-exec delete 1</code>
-* Ensure with <code>-exec info b</code> that no breakpoints are set.
-* Press F5 (Start/Continue Debugging) several times until in the output area of the DEBUG CONSOLE the loaded libraries are listed and the yellow debug arrow points to the 'raise(SIGSTOP)' line.</p>
+<ul>
+<li>Click into the gdb command line (green area in the picture above) and enter <code>-exec info b</code></li>
+<li>All active breakpoints are listed. Each breakpoint has an number (see cloumn 'Num')</li>
+<li>Delete all listed breakpoints specified by their number, beginning with 1: <code>-exec delete 1</code></li>
+<li>Ensure with <code>-exec info b</code> that no breakpoints are set.</li>
+<li>Press F5 (Start/Continue Debugging) several times until in the output area of the DEBUG CONSOLE the loaded libraries are listed and the yellow debug arrow points to the 'raise(SIGSTOP)' line.</li>
+</ul>
 <p>Now you can add further breakpoints and continue debugging in the known way.</p>
 <h3 id="screenshots">Screenshots<a class="headerlink" href="#screenshots" title="Permanent link">&para;</a></h3>
 <p><img alt="Debug" src="images/debug_app.png" /></p>
-<h2 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
-<p>This chapter describes remote debugging of snap written in Python.</p>
-<p>In the sample project <a href="samples-python/datalayer.remote.debug">datalayer.remote.debug</a> all the features described in this chapter have been implemented.</p>
-<h3 id="using-visual-studio-code-additional-tasks-in-launchjson">Using Visual Studio Code - Additional Tasks in launch.json<a class="headerlink" href="#using-visual-studio-code-additional-tasks-in-launchjson" title="Permanent link">&para;</a></h3>
-<p>On the host computer Visual Studio Code is used as Integrated Development Environment (IDE). </p>
-<p>For general informations regarding Python debugging in Visual Studio Code see <a href="https://code.visualstudio.com/docs/python/debugging">https://code.visualstudio.com/docs/python/debugging</a>, chapter "Debugging by attaching over a network connection".</p>
-<p>The Python Visual Studio Code extension has a Python debug client. For a remote debugging session we have add a configuration set with these parameters/values:</p>
-<ul>
-<li>The request type is <strong>"attach"</strong>: "request": "attach",</li>
-<li>The IP address of the ctrlX CORE has to be provided e.g.: "host": "192.168.2.61",</li>
-<li>The port number where the debug server is listening has to be provided e.g.: "port": 12345,</li>
-<li>and a link to the exe</li>
-</ul>
-<p>Here you can find the complete file: samples-python/datalayer.remote.debug/.vscode/launch.json</p>
-<p>There are three launch configurations for remote debugging:
-* "Remote ctrlX CORE virtual - Port forwarding"
-* "Remote ctrlX CORE virtual - Network adapter"
-* "Remote ctrlX CORE"</p>
-<h3 id="preparing-your-python-project-for-remote-debugging">Preparing your Python Project for Remote Debugging<a class="headerlink" href="#preparing-your-python-project-for-remote-debugging" title="Permanent link">&para;</a></h3>
-<p>Installing the required Python packages into your build environment ist described here: samples-python/python.md</p>
-<p>In our sample project the Python package  <strong>debugpy</strong> is used for remote debugging of Python code. </p>
-<h4 id="the-python-package-debugpy">The Python Package debugpy<a class="headerlink" href="#the-python-package-debugpy" title="Permanent link">&para;</a></h4>
-<p>The package debugpy provides a debug server and functions to configure the debug connection and to set breakpoints. </p>
-<p>The configuration of the debug connection and the start of the debug server have to be called in the Python application program so that the application stops (preferred in the startup phase) and waits for a debug client whow wants attach to the process.</p>
-<p>Setting breakpoints by program code is optional.</p>
-<p>To make the usage of debugpy easier the essential function calls are extracted and provided in the script samples-python/datalayer.remote.debug/debugging.py.</p>
-<ul>
-<li>debugging.init() scans the applications parameter list for --debug-port=... If this parameter is not found remote debugging will be not enabled. Usage see main.py.</li>
-<li>debugging.wait_for_client(port: int) is an internal function called by init(). It configures the remote debug connections and starts the debug server. The application is stopped until a debug client connects. </li>
-<li>With debugging.breakpoint() breakpoints can be set by the Python code itself - see main.py.</li>
-</ul>
-<h4 id="packing-debugpy-into-your-snap">Packing debugpy into your snap<a class="headerlink" href="#packing-debugpy-into-your-snap" title="Permanent link">&para;</a></h4>
-<p>snapcraft will pack debugpy into the snap because it is listed in the parameter "install_requires" of the function setup() in setup.py.</p>
-<h3 id="creating-and-installing-a-snap">Creating and Installing a snap<a class="headerlink" href="#creating-and-installing-a-snap" title="Permanent link">&para;</a></h3>
-<p>Start a terminal and enter</p>
-<div class="codehilite"><pre><span></span><code>snapcraft clean --destructive-mode
-snapcraft --destructive-mode
-</code></pre></div>
-
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>To create a snap for a ctrlX CORE you need an aarch64 (arm64) building environment e.g. a QEMU VM with aarch64 emulation.</p>
-</div>
-<p>Install the snap on your ctrlX CORE. </p>
-<p>After installation of the snap the app will be started at once - but without remote debugging enabled.</p>
-<h3 id="start-your-python-app-in-remote-debugging-mode">Start your Python App in Remote Debugging Mode<a class="headerlink" href="#start-your-python-app-in-remote-debugging-mode" title="Permanent link">&para;</a></h3>
-<p>Connect via SSH to your ctrlX and start your app in debugging mode.</p>
-<p>Stop the snap:</p>
-<div class="codehilite"><pre><span></span><code>sudo snap stop sdk-py-remote-debug
-</code></pre></div>
-
-<p>Start the app providing a debug port as command line parameter:</p>
-<div class="codehilite"><pre><span></span><code>sudo snap run sdk-py-remote-debug.app --debug-port=12345
-</code></pre></div>
-
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Ensure that the port number is the same as configured in launch.json.</p>
-</div>
-<p>Now the app holds on startup and waits for a debug client to connect.</p>
-<h3 id="do-remote-debugging-with-visual-studio-code">Do Remote Debugging with Visual Studio Code<a class="headerlink" href="#do-remote-debugging-with-visual-studio-code" title="Permanent link">&para;</a></h3>
-<p>In Visual Studio Code 
-* Click the 'Run and Debug' icon in the side bar,
-* select the according launch configuration for remote debugging
-* and enter F5</p>
-<p>Visual Studio Code will connect to the debug server on the ctrlX CORE and attach to the process. </p>
-<p>Breakpoints can be set within the Python editor. Furthermore breakpoints set programatically are active.</p>
-<h3 id="using-python-package-debugpy-in-your-own-projects">Using Python Package debugpy in your own Projects<a class="headerlink" href="#using-python-package-debugpy-in-your-own-projects" title="Permanent link">&para;</a></h3>
-<p>To use remote debugging in your own projects just do following steps:</p>
-<ul>
-<li>Copy the script samples-python/datalayer.remote.debug/debugging.py into your project folder</li>
-<li>Install debugpy into your development environment e.g. by adding 'debugpy' into the file requirerequirements.txt</li>
-<li>Add debugpy to the list of parameter install_requires=[...]</li>
-</ul>
 
 
 
@@ -2072,42 +1636,6 @@ snapcraft --destructive-mode
       </main>
       
         <footer class="md-footer">
-  
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="samples-iec61131/index.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Samples IEC 61131-3" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Samples IEC 61131-3
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="references.html" class="md-footer__link md-footer__link--next" aria-label="Next: Overview" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Overview
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -2133,7 +1661,7 @@ snapcraft --destructive-mode
       
     
     <a href="https://github.com/boschrexroth" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
     </a>
   
     
@@ -2142,7 +1670,7 @@ snapcraft --destructive-mode
       
     
     <a href="https://twitter.com/boschrexroth" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
     </a>
   
 </div>
@@ -2156,11 +1684,12 @@ snapcraft --destructive-mode
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.078830c0.min.js"></script>
+      <script src="assets/javascripts/bundle.5a2dcb6a.min.js"></script>
       
+    
     
   </body>
 </html>
