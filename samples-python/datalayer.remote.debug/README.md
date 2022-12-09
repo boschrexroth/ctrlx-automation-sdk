@@ -1,7 +1,5 @@
 # Sample Project datalayer.remote.debug
 
-The remote debugging of snaps written in Python is described here [Debugging](../../doc/debug.md), chapter "Python". 
-
 ## Enabling Remote Debugging
 
 Remote debugging is enabled when the app is called with a command line parameter --debug-port=....

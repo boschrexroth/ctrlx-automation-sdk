@@ -60,6 +60,7 @@ This will create a folder "license-service" during installation of the app on th
 The app shall provide information in the package-manifest about each license that is supported. Description and title shall be human readable.
 The "required" flag indicates whether a license is mandatory to use the application. Set the flag to true when the license is required and to false, when the license is optional. 
 
+
 ```json
 "licenses": [
     {
@@ -76,7 +77,6 @@ The "required" flag indicates whether a license is mandatory to use the applicat
     }
   ],
 ```
-
 
 ## 3.3 Use REST API to enforce licenses <a name="rest"></a>
 

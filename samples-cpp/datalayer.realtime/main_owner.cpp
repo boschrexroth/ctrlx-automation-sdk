@@ -30,20 +30,18 @@
 #include <thread>
 #include <iostream>
 
-#include "ctrlx_datalayer_helper.h"
-
 #define MEM_SIZE (100)
-// Revision should be unique for this Layout, if you need a new Memorylayout define a new revision, or use checksum algorithms
+// Revision should be unique for this Layout, if you need a new memory layout define a new revision, or use checksum algorithms
 #define REVISION (0)
 
+ // Create end process flag witch is set to true if SIGINT is send
 bool endProcess = false;
-
-static void hdl(int sig, siginfo_t *siginfo, void *context)
+static void hdl(int sig, siginfo_t* siginfo, void* context)
 {
   endProcess = true;
 }
 
-void deleteOwnerMemory(comm::datalayer::DatalayerSystem *datalayer,
+void deleteOwnerMemory(comm::datalayer::DatalayerSystem* datalayer,
                        std::shared_ptr<comm::datalayer::IMemoryOwner> ownerMemory)
 {
   if (ownerMemory == nullptr)
@@ -55,13 +53,13 @@ void deleteOwnerMemory(comm::datalayer::DatalayerSystem *datalayer,
   comm::datalayer::DlResult result = datalayer->factory()->deleteMemorySync(ownerMemory);
   if (comm::datalayer::STATUS_FAILED(result))
   {
-    std::cout << "WARN Closing realtime owner memory failed with: " << result.toString() << std::endl;
+    std::cout << "WARNING Closing realtime owner memory failed with: " << result.toString() << std::endl;
   }
 }
 
 // Cleanup closes the memory and stop the datalayersystem
-void cleanup(comm::datalayer::DatalayerSystem *datalayer,
-             comm::datalayer::IProvider *provider,
+void cleanup(comm::datalayer::DatalayerSystem* datalayer,
+             comm::datalayer::IProvider* provider,
              std::shared_ptr<comm::datalayer::IMemoryOwner> input,
              std::shared_ptr<comm::datalayer::IMemoryOwner> output)
 {
@@ -119,22 +117,53 @@ comm::datalayer::Variant createMemMap(size_t size, uint32_t revision)
   return result;
 }
 
-int main(int ac, char *av[])
+// Test if code is runnning in snap environment (of a ctrlX CORE)
+static bool isSnap()
+{
+  return std::getenv("SNAP") != nullptr;
+}
+
+int main(int ac, char* av[])
 {
   comm::datalayer::DlResult result;
   comm::datalayer::Variant data;
   comm::datalayer::DatalayerSystem datalayer;
-  // Start datalayer without a broker - a broker already exists in rexroth-automationcore snap
-  datalayer.start(false);
+
+  if (isSnap())
+  {
+    // Running on ctrlX CORE: Start datalayer without a broker - a broker already exists in rexroth-automationcore snap
+    std::cout << "INFO Using existing Data Layer." << std::endl;
+    datalayer.start(false);
+  }
+  else
+  {
+    // Running in App Builder Env: Start datalayer WITH a broker - we need him for exchange of data via shared memory
+    std::cout << "INFO Starting own Data Layer." << std::endl;
+    datalayer.start(true);
+  }
+
 
   // Get provider instance
-  comm::datalayer::IProvider *provider = getProvider(datalayer); // ctrlX CORE (virtual)
-  //comm::datalayer::IProvider *provider = getProvider(datalayer, "10.0.2.2", "boschrexroth", "boschrexroth", 8443); // ctrlX CORE virtual with port forwarding
-
+  comm::datalayer::IProvider* provider = datalayer.factory()->createProvider(DL_IPC);
   if (provider == nullptr)
   {
-    std::cout << "ERROR Creating Datalayer provider connection." << std::endl;
+    std::cout << "ERROR Creating Data Layer provider connection." << std::endl;
     cleanup(&datalayer, nullptr, nullptr, nullptr);
+    return 1;
+  }
+
+  result = provider->start();
+  if (comm::datalayer::STATUS_FAILED(result))
+  {
+    std::cout << "ERROR Provider could not be started." << std::endl;
+    cleanup(&datalayer, provider, nullptr, nullptr);
+    return 1;
+  }
+
+  if (provider->isConnected() == false)
+  {
+    std::cout << "ERROR Provider is NOT connected." << std::endl;
+    cleanup(&datalayer, provider, nullptr, nullptr);
     return 1;
   }
 
@@ -148,8 +177,8 @@ int main(int ac, char *av[])
   if (comm::datalayer::STATUS_FAILED(result))
   {
     std::cout << "ERROR Creation of sdk-cpp-realtime/rt/input failed with: " << result.toString() << std::endl;
-    cleanup(&datalayer, provider, nullptr, nullptr);
-    return 2;
+    cleanup(&datalayer, provider, input, nullptr);
+    return 1;
   }
 
   std::shared_ptr<comm::datalayer::IMemoryOwner> output;
@@ -157,8 +186,8 @@ int main(int ac, char *av[])
   if (comm::datalayer::STATUS_FAILED(result))
   {
     std::cout << "ERROR Creation of sdk-cpp-realtime/rt/output failed with: " << result.toString() << std::endl;
-    cleanup(&datalayer, provider, input, nullptr);
-    return 3;
+    cleanup(&datalayer, provider, input, output);
+    return 1;
   }
 
   // Memory layout is defined by owner
@@ -166,37 +195,40 @@ int main(int ac, char *av[])
   // * a realtime user can access the layout
   // * you can access all variables using non realtime client directly
   comm::datalayer::Variant memMap = createMemMap(MEM_SIZE, REVISION);
-  std::cout << "Set memory map for input and output buffer" << std::endl;
+  std::cout << "Setting memory map for input and output buffer" << std::endl;
   result = input->setMemoryMap(memMap);
   if (comm::datalayer::STATUS_FAILED(result))
   {
-    std::cout << "ERROR Set input memMap failed with: " << result.toString() << std::endl;
+    std::cout << "ERROR Setting input memMap failed with: " << result.toString() << std::endl;
     cleanup(&datalayer, provider, input, output);
-    return 4;
+    return 1;
   }
 
   result = output->setMemoryMap(memMap);
   if (comm::datalayer::STATUS_FAILED(result))
   {
-    std::cout << "ERROR Set output memMap failed with: " << result.toString() << std::endl;
+    std::cout << "ERROR Setting output memMap failed with: " << result.toString() << std::endl;
     cleanup(&datalayer, provider, input, output);
-    return 5;
+    return 1;
   }
 
-  uint8_t *inData;
+  // Input ---------------------------------------
+  uint8_t* inData = nullptr;
+  //inData = new uint8_t[MEM_SIZE];
   result = input->beginAccess(inData, REVISION);
   if (comm::datalayer::STATUS_FAILED(result))
   {
-    std::cout << "ERROR Fill input memory failed with: " << result.toString() << std::endl;
+    std::cout << "ERROR Accessing input memory failed with: " << result.toString() << std::endl;
     cleanup(&datalayer, provider, input, output);
-    return 6;
+    return 1;
   }
 
-  std::cout << "INFO Fill memory" << std::endl;
+  std::cout << "INFO Filling memory with start value 0" << std::endl;
   memset(inData, 0, MEM_SIZE);
+
   input->endAccess();
 
-  // Structure to interrupt the do while loop with SIGINT
+  // Structure to interrupt the do while loop with SIGINT ----------------------------------
   struct sigaction act;
   memset(&act, '\0', sizeof(act));
   act.sa_sigaction = &hdl;
@@ -208,13 +240,12 @@ int main(int ac, char *av[])
   {
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
-    uint8_t *inData;
-    uint8_t *outData;
-    std::cout << "INFO Check if my memory is accessed ... " << std::endl;
+    uint8_t* inData;
+    uint8_t* outData;
     result = output->beginAccess(outData, REVISION);
     if (comm::datalayer::STATUS_FAILED(result))
     {
-      std::cout << "WARN No user connected or access to output failed with: " << result.toString() << std::endl;
+      std::cout << "WARNING Accessing output memory failed with: " << result.toString() << std::endl;
       continue;
     }
 
@@ -222,12 +253,15 @@ int main(int ac, char *av[])
     result = input->beginAccess(inData, REVISION);
     if (comm::datalayer::STATUS_FAILED(result))
     {
-      std::cout << "WARN Output to input failed with: " << result.toString() << std::endl;
+      std::cout << "WARNING Accessing input memory failed with: " << result.toString() << std::endl;
       output->endAccess();
       continue;
     }
 
-    std::cout << "INFO Copy output to input" << std::endl;
+    std::cout << "INFO First byte of output memory: '";
+    std::cout << unsigned(outData[0]);
+    std::cout << "' - will be copied to input" << std::endl;
+
     memcpy(inData, outData, MEM_SIZE);
 
     input->endAccess();
@@ -236,4 +270,6 @@ int main(int ac, char *av[])
   } while (!endProcess);
 
   cleanup(&datalayer, provider, input, output);
+
+  return 0;
 }

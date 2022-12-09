@@ -1,5 +1,5 @@
 name: sdk-py-provider
-version: 2.1.0
+version: 2.4.0
 summary: Data Layer provider sample written in Python for ctrlX
 title: sdk-py-provider
 description: |
@@ -23,6 +23,9 @@ parts:
   provider:
     plugin: python
     source: .
+    stage-packages:
+      - libzmq5
+      - ctrlx-datalayer
 
   bfbs:
     plugin: dump
@@ -32,20 +35,6 @@ parts:
     plugin: dump
     source: ./mddb 
       
-  datalayerdeb:
-      plugin: dump
-      source: ./tmp/ctrlx-datalayer.deb
-      source-type: deb
-      stage-packages:
-        - libzmq5
-      override-pull: |
-        mkdir -p ../../../tmp/
-        cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
-        snapcraftctl pull
-      override-prime: |
-        rm -rf ../tmp
-        snapcraftctl prime
-
 plugs:
   datalayer:
     interface: content

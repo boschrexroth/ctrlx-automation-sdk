@@ -50,7 +50,7 @@ To develop and test .NET application for the ctrlX we have to install the C# ext
 * Select the extension icon in the left side bar and enter c#
 * Select this extension and click 'Install in SSH'
 
-![C# extension](./images/csharpextension.png)
+![C# extension](images/csharpextension.png)
 
 ### Prepare NuGet on the QEMU VM
 
@@ -78,7 +78,7 @@ The following sample uses the [Px Proxy](https://pypi.org/project/px-proxy) runn
 ## Building a .NET Sample Project
 Each .NET sample provides a rich set of tasks for your convenience.
 
-![Tasks](./images/tasks.png)
+![Tasks](images/tasks.png)
 
 + Click on Terminal -> __Run Task__.
 + Choose your preferred task to run.
@@ -128,8 +128,6 @@ Just press __F5__ or
 + For debugging snaps see [here](https://snapcraft.io/docs/debug-snaps)
 
 Now you're ready to code .NET on ctrlX! 
-
-Please open any sample directory in WSL using the Remote Explorer and see documentations how to 
 
 ## Best Practise
 
@@ -261,7 +259,7 @@ If you've found an error in these sample, please [file an issue](https://github.
 
 MIT License
 
-Copyright (c) 2021 Bosch Rexroth AG
+Copyright (c) 2021-2022 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

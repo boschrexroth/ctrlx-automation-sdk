@@ -26,7 +26,7 @@ For more informations about Px see [What is Px](https://github.com/genotrance/px
     px.exe --proxy=__address_of_your_network_proxy__:__port__ --save
 
 !!! important 
-    Px.exe provides both http and https access via default port __3128__. If this port is not available on the host it can be changed in px.ini BUT: The alternative port has to be changed in the VM too - see [Setup a QEMU VM](./setup_qemu_ubuntu.md) and [Setup a Virtual Box VM](./setup_windows_virtualbox_ubuntu.md). 
+    Px.exe provides both http and https access via default port __3128__. If this port is not available on the host it can be changed in px.ini BUT: The alternative port has to be changed in the VM too - see [Setup a QEMU VM](setup_qemu_ubuntu.md) and [Setup a Virtual Box VM](setup_windows_virtualbox_ubuntu.md). 
 
 
 * Add Px to the Windows registry to run on startup:

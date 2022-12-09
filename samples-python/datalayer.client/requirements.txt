@@ -1,4 +1,5 @@
 autopep8
 flake8
+isort
 ctrlx-datalayer
 ctrlx-fbs

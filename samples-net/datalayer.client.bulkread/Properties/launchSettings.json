@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "datalayer.client.bulkread": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

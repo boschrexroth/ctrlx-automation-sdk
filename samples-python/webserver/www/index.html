@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html style="font-family: Arial">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/python-webserver/stylesheet.css">
+    <head>
+      <title>ctrlX Python Webserver Sample</title>
+      <link rel="icon" type="image/png" sizes="16x16" href="/python-webserver/favicon.png">
+    </head>
+    <body>
+        <header>
+            <h1 fontcolor="#e7913c">PYTHON WEBSERVER SAMPLE</h1>
+        </header>
+        <div class="main">
+            <div class="box">
+                <p><b>Read Data Layer Node</b></p>
+                <form action="/python-webserver?token=$(token)" method="POST">
+                    <p>Node: <input id="textbox" type="text" name="node" value="$(Server.readPath)" $(permissions_read_text) > <input id="button" type="submit" name="submit" value="Read Value" $(permissions_read_text) > </p>
+                    <p>Value: $(Server.readValue) </p>
+                    <p>Result: $(Server.readResult) </p>
+                </form>
+            </div>
+            <div class="box">
+                <p><b>Write Data Layer Node</b></p>
+                <form action="/python-webserver?token=$(token)" method="POST">
+                    <p>Node: <input id="textbox" type="text" name="node" value="$(Server.writePath)" $(permissions_write_text) > </p>
+                    <p>Value: <input id="textbox" type="text" name="value" value="$(Server.writeValue)" $(permissions_write_text)> <input id="button" type="submit" name="submit" value="Write Value" $(permissions_write_text)> </p>
+                    <p>Result: $(Server.writeResult)  </p>
+                </form>
+            </div>
+            <div class="box">
+                <p><b>User Permissions</b></p>
+                    <p>Full access: $(permissions_rwx) </p>
+                    <p>Read/Write: $(permissions_rw) </p>
+                    <p>Read: $(permissions_r)  </p>
+            </div>
+        </div>
+    </body>
+</html>

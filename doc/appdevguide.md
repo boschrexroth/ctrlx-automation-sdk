@@ -49,18 +49,18 @@ This document describes the technical aspects for ctrlX apps. These aspects each
 
 ### 1.3 Partner Contract and Legal Framework
 
-This development guide describes the technical integration of an app into ctrlX CORE. The following documents also need to be available and signed as non-technical prerequisites before an app gets published:
+This development guide describes the technical integration of an app into ctrlX CORE. The following documents of the ctrlX World partner program also need to be available and signed as non-technical prerequisites before an app gets published:
 
-- The **Software Distribution Framework** agreement ("Partner Contract") describes the fundamental constraints of the partnership between you as app developer and Bosch Rexroth and affiliates
-- A **License Contract** describes all app related licenses as part of the product to be sold within Bosch Rexroth and affiliates sales channels
-- Optionally a **Letter of Intent** (LOI)
-- Optionally a **Non Disclosure Agreement** (NDA)
+- The **Distribution Framework Agreement** ("Partner Contract") describes the fundamental conditions of the partnership between you as app developer and Bosch Rexroth and affiliates
+- A **Individual Contract** describes all app related licenses as part of the product to be sold within Bosch Rexroth and affiliates sales channels
+- A **Letter of Intent** (LOI) defines the partnership priciples
+- A **Non Disclosure Agreement** (NDA) is the basis of our collaboration and needed for file exchange
 
 ## 2 App Validation Process<a name="validation"></a>
 
-As a mandatory step for app integration into ctrlX, Bosch Rexroth will carry out a standard app validation and signing process.
+As a mandatory step for app integration into ctrlX AUTOMATION, Bosch Rexroth will carry out a standard app validation and signing process.
 
-For handover, Bosch Rexroth accordingly provides a ctrlX World Partner Portal SharePoint space, which will be prepared during the partner contracting process.
+For handover, Bosch Rexroth accordingly provides a partner folder in the ctrlX World Portal, which will be prepared during the partner contracting process.
 
 ### 2.1 Initial Meeting for App Validation
 
@@ -87,10 +87,8 @@ Bosch Rexroth checks the provided artifacts and the described behavior of an app
 
 This validation framework requires a standard format for artifacts and information.
 
-To simplify the delivery of artifacts, we provide a base folder structure with description and schema files. This helps app developers to deliver the required artifacts and us to simplify the validation work. Please use the given structure, folder names and file names as given below, without any renaming. 
+To simplify the delivery of artifacts, we provide a base folder structure with description and schema files. This helps app developers to deliver the required artifacts and us to simplify the validation work. Please use the given structure, folder names and file names as given below, without any renaming:
 
-
-The provided artifacts and information must be organized in the following way:
 
 **General Folder structure**
 
@@ -115,7 +113,7 @@ Once all the required information is available in your local folder, zip the fol
 ### 2.4 Validation and Signing
 
 Validation is typically carried out in several iterations, depending on the result of a particular validation activity.
-If all the required information is provided in the ctrlX World Partner Portal space, an email to `ctrlx.world@boschrexroth.de` will trigger a validation loop.
+If all the required information is provided in the ctrlX World Portal, an email to `ctrlx.world@boschrexroth.de` will trigger a validation loop.
 Basically, the workflow will be as follows:
 
 1. Partner/app developer: Uploads required artifacts and informs Bosch Rexroth
@@ -252,7 +250,7 @@ This will create the required folder structure for the mandatory artifacts out-o
 !!!! important 
      Please use the given structure, folder names and file names unchanged. This will support an efficient validation process.
 
-![image](./images/artefacts.png)
+![image](images/artefacts.png)
 
 
 The artifacts are organized in five sub folders:
@@ -618,7 +616,8 @@ Please contact your partner manager if a real-time extension might be required f
 
 If you are ctrlX World Partner you must use the licensing service that is operated by Bosch Rexroth. For information how to adapt an app to the licensing service please have look on the [Licensing Page](licensing.md) 
 
-
+### Appendix
+[Guide appendix](appdevguide_other-technologies.md)
 
 **Copyright**
 © Bosch Rexroth AG 2021

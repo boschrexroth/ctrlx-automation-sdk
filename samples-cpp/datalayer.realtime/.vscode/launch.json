@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "x64 RealtimeOwner Build Environment (local)",
+            "name": "Owner - Build Environment (local)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/datalayerRealtimeOwner",
@@ -30,7 +30,7 @@
             ]
         },
         {
-            "name": "x64 RealtimeUser Build Environment (local)",
+            "name": "User - Build Environment (local)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/datalayerRealtimeUser",
@@ -55,7 +55,7 @@
             ]
         },
         {
-            "name": "aarch64 RealtimeUser ctrlX (remote)",
+            "name": "User - ctrlX (remote)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-aarch64/Debug/datalayerRealtimeUser",
@@ -75,7 +75,7 @@
             ]
         },
         {
-            "name": "aarch64 RealtimeOwner ctrlX (remote)",
+            "name": "Owner - ctrlX (remote)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/generated/ubuntu20-gcc-aarch64/Debug/datalayerRealtimeOwner",

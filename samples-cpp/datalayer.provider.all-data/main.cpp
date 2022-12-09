@@ -50,7 +50,7 @@ static void shutdownMessage()
   std::cout << std::endl;
 
   std::cout << "Shutting down!" << std::endl;
-  if (getenv("SNAP") != nullptr)
+  if (std::getenv("SNAP") != nullptr)
   {
     std::cout << " Restarting automatically..." << std::endl;
   }

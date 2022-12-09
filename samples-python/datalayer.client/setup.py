@@ -2,7 +2,7 @@ from setuptools import setup
 
 
 setup(name = 'sdk-py-client',
-      version = '2.1.0',
+      version = '2.4.0',
       description = 'Data Layer client sample written in Python for ctrlX',
       author = 'SDK Team',
       packages = ['app', 'helper'],

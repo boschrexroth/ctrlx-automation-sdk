@@ -1,84 +1,45 @@
-# QEMU VM with Ubuntu Server as ctrlX Application Build Environment
+# ctrlX App Build Environment
 
 ## Indroduction
 
-This folder contains configuration files and scripts to build and launch [QEMU](https://wiki.ubuntu.com/ARM64/QEMU) virtual machines running Ubuntu Server guest operating system on Windows 10 or Linux host operating systems.
+This folder contains bat and image files to build and launch an App Builder Environment.
 
-__Important__: The host operating system must be amd64 based.
+This is a [QEMU](https://wiki.ubuntu.com/ARM64/QEMU) virtual machines running an Ubuntu Server operating system.
 
-Installation and configuration of the Ubuntu Server guest operating system are automatically done on first boot by the Ubuntu Cloud-Init Technology. For this purpose, a so-called user image file is specified when the VM is started. This file contains the compiled information of a cloud-config file which is processed by the cloud-init service.
+__Important__: The host operating system must be Windows 64Bit (amd64).
 
-For more informations [cloud-init](https://cloud-init.io/)
+Installation and configuration of the Ubuntu Server guest operating system are automatically done on first boot by the Ubuntu Cloud-Init Technology. 
+For this purpose, a so-called user image file is specified when the VM is started. 
+This file contains the compiled information of a cloud-config file which is processed by the cloud-init service.
 
-## File Overview
+For more informations see [cloud-init](https://cloud-init.io/)
 
-Hint: The parameters of .sh/.bat files are explained in comment lines at the beginning of these files.
+## Starting and Building the App Builder Environment
 
-### Build Files:
+* start.bat is created and called by ctrlX WORKS. Here the required parameters are passed.
+* start.bat calls launch.bat
+* launch.bat calls build.bat. This script downloads the Ubuntu Server image and creates a qemu snapshotfile .qcow2
+* The Ubuntu Server image file will kept unchanged, all changes are stored into the snapshot file.
+* Furthermore a user-data image file is provided. This file contains the cloud-config informations used during first boot to preinstall the operating system.
 
-* build.bat Windows batch file to download Ubuntu Server image - check/change environment variables 
-* build.sh  Linux build script to install packages, to compile a cloud-config file and to download Ubuntu Server image
 
-* build-all.sh  Linux build script to compile all types of user image files (amd64/aarch64, proxy/noproxy).
+## Windows Helper Batchs
 
-### cloud-config Files
-
-Cloud-config files are containing settings (user/password, proxy,...) and a list of packages to be installed:
-
-* cloud-config-aarch64  For aarch64 VMs
-* cloud-config-amd64    For amd64 VMs
-
-For informations on the content of cloud-config files see [Cloud config examples](https://cloudinit.readthedocs.io/en/latest/topics/examples.html).
-
-### Creating a QEMU Virtual Machine instance
-
-Files starting with create-new... are creating a new folder and copying all necessary files into it:
-
-* create-new-vm-ARCH-PROXY.bat Creates a new VM where ARCH is amd64 or aarch64, PROXY is proxy or noproxy
-* create-new-vm.bat Called as subroutine
- 
-### Helper Scripts to Install Packages on Linux (Ubuntu) Host Operating Systems
-
-The scripts has to be started on the host system:
-
-* install-kvm-on-host.sh    Install the kvm package
-* install-qemu-on-host.sh   Download, build and install QEMU
-
-### Start a QEMU VM
-
-* launch.bat Generic bat file to start an VM
-* launch-ARCH-PROXY.bat Helper Calls launch.bat with the parameters ARCH and PROXY.
-
-### Script Files to be started in the QEMU VM
-
-* install-nodejs-npm-from-binary-archive.sh Uninstall snap node, install node and npm from https://nodejs.org
-
-### User Image Files
-
-Instead of compiling a cloud-config file __on Windows host systems one of the precompiled user image file has to be used__:
-
-* ubuntu-20.04-server-cloudimg-amd64-user-data-proxy.img    amd64 VM with proxy usage
-* ubuntu-20.04-server-cloudimg-amd64-user-data-noproxy.img  amd64 VM without proxy usage
-* ubuntu-20.04-server-cloudimg-aarch64-user-data-proxy.img    aarch64 VM with proxy usage
-* ubuntu-20.04-server-cloudimg-aarch64-user-data-noproxy.img  aarch64 VM without proxy usage
-
-### Windows Helper Batchs
-
-#### ssh-keygen-copy-id.bat
+### ssh-keygen-copy-id.bat
 
 Enables login without password by adding .ssh\id_rsa.pub of the host to ~/.authorized_keys of the QM VM.
 
 !!! important
     We recommend to use this script instead of always signing in with the password.
 
-#### shrink-qcow2.bat
+### shrink-qcow2.bat
 
 Shrinks the qcow2 snapshot file.
 
 !!! important
     This action takes some time, do not interrupt.
 
-#### wget.bat  
+### wget.bat  
 
 Calls PowerShell to download files.
 

@@ -93,6 +93,22 @@ func runNodes(provider *datalayer.Provider) {
 		fmt.Println("ERROR Registering node ", ndfbs.Name(), " failed: ", r)
 	}
 
+	ndt := node.NewNodeDataTimestamp("timestamp-value")
+	defer node.DeleteNodeData(&ndt.NodeData)
+	go node.StartNodeDataHandler(ndt)
+	r = provider.RegisterNode(ndt.Name(), ndt.Node())
+	if r != datalayer.ResultOk {
+		fmt.Println("ERROR Registering node ", ndt.Name(), " failed: ", r)
+	}
+
+	ndat := node.NewNodeDataArrayTimestamp("array-of-timestamp-value")
+	defer node.DeleteNodeData(&ndat.NodeData)
+	go node.StartNodeDataHandler(ndat)
+	r = provider.RegisterNode(ndat.Name(), ndat.Node())
+	if r != datalayer.ResultOk {
+		fmt.Println("ERROR Registering node ", ndat.Name(), " failed: ", r)
+	}
+
 	b := provider.IsConnected()
 	if !b {
 		fmt.Println("ctrlX Data Layer Provider not connectet")
@@ -103,6 +119,15 @@ func runNodes(provider *datalayer.Provider) {
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM, syscall.SIGABRT)
 	s := <-sigs
 	fmt.Println("ctrlX Data Layer Provider signal: ", s)
+
+	r = provider.UnregisterNode(ndat.Name())
+	if r != datalayer.ResultOk {
+		fmt.Println("ERROR Unregistering node ", ndat.Name(), " failed: ", r)
+	}
+	r = provider.UnregisterNode(ndt.Name())
+	if r != datalayer.ResultOk {
+		fmt.Println("ERROR Unregistering node ", ndt.Name(), " failed: ", r)
+	}
 
 	fmt.Println("INFO unregister nodes")
 	// Unregister node of the flatbuffer

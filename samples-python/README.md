@@ -2,16 +2,23 @@
 
 ## Find out the supported samples
 
+
+### Basic Samples
+
+* [ctrlX Data Layer Client Light](datalayer.client.light/README.md)
+* [ctrlX Data Layer Client Bulk](datalayer.client.bulk/README.md)
+* [ctrlX Data Layer Client](datalayer.client/README.md)
+* [ctrlX Data Layer Provider](datalayer.provider/README.md)
+* [ctrlX Diagnostics Logbook](logbook/README.md)
+
+### Advanced Samples
+
 * [AppData File Storage](appdata/README.md)
 * [ctrlX Data Layer Calculation operations](datalayer.calc/README.md)
-* [ctrlX Data Layer Client](datalayer.client/README.md)
 * [ctrlX Data Layer Client Browse](datalayer.client.browse/README.md)
-* [ctrlX Data Layer Client Light](datalayer.client.light/README.md)
 * [ctrlX Data Layer Client Subscription](datalayer.client.sub/README.md)
-* [ctrlX Data Layer Provider](datalayer.provider/README.md)
 * [ctrlX Data Layer Provider All Data Types](datalayer.provider.all-data/README.md)
 * [Example Remote Debugging with Python](datalayer.remote.debug/README.md)
-* [ctrlX Diagnostics Logbook](logbook/README.md)
 * [ctrlX Data Layer + Webserver](webserver/README.md)
 
 ## Build a Snap
@@ -64,7 +71,7 @@ A subfolder venv/ will be created and activated as virtual environment which con
 
 * Watch trace of your snap on the ctrlX CORE e.g.: `$ sudo snap logs -f sdk-py-provider-alldata`
 
-* Debugging Python code on the ctrlX CORE is described here [Remote Debugging](../debug.md).
+* Debugging Python code on the ctrlX CORE is described here [Remote Debugging Python](../remote-debug-python.md).
 
 ## Support
 

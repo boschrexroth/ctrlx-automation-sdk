@@ -1,5 +1,5 @@
 name: sdk-py-client
-version: 2.1.0
+version: 2.4.0
 summary: Data Layer client sample written in Python for ctrlX.
 title: sdk-py-client
 description:  |
@@ -23,20 +23,9 @@ parts:
   client:
     plugin: python
     source: .
-
-  datalayerdeb:
-      plugin: dump
-      source: ./tmp/ctrlx-datalayer.deb
-      source-type: deb
-      stage-packages:
-        - libzmq5
-      override-pull: |
-        mkdir -p ../../../tmp/
-        cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
-        snapcraftctl pull
-      override-prime: |
-        rm -rf ../tmp
-        snapcraftctl prime
+    stage-packages:
+      - libzmq5
+      - ctrlx-datalayer
 
 plugs:
   datalayer:

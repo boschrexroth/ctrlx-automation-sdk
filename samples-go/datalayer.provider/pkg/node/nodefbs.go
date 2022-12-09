@@ -29,7 +29,6 @@ import (
 	"path"
 
 	"datalayer.provider/pkg/sample/schema"
-	"datalayer.provider/pkg/utils"
 	"github.com/boschrexroth/ctrlx-datalayer-golang/pkg/datalayer"
 	fbs "github.com/boschrexroth/ctrlx-datalayer-golang/pkg/fbs/comm/datalayer"
 	flatbuffers "github.com/google/flatbuffers/go"
@@ -78,10 +77,10 @@ func (nd *NodeDataFbs) registerBfbs(p *datalayer.Provider) {
 
 // OnMetadata descript 'flatbuffers' MetaData of the provider node
 func (n *NodeDataFbs) OnMetadata() (datalayer.Result, *datalayer.Variant) {
-	m := utils.NewMetaDataBuilder(utils.AllowedOperationRead|utils.AllowedOperationWrite|utils.AllowedOperationBrowse, "Simple flatbuffers variable", "")
+	m := datalayer.NewMetaDataBuilder(datalayer.AllowedOperationRead|datalayer.AllowedOperationWrite|datalayer.AllowedOperationBrowse, "Simple flatbuffers variable", "")
 	m.Unit("g").DisplayName("inertial-value").NodeClass(fbs.NodeClassVariable)
-	m.AddReference(utils.ReferenceTypeRead, typeaddressfbs)
-	m.AddReference(utils.ReferenceTypeWrite, typeaddressfbs)
+	m.AddReference(datalayer.ReferenceTypeRead, typeaddressfbs)
+	m.AddReference(datalayer.ReferenceTypeWrite, typeaddressfbs)
 	v := m.Build()
 	return datalayer.ResultOk, v
 }

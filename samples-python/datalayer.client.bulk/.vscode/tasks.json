@@ -1,0 +1,36 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "0 Install venv and packages",
+            "type": "shell",
+            "command": "bash",
+            "args": ["install-venv.sh"],
+            "problemMatcher": []
+        },
+        {
+            "label": "build snap amd64",
+            "type": "shell",
+            "command": "bash",
+            "args": ["build-snap-amd64.sh"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build snap arm64",
+            "type": "shell",
+            "command": "bash",
+            "args": ["build-snap-arm64.sh"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

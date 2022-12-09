@@ -7,7 +7,7 @@ cmake_minimum_required( VERSION 3.9 )
 # Project information
 # Set project, VERSION should be same as snap version
 #
-set(VERSION 2.1.0)
+set(VERSION 2.2.0)
 project( hello_plc_snap_project VERSION ${VERSION} )
 
 #

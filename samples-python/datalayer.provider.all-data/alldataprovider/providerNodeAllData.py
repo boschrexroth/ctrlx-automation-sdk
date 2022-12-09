@@ -20,13 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from comm.datalayer import NodeClass
-
 import ctrlxdatalayer
-
+from comm.datalayer import NodeClass
 from ctrlxdatalayer.metadata_utils import MetadataBuilder
 from ctrlxdatalayer.provider import Provider
-from ctrlxdatalayer.provider_node import ProviderNodeCallbacks, NodeCallback
+from ctrlxdatalayer.provider_node import NodeCallback, ProviderNodeCallbacks
 from ctrlxdatalayer.variant import Result, Variant
 
 

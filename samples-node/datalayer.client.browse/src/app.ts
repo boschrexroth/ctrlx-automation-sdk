@@ -57,10 +57,5 @@ async function main() {
     await system.stop();
 }
 
-//Checks whether the app is running inside a snap
-function isSnap() {
-    return typeof process.env.SNAP_NAME !== 'undefined' && process.env.SNAP_NAME !== 'node';
-}
-
 // Call main function
 main();

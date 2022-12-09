@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='sdk-py-datalayer-provider',
-    version='2.1.0',
+    version='2.4.0',
     description='This sample shows how to provide data to ctrlX Data Layer',
     author='SDK Team',
     install_requires = ['ctrlx-datalayer', 'ctrlx_fbs'],    

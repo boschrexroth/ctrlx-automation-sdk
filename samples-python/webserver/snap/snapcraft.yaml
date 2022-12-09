@@ -1,5 +1,5 @@
 name: sdk-py-webserver
-version: 2.0.0
+version: 2.4.0
 summary: Webserver Sample written in Python for ctrlX
 title: sdk-py-webserver
 description: |
@@ -27,6 +27,9 @@ parts:
   webserver:
     plugin: python
     source: .
+    stage-packages:
+      - libzmq5
+      - ctrlx-datalayer
 
   configs:
     plugin: dump
@@ -37,20 +40,8 @@ parts:
   www:
     plugin: dump
     source: ./www
-
-  datalayerdeb:
-    plugin: dump
-    source: ./tmp/ctrlx-datalayer.deb
-    source-type: deb
-    stage-packages:
-      - libzmq5
-    override-pull: |
-      mkdir -p ../../../tmp/
-      cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
-      snapcraftctl pull
-    override-prime: |
-      rm -rf ../tmp
-      snapcraftctl prime
+    organize:
+      '*': www/
 
 slots:
   package-assets:

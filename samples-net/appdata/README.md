@@ -13,7 +13,7 @@ Use the ctrlX App Data storage for your application data persistence.
 
 ## Prerequisites
 
-Please read the common .NET docs [here](../README.md), first.
+Please read the common .NET docs [here](./../../doc/dotnet.md), first.
 
 ## Getting Started
 

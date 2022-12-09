@@ -1,9 +1,8 @@
-﻿using System.Globalization;
+using System.Globalization;
 
 namespace Hello.Web.Asp.services
 {
     using Datalayer;
-    using Samples.Datalayer;
     using System;
     using System.Text.Json;
 
@@ -39,8 +38,8 @@ namespace Hello.Web.Asp.services
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Create a connection string with the parameters according to your environment (see DatalayerHelper class)
-            var connectionString = DatalayerHelper.GetConnectionString(ip: "192.168.1.1", sslPort: 443);
+            // Create a connection string with the parameters according to your environment (see Remote class)
+            var connectionString = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
             // Create the client with remote connection string
             using var client = system.Factory.CreateClient(connectionString);

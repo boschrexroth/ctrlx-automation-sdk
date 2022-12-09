@@ -1,6 +1,3 @@
-#ifndef PROVIDE_NODES_H
-#define PROVIDE_NODES_H
-
 /**
  * MIT License
  *
@@ -30,7 +27,7 @@
 #include "providerNodeAllData.h"
 #include "sampleSchema_generated.h"
 
-DataContainer *ProviderNodeAllData::getDataContainer(const std::string &address)
+DataContainer* ProviderNodeAllData::getDataContainer(const std::string& address)
 {
   for (auto dataContainer : _dataContainers)
   {
@@ -43,8 +40,8 @@ DataContainer *ProviderNodeAllData::getDataContainer(const std::string &address)
 }
 
 comm::datalayer::DlResult ProviderNodeAllData::createDataContainer(
-    const std::string &address,
-    const comm::datalayer::Variant &data)
+  const std::string& address,
+  const comm::datalayer::Variant& data)
 {
   if (getDataContainer(address) != nullptr)
   {
@@ -63,9 +60,9 @@ comm::datalayer::DlResult ProviderNodeAllData::createDataContainer(
 }
 
 void ProviderNodeAllData::createDataContainer(
-    comm::datalayer::DlResult setValueResult,
-    const std::string &addressNode,
-    const comm::datalayer::Variant &data)
+  comm::datalayer::DlResult setValueResult,
+  const std::string& addressNode,
+  const comm::datalayer::Variant& data)
 {
   const std::string address = _addressBase + addressNode;
   if (comm::datalayer::DlResult::DL_OK != setValueResult)
@@ -79,7 +76,7 @@ void ProviderNodeAllData::createDataContainer(
   }
 }
 
-comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalayer::Variant &data, const std::string &address)
+comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalayer::Variant& data, const std::string& address)
 {
 
   flatbuffers::FlatBufferBuilder builder;
@@ -102,23 +99,23 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
   flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<comm::datalayer::Reference>>> references;
   if (data.getType() == comm::datalayer::VariantType::FLATBUFFERS)
   {
-    const char *type_addr = "types/sampleSchema/inertialValue";
+    const char* type_addr = "types/sampleSchema/inertialValue";
 
     if (_dynamic)
     {
       flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
-          {
-              comm::datalayer::CreateReferenceDirect(builder, "readType", type_addr),
-              comm::datalayer::CreateReferenceDirect(builder, "writeType", type_addr),
-          };
+      {
+          comm::datalayer::CreateReferenceDirect(builder, "readType", type_addr),
+          comm::datalayer::CreateReferenceDirect(builder, "writeType", type_addr),
+      };
       references = builder.CreateVectorOfSortedTables(vecReferences, 2);
     }
     else
     {
       flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
-          {
-              comm::datalayer::CreateReferenceDirect(builder, "readType", type_addr),
-          };
+      {
+          comm::datalayer::CreateReferenceDirect(builder, "readType", type_addr),
+      };
       references = builder.CreateVectorOfSortedTables(vecReferences, 1);
     }
   }
@@ -142,7 +139,7 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
   return variant;
 }
 
-ProviderNodeAllData::ProviderNodeAllData(comm::datalayer::IProvider *provider, const std::string &addressRoot, bool dynamic)
+ProviderNodeAllData::ProviderNodeAllData(comm::datalayer::IProvider* provider, const std::string& addressRoot, bool dynamic)
 {
   _provider = provider;
   _addressRoot = addressRoot;
@@ -289,9 +286,9 @@ void ProviderNodeAllData::RegisterNodes()
 
 // This function will be called whenever a object should be created.
 void ProviderNodeAllData::onCreate(
-    const std::string &address,
-    const comm::datalayer::Variant *data,
-    const comm::datalayer::IProviderNode::ResponseCallback &callback)
+  const std::string& address,
+  const comm::datalayer::Variant* data,
+  const comm::datalayer::IProviderNode::ResponseCallback& callback)
 {
   comm::datalayer::DlResult result;
 
@@ -314,9 +311,9 @@ void ProviderNodeAllData::onCreate(
 
 // Read function of a node. Function will be called whenever a node should be read.
 void ProviderNodeAllData::onRead(
-    const std::string &address,
-    const comm::datalayer::Variant *data,
-    const comm::datalayer::IProviderNode::ResponseCallback &callback)
+  const std::string& address,
+  const comm::datalayer::Variant* data,
+  const comm::datalayer::IProviderNode::ResponseCallback& callback)
 {
   comm::datalayer::DlResult result;
 
@@ -324,23 +321,23 @@ void ProviderNodeAllData::onRead(
   if (nullptr == dataContainer)
   {
     result = comm::datalayer::DlResult::DL_INVALID_ADDRESS;
-    std::cout << "onRead(): " << address << " " << result.toString() << std::endl;
+    //std::cout << "onRead(): " << address << " " << result.toString() << std::endl;
     callback(result, nullptr);
     return;
   }
 
   comm::datalayer::Variant myData = dataContainer->Data;
   result = dataContainer->ErrorCode >= 0 ? comm::datalayer::DlResult::DL_OK : comm::datalayer::DlResult::DL_INVALID_VALUE;
-  std::cout << "onRead(): " << address << " " << result.toString() << std::endl;
+  //std::cout << "onRead(): " << address << " " << result.toString() << std::endl;
 
   callback(result, &myData);
 }
 
 // Write function of a node. Function will be called whenever a node should be written.
 void ProviderNodeAllData::onWrite(
-    const std::string &address,
-    const comm::datalayer::Variant *data,
-    const comm::datalayer::IProviderNode::ResponseCallback &callback)
+  const std::string& address,
+  const comm::datalayer::Variant* data,
+  const comm::datalayer::IProviderNode::ResponseCallback& callback)
 {
   comm::datalayer::DlResult result;
 
@@ -354,7 +351,7 @@ void ProviderNodeAllData::onWrite(
     return;
   }
 
-  DataContainer *dataContainer = getDataContainer(address);
+  DataContainer* dataContainer = getDataContainer(address);
   if (nullptr == dataContainer)
   {
     // A virtual node which is not registered should be written.
@@ -368,7 +365,8 @@ void ProviderNodeAllData::onWrite(
     result = comm::datalayer::DlResult::DL_OK;
     // We are take the data without data type check.
     dataContainer->Data = *data;
-    std::cout << "onWrite(): " << address << " OK" << std::endl;
+    // No trace to improve performance
+    // std::cout << "onWrite(): " << address << " OK" << std::endl;
   }
 
   callback(result, data);
@@ -376,8 +374,8 @@ void ProviderNodeAllData::onWrite(
 
 // Remove function for an object. Function will be called whenever a object should be removed.
 void ProviderNodeAllData::onRemove(
-    const std::string &address,
-    const comm::datalayer::IProviderNode::ResponseCallback &callback)
+  const std::string& address,
+  const comm::datalayer::IProviderNode::ResponseCallback& callback)
 {
   comm::datalayer::DlResult result;
 
@@ -389,19 +387,13 @@ void ProviderNodeAllData::onRemove(
     return;
   }
 
-  DataContainer *dataContainer = getDataContainer(address);
-  if (nullptr == dataContainer)
+  DataContainer* dataContainer = getDataContainer(address);
+  if (nullptr != dataContainer)
   {
-    result = comm::datalayer::DlResult::DL_INVALID_ADDRESS;
-    std::cout << "onRemove(): " << address << " " << result.toString() << std::endl;
-    callback(result, nullptr);
-    return;
+    _provider->unregisterNode(dataContainer->Address);
+    remove(_dataContainers.begin(), _dataContainers.end(), dataContainer);
+    delete dataContainer;
   }
-
-  _provider->unregisterNode(dataContainer->Address);
-  remove(_dataContainers.begin(), _dataContainers.end(), dataContainer);
-
-  delete dataContainer;
 
   result = comm::datalayer::DlResult::DL_OK;
   std::cout << "onRemove(): " << address << " " << result.toString() << std::endl;
@@ -410,21 +402,22 @@ void ProviderNodeAllData::onRemove(
 
 // Browse function of a node. Function will be called to determine children of a node.
 void ProviderNodeAllData::onBrowse(
-    const std::string &address,
-    const comm::datalayer::IProviderNode::ResponseCallback &callback)
+  const std::string& address,
+  const comm::datalayer::IProviderNode::ResponseCallback& callback)
 {
-  std::cout << "onBrowse(): " << address << std::endl;
+  // No trace to improve performance
+  //std::cout << "onBrowse(): " << address << std::endl;
 
   callback(comm::datalayer::DlResult::DL_OK, nullptr); // Data Layer Broker "knows" all sub node, we don't add further nodes here.
 }
 
 // Read function of metadata of an object. Function will be called whenever the metadata of a node should be written.
 void ProviderNodeAllData::onMetadata(
-    const std::string &address,
-    const comm::datalayer::IProviderNode::ResponseCallback &callback)
+  const std::string& address,
+  const comm::datalayer::IProviderNode::ResponseCallback& callback)
 {
   comm::datalayer::DlResult result;
-  DataContainer *dataContainer = getDataContainer(address); // For .../dynamic or .../static we get also nullptr
+  DataContainer* dataContainer = getDataContainer(address); // For .../dynamic or .../static we get also nullptr
   if (nullptr == dataContainer)
   {
     if (address + "/" == _addressBase)
@@ -439,4 +432,3 @@ void ProviderNodeAllData::onMetadata(
   }
   callback(comm::datalayer::DlResult::DL_OK, &dataContainer->Metadata);
 }
-#endif

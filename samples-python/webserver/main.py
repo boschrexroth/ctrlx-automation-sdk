@@ -24,57 +24,111 @@
 
 import os
 import time
+import sys
+import logging
+import threading
 
-from http.server import HTTPServer
-from web.webserver import Server, UnixSocketHttpServer
+from systemd.journal import JournaldLogHandler
 
+import http.server
+import web.web_server
+import web.unix_socket_http_server
+
+from comm.datalayer import Metadata
+
+import app.datalayer_client 
+
+log = logging.getLogger()
+
+httpServerPort = 12345
+token = 'eyJhbGciOiJFUzM4NCIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjAxNDg3NzQsImlhdCI6MTY2MDExOTk3NCwiaWQiOiIxMDAwIiwibmFtZSI6ImJvc2NocmV4cm90aCIsIm5vbmNlIjoiMGU0NTVhODMtMThlOC00YjY2LTllMWUtYTE0NWM2ZWIzZWQzIiwicGxjaGFuZGxlIjowLCJyZW1vdGVhdXRoIjoiIiwic2NvcGUiOlsicmV4cm90aC1kZXZpY2UuYWxsLnJ3eCJdfQ.VqCCRh2ga1Ujn5C_vBAf7dZHXNr6gY0Aqvrwu39_6L9d7fWBYXr-MmqdYxGB85fHBhs56MFrCacYjN5SbctqSyH1LTeXLKAdP4Etx8V7B2QB_5XZdVCLqIwYOAU8Gdzv'
 
 def main():
-    # Use unix sockets if app running as snap
-    print('Starting Webserver...')
-    if 'SNAP' in os.environ:
-        print('Running in Snap environment')
-        run_webserver_unixsock()
-    else:
-        run_webserver_tcp()
+
+    log.setLevel(logging.DEBUG)
+
+    snap_environment = 'SNAP' in os.environ
+    if snap_environment is False:
+        # Snap environment: Avoid logging message twice
+        log.addHandler(logging.StreamHandler(sys.stdout))
+    log.addHandler(JournaldLogHandler())
+
+    datalayer_system = app.datalayer_client.data_layer_start()
+
+    # ctrlX CORE virtual with port forwarding:
+    datalayer_client, error_msg = app.datalayer_client.data_layer_client_connect(ip="10.0.2.2", https_port=8443)
+
+    # ctrlX CORE virtual with network adapter:
+    #app.datalayer_client.datalayer_client, error_msg = data_layer_client_connect()
+
+    if error_msg:
+        log.error(error_msg)
+        sys.exit(1)
+
+    new_thread = threading.Thread(
+        target=thread_start, args=(snap_environment, ))
+    new_thread.start()
+
+    while datalayer_client.is_connected():
+        time.sleep(5)
+
+    log.debug('')
+    log.debug('Data Layer connection broken - stopping web server...')
+
+    app.datalayer_client.data_layer_stop()
+
+    sys.exit(1)
+
+
+def thread_start(snap_environment: bool):
+
+    # If running with a snap (on a ctrlX) start UNIX socket
+    # If running as app in an app builder envorinemtn start a TCP server
+    run_webserver_unixsock() if snap_environment else run_webserver_tcp()
 
 
 def run_webserver_tcp():
-    serverPort = 1234
-    hostname = 'localhost'
-    with HTTPServer(('', serverPort), Server) as webServer:
 
-        print(time.asctime(), 'Server UP - TCP/IP - ', hostname, ':', serverPort)
-        # Shutdown server after 100 request (auto-restart through snapcraft)
-        for lp in range(100):
-            webServer.handle_request()
+    with http.server.HTTPServer(('', httpServerPort), web.web_server.WebServer) as http_server:
 
-        webServer.server_close()
-        print(time.asctime(), 'Server DOWN - TCP/IP')
+        log.debug("")
+        log.debug('TCP/IP server started - listening on 0.0.0.0:%i',
+                  httpServerPort)
+        log.debug("")
+        log.debug(
+            '------------------Copy this link into the address field of your browser ----------------------')
+        log.debug('http://localhost:'+str(httpServerPort) +
+                  '/python-webserver?token='+token)
+        log.debug(
+            '----------------------------------------------------------------------------------------------')
+        log.debug("")
+
+        http_server.serve_forever()
+
+        http_server.server_close()
 
 
 def run_webserver_unixsock():
 
     sock_dir = os.getenv('SNAP_DATA') + '/package-run/sdk-py-webserver/'
-    sock_file = sock_dir + 'web.sock'
-    print(time.asctime(), 'Create socket in ', sock_file)
     if not os.path.exists(sock_dir):
         os.makedirs(sock_dir)
+
+    sock_file = sock_dir + 'web.sock'
+
     try:
         os.unlink(sock_file)
     except OSError:
         pass
 
-    with UnixSocketHttpServer(sock_file, Server) as webServer:
+    with web.unix_socket_http_server.UnixSocketHttpServer(sock_file, web.web_server.WebServer) as http_server:
 
-        print(time.asctime(), 'Server UP - UNIX SOCKET - ', sock_file)
-        # Shutdown server after 100 request (auto-restart through snapcraft)
-        for lp in range(100):
-            webServer.handle_request()
+        log.debug('UNIX SOCKET server started - listening on %s', sock_file)
 
-        webServer.server_close()
+        http_server.serve_forever()
+
+        http_server.server_close()
         os.remove(sock_file)
-        print(time.asctime(), 'Server DOWN - UNIX SOCKET')
 
 
 if __name__ == '__main__':

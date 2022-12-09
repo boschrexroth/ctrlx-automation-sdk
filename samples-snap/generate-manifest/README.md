@@ -119,6 +119,7 @@ In line 6-7 we use jq to change the existing menus.sidebar.title of the template
 
 To make this work we need to create the script template in the "dump/package-assets" folder:
 
+[changing-world.package-manifest.json.template](dump/package-assets/changing-world.package-manifest.json.template)
 
 ```json
 {
@@ -131,7 +132,7 @@ To make this work we need to create the script template in the "dump/package-ass
         "id": "changing-world",
         "title": "",
         "icon": "bosch-ic-automation",
-        "link": "https://www.google.com/"
+        "link": "0"
       }
     ]
   }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datalayer.client", "datalayer.client\datalayer.client.csproj", "{78366E2C-DA29-4226-B08A-E420911FC8E8}"
 EndProject
@@ -27,6 +27,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "appdata", "appdata\appdata.csproj", "{6C8E126C-30ED-4C30-ADEC-1CA3A2B8CDDA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hello.web.asp", "hello.web.asp\hello.web.asp.csproj", "{5A96140D-88D5-4EF9-AEC2-D1B150E3142A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datalayer.client.bulkread", "datalayer.client.bulkread\datalayer.client.bulkread.csproj", "{9453497C-90F8-4811-AA2C-CC89D4E86F8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +76,10 @@ Global
 		{5A96140D-88D5-4EF9-AEC2-D1B150E3142A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A96140D-88D5-4EF9-AEC2-D1B150E3142A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A96140D-88D5-4EF9-AEC2-D1B150E3142A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9453497C-90F8-4811-AA2C-CC89D4E86F8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9453497C-90F8-4811-AA2C-CC89D4E86F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9453497C-90F8-4811-AA2C-CC89D4E86F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9453497C-90F8-4811-AA2C-CC89D4E86F8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

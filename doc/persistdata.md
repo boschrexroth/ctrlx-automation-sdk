@@ -22,7 +22,7 @@ This document, as well as the data, specifications and other information set for
 This How-To shows how to integrate an App into the common ctrlX persistence and storage mechanisms.
 Persistence handling is done by the Solutions App (app.solutions), which is an essential part of any ctrlX CORE device. It provides a central storage for other apps that need to persist their app data. App data is saved to the storage or loaded from the storage on demand (via app editors, the "Manage app data" UI, or the Solutions REST API).
 
-![image](./images/How-To-Persist-app-data-Fig01_Overview.png)
+![image](images/How-To-Persist-app-data-Fig01_Overview.png)
 
 
 The diagram shows that the storage provided by the Solutions app is structured into two conceptual locations:
@@ -88,7 +88,7 @@ The `$SNAP_COMMON/solution` directory contains an `activeConfiguration` symlink.
 
 Within the appdata root directory, define a sub-directory with a unique name as your base directory. We recommend to use your app's name in lowercase letters to avoid conflicts with other apps and allow users to easily identify your data in the file system. The screenshot shows an example with the base directories of the Motion and PLC apps, among others.
 
-![image](./images/How-To-Persist-app-data-Fig02_configuation-screenshot.png)
+![image](images/How-To-Persist-app-data-Fig02_configuation-screenshot.png)
 
 You should also explicitly declare ownership of your app directories in your package manifest. The following example shows the declaration of the PLC base directory.
 
@@ -233,18 +233,13 @@ Participants must consider the following conditions and constraints in their com
 The dynamicDescription field can provide specific information for the user, like the cause of the failure and hints how to resolve it (if cause and hint are not already provided through the main and detailed diagnosis).
 The field may contain “\n“ to separate cause and hint in the result output of the UI, e.g. “Format error in X.json.\nAdapt file or use motion editor to fix/recreate axis. [282xy5]”
 
-> **Common response if app requires Setup state for loading (since XCR-V-0116)**
+> **Common response if apps require Setup state for loading (since XCR-V-0116)**
 > 
-> If a participant gets a load request, but requires Setup state for loading, it should
+> If participants require Setup state for loading, they should in the query phase
 > 
 > - Respond with status code 409 (Conflict)
-> - Return a Problem object with
->   - the common mainDiagnosisCode **080F0E00** ("Loading configuration not possible in current state")
->   - a participant-specific detailed diagnostic which references the common main diagnostic and explains the cause of
->     the problem and how to resolve it
-> - Not write diagnoses to the Logbook in the query phase
->  
-> Limitation: The described approach is only applicable to Rexroth apps. 
+> - Return a Problem object with the common mainDiagnosisCode **080F0E00** ("Loading configuration not possible in current state")
+> - Not write diagnoses to the Logbook
 
 #### Diagnostic messages
 
@@ -333,21 +328,21 @@ For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is execu
 
 ### Annotated load process
 
-![image](./images/How-To-Persist-app-data-Fig03_Annotated-Load-Process.png)
+![image](images/How-To-Persist-app-data-Fig03_Annotated-Load-Process.png)
 
 ### Example loading sequences
 
 #### Cancelled
 
-![image](./images/How-To-Persist-app-data-Fig04_Loading(CANCELED).png)
+![image](images/How-To-Persist-app-data-Fig04_Loading(CANCELED).png)
 
 #### Succeeded
 
-![image](./images/How-To-Persist-app-data-Fig05_Loading(SUCCEEDED).png)
+![image](images/How-To-Persist-app-data-Fig05_Loading(SUCCEEDED).png)
 
 #### Failed
 
-![image](./images/How-To-Persist-app-data-Fig06_Loading(FAILED).png)
+![image](images/How-To-Persist-app-data-Fig06_Loading(FAILED).png)
 
 
 ### Problem schema definition

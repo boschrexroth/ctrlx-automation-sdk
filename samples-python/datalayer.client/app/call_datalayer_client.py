@@ -195,7 +195,7 @@ class CallDataLayerClient:
             return
 
         if data.get_type() == VariantType.FLOAT32:
-            print(data.get_float32)
+            print(data.get_float32())
             return
 
         if data.get_type() == VariantType.FLOAT64:

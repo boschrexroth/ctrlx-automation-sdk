@@ -1,4 +1,4 @@
-__version__ = '2.1.0'
+__version__ = '2.4.0'
 __description__ = 'Sample for calculations with data from the ctrlX Data Layer'
 __author__ = 'Fantastic Python Developers'
 __licence__ = 'MIT License'

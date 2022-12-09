@@ -59,3 +59,7 @@ parts:
 
       # pack and install the app (only production)
       npm install -g --prefix $SNAPCRAFT_PART_INSTALL $(npm pack . | tail -1) --only=prod --production --no-fund
+
+      # remove unused node_modules
+      rm -rf ${SNAPCRAFT_PART_INSTALL}/lib/node_modules/npm
+      rm -rf ${SNAPCRAFT_PART_INSTALL}/lib/node_modules/corepack

@@ -19,10 +19,7 @@ The sample __hello-webserver__ contains simple webserver.
 
 ## Detailed Informations 
 
-For the best webserver integration take a look at
-
-[package-manifest](./../package-manifest.md)
-
+For the best webserver integration take a look at [package-assets](../../package-assets.md)
 
 ## Screenshots
 

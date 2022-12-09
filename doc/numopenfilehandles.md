@@ -31,30 +31,30 @@ Therefor we recommend to:
 - Create a script in a sub folder e.g. ulimit-snap/ of your project.
 - And to add into your snapcraft.yaml file a daemon entry to call this script at startup.
 
-__Script to call ulimit:__
+??? Script
 
-```
-#!/bin/sh
-ulimit -n 16384
-```
+    ```yaml title="increase-ulimit.sh"
+    #!/bin/sh
+    ulimit -n 16384
+    ```
 
-__Additional daemon in your snapcraft.yaml file:__
+??? Daemon
 
-```
-parts:
-  ulimit-script:
-    plugin: dump
-    source: ./ulimit-snap
- 
-apps:
-  ulimit:
-    daemon: simple
-    command: increase-ulimit.sh
-```
+    ```yaml title="snapcraft.yaml"
+    parts:
+    ulimit-script:
+        plugin: dump
+        source: ./ulimit-snap
+    
+    apps:
+    ulimit:
+        daemon: simple
+        command: increase-ulimit.sh
+    ```
 
 ## Complete Example Snap
 
-In this SDK an complete example project creating a demo snap is stored under samples-sh/ulimit-snap.
+In this SDK an complete example project creating a demo snap is stored under __samples-sh/ulimit-snap__.
 
 The sample project folder also contains a README.md file with further informations.
 

@@ -1,6 +1,6 @@
 name: sdk-go-provider 
 base: core20 
-version: '0.1' 
+version: '1.0' 
 summary: ctrlX Data Layer provider sample written in Go
 description: |
   This sample shows how to provide data to the ctrlX Data Layer
@@ -24,6 +24,9 @@ parts:
     plugin: go
     source: .
     build-snaps: ['go/1.17/stable']
+    stage-packages:
+      - libzmq5
+      - ctrlx-datalayer
     build-packages:
       - on amd64:
         - libsystemd-dev
@@ -46,20 +49,6 @@ parts:
           ;;
       esac
       go build -buildvcs=false -o ../install/bin/ ./...
-      
-  datalayerdeb:
-    plugin: dump
-    source: ./tmp/ctrlx-datalayer.deb
-    source-type: deb
-    stage-packages:
-      - libzmq5
-    override-pull: |
-      mkdir -p ../../../tmp/
-      cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
-      snapcraftctl pull
-    override-prime: |
-      rm -rf ../tmp
-      snapcraftctl prime
 
   bfbs:
     plugin: dump

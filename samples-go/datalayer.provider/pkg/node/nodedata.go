@@ -71,6 +71,9 @@ func (n *NodeData) Value() *datalayer.Variant {
 // NodeData is accessed via the interface NodeDataHandler
 func StartNodeDataHandler(d NodeDataHandler) {
 	for {
+		if d.Node() == nil {
+			return
+		}
 		select {
 		case event := <-d.Node().Channels().OnCreate:
 			fmt.Println("event: oncreate: ", d.Name())
@@ -81,31 +84,36 @@ func StartNodeDataHandler(d NodeDataHandler) {
 			event.Callback(datalayer.ResultUnsupported, nil)
 
 		case event := <-d.Node().Channels().OnBrowse:
-			newData := datalayer.NewVariant()
-			defer datalayer.DeleteVariant(newData)
-			newData.SetArrayString([]string{})
-			fmt.Println("event: OnBrowse: ", d.Name())
-			event.Callback(datalayer.Result(0), newData)
+			func() {
+				newData := datalayer.NewVariant()
+				defer datalayer.DeleteVariant(newData)
+				newData.SetArrayString([]string{})
+				fmt.Println("event: OnBrowse: ", d.Name())
+				event.Callback(datalayer.Result(0), newData)
+			}()
 
 		case event := <-d.Node().Channels().OnRead:
-			newData := datalayer.NewVariant()
-			defer datalayer.DeleteVariant(newData)
-			d.Value().Copy(newData)
-			fmt.Println("event: OnRead: ", d.Name())
-			event.Callback(datalayer.Result(0), newData)
+			func() {
+				newData := datalayer.NewVariant()
+				defer datalayer.DeleteVariant(newData)
+				d.Value().Copy(newData)
+				fmt.Println("event: OnRead: ", d.Name())
+				event.Callback(datalayer.Result(0), newData)
+			}()
 
 		case event := <-d.Node().Channels().OnWrite:
-			//s := event.Data.GetString()
 			event.Data.Copy(d.Value())
 			fmt.Println("event: OnWrite: ", d.Name())
 			event.Callback(datalayer.Result(0), event.Data)
 
 		case event := <-d.Node().Channels().OnMetadata:
-			fmt.Println("event: OnMetadata: ", d.Name())
+			func() {
+				fmt.Println("event: OnMetadata: ", d.Name())
 
-			r, v := d.OnMetadata()
-			defer datalayer.DeleteVariant(v)
-			event.Callback(r, v)
+				r, v := d.OnMetadata()
+				defer datalayer.DeleteVariant(v)
+				event.Callback(r, v)
+			}()
 
 		case <-d.Node().Channels().Done:
 			fmt.Println("event: Done: ", d.Name())

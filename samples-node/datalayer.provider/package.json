@@ -11,17 +11,18 @@
         "dist"
     ],
     "devDependencies": {
-        "@types/node": "^18.0.0",
-        "@typescript-eslint/parser": "^5.28.0",
-        "eslint": "^8.18.0",
-        "typescript": "^4.7.4",
+        "@types/node": "^18.8.4",
+        "@typescript-eslint/parser": "^5.40.0",
+        "eslint": "^8.25.0",
+        "typescript": "^4.8.4",
         "ts-node": "^10.8.1"
     },
     "dependencies": {
-        "ctrlx-datalayer": "^1.4.0",
-        "ctrlx-datalayer-flatbuffers": "^1.16.0"
+        "ctrlx-datalayer": "^1.5.0",
+        "ctrlx-datalayer-flatbuffers": "^1.18.0"
     },
     "scripts": {
+        "getName": "echo $npm_package_name",
         "prepare": "npm run copy-bfbs && npm run tsc",
         "tsc": "tsc",
         "copy-bfbs": "mkdir -p ./dist && cp ./src/*.bfbs ./dist/"

@@ -6,7 +6,7 @@ You can find a detailed documentation here: [Remote build](https://snapcraft.io/
 For support please consult the [Snapcraft Forum](https://forum.snapcraft.io/).
 
 !!! important
-    Using the snapcraft remote-build feature makes your projects public. So it is primarily useful for open sorce software projects.
+    Using the snapcraft remote-build feature makes your projects public. So it is primarily useful for open source software projects.
 
 
 

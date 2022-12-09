@@ -24,7 +24,6 @@
 package node
 
 import (
-	"datalayer.provider/pkg/utils"
 	"github.com/boschrexroth/ctrlx-datalayer-golang/pkg/datalayer"
 	fbs "github.com/boschrexroth/ctrlx-datalayer-golang/pkg/fbs/comm/datalayer"
 )
@@ -45,11 +44,10 @@ func NewNodeDataString(n string) *NodeDataString {
 
 // OnMetadata descript 'string' MetaData of the provider node
 func (n *NodeDataString) OnMetadata() (datalayer.Result, *datalayer.Variant) {
-	m := utils.NewMetaDataBuilder(utils.AllowedOperationRead|utils.AllowedOperationBrowse|utils.AllowedOperationWrite, "String variable", "String_variable_url")
+	m := datalayer.NewMetaDataBuilder(datalayer.AllowedOperationRead|datalayer.AllowedOperationWrite, "String variable", "String_variable_url")
 	m.Unit("-").DisplayName("string-value").NodeClass(fbs.NodeClassVariable)
-	m.AddReference(utils.ReferenceTypeRead, typeaddressstring)
-	m.AddReference(utils.ReferenceTypeWrite, typeaddressstring)
-	m.AddReference(utils.ReferenceTypeCreate, typeaddressstring)
+	m.AddReference(datalayer.ReferenceTypeRead, typeaddressstring)
+	m.AddReference(datalayer.ReferenceTypeWrite, typeaddressstring)
 	v := m.Build()
 	return datalayer.ResultOk, v
 }

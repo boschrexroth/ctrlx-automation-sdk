@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "main.py",
+            "name": "main.py - App Build Env",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/main.py",

@@ -146,6 +146,7 @@ func handler(response http.ResponseWriter, request *http.Request) {
 		// Phases we don't care about in this sample can be implemented on demand.
 
 		// query: Check if loading is possible in the current system statecase "query":
+		// Hint: The phase 'query' is called 2 times: the first call asks for a setup mode change acknowledge and the second is called during normal load sequence
 		case "query":
 		// prepare: Perform any required preparatory steps
 		case "prepare":

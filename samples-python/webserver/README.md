@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This python app deploys a simple webserver including Data Layer connection and user permissions with webinterface accessible from ctrlX webpage.
+This python app deploys a simple webserver including Data Layer connection and user permissions with web interface accessible from ctrlX webpage.
 
 ## Function Description
 
@@ -10,28 +10,31 @@ The app runs a simple webserver with reverse proxy and Data Layer access, setup 
 
 Once the installation of the snap was finished, you can access to the provided webpage through the sidebar or overview menu of ctrlX CORE webpage.
 
-![ctrlX Integration](./docs/images/ctrlx_integration.png)
+![ctrlX Integration](docs/images/ctrlx_integration.png)
 
 
 The Python-Webpage allows you to read and write at the Data Layer (depends on permissions of the current user) and shows permissions of the current user. 
 
-![Python Webserver](./docs/images/python_webserver.png)
+![Python Webserver](docs/images/python_webserver.png)
 
-You can find the configuration of user permissions (scopes) at settings section <ins>Users & Permissions > Users</ins>
+You can find the configuration of user permissions (scopes) on the ctrlX at  <ins>Settings > Users & Permissions > Users</ins>
 
-![ctrlX User Permissions](./docs/images/ctrlx_userpermissions.png)
+![ctrlX User Permissions](docs/images/ctrlx_userpermissions.png)
 
-The integration of the app inside ctrlX Core webpage (sidebar and overview integration, reverse proxy, bearertoken, scopes) is done by the package-manifest (<ins>./configs/package-assets/rexroth-python-webserver.package-manifest.json</ins>). Take a look at [package-manifest](./../package-manifest.md) to find out the basics.
-
+The integration of the app inside ctrlX Core webpage (sidebar and overview integration, reverse proxy, bearertoken, scopes) is done by the package-manifest (<ins>./configs/package-assets/rexroth-python-webserver.package-manifest.json</ins>). 
 
 ## Implementation Description
 
 The app has these modules:
 
-* __main.py__ starts the web server. In snap environment an Unix socket connection is established otherwise a TCP/IP connectin.
-* __web/webserver.py__ contains the web server implementation. Internally the Python package http.server is used.
-* __web/webtoken.py__  decodes the token string using the Python package jwt
-* __app/datalayerclient.py__ handles the Data Layer node data access.
+* __main.py__ starts the web server. In snap environment an Unix socket connection is established otherwise a TCP/IP connection.
+* __unix_socket_http_server.py *)__ HTTP web server class (wrapper) to use unix sockets instead of TCP/IP
+* __web/web_server.py *)__ HTTP request handler class for both UNIX sockets and TCP/IP
+* __web/web_token.py__  contains a helper function to check permissions using jwt
+* __app/datalayer_client.py__ handles the Data Layer node data access.
+* __app/datalayer_helper.py__ handles the Data Layer client connection.
+
+*) 
 ___
 
 ## License

@@ -22,20 +22,31 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import sys
 import faulthandler
+import signal
+import sys
 import time
 
 import ctrlxdatalayer
 
 from app.call_datalayer_client import CallDataLayerClient
-
 from helper.ctrlx_datalayer_helper import get_client
+
+close_app = False
+
+
+def handler(signum, frame):
+    global close_app
+    close_app = True
+#    print('Here you go signum: ', signum, close_app)
 
 
 if __name__ == '__main__':
 
     faulthandler.enable()
+    signal.signal(signal.SIGINT, handler)
+    signal.signal(signal.SIGTERM, handler)
+    signal.signal(signal.SIGABRT, handler)
 
     print()
     print("========================================================================")
@@ -68,17 +79,18 @@ if __name__ == '__main__':
 
         print("INFO Connecting", connection_string, "succeeded.")
 
-        with datalayer_client: # datalayer_client is closed automatically when leaving with block
+        with datalayer_client:  # datalayer_client is closed automatically when leaving with block
 
             print("INFO Creating Python Data Layer Client instance")
             calldatalayerclient = CallDataLayerClient(datalayer_client)
 
-            while datalayer_client.is_connected():
+            while datalayer_client.is_connected() and not close_app:
                 calldatalayerclient.run()
                 time.sleep(1.0)
 
             print("ERROR Data Layer is NOT connected")
 
         print("INFO Stopping Data Layer system")
-        stop_ok = datalayer_system.stop(False)  # Attention: Doesn't return if any provider or client instance is still runnning
+        # Attention: Doesn't return if any provider or client instance is still runnning
+        stop_ok = datalayer_system.stop(False)
         print("System Stop", stop_ok)

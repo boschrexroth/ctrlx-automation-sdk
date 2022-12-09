@@ -22,18 +22,31 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import signal
 import sys
 import time
 
 import ctrlxdatalayer
 
-from helper.ctrlx_datalayer_helper import get_provider
 from alldataprovider.nodeManagerAllData import NodeManagerAllData
+from helper.ctrlx_datalayer_helper import get_provider
 
 address_root = "sdk-py-provider-alldata/"
 
+close_app = False
+
+
+def handler(signum, frame):
+    global close_app
+    close_app = True
+#    print('Here you go signum: ', signum, close_app)
+
 
 def main():
+
+    signal.signal(signal.SIGINT, handler)
+    signal.signal(signal.SIGTERM, handler)
+    signal.signal(signal.SIGABRT, handler)
 
     datalayer_system = ctrlxdatalayer.system.System("")
     datalayer_system.start(False)
@@ -54,8 +67,8 @@ def main():
         nodeManager.create_dynamic_nodes()
         nodeManager.create_static_nodes()
 
-        while provider.is_connected():
-            time.sleep(10.0)
+        while provider.is_connected() and not close_app:
+            time.sleep(5.0)
 
         print("ERROR: Data Layer provider is NOT connected")
 

@@ -40,31 +40,120 @@ write_files:
   # install-sdk.sh
   - content: |
       #!/usr/bin/env bash
-      sudo snap install snapcraft --classic
 
-      sudo apt-get install jq -y
+      echo " "
+      echo "============================================"
+      echo Installing ctrlX AUTOMATION SDK from github
+      echo "============================================"
+      read -t 2
 
-      rm ctrlx-automation-sdk-*.zip*
-      rm ctrlx-datalayer-*.deb*
+      ZIP_ARCHIVE=ctrlx-automation-sdk-*.zip
+      if compgen -G ${ZIP_ARCHIVE} > /dev/null; then
+        read -p "${ZIP_ARCHIVE} exists, delete, exit or continue d/e/c?" USERS_INPUT
+        
+        if grep -q "d" <<<${USERS_INPUT}; then
+          rm ${ZIP_ARCHIVE}
+        fi
+        
+        
+        if grep -q "e" <<<${USERS_INPUT}; then
+          exit 1
+        fi
+      fi
 
       LATEST=$(curl -s https://api.github.com/repos/boschrexroth/ctrlx-automation-sdk/releases/latest)
-            
-      for i in {0..1}
-      do
-        FILTER=.assets[$i].browser_download_url
-        DOWNLOAD_URL=$(echo $LATEST | jq -r $FILTER)
-        wget $DOWNLOAD_URL
-      done
+        
+      if grep -q "limit exceeded" <<<${LATEST}; then
+        echo " "
+          echo ERROR
+        echo " "
+        echo ${LATEST}
+        echo " "
+        echo "Hint:"
+        echo This error happens often because a proxy server is used.
+        echo In this case github registered a hugh number of requests from the same machine.
+        echo " "
+        echo Workaround:
+          echo "- Download the zip archive from here https://github.com/boschrexroth/ctrlx-automation-sdk/releases"
+        echo "- Copy it into this directory."
+        echo "- Restart this script."
+        echo " "	
+        read -p "Continue or exit c/e?" USERS_INPUT
+        if grep -q "e" <<<${USERS_INPUT}; then
+          exit 1
+        fi
+        echo " "
+      else
+        # .assets[0].browser_download_url   --> ctrlx-...zip
+        # .assets[1].browser_download_url   --> ctrlx-...deb
+        sudo apt-get install jq -y
+        DOWNLOAD_URL=$(echo $LATEST | jq -r .assets[0].browser_download_url)
+        wget $DOWNLOAD_URL	
+      fi
 
-      unzip -XK $(ls ctrlx-automation-sdk-*.zip)
-      chmod a+x ctrlx-automation-sdk/bin/oss.flatbuffers*/ubuntu20-gcc-*/release/flatc
-      chmod a+x ctrlx-automation-sdk/bin/framework/ubuntu20-gcc-*/rexroth-automation-frame
-      find ctrlx-automation-sdk/ -name '*.sh' -exec chmod +x {} \;
+      if compgen -G ${ZIP_ARCHIVE} > /dev/null; then
+        unzip -XK $(ls ctrlx-automation-sdk-*.zip)
+        chmod a+x ctrlx-automation-sdk/bin/oss.flatbuffers*/ubuntu20-gcc-*/release/flatc 
+        chmod a+x ctrlx-automation-sdk/bin/framework/ubuntu20-gcc-*/rexroth-automation-frame
+        chmod a+w -R ctrlx-automation-sdk/include
+        sudo chown -R boschrexroth:boschrexroth ctrlx-automation-sdk/fbs/comm/ethercat/master/
+        sudo chown -R boschrexroth:boschrexroth  ctrlx-automation-sdk/bfbs/comm/ethercat/master/
+        sudo chmod 777 -R ctrlx-automation-sdk/fbs/comm/ethercat/master/
+        sudo chmod 777 -R ctrlx-automation-sdk/bfbs/comm/ethercat/master/
+        find ctrlx-automation-sdk/ -name '*.sh' -exec chmod +x {} \;
+        
+        cd ctrlx-automation-sdk/deb/
+        source ~/install-ctrlx-datalayer-deb.sh
+        
+      else
+        echo "ERROR ${ZIP_ARCHIVE} does not exist"
+      fi
 
-      sudo dpkg -r ctrlx-datalayer
-      sudo dpkg -i ctrlx-datalayer-*.deb
+      echo " "
+      echo "============================================"
+      echo Installing snapcraft snap
+      echo "============================================"
+
+      sudo snap install snapcraft --classic
+      source ~/install-deb.sh
     # Create in /tmp because /home/boschrexroth doesn't exists at this moment
     path: /tmp/cloud-config/install-sdk.sh
+    permissions: '0755'
+
+  # install-ctrlx-datalayer-deb.sh
+  - content: |
+      #!/usr/bin/env bash
+
+      DEP_PACKAGE=*.deb
+
+      echo " "
+      echo "============================================"
+      echo Installing ${DEP_PACKAGE}
+      echo "============================================"
+      read -t 2
+
+      if compgen -G ${DEP_PACKAGE} > /dev/null; then
+        # Exists
+        # Install package containing required component dpkg-scanpackages 
+        sudo apt-get install dpkg-dev
+
+        # Install debian package locally so that 'apt-get install' will find it (for building sample project snaps) 
+        dpkg-scanpackages -m . > Packages
+
+        # Create full path
+        FULL_PATH=$(pwd)
+        # Add package to sources list
+        sudo sh -c "echo 'deb [trusted=yes] file:${FULL_PATH} ./' > /etc/apt/sources.list.d/ctrlx-automation.list"
+        # Use newest sources list
+        sudo apt update
+
+        # Install newest ctrlx-datalayer package
+        sudo apt-get install -y ctrlx-datalayer
+      else
+        echo "ERROR ${DEP_PACKAGE} not found!"
+      fi
+    # Create in /tmp because /home/boschrexroth doesn't exists at this moment
+    path: /tmp/cloud-config/install-ctrlx-datalayer-deb.sh
     permissions: '0755'
 
 # Proxy settings for apt                                                          #Remove-if-noproxy

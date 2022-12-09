@@ -56,7 +56,7 @@ An app can be integrated into the ctrlX CORE navigation by defining menu entries
 * Settings: To allow the navigation to your app settings
 * Home Overview: To provide a customized tile for your application
   
-![Integration](./samples-go/hello.webserver/docs/images/integration.png)
+![Integration](samples-go/hello.webserver/docs/images/integration.png)
 
 ### Declare menu items in the package-manifest
 
@@ -493,7 +493,7 @@ The following predefined folder structure applies to every certificate store:
     ```
 
 !!! hint
-    You can store your keys using a [TPM](./tpm2.md).
+    You can store your keys using a [TPM](https://en.wikipedia.org/wiki/Trusted_Platform_Module).
 
 
 ### Example package-manifest.json

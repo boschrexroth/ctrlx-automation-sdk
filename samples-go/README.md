@@ -2,10 +2,16 @@
 
 ## Find out the supported samples
 
-* [Hello Webserver](./hello.webserver/README.md)
-* [Load/Save Application Data](./appdata/README.md)
+
+### Basic Samples
+
 * [ctrlX Data Layer Client](./datalayer.client/README.md)
 * [ctrlX Data Layer Provider](./datalayer.provider/README.md)
+* [Hello Webserver](./hello.webserver/README.md)
+
+### Advanced Samples
+
+* [Load/Save Application Data](./appdata/README.md)
 * [Usage of TPM2](./tpm2.srk/README.md)
 
 ## Build a Snap

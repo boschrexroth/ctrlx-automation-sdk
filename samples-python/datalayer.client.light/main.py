@@ -30,7 +30,7 @@ import flatbuffers
 
 import ctrlxdatalayer
 from ctrlxdatalayer.variant import Result, Variant
-from comm.datalayer import SubscriptionProperties
+from comm.datalayer import SubscriptionProperties, Metadata
 
 from helper.ctrlx_datalayer_helper import get_client
 
@@ -44,7 +44,7 @@ def main():
     with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
-        datalayer_client, datalayer_client_connection_string = get_client(datalayer_system)
+        datalayer_client, datalayer_client_connection_string = get_client(datalayer_system, ip="10.0.2.2", ssl_port=8443)
         if datalayer_client is None:
             print("ERROR Connecting", datalayer_client_connection_string, "failed.")
             sys.exit(1)
@@ -62,7 +62,7 @@ def main():
             SubscriptionProperties.SubscriptionPropertiesStart(builder)
             SubscriptionProperties.SubscriptionPropertiesAddId(builder, id)
             SubscriptionProperties.SubscriptionPropertiesAddKeepaliveInterval(builder, 10000)
-            SubscriptionProperties.SubscriptionPropertiesAddPublishInterval(builder, 1000)
+            SubscriptionProperties.SubscriptionPropertiesAddPublishInterval(builder, 2000)
             SubscriptionProperties.SubscriptionPropertiesAddErrorInterval(builder, 10000)
             properties = SubscriptionProperties.SubscriptionPropertiesEnd(builder)
             builder.Finish(properties)
@@ -83,15 +83,40 @@ def main():
                 print("ERROR Adding subscription node failed:", result)
 
             while datalayer_client.is_connected():
-
-                dt_str = datetime.now().strftime("%d/%m/%Y %H:%M:%S.%f")
-
-                addr = "framework/metrics/system/memused-percent"
-                result, read_var = datalayer_client.read_sync(addr)
-                val = read_var.get_float64()
-                print("INFO read_sync: %s, %s: %f" % (dt_str, addr, val))
                
-                time.sleep(5.0)
+                dt_str = datetime.now().strftime("%H:%M:%S.%f")
+
+                # Float64 -------------------------------------------------------
+                addr = "framework/metrics/system/memused-percent"
+                result, float64_var = datalayer_client.read_sync(addr)
+                float64_value = float64_var.get_float64()
+                print("INFO %s Sync read '%s': %f" % (dt_str, addr, float64_value))
+
+                # Flatbuffers ---------------------------------------------------
+                addr = "datalayer/subscriptions/settings"
+                result, fbs_var = datalayer_client.read_sync(addr)
+                result, fbs_metadata = datalayer_client.metadata_sync(addr)
+                metadata_root = Metadata.Metadata.GetRootAsMetadata(fbs_metadata.get_flatbuffers())
+         
+                address_read_type = ""
+                for i in range(0, metadata_root.ReferencesLength()):
+                    reference = metadata_root.References(i)
+
+                    if reference is None:
+                        continue
+
+                    if reference.Type().decode('utf-8').lower() == "readtype":
+                        address_read_type = reference.TargetAddress().decode('utf-8')
+                        break
+
+                result, type_var = datalayer_client.read_sync(address_read_type)
+                # Convert to JSON
+                result, json = datalayer_system.json_converter().converter_generate_json_complex(fbs_var, type_var, -1)
+
+                fbs_value = json.get_string()
+                print("INFO %s Sync read '%s': %s" % (dt_str, addr, fbs_value))
+
+                time.sleep(2.0)
 
             print("ERROR Data Layer is NOT connected")
             print("INFO Closing subscription")
@@ -111,7 +136,7 @@ def cb_subscription_sync(result: Result, items: List[ctrlxdatalayer.subscription
     dt_str = dt.strftime("%d/%m/%Y %H:%M:%S.%f")
     address = items[0].get_address()
     val = Variant.get_float64(items[0].get_data())
-    print("INFO Subscription notification: %s, %s: %f" % (dt_str, address, val))
+    print("INFO %s Subscription notification '%s': %f" % (dt_str, address, val))
 
 
 if __name__ == '__main__':

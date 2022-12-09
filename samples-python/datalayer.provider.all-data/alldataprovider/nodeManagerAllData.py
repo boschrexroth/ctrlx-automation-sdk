@@ -20,10 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import datetime
+
 from ctrlxdatalayer.provider import Provider
 from ctrlxdatalayer.variant import Variant
 
 from alldataprovider.providerNodeAllData import ProviderNodeAllData
+
 
 class NodeManagerAllData:
 
@@ -100,7 +103,11 @@ class NodeManagerAllData:
         data.set_string("This is string")
         self.create_single_node(addressBranch, "", "string",
                                 "unit", "description", dynamic, data)
-
+        data = Variant()
+        data.set_datetime(datetime.datetime(2014, 7, 13))
+        self.create_single_node(addressBranch, "", "timestamp",
+                                "unit", "description", dynamic, data)
+                                
         # Flatbuffers - see samples-python/datalayer.provider/main.py
 
         data = Variant()
@@ -164,6 +171,10 @@ class NodeManagerAllData:
         self.create_single_node(addressBranch, "", "array-of-string",
                                 "unit", "description", dynamic, data)
 
+        data = Variant()
+        data.set_array_datetime([datetime.datetime(1970, 1, 1), datetime.datetime(2014, 7, 13)])
+        self.create_single_node(addressBranch, "", "array-of-timestamp",
+                                "unit", "description", dynamic, data)
 
     def create_single_node(self, addressBranch: str, addressType : str, name: str, unit: str, description: str, dynamic: bool, data: Variant):
         address = addressBranch + name

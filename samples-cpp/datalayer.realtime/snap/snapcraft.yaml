@@ -4,7 +4,7 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
 name: sdk-cpp-realtime
-version: "2.1.0"
+version: "2.3.0"
 grade: stable
 summary: Example app for ctrlX Data Layer realtime
 description: |
@@ -23,6 +23,8 @@ apps:
     plugs:
       - network
       - datalayer
+      - datalayer-shm
+      
     daemon: simple
     passthrough:
       restart-condition: always
@@ -34,6 +36,8 @@ apps:
     plugs:
       - network
       - datalayer
+      - datalayer-shm
+      
     daemon: simple
     passthrough:
       restart-condition: always
@@ -46,20 +50,7 @@ parts:
     source: ./generated/build
     stage-packages:
       - libzmq5
-
-  deb:
-      plugin: dump
-      source: ./tmp/ctrlx-datalayer.deb
-      source-type: deb
-      stage-packages:
-        - libzmq5
-      override-pull: |
-        mkdir -p ../../../tmp/
-        cp ../../../../../deb/ctrlx-datalayer-1.*.*.deb ../../../tmp/ctrlx-datalayer.deb
-        snapcraftctl pull
-      override-prime: |
-        rm -rf ../tmp
-        snapcraftctl prime
+      - ctrlx-datalayer
 
 # describes which interface slots are supported by defining the plugs
 plugs:
@@ -67,3 +58,7 @@ plugs:
     interface: content
     content: datalayer
     target: $SNAP_DATA/.datalayer
+
+  datalayer-shm:
+    interface: shared-memory
+    shared-memory: datalayer-shm
