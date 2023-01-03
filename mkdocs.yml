@@ -97,6 +97,7 @@ nav:
         - Service-to-Service Authentication: s2sauth.md
         - Using Flatbuffers in IEC 61131-3 Code: fbs2plc.md
         - Configure maximal Number of Open File Handles: numopenfilehandles.md
+        - Using Localizaction: localizaction.md
       - Releases:
         - Changelog: changelog.md
     - Setup:
@@ -125,10 +126,14 @@ nav:
       - Samples Shell: samples-sh/README.md
       - Samples Snap: samples-snap/README.md
       - Samples IEC 61131-3: samples-iec61131/README.md
-      - Debugging Snaps: debug.md
+    - Debugging:
+      - Debugging Overview: debug-overview.md
+      - Remote Debugging C++: remote-debug-cpp.md
+      - Remote Debugging Python: remote-debug-python.md
     - References: 
         - Overview: references.md
         - Api Reference:
+          - c/c++: https://apps.boschrexroth.com/docs/ctrlx/comm.datalayer/html/index.html
           - c#: https://apps.boschrexroth.com/docs/ctrlx/csharp/html/index.html
           - python: https://apps.boschrexroth.com/docs/ctrlx/python/html/index.html
         - Bundle Reference:
