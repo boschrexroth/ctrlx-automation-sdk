@@ -14,20 +14,25 @@
       
         <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/remote-debug-cpp.html">
       
+      
+        <link rel="prev" href="debug-overview.html">
+      
+      
+        <link rel="next" href="remote-debug-python.html">
+      
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.1">
     
     
       
-        <title>Remote Debugging Snaps C++ - Software Development Kit</title>
+        <title>Remote Debugging C++ - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.975780f9.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.3bd4f189.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.2505c338.min.css">
-        
       
       
   
@@ -148,7 +153,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Remote Debugging Snaps C++
+              Remote Debugging C++
             
           </span>
         </div>
@@ -157,8 +162,6 @@
     
       <form class="md-header__option" data-md-component="palette">
         
-          
-          
           
           <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
@@ -286,6 +289,24 @@
     <li class="md-tabs__item">
       <a href="samples.html" class="md-tabs__link">
         Samples
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="debug-overview.html" class="md-tabs__link md-tabs__link--active">
+        Debugging
       </a>
     </li>
   
@@ -554,6 +575,20 @@
     <li class="md-nav__item">
       <a href="numopenfilehandles.html" class="md-nav__link">
         Configure maximal Number of Open File Handles
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="localizaction.html" class="md-nav__link">
+        Using Localizaction
       </a>
     </li>
   
@@ -1041,14 +1076,262 @@
 
             
           
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Debugging
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Debugging" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Debugging
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
             
               
   
   
   
     <li class="md-nav__item">
-      <a href="debug.md" class="md-nav__link">
-        Debugging Snaps
+      <a href="debug-overview.html" class="md-nav__link">
+        Debugging Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Remote Debugging C++
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="remote-debug-cpp.html" class="md-nav__link md-nav__link--active">
+        Remote Debugging C++
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connecting-ctrlx-core-devices" class="md-nav__link">
+    Connecting ctrlX CORE devices
+  </a>
+  
+    <nav class="md-nav" aria-label="Connecting ctrlX CORE devices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ip-address-of-a-ctrlx-core" class="md-nav__link">
+    IP Address of a ctrlX CORE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-up-ssh-public-key-authentication" class="md-nav__link">
+    Set up SSH Public Key Authentication
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remote-debugging-c" class="md-nav__link">
+    Remote Debugging C++
+  </a>
+  
+    <nav class="md-nav" aria-label="Remote Debugging C++">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview_1" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites-for-the-ctrlx" class="md-nav__link">
+    Prerequisites for the ctrlX
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites-for-the-linux-build-environment" class="md-nav__link">
+    Prerequisites for the Linux Build Environment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting Started
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting Started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#raising-sigstop-in-the-c-code" class="md-nav__link">
+    Raising SIGSTOP in the C++ Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-the-debug-snap" class="md-nav__link">
+    Build the Debug Snap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-the-debug-snap" class="md-nav__link">
+    Install the Debug Snap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-remote-debugging-in-visualstudio-code" class="md-nav__link">
+    Configuring Remote Debugging in VisualStudio Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#starting-the-application-with-visualstudio-code" class="md-nav__link">
+    Starting the Application with VisualStudio Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-snap-debugging-with-the-visual-studio-code" class="md-nav__link">
+    Start Snap Debugging with the Visual Studio Code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#screenshots" class="md-nav__link">
+    Screenshots
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="remote-debug-python.html" class="md-nav__link">
+        Remote Debugging Python
       </a>
     </li>
   
@@ -1072,18 +1355,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5">
+        <label class="md-nav__link" for="__nav_6">
           References
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="References" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           References
         </label>
@@ -1114,22 +1397,36 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2" type="checkbox" id="__nav_6_2" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_2">
+        <label class="md-nav__link" for="__nav_6_2">
           Api Reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Api Reference" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_2">
+        <label class="md-nav__title" for="__nav_6_2">
           <span class="md-nav__icon md-icon"></span>
           Api Reference
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://apps.boschrexroth.com/docs/ctrlx/comm.datalayer/html/index.html" class="md-nav__link">
+        c/c++
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -1177,18 +1474,18 @@
     <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_3" type="checkbox" id="__nav_6_3" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_3">
+        <label class="md-nav__link" for="__nav_6_3">
           Bundle Reference
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Bundle Reference" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_3">
+        <label class="md-nav__title" for="__nav_6_3">
           <span class="md-nav__icon md-icon"></span>
           Bundle Reference
         </label>
@@ -1454,10 +1751,9 @@
                 
                   
 
-  <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/edit/master/doc/remote-debug-cpp.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+  
+  
+
 
 
 <h1 id="remote-debugging-snaps-c">Remote Debugging Snaps C++<a class="headerlink" href="#remote-debugging-snaps-c" title="Permanent link">&para;</a></h1>
@@ -1534,9 +1830,9 @@ From the point of view of the virtual machine this is the IP address of the host
 <h4 id="raising-sigstop-in-the-c-code">Raising SIGSTOP in the C++ Code<a class="headerlink" href="#raising-sigstop-in-the-c-code" title="Permanent link">&para;</a></h4>
 <p>In main.cpp at the beginning of the 'int main()' function the code for raising the SIGSTOP signal is placed. The code is only compiled in debug mode:</p>
 <div class="codehilite"><pre><span></span><code><span class="cp">#ifdef MY_DEBUG</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Starting &#39;raise(SIGSTOP)&#39;, waiting for debugger..&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">raise</span><span class="p">(</span><span class="n">SIGSTOP</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Debugger connected, continuing program...&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Starting &#39;raise(SIGSTOP)&#39;, waiting for debugger..&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">raise</span><span class="p">(</span><span class="n">SIGSTOP</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Debugger connected, continuing program...&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="cp">#endif</span>
 </code></pre></div>
 
@@ -1553,34 +1849,34 @@ From the point of view of the virtual machine this is the IP address of the host
 <p>From Visual Studio Code we want to start the application with the snap run command. </p>
 <p>For this the file <strong>tasks.json</strong> contains the task <code>Launch Remote GDB Server</code></p>
 <div class="codehilite"><pre><span></span><code>{
-  &quot;label&quot;: &quot;Launch Remote GDB Server&quot;,
-  &quot;type&quot;: &quot;shell&quot;,
-  &quot;problemMatcher&quot;: &quot;<span class="nv">$gcc</span>&quot;,
-  &quot;command&quot;: &quot;ssh <span class="cp">${</span><span class="nb">input</span><span class="p">:</span><span class="n">Root</span><span class="o">-</span><span class="n">User</span><span class="cp">}</span>@<span class="cp">${</span><span class="nb">input</span><span class="p">:</span><span class="n">Target</span><span class="o">-</span><span class="n">IP</span><span class="cp">}</span>  \&quot;sudo snap run --experimental-gdbserver=:12345 registernode.registerNode\&quot; &quot;,
+<span class="w">  </span>&quot;label&quot;:<span class="w"> </span>&quot;Launch<span class="w"> </span>Remote<span class="w"> </span>GDB<span class="w"> </span>Server&quot;,
+<span class="w">  </span>&quot;type&quot;:<span class="w"> </span>&quot;shell&quot;,
+<span class="w">  </span>&quot;problemMatcher&quot;:<span class="w"> </span>&quot;<span class="nv">$gcc</span>&quot;,
+<span class="w">  </span>&quot;command&quot;:<span class="w"> </span>&quot;ssh<span class="w"> </span><span class="cp">${</span><span class="nb">input</span><span class="p">:</span><span class="n">Root</span><span class="o">-</span><span class="n">User</span><span class="cp">}</span>@<span class="cp">${</span><span class="nb">input</span><span class="p">:</span><span class="n">Target</span><span class="o">-</span><span class="n">IP</span><span class="cp">}</span><span class="w">  </span>\&quot;sudo<span class="w"> </span>snap<span class="w"> </span>run<span class="w"> </span>--experimental-gdbserver=:12345<span class="w"> </span>registernode.registerNode\&quot;<span class="w"> </span>&quot;,
 }
 </code></pre></div>
 
 <p>The tag 'command' starts the application under the gdb server via ssh.</p>
 <p>As second action we want to start the gdb debugger in remote mode so that he connects to the remote gdb server. Therefor in <strong>launch.json</strong> the configuration set <code>aarch64 ctrlX (remote)</code> is stored.</p>
 <div class="codehilite"><pre><span></span><code>{
-    &quot;name&quot;: &quot;aarch64 ctrlX (remote)&quot;,
-    &quot;type&quot;: &quot;cppdbg&quot;,
-    &quot;request&quot;: &quot;launch&quot;,
-    &quot;program&quot;: &quot;<span class="cp">${</span><span class="n">workspaceFolder</span><span class="cp">}</span>/generated/ubuntu20-gcc-aarch64/Debug/registerNode&quot;,
-    &quot;cwd&quot;: &quot;<span class="cp">${</span><span class="n">workspaceFolder</span><span class="cp">}</span>&quot;,
-    &quot;miDebuggerPath&quot;: &quot;/usr/bin/gdb-multiarch&quot;,
-    &quot;miDebuggerServerAddress&quot;: &quot;192.168.1.1:12345&quot;,
-    &quot;stopAtEntry&quot;: true,
-    &quot;targetArchitecture&quot;: &quot;arm64&quot;,
-    &quot;externalConsole&quot;: false,
-    &quot;MIMode&quot;: &quot;gdb&quot;,
-    &quot;setupCommands&quot;: [
-        {
-            &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,
-            &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
-            &quot;ignoreFailures&quot;: true
-        },
-    ]
+<span class="w">    </span>&quot;name&quot;:<span class="w"> </span>&quot;aarch64<span class="w"> </span>ctrlX<span class="w"> </span>(remote)&quot;,
+<span class="w">    </span>&quot;type&quot;:<span class="w"> </span>&quot;cppdbg&quot;,
+<span class="w">    </span>&quot;request&quot;:<span class="w"> </span>&quot;launch&quot;,
+<span class="w">    </span>&quot;program&quot;:<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">workspaceFolder</span><span class="cp">}</span>/generated/ubuntu20-gcc-aarch64/Debug/registerNode&quot;,
+<span class="w">    </span>&quot;cwd&quot;:<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">workspaceFolder</span><span class="cp">}</span>&quot;,
+<span class="w">    </span>&quot;miDebuggerPath&quot;:<span class="w"> </span>&quot;/usr/bin/gdb-multiarch&quot;,
+<span class="w">    </span>&quot;miDebuggerServerAddress&quot;:<span class="w"> </span>&quot;192.168.1.1:12345&quot;,
+<span class="w">    </span>&quot;stopAtEntry&quot;:<span class="w"> </span>true,
+<span class="w">    </span>&quot;targetArchitecture&quot;:<span class="w"> </span>&quot;arm64&quot;,
+<span class="w">    </span>&quot;externalConsole&quot;:<span class="w"> </span>false,
+<span class="w">    </span>&quot;MIMode&quot;:<span class="w"> </span>&quot;gdb&quot;,
+<span class="w">    </span>&quot;setupCommands&quot;:<span class="w"> </span>[
+<span class="w">        </span>{
+<span class="w">            </span>&quot;description&quot;:<span class="w"> </span>&quot;Enable<span class="w"> </span>pretty-printing<span class="w"> </span>for<span class="w"> </span>gdb&quot;,
+<span class="w">            </span>&quot;text&quot;:<span class="w"> </span>&quot;-enable-pretty-printing&quot;,
+<span class="w">            </span>&quot;ignoreFailures&quot;:<span class="w"> </span>true
+<span class="w">        </span>},
+<span class="w">    </span>]
 }
 </code></pre></div>
 
@@ -1588,14 +1884,14 @@ From the point of view of the virtual machine this is the IP address of the host
 <h4 id="starting-the-application-with-visualstudio-code">Starting the Application with VisualStudio Code<a class="headerlink" href="#starting-the-application-with-visualstudio-code" title="Permanent link">&para;</a></h4>
 <p>Select Main menu item Terminal --&gt; Run Task... --&gt; Launch GDB-Server</p>
 <p>In the Terminal window a wellcome message will appear:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="s2">&quot;snap run --gdbserver&quot;</span><span class="o">.</span><span class="w"></span>
-<span class="n">You</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">application</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">run</span><span class="o">.</span><span class="w"></span>
-<span class="n">Please</span><span class="w"> </span><span class="n">open</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">different</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">run</span><span class="p">:</span><span class="w"></span>
+<div class="codehilite"><pre><span></span><code><span class="n">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="s2">&quot;snap run --gdbserver&quot;</span><span class="o">.</span>
+<span class="n">You</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">application</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">run</span><span class="o">.</span>
+<span class="n">Please</span><span class="w"> </span><span class="n">open</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">different</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">run</span><span class="p">:</span>
 
-<span class="n">gdb</span><span class="w"> </span><span class="o">-</span><span class="n">ex</span><span class="o">=</span><span class="s2">&quot;target remote :12345&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ex</span><span class="o">=</span><span class="k">continue</span><span class="w"> </span><span class="o">-</span><span class="n">ex</span><span class="o">=</span><span class="s2">&quot;signal SIGCONT&quot;</span><span class="w"></span>
-<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="w"></span>
+<span class="n">gdb</span><span class="w"> </span><span class="o">-</span><span class="n">ex</span><span class="o">=</span><span class="s2">&quot;target remote :12345&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ex</span><span class="o">=</span><span class="k">continue</span><span class="w"> </span><span class="o">-</span><span class="n">ex</span><span class="o">=</span><span class="s2">&quot;signal SIGCONT&quot;</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span>
 
-<span class="ow">or</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">favorite</span><span class="w"> </span><span class="n">gdb</span><span class="w"> </span><span class="n">frontend</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">connect</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="p">:</span><span class="mi">12345</span><span class="w"></span>
+<span class="ow">or</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">favorite</span><span class="w"> </span><span class="n">gdb</span><span class="w"> </span><span class="n">frontend</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">connect</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="p">:</span><span class="mi">12345</span>
 </code></pre></div>
 
 <p>The gdb server has started the application which stops because of SIGSTOP. We are ready to connect with the gdb debugger.</p>
@@ -1684,12 +1980,11 @@ From the point of view of the virtual machine this is the IP address of the host
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections"], "search": "assets/javascripts/workers/search.12658920.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      <script src="assets/javascripts/bundle.5cf534bf.min.js"></script>
       
-    
     
   </body>
 </html>
