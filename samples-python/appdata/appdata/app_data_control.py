@@ -62,12 +62,12 @@ class AppDataControl():
         }
 
     def load(self):
-        print("INFO Starting load routine")
+        print("INFO Starting load routine", flush=True)
         path = self.storage_file
 
         # Check if storagefile exist, if not reset with inital data
         if os.path.isfile(path) is False:
-            print("INFO No application file exist")
+            print("INFO No application file exist", flush=True)
             return AppDataControl.set_default(self)
 
         # Open JSON AppData file
@@ -82,19 +82,19 @@ class AppDataControl():
 
             if result is True:
                 print("INFO Loaded application data from file",
-                      path, "successfully")
+                      path, "successfully", flush=True)
                 return True
             else:
                 print("ERROR Loading application data from file",
-                      path, "failed! Data type missmatch")
+                      path, "failed! Data type missmatch", flush=True)
                 return False
         else:
             print("ERROR Loading application data from file",
-                  path, "failed! Data type is not dict")
+                  path, "failed! Data type is not dict", flush=True)
             return False
 
     def save(self):
-        print("INFO Starting save routine")
+        print("INFO Starting save routine", flush=True)
 
         # Check if storage location exists
         result = AppDataControl.ensure_storage_location(self)
@@ -105,10 +105,10 @@ class AppDataControl():
             with open(path, 'w') as filewrite:
                 json.dump(AppDataControl.get_appdata(self), filewrite)
 
-            print("INFO Saved application data to file: '", path)
+            print("INFO Saved application data to file: '", path, flush=True)
             return True
 
-        print("ERROR Saving application data not possible")
+        print("ERROR Saving application data not possible", flush=True)
         return False
 
     def set_default(self):
@@ -123,7 +123,7 @@ class AppDataControl():
 
         result = AppDataControl.set_appdata(self, data)
 
-        print("INFO Created default application file")
+        print("INFO Created default application file", flush=True)
         return AppDataControl.save(self)
 
     def ensure_storage_location(self):
@@ -134,21 +134,21 @@ class AppDataControl():
         if 'SNAP' in os.environ:
             solutions_path = os.path.join(self.common_path, "solutions")
             for i in range(4):
-                print("INFO Check if content interface is mounted")
+                print("INFO Check if content interface is mounted", flush=True)
                 if os.path.isdir(solutions_path) is False:
-                    print("ERROR Content interface is not mounted: Attempt", i+1)
+                    print("ERROR Content interface is not mounted: Attempt", i+1, flush=True)
                     time.sleep(1.0)
                     if i >= 4:
                         return False
                 else:
-                    print("INFO Content interface is mounted")
+                    print("INFO Content interface is mounted", flush=True)
 
         if os.path.isdir(path) is False:
             try:
-                print("INFO Creating storage location: ", path)
+                print("INFO Creating storage location: ", path, flush=True)
                 os.makedirs(path)
             except OSError:
-                print("ERROR Creating storage location", path, "failed!")
+                print("ERROR Creating storage location", path, "failed!", flush=True)
                 return False
 
         return True
@@ -158,7 +158,7 @@ class AppDataControl():
         if self.appdata.keys() <= data.keys():
             self.appdata = data
             return True
-        print("ERROR Setting application data failed! Present data is not a subset of new data")
+        print("ERROR Setting application data failed! Present data is not a subset of new data", flush=True)
         return False
 
     def get_appdata(self):

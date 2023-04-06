@@ -27,7 +27,7 @@
 from socketserver import UnixStreamServer
 
 
-class UnixSocketHttpServer(UnixStreamServer):
+class UnixSocketServer(UnixStreamServer):
 
     def get_request(self):
         request, _ = super().get_request()

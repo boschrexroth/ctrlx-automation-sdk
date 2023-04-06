@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2021 Bosch Rexroth AG
+# Copyright (c) 2021-2022 Bosch Rexroth AG
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ import logging
 from systemd.journal import JournaldLogHandler
 
 def run():
-    print("Simple Snap for insert different loglevels with Python")
+    print("Simple snap in Python using logging with different log levels", flush=True)
         
     log = logging.getLogger()
     log.setLevel(logging.DEBUG)

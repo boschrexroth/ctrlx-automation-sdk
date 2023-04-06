@@ -1,4 +1,4 @@
-// Copyright (c) 2021-2022 Bosch Rexroth AG
+// Copyright (c) 2021-2023 Bosch Rexroth AG
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the 'Software'), to deal
@@ -18,8 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// MetadataUtils
-import * as MetadataUtils from 'ctrlx-datalayer/dist/metadata-utils';
+// DatalayerSystem
 import DatalayerSystem from 'ctrlx-datalayer/dist/datalayersystem';
 
 // Flatbuffers
@@ -27,7 +26,11 @@ import * as flatbuffers from 'flatbuffers';
 import { InertialValue } from './sample/schema/inertial-value';
 
 import DataType from './datatype';
-import DataTypes from './datatypes';
+import DATA_TYPES from './datatypes';
+import DatalayerSystem from 'ctrlx-datalayer/dist/datalayersystem';
+
+// Utils
+import * as MetadataUtils from 'ctrlx-datalayer/dist/metadata-utils';
 
 /**
  * The interface INode
@@ -186,81 +189,81 @@ class Node implements INode {
      */
     public incrementValue(now: Date) {
         switch (this.dataType) {
-            case DataTypes.bool8:
+            case DATA_TYPES.bool8:
                 this.value = !this.value;
                 break;
 
-            case DataTypes.int8:
-            case DataTypes.uint8:
-            case DataTypes.int16:
-            case DataTypes.uint16:
-            case DataTypes.int32:
-            case DataTypes.uint32:
+            case DATA_TYPES.int8:
+            case DATA_TYPES.uint8:
+            case DATA_TYPES.int16:
+            case DATA_TYPES.uint16:
+            case DATA_TYPES.int32:
+            case DATA_TYPES.uint32:
                 this.value += 1;
                 break;
 
-            case DataTypes.int64:
-            case DataTypes.uint64:
+            case DATA_TYPES.int64:
+            case DATA_TYPES.uint64:
                 this.value += 1n;
                 break;
 
-            case DataTypes.float:
-            case DataTypes.double:
+            case DATA_TYPES.float:
+            case DATA_TYPES.double:
                 this.value += 0.1;
                 break;
 
-            case DataTypes.string:
+            case DATA_TYPES.string:
                 this.value = this.incrementStringValue(this.value, '_');
                 break;
 
-            case DataTypes.timestamp:
+            case DATA_TYPES.timestamp:
                 this.value = now;
                 break;
 
-            case DataTypes.arbool8:
-                for (var i = 0; i < this.value.length; ++i) {
+            case DATA_TYPES.arbool8:
+                for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = !this.value[i];
                 }
                 break;
 
-            case DataTypes.arint8:
-            case DataTypes.aruint8:
-            case DataTypes.arint16:
-            case DataTypes.aruint16:
-            case DataTypes.arint32:
-            case DataTypes.aruint32:
+            case DATA_TYPES.arint8:
+            case DATA_TYPES.aruint8:
+            case DATA_TYPES.arint16:
+            case DATA_TYPES.aruint16:
+            case DATA_TYPES.arint32:
+            case DATA_TYPES.aruint32:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = this.value[i] + 1;
                 }
                 break;
 
-            case DataTypes.arfloat:
-            case DataTypes.ardouble:
+            case DATA_TYPES.arfloat:
+            case DATA_TYPES.ardouble:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = this.value[i] + 0.1;
                 }
                 break;
 
-            case DataTypes.arint64:
-            case DataTypes.aruint64:
+            case DATA_TYPES.arint64:
+            case DATA_TYPES.aruint64:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = this.value[i] + 1n;
                 }
                 break;
 
-            case DataTypes.arstring:
+            case DATA_TYPES.arstring:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = this.incrementStringValue(this.value[i], '_');
                 }
                 break;
 
-            case DataTypes.artimestamp:
+            case DATA_TYPES.artimestamp:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = now;
                 }
                 break;
 
-            case DataTypes.inertialValue:
+            case DATA_TYPES.inertialValue:
                 const oldInertialValue = InertialValue.getRootAsInertialValue(new flatbuffers.ByteBuffer(this.value))
                 const builder = new flatbuffers.Builder(DatalayerSystem.defaultFlatbuffersInitialSize);
                 const offset = InertialValue.createInertialValue(builder,
@@ -278,10 +281,10 @@ class Node implements INode {
      * @returns 
      */
     private incrementStringValue(text: string, separator: string): string {
-        var separatorIndex = text.indexOf(separator);
-        var prefix = text.substring(0, separatorIndex);
-        var postfix = text.substring(separatorIndex + 1);
-        var number = Number.parseInt(postfix);
+        const separatorIndex = text.indexOf(separator);
+        const prefix = text.substring(0, separatorIndex);
+        const postfix = text.substring(separatorIndex + 1);
+        let number = Number.parseInt(postfix);
         return `${prefix}${separator}${++number}`;
     }
 }

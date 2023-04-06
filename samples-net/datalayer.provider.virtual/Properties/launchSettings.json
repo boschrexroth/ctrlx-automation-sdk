@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "datalayer.provider.virtual": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

@@ -56,17 +56,16 @@ def main():
         datalayer_system.start(False)
 
         # ip="10.0.2.2", ssl_port=8443: ctrlX virtual with port forwarding and default port mapping
-        provider, connection_string = get_provider(
-            datalayer_system, ip="10.0.2.2", ssl_port=8443)
+        provider, connection_string = get_provider(datalayer_system)
         if provider is None:
-            print("ERROR Connecting", connection_string, "failed.")
+            print("ERROR Connecting", connection_string, "failed.", flush=True)
             sys.exit(1)
 
         with provider:  # provider.close() is called automatically when leaving with... block
 
             result = provider.start()
             if result != Result.OK:
-                print("ERROR Starting Data Layer Provider failed with:", result)
+                print("ERROR Starting Data Layer Provider failed with:", result, flush=True)
                 return
 
             # Path to compiled files
@@ -87,23 +86,23 @@ def main():
             result = provider.register_type(type_sampleSchema_inertialValue, bfbs_path)
             if result != Result.OK:
                 print("WARNING Registering",
-                      type_sampleSchema_inertialValue, "failed with:", result)
+                      type_sampleSchema_inertialValue, "failed with:", result, flush=True)
 
             # Register Metadata Database
             result = provider.register_type("datalayer", mddb_path)
             if result != Result.OK:
                 print("WARNING Registering",
-                      mddb_path, "failed with:", result)
+                      mddb_path, "failed with:", result, flush=True)
 
             # Create nodes
             provider_node_fbs = provide_fbs(provider, "inertial-value")
             provider_node_str = provide_string(provider, "string-value")
 
-            print("INFO Running endless loop...")
+            print("INFO Running endless loop...", flush=True)
             while provider.is_connected():
                 time.sleep(1.0)  # Seconds
 
-            print("ERROR Data Layer Provider is disconnected")
+            print("ERROR Data Layer Provider is disconnected", flush=True)
 
             provider_node_fbs.unregister_node()
             del provider_node_fbs
@@ -111,17 +110,17 @@ def main():
             provider_node_str.unregister_node()
             del provider_node_str
 
-            print("Unregistering", type_sampleSchema_inertialValue, end=" ")
+            print("Unregistering", type_sampleSchema_inertialValue, end=" ", flush=True)
             result = provider.unregister_type(type_sampleSchema_inertialValue)
-            print(result)
+            print(result, flush=True)
 
-            print("Stopping Data Layer provider:", end=" ")
+            print("Stopping Data Layer provider:", end=" ", flush=True)
             result = provider.stop()
-            print(result)
+            print(result, flush=True)
 
         # Attention: Doesn't return if any provider or client instance is still running
         stop_ok = datalayer_system.stop(False)
-        print("System Stop", stop_ok)
+        print("System Stop", stop_ok, flush=True)
 
 
 def provide_fbs(provider: ctrlxdatalayer.provider, name: str):
@@ -141,24 +140,24 @@ def provide_fbs(provider: ctrlxdatalayer.provider, name: str):
     variantFlatbuffers = Variant()
     result = variantFlatbuffers.set_flatbuffers(builder.Output())
     if result != ctrlxdatalayer.variant.Result.OK:
-        print("ERROR creating variant flatbuffers failed with:", result)
+        print("ERROR creating variant flatbuffers failed with:", result, flush=True)
         return
 
     # Create and register flatbuffers provider node
-    print("Creating flatbuffers provider node " + address_base + name)
+    print("Creating flatbuffers provider node " + address_base + name, flush=True)
     provider_node_fbs = MyProviderNode(
         provider, address_base + name,  variantFlatbuffers)
     result = provider_node_fbs.register_node()
     if result != ctrlxdatalayer.variant.Result.OK:
         print("ERROR Registering node " + address_base +
-              name + " failed with:", result)
+              name + " failed with:", result, flush=True)
 
     return provider_node_fbs
 
 
 def provide_string(provider: ctrlxdatalayer.provider, name: str):
     # Create and register simple string provider node
-    print("Creating string  provider node " + address_base + name)
+    print("Creating string  provider node " + address_base + name, flush=True)
     variantString = Variant()
     variantString.set_string("myString")
     provider_node_str = MyProviderNode(
@@ -166,7 +165,7 @@ def provide_string(provider: ctrlxdatalayer.provider, name: str):
     result = provider_node_str.register_node()
     if result != ctrlxdatalayer.variant.Result.OK:
         print("ERROR Registering node " + address_base +
-              name + " failed with:", result)
+              name + " failed with:", result, flush=True)
 
     return provider_node_str
 

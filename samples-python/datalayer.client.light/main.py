@@ -39,20 +39,20 @@ def main():
     print()
     print("=================================================================")
     print("sdk-py-datalayer-client - A ctrlX Data Layer Client App in Python")
-    print("=================================================================")
+    print("=================================================================", flush=True)
 
     with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
         datalayer_client, datalayer_client_connection_string = get_client(datalayer_system, ip="10.0.2.2", ssl_port=8443)
         if datalayer_client is None:
-            print("ERROR Connecting", datalayer_client_connection_string, "failed.")
+            print("ERROR Connecting", datalayer_client_connection_string, "failed.", flush=True)
             sys.exit(1)
 
         with datalayer_client: # datalayer_client is closed automatically when leaving with block
 
             if datalayer_client.is_connected() is False:
-                print("ERROR Data Layer is NOT connected:", datalayer_client_connection_string)
+                print("ERROR Data Layer is NOT connected:", datalayer_client_connection_string, flush=True)
                 sys.exit(2)
 
 
@@ -70,17 +70,17 @@ def main():
             sub_prop.set_flatbuffers(builder.Output())
 
             # Create subscription
-            print("INFO Creating subscription")
+            print("INFO Creating subscription", flush=True)
             result, sub = datalayer_client.create_subscription_sync(sub_prop, cb_subscription_sync)
             if result is not Result.OK:
-                print("ERROR Creating subscription failed:", result)
+                print("ERROR Creating subscription failed:", result, flush=True)
 
             # Add subscription node
-            print("INFO Add subscription node")
+            print("INFO Add subscription node", flush=True)
             sub_adr = "framework/metrics/system/cpu-utilisation-percent"
             result = sub.subscribe(sub_adr)   
             if result is not Result.OK:
-                print("ERROR Adding subscription node failed:", result)
+                print("ERROR Adding subscription node failed:", result, flush=True)
 
             while datalayer_client.is_connected():
                
@@ -90,7 +90,7 @@ def main():
                 addr = "framework/metrics/system/memused-percent"
                 result, float64_var = datalayer_client.read_sync(addr)
                 float64_value = float64_var.get_float64()
-                print("INFO %s Sync read '%s': %f" % (dt_str, addr, float64_value))
+                print("INFO %s Sync read '%s': %f" % (dt_str, addr, float64_value), flush=True)
 
                 # Flatbuffers ---------------------------------------------------
                 addr = "datalayer/subscriptions/settings"
@@ -114,29 +114,29 @@ def main():
                 result, json = datalayer_system.json_converter().converter_generate_json_complex(fbs_var, type_var, -1)
 
                 fbs_value = json.get_string()
-                print("INFO %s Sync read '%s': %s" % (dt_str, addr, fbs_value))
+                print("INFO %s Sync read '%s': %s" % (dt_str, addr, fbs_value), flush=True)
 
                 time.sleep(2.0)
 
             print("ERROR Data Layer is NOT connected")
-            print("INFO Closing subscription")
+            print("INFO Closing subscription", flush=True)
             sub.close()
 
         stop_ok = datalayer_system.stop(False)  # Attention: Doesn't return if any provider or client instance is still running
-        print("System Stop", stop_ok)
+        print("System Stop", stop_ok, flush=True)
 
 
 # Response notify callback function
 def cb_subscription_sync(result: Result, items: List[ctrlxdatalayer.subscription.NotifyItem], userdata):
     if result is not Result.OK:
-        print("ERROR notify subscription:", result)
+        print("ERROR notify subscription:", result, flush=True)
         return
     timestamp = items[0].get_timestamp()
     dt = datetime.fromtimestamp(timestamp/10000000-11644473600) # convert ldap to unix timestamp
     dt_str = dt.strftime("%d/%m/%Y %H:%M:%S.%f")
     address = items[0].get_address()
     val = Variant.get_float64(items[0].get_data())
-    print("INFO %s Subscription notification '%s': %f" % (dt_str, address, val))
+    print("INFO %s Subscription notification '%s': %f" % (dt_str, address, val), flush=True)
 
 
 if __name__ == '__main__':

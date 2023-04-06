@@ -1,10 +1,11 @@
 **Copyright**
-© Bosch Rexroth AG 2021
+© Bosch Rexroth AG 2023
 This document, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch Rexroth AG. It may not be reproduced or given to third parties without our consent.
 
 **Liability** The information in this document is intended for product description purposes only and shall not be deemed to be a guaranteed characteristic, unless expressly stipulated by contract. All rights are reserved with respect to the content of this documentation and the availability of the product.
 
 ### **Table of content**
+
 [1 Introduction](#introduction)
 
 [2 Get access to the Solutions storage](#access)
@@ -19,11 +20,10 @@ This document, as well as the data, specifications and other information set for
 
 ## 1 Introduction<a name="introduction"></a>
 
-This How-To shows how to integrate an App into the common ctrlX persistence and storage mechanisms.
-Persistence handling is done by the Solutions App (app.solutions), which is an essential part of any ctrlX CORE device. It provides a central storage for other apps that need to persist their app data. App data is saved to the storage or loaded from the storage on demand (via app editors, the "Manage app data" UI, or the Solutions REST API).
+This document shows how to integrate an app into the common ctrlX persistence and storage mechanisms.
+Persistence handling is done by the Solutions app (app.solutions), which is an essential part of any ctrlX CORE device. It provides a central storage for other apps that need to persist their app data. App data is saved to the storage or loaded from the storage on demand (via app editors, the "Manage app data" UI, or the Solutions REST API).
 
 ![image](images/How-To-Persist-app-data-Fig01_Overview.png)
-
 
 The diagram shows that the storage provided by the Solutions app is structured into two conceptual locations:
 
@@ -33,23 +33,23 @@ The diagram shows that the storage provided by the Solutions app is structured i
 The responsibilities of the Solutions app and Apps that persist their data in the Solutions storage are allocated as follows:
 
 **Solutions (app.solutions):**
+
 - Provide file storage and make appdata directory available via the activeConfiguration symlink
 - Trigger and coordinate "save" and "load" operations and collect results
 - Manage the archived configurations (Web UI, REST API)
 
 **Apps:**
+
 - Participate in loading and saving
 - Use and update the files in their appdata directories
 - Must not change the contents of archived configurations
 
-
-
 ## 2 Get access to the Solutions storage<a name="access"></a>
-
 
 The Solutions app exports the base directory of the storage location as a slot using a content interface. Your app must provide a plug that connects to the slot so that the $SNAP_COMMON/solutions directory becomes visible in your file system:
 
 **snapcraft.yaml:**
+
 ```yaml
 plugs:
   active-solution:
@@ -57,9 +57,8 @@ plugs:
     content: solutions
     target: $SNAP_COMMON/solutions
 ```
+
 The `$SNAP_COMMON/solution` directory contains an `activeConfiguration` symlink. Use this symlink to get the path to the appdata directory which contains the currently active app data: `$SNAP_COMMON/solutions/activeConfiguration` → `$SNAP_COMMON/solutions/DefaultSolution/configurations/appdata/`
-
-
 
 >**Note:**
 >
@@ -79,14 +78,13 @@ The `$SNAP_COMMON/solution` directory contains an `activeConfiguration` symlink.
 >- Check existence of the folder `$SNAP_COMMON/solutions/activeConfiguration` in your application logic
 >
 >In a development environment, you can check the connection of the **active-solution interface** by
+>
 >- calling *snap connections* and checking whether there is an entry with > **interface content[solutions]** for the **plug \<your app name\>:active-solution** and **slot rexroth-solutions:active-solution**
 >- running a shell in the context of your app and checking the content of the folder `$SNAP_COMMON/solutions` which must contain a folder **DefaultSolution** and the two symlinks **activeSolution** and **activeConfiguration**. The shell can be started with *snap run --shell \<your app name\>.\<your app command\>*
 
-
-
 ## 3 Specify your app directories<a name="specify"></a>
 
-Within the appdata root directory, define a sub-directory with a unique name as your base directory. We recommend to use your app's name in lowercase letters to avoid conflicts with other apps and allow users to easily identify your data in the file system. The screenshot shows an example with the base directories of the Motion and PLC apps, among others.
+Within the appdata root directory, define a subdirectory with a unique name as your base directory. We recommend to use your app's name in lowercase letters to avoid conflicts with other apps and allow users to easily identify your data in the file system. The screenshot shows an example with the base directories of the Motion and PLC apps, among others.
 
 ![image](images/How-To-Persist-app-data-Fig02_configuation-screenshot.png)
 
@@ -108,10 +106,25 @@ You should also explicitly declare ownership of your app directories in your pac
 ```
 
 - **name** (required): The name or path of the app directory
+
 - **description**: The title to display in the "Manage app data" content view (should be consistent with title used e.g. in sidebar menu); if omitted or empty, the app directory does not appear in the content view
+
 - **icon**: The app icon to display in the "Manage app data" content view (should be consistent with icon used e.g. in sidebar menu); if omitted or empty, no icon is displayed in the content view
-- **copyOnLoad**: Set “true” to instruct the Solutions app to copy the data from your app directory in the archive to the active configuration on load; omit (or set "false") to enable custom "smart loading"; see section "From copying to smart loading" for details
-- **writeProtected**: By default, app directories and their contents can be changed by users with "Manage configurations" permissions (e.g., via WebDAV). Set "true" for your root app directory to protect your app directory and its sub-directories in the active configuration against changes by users; omit (or set "false") for specific sub-directories to provide write-access to those directories. Since XCR-V-0112.
+
+- **copyOnLoad** (default: *false*): Set *true* to instruct the Solutions app to copy the data from your app directory 
+in the archive to the active configuration on load; omit (or set *false*) to enable custom "smart loading"; see section
+"From copying to smart loading" for details
+
+  > Since XCR-V-0120, app directories with active copyOnLoad are only copied if the corresponding app is installed
+  > and enabled on loading.
+
+- **writeProtected** (default: *true*): App directories and their contents in the active configuration are protected
+against changes through the WebDAV interface and the Solutions UI by default. Set *false* to allow changes for a
+directory and its subdirectories, which requires that your app can detect and handle potential changes appropriately.
+Since XCR-V-0112.
+  
+  > Since XCR-V-0120, the default value of the writeProtected attribute is *true* in order to protect app directories
+  > against unintended changes.
 
 Configuration contents should generally have the following properties:
 
@@ -121,14 +134,15 @@ Configuration contents should generally have the following properties:
 
 We recommend JSON as the file format where possible, as it supports these properties. You may also consider to provide corresponding JSON-schema files to enable guidance and validation. In any case, JSON files should contain a root object (NOT an array) to enable schema references and extendibility.
 
-**Remark:**
-Your app can specify "private files" inside your appdata directories in order to exclude them from save and load operations. See appendix "App-private files" for details.
+> **Note:**
+> An app may specify "private files" inside its appdata directories in order to exclude them from save and load operations. See appendix "App-private files" for details.
 
 ## 4 Register for saving and loading<a name="register"></a>
 
 In order to participate in the save and load operations triggered by the Solutions app, your app must register its own save and load commands. The following example shows how to register a save and a load command for Motion settings by adding the respective command declarations to the package manifest:
 
 **package-manifest.json:**
+
 ```json
 "commands": {
   "activeConfiguration": {
@@ -149,24 +163,26 @@ In order to participate in the save and load operations triggered by the Solutio
   }
 }
 ```
+
 For each command, the following elements must be specified:
 
 - **id** (required): a string serving as the identifier of the save or load command; must be unique within the “commands/activeConfiguration/save” and “commands/activeConfiguration/load” paths, respectively
 - **subject** (required): a string denoting what will be saved or loaded; used to inform users, e.g. in messages like “Loading *motion settings*” or “Failed to load *motion settings*”
-- **url** (required): a string representing the request URL; URLs starting with a slash are interpreted to be relative to https://\<host\> (the control itself). Declare an absolute URL if you need to specify a port, e.g. `http://localhost:5555/my-app/api/v1/save`. The URL is used for HTTP POST requests which include command parameters in the request body (see section "Request parameters" for details)
+- **url** (required): a string representing the request URL; URLs starting with a slash are interpreted to be relative to <https://\<host\>> (the control itself). Declare an absolute URL if you need to specify a port, e.g. `http://localhost:5555/my-app/api/v1/save`. The URL is used for HTTP POST requests which include command parameters in the request body (see section "Request parameters" for details)
 
 By default there is no defined order of command execution. Starting with version XCR-V-0112, a command may declare that it needs to be executed **after** other commands. If this is required (which should be the exception), add an after element to your command declaration with an array containing the IDs of the predecessor commands.
 
->**Note: Hint for developers providing Data Layer endpoints for loading and saving**
+>**Hint for developers providing Data Layer endpoints for loading and saving**
 >
 >In order to make the Data Layer endpoints for saving and loading a configuration consistent, the respective URLs should adhere to the following pattern:
 >
 >\<datalayer-basepath\>/\<**technology**\>/admin/cfg/\<operation\>
 >
 >Examples:
->    - /automation/api/v1/**scheduler**/admin/cfg/save(or load)
->    - /automation/api/v1/**fieldbuses/ethercat/master**/admin/cfg/save (or load)
->    - /automation/api/v1/**motion**/admin/cfg/save (or load)
+>
+> - /automation/api/v1/**scheduler**/admin/cfg/save(or load)
+> - /automation/api/v1/**fieldbuses/ethercat/master**/admin/cfg/save (or load)
+> - /automation/api/v1/**motion**/admin/cfg/save (or load)
 
 ## 5 Implement saving and loading<a name="implement"></a>
 
@@ -194,6 +210,12 @@ Any errors or problems that occur during phases 2-5 are collected and reported t
 
 A more detailed description of the load phases and example sequences can be found in the Appendix.
 
+> **Note:** Starting with XCR-V-0120, a save operation is triggered when a load operation is completed. This ensures that
+> the content of the active configuration (appdata directory) is consistent with the data that is active in the apps.
+>
+> The save requests of this special save operation have the same id as the preceding load requests. Participants may
+> ignore those save requests if they update their app data on loading.
+
 ### Request parameters
 
 The following information is sent as request parameters to all participants in all save and load phases:
@@ -203,6 +225,7 @@ The following information is sent as request parameters to all participants in a
 - **phase**: specifies the current processing phase of a save or load operation; one of the phases described in section "Processing sequences"; e.g., "load"
 
 The request parameters are provided in the request body as a JSON object with the following structure (using the sample values from above):
+
 ```json
 {
     "configurationPath": "solutions/DefaultSolution/configurations/<configuration>",
@@ -211,6 +234,7 @@ The request parameters are provided in the request body as a JSON object with th
 }
 
 ```
+
 ### Expected behavior
 
 Participants must consider the following conditions and constraints in their command implementations.
@@ -234,9 +258,9 @@ The dynamicDescription field can provide specific information for the user, like
 The field may contain “\n“ to separate cause and hint in the result output of the UI, e.g. “Format error in X.json.\nAdapt file or use motion editor to fix/recreate axis. [282xy5]”
 
 > **Common response if apps require Setup state for loading (since XCR-V-0116)**
-> 
+>
 > If participants require Setup state for loading, they should in the query phase
-> 
+>
 > - Respond with status code 409 (Conflict)
 > - Return a Problem object with the common mainDiagnosisCode **080F0E00** ("Loading configuration not possible in current state")
 > - Not write diagnoses to the Logbook
@@ -249,14 +273,14 @@ Example of diagnostic entries as they would appear in the Logbook:
 
 | Level | Date | Unit | Code | Description |
 | --- | --- | --- | --- | ---|
-| Info |	06/04/2020, 10:33:11.964	| web.solutions	| 080A0401	| Loading configuration successfully finished [282xy5] |
-| ... |	...	| ... |	...	|... |
-| ... |	... |	...	| \<main diag code\><br>\<detailed diag code\> |	\<main diag text\><br>\<detailed diag text\><br>\<dynamic description text\> [282xy5]<br>\<entity text\> |
-| Info |	06/04/2020, 10:31:20.733	| web.automation	| \<main diag code\>	|Trace message\<component name\><br>Scheduler successfully prepared for loading [282xy5] |
-| Info|	06/04/2020, 10:31:19.820|	web.solutions|	080A0400	| Loading configuration started [282xy5]|
+| Info | 06/04/2020, 10:33:11.964 | web.solutions | 080A0401 | Loading configuration successfully finished [282xy5] |
+| ... | ... | ... | ... |... |
+| ... | ... | ... | \<main diag code\><br>\<detailed diag code\> | \<main diag text\><br>\<detailed diag text\><br>\<dynamic description text\> [282xy5]<br>\<entity text\> |
+| Info | 06/04/2020, 10:31:20.733 | web.automation | \<main diag code\> |Trace message\<component name\><br>Scheduler successfully prepared for loading [282xy5] |
+| Info| 06/04/2020, 10:31:19.820| web.solutions| 080A0400 | Loading configuration started [282xy5]|
 
->**Note:**
->The id of a save or load operation can also be found on and copied from the "Manage app data" page (Save or Load report) in order to search for corresponding messages in the Logbook. The diagnostic numbers may be used to find the beginning and end of the respective operation in the Logbook, e.g. "080A0400" denoting "Loading configuration started".
+> **Note:**
+> The id of a save or load operation can also be found on and copied from the "Manage app data" page (Save or Load report) in order to search for corresponding messages in the Logbook. The diagnostic numbers may be used to find the beginning and end of the respective operation in the Logbook, e.g. "080A0400" denoting "Loading configuration started".
 
 #### Robustness
 
@@ -280,9 +304,9 @@ The coordinator (Solutions app) ensures the following properties:
 
 ### From copying to smart loading
 
-Apps must update their appdata sub-directory contents during the load operation to reflect the data which has been loaded and is now active in the apps.
+Apps must update their appdata subdirectory contents during the load operation to reflect the data which has been loaded and is now active in the apps.
 
-A first basic implementation may be to just copy the directory contents from the "configuration to load" to the corresponding appdata sub-directory. The Solutions app provides a default implementation of this file copy functionality. To activate this functionality, use the copyOnLoad option in your app directory declarations (cf. section "Specify your app directories").
+A first basic implementation may be to just copy the directory contents from the "configuration to load" to the corresponding appdata subdirectory. The Solutions app provides a default implementation of this file copy functionality. To activate this functionality, use the copyOnLoad option in your app directory declarations (cf. section "Specify your app directories").
 
 The following example shows how a set of copyOnLoad declarations would be applied for a given configuration:
 
@@ -312,14 +336,12 @@ The following example shows how a set of copyOnLoad declarations would be applie
     f: false (inherited from e)
     g: true (inherited from a)
 
-
 However, an app might improve the load functionality by evaluating the changes to be applied during load. The app may determine that state changes (e.g., stopping the PLC for loading) are actually not required depending on the kind of data to load. Some participants may even be able to skip a load operation completely if their part of the configuration has not changed.
 
 If you want to take control and be able to evaluate differences between the configuration files and the appdata files,
 
-- declare your base directory or specific sub-directories you would like to handle yourself in the package manifest
-- omit the copyOnLoad option (or set copyOnLoad to "false")
-
+- declare your base directory or specific subdirectories you would like to handle yourself in the package manifest
+- omit the copyOnLoad option (or set copyOnLoad to *false*)
 
 >**Note:**
 For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is executed before the "prepare" phase. If you do not use copyOnLoad, you should persist your app data in the "load" phase as specified; see the "Annotated load process" in the Appendix for details
@@ -343,7 +365,6 @@ For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is execu
 #### Failed
 
 ![image](images/How-To-Persist-app-data-Fig06_Loading(FAILED).png)
-
 
 ### Problem schema definition
 
@@ -471,7 +492,7 @@ Problem:
 
 Apps may need to store files in their appdata directories which are only needed at runtime. These files (or directories) have to be ignored on loading and when saving the appdata to an archived configuration.
 
-An app can specify such files using the "appPrivateFiles" element in the configuration section of its manifest. The element value is an array of strings where each string represents a regular expression following the RE2 syntax (https://golang.org/s/re2syntax). The expressions describe paths and names of files to be considered as private and are checked case-insensitively.
+An app can specify such files using the "appPrivateFiles" element in the configuration section of its manifest. The element value is an array of strings where each string represents a regular expression following the RE2 syntax (<https://golang.org/s/re2syntax>). The expressions describe paths and names of files to be considered as private and are checked case-insensitively.
 
 The following example shows the declaration of "appPrivateFiles" with 3 regular expressions and the declaration of the app's root directory:
 
@@ -502,10 +523,39 @@ Hints for the regular expressions: The characters "\[]().\\^\$|?*+{}" have speci
 
 Examples for regular expressions (with an app root directory of "my-app")
 
-
 | Regular expression| Meaning |
 | --- | --- |
 | "^my-app/private/" | defines the my-app/private directory and its content as private |
-| "^my-app/mixed/[^/]+.\.bak"	| defines all files with extension .bak within the my-app/mixed directory as private |
-|"^my-app/mixed/$"	| defines the my-app/mixed directory itself as private so that it is not removed if empty|
+| "^my-app/mixed/[^/]+.\.bak" | defines all files with extension .bak within the my-app/mixed directory as private |
+|"^my-app/mixed/$" | defines the my-app/mixed directory itself as private so that it is not removed if empty|
 
+### Accessing configuration files per WebDAV
+
+The configuration files are available via WebDAV protocol under the ctrlx-device web address with base path of "solutions/webdav", eg. access the configuration.json file content of appdata:
+
+    https://localhost:8443/solutions/webdav/appdata/configuration.json
+
+See also: [golang WebDAV client](../samples-go/webdav.client/readme.md) and [nodejs WebDAV client](../samples-node/webdav-client/readme.md)
+
+### Accessing configuration files with WinSCP
+
+[WinSCP](https://winscp.net/) is a windows app, which allows access to a remote file system via WebDAV.
+
+#### Connect to a crtlX device
+
+Start WinSCP, login with:
+
+    File protocol:          WebDAV
+    Host name:              IP-address or hostname of the device
+    Port number:            443 or 8443 for a virtual control
+    User name and Password: credentials on the ctrlX-device
+
+![](images/winscp-sites.png)
+
+The user needs manage configuration rights to access the files.
+
+Access the configuration files located in **/solutions/webdav**
+
+![](images/winscp-files.png)
+
+The folder "appdata" contains the files of the active configuration. The other folders are configuration archives.

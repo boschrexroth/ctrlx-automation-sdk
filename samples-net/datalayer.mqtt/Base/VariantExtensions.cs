@@ -1,7 +1,7 @@
-﻿/*
+/*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -131,6 +131,7 @@ namespace Samples.Datalayer.MQTT.Base
                 DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_FLOAT32 => JsonSerializer.Serialize(value.ToFloat()),
                 DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_FLOAT64 => JsonSerializer.Serialize(value.ToDouble()),
                 DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_STRING => JsonSerializer.Serialize(value.ToString()),
+                DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_TIMESTAMP => JsonSerializer.Serialize(value.ToDateTime()),
 
                 //Flatbuffer -> JSON Array
                 DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_FLATBUFFERS => JsonSerializer.Serialize(value.ToFlatbuffers().ToSizedArray()),
@@ -149,7 +150,7 @@ namespace Samples.Datalayer.MQTT.Base
                 DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_ARRAY_OF_FLOAT32 => JsonSerializer.Serialize(value.ToFloatArray()),
                 DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_ARRAY_OF_FLOAT64 => JsonSerializer.Serialize(value.ToDoubleArray()),
                 DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_ARRAY_OF_STRING => JsonSerializer.Serialize(value.ToStringArray()),
-
+                DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_ARRAY_OF_TIMESTAMP => JsonSerializer.Serialize(value.ToDateTimeArray()),
                 DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_UNKNOWN => null,
                 _ => null,
             };

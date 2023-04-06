@@ -1,7 +1,7 @@
-﻿/*
+/*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -54,11 +54,11 @@ namespace Samples.Appdata
         private static readonly string HttpApiRouteSave = $"http://localhost:{HttpPort}/ctrlx-dotnet-appdata/api/v1/save";
 
         /// The name of the storage file
-        private static readonly string StorageFileName = "appdata.json";
+        private const string StorageFileName = "appdata.json";
 
         /// The name of the application storage folder
         /// MUST be same as specified in your *.package-manifest.json file
-        private static readonly string StorageFolderName = "appdatasample";
+        private const string StorageFolderName = "appdatasample";
 
         //Fields
         private HttpListener _httpListener;
@@ -208,7 +208,7 @@ namespace Samples.Appdata
                 Console.WriteLine($"Loaded application data from file '{path}'.");
                 return DLR_RESULT.DL_OK;
             }
-            catch (Exception exc)
+            catch (Exception exc) when (exc is IOException || exc is JsonException)
             {
                 Console.WriteLine($"Loading application data from file '{path}' failed! {exc.Message}");
                 return DLR_RESULT.DL_FAILED;
@@ -242,7 +242,7 @@ namespace Samples.Appdata
                 Console.WriteLine($"Saved application data to file '{path}'.");
                 return DLR_RESULT.DL_OK;
             }
-            catch (Exception exc)
+            catch (IOException exc)
             {
                 Console.WriteLine($"Saving application data to file '{path}' failed! {exc.Message}");
                 return DLR_RESULT.DL_FAILED;
@@ -264,7 +264,7 @@ namespace Samples.Appdata
                     Directory.CreateDirectory(path);
                     Console.WriteLine($"Created storage location: '{path}'.");
                 }
-                catch (Exception exc)
+                catch (IOException exc)
                 {
                     Console.WriteLine($"Creating storage location '{path}' failed! {exc.Message}");
                     return DLR_RESULT.DL_FAILED;
@@ -282,7 +282,6 @@ namespace Samples.Appdata
         {
             //Extract the scopes
             var scopes = jwt.GetPayloadValue<string[]>("scope");
-            //Console.WriteLine($"scopes: {string.Join(" ", scopes)}");
 
             //Check permissions
             foreach (var scope in scopes)
@@ -367,14 +366,14 @@ namespace Samples.Appdata
                 Console.WriteLine($"Listening to HTTP: {string.Join(", ", _httpListener.Prefixes.ToArray())}");
 
                 //Listen
-                var task = Task.Factory.StartNew(() =>
+                Task.Factory.StartNew(() =>
                 {
                     while (true)
                     {
                         // Note: The GetContext method blocks while waiting for a request.
-                        HttpListenerContext context = _httpListener.GetContext();
-                        HttpListenerRequest request = context.Request;
-                        HttpListenerResponse response = context.Response;
+                        var context = _httpListener.GetContext();
+                        var request = context.Request;
+                        var response = context.Response;
 
                         //We received a new app data REST command
                         Console.WriteLine($"Request: {request.Url}");
@@ -420,7 +419,7 @@ namespace Samples.Appdata
                                     // Phases we don't care about in this sample can be implemented on demand.
 
                                     // query: Check if loading is possible in the current system statecase "query":
-									// Hint: The phase 'query' is called 2 times: the first call asks for a setup mode change acknowledge and the second is called during normal load sequence
+                                    // Hint: The phase 'query' is called 2 times: the first call asks for a setup mode change acknowledge and the second is called during normal load sequence
                                     case "query":
                                     // prepare: Perform any required preparatory steps
                                     case "prepare":
@@ -465,20 +464,19 @@ namespace Samples.Appdata
                                 }
                             }
                         }
-                        catch (NotSupportedException exc)
+                        catch (JsonException exc)
                         {
                             //IMPORTANT: 
                             //We have to handle _ALL_ possible exceptions here and _ALLWAYS_ return a response!              
                             Console.WriteLine($"Failed to parse appdata request! {exc.Message}");
                             response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         }
-
                         response.Close();
                     }
                 });
                 return DLR_RESULT.DL_OK;
             }
-            catch (Exception exc)
+            catch (HttpListenerException exc)
             {
                 Console.WriteLine($"Listening to HTTP failed! {exc.Message}");
                 return DLR_RESULT.DL_FAILED;

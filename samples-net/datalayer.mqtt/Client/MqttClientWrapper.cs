@@ -1,8 +1,8 @@
-﻿
+
 /*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -70,6 +70,7 @@ namespace Samples.Datalayer.MQTT.Client
         /// <summary>
         /// Creates a MQTT client wrapper
         /// </summary>
+        /// <param name="serverAddress"></param>
         public MqttClientWrapper()
         {
             //Create client
@@ -84,17 +85,17 @@ namespace Samples.Datalayer.MQTT.Client
         #region Properties
 
         /// <summary>
-        /// Gets or sets the Server Address
+        /// Gets or sets the broker address 
         /// </summary>
-        public string ServerAddress { get; set; } = "192.168.1.200";
+        public string BrokerAddress { get; set; } = "";
 
         /// <summary>
-        /// Gets or sets the Port
+        /// Gets or sets the port
         /// </summary>
         public int Port { get; set; } = 1883;
 
         /// <summary>
-        /// Sets or sets the ClientId
+        /// Sets or sets the client ID
         /// </summary>
         public string ClientId { get; set; } = "";
 
@@ -114,7 +115,7 @@ namespace Samples.Datalayer.MQTT.Client
         public TimeSpan CommunicationTimeout { get; set; } = TimeSpan.FromMilliseconds(10_000);
 
         /// <summary>
-        /// 
+        /// Gets or sets the keepalive period
         /// </summary>
         public TimeSpan KeepAlivePeriod { get; set; } = TimeSpan.FromMilliseconds(10_000);
 
@@ -152,11 +153,11 @@ namespace Samples.Datalayer.MQTT.Client
 
             try
             {
-                Console.WriteLine($"Connecting to MQTT Broker: {ServerAddress}, ClientId: {ClientId}, CleanSession: {CleanSession} ...");
+                Console.WriteLine($"Connecting to MQTT Broker: {BrokerAddress}, ClientId: {ClientId}, CleanSession: {CleanSession} ...");
 
                 //Run a MQTT publish client
                 var task = _client.ConnectAsync(new MqttClientOptionsBuilder()
-                    .WithTcpServer(ServerAddress, Port)
+                    .WithTcpServer(BrokerAddress, Port)
                     .WithClientId(ClientId)
                     .WithProtocolVersion(MqttProtocolVersion.V500) //Version 5 is Mandatory, because we make use of the SubscriptionIdentifier feature
                     .WithCleanSession(CleanSession)
@@ -166,19 +167,19 @@ namespace Samples.Datalayer.MQTT.Client
                     //.WithSessionExpiryInterval(60000)
                     //.WithTls()
                     .WithNoKeepAlive()
-                    .Build()); ;
+                    .Build());
 
                 var result = await task;
 
                 //Failed
                 if (result.ResultCode != MqttClientConnectResultCode.Success)
                 {
-                    Console.WriteLine($"Failed to connect to MQTT Broker: {ServerAddress}, Result: {result.ResultCode}");
+                    Console.WriteLine($"Failed to connect to MQTT Broker: {BrokerAddress}, Result: {result.ResultCode}");
                     return DLR_RESULT.DL_FAILED;
                 }
 
                 //Success
-                Console.WriteLine($"Connected to MQTT Broker: {ServerAddress}");
+                Console.WriteLine($"Connected to MQTT Broker: {BrokerAddress}");
                 return DLR_RESULT.DL_OK;
             }
             catch (OperationCanceledException exc)
@@ -213,7 +214,7 @@ namespace Samples.Datalayer.MQTT.Client
 
             try
             {
-                Console.WriteLine($"Disconnecting from MQTT Broker: {ServerAddress} ...");
+                Console.WriteLine($"Disconnecting from MQTT Broker: {BrokerAddress} ...");
 
                 var task = _client.DisconnectAsync(options);
                 await task;
@@ -446,7 +447,10 @@ namespace Samples.Datalayer.MQTT.Client
         /// Returns a default client id
         /// </summary>
         /// <returns></returns>
-        public static string DefaultClientId() => Dns.GetHostName() + "_" + DateTime.Now.Ticks.ToString();
+        public static string DefaultClientId()
+        {
+            return Dns.GetHostName() + "_" + DateTime.Now.Ticks.ToString();
+        }
 
         /// <summary>
         /// Returns a default topic

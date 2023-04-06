@@ -5,6 +5,7 @@
 * ctrlX AUTOMATION SDK build environment
 * ctrlX AUTOMATION SDK version
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE
+
 * Visual Studio Code installed on your host computer
 
 ## Find out the supported samples 

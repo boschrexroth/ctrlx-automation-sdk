@@ -31,7 +31,7 @@ debugging_enabled = False
 
 def breakpoint():
     """Set a breakpoint.
-    This function can be used to set a fix breakpoint into the programing code. 
+    This function can be used to set a fix breakpoint into the programming code. 
     The call is ineffective if debug is not activated (by providing a valid port number via command line parameter)
     """
     if debugging_enabled:
@@ -54,11 +54,11 @@ def wait_for_client(port: int):
     """
 
     address = ('0.0.0.0', port) # Accept incomming calls from all network interfaces
-    print('Accepting remote debug client attaches to port', port)
+    print('Accepting remote debug client attaches to port', port, flush=True)
     debugpy.listen(address)
 
     debugpy.wait_for_client()
-    print('Debugger is attached!')
+    print('Debugger is attached!', flush=True)
 
     breakpoint()
 

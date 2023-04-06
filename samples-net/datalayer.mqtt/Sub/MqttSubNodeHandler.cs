@@ -1,4 +1,4 @@
-﻿/*
+/*
 MIT License
 
 Copyright (c) 2021-2022 Bosch Rexroth AG
@@ -99,7 +99,7 @@ namespace Samples.Datalayer.MQTT.Sub
             var trimmedWriteValue = writeValue.Trim();
             if (wrappedNode.Value == trimmedWriteValue)
             {
-                result.SetResult(DLR_RESULT.DL_FAILED);
+                result.SetResult(DLR_RESULT.DL_OK);
                 return;
             }
 

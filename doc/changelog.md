@@ -1,5 +1,10 @@
 ## Software Development Kit for ctrlX AUTOMATION
 
+### Version 1.20.0 <small> April 02, 2023</small>
+
+* Add new samples in angular and go
+* Update documentation
+
 ### Version 1.18.0 <small> November 30, 2022</small>
 
 * Adapt bulk operation from ctrlX Data Layer

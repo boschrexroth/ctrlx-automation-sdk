@@ -28,7 +28,7 @@ class Convert:
         try:
             return Convert.get_float64_internal(v)
         except Exception as e:
-            print(e)
+            print(e, flush=True)
 
         return None
 

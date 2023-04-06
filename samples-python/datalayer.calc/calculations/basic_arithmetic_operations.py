@@ -92,7 +92,7 @@ class BasicArithmeticOperations:
                                  userdata: ctrlxdatalayer.clib.userData_c_void_p):
 
         if result != Result.OK:
-            print("response_notify_callback parameter result:", result)
+            print("response_notify_callback parameter result:", result, flush=True)
             self.out_error = True
             return
 
@@ -103,7 +103,7 @@ class BasicArithmeticOperations:
             print("address:", item.get_address())
             print("type:", item.get_data().get_type())
             print("value:", item.get_data().get_float64())
-            print("timestamp:", item.get_timestamp())
+            print("timestamp:", item.get_timestamp(), flush=True)
 
             if item.get_address() == self.in1_address.get_string():
                 self.in1_value.close()  # Avoid mem. leak
@@ -155,10 +155,10 @@ class BasicArithmeticOperations:
         print()
         print("Result ###################################")
         if self.out_error:
-            print("ERROR", self.out_error_text)
+            print("ERROR", self.out_error_text, flush=True)
         else:
             print(self.in1_value.get_float64(), self.mode.get_string(),
-                  self.in2_value.get_float64(), "=", self.out.get_float64())
+                  self.in2_value.get_float64(), "=", self.out.get_float64(), flush=True)
 
     def calc_internal(self):
 
@@ -215,15 +215,24 @@ class BasicArithmeticOperations:
 
     def register_node(self, name: str):
         address = self.addressRoot + name
-        print("Registering node", address)
+        print("Registering node", address, flush=True)
         self.provider.register_node(
             address, self.providerNode)
 
     def register_nodes(self):
-        self.register_node("in1")
-        self.register_node("in2")
-        self.register_node("mode")
-        self.register_node("out")
+        result = self.register_node("in1")
+        if result != ctrlxdatalayer.variant.Result.OK:
+            return result
+        
+        result = self.register_node("in2")
+        if result != ctrlxdatalayer.variant.Result.OK:
+            return result
+        
+        result = self.register_node("mode")
+        if result != ctrlxdatalayer.variant.Result.OK:
+            return result
+        
+        return self.register_node("out")
 
     def subscribe(self):
 
@@ -235,11 +244,11 @@ class BasicArithmeticOperations:
         addressList = []
 
         address = self.in1_address.get_string()
-        print("Subscribing", address)
+        print("Subscribing", address, flush=True)
         addressList.append(address)
 
         address = self.in2_address.get_string()
-        print("Subscribing", address)
+        print("Subscribing", address, flush=True)
         addressList.append(address)
 
         result, self.subscription = self.client.create_subscription_sync(

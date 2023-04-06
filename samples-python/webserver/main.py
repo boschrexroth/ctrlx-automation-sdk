@@ -23,85 +23,58 @@
 # SOFTWARE.
 
 import os
-import time
 import sys
-import logging
 import threading
 
-from systemd.journal import JournaldLogHandler
-
 import http.server
-import web.web_server
-import web.unix_socket_http_server
+import web.request_handler
+import web.unix_socket_server
 
-from comm.datalayer import Metadata
+import app.datalayer
 
-import app.datalayer_client 
-
-log = logging.getLogger()
 
 httpServerPort = 12345
 token = 'eyJhbGciOiJFUzM4NCIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjAxNDg3NzQsImlhdCI6MTY2MDExOTk3NCwiaWQiOiIxMDAwIiwibmFtZSI6ImJvc2NocmV4cm90aCIsIm5vbmNlIjoiMGU0NTVhODMtMThlOC00YjY2LTllMWUtYTE0NWM2ZWIzZWQzIiwicGxjaGFuZGxlIjowLCJyZW1vdGVhdXRoIjoiIiwic2NvcGUiOlsicmV4cm90aC1kZXZpY2UuYWxsLnJ3eCJdfQ.VqCCRh2ga1Ujn5C_vBAf7dZHXNr6gY0Aqvrwu39_6L9d7fWBYXr-MmqdYxGB85fHBhs56MFrCacYjN5SbctqSyH1LTeXLKAdP4Etx8V7B2QB_5XZdVCLqIwYOAU8Gdzv'
 
 def main():
 
-    log.setLevel(logging.DEBUG)
+    web.request_handler.data_layer = app.datalayer.DataLayer()
+    web.request_handler.data_layer.start()
 
-    snap_environment = 'SNAP' in os.environ
-    if snap_environment is False:
-        # Snap environment: Avoid logging message twice
-        log.addHandler(logging.StreamHandler(sys.stdout))
-    log.addHandler(JournaldLogHandler())
+    client, connection_string = web.request_handler.data_layer.connect_client(ip="10.0.2.2", https_port=8443)
+    if client == None:
+        print("ERROR Could not connect", connection_string, flush=True)
+        return
 
-    datalayer_system = app.datalayer_client.data_layer_start()
-
-    # ctrlX CORE virtual with port forwarding:
-    datalayer_client, error_msg = app.datalayer_client.data_layer_client_connect(ip="10.0.2.2", https_port=8443)
-
-    # ctrlX CORE virtual with network adapter:
-    #app.datalayer_client.datalayer_client, error_msg = data_layer_client_connect()
-
-    if error_msg:
-        log.error(error_msg)
-        sys.exit(1)
-
-    new_thread = threading.Thread(
-        target=thread_start, args=(snap_environment, ))
+    new_thread = threading.Thread(target=thread_start)
     new_thread.start()
 
-    while datalayer_client.is_connected():
-        time.sleep(5)
+    new_thread.join()
 
-    log.debug('')
-    log.debug('Data Layer connection broken - stopping web server...')
+    web.request_handler.data_layer.stop()
 
-    app.datalayer_client.data_layer_stop()
-
-    sys.exit(1)
+    sys.exit(0)
 
 
-def thread_start(snap_environment: bool):
+def thread_start():
 
     # If running with a snap (on a ctrlX) start UNIX socket
     # If running as app in an app builder envorinemtn start a TCP server
-    run_webserver_unixsock() if snap_environment else run_webserver_tcp()
+    run_webserver_unixsock() if 'SNAP' in os.environ else run_webserver_tcp()
 
 
 def run_webserver_tcp():
 
-    with http.server.HTTPServer(('', httpServerPort), web.web_server.WebServer) as http_server:
+    with http.server.HTTPServer(('', httpServerPort), web.request_handler.RequestHandler) as http_server:
 
-        log.debug("")
-        log.debug('TCP/IP server started - listening on 0.0.0.0:%i',
-                  httpServerPort)
-        log.debug("")
-        log.debug(
+        print('TCP/IP server started - listening on 0.0.0.0:', httpServerPort)
+        print("")
+        print(
             '------------------Copy this link into the address field of your browser ----------------------')
-        log.debug('http://localhost:'+str(httpServerPort) +
-                  '/python-webserver?token='+token)
-        log.debug(
-            '----------------------------------------------------------------------------------------------')
-        log.debug("")
+        print('http://localhost:'+str(httpServerPort) +
+              '/python-webserver?token='+token)
+        print(
+            '----------------------------------------------------------------------------------------------', flush=True)
 
         http_server.serve_forever()
 
@@ -121,9 +94,9 @@ def run_webserver_unixsock():
     except OSError:
         pass
 
-    with web.unix_socket_http_server.UnixSocketHttpServer(sock_file, web.web_server.WebServer) as http_server:
+    with web.unix_socket_server.UnixSocketServer(sock_file, web.request_handler.RequestHandler) as http_server:
 
-        log.debug('UNIX SOCKET server started - listening on %s', sock_file)
+        print('UNIX SOCKET server started - listening on', sock_file, flush=True)
 
         http_server.serve_forever()
 

@@ -38,13 +38,13 @@ class TokenValidation():
                         self.token_decoded = jwt.decode(self.token, options={"verify_signature": False})
                         return True, self.token, self.token_decoded
                     except jwt.DecodeError:
-                        print("ERROR Decoding bearertoken")
+                        print("ERROR Decoding bearertoken", flush=True)
                         return False, self.token, None
         return False, None, None
 
     def is_authorized(self, role):
         if 'scope' in self.token_decoded is None:
-            print("ERROR Decoding bearertoken: No scope found")
+            print("ERROR Decoding Bearer token: No scope found", flush=True)
             return False
         scopes_token = self.token_decoded['scope']
         if role in scopes_token:

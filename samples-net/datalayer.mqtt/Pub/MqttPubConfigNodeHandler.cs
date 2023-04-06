@@ -1,7 +1,7 @@
-﻿/*
+/*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ SOFTWARE.
 
 using comm.datalayer;
 using Datalayer;
-using FlatBuffers;
+using Google.FlatBuffers;
 using MQTTnet.Protocol;
 using Samples.Datalayer.MQTT.Base;
 using Samples.Datalayer.MQTT.Client;
@@ -181,7 +181,7 @@ namespace Samples.Datalayer.MQTT.Pub
             var trimmedWriteValue = writeValue.Trim();
             if (wrappedNode.Value == trimmedWriteValue)
             {
-                result.SetResult(DLR_RESULT.DL_FAILED);
+                result.SetResult(DLR_RESULT.DL_OK);
                 return;
             }
 
@@ -483,8 +483,7 @@ namespace Samples.Datalayer.MQTT.Pub
                 messageExpiryIntervalMillis: GetNode(Names.MessageExpiryIntervalMillis).Value.ToUInt32(),
                 retain: GetNode(Names.Retain).Value.ToBool());
 
-            var result = await task;
-            return result;
+            return await task;
         }
 
         #endregion

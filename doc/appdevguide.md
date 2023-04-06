@@ -103,7 +103,7 @@ To simplify the delivery of artifacts, we provide a base folder structure with d
 
 **Handover of artifacts**
 
-Once all the required information is available in your local folder, zip the folder using Windows-zip and upload it as "**artifacts.zip**" to the ctrlX World Partner Portal space in the "**.../{company-name}/{app-name}/{version}/**" path.
+Once all the required information is available in your local folder, zip the folder using Windows-zip and upload it as "**artifacts.zip**" to the ctrlX World Portal space in the "**.../{company-name}/{app-name}/{version}/**" path.
 
 !!! important 
     To avoid problems when uploading the artifacts.zip file, please use the Windows-zip feature
@@ -113,7 +113,7 @@ Once all the required information is available in your local folder, zip the fol
 ### 2.4 Validation and Signing
 
 Validation is typically carried out in several iterations, depending on the result of a particular validation activity.
-If all the required information is provided in the ctrlX World Portal, an email to `ctrlx.world@boschrexroth.de` will trigger a validation loop.
+If all the required information is provided in the ctrlX World Portal, an email to `ctrlx.world@boschrexroth.com` will trigger a validation loop.
 Basically, the workflow will be as follows:
 
 1. Partner/app developer: Uploads required artifacts and informs Bosch Rexroth
@@ -244,7 +244,7 @@ The basic app information is checked as a prerequisite by Bosch Rexroth, before 
 
 #### 4.1.1 Artifacts Folder Template
 
-The ctrlX World Partner Portal provides a file (artifacts.zip), which can be downloaded and extracted locally.
+The ctrlX World Portal provides a file (artifacts.zip), which can be downloaded and extracted locally.
 This will create the required folder structure for the mandatory artifacts out-of-the-box, with default descriptions and schema files.
 
 !!!! important 
@@ -336,7 +336,7 @@ The following properties must be defined within the **"snapcraft.yaml"** file (s
 
 - **Title** - The general name of the app that will be shown on all sales channels and customer touch points, e.g. app overview or ctrlX App Store. This is defined together with the partner manager, as part of the business model definitions. Example: "My App"
 
-- **Name** - The technical name of the snap. The name has to be unique in the snap universe and across all snap developer and device vendors. The snap name has to **start with "ctrlx-"** and must be **lowercase** and a **maximum length of 32 characters**. ctrlX World Partners add their company name to the snap name. Example: "ctrlx-partnername-myapp"
+- **Name** - The technical name of the snap. The name has to be unique in the snap universe and across all snap developer and device vendors. The snap name has to **start with "ctrlx-"** and must be **lowercase** and a **maximum length of 32 characters**. ctrlX World partners add their company name to the snap name. Example: "ctrlx-partnername-myapp"
 
 - **Confinement** - Must be set to **"strict"** for releases. See also https://snapcraft.io/docs/snap-confinement
 
@@ -614,7 +614,7 @@ Please contact your partner manager if a real-time extension might be required f
 
 ## 12 Licensing (<span style="color:green;">**OPTIONAL**</span>)<a name="licensing"></a>
 
-If you are ctrlX World Partner you must use the licensing service that is operated by Bosch Rexroth. For information how to adapt an app to the licensing service please have look on the [Licensing Page](licensing.md) 
+If you are ctrlX World partner you must use the licensing service that is operated by Bosch Rexroth. For information how to adapt an app to the licensing service please have look on the [Licensing Page](licensing.md) 
 
 ### Appendix
 [Guide appendix](appdevguide_other-technologies.md)

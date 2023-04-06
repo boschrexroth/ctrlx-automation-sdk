@@ -1,66 +1,17 @@
-!!! important
-    We recommend to use ctrlX WORKS setting up and operating an App Build Environment. This guide is only for use cases where ctrlX WORKS cannot be used.
+This chapter describes how to setup and run App Build Environments without using ctrlX WORKS.
 
-Creating and running an App Build Environment for the ctrlX AUTOMATION SDK is possible because the SDK archive contains all configuration and script files.
+Remember ctrlX WORKS provides all necessary actions required to deal with app build environments.
+
 
 This is the recommended constellation:
 
-* The QEMU software should be run on an __AMD64__ based host computer with hardware acceleration. QEMU supports both Windows 10 and Linux host systems.
+* Despite QEMU supports both Windows and Linux we are recommending to use a Windows host operating system .
 
-* For the QEMU virtual machine also __AMD64__ should be selected as CPU architecture.
+* Host and guest machine should use CPU architecture amd64. Snaps for an arm64 target are build via cross build.
 
-This combination provides best performance conditions.
+## Installation on Windows 10 Host
 
-The installation of QEMU, further required tools and QEMU virtual machines is described in the next chapters.
-
-
-## Preparations
-
-Download the archive ctrlX AUTOMATION SDK from [github boschrexroth/ctrlx-automation-sdk/releases](https://github.com/boschrexroth/ctrlx-automation-sdk/releases) to your host computer and unpack at least the folder  __public/scripts/environment__.
-
-This folder contains all necessary files and scripts for both Windows 10 and Linux hosts.
-
-## Install QEMU 
-
-### Linux Host
-
-Change to the SDK folder public/scripts/environment and set x file permissions:
-
-    $ chmod a+x *.sh
-
-#### Install QEMU on Linux Host
-
-Because the newest QEMU software is not provided as Debian package we have to download the source files, compile the project and install the binaries. This is done automatically by the script __install-qemu-on-host.sh__ stored in the SDK folder __public/scripts/environment/__.
-
-To install QEMU do following steps:
-
-* Copy the script install-qemu-on-host.sh into a tempory folder on your Linux host computer.
-
-* Change to the temporary folder and start these commands: 
-
-	$ chmod a+x install-qemu-on-host.sh
-    $ sudo ./install-qemu-on-host.sh
-
-This procedure will take some time - at the end QEMU is installed.
-
-#### Install KVM on Linux Host
-
-We recommend to install KVM (Kernel-based Virtual Machine) on your host sytem.
-
-Change to the SDK folder public/scripts/environment and start
-
-    ./install-kvm-on-host.sh
-
-See here for further informations:
-
-[How to Install Kvm on Ubuntu 20.04](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-20-04/)
-
-[linux-kvm](https://www.linux-kvm.org/page/Documents)
-
-
-### Windows 10 Host
-
-#### Install QEMU on Windows 10 Host
+### QEMU on Windows
 
 Download and install the newest version of QEMU for Windows from [https://qemu.weilnetz.de/w64/](https://qemu.weilnetz.de/w64/).
 
@@ -69,7 +20,7 @@ Download and install the newest version of QEMU for Windows from [https://qemu.w
 
     See [How do I set or change the PATH system variable?](https://www.java.com/en/download/help/path.html)
 
-#### Install Windows Hypervisor Platform
+### Install Windows Hypervisor Platform
 
 We recommend to install __Windows Hypervisor Platform__: 
 
@@ -99,40 +50,44 @@ __Hints:__
 * If Windows Hypervisor Platform cannot be installed for any reason, we recommend using the Intel Hardware Accelerated Execution Manager (HAXM). The installation is described here [Installing HAXM](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/hardware-acceleration?pivots=windows#installing-haxm)
 
 
-#### Install Px.exe as Local Proxy Server 
+### Install Px.exe as Local Proxy Server 
 
 See [Use PX.exe as Local Proxy on a Windows Host](./px.md).
 
-## Create an Instance of an AMD64 QEMU Virtual Machine
+## Installation on Linux Host
 
-A virtual machine should be installed and started within a separate folder on your host computer. Therefor SDK folder __public/scripts/environment__ contains these scripts:
+You have to install both QEMU and KVM on your host system. 
 
-* __create-new-vm-amd64-noproxy.bat, .sh__: creates an AMD64 VM with direct internet access
-* __create-new-vm-amd64-proxy.bat, .sh__: creates an AMD64 VM using a proxy server
+The installation process is descriped in the internet e.g.
 
-__These scripts are expecting the destination folder of your new VM as argument.__
+[How to Install QEMU on Ubuntu to Set Up a Virtual Machine](https://www.makeuseof.com/how-to-install-qemu-ubuntu-set-up-virtual-machine/). 
 
-To create e.g. a new amd64 VM instance with proxy usage on a Windows host do following steps:
+See also:
 
-* Create a separate folder on your host computer D:\qemuvm\amd64-proxy-1
-* Start cmd.exe
-* Change to the SDK folder __public/scripts/environment__
-* Call create-new-vm-amd64-proxy.bat D:\qemuvm\amd64-proxy-1
+[How to Install Kvm on Ubuntu 20.04](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-20-04/)
 
-All necessary files for this new VM are copied into the destination folder.
+[KVM](https://www.linux-kvm.org/page/Documents)
 
-Notice:
+## Running the QEMU Virtual Machine
 
-The aarch64 .bat/.sh__ files are obsolete and should not be used.
+### Create an Instance of a QEMU Virtual Machine
 
-## Running a QEMU Virtual Machine
+Do following steps:
+
+* Create a new folder (on a disk with enough free disk space)
+* Copy the content of the SDK folder __public/scripts/environment__ into your instance folder.
+
+__Hint:__ You can download the folder from here
+
+[ctrlx-automation-sdk/scripts/environment/](https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/scripts/environment)
+
 
 ### Start the QEMU Virtual Machine
 
 To start the QEMU VM instance change to its installation folder and run one of these script files:
 
-* __launch-amd64-noproxy.bat, .sh__: If the VM has direct internet access
-* __launch-amd64-proxy.bat, .sh__: If the VM has to use a proxy server on the host computer
+* __launch-amd64-noproxy (.bat, .sh) : If the VM has direct internet access
+* __launch-amd64-proxy (.bat, .sh):    If the VM has to use a proxy server on the host computer
 
 The VM is started as console application, you can see the trace output.
 
@@ -161,12 +116,6 @@ For forwarding further ports e.g. __502 (Modbus)__ just extend this line e.g.:
 
 During the first connection with Visual Studio Code enter: __ssh -p 10022 boschrexroth@127.0.0.1__ password is __boschrexroth__
 
-### Install the ctrlX AUTOMATION SDK and Additional Software After First Boot
-
-Start your VM, from your host start a SSH session and login with __boschrexroth/boschrexroth__.
-
-Please regard instructions in chapter [Important Install Scripts](install-scripts.md).
-	
 ### Shutdown
 
 It's very important to shutdown the __QEMU VM__ properly. So initiate a shutdown e.g. with this command on your VM console:

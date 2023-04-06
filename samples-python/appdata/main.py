@@ -23,7 +23,6 @@
 # SOFTWARE.
 
 import os
-import time
 from http.server import HTTPServer
 
 from web.server import Server, UnixSocketHttpServer
@@ -39,7 +38,7 @@ def main():
 
     webserver.serve_forever()
 
-    print(time.asctime(), 'Server DOWN')
+    print("Server DOWN", flush=True)
 
 
 def create_webserver_tcp():
@@ -47,7 +46,7 @@ def create_webserver_tcp():
     hostname = 'localhost'
 
     webserver = HTTPServer(('', serverPort), Server)
-    print(time.asctime(), 'Server UP -TCP/IP- ', hostname, ':', serverPort)
+    print("Server started, listening on TCP SOCKET", hostname, ':', serverPort, flush=True)
     return webserver
 
 
@@ -62,7 +61,7 @@ def create_webserver_unixsock():
         pass
 
     webserver = UnixSocketHttpServer(sock_file, Server)
-    print(time.asctime(), 'Server UP -UNIX SOCKET- ', sock_file)
+    print('Server started, listening on UNIX SOCKET', sock_file, flush=True)
     return webserver
 
 

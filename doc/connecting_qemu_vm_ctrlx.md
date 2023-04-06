@@ -1,4 +1,4 @@
-This document describes how SDK QEMU VMs and a ctrlX CORE can be connected.
+This document describes how SDK App Build Environments (resp. QEMU VMs) and a ctrlX CORE can be connected.
 
 In our examples we are assuming a Windows 10 host with px.exe as local proxy.
 

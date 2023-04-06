@@ -1,0 +1,58 @@
+.sample-header {
+    font-size: large;
+    text-align: center;
+    margin-top: 20px;
+    background-image: linear-gradient( rgb(126, 189, 221), white,);
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+.mat-raised-button {
+    margin:30px 0px 0px 0px;
+    padding:10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    background: rgb(126, 189, 221);
+    color:black;
+}
+
+.mat-header-cell {
+    font-size: large;
+    font-weight: bold;
+}
+
+.mat-column-id {
+    width: 30px;
+    padding-right: 14px;
+    text-align: center;
+}
+
+.mat-column-author {
+    width: 60px;
+    padding-left: 16px;
+    text-align: center;
+}
+
+.mat-column-title {
+    width: 60px;
+    padding-left: 16px;
+    text-align: center;
+}
+
+.mat-column-category {
+    width: 60px;
+    padding-left: 16px;
+    text-align: center;
+}
+
+.mat-column-price {
+    width: 60px;
+    padding-left: 16px;
+    text-align: center;
+}

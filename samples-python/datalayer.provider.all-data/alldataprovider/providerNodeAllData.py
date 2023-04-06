@@ -63,39 +63,39 @@ class ProviderNodeAllData:
             type_path=addressType)
 
     def __on_create(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
-        # print("__on_create", address)
+        # print("__on_create", address, flush=True)
         cb(Result.OK, None)
 
     def __on_remove(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
         # Not implemented because no wildcard is registered
-        print("__on_remove", address)
+        print("__on_remove", address, flush=True)
         cb(Result.UNSUPPORTED, None)
 
     def __on_browse(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
-        # print("__on_browse", address)
+        # print("__on_browse", address, flush=True)
         cb(Result.OK, None)
         
     def __on_read(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
-        # print("__on_read", address) - this command slows the performance down
+        # print("__on_read", address, flush=True) - this command slows the performance down
         new_data = self.data
         cb(Result.OK, new_data)
 
     def __on_write(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
 
         if self.dynamic is False:
-            print("__on_write PERMISSION_DENIED", address, data.get_type())
+            print("__on_write PERMISSION_DENIED", address, data.get_type(), flush=True)
             cb(Result.PERMISSION_DENIED, None)
             return
 
         if self.data.get_type() != data.get_type():
-            print("__on_write TYPE_MISMATCH", address, data.get_type())
+            print("__on_write TYPE_MISMATCH", address, data.get_type(), flush=True)
             cb(Result.TYPE_MISMATCH, None)
             return
 
-        print("__on_write", address, data.get_type())
+        print("__on_write", address, data.get_type(), flush=True)
         _, self.data = data.clone()
         cb(Result.OK, data)
 
     def __on_metadata(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
-        # print("__on_metadata", address)
+        # print("__on_metadata", address, flush=True)
         cb(Result.OK, self.metadata)

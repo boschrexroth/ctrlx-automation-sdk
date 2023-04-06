@@ -1,4 +1,4 @@
-// Copyright (c) 2021-2022 Bosch Rexroth AG
+// Copyright (c) 2021-2023 Bosch Rexroth AG
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the 'Software'), to deal
@@ -25,7 +25,7 @@ import DataType from './datatype';
 /**
  * The data types with variant type and target address.
  */
-const DataTypes = {
+const DATA_TYPES = {
     /**
      * bool 8 bit	
      */
@@ -162,4 +162,4 @@ const DataTypes = {
     artimestamp: DataType.create('array-of-timestamp', VariantTypes.arstring, 'types/datalayer/array-of-timestamp'),
 }
 
-export = DataTypes;
+export = DATA_TYPES;

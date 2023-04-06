@@ -1,0 +1,24 @@
+{
+    "version": "1.0.0",
+    "id": "ctrlx-hello-multilanguage",
+    "menus": {
+      "sidebar": [
+        {
+          "id": "ctrlx-hello-multilanguage",
+          "title": "Hello Multilanguage",
+          "icon": "bosch-ic-translate",
+          "link": "/ctrlx-hello-multilanguage",
+          "target": "_blank"
+        }
+      ]
+    },
+    "services": {
+      "proxyMapping": [
+        {
+          "binding": "unix://{$PACKAGE_WWW_SOCKET}",
+          "name": "ctrlx-hello-multilanguage",
+          "url": "/ctrlx-hello-multilanguage"
+        }
+      ]
+    }
+}

@@ -1,7 +1,7 @@
-﻿/*
+/*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ namespace Samples.Datalayer.Client.Browse
         /// <summary>
         /// Defines the MaxChars.
         /// </summary>
-        private static readonly int MaxChars = 100;
+        private const int MaxChars = 100;
 
         /// <summary>
         /// Browses all nodes in DataLayer tree.
@@ -83,9 +83,15 @@ namespace Samples.Datalayer.Client.Browse
             Console.WriteLine(valueAsString);
 
             var (result, childrenVariant) = client.Browse(address);
-            if (result != DLR_RESULT.DL_OK) return;
+            if (result != DLR_RESULT.DL_OK)
+            {
+                return;
+            }
             var children = childrenVariant.ToStringArray();
-            if (children == null) return;
+            if (children == null)
+            {
+                return;
+            };
 
             for (var i = 0; i < children.Length; i++)
             {

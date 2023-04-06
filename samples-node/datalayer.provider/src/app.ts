@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // !!! DO NOT REMOVE THE SHEBANG ON TOP OF THE FILE, WHICH SPECIFIES THIS APP TO BE EXECUTED BY NODE.JS !!!
 
-// Copyright (c) 2021-2022 Bosch Rexroth AG
+// Copyright (c) 2021-2023 Bosch Rexroth AG
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the 'Software'), to deal
@@ -31,9 +31,9 @@ import IVariant from "ctrlx-datalayer/dist/variant.js";
 import * as flatbuffers from 'flatbuffers';
 import { InertialValue } from './sampleSchema';
 
-// MetadataUtils
+// Utils
 import * as MetadataUtils from 'ctrlx-datalayer/dist/metadata-utils';
-import DatalayerHelper from './datalayerhelper';
+import { Remote } from 'ctrlx-datalayer/dist/remote';
 
 // The main function
 async function main() {
@@ -43,12 +43,12 @@ async function main() {
     // Starts the ctrlX Data Layer system without a new broker (startBroker = false) because one broker is already running on ctrlX device
     await system.start(false);
 
-    // Create a connection string with the parameters according to your environment (see DatalayerHelper class)
-    const connectionString = DatalayerHelper.getConnectionString({ ip: "192.168.1.1", sslPort: 443 })
-    console.log('connection string:', connectionString)
+    // Create a remote address with the parameters according to your environment
+    const remote = Remote.build({ ip: "192.168.1.1", sslPort: 443 })
+    console.log('connection string:', remote)
 
     //Create a Provider with the given remote address
-    const provider = await system.createProvider(connectionString);
+    const provider = await system.createProvider(remote);
     await provider.start();
 
     if (provider.isConnected() === false) {

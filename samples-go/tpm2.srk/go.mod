@@ -1,6 +1,6 @@
 module tpm2.srk
 
-go 1.13
+go 1.19
 
 require (
 	github.com/google/go-tpm v0.3.2

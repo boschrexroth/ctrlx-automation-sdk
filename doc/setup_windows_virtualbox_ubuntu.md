@@ -68,13 +68,20 @@ You might want to update your distribution and install essential packages for de
 
 ### Setup Standard Packages
 
-Packages in QEMU based VMs created by ctrlX WORKS are installed automatically. In the configuration file [cloud-config-amd64](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config-amd64) these packages are listed under the section __packages:__
+In QEMU based VMs created by ctrlX WORKS, required packages are installed automatically. 
 
-You can copy the list and create an install command, e.g.
+Here you have to install them manually:
 
-packages: - ssh - zip - unzip ...
+1. Open the according user-data-img file e.g. with Windows notepad. In the text part of this file you will find the section packages (here the first lines only):
 
-    sudo apt-get install -y ssh zip unzip ...
+    packages:
+        - zip
+        - unzip
+        
+ 
+2. Copy the package list, remove the '-' character and create a comand line e.g.
+
+    sudo apt-get install -y zip unzip ...
 
 !!! important
     Install ALL listed packages.

@@ -28,13 +28,13 @@ parts:
   app:
     source: .
     build-environment:
-    # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: "16.15.1"    
-    
+      # Set the node version here. We recommend to use the latest LTS version.
+      - NODE_VERSION: "18.15.0"
+
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "16.15.1"
-    plugin: nil 
+    # npm-node-version: "18.15.0"
+    plugin: nil
     override-build: |
       # set target arch
       if [ $SNAPCRAFT_TARGET_ARCH == "arm64" ]; then
@@ -51,14 +51,11 @@ parts:
           curl $node_uri | tar xzf - -C $SNAPCRAFT_PART_INSTALL/ --no-same-owner --strip-components=1
       fi
 
-      # setup npm
-      npm config set unsafe-perm true
-      
       # install the app (full) to compile (tsc -> ./dist)
-      npm install
+      npm install --unsafe-perm
 
       # pack and install the app (only production)
-      npm install -g --prefix $SNAPCRAFT_PART_INSTALL $(npm pack . | tail -1) --only=prod --production --no-fund
+      npm install -g --prefix $SNAPCRAFT_PART_INSTALL $(npm pack . | tail -1) --only=prod --production --no-fund --unsafe-perm
 
       # remove unused node_modules
       rm -rf ${SNAPCRAFT_PART_INSTALL}/lib/node_modules/npm

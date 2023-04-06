@@ -1,4 +1,4 @@
-// Copyright (c) 2021-2022 Bosch Rexroth AG
+// Copyright (c) 2021-2023 Bosch Rexroth AG
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the 'Software'), to deal
@@ -23,7 +23,7 @@ import DataRange from './datarange';
 /**
  * The data ranges of all data types.
  */
-const DataRanges = {
+const DATA_RANGES = {
 
     /**
     * bool 8 bit	
@@ -81,4 +81,4 @@ const DataRanges = {
     double: DataRange.create(-1.7976931348623157e+308, 1.7976931348623157e+308),
 }
 
-export = DataRanges;
+export = DATA_RANGES;

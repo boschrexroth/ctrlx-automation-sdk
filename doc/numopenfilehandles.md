@@ -1,6 +1,6 @@
 # How to Configure the maximal Number of Open File Handles
 
-## Indroduction
+## Introduction
 
 The maximum number of open file/socket handles is by default limited to 1024. This is not enough for some apps (e.g. connectivity apps or databases).
 

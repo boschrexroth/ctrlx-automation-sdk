@@ -4,9 +4,9 @@
 
 
 !!! important
-    The newest App Builder Environment is always provided with ctrlX WORKS. 
+    The newest App Build Environment is always provided with ctrlX WORKS. 
 
-Only the AMD64 version is supported because for every programing language supported by the ctrlX AUTOMATION SDK cross build capability is provided.
+Only the AMD64 version is supported because for every programming language supported by the ctrlX AUTOMATION SDK cross build capability is provided.
 
 ### Common
 

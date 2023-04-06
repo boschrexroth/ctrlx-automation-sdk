@@ -23,23 +23,22 @@
 import os
 import traceback
 
-import http.server  
+import http.server
 
 import web.web_token
 
 from urllib.parse import unquote, parse_qs, urlparse
 from json import dumps, loads
 
-import app.datalayer_client
+import app.datalayer 
 
-import logging
-log = logging.getLogger()
+data_layer : app.datalayer.DataLayer
 
-
-class WebServer(http.server.BaseHTTPRequestHandler):
+class RequestHandler(http.server.BaseHTTPRequestHandler):
 
     # Form parameters saved server side
-    readPath =  "framework/metrics/system/cpu-utilisation-percent" # "datalayer/subscriptions/settings"
+    # "datalayer/subscriptions/settings"
+    readPath = "datalayer/subscriptions/settings" # "framework/metrics/system/cpu-utilisation-percent"
     readValue = ""
     readResult = ""
     writePath = "sdk-py-provider-alldata/dynamic/int64"
@@ -55,7 +54,7 @@ class WebServer(http.server.BaseHTTPRequestHandler):
         if len(relative_path) <= 0:
             relative_path = self.path
 
-        log.debug("get_www_file_path relative_path: %s", relative_path)
+        print("get_www_file_path relative_path: %s", relative_path)
 
         rel_www_path = "/www/" + os.path.basename(relative_path)
 
@@ -63,7 +62,7 @@ class WebServer(http.server.BaseHTTPRequestHandler):
 
         result_path = os.getcwd() + rel_www_path if snap_path is None else snap_path + rel_www_path
 
-        log.debug("get_www_file_path result_path: %s", result_path)
+        print("get_www_file_path result_path:", result_path, flush=True)
 
         return result_path
 
@@ -81,8 +80,8 @@ class WebServer(http.server.BaseHTTPRequestHandler):
                 self.send_response_and_header(200, content_type)
                 self.wfile.write(bufferedReader.read())
         except Exception:
-            log.error("Exception opening and sending file: %s", path)
-            log.exception(traceback.format_exc())
+            print("EXCEPTION Opening and sending file:", path)
+            print(traceback.format_exc(), flush=True)
             self.send_response_and_header(404, content_type)
 
     def send_html_file_response(self, rel_path=""):
@@ -95,13 +94,13 @@ class WebServer(http.server.BaseHTTPRequestHandler):
                 self.send_response_and_header(200, content_type)
                 self.wfile.write(bytes(bufferedReader.read(), 'utf-8'))
         except Exception:
-            log.error("Exception opening and sending file: %s", path)
-            log.exception(traceback.format_exc())
+            print("EXCEPTION opening and sending file:", path)
+            print(traceback.format_exc(), flush=True)
             self.send_response_and_header(404, content_type)
 
     def do_GET(self):
         # GET Requests from client
-        log.debug("GET %s", self.path)
+        print("GET", self.path, flush=True)
 
         # Attempt To Send Different Files
         if self.path.endswith(".png"):
@@ -164,16 +163,19 @@ class WebServer(http.server.BaseHTTPRequestHandler):
                 '$(permissions_write_text)', '' if permissions_write else "'disabled'")  # Text must be surrounded by ' '
 
             # Set read content
-            htmlX = htmlX.replace('$(Server.readPath)', str(WebServer.readPath))
-            htmlX = htmlX.replace('$(Server.readValue)', str(WebServer.readValue))
+            htmlX = htmlX.replace('$(Server.readPath)',
+                                  str(RequestHandler.readPath))
+            htmlX = htmlX.replace('$(Server.readValue)',
+                                  str(RequestHandler.readValue))
             htmlX = htmlX.replace('$(Server.readResult)',
-                                  str(WebServer.readResult))
+                                  str(RequestHandler.readResult))
 
-            htmlX = htmlX.replace('$(Server.writePath)', str(WebServer.writePath))
+            htmlX = htmlX.replace('$(Server.writePath)',
+                                  str(RequestHandler.writePath))
             htmlX = htmlX.replace('$(Server.writeValue)',
-                                  str(WebServer.writeValue))
+                                  str(RequestHandler.writeValue))
             htmlX = htmlX.replace('$(Server.writeResult)',
-                                  str(WebServer.writeResult))
+                                  str(RequestHandler.writeResult))
 
             # Show permissions: 'True' or 'False'
             htmlX = htmlX.replace('$(permissions_rwx)', str(
@@ -197,35 +199,35 @@ class WebServer(http.server.BaseHTTPRequestHandler):
         json = dumps(parse_qs(post_data))
         data = loads(json)
 
-        log.debug("POST %s", str(data))
+        print("POST", str(data), flush=True)
 
         # Evaluate post data
         if data['submit'][0] == 'Read Value':
 
             if 'node' in data:
-                WebServer.readPath = data['node'][0]
+                RequestHandler.readPath = data['node'][0]
 
                 # Data Layer access
-                WebServer.readResult, WebServer.readValue = app.datalayer_client.read_node(
-                    WebServer.readPath)
+                RequestHandler.readResult, RequestHandler.readValue = data_layer.read_node(
+                    RequestHandler.readPath)
 
             else:
-                WebServer.readValue = ''
-                WebServer.readResult = 'INVALID NODE'
+                RequestHandler.readValue = ''
+                RequestHandler.readResult = 'INVALID NODE'
 
         if data['submit'][0] == 'Write Value':
 
             if 'node' in data and 'value' in data:
-                WebServer.writePath = data['node'][0]
-                WebServer.writeValue = data['value'][0]
+                RequestHandler.writePath = data['node'][0]
+                RequestHandler.writeValue = data['value'][0]
 
                 # Data Layer access
-                WebServer.writeResult = app.datalayer_client.write_node(
-                    WebServer.writePath, WebServer.writeValue)
+                RequestHandler.writeResult = data_layer.write_node(
+                    RequestHandler.writePath, RequestHandler.writeValue)
 
             else:
-                WebServer.writeValue = ''
-                WebServer.writeResult = 'INVALID NODE'
+                RequestHandler.writeValue = ''
+                RequestHandler.writeResult = 'INVALID NODE'
 
         self.send_response(303)
         self.send_header('Content-type', 'text/html')

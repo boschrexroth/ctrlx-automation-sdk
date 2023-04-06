@@ -40,8 +40,7 @@ if __name__ == '__main__':
     print("=============================================================================")
     print("Simple ctrlX Data Layer Client Snap in Python using Data Layer subscriptions.")
     print("Will be restarted by the snap system.")
-    print("=============================================================================")
-    print()
+    print("=============================================================================", flush=True)
 
     faulthandler.enable()
 
@@ -50,7 +49,7 @@ if __name__ == '__main__':
 
         datalayer_client, datalayer_client_connection_string = get_client(datalayer_system)
         if datalayer_client  is None:
-            print("WARNING Connecting", datalayer_client_connection_string, "failed.")
+            print("WARNING Connecting", datalayer_client_connection_string, "failed.", flush=True)
             sys.exit(1)
 
         with datalayer_client:  # datalayer_client is closed automatically when leaving with block
@@ -59,18 +58,18 @@ if __name__ == '__main__':
                 "python-datalayer-client-sub", publish_interval=100)
 
             if subscription_properties is None:
-                print("ERROR create_properties() returned: None")
+                print("ERROR create_properties() returned: None", flush=True)
                 sys.exit(1)
 
             with subscription_properties:
                 result, subscription = datalayerclient.app.subscribe_single(
                     datalayer_client, subscription_properties)
                 if result != Result.OK:
-                    print("ERROR subscribe_single() failed with:", result)
+                    print("ERROR subscribe_single() failed with:", result, flush=True)
                     sys.exit(1)
 
                 if subscription is None:
-                    print("ERROR subscribe_single() returned None")
+                    print("ERROR subscribe_single() returned None", flush=True)
                     sys.exit(1)
 
                 with subscription:
@@ -80,11 +79,11 @@ if __name__ == '__main__':
                 result, subscription = datalayerclient.app.subscribe_multi(
                     datalayer_client, subscription_properties)
                 if result != Result.OK:
-                    print("ERROR subscribe_multi() failed with:", result)
+                    print("ERROR subscribe_multi() failed with:", result, flush=True)
                     sys.exit(1)
 
                 if subscription is None:
-                    print("ERROR subscribe_multi() returned None")
+                    print("ERROR subscribe_multi() returned None", flush=True)
                     sys.exit(1)
 
                 with subscription:
@@ -97,6 +96,6 @@ if __name__ == '__main__':
 
     # Attention: Doesn't return if any provider or client instance is still running
     stop_ok = datalayer_system.stop(False)
-    print("System Stop", stop_ok)
+    print("System Stop", stop_ok, flush=True)
 
     sys.exit(0)

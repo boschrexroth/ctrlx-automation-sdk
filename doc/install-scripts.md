@@ -1,53 +1,26 @@
-An App Build Environment instance created by ctrlX WORKS or based on the scripts under the SDK folder public/scripts/environment has a set of important install scripts in the directory __/home/boschrexroth/.__
+The directory __/home/boschrexroth/scripts/__ of an App Build Environment contains a set of important scripts.
 
-## install-sdk.sh
+In the file `/home/boschrexroth/scripts/README.md` all files are listed and described. 
 
-!!! important
-    Starting this script must be the first step using a new App Build Environment. 
+__Hint:__ The ctrlX AUTOMATION SDK contains these scripts also in the folder scripts/environment/scripts.
 
-This script downloads the ctrlX AUTOMATION SDK archive from github, extracts the content into the actual directory, sets some x permission flags and installs the ctrlx-datalayer debian package.
+## Some important scripts
 
-Also snapcraft is installed because in the initialization phase during the first boot this snap cannot be installed.
-
-Here the archive is directly installed into the home directory:
-
-    cd 
-    ./install-sdk.sh
-    cd ctrlx-automation-sdk
-
-## install-deb.sh
+### install-sdk.sh
 
 !!! important
-    Calling this script once is mandatory for architectural cross-builds of C++ apps.
-
-    cd
-    ./install-deb.sh
+    Run this script first. 
     
-Important libraries for the Data Layer communication are installed for both amd64 and arm64 (aarch64) architecture.
+In addition to the ctrlX AUTOMATION SDK, the ctrlx-datalayer debian package, snapcraft and libraries for cross build are installed.
 
-## install-go.sh
+    ~/scripts/install-sdk.sh
 
-If you want to develop apps in golang call this script:
+Now the directory ctrlx-automation-sdk/ contains the files of the ctrlX AUTOMATION SDK.
 
-    cd
-    ./install-go.sh
+### install-go, -dotnet, -nodejs
 
-## install-dotnet.sh
+These scripts are installing programming language dependend packages to be able to build apps in the according language.
 
-If you want to develop apps in C# call this script:
+### install-ctrlx-os-dev-tools.sh
 
-    cd
-    ./install-dotnet.sh
-
-## install-nodejs-npm.sh
-
-If you want to develop apps in Node.js call this script:
-
-    cd
-    ./install-nodejs-npm.sh
-
-The Node.js snap inclusively the Node Package Manager npm ist installed.
-
-## install-snapcraft.sh
-
-This script installs snapcraft, it is called implicitly by the other scripts.
+This script installs packages needed to build a ctrlX CORE image.

@@ -92,7 +92,7 @@ nav:
       - Guidelines:
         - Package Assets: package-assets.md
         - App Developer Guideline: appdevguide.md
-        - Data Persistance: persistdata.md
+        - App persist configurations: persistdata.md
         - License Management: licensing.md
         - Service-to-Service Authentication: s2sauth.md
         - Using Flatbuffers in IEC 61131-3 Code: fbs2plc.md
@@ -108,10 +108,11 @@ nav:
       - QEMU Virtual Machine: setup_qemu_ubuntu.md
       - VirtualBox Virtual Machine: setup_windows_virtualbox_ubuntu.md
       - Native Ubuntu 20.04: setup_ubuntu.md
+      - Install Sources from github: install-sources-from-github.md
       - Toolchain:
         - Px.exe as Proxy on a Windows Host: px.md
         - Connecting QEMU VMs and ctrlX CORE: connecting_qemu_vm_ctrlx.md
-        - Working with App Builder Environments (QEMU VMs): working-with-app-builder-envs.md
+        - Working with App Build Environments (QEMU VMs): working-with-app-builder-envs.md
         - SSH Connection: ssh_connection.md
         - Visual Studio Code: vscode.md
         - .NET: dotnet.md

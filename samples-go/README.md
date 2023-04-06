@@ -2,12 +2,13 @@
 
 ## Find out the supported samples
 
-
 ### Basic Samples
 
 * [ctrlX Data Layer Client](./datalayer.client/README.md)
+* [ctrlX Data Layer Client Extensions](./datalayer.client.ext/README.md)
 * [ctrlX Data Layer Provider](./datalayer.provider/README.md)
 * [Hello Webserver](./hello.webserver/README.md)
+* [WebDAV Client](./webdav.client/README.md)
 
 ### Advanced Samples
 

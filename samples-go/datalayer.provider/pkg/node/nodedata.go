@@ -75,16 +75,27 @@ func StartNodeDataHandler(d NodeDataHandler) {
 			return
 		}
 		select {
-		case event := <-d.Node().Channels().OnCreate:
+		case event, ok := <-d.Node().Channels().OnCreate:
+			if !ok {
+				return
+			}
 			fmt.Println("event: oncreate: ", d.Name())
 			event.Callback(datalayer.Result(0), nil)
 
-		case event := <-d.Node().Channels().OnRemove:
+		case event, ok := <-d.Node().Channels().OnRemove:
+			if !ok {
+				return
+			}
+
 			fmt.Println("event: OnRemove: ", d.Name())
 			event.Callback(datalayer.ResultUnsupported, nil)
 
-		case event := <-d.Node().Channels().OnBrowse:
+		case event, ok := <-d.Node().Channels().OnBrowse:
 			func() {
+				if !ok {
+					return
+				}
+
 				newData := datalayer.NewVariant()
 				defer datalayer.DeleteVariant(newData)
 				newData.SetArrayString([]string{})
@@ -92,8 +103,12 @@ func StartNodeDataHandler(d NodeDataHandler) {
 				event.Callback(datalayer.Result(0), newData)
 			}()
 
-		case event := <-d.Node().Channels().OnRead:
+		case event, ok := <-d.Node().Channels().OnRead:
 			func() {
+				if !ok {
+					return
+				}
+
 				newData := datalayer.NewVariant()
 				defer datalayer.DeleteVariant(newData)
 				d.Value().Copy(newData)
@@ -101,13 +116,21 @@ func StartNodeDataHandler(d NodeDataHandler) {
 				event.Callback(datalayer.Result(0), newData)
 			}()
 
-		case event := <-d.Node().Channels().OnWrite:
+		case event, ok := <-d.Node().Channels().OnWrite:
+			if !ok {
+				return
+			}
+
 			event.Data.Copy(d.Value())
 			fmt.Println("event: OnWrite: ", d.Name())
 			event.Callback(datalayer.Result(0), event.Data)
 
-		case event := <-d.Node().Channels().OnMetadata:
+		case event, ok := <-d.Node().Channels().OnMetadata:
 			func() {
+				if !ok {
+					return
+				}
+
 				fmt.Println("event: OnMetadata: ", d.Name())
 
 				r, v := d.OnMetadata()

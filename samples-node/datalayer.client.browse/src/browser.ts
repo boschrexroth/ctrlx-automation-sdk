@@ -1,4 +1,4 @@
-// Copyright (c) 2021-2022 Bosch Rexroth AG
+// Copyright (c) 2021-2023 Bosch Rexroth AG
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the 'Software'), to deal
@@ -44,9 +44,9 @@ class Browser {
         try {
             const variant = await this.client.browse(address);
             const children = variant.value as Array<string>;
-            for (var i = 0; i < children.length; i++) {
+            for (let i = 0; i < children.length; i++) {
                 const childAddress = address === '' ? children[i] : `${address}/${children[i]}`;
-                await this.traverse(childAddress, children[i], indent, i == children.length - 1);
+                await this.traverse(childAddress, children[i], indent, i === children.length - 1);
             }
         } catch (error) {
             // do nothing in case of error

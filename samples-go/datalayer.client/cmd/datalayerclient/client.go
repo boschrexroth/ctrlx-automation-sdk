@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2021-2022 Bosch Rexroth AG
+ * Copyright (c) 2021-2023 Bosch Rexroth AG
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -65,12 +65,13 @@ func main() {
 
 	for c.IsConnected() {
 		callClient.Run()
-		time.Sleep(1.0)
+		time.Sleep(1 * time.Second)
 	}
+
+	dlc.DeleteCallDatalayerClient(callClient)
 
 	system.Stop(false)
 	fmt.Println("INFO stopping Data Layer system")
-
 }
 
 // This is the connection string for TCP in the format: tcp://USER:PASSWORD@IP_ADDRESS:2070?sslport=SSL_PORT

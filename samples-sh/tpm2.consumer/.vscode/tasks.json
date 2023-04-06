@@ -12,12 +12,11 @@
             "type": "shell",
             "command": "snapcraft --target-arch='${input:arch}';snapcraft clean"
         }
-        
     ],
     "inputs": [
         {
             "id": "arch",
-            "type":"pickString",
+            "type": "pickString",
             "description": "Architecture",
             "options": [
                 "amd64",

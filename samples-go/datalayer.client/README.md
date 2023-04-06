@@ -30,11 +30,15 @@ Build the executable with `go build ./cmd/...`
 
 Build the snap with `snapcraft --destructive-mode`
 
+## Runtime
+
+This application needs "sdk-cpp-alldata" as provider.
+
 ## License
 
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

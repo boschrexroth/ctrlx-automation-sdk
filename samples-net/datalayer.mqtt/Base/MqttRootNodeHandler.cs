@@ -1,7 +1,7 @@
-﻿/*
+/*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -38,17 +38,20 @@ namespace Samples.Datalayer.MQTT.Base
     /// </summary>
     internal class MqttRootNodeHandler : MqttBaseNodeHandler
     {
-
         /// <summary>
-        /// Creates a handler
+        ///  Creates a handler
         /// </summary>
+        /// <param name="client"></param>
+        /// <param name="provider"></param>
+        /// <param name="brokerAddress"></param>
         /// <param name="baseAddress"></param>
         /// <param name="name"></param>
-        public MqttRootNodeHandler(IClient client, IProvider provider, string baseAddress, string name) :
+        public MqttRootNodeHandler(IClient client, IProvider provider, string brokerAddress, string baseAddress, string name) :
                 base(baseAddress, name)
         {
             Client = client;
             Provider = provider;
+            MqttClient = new MqttClientWrapper() { BrokerAddress = brokerAddress };
         }
 
         #region Properties
@@ -71,7 +74,7 @@ namespace Samples.Datalayer.MQTT.Base
         /// <summary>
         /// Gets the MQTT client
         /// </summary>
-        public MqttClientWrapper MqttClient { get; } = new MqttClientWrapper();
+        public MqttClientWrapper MqttClient { get; private set; }
 
         /// <summary>
         /// Gets the Test Handler
@@ -88,14 +91,12 @@ namespace Samples.Datalayer.MQTT.Base
         /// <returns></returns>
         public override DLR_RESULT Start()
         {
-
             //Wait until client connected
             if (WaitUntilConnected(Client, TimeoutMillis).IsBad())
             {
                 Console.WriteLine("Data Layer client could not be connected!");
                 return DLR_RESULT.DL_FAILED;
             }
-
 
             //Create child handlers and add
             Handlers.Add(new MqttClientNodeHandler(this, this));

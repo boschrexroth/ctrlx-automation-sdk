@@ -2,8 +2,7 @@
 
 The sample __hello-webserver__ contains simple webserver.
 
-## Indroduction
-
+## Introduction
 
 ## Pre-requisites
 

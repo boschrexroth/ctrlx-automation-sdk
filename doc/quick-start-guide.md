@@ -2,7 +2,7 @@ With the help of this guide you will be able to build your first snap with one o
 
 ## Prerequisites
 
-* Install ctrlX WORKS >= 1.14 with function 'App Build Environment' on your Windows host computer
+* Install ctrlX WORKS >= 1.20 with function 'App Build Environment' on your Windows host computer
  
 * If your Windows host computer is behind a proxy server, install and run [PX.exe](px.md). 
 
@@ -21,9 +21,11 @@ On password prompt enter `boschrexroth`
 
 * __Install the latest ctrlX AUTOMATION SDK from github__
 
-From the home directory call this script:
+Call this script:
 
-    ./install-sdk.sh
+    ~/scripts/install-sdk.sh
+
+The script downloads downloads ctrlx-automation-sdk.zip from github and unzips it to the folder /home/boschrexroth/ctrlx-automation-sdk/
 
 * __Change to project folder /home/boschrexroth/ctrlx-automation-sdk/samples-cpp/datalayer.register.node__
 
@@ -37,7 +39,9 @@ To build a snap for a ctrlX CORE enter:
 
     ./build-snap-arm64.sh
 
-* __From your Windows host copy the snaps to your local file system__
+As a result a snap file `sdk-cpp-registernode_...._amd64.snap` respectively `sdk-cpp-registernode_...._arm64.snap` will be created.
+
+* From your __Windows host__ copy the snaps from your App Build Environment to your Windows file system__
 
 Start cmd.exe and enter this command:
 

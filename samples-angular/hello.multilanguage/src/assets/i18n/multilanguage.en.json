@@ -1,0 +1,27 @@
+{
+  "doc": {
+    "pageTitle": "Multilanguage in ctrlX",
+    "title": "This is an example application for the usage of ngx-translate",
+    "table": {
+      "id": "Id",
+      "author": "Author ",
+      "title": "Title",
+      "category": "Category",
+      "price": "Price"
+    },
+    "book": {
+      "Title-1": "Hercule Poirot",
+      "Category-1": "Detective story",
+      "Title-2": "September",
+      "Category-2": "Romance novel",
+      "Title-3": "The Lord of the Rings",
+      "Category-3": "Fantasy",
+      "Title-4": "The Lives of Brian",
+      "Category-4": "Biography",
+      "Title-5": "Daytrading",
+      "Category-5": "Guidebook",
+      "Title-6": "Chess",
+      "Category-6": "Reference book"
+    }
+  }
+}

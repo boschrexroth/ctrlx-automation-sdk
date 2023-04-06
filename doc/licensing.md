@@ -30,20 +30,20 @@ Please refer to the App Development Guide for further information.
 
 
 
-# 2 Introduction <a name="introduction"></a>
+# 1 Introduction <a name="introduction"></a>
 
-From a user's perspective, device licenses are managed by the Bosch Rexroth Licensing Center [https://licensing.boschrexroth.com](https://licensing.boschrexroth.com). 
+Licenses are issued by the Bosch Rexroth Licensing Center [https://licensing.boschrexroth.com](https://licensing.boschrexroth.com). 
 
-Using the portal it is possible to assign licenses to a device and to download a capability response, which contains all assigned licenses for a specific device. The downloaded capability response can than be deployed to the corresponding device.
+There a user can assign licenses to devices and can download a capability response, which contains all assigned licenses for a specific device. The downloaded capability response can than be deployed on the corresponding device.
 
-The ctrlX CORE User Interfaces therefore provides a page which allows to upload a capability response and to check the currently available licenses on the device. For developers, the ctrlX CORE offers a restful API via an internal unix domain socket which can be used by an app to request and release a specific license.
+The ctrlX CORE User Interfaces comes with a screen to upload the provided capability response and the possibility to check the currently available licenses on the device. The license manager feature on the ctrlX CORE offers a restful API via an internal unix domain socket, that can be used by Apps to request and release a specific license.
 
-# 3 License Enforcement <a name="enforcement"></a>
+# 2 License Enforcement <a name="enforcement"></a>
 
-To integrate an app into the license management, please follow the instructions below.
+In order to integrate license enforcement into your App, please follow the instructions below.
 
-## 3.1 Add Content Plug to snapcraft.yaml (<a name="plug"></a>)
-To get access to the unix domain socket that provides the restful API, add the following content plug definition to the snapcraft.yaml:
+## 2.1 Add Content Plug to snapcraft.yaml (<a name="plug"></a>)
+To get access to the unix domain socket that provides the restful API, add the following content plug to the snapcraft.yaml:
 
 ```yaml
 plugs:
@@ -53,15 +53,14 @@ plugs:
     target: $SNAP_DATA/licensing-service
 ``` 
 
-This will create a folder "license-service" during installation of the app on the ctrlX CORE and provide access to the unix domain socket "licensing-service.sock" which will be located in the folder.
+This will create a folder "license-service" during installation of the App on the ctrlX CORE and provide access to the unix domain socket "licensing-service.sock".
 
-## 3.2 Adapt package-manifest.json (<a name="manifest"></a>)
+## 2.2 Adapt package-manifest.json (<a name="manifest"></a>)
 
-The app shall provide information in the package-manifest about each license that is supported. Description and title shall be human readable.
-The "required" flag indicates whether a license is mandatory to use the application. Set the flag to true when the license is required and to false, when the license is optional. 
+The App shall provide a human readable text and a description with it´s package-manifest.json for each license that the App supports.
+The "required" flag indicates, if the license is necessary for operation. Optional licenses (flag is false) extends the functionality of an application. 
 
-
-```json
+``` json
 "licenses": [
     {
       "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",
@@ -76,27 +75,36 @@ The "required" flag indicates whether a license is mandatory to use the applicat
       "required": false
     }
   ],
-```
 
-## 3.3 Use REST API to enforce licenses <a name="rest"></a>
+  ```
 
 
-### 3.3.1 License Integration
 
-How an app reacts when no license is present or the license is removed during runtime, can be freely chosen by the app. Nevertheless, to provide a unique user experience across multiple apps, the following best practices are recommended.
 
-The app should acquire the license when started or (each time) when a function is called which requires a license. Additionally, the app should check whether the license is still present on the device in regular intervals or if the license has been removed or expired. Therefore, either release and re-acquire the license or use the getCapabilities() function. This applies for both, mandatory and optional, types of licenses.
+## 2.3 Use REST API to Enforce Licenses <a name="rest"></a>
 
-In case a license is not required anymore - e.g. when the app is stopped or uninstalled - the license should be released so that it is returned to the license pool and can be acquired by another app. Otherwise, the license will become available again only after a reboot of the device.
 
-In case a license is missing, a warning or an error shall be displayed and/or logged and the user should be informed which licences are required to execute the specific functionality of the app.
+### 2.3.1 License Integration
+
+A license model must be defined for each ctrlX CORE App, so that users have the same experience across all Apps when it comes to licensing. The App shall enforce licensing, according to the App's business model as part of the contract addendum.
+
+Each software license (SWL) bought by a customer generates one or more capabilities for an App on a ctrlX CORE.
+Every App has to aquire a license capability from the ctrlX CORE license pool when it starts, and while it is running to check if the license is activated or removed.
+One or more licenses may be defined for a particular App.  In case of multiple licenses, each license has to be aquired separately (unique license ID for each license) from the ctrlX License Manager.
+
+If the license is not needed anymore, it should be returned to the license pool. This is also necessary if an App is stopped or uninstalled. 
+If an application crashes and the license was not returned properly, a reboot of the device is required. The reboot resets the license pool and all licenses can be aquired again. 
+
+It is recommended to return the license back to the pool to re-aquire it again from time to time. So the App can detect if an license was removed or has expired. With this method, the App can detect license expiration very easily, and it does not need to handle expiration time by itself.
+
+If a license is missing, an according warning or error must be shown, and the user should be informed, which licences are defined for the App.
 
  
 !!! important
     On the ctrlX CORE, when enforcing licenses the use of the license management is mandatory. Individual implementations are not permitted.
 
 
-### 3.3.2 License Manager API
+### 2.3.2 License Manager API
 
 The licensing API is available on GitHub: [https://boschrexroth.github.io/rest-api-description](https://boschrexroth.github.io/rest-api-description)
 
@@ -116,34 +124,39 @@ Implementing this API, an app is able to
 
 
 
-### 3.3.3 Acquiring & releasing a license
+### 2.3.3 License ID
 
-Acquiring a license generates a unique license ID for that particular license. 
+The API call to aquire a license generates a unique license ID for that particular license
+name. This unique ID can be stored in temp file. 
 
 
 > ![](images/licensing2.png)
 
-This ID is required to release the license. Therefore, this ID should be stored in a directory which is not affected when your application goes into a faulty state and needs to be restarted. The usage of /tmp is recommended for this.
-
-!!! hint
-    Know more about mounting temporary disk in memory system type:tmpfs from snap documentation.
+Hint: Know more about mounting temporary disk in memory system type:tmpfs from snap documentation.
 
 
-### 3.3.4 Available licenses on the device (activated capabilities)
-Upon request, an app may retrieve the list of available licenses on the device including all details (e.g. expiration, counter, ...). This may be used to check whether a specific license is available (and not in use) before trying to acquire it.
-Nevertheless, this is optional - it is sufficient to just try to acquire a license and then check whether the acquisition request was successful.
+### 2.3.4 Capability Response
 
-Sample response:
+The capability response contains list of activated license capabilities for the particular ctrlX CORE device. The App shall verify / check the licenses, which are assigned to the App, with the licenses from capabilities from response.
+
+Sample capability response:
 
 > ![](images/licensing1.png)
 
-### 3.3.5 Update license status
-The API allows to upload a capability response from the license portal to update the license status on the device (e.g. add new licenses). This functionality is not required by an app itself.
 
-# 4 Licensing Modes  <a name="modes"></a>
+# 3 Licensing Modes  <a name="modes"></a>
 
-## 4.1 Overview <a name="overview"></a>
-The license management on the **ctrlX CORE** supports several different licensing modes. THe following table gives an overview about the license modes.
+## 3.1 Overview <a name="overview"></a>
+
+On a **ctrlX CORE** controller, an App specific license is provided in the ctrlX CORE License Manager, if an according license capability response file was uploaded to the ctrlX CORE.
+The capability response file contains the App specific key, for example , and the License Manager returns information for this license key.
+
+On a **ctrlX CORE<sup>virtual</sup>**, currently no licenses for productive use are available .
+To allow a user to run and evaluate an App that enforces licensing on the ctrlX CORE<sup>virtual</sup>, the runtime on the ctrlX CORE<sup>virtual</sup> is limited to four hours
+
+The following table lists the three different license mode on a ctrlX CORE and the ctrlX CORE<sup>virtual</sup>, together with additional information which is provided by the License Manager for the specific license type.
+
+
 
 | License Mode | Target | Key | Usage | Additional information |
 |---|---|---|---|---|
@@ -152,11 +165,10 @@ The license management on the **ctrlX CORE** supports several different licensin
 | 10 Day Trial License |ctrlX CORE |`SWL_XCR_{YOUR_APP_LICENSE_CODE}` | optional |`isPermanent` flag is `false`
 |Four Hour Engineering Demo License |ctrlX CORE<sup>virtual</sup>|`SWL_XCR_ENGINEERING_4H`|optional|(none specific)
 
-As displayed in the table, there is only the "four hour engineering demo license" available on the **ctrlX CORE<sup>virtual</sup>**, which allows to evaluate a new app for a limited time (the trlX CORE<sup>virtual</sup> is terminated after four hours to prevent productive use)
 
-The different license modes, and the expected behaviour of the App for these modes, are briefly described below.
+These different license modes, and the expected behaviour of the App for these modes, are briefly described below.
 
-## 4.2 ctrlX CORE Main License  <a name="main"></a>
+## 3.2 ctrlX CORE Main License  <a name="main"></a>
 
 **Purpose:** Standard License
 
@@ -172,7 +184,7 @@ The different license modes, and the expected behaviour of the App for these mod
 - When no standard app specific license is available on the device, an app shall only run if one of the other licenses is active.
 
 
-## 4.3 ctrlX CORE Temporary Usage Rights (Emergency Mode)  <a name="emergency"></a>
+## 3.3 ctrlX CORE Temporary Usage Rights (Emergency Mode)  <a name="emergency"></a>
 
 **Purpose:** Avoid machine downtime
 
@@ -187,38 +199,38 @@ The different license modes, and the expected behaviour of the App for these mod
 **Expected App Behaviour:**
 
  - Support of this license is **mandatory**.
- - The app is able to detect whether the system runs in this mode by evaluating the `tampered` flag in the response to the acquisition request (the flag is set to `true`)
- - When this mode is active, the app should work as if a standard license is available.
+ - The App is informed with the `tampered` flag which is set to `true` in the response when acquiring such a license from the License Manager. 
 
-## 4.4 ctrX CORE 10 Day Trial License  <a name="trial"></a>
+
+## 3.4 ctrX CORE 10 Day Trial License  <a name="trial"></a>
 
 **Purpose:** Test Mode on ctrlX CORE Hardware
 
 **Description:**
-- The 10 day trial license allows to use all apps - which support this license mode - for a restricted time for testing purposes.
-- The license is intended for test and evaluation only and not for use in a production environment
-- The license will automatically expire after 10 days.
-- Other than the temporary usage rights mode, 10 day trial licenses may be used (consecutively) in case an according contractual agreement is available for all involved parties (Bosch Rexroth, Customer, ctrlX World Partner).
+- Users can aquire a 10 day test license for ctrlX CORE, which allows the usage of all ctrlX CORE Apps for this time.
+- It is intended for test and evaluation only, and not for use in a production environment
+- This license will automatically expire after 10 days.
+- Differently from the Temporary Usage Rights (which is av ailable to avoid machine downtime in case of broken devices), several 10 Day Trial Licenses can be used one after another on a device, if an according contractual agreement is available for all involved parties (Bosch Rexroth, Customer, ctrlX World Partner).
 
 **Expected App Behaviour:**
 - Support of this mode is **optional**.
-- The app is able to detect whether the system runs in this mode by evaluating the `isPermanent` flag in the response to the acquisition request (the flag is set to `false`)
- - When this mode is active, the app should work as if a standard license is available.
+- The App is informed with the `isPermanent` flag set to `false` in the response when acquiring such a license from the License Manager. 
 
 
-## 4.5 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup> <a name="virtual"></a>
+## 3.5 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup> <a name="virtual"></a>
 
-**Purpose**: Evaluation mode on a ctrlX CORE<sup>virtual</sup>
+**Purpose**: Demonstration Mode on a virtual control (no ctrlX CORE hardware)
+
 **Description**:
 -  An according special license key (`SWL_XCR_ENGINEERING_4H`) indicates that currently the limited evaluation mode is active
 - After 4 hours the virtual device shuts down itself to prevent a productive use.
 
 **Expected App Behaviour:**
 - Support of this mode is **optional**.
-- In order to support this non-productive mode, apps must check for the license `SWL_XCR_ENGINEERING_4H`, which guarantees that the runtime is limited to 4 hours.
+- In order to support this non-productive mode, Apps must check for the license `SWL_XCR_ENGINEERING_4H`, which guarantees that the runtime is limited to 4 hours.
 
-##  4.6 Additional License Mode: ctrX CORE 3 Month Test License  <a name="test"></a>
-**Purpose:** Time limited test and evaluation of apps which are in beta/prototype phase (B-Sample phase)
+##  3.6 Additional License Mode: ctrX CORE 3 Month Test License  <a name="test"></a>
+**Purpose:** Time limited test and evaluation of Apps which are in beta/prototype phase (B-Sample phase)
 
 **Description:**
 - This mode is not intended / available for partner apps by default.
@@ -226,4 +238,4 @@ The different license modes, and the expected behaviour of the App for these mod
 
 
 **Copyright**
-Copyright (c) 2022 Bosch Rexroth AG
+Copyright (c) 2022-2023 Bosch Rexroth AG

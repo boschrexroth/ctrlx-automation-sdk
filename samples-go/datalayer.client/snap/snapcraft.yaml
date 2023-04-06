@@ -23,7 +23,7 @@ parts:
   client:
     plugin: go
     source: .
-    build-snaps: ['go/1.17/stable']
+    build-snaps: ['go/1.19/stable']
     stage-packages:
       - libzmq5
       - ctrlx-datalayer

@@ -34,15 +34,15 @@ def rncb(result: Result, items: typing.List[ctrlxdatalayer.subscription.NotifyIt
 
     now = datetime.now().time()
     print(now, "----------------------------------------------------------")
-    print("ResponseNotifyCallback", result)
+    print("ResponseNotifyCallback", result, flush=True)
     if result != Result.OK:
         return
 
     if items is None:
-        print("No items")
+        print("No items", flush=True)
         return
 
-    print("Number of items", len(items))
+    print("Number of items", len(items), flush=True)
     if len(items) <= 0:
         return
 
@@ -54,22 +54,22 @@ def rncb(result: Result, items: typing.List[ctrlxdatalayer.subscription.NotifyIt
         print("  value:", item.get_data().get_float32())
         print("  timestamp:", item.get_timestamp())
         print("  datetime:", ctrlxdatalayer.subscription.to_datetime(
-            item.get_timestamp()))
+            item.get_timestamp()), flush=True)
         n = n + 1
 
 
 def subscribe_single(client: Client, subscription_properties: Variant):
 
-    print("subscribe_single() +++++++++++++++++++++++++++++++++++++++++++++++")
+    print("subscribe_single() +++++++++++++++++++++++++++++++++++++++++++++++", flush=True)
 
     result, subscription = client.create_subscription_sync(
         subscription_properties, rncb)
     if result != Result.OK:
-        print("ERROR create_subscription_sync() failed with:", result)
+        print("ERROR create_subscription_sync() failed with:", result, flush=True)
         return result, None
 
     if subscription is None:
-        print("ERROR create_subscription_sync() returned: None")
+        print("ERROR create_subscription_sync() returned: None", flush=True)
         return Result.CREATION_FAILED, None
 
     address = "framework/metrics/system/cpu-utilisation-percent"
@@ -96,21 +96,21 @@ def get_address_list(client: Client, addressBase: str):
 
 def subscribe_multi(client: Client, subscription_properties: Variant):
 
-    print("subscribe_multi() ++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("subscribe_multi() ++++++++++++++++++++++++++++++++++++++++++++++++", flush=True)
 
     addressBase = "framework/metrics/system/"
     addressList = get_address_list(client, addressBase)
     if addressList is None:
-        print("ERROR No sub nodes found:", addressBase)
+        print("ERROR No sub nodes found:", addressBase, flush=True)
         return Result.FAILED, None
 
     result, subscription = client.create_subscription_sync(subscription_properties, rncb)
     if result != Result.OK:
-        print("ERROR create_subscription_sync() failed with:", result)
+        print("ERROR create_subscription_sync() failed with:", result, flush=True)
         return result, None
 
     if subscription is None:
-        print("ERROR create_subscription_sync() returned: None")
+        print("ERROR create_subscription_sync() returned: None", flush=True)
         return Result.CREATION_FAILED, None
 
     result = subscription.subscribe_multi(addressList)

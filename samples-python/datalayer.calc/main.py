@@ -49,7 +49,7 @@ def start_new_basic_arithmetic_operation(
         basicArithmeticOperation.unsubscribe()
         print("WARN Starting Data Layer subscriptions for",
               addr_root + "/" + id, "failed with: " + str(result))
-        print("INFO Retry in 5s")
+        print("INFO Retry in 5s", flush=True)
         time.sleep(5.0)
     pass
 
@@ -64,8 +64,7 @@ if __name__ == '__main__':
     print("- Provides result as Data Layer Node")
     print()
     print("Will be restarted by the snap system on error.")
-    print("===========================================================================")
-    print()
+    print("===========================================================================", flush=True)
 
     faulthandler.enable()
 
@@ -76,31 +75,40 @@ if __name__ == '__main__':
     # Enter ip, user, password etc. if they differ from your application.
     client, client_connection_string = get_client(system)
     if client is None:
-        print("ERROR Could get ctrlX Datalayer client connection:", client_connection_string)
+        print("ERROR Could get ctrlX Datalayer client connection:", client_connection_string, flush=True)
         system.stop(False)
         sys.exit(1)
-    print("INFO ctrlX Datalayer client connection succeeded:", client_connection_string)
+    print("INFO ctrlX Datalayer client connection succeeded:", client_connection_string, flush=True)
 
     # Here default argument values are used: ip="192.168.1.1", user="boschrexroth", password="boschrexroth", ssl_port=443
     # Enter ip, user, password etc. if they differ from your application.
-    provider, provider_connection_string = get_provider(system)
+    provider, provider_connection_string = get_provider(system, ip="10.52.244.109",
+               user="boschrexroth",
+               password="boschrexroth",
+               ssl_port=443)
     if provider is None:
-        print("ERROR Could get ctrlX Datalayer provider connection:", provider_connection_string)
+        print("ERROR Could get ctrlX Datalayer provider connection:", provider_connection_string, flush=True)
         provider.close()
         client.close()
         system.stop(False)
         sys.exit(2)
 
-    print("INFO ctrlX Datalayer provider connection succeeded:", provider_connection_string)
+    print("INFO ctrlX Datalayer provider connection succeeded:", provider_connection_string, flush=True)
 
     update_time = 1.0
     bao = BasicArithmeticOperations(
         provider, client, addr_root, "1", "+", int(update_time)*1000)
-    bao.register_nodes()
+    result = bao.register_nodes()
+    if result != ctrlxdatalayer.variant.Result.OK:
+        print("ERROR Registering nodes failed with", str(result), flush=True)
+        provider.close()
+        client.close()
+        system.stop(False)
+        sys.exit(2)
 
     result = bao.subscribe()
     if result != ctrlxdatalayer.variant.Result.OK:
-        print("ERROR Subscribing values failed with", str(result))
+        print("ERROR Subscribing values failed with", str(result), flush=True)
         provider.close()
         client.close()
         system.stop(False)
@@ -119,7 +127,7 @@ if __name__ == '__main__':
         time.sleep(update_time)
 
     print("ERROR Client connection", client_connection_string,
-          "disconnected - exiting application. Will be restarted automatically.")
+          "disconnected - exiting application. Will be restarted automatically.", flush=True)
 
     bao.unsubscribe()
     provider.close()
@@ -127,6 +135,6 @@ if __name__ == '__main__':
 
     # Attention: Doesn't return if any provider or client instance is still running
     stop_ok = system.stop(False)
-    print("System Stop", stop_ok)
+    print("System Stop", stop_ok, flush=True)
 
     sys.exit(3)

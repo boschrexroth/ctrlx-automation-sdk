@@ -38,7 +38,7 @@ close_app = False
 def handler(signum, frame):
     global close_app
     close_app = True
-#    print('Here you go signum: ', signum, close_app)
+    # print('Here you go signum: ', signum, close_app, flush=True)
 
 
 if __name__ == '__main__':
@@ -64,33 +64,32 @@ if __name__ == '__main__':
     print("Precondition:")
     print("Build and install the snap 'sdk-cpp-alldata' from the SDK folder")
     print("samples-cpp/datalayer.provider.all-data")
-    print("========================================================================")
-    print()
+    print("========================================================================", flush=True)
 
     with ctrlxdatalayer.system.System("") as datalayer_system:
-        print("INFO Starting Data Layer system")
+        print("INFO Starting Data Layer system", flush=True)
         datalayer_system.start(False)
 
         datalayer_client, connection_string = get_client(datalayer_system)
         if datalayer_client is None:
-            print("WARNING Connecting", connection_string, "failed.")
+            print("WARNING Connecting", connection_string, "failed.", flush=True)
             datalayer_system.stop(False)
             sys.exit(1)
 
-        print("INFO Connecting", connection_string, "succeeded.")
+        print("INFO Connecting", connection_string, "succeeded.", flush=True)
 
         with datalayer_client:  # datalayer_client is closed automatically when leaving with block
 
-            print("INFO Creating Python Data Layer Client instance")
+            print("INFO Creating Python Data Layer Client instance", flush=True)
             calldatalayerclient = CallDataLayerClient(datalayer_client)
 
             while datalayer_client.is_connected() and not close_app:
                 calldatalayerclient.run()
                 time.sleep(1.0)
 
-            print("ERROR Data Layer is NOT connected")
+            print("ERROR Data Layer is NOT connected", flush=True)
 
         print("INFO Stopping Data Layer system")
         # Attention: Doesn't return if any provider or client instance is still runnning
         stop_ok = datalayer_system.stop(False)
-        print("System Stop", stop_ok)
+        print("System Stop", stop_ok, flush=True)

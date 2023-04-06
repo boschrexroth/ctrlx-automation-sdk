@@ -178,7 +178,7 @@ class NodeManagerAllData:
 
     def create_single_node(self, addressBranch: str, addressType : str, name: str, unit: str, description: str, dynamic: bool, data: Variant):
         address = addressBranch + name
-        print("Creating", address)
+        print("Creating", address, flush=True)
 
         if is_blank(addressType):
             addressType = "types/datalayer/" + name

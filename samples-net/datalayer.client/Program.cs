@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -45,11 +45,11 @@ namespace Samples.Datalayer.Client
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Create a connection string with the parameters according to your environment (see Remote class)
-            var connectionString = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
+            // Create a remote address with the parameters according to your environment
+            var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
             // Create the client with remote connection string
-            using var client = system.Factory.CreateClient(connectionString);
+            using var client = system.Factory.CreateClient(remote);
             Console.WriteLine("ctrlX Data Layer client created.");
 
             // Check if client is connected
@@ -66,7 +66,6 @@ namespace Samples.Datalayer.Client
                 .SetPublishIntervalMillis(1000)
                 .SetErrorIntervalMillis(1000)
                 .Build();
-
 
             // Define the subscription properties by using Flatbuffers class SubscriptionProperties. 
             // var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);

@@ -1,7 +1,7 @@
-﻿/*
+/*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,6 @@ SOFTWARE.
 using Datalayer;
 using Samples.Datalayer.MQTT.Base;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Samples.Datalayer.MQTT.Client
@@ -35,13 +34,6 @@ namespace Samples.Datalayer.MQTT.Client
     /// </summary>
     internal class MqttClientNodeHandler : MqttBaseNodeHandler
     {
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // !!! CHANGE THIS TO YOUR ENVIRONMENT !!!
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        private static readonly IPAddress BrokerAddress = IPAddress.Parse("192.168.1.200");
-        private static readonly string Username = "";
-        private static readonly string Password = "";
-
         /// <summary>
         /// Creates a handler
         /// </summary>
@@ -94,7 +86,7 @@ namespace Samples.Datalayer.MQTT.Client
             //...
 
             //server-address
-            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.ServerAddress, new Variant(BrokerAddress.ToString()));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.BrokerAddress, new Variant(Root.MqttClient.BrokerAddress));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -118,7 +110,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //username
-            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Username, new Variant(Username));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Username, new Variant(Root.MqttClient.Username));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -126,7 +118,7 @@ namespace Samples.Datalayer.MQTT.Client
             Nodes.Add(node.Address, node);
 
             //password
-            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Password, new Variant(Password));
+            (result, node) = Root.Provider.CreateVariableNode(this, FullAddress, Names.Password, new Variant(Root.MqttClient.Password));
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -209,16 +201,17 @@ namespace Samples.Datalayer.MQTT.Client
                 return;
             }
 
+            //We're only interested in changed values
             var trimmedWriteValue = writeValue.Trim();
             if (wrappedNode.Value == trimmedWriteValue)
             {
-                result.SetResult(DLR_RESULT.DL_FAILED);
+                result.SetResult(DLR_RESULT.DL_OK);
                 return;
             }
 
             switch (wrappedNode.Name)
             {
-                case Names.ServerAddress:
+                case Names.BrokerAddress:
                     if (writeValue.IsEmptyOrWhiteSpace())
                     {
                         result.SetResult(DLR_RESULT.DL_FAILED);
@@ -349,7 +342,7 @@ namespace Samples.Datalayer.MQTT.Client
         /// <returns></returns>
         private async Task<DLR_RESULT> ConnectMqttAsync()
         {
-            Root.MqttClient.ServerAddress = GetNode(Names.ServerAddress).Value.ToString();
+            Root.MqttClient.BrokerAddress = GetNode(Names.BrokerAddress).Value.ToString();
             Root.MqttClient.Port = GetNode(Names.Port).Value.ToInt32();
             Root.MqttClient.ClientId = GetNode(Names.ClientId).Value.ToString();
             Root.MqttClient.CleanSession = GetNode(Names.CleanSession).Value.ToBool();

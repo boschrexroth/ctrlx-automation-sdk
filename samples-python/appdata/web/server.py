@@ -49,7 +49,7 @@ class Server(BaseHTTPRequestHandler):
     def do_POST(self):
         # Check if url valid
         request_url = self.path
-        print("INFO REST Command:", request_url)
+        print("INFO REST Command:", request_url, flush=True)
         if request_url != Server.rest_url_load and request_url != Server.rest_url_save:
             self.send_error(HTTPStatus.FORBIDDEN)
             return
@@ -62,9 +62,9 @@ class Server(BaseHTTPRequestHandler):
         result, token, token_decoded = token_validation.get_token(self.headers)
         if result is False or token_validation.is_authorized("rexroth-device.all.rwx") is False:
             self.send_error(HTTPStatus.UNAUTHORIZED)
-            print("ERROR Not authorized (Bearer invalid)")
+            print("ERROR Not authorized (Bearer invalid)", flush=True)
             return
-        print("INFO Check scope passed")
+        print("INFO Check scope passed", flush=True)
 
         # Get payload from request
         content_length = int(self.headers['Content-Length'])    # Get the size of data
@@ -74,7 +74,7 @@ class Server(BaseHTTPRequestHandler):
         # Check if payload contains config payload
         if payload.keys() != Server.config_payload.keys():
             self.send_error(HTTPStatus.BAD_REQUEST)
-            print("ERROR wrong request payload")
+            print("ERROR wrong request payload", flush=True)
             return
 
         # Command evaluation
@@ -85,35 +85,35 @@ class Server(BaseHTTPRequestHandler):
             # query: Check if loading is possible in the current system statecase "query" :
 			# Hint: The phase 'query' is called 2 times: the first call asks for a setup mode change acknowledge and the second is called during normal load sequence
             if payload["phase"] == "query":
-                print("INFO Phase: query")
+                print("INFO Phase: query", flush=True)
                 self.send_response(HTTPStatus.OK)
                 self.end_headers()
                 return
 
             # prepare: Perform any required preparatory steps
             elif payload["phase"] == "prepare":
-                print("INFO Phase: prepare")
+                print("INFO Phase: prepare", flush=True)
                 self.send_response(HTTPStatus.OK)
                 self.end_headers()
                 return
 
             # validate: Perform post-processing steps, connect resources and resolve dependencies
             elif payload["phase"] == "validate":
-                print("INFO Phase: validate")
+                print("INFO Phase: validate", flush=True)
                 self.send_response(HTTPStatus.OK)
                 self.end_headers()
                 return
 
             # activate (if phases 1-4 have been finished without problems): Establish desired run state of the device
             elif payload["phase"] == "activate":
-                print("INFO Phase: activate")
+                print("INFO Phase: activate", flush=True)
                 self.send_response(HTTPStatus.OK)
                 self.end_headers()
                 return
 
             # abort (otherwise): Do NOT change run state of the device, clean up if required
             elif payload["phase"] == "abort":
-                print("INFO Phase: abort")
+                print("INFO Phase: abort", flush=True)
                 # We return 204 as an default to satisfy the workflow
                 # response.WriteHeader(http.StatusNoContent)
                 self.send_response(HTTPStatus.OK)
@@ -122,7 +122,7 @@ class Server(BaseHTTPRequestHandler):
 
             # load: Provide resources according to the data from the active configuration
             elif payload["phase"] == "load":
-                print("INFO Phase: load")
+                print("INFO Phase: load", flush=True)
                 # This is were we can load our application data from current configuration
                 if Server.app_data_control.load() is False:
                     self.send_error(HTTPStatus.INTERNAL_SERVER_ERROR)
@@ -141,7 +141,7 @@ class Server(BaseHTTPRequestHandler):
             # phases
             # Save: Serialize current resources into active configuration
             if payload["phase"] == "save":
-                print("INFO phase: save")
+                print("INFO phase: save", flush=True)
                 # This is were we can save our application data into current configuration to be persistent
                 # Set default data on save command every time because this sample has no additional application data
                 Server.app_data_control.set_default()

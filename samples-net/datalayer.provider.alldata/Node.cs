@@ -26,7 +26,7 @@ using Datalayer;
 
 namespace Samples.Datalayer.Provider.Alldata
 {
-    using FlatBuffers;
+    using Google.FlatBuffers;
     using sample.schema;
     using System;
     using System.Linq;

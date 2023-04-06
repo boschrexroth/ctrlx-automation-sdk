@@ -58,28 +58,28 @@ class MyProviderNode:
         self.data = value
 
     def __on_create(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
-        print("__on_create()", "address:", address, "userdata:", userdata)
+        print("__on_create()", "address:", address, "userdata:", userdata, flush=True)
         cb(Result.OK, data)
 
     def __on_remove(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
-        print("__on_remove()", "address:", address, "userdata:", userdata)
+        print("__on_remove()", "address:", address, "userdata:", userdata, flush=True)
         cb(Result.UNSUPPORTED, None)
 
     def __on_browse(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
-        print("__on_browse()", "address:", address, "userdata:", userdata)
+        print("__on_browse()", "address:", address, "userdata:", userdata, flush=True)
         new_data = Variant()
         new_data.set_array_string([])
         cb(Result.OK, new_data)
 
     def __on_read(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
         print("__on_read()", "address:", address,
-              "data:", self.data, "userdata:", userdata)
+              "data:", self.data, "userdata:", userdata, flush=True)
         new_data = self.data
         cb(Result.OK, new_data)
 
     def __on_write(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
         print("__on_write()", "address:", address,
-              "data:", data, "userdata:", userdata)
+              "data:", data, "userdata:", userdata, flush=True)
 
         if self.data.get_type() != data.get_type():
             cb(Result.TYPE_MISMATCH, None)
@@ -89,5 +89,5 @@ class MyProviderNode:
         cb(Result.OK, self.data)
 
     def __on_metadata(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
-        print("__on_metadata()", "address:", address)
+        print("__on_metadata()", "address:", address, flush=True)
         cb(Result.FAILED, None)  # Take metadata from metadata.mddb

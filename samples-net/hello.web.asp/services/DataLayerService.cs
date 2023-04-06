@@ -1,3 +1,26 @@
+/*
+MIT License
+
+Copyright (c) 2021-2023 Bosch Rexroth AG
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
 using System.Globalization;
 
 namespace Hello.Web.Asp.services
@@ -30,7 +53,6 @@ namespace Hello.Web.Asp.services
         /// <returns>The <see cref="IClient"/>.</returns>
         private static IClient CreateClient()
         {
-
             // Create a new ctrlX Data Layer system
             var system = new DatalayerSystem();
 
@@ -38,11 +60,11 @@ namespace Hello.Web.Asp.services
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Create a connection string with the parameters according to your environment (see Remote class)
-            var connectionString = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
+            // Create a remote address with the parameters according to your environment
+            var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
             // Create the client with remote connection string
-            using var client = system.Factory.CreateClient(connectionString);
+            using var client = system.Factory.CreateClient(remote);
             Console.WriteLine("ctrlX Data Layer client created.");
 
             return client;

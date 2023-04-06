@@ -3,19 +3,23 @@
 
 Applications (snaps) for ctrlX CORE targets can be written in several programming language or even as shell scripts.
 
-For creating your own applications, the ctrlX AUTOMATION SDK offers sample projects that can be used directly or as templates. The sample projects are saved in sub folders according to their programming language or their type. 
+For creating your own applications, the ctrlX AUTOMATION SDK offers sample projects that can be used as source of code snippets as templates. The sample projects are saved in sub folders according to their programming language or their type. 
 
-Here an overview of the sample project types and their subfolders.
+Here an overview of the sample project types and their subfolders. 
 
-| Sample Project Type | Link to Projects                                       |
-| :------------------ | :----------------------------------------------------- |
-| __C/C++__           | [samples-cpp/README.md](samples-cpp/README.md)       |
-| __Go__              | [samples-go/README.md](samples-go/README.md)         |
-| __Python__          | [samples-python/README.md](samples-python/README.md) |
-| __.NET__            | [samples-net/README.md](samples-net/README.md)       |
-| __Node.js__         | [samples-node/README.md](samples-node/README.md)     |
-| __Shell scripting__ | [samples-sh/README.md](samples-sh/README.md)         |
-| __Snap__            | [samples-snap/README.md](samples-snap/README.md)     |
+!!! important
+    Run the install script listet in column three once before you are working with one or more sample projects.
+    These scripts are located in __/home/boschrexroth/scripts__. See also [install-scripts](install-scripts.md).
+
+| Sample Project Type | Link to Projects                                        | Install Script
+| :------------------ | :------------------------------------------------------ | :------------------------ |
+| __C/C++__           | [samples-cpp/README.md](samples-cpp/README.md)          |                                           
+| __Go__              | [samples-go/README.md](samples-go/README.md)            | ~/scripts/install-go.sh
+| __Python__          | [samples-python/README.md](samples-python/README.md)    |
+| __.NET__            | [samples-net/README.md](samples-net/README.md)          | ~/scripts/install-dotnet-sdk.sh
+| __Node.js__         | [samples-node/README.md](samples-node/README.md)        | ~/scripts/install-nodejs-npm.sh
+| __Shell scripting__ | [samples-sh/README.md](samples-sh/README.md)            |
+| __Snap__            | [samples-snap/README.md](samples-snap/README.md)        |
 | __IEC 61131-3__     | [samples-iec61131/README.md](samples-iec61131/README.md)|
 
 
@@ -40,7 +44,9 @@ You can call these scripts from the command line:
 
 At the end of the build process the snap file should be available in the root folder of your project.
 
-## Installing a Snap
+See below for further Run Build Task items.
+
+## Installing a Snap Manually
 
 Right click the snap file in the Visual Studio Code EXPLORER and select 'Download'. Visual Studio Code stores it in your home directory on your host computer. For Windows 10 this is %USERPROFILE%, in Linux this is: ~/
 
@@ -51,3 +57,39 @@ Start a Web browser, login into your ctrlX CORE:
 * Click Install from file
 * Select the downloaded file 
 * Switch to Operation Mode
+
+## Building and Installing a Snap Automated by Script
+
+Using the bash script __build-upload-log-snap.sh__ in the ctrlX AUTOMATION SDK folder scripts/
+You can create a snap file, upload it, install it on a ctrlX CORE and view the log output.
+
+The script can be started either from the command line or with the additional Run Build Task items of the Visual Studio Code IDE. 
+
+### Starting Script from the Command Line
+
+Change into a sample project folder (e.g. samples-cpp/datalayer.client) and enter
+
+     ../../scripts/build-upload-log-snap.sh -help
+
+All parameters and their default values are listed.
+
+E.g. to build and install a snap for a ctrlX CORE virtual with Network Adapter enter
+
+    ../../scripts/build-upload-log-snap.sh -NA
+
+But we recommend calling this script from Visual Studio Code. See next chapter.
+
+### Starting Script as Visual Studio Build Task
+
+Additional to the two Build Tasks mentioned above there are further tasks:
+
+* __Build upload snap - ctrlX CORE virtual Network Adapter__ 
+* __Build upload snap - ctrlX CORE virtual Port Forwarding__
+* __Build upload log snap - ctrlX CORE 192.168.1.1__
+* __Build upload snap__ 
+
+The first three tasks are calling the script with the parameter set needed for the according destination. There is sno need to select further parameters.
+
+If you are choosing the last item each parameter is prompted.
+
+Feel free to add more tasks or adapt the existing ones.

@@ -21,7 +21,7 @@ apps:
   app:
     command: datalayer.provider.alldata
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: [network, network-status, network-bind, process-control]
+    plugs: [network, network-status, network-bind]
     daemon: simple
     restart-condition: always
     passthrough:

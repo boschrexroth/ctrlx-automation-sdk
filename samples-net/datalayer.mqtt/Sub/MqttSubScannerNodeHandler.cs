@@ -1,7 +1,7 @@
-﻿/*
+/*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ SOFTWARE.
 
 using comm.datalayer;
 using Datalayer;
-using FlatBuffers;
+using Google.FlatBuffers;
 using MQTTnet;
 using MQTTnet.Protocol;
 using Samples.Datalayer.MQTT.Base;
@@ -43,13 +43,14 @@ namespace Samples.Datalayer.MQTT.Sub
         // If we know how many items we want to insert into the ConcurrentDictionary,
         // set the initial capacity to some prime number above that, to ensure that
         // the ConcurrentDictionary does not need to be resized while initializing it.       
-        private static readonly int InitialCapacity = 101;
+        private const int InitialCapacity = 101;
 
         // The higher the concurrencyLevel, the higher the theoretical number of operations
         // that could be performed concurrently on the ConcurrentDictionary.  However, global
         // operations like resizing the dictionary take longer as the concurrencyLevel rises.
         // For the purposes of this example, we'll compromise at numCores * 2.
         private static readonly int ConcurrencyLevel = Environment.ProcessorCount * 2;
+
         /// <summary>
         /// Represents a virtual light-weight MQTT Node
         /// </summary>
@@ -247,7 +248,6 @@ namespace Samples.Datalayer.MQTT.Sub
             //Create a Variant of best matching type (Supported int32, double, string)
             var value = ToVariant(stringifiedPayload);
             var address = $"{FullAddress}/{args.ApplicationMessage.Topic}";
-            //var node = new MqttNode(address, value);
 
             //Add node if not existing or update with current value
             _nodes.AddOrUpdate(address, value, (k, v) => value);

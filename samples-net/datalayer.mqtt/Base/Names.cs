@@ -1,7 +1,7 @@
-﻿/*
+/*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ namespace Samples.Datalayer.MQTT.Base
         public const string Topic = "topic";
         public const string QualityOfService = "quality-of-service";
 
-        public const string ServerAddress = "server-address";
+        public const string BrokerAddress = "broker";
         public const string Port = "port";
         public const string ClientId = "client-id";
         public const string Username = "username";

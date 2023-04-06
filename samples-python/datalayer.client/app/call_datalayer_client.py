@@ -136,109 +136,109 @@ class CallDataLayerClient:
         if result != Result.OK:
             return
 
-        print(msg, address, result, " ", end='')
+        print(msg, address, result, " ", end='', flush=True)
 
         if data.get_type() == VariantType.ARRAY_BOOL8:
-            print(data.get_array_bool8())
+            print(data.get_array_bool8(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_FLOAT32:
-            print(data.get_array_float32())
+            print(data.get_array_float32(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_FLOAT64:
-            print(data.get_array_float64())
+            print(data.get_array_float64(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_INT16:
-            print(data.get_array_int16())
+            print(data.get_array_int16(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_INT32:
-            print(data.get_array_int32())
+            print(data.get_array_int32(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_INT64:
-            print(data.get_array_int64())
+            print(data.get_array_int64(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_INT8:
-            print(data.get_array_int8())
+            print(data.get_array_int8(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_STRING:
-            print(data.get_array_bool8())
+            print(data.get_array_bool8(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_UINT16:
-            print(data.get_array_uint16())
+            print(data.get_array_uint16(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_UINT32:
-            print(data.get_array_uint32())
+            print(data.get_array_uint32(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_UINT64:
-            print(data.get_array_uint64())
+            print(data.get_array_uint64(), flush=True)
             return
 
         if data.get_type() == VariantType.ARRAY_UINT8:
-            print(data.get_array_uint8())
+            print(data.get_array_uint8(), flush=True)
             return
 
         if data.get_type() == VariantType.BOOL8:
-            print(data.get_bool8())
+            print(data.get_bool8(), flush=True)
             return
 
         if data.get_type() == VariantType.FLATBUFFERS:
-            print(data.get_flatbuffers())
+            print(data.get_flatbuffers(), flush=True)
             return
 
         if data.get_type() == VariantType.FLOAT32:
-            print(data.get_float32())
+            print(data.get_float32(), flush=True)
             return
 
         if data.get_type() == VariantType.FLOAT64:
-            print(data.get_float64())
+            print(data.get_float64(), flush=True)
             return
 
         if data.get_type() == VariantType.INT16:
-            print(data.get_int16())
+            print(data.get_int16(), flush=True)
             return
 
         if data.get_type() == VariantType.INT32:
-            print(data.get_int32())
+            print(data.get_int32(), flush=True)
             return
 
         if data.get_type() == VariantType.INT64:
-            print(data.get_int64())
+            print(data.get_int64(), flush=True)
             return
 
         if data.get_type() == VariantType.INT8:
-            print(data.get_int8())
+            print(data.get_int8(), flush=True)
             return
 
         if data.get_type() == VariantType.STRING:
-            print(data.get_string())
+            print(data.get_string(), flush=True)
             return
 
         if data.get_type() == VariantType.UINT16:
-            print(data.get_uint16())
+            print(data.get_uint16(), flush=True)
             return
 
         if data.get_type() == VariantType.UINT32:
-            print(data.get_uint32())
+            print(data.get_uint32(), flush=True)
             return
 
         if data.get_type() == VariantType.UINT64:
-            print(data.get_uint64())
+            print(data.get_uint64(), flush=True)
             return
 
         if data.get_type() == VariantType.UINT8:
-            print(data.get_uint8())
+            print(data.get_uint8(), flush=True)
             return
 
-        print("UNHANDLED ---------")
+        print("UNHANDLED ---------", flush=True)
 
     def read(self):
 
@@ -530,7 +530,7 @@ class CallDataLayerClient:
               "create=", allowedoperations.Create(),
               "delete=", allowedoperations.Delete(),
               "metadata.DisplayName()", metadata.DisplayName(),
-              "metadata.DisplayFormat()", metadata.DisplayFormat())
+              "metadata.DisplayFormat()", metadata.DisplayFormat(), flush=True)
 
     def metadata_async_callback(self, result: Result, data: Variant, userdata: ctrlxdatalayer.clib.userData_c_void_p):
         self.waiting_for = None

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // !!! DO NOT REMOVE THE SHEBANG ON TOP OF THE FILE, WHICH SPECIFIES THIS APP TO BE EXECUTED BY NODE.JS !!!
 
-// Copyright (c) 2021-2022 Bosch Rexroth AG
+// Copyright (c) 2021-2023 Bosch Rexroth AG
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the 'Software'), to deal
@@ -22,7 +22,7 @@
 // SOFTWARE.
 
 import DatalayerSystem from 'ctrlx-datalayer/dist/datalayersystem';
-import DatalayerHelper from './datalayerhelper';
+import { Remote } from 'ctrlx-datalayer/dist/remote';
 
 // The main function
 async function main() {
@@ -33,12 +33,12 @@ async function main() {
     // Starts the ctrlX Data Layer system without a new broker (startBroker = false) because one broker is already running on ctrlX device
     await system.start(false);
 
-    // Create a connection string with the parameters according to your environment (see DatalayerHelper class)
-    const connectionString = DatalayerHelper.getConnectionString({ ip: "10.0.2.2", sslPort: 8443 })
-    console.log('connection string:', connectionString)
+    // Create a remote address with the parameters according to your environment
+    const remote = Remote.build({ ip: "10.0.2.2", sslPort: 8443 })
+    console.log('connection string:', remote)
 
     // Create the client with the given remote address
-    const client = await system.createClient(connectionString);
+    const client = await system.createClient(remote);
 
     if (client.isConnected() === false) {
         console.log('client is not connected -> exit.')

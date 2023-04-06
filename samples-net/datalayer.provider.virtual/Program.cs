@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -42,11 +42,11 @@ namespace Samples.Datalayer.Provider.Virtual
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
-            // Create a connection string with the parameters according to your environment (see Remote class)
-            var connectionString = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
+            // Create a remote address with the parameters according to your environment
+            var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
             // Create the provider with remote connection string
-            using var provider = system.Factory.CreateProvider(connectionString);
+            using var provider = system.Factory.CreateProvider(remote);
             Console.WriteLine("ctrlX Data Layer provider created.");
 
             //Create root node handler

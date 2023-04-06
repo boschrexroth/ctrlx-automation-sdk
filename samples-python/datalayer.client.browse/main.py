@@ -40,7 +40,7 @@ def main():
         datalayer_client, datalayer_client_connection_string = get_client(
             datalayer_system)
         if datalayer_client is None:
-            print("ERROR Connecting", datalayer_client_connection_string, "failed.")
+            print("ERROR Connecting", datalayer_client_connection_string, "failed.", flush=True)
             sys.exit(1)
 
         with datalayer_client:  # datalayer_client is closed automatically when leaving with block
@@ -49,17 +49,17 @@ def main():
             if datalayer_client.is_connected() is False:
 
                 print("ERROR Not connected to", datalayer_client_connection_string,
-                      "- restarting app after a delay of 10 s ...")
+                      "- restarting app after a delay of 10 s ...", flush=True)
                 sys.exit(2)
 
             # Browse the whole ctrlX Data Layer tree
-            print("Browsing and reading nodes...")
+            print("Browsing and reading nodes...", flush=True)
             browse_tree(datalayer_client, datalayer_system.json_converter())
 
-        print("Stopping Datalayer System")
+        print("Stopping Data Layer System", flush=True)
         # Attention: Doesn't return if any provider or client instance is still running
         stop_ok = datalayer_system.stop(False)
-        print("System Stop", stop_ok)
+        print("System Stop", stop_ok, flush=True)
 
 
 def browse_tree(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.system.Converter, address=""):
@@ -67,14 +67,14 @@ def browse_tree(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.
     # print current address and get value of node
     node_value = get_value(client, converter, address)
     if node_value is None:
-        print(address)
+        print(address, flush=True)
     else:
-        print(address, node_value)
+        print(address, node_value, flush=True)
 
     # Browse Data Layer tree
     result, data = client.browse_sync(address)
     if result != Result.OK:
-        print("ERROR Browsing Data Layer failed with: ", result)
+        print("ERROR Browsing Data Layer failed with: ", result, flush=True)
         return
     with data:
         # Recursive loop
@@ -88,7 +88,7 @@ def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.sy
     # get data with read sync
     result, data = client.read_sync(address)
     if result != Result.OK:
-        # print("ERROR Reading Data Layer failed with: ", result)
+        # print("ERROR Reading Data Layer failed with: ", result, flush=True)
         return
     with data:
 
@@ -138,20 +138,20 @@ def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.sy
             # Get type address for flatbuffers information
             typeAddress = get_typeaddress(client, address)
             if typeAddress is None:
-                print("ERROR Type Address is none")
+                print("ERROR Type Address is none", flush=True)
                 return
 
             # Read type address as variant
             result, typeVar = client.read_sync(typeAddress)
             if result != Result.OK:
-                print("ERROR Reading Type Value failed with: ", result)
+                print("ERROR Reading Type Value failed with: ", result, flush=True)
                 return
 
             # Convert variant flatbuffers data to json type
             result, json = converter.converter_generate_json_complex(
                 data, typeVar, -1)
             if result != Result.OK:
-                print("ERROR Converting json failed with: ", result)
+                print("ERROR Converting json failed with: ", result, flush=True)
                 return
 
             return json.get_string()
@@ -189,7 +189,7 @@ def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.sy
         if vt == VariantType.UINT8:
             return data.get_uint8()
 
-        print("WARNING Unknown Variant Type:", vt)
+        print("WARNING Unknown Variant Type:", vt, flush=True)
         return None
 
 
@@ -197,14 +197,14 @@ def get_typeaddress(client: ctrlxdatalayer.client.Client, address: str):
 
     result, metadata = client.metadata_sync(address)
     if result != Result.OK:
-        print("ERROR Reading metadata of ", address, " failed with: ", result)
+        print("ERROR Reading metadata of ", address, " failed with: ", result, flush=True)
         return
 
     metadata_root = Metadata.Metadata.GetRootAsMetadata(
         metadata.get_flatbuffers())
 
     if metadata_root.ReferencesLength() == 0:
-        print("ERROR Metadata references are empty")
+        print("ERROR Metadata references are empty", flush=True)
         return
 
     for i in range(0, metadata_root.ReferencesLength()):

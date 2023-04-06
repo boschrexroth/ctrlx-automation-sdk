@@ -1,7 +1,7 @@
-﻿/*
+/*
 MIT License
 
-Copyright (c) 2021-2022 Bosch Rexroth AG
+Copyright (c) 2021-2023 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ SOFTWARE.
 
 using comm.datalayer;
 using Datalayer;
-using FlatBuffers;
+using Google.FlatBuffers;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -37,11 +37,10 @@ namespace Samples.Datalayer.Provider.Virtual
     /// </summary>
     internal class VirtualNodeHandler : IProviderNodeHandler
     {
-
         // If we know how many items we want to insert into the ConcurrentDictionary,
         // set the initial capacity to some prime number above that, to ensure that
         // the ConcurrentDictionary does not need to be resized while initializing it.       
-        private static readonly int InitialCapacity = 101;
+        private const int InitialCapacity = 101;
 
         // The higher the concurrencyLevel, the higher the theoretical number of operations
         // that could be performed concurrently on the ConcurrentDictionary.  However, global
@@ -117,7 +116,6 @@ namespace Samples.Datalayer.Provider.Virtual
         /// <returns></returns>
         public DLR_RESULT Start()
         {
-
             //We just listen to our base address using a wildcard on '{FullAddress}/**'
             var (result, _) = Provider.CreateNode(FullAddress, "**", this);
             if (result.IsBad())
@@ -128,6 +126,7 @@ namespace Samples.Datalayer.Provider.Virtual
             _nodes.AddOrUpdate(folderNode.Address, folderNode, (k, v) => folderNode);
 
             //Create some virtual nodes here just for demonstration
+            Console.WriteLine($"Creating virtual nodes on address: {FullAddress}");
             int currentLevel = 0;
             if (CreateDummyNodes(FullAddress, 3, ref currentLevel, 5).IsBad())
             {
@@ -306,8 +305,6 @@ namespace Samples.Datalayer.Provider.Virtual
                 //Add the nodes to our map by address
                 var virtualNode = new VirtualNode(address, new Variant(_random.Next()), NodeClass.Variable, true, true, false, false, false);
                 _nodes.AddOrUpdate(address, virtualNode, (k, v) => virtualNode);
-
-                Console.WriteLine($"Created a virtual node on address: {address}");
 
                 if (currentLevel < maxDepth)
                 {

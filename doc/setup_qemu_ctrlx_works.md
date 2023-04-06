@@ -30,7 +30,8 @@ Select App Build Environments on the side bar of ctrlX WORKS. The list of instal
 ### Start an App Build Environment
 
 * Start a App Build Environment with the play `>` icon.
-* On first start the Ubuntu image will be downloaded and the environment will be installed. This will take some time. During this state no login will be possible. When this process is complete the VM will shutdown. Click the play icon again to restart.
+* On first start the Ubuntu image will be downloaded and the environment will be installed. This will take some time. In this phase no login will be possible. When the initialization phase is finished the VM will shutdown automatically. 
+* Click the play icon again to restart the App Build Environment.
 * When the environment is up ctrlX WORKS will show 'Online' in column State.
 
 ### Working with an App Build Environment
@@ -39,7 +40,7 @@ You can open a SSH connection (secure shell) by clicking the according link in t
 
 For the login a password is required, it is __boschrexroth__.
 
-We recommend to add your public key in the hosts id_rsa.pub file to the file authorized_keys in the VMs directory /home/boschrexroth/.ssh/. So password input on each login is obsolete. 
+We recommend to add your public key contained in the __hosts__ id_rsa.pub file to the file authorized_keys in the VMs directory /home/boschrexroth/.ssh/. So password input on each login is obsolete. 
 
 Therefor you can use the bat file ssh-keygen-copy-id.bat in the destination directory of the VM (see below).
 

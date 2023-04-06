@@ -39,7 +39,7 @@ close_app = False
 def handler(signum, frame):
     global close_app
     close_app = True
-#    print('Here you go signum: ', signum, close_app)
+    #print('Here you go signum: ', signum, close_app, flush=True)
 
 
 def main():
@@ -54,11 +54,11 @@ def main():
     # Try SSL port 8443
     provider, connection_string = get_provider(datalayer_system)
     if provider is None:
-        print("ERROR Connecting", connection_string, "failed.")
+        print("ERROR Connecting", connection_string, "failed.", flush=True)
         datalayer_system.stop(False)
         sys.exit(1)
 
-    print("INFO Connecting", connection_string, "succeeded.")
+    print("INFO Connecting", connection_string, "succeeded.", flush=True)
 
     with provider:  # provider.close() is called automatically when leaving with block
 
@@ -70,13 +70,13 @@ def main():
         while provider.is_connected() and not close_app:
             time.sleep(5.0)
 
-        print("ERROR: Data Layer provider is NOT connected")
+        print("ERROR: Data Layer provider is NOT connected", flush=True)
 
         provider.stop()
 
     # Attention: Doesn't return if any provider or client instance is still running
     stop_ok = datalayer_system.stop(False)
-    print("System Stop", stop_ok)
+    print("System Stop", stop_ok, flush=True)
 
 
 if __name__ == "__main__":
