@@ -20,7 +20,7 @@ Select App Build Environments on the side bar of ctrlX WORKS. The list of instal
 * The dialog 'Add ctrlX CORE App Build Environment' will appear.  Now the new instance can be configured.
 * Name: Enter a unique name.
 * Storage location: Enter/select a destination directory where the files are stored.
-* Port forwarding: Here prot forwardings from the Windows host to the VM guest are defined. Per default for SSH the port 10022 of the Windows host is forwarded to port 22 of the guest VM. Do NOT change 22! You can change 10022 if you want to run several environments concurrently.
+* Port forwarding: Here port forwardings from the Windows host to the VM guest are defined. Per default for SSH the port 10022 of the Windows host is forwarded to port 22 of the guest VM. Do NOT change 22! You can change 10022 if you want to run several environments concurrently.
 * Select 'Use HTTP and HTTPS proxy on localhost:3128' if your host is behind a proxy. In this case install and run [px.exe](px.md)
 * Create a new Add Build Environment with OK or abort with Cancel
 
