@@ -538,7 +538,7 @@ class CallDataLayerClient:
 
     def metadata(self):
 
-        address = root_node + "dynamic/bool8"
+        address = root_node + "/dynamic/bool8"
         self.waiting_for = "metadata_async_callback"
         logging.info("metadata_async() %s", address)
         result = self.client.metadata_async(
