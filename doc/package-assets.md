@@ -37,8 +37,8 @@ The following example shows the procedure step-by-step.
         interface: content
         content: package-assets
         source:
-        read:
-        - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+          read:
+          - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
     [...]
     ```
 
