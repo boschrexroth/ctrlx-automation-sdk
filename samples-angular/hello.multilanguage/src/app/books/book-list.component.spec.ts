@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router'

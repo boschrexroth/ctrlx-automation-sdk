@@ -23,7 +23,6 @@
 
 [11 Real Time Extension (optional)](#realtime)
 
-[12 Licensing (optional)](#licensing)
 
 ## 1 Introduction<a name="introduction"></a>
 
@@ -103,7 +102,7 @@ To simplify the delivery of artifacts, we provide a base folder structure with d
 
 **Handover of artifacts**
 
-Once all the required information is available in your local folder, zip the folder using Windows-zip and upload it as "**artifacts.zip**" to the ctrlX World Portal space in the "**.../{company-name}/{app-name}/{version}/**" path.
+Once all the required information is available in your local folder, zip the folder using Windows-zip and upload it as "**artifacts.zip**" to the ctrlX World Partner Portal space in the "**.../{company-name}/{app-name}/{version}/**" path.
 
 !!! important 
     To avoid problems when uploading the artifacts.zip file, please use the Windows-zip feature
@@ -113,7 +112,7 @@ Once all the required information is available in your local folder, zip the fol
 ### 2.4 Validation and Signing
 
 Validation is typically carried out in several iterations, depending on the result of a particular validation activity.
-If all the required information is provided in the ctrlX World Portal, an email to `ctrlx.world@boschrexroth.com` will trigger a validation loop.
+If all the required information is provided in the ctrlX World Portal, an email to `ctrlx.world@boschrexroth.de` will trigger a validation loop.
 Basically, the workflow will be as follows:
 
 1. Partner/app developer: Uploads required artifacts and informs Bosch Rexroth
@@ -139,7 +138,7 @@ The app itself and corresponding user documentation need to be provided. Legal a
 Working set information is needed to support the test and validation process.
 During runtime, the app must use the ctrlX CORE onboard licensing mechanism.
 #### **3.1.2 Customer User Experience**
-Customers can find the app in the ctrlX App Store. They know how the app is licensed and can use the overall Bosch Rexroth licensing system for ctrlX.
+Customers can find the app in the ctrlX App Store. They know how the app is licensed and can use the overall Bosch Rexroth licensing system for ctrlX CORE.
 They can also be sure that the app contributes to the basic ctrlX CORE security mechanisms.
 
 #### **3.1.3 Technical Prerequisites**
@@ -219,7 +218,7 @@ Finally, an app can integrate in the Automation framework and extend the ctrlX r
     Real time integration requires additional training and support from Bosch Rexroth to avoid unexpected system behavior and impacts on the ctrlX real-time kernel.
 
 #### **3.3.1 Description**
-The app exposes information in the ctrlX Data Layer for all other apps. It also can extend the real time functions of ctrlX if connected to the real-time task scheduler
+The app exposes information in the ctrlX Data Layer for all other apps. It also can extend the real time functions of ctrlX CORE if connected to the real-time task scheduler
 
 #### **3.3.2 Customer User Experience**
 The app extends the ctrlX AUTOMATION system functions, e.g. for Motion and/or PLC
@@ -244,13 +243,13 @@ The basic app information is checked as a prerequisite by Bosch Rexroth, before 
 
 #### 4.1.1 Artifacts Folder Template
 
-The ctrlX World Portal provides a file (artifacts.zip), which can be downloaded and extracted locally.
+The ctrlX World Partner Portal provides a file (artifacts.zip), which can be downloaded and extracted locally.
 This will create the required folder structure for the mandatory artifacts out-of-the-box, with default descriptions and schema files.
 
 !!!! important 
      Please use the given structure, folder names and file names unchanged. This will support an efficient validation process.
 
-![image](images/artefacts.png)
+![image](images/artifacts.png)
 
 
 The artifacts are organized in five sub folders:
@@ -282,12 +281,15 @@ Note: For the `{xxx}-description` files, a default file (with explanation) and t
 
 - **"slotplug-description.json" (<span style="color:red;">**MANDATORY**</span>)** - All used slot and plugs are described in the slot and plug description
 
+
+**The [Base checklist](appdevguide_basechecks.md) contains the criteria which are checked in these files.**
+
 #### 4.1.4 "Documentation" folder (<span style="color:red;">**MANDATORY**</span>)
  
  All documentation relevant to the app is provided here 
 
  - **"manual.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The app description (user manual) documents the app’s overall functionality
- - **"test-setup-description.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The app setup describes how to configure the app on a ctrlX device for a typical usage and test scenario
+ - **"test-setup-description.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The app setup describes how to configure the app on a ctrlX CORE for a typical usage and test scenario
  - **"release-notes.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The latest changes, workarounds and defects are mentioned in the release notes
 
 #### 4.1.5 "App States" folder (<span style="color:red;">**MANDATORY**</span>)
@@ -302,9 +304,9 @@ The app validation framework tries to establish relevant states that have to be 
 
 ctrlX currently supports the amd64 and the arm64 processor architecture. The corresponding target snaps for the app are provided here
 
-- **"{TechnicalAppName}_{version}_arm64.snap" (<span style="color:red;">**MANDATORY**</span>)** - Snap that runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX CORE hardware.
+- **"ctrlx-{company name}-{app name}-{version}_arm64.snap" (<span style="color:red;">**MANDATORY**</span>)** - Snap that runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX CORE hardware.
 
-- **"{TechnicalAppName}_{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE<sup>virtual</sup>. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
+- **"ctrlx-{company name}-{app name}-{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE<sup>virtual</sup>. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
 
 
 
@@ -336,7 +338,7 @@ The following properties must be defined within the **"snapcraft.yaml"** file (s
 
 - **Title** - The general name of the app that will be shown on all sales channels and customer touch points, e.g. app overview or ctrlX App Store. This is defined together with the partner manager, as part of the business model definitions. Example: "My App"
 
-- **Name** - The technical name of the snap. The name has to be unique in the snap universe and across all snap developer and device vendors. The snap name has to **start with "ctrlx-"** and must be **lowercase** and a **maximum length of 32 characters**. ctrlX World partners add their company name to the snap name. Example: "ctrlx-partnername-myapp"
+- **Name** - The technical name of the snap. The name has to be unique in the snap universe and across all snap developer and device vendors. The snap name has to **start with "ctrlx-"** and must be **lowercase** and a **maximum length of 32 characters**. ctrlX World Partners add their company name to the snap name. Example: "ctrlx-partnername-myapp"
 
 - **Confinement** - Must be set to **"strict"** for releases. See also https://snapcraft.io/docs/snap-confinement
 
@@ -386,24 +388,10 @@ Used interfaces (Slots & Plugs) must be documented in the **snapcraft.yaml** fil
 
 - **Debug interfaces only on demand**. By default, the app should not provide any open network debug interfaces. If debugging is required, the user should be able to enable the debug interface on demand and only after successful authentication (and authorization). In general, debug interfaces shall not be accessible without authentication and/or insufficient or even hard-coded credentials.
 
+The following operating system interfaces which are listed here are denied or restricted for usage:
 
-The following operating system interfaces are denied or restricted for usage. See also https://snapcraft.io/docs/supported-interfaces.
+[Reserved interfaces](appdevguide_reserved-interfaces.md), (1. Reserved slots and plugs)
 
-| Interface   | Direction | Parameters | Exceptions | Reason |
-| ----------- | ----------- | ---------| --------| ------|
-| udisk2      | Plug & Slot |          |         |        |
-| system-files      | Plug  |    *      |    "read=^(\\/dev\\/shm\| \\/dev\\/shm\\/.+)$", "write=^(\\/dev\\/shm\| \\/dev\\/shm\\/.+)$"     |        |
-| snapd-control      | Plug | *          |         | Prevent uncontrolled access to system configuration.       |
-|raw-volumes     |	Plug	| | | Prevent mounting of partitions.|
-|process-control |	Plug	| | | Prevent tampering with running processes.|
-|content	|Plug|	content=package-certificates	| |Prevent apps to act as device admin.|
-|content |	Plug |	content=package-run	| | Prevent apps to act as device admin.|
-|content|	Plug|	content=package-assets	| |Prevent apps to act as device admin.|
-|content|	Slot|	content=auth-service	| |Prevent unauthorized access, service to service authentication.|
-|content|	Slot|	content=active-solution	|  |Prevent apps to act as solution snap.|
-|block-devices	| Plug	| | | Prevent mounting of partitions.|
-account-control	| Plug	|* | | Prevent uncontrolled access to user and group databases.|
-|removable-media|	Plug | | 	|Prevent uncontrolled access to removal media (micro sd, USB).|
 
  This list is subject to change and might be extended. If unsure, please provide the slot/plug you want to use inside your application together with justification to check whether or not this specific slot/plug is allowed and find potential alternatives.
 
@@ -423,41 +411,12 @@ Security protocols are to be used by default. This means:
 
 - The app must provide a list of ports to be used in order to avoid conflicts. The app must therefore be robust to already open / used ports. At least a warning is to be issued to the user.
 
-The following ports are blocked and cannot be used by an app:
+The ports listed here are blocked and cannot be used by an app:
 
-- 22
 
-- 80
+[Reserved interfaces](appdevguide_reserved-interfaces.md), (2. Blocked ports)
 
-- 81
 
-- 443
-
-- 1338 (UDP)
-
-- 1880
-
-- 1900 (UDP)
-
-- 2069
-
-- 2070
-
-- 4840
-
-- 5355 (UDP)
-
-- 5353
-
-- 6000
-
-- 7878
-
-- 8069
-
-- 11740
-
-- 11741
 
 This list is subject to change and might be extended.
 
@@ -468,7 +427,7 @@ It is very likely that an app stores settings & configuration data in the applic
 
 ### 6.2 Resource Consumption and Read/Write Operations (<span style="color:red;">**MANDATORY**</span>)
 
-Typically, more than one app runs on a ctrlX device. It is therefore very important than an app does not consume too many system resources (e.g. RAM or disk space). In addition, the available virtual memory on the device is limited to the amount of physical available memory, because the possibility of swapping unused RAM to disk is disabled on ctrlX devices. The reasons for this is the otherwise negative impact on real-time capability and flash disk lifetime.
+Typically, more than one app runs on a ctrlX CORE. It is therefore very important than an app does not consume too many system resources (e.g. RAM or disk space). In addition, the available virtual memory on the device is limited to the amount of physical available memory, because the possibility of swapping unused RAM to disk is disabled on ctrlX CORE. The reasons for this is the otherwise negative impact on real-time capability and flash disk lifetime.
 
 #### 6.2.1 Resource Consumption
 
@@ -499,7 +458,9 @@ Videos and further media can be attached.
 
 ### 7.1 ctrlX License Handling (<span style="color:red;">**MANDATORY**</span>)
 
-A license model must be defined for each app which is part of ctrlX World. To ensure maximum usability for a ctrlX CORE user, the app must call up the ctrlX license manager API when it starts or is running to check if a license is activated.  If a license is missing, the missing license will be shown to the user on a user interface (Note: This will be available after July 2021). A warning or error must be shown in case the license is missing.
+ctrlX World Partner apps must use the licensing service that is operated by Bosch Rexroth. 
+
+A license model must be defined for each app. To ensure maximum usability for a ctrlX CORE user, the app must call up the ctrlX license manager API when it starts or is running to check if a license is activated.  If a license is missing, the missing license will be shown to the user on a user interface. A warning or error must be shown in case the license is missing.
 
 Each software license (SWL) bought by a customer generates one or more capabilities:
 
@@ -509,7 +470,7 @@ Each software license (SWL) bought by a customer generates one or more capabilit
 
 - The usage of other licensing mechanisms is not allowed
 
-- The licensing interface will be available by March 2021
+For information how to adapt an app to the licensing service please have look on the [Licensing guideline](licensing.md) 
 
 
 !!! note
@@ -612,13 +573,20 @@ For further information see https://docs.automation.boschrexroth.com
 
 Please contact your partner manager if a real-time extension might be required for your app.
 
-## 12 Licensing (<span style="color:green;">**OPTIONAL**</span>)<a name="licensing"></a>
 
-If you are ctrlX World partner you must use the licensing service that is operated by Bosch Rexroth. For information how to adapt an app to the licensing service please have look on the [Licensing Page](licensing.md) 
+# Appendices
 
-### Appendix
-[Guide appendix](appdevguide_other-technologies.md)
+[Base checklist](appdevguide_basechecks.md)
 
+[Licensing guideline](licensing.md)
+
+[Reserved interfaces and ports](appdevguide_reserved-interfaces.md)
+
+[Guidelines for other platforms (not ctrlX OS)](appdevguide_other-technologies.md)
+
+
+***
 **Copyright**
-© Bosch Rexroth AG 2021
+© Bosch Rexroth AG 2021-2023
+
 This guideline, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch Rexroth AG. It may not be reproduced or given to third parties without our consent.

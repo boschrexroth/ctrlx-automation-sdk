@@ -1,25 +1,7 @@
-/**
- * MIT License
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
  *
- * Copyright (c) 2020-2022 Bosch Rexroth AG
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-License-Identifier: MIT
  */
 
 #include <functional>
@@ -29,13 +11,13 @@
 #include "ctrlx_datalayer_helper.h"
 #include "datalayerclient.h"
 
-// Function to print out array of all nodes from VariantType on ctrlX Data Layer
-void printStringList(comm::datalayer::Variant &data)
+ // Function to print out array of all nodes from VariantType on ctrlX Data Layer
+static void printStringList(comm::datalayer::Variant& data)
 {
   if (data.getType() == comm::datalayer::VariantType::ARRAY_OF_STRING)
   {
     std::cout << "Node List: ";
-    const char **strArray = data;
+    const char** strArray = data;
     for (uint32_t i = 0; i < data.getCount(); i++)
     {
       std::cout << strArray[i] << " ";
@@ -44,7 +26,7 @@ void printStringList(comm::datalayer::Variant &data)
   }
 }
 
-void printMetadata(comm::datalayer::Variant &data)
+static void printMetadata(comm::datalayer::Variant& data)
 {
   if (STATUS_FAILED(data.verifyFlatbuffers(comm::datalayer::VerifyMetadataBuffer)))
   {
@@ -69,30 +51,24 @@ void printMetadata(comm::datalayer::Variant &data)
   }
 }
 
-DataLayerClient::DataLayerClient(const std::string &ip, const std::string &user, const std::string &password, int sslPort)
-{
-  _ip = ip;
-  _user = user;
-  _password = password;
-  _sslPort = sslPort;
-}
+DataLayerClient::DataLayerClient(const std::string& ip, const std::string& user, const std::string& password, int sslPort)
+  : m_ip(ip)
+  , m_user(user)
+  , m_password(password)
+  , m_sslPort(sslPort)
+  , m_client(nullptr)
+{}
 
-comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
+comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant* data)
 {
-  std::string valueText;
-  comm::datalayer::DlResult result = comm::datalayer::DlResult::DL_OK;
   auto variantType = data->getType();
-
-  int16_t x;
-  int16_t y;
-  int16_t z;
 
   if (variantType == comm::datalayer::VariantType::FLATBUFFERS)
   {
-    result = data->verifyFlatbuffers(sample::schema::VerifyInertialValueBuffer);
+    comm::datalayer::DlResult result = data->verifyFlatbuffers(sample::schema::VerifyInertialValueBuffer);
     if (comm::datalayer::STATUS_FAILED(result))
     {
-      valueText = "Node is no InertialValue flatbuffers";
+      std::cout << "Node is no InertialValue flatbuffers" << std::endl;
       return result;
     }
 
@@ -100,12 +76,15 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
     auto buffer = data->getData();
     auto inertialValue = sample::schema::GetInertialValue(buffer);
 
+    int16_t x;
+    int16_t y;
+    int16_t z;
+
     x = inertialValue->x();
     y = inertialValue->y();
     z = inertialValue->z();
 
-    valueText = "x=" + std::to_string(x) + " y=" + std::to_string(y) + " z=" + std::to_string(z);
-    std::cout << valueText;
+    std::cout << "x=" + std::to_string(x) + " y=" + std::to_string(y) + " z=" + std::to_string(z) << std::endl;
     return comm::datalayer::DlResult::DL_OK;
   }
 
@@ -115,7 +94,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_BOOL8)
   {
-    const bool *values = *data;
+    const bool* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i];
@@ -126,7 +105,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_FLOAT32)
   {
-    const float *values = *data;
+    const float* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i];
@@ -137,7 +116,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_FLOAT64)
   {
-    const double *values = *data;
+    const double* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i];
@@ -148,7 +127,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_INT16)
   {
-    const int16_t *values = *data;
+    const int16_t* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i];
@@ -159,7 +138,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_INT32)
   {
-    const int32_t *values = *data;
+    const int32_t* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i];
@@ -170,7 +149,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_INT64)
   {
-    const int64_t *values = *data;
+    const int64_t* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i];
@@ -181,7 +160,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_INT8)
   {
-    const int8_t *values = *data;
+    const int8_t* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << std::to_string(values[i]);
@@ -192,7 +171,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_STRING)
   {
-    const char **values = *data;
+    const char** values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i] << " ";
@@ -202,7 +181,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_UINT16)
   {
-    const uint16_t *values = *data;
+    const uint16_t* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i];
@@ -213,7 +192,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_UINT32)
   {
-    const uint32_t *values = *data;
+    const uint32_t* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i];
@@ -224,7 +203,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_UINT64)
   {
-    const uint64_t *values = *data;
+    const uint64_t* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << values[i];
@@ -235,7 +214,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::ARRAY_OF_UINT8)
   {
-    const uint8_t *values = *data;
+    const uint8_t* values = *data;
     for (uint32_t i = 0; i < data->getCount(); i++)
     {
       std::cout << std::to_string(values[i]);
@@ -302,7 +281,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
 
   if (variantType == comm::datalayer::VariantType::STRING)
   {
-    const char *value = *data;
+    const char* value = *data;
     std::cout << value;
 
     return comm::datalayer::DlResult::DL_OK;
@@ -336,7 +315,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant *data)
   return comm::datalayer::DlResult::DL_UNSUPPORTED;
 }
 
-void DataLayerClient::println(const std::string &text, comm::datalayer::DlResult result, comm::datalayer::Variant *data)
+void DataLayerClient::println(const std::string& text, comm::datalayer::DlResult result, comm::datalayer::Variant* data)
 {
   std::cout << text;
   std::cout << " " << result.toString() << " ";
@@ -348,12 +327,12 @@ void DataLayerClient::println(const std::string &text, comm::datalayer::DlResult
 
 bool DataLayerClient::start()
 {
-  std::cout << "_datalayer.start(..)" << std::endl;
-  _datalayerSystem.start(false);
+  std::cout << "m_datalayer.start(..)" << std::endl;
+  m_datalayerSystem.start(false);
 
-  _client = getClient(_datalayerSystem, _ip, _user, _password, _sslPort);
+  m_client = getClient(m_datalayerSystem, m_ip, m_user, m_password, m_sslPort);
 
-  return _client != nullptr && _client->isConnected();
+  return m_client != nullptr && m_client->isConnected();
 }
 
 // This method returns a comm::datalayer::IClient::ResponseCallback function as lambda expression.
@@ -364,17 +343,17 @@ comm::datalayer::IClient::ResponseCallback DataLayerClient::responseCallback()
 {
   // [&]    All needed symbols are provided per reference
   // (...)  Parameter provided by the calling site
-  return [&](comm::datalayer::DlResult result, const comm::datalayer::Variant *data)
+  return [&](comm::datalayer::DlResult result, const comm::datalayer::Variant* data)
   {
-    _resultAsync = result;
+    m_resultAsync = result;
     if (data != nullptr)
     {
       // data must not be nullptr otherwise the '=' operator crashes
-      _dataAsync = *data;
+      m_dataAsync = *data;
 
-      if (_dataAsync.getType() == comm::datalayer::VariantType::ARRAY_OF_STRING)
+      if (m_dataAsync.getType() == comm::datalayer::VariantType::ARRAY_OF_STRING)
       {
-        printStringList(_dataAsync);
+        printStringList(m_dataAsync);
       }
     }
 
@@ -390,14 +369,16 @@ bool DataLayerClient::waitForResponseCallback(int counter)
     {
       counter--;
       if (counter <= 0)
+      {
         return false;
+      }
     }
 
     sleep(1);
 
-    if (_resultAsync != -1)
+    if (m_resultAsync != -1)
     {
-      std::cout << "ResponseCallback finished: " << _resultAsync.toString() << std::endl;
+      std::cout << "ResponseCallback finished: " << m_resultAsync.toString() << std::endl;
       return true;
     }
   }
@@ -405,19 +386,19 @@ bool DataLayerClient::waitForResponseCallback(int counter)
 
 void DataLayerClient::ping()
 {
-  _result = _client->pingSync();
-  std::cout << "_client->pingSync() " << _result.toString() << std::endl;
+  m_result = m_client->pingSync();
+  std::cout << "m_client->pingSync() " << m_result.toString() << std::endl;
 
-  _resultAsync = -1;
-  _result = _client->pingAsync(responseCallback());
+  m_resultAsync = -1;
+  m_result = m_client->pingAsync(responseCallback());
   waitForResponseCallback(10);
 }
 
-void DataLayerClient::readSync(const std::string &node)
+void DataLayerClient::readSync(const std::string& node)
 {
   std::string address = "sdk-cpp-alldata/static/" + node;
-  _result = _client->readSync(address, &_data);
-  println("readSync() " + address, _result, &_data);
+  m_result = m_client->readSync(address, &m_data);
+  println("readSync() " + address, m_result, &m_data);
 }
 
 void DataLayerClient::read()
@@ -427,9 +408,9 @@ void DataLayerClient::read()
 
   std::string address = "sdk-cpp-alldata/static/bool8";
 
-  _result = _client->readAsync(address, _data, responseCallback());
+  m_result = m_client->readAsync(address, m_data, responseCallback());
 
-  std::cout << "readAsync()" << _result.toString() << std::endl;
+  std::cout << "readAsync()" << m_result.toString() << std::endl;
 
   waitForResponseCallback(10);
 
@@ -482,173 +463,173 @@ void DataLayerClient::read()
   readSync("array-of-uint64");
 }
 
-void DataLayerClient::createSync(const std::string &node)
+void DataLayerClient::createSync(const std::string& node)
 {
   std::string address = "/sdk-cpp-alldata/dynamic/_cpp/" + node;
-  _client->removeSync(address); // First remove - may be node exists
-  _result = _client->createSync(address, &_data);
+  m_client->removeSync(address); // First remove - may be node exists
+  m_result = m_client->createSync(address, &m_data);
 }
 
 void DataLayerClient::create()
 {
-  _data.setValue(false);
+  m_data.setValue(false);
   createSync("bool8");
 
-  _data.setValue(-0.123456789f);
+  m_data.setValue(-0.123456789f);
   createSync("float32");
 
-  _data.setValue(-0.987654321);
+  m_data.setValue(-0.987654321);
   createSync("float64");
 
-  _data.setValue((int8_t)-127);
+  m_data.setValue((int8_t)-127);
   createSync("int8");
 
-  _data.setValue((int16_t)-32767);
+  m_data.setValue((int16_t)-32767);
   createSync("int16");
 
-  _data.setValue((int32_t)0x80000001);
+  m_data.setValue((int32_t)0x80000001);
   createSync("int32");
 
-  _data.setValue((int64_t)0x8000000000000001);
+  m_data.setValue((int64_t)0x8000000000000001);
   createSync("int64");
 
-  _data.setValue("Changed by cpp Data Layer Client");
+  m_data.setValue("Changed by cpp ctrlX Data Layer Client");
   createSync("string");
 
   // Flatbuffers
 
   bool arrBool[] = {false, true, false};
-  _data.setValue(arrBool);
+  m_data.setValue(arrBool);
   createSync("array-of-bool8");
 
   int8_t arrInt8[] = {-127, -1, 0, 127};
-  _data.setValue(arrBool);
+  m_data.setValue(arrBool);
   createSync("array-of-int8");
 
   uint8_t arrUint8[] = {0, 127, 128, 255};
-  _data.setValue(arrUint8);
+  m_data.setValue(arrUint8);
   createSync("array-of-uint8");
 
   int16_t arrInt16[] = {-32767, -1, 0, 32767};
-  _data.setValue(arrInt16);
+  m_data.setValue(arrInt16);
   createSync("array-of-int16");
 
   uint16_t arrUint16[] = {0, 32767, 32768, 65535};
-  _data.setValue(arrUint16);
+  m_data.setValue(arrUint16);
   createSync("array-of-uint16");
 
   int32_t arrInt32[] = {-2147483647, -1, 0, 2147483647};
-  _data.setValue(arrInt32);
+  m_data.setValue(arrInt32);
   createSync("array-of-int32");
 
   uint32_t arrUint32[] = {0, 2147483647, 2147483648, 4294967295};
-  _data.setValue(arrUint32);
+  m_data.setValue(arrUint32);
   createSync("array-of-uint32");
 
   int64_t arrInt64[] = {-9223372036854775807, -1, 0, 9223372036854775807};
-  _data.setValue(arrInt64);
+  m_data.setValue(arrInt64);
   createSync("array-of-int64");
 
   // https://en.cppreference.com/w/cpp/types/numeric_limits/max
   uint64_t arrUint64[] = {0, 9223372036854775807, std::numeric_limits<std::size_t>::max() - 1, std::numeric_limits<std::size_t>::max()};
-  _data.setValue(arrUint64);
+  m_data.setValue(arrUint64);
   createSync("array-of-uint64");
 
   float_t arrFloat32[] = {32.1, 32.2, 32.3, 32.4};
-  _data.setValue(arrFloat32);
+  m_data.setValue(arrFloat32);
   createSync("array-of-float32");
 
   double_t arrFloat64[] = {64.1, 64.2, 64.3, 64.4};
-  _data.setValue(arrFloat64);
+  m_data.setValue(arrFloat64);
   createSync("array-of-float64");
 
   std::string arrString[] = {"Red", "Green", "Yellow", "Blue"};
-  _data.setValue(arrString);
+  m_data.setValue(arrString);
   createSync("array-of-string");
 }
 
 void DataLayerClient::remove()
 {
-  _data.setValue("Will be removed");
+  m_data.setValue("Will be removed");
   createSync("xxx");
 
   std::string address = "/sdk-cpp-alldata/dynamic/_cpp/xxx";
-  _result = _client->removeSync(address);
+  m_result = m_client->removeSync(address);
 
   createSync("xxx");
-  _result = _client->removeAsync(address, responseCallback());
+  m_result = m_client->removeAsync(address, responseCallback());
   waitForResponseCallback(10);
 }
 
 void DataLayerClient::browse()
 {
-  _data.setValue("");
-  _result = _client->browseSync("", &_data);
-  if (_result == comm::datalayer::DlResult::DL_OK)
+  m_data.setValue("");
+  m_result = m_client->browseSync("", &m_data);
+  if (m_result == comm::datalayer::DlResult::DL_OK)
   {
-    printStringList(_data);
+    printStringList(m_data);
   }
 
-  _result = _client->browseAsync("", responseCallback());
+  m_result = m_client->browseAsync("", responseCallback());
   waitForResponseCallback(10);
 }
 
-void DataLayerClient::writeSync(const std::string &node)
+void DataLayerClient::writeSync(const std::string& node)
 {
   std::string address = "sdk-cpp-alldata/dynamic/" + node;
 
-  _result = _client->writeSync(address, &_data);
-  println("writeSync() " + address, _result, &_data);
+  m_result = m_client->writeSync(address, &m_data);
+  println("writeSync() " + address, m_result, &m_data);
 }
 
 void DataLayerClient::write()
 {
-  _data.setValue(false);
+  m_data.setValue(false);
   writeSync("bool8");
 
-  _data.setValue(-0.123456789f);
+  m_data.setValue(-0.123456789f);
   writeSync("float32");
 
-  _data.setValue(-0.987654321);
+  m_data.setValue(-0.987654321);
   writeSync("float64");
 
-  _data.setValue((int8_t)-127);
+  m_data.setValue((int8_t)-127);
   writeSync("int8");
 
-  _data.setValue((int16_t)-32767);
+  m_data.setValue((int16_t)-32767);
   writeSync("int16");
 
-  _data.setValue((int32_t)0x80000001);
+  m_data.setValue((int32_t)0x80000001);
   writeSync("int32");
 
-  _data.setValue((int64_t)0x8000000000000001);
+  m_data.setValue((int64_t)0x8000000000000001);
   writeSync("int64");
 
-  _data.setValue("Changed by cpp Data Layer Client");
+  m_data.setValue("Changed by cpp ctrlX Data Layer Client");
   writeSync("string");
 }
 
 void DataLayerClient::metadata()
 {
   std::string address = "scheduler/admin/state";
-  _result = _client->metadataSync(address, &_data);
+  m_result = m_client->metadataSync(address, &m_data);
 
-  printMetadata(_data);
+  printMetadata(m_data);
 }
 
 void DataLayerClient::stop()
 {
-  delete _client;
+  delete m_client;
+  m_client = nullptr;
 }
 
-void DataLayerClient::Run()
+void DataLayerClient::run()
 {
   std::cout << "Simple Snap for ctrlX Datalayer Client in cpp" << std::endl;
   std::cout << "--------------------------------------------" << std::endl;
 
   if (start())
   {
-
     ping();
     read();
     create();

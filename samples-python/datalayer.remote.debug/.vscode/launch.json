@@ -14,12 +14,12 @@
             "justMyCode": false
         },
         {
-            "name": "Remote ctrlX CORE virtual - Port forwarding",
+            "name": "Remote ctrlX COREvirtual - Port forwarding",
             "type": "python",
             "request": "attach",
             // IP address where the remote debug server is listening for debug connections.
             // From the QEMU SDK VM (guest) 10.0.2.2 will address the host.
-            // From the host the ctrlX CORE virtual is connected via Port Forwarding.
+            // From the host the ctrlX COREvirtual is connected via Port Forwarding.
             "host": "10.0.2.2",  // NOT change
             // Port where the remote debug server is listening for debug connections.
             "port": 15678,
@@ -31,10 +31,10 @@
             ]
         },
         {
-            "name": "Remote ctrlX CORE virtual - Network adapter",
+            "name": "Remote ctrlX COREvirtual - Network adapter",
             "type": "python",
             "request": "attach",
-            "host": "192.168.1.1", // Do NOT change - this is the IP address of your ctrlX virtual
+            "host": "192.168.1.1", // Do NOT change - this is the IP address of your ctrlX COREvirtual
             "port": 15678,
             "pathMappings": [
                 {

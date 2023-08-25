@@ -1,6 +1,6 @@
 # README .NET appdata
 
-This .NET sample shows how to persist application data in ctrlX environment using an
+This .NET sample shows how to persist application data in ctrlX CORE using an
 HTTP Listener. Please read the available [HOW-TO persist your app data](../../persistdata.md) documention for details.
 
 ## Introduction
@@ -22,7 +22,7 @@ Please read the common .NET docs [here](./../../doc/dotnet.md), first.
 3. Choose __Open Folder__.
 4. Open the directory __appdata__.
 5. Build and install snap as described [here](../README.md).
-6. Checkout ctrlX Data Layer web frontend (System | Data Layer) 
+6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer) 
 7. Check the output using __Diagnostics__:
 
    - Login into your ctrlX
@@ -60,24 +60,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 
 ## License
 
-MIT License
-
-Copyright (c) 2022 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+SPDX-FileCopyrightText: Bosch Rexroth AG
+SPDX-License-Identifier: MIT

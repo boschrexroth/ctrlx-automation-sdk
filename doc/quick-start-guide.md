@@ -25,13 +25,13 @@ Call this script:
 
     ~/scripts/install-sdk.sh
 
-The script downloads downloads ctrlx-automation-sdk.zip from github and unzips it to the folder /home/boschrexroth/ctrlx-automation-sdk/
+The script downloads ctrlx-automation-sdk.zip from github and unzips it to the folder /home/boschrexroth/ctrlx-automation-sdk/
 
 * __Change to project folder /home/boschrexroth/ctrlx-automation-sdk/samples-cpp/datalayer.register.node__
 
 * __Build one or both snaps__
 
-To build a snap for a ctrlX CORE <sup>virtual</sup> enter:
+To build a snap for a ctrlX CORE<sup>virtual</sup> enter:
 
     ./build-snap-amd64.sh
 
@@ -41,9 +41,7 @@ To build a snap for a ctrlX CORE enter:
 
 As a result a snap file `sdk-cpp-registernode_...._amd64.snap` respectively `sdk-cpp-registernode_...._arm64.snap` will be created.
 
-* From your __Windows host__ copy the snaps from your App Build Environment to your Windows file system__
-
-Start cmd.exe and enter this command:
+To copy the snap(s) into your Windows file system start cmd.exe on __your Windows host__ and enter this command:
 
     scp -P 10022 boschrexroth@localhost:~/ctrlx-automation-sdk/samples-cpp/datalayer.register.node/*.snap .
 
@@ -51,7 +49,7 @@ Start cmd.exe and enter this command:
 
 Don't forget to set option 'Allow installation from unknown source' under Apps --> Settings
 
-* __Select Settings --> Data Layer and check the nodes under path sdk-cpp-registernode/__
+* __Select Settings --> ctrlX Data Layer and check the nodes under path sdk-cpp-registernode/__
 
 There should appear several nodes created by the snap.
 

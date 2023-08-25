@@ -1,13 +1,13 @@
-This chapter describes how to setup and run App Build Environments without using ctrlX WORKS.
+This chapter describes how to setup and run App Build Environments __without using ctrlX WORKS__.
 
-Remember ctrlX WORKS provides all necessary actions required to deal with app build environments.
+Remember ctrlX WORKS provides all necessary actions required to deal with App Build Environments.
 
 
 This is the recommended constellation:
 
 * Despite QEMU supports both Windows and Linux we are recommending to use a Windows host operating system .
 
-* Host and guest machine should use CPU architecture amd64. Snaps for an arm64 target are build via cross build.
+* Host and guest machine should use CPU architecture amd64. Snaps for a arm64 targets are build via cross build.
 
 ## Installation on Windows 10 Host
 
@@ -57,16 +57,9 @@ See [Use PX.exe as Local Proxy on a Windows Host](./px.md).
 ## Installation on Linux Host
 
 You have to install both QEMU and KVM on your host system. 
+Therefor you can run this script:
 
-The installation process is descriped in the internet e.g.
-
-[How to Install QEMU on Ubuntu to Set Up a Virtual Machine](https://www.makeuseof.com/how-to-install-qemu-ubuntu-set-up-virtual-machine/). 
-
-See also:
-
-[How to Install Kvm on Ubuntu 20.04](https://linuxize.com/post/how-to-install-kvm-on-ubuntu-20-04/)
-
-[KVM](https://www.linux-kvm.org/page/Documents)
+    scripts/environment/install-qemu.sh
 
 ## Running the QEMU Virtual Machine
 

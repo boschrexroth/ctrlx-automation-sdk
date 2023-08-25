@@ -1,24 +1,6 @@
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2020-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 import datetime
 
@@ -29,19 +11,29 @@ from alldataprovider.providerNodeAllData import ProviderNodeAllData
 
 
 class NodeManagerAllData:
+    """NodeManagerAllData
+    """
 
     def __init__(self, provider: Provider, addressRoot: str):
+        """__init__
+        """
         self.provider = provider
         self.addressRoot = addressRoot
         self.nodes = []
 
     def create_static_nodes(self):
+        """create_static_nodes
+        """
         self.create_nodes("static/", False)
 
     def create_dynamic_nodes(self, ):
+        """create_dynamic_nodes
+        """
         self.create_nodes("dynamic/", True)
 
     def create_nodes(self, address: str, dynamic: bool):
+        """create_nodes
+        """
         addressBranch = self.addressRoot + address
 
         data = Variant()
@@ -107,7 +99,7 @@ class NodeManagerAllData:
         data.set_datetime(datetime.datetime(2014, 7, 13))
         self.create_single_node(addressBranch, "", "timestamp",
                                 "unit", "description", dynamic, data)
-                                
+
         # Flatbuffers - see samples-python/datalayer.provider/main.py
 
         data = Variant()
@@ -172,11 +164,14 @@ class NodeManagerAllData:
                                 "unit", "description", dynamic, data)
 
         data = Variant()
-        data.set_array_datetime([datetime.datetime(1970, 1, 1), datetime.datetime(2014, 7, 13)])
+        data.set_array_datetime(
+            [datetime.datetime(1970, 1, 1), datetime.datetime(2014, 7, 13)])
         self.create_single_node(addressBranch, "", "array-of-timestamp",
                                 "unit", "description", dynamic, data)
 
-    def create_single_node(self, addressBranch: str, addressType : str, name: str, unit: str, description: str, dynamic: bool, data: Variant):
+    def create_single_node(self, addressBranch: str, addressType: str, name: str, unit: str, description: str, dynamic: bool, data: Variant):
+        """create_single_node
+        """
         address = addressBranch + name
         print("Creating", address, flush=True)
 
@@ -191,5 +186,7 @@ class NodeManagerAllData:
             self.provider.register_node(address, node.providerNode)
 
 
-def is_blank (myString):
+def is_blank(myString):
+    """is_blank
+    """
     return not (myString and myString.strip())

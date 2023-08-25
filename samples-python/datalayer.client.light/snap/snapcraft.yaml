@@ -1,10 +1,10 @@
 name: sdk-py-client-light
 version: 2.4.0
-summary: Data Layer client sample written in Python for ctrlX.
+summary: ctrlX Data Layer client sample written in Python for ctrlX CORE.
 title: sdk-py-client-light
 description: |
   The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console. 
-base: core20
+base: core22
 confinement: strict
 grade: stable
 

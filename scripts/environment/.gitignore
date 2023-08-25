@@ -1,9 +1,10 @@
-*-generated
+*generated*
 *64.img
 *.qcow2
 QEMU_EFI.fd
-*.tar.*
-*copy
-*copy.*
--pure.*
+*copy*
 wget-log*
+*.bak
+*.zip
+cloud-config-*
+scripts/cloud-config/*

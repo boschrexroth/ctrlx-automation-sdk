@@ -1,24 +1,6 @@
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2021-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler
@@ -28,13 +10,14 @@ from json import loads
 
 from  appdata.app_data_control import AppDataControl
 
-import token
+from web.token import TokenValidation
 
 
 
 # Simple Webserver to get rest requests
 class Server(BaseHTTPRequestHandler):
-
+    """Server
+    """
     rest_url_load = '/sdk-py-appdata/api/v1/load'
     rest_url_save = '/sdk-py-appdata/api/v1/save'
 
@@ -46,9 +29,9 @@ class Server(BaseHTTPRequestHandler):
         "phase": ""
         }
 
-    def do_POST(self):
-        # Check if url valid
-        request_url = self.path
+    def __check_url_valid(self, request_url) -> bool:
+        """__check_url_valid
+        """
         print("INFO REST Command:", request_url, flush=True)
         if request_url != Server.rest_url_load and request_url != Server.rest_url_save:
             self.send_error(HTTPStatus.FORBIDDEN)
@@ -56,17 +39,20 @@ class Server(BaseHTTPRequestHandler):
         # Check if command valid
         if self.command != 'POST':
             self.send_error(HTTPStatus.METHOD_NOT_ALLOWED)
-            return
+            return False
         # Check Request Token
-        token_validation = webtoken.TokenValidation()
+        token_validation = TokenValidation()
         result, token, token_decoded = token_validation.get_token(self.headers)
         if result is False or token_validation.is_authorized("rexroth-device.all.rwx") is False:
             self.send_error(HTTPStatus.UNAUTHORIZED)
             print("ERROR Not authorized (Bearer invalid)", flush=True)
-            return
+            return False
         print("INFO Check scope passed", flush=True)
+        return True
 
-        # Get payload from request
+    def __check_request_payload(self):
+        """__check_request_payload
+        """
         content_length = int(self.headers['Content-Length'])    # Get the size of data
         payload_string = unquote(self.rfile.read(content_length).decode("utf-8"))
         # parse = parse_qs(post_data)
@@ -75,6 +61,20 @@ class Server(BaseHTTPRequestHandler):
         if payload.keys() != Server.config_payload.keys():
             self.send_error(HTTPStatus.BAD_REQUEST)
             print("ERROR wrong request payload", flush=True)
+            return False, None
+        return True, payload
+
+    def do_POST(self):
+        """do_POST
+        """
+        # Check if url valid
+        request_url = self.path
+        if self.__check_url_valid(request_url) == False:
+            return
+
+        # Get payload from request
+        check, payload = self.__check_request_payload()
+        if check == False:
             return
 
         # Command evaluation
@@ -156,10 +156,13 @@ class Server(BaseHTTPRequestHandler):
 
 # Because http.server lib is designed for tcp, we need to write our own class to use unix sockets
 class UnixSocketHttpServer(UnixStreamServer):
-
+    """UnixSocketHttpServer
+    """
     allow_reuse_address = True
 
     def get_request(self):
+        """get_request
+        """
         # dummy client address to avoid errors
         request, client_address = super().get_request()
         return (request, ["local", 0])

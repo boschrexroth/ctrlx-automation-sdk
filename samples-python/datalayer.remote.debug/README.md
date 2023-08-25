@@ -1,42 +1,59 @@
-# Sample Project datalayer.remote.debug
+# Python sample for remote debugging
 
-## Enabling Remote Debugging
+This sample shows how remote debugging can be done with Python.
 
-Remote debugging is enabled when the app is called with a command line parameter --debug-port=....
-If this parameter is missing the debugging functions are disabled, the app starts normally.
+## Prerequisites
 
-For debugging in the build environment this parameter doesn't matter.
+If you use a ctrlX CORE<sup>virtual<sup/> enable port forwarding of your remote debug port e.g. for port 15678
 
-## Python Package debugpy and Script debugging.py
+    8022:22,8443:443,8740:11740,4840:4840,2069:2069,2070:2070__,15678:15678__
 
-We use the Python package __debugpy__ for remote debugging. 
+## Implementation
 
-To simplify the usage of this package the debugging code is outsourced into the script debugging.py.
+Remote debugging is enabled with by the package [__debugpy__](https://pypi.org/project/debugpy/)
 
-To use debugpy and the script in your own Python projects too install the package into your project environment, copy the script debugging.py into your project folder and add the function calls into your code.
+The script debug.py provides the function __debug.remote_debugging_wait_for_client()__ were debugpy is used.
+
+In main.py __debug.remote_debugging_wait_for_client()__ is called. 
+
+Installed on a ctrlX CORE the service stops executing and waits until a remote debug client will attach.
+
+!!! important 
+    Feel free to use the script debug.py in your own projects.
+
+## Build snap and install and start it
+
+For this job we recommend to use our shell script, here for a ctrlX ctrlX CORE<sup>virtual<sup/> with port forwarding
+
+    ../../scripts/build-upload-log-snap.sh -PF
+
+and here with network adapter
+
+    ../../scripts/build-upload-log-snap.sh -NA
+
+For a bare metal ctrlX CORE you are able to provide all settings via command line, call this for help:
+
+    ../../scripts/build-upload-log-snap.sh -help 
+
+When build and installation succeeded the snap is started as a service waiting for a remote debug client to connect. This print out should be shown e.g.:
+
+    __Accepting remote debug client attaches to port 15678__
+
+!!! hint
+    In Visual Studio Code you can use menu item Terminal - Run Build Task... - Build upload snap ...
+
+## Start debugging wih Visual Studio Code
+
+
+The file .vscode/launch.json contains launch configurations for remote debugging. 
+
+We assume to debug the snap on a ctrlX ctrlX CORE<sup>virtual<sup/> with port forwarding click the launch icon on the side bar and select configuration 'Remote ctrlX COREvirtual - Port forwarding'.
+
+The debugging client of Visual Studio Code will connect to the waiting server and debugging will start.
 
 ___
 
 ## License
 
-MIT License
-
-Copyright (c) 2021-2022 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+SPDX-FileCopyrightText: Bosch Rexroth AG
+SPDX-License-Identifier: MIT

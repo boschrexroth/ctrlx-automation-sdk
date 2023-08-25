@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 rm -rf bfbs/
 rm -rf generated/
 rm -rf build/

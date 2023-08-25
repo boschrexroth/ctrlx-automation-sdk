@@ -3,7 +3,7 @@ site_name: Software Development Kit
 site_url: https://boschrexroth.github.io/ctrlx-automation-sdk
 site_description: ctrlX AUTOMATION Software Development Kit
 site_author: Bosch Rexroth AG
-copyright: Copyright &copy; 2020-2022 Bosch Rexroth AG
+copyright: Copyright &copy; 2020-2023 Bosch Rexroth AG
 
 # Repository Settings
 repo_name: boschrexroth/ctrlx-automation-sdk
@@ -23,6 +23,7 @@ theme:
     - navigation.instant
     - navigation.tabs
     - navigation.sections
+    - content.code.copy
   favicon: assets/favicon.png
   icon:
     admonition:
@@ -98,6 +99,10 @@ nav:
         - Using Flatbuffers in IEC 61131-3 Code: fbs2plc.md
         - Configure maximal Number of Open File Handles: numopenfilehandles.md
         - Using Localizaction: localizaction.md
+        - External Storages:
+          - Date exchange: data-exchange.md
+          - Storage extension: storage-extension.md
+        - Extendable Denylist: extenable-denylist.md
       - Releases:
         - Changelog: changelog.md
     - Setup:
@@ -107,7 +112,7 @@ nav:
       - Important Installation Scripts: install-scripts.md
       - QEMU Virtual Machine: setup_qemu_ubuntu.md
       - VirtualBox Virtual Machine: setup_windows_virtualbox_ubuntu.md
-      - Native Ubuntu 20.04: setup_ubuntu.md
+      - Native Ubuntu: setup_ubuntu.md
       - Install Sources from github: install-sources-from-github.md
       - Toolchain:
         - Px.exe as Proxy on a Windows Host: px.md
@@ -124,6 +129,7 @@ nav:
       - Samples Python: samples-python/README.md
       - Samples .NET: samples-net/README.md
       - Samples Nodejs: samples-node/README.md
+      - Samples ANGULAR: samples-angular/README.md
       - Samples Shell: samples-sh/README.md
       - Samples Snap: samples-snap/README.md
       - Samples IEC 61131-3: samples-iec61131/README.md

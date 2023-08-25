@@ -1,26 +1,8 @@
 #!/usr/bin/env python3
 
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2021-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 import sys
 
@@ -33,7 +15,8 @@ from helper.ctrlx_datalayer_helper import get_client
 
 
 def main():
-
+    """main
+    """
     with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
@@ -56,14 +39,15 @@ def main():
             print("Browsing and reading nodes...", flush=True)
             browse_tree(datalayer_client, datalayer_system.json_converter())
 
-        print("Stopping Data Layer System", flush=True)
+        print("Stopping ctrlX Data Layer System", flush=True)
         # Attention: Doesn't return if any provider or client instance is still running
         stop_ok = datalayer_system.stop(False)
         print("System Stop", stop_ok, flush=True)
 
 
 def browse_tree(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.system.Converter, address=""):
-
+    """browse_tree
+    """
     # print current address and get value of node
     node_value = get_value(client, converter, address)
     if node_value is None:
@@ -71,10 +55,10 @@ def browse_tree(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.
     else:
         print(address, node_value, flush=True)
 
-    # Browse Data Layer tree
+    # Browse ctrlX Data Layer tree
     result, data = client.browse_sync(address)
     if result != Result.OK:
-        print("ERROR Browsing Data Layer failed with: ", result, flush=True)
+        print("ERROR Browsing ctrlX Data Layer failed with: ", result, flush=True)
         return
     with data:
         # Recursive loop
@@ -84,11 +68,12 @@ def browse_tree(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.
 
 
 def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.system.Converter, address: str):
-
+    """get_value
+    """
     # get data with read sync
     result, data = client.read_sync(address)
     if result != Result.OK:
-        # print("ERROR Reading Data Layer failed with: ", result, flush=True)
+        # print("ERROR Reading ctrlX Data Layer failed with: ", result, flush=True)
         return
     with data:
 
@@ -194,7 +179,8 @@ def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.sy
 
 
 def get_typeaddress(client: ctrlxdatalayer.client.Client, address: str):
-
+    """get_typeaddress
+    """
     result, metadata = client.metadata_sync(address)
     if result != Result.OK:
         print("ERROR Reading metadata of ", address, " failed with: ", result, flush=True)

@@ -31,7 +31,7 @@
       "problemMatcher": [],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       }
     },
     {
@@ -44,11 +44,11 @@
       "problemMatcher": [],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       }
     },
     {
-      "label": "Build upload snap - ctrlX CORE virtual Network Adapter",
+      "label": "Build upload snap - ctrlX COREvirtual Network Adapter",
       "type": "shell",
       "command": "../../scripts/build-upload-log-snap.sh",
       "args": [
@@ -57,11 +57,11 @@
       "problemMatcher": [],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       }
     },
     {
-      "label": "Build upload snap - ctrlX CORE virtual Port Forwarding",
+      "label": "Build upload snap - ctrlX COREvirtual Port Forwarding",
       "type": "shell",
       "command": "../../scripts/build-upload-log-snap.sh",
       "args": [
@@ -70,7 +70,7 @@
       "problemMatcher": [],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       }
     },
     {
@@ -84,7 +84,7 @@
       "problemMatcher": [],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       }
     },
     {
@@ -118,7 +118,7 @@
       "problemMatcher": [],
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       }
     },
   ],
@@ -151,12 +151,8 @@
     },
     {
       "id": "SSLPort",
-      "type": "pickString",
+      "type": "promptString",
       "description": "HTTPS (SSL) port number",
-      "options": [
-        "443",
-        "8443"
-      ],
       "default": "443"
     },
     {
@@ -167,7 +163,7 @@
         "y",
         "n"
       ],
-      "default": "n"
+      "default": "y"
     },
     {
       "id": "SSLUser",
@@ -204,12 +200,8 @@
     },
     {
       "id": "SSHPort",
-      "type": "pickString",
+      "type": "promptString",
       "description": "SSH port number",
-      "options": [
-        "22",
-        "8022"
-      ],
       "default": "22"
     },
     {

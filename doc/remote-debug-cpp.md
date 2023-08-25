@@ -71,10 +71,10 @@ This overview will give you a short explenation how remote debugging of a C++ sn
 These are the basics points:
 
 * Your C++ code has to raise a SIGSTOP signal in debug mode. This is done typically in the startup sequence or somewhere else where needed.
-* You have to build your C++ snap in __debug mode__ and install it on your ctrlX.
+* You have to build your C++ snap in __debug mode__ and install it on your ctrlX CORE.
 * The snap application will be restarted manually via ssh with the command `sudo snap run --experimental-gdbserver=:12345 <Snapname>.<Appname>`  
 * The execution of the application will stop when the SIGSTOP signal is raised so that the gdb server is able to connect.
-* From your build environment the gdb debugger is started in remote mode. Provided with IP address and port nummber he can communicate with the gdb server on the ctrlX.
+* From your build environment the gdb debugger is started in remote mode. Provided with IP address and port nummber he can communicate with the gdb server on the ctrlX CORE.
 * Now the debug process can be started using gdb debugger commands. Normally this is done from an IDE like VisualStudio Code.
 
 ### Prerequisites
@@ -142,7 +142,7 @@ As second action we want to start the gdb debugger in remote mode so that he con
         "name": "aarch64 ctrlX (remote)",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/generated/ubuntu20-gcc-aarch64/Debug/registerNode",
+        "program": "${workspaceFolder}/generated/ubuntu22-gcc-aarch64/Debug/registerNode",
         "cwd": "${workspaceFolder}",
         "miDebuggerPath": "/usr/bin/gdb-multiarch",
         "miDebuggerServerAddress": "192.168.1.1:12345",

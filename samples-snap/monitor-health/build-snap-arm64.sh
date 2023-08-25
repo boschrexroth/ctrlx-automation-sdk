@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 TARGET_ARCH=arm64
 
 # Clean all snap part assets

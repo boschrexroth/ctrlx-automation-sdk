@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
@@ -14,8 +14,8 @@
     <Folder Include="docs\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ctrlX-DataLayer" Version="2.7.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.12.0" />
+    <PackageReference Include="ctrlX-DataLayer" Version="3.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.*" />
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.*" />
   </ItemGroup>
 </Project>

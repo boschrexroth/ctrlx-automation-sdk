@@ -70,8 +70,8 @@ The Python Visual Studio Code extension has a Python debug client. For a remote 
 Here you can find the complete file: samples-python/datalayer.remote.debug/.vscode/launch.json
 
 There are three launch configurations for remote debugging:
-* "Remote ctrlX CORE virtual - Port forwarding"
-* "Remote ctrlX CORE virtual - Network adapter"
+* "Remote ctrlX COREvirtual - Port forwarding"
+* "Remote ctrlX COREvirtual - Network adapter"
 * "Remote ctrlX CORE"
 
 ### Preparing your Python Project for Remote Debugging

@@ -4,3 +4,4 @@
 
 * [Generate Manifest](generate-manifest/README.md)
 * [Monitor Health](monitor-health/README.md)
+* [Storage extension](storage-extension/README.md)

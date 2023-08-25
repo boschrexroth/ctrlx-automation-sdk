@@ -3,6 +3,8 @@
     "cmake.configureArgs": [
         "-DCMAKE_BUILD_KIT=${buildKit}"
     ],
-    "cmake.configureOnOpen": false
-    
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "ostream": "cpp"
+    }
 }

@@ -74,4 +74,4 @@ In addition to general aspects, Node-RED Palettes must support the following top
 
 
 **Copyright**
-Copyright (c) 2022 Bosch Rexroth AG
+SPDX-FileCopyrightText: Bosch Rexroth AG

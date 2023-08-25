@@ -1,60 +1,50 @@
-/**
- * MIT License
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
  *
- * Copyright (c) 2020-2021 Bosch Rexroth AG
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-License-Identifier: MIT
  */
 
-/*
- * This snap-program determines symbolic PLC variables from plc-program 'PLC_PRG' and writes in all variables of
- * the type string 'HelloDeveloper', in all integers '1337' and in all floats the value '0.815f'.
- */
+ /*
+  * This snap-program determines symbolic PLC variables from plc-program 'PLC_PRG' and writes in all variables of
+  * the type string 'HelloDeveloper', in all integers '1337' and in all floats the value '0.815f'.
+  */
 
 #include <stdio.h>
 #include <iostream>
+#include <string_view>
 
 #include "comm/datalayer/datalayer.h"
 #include "comm/datalayer/datalayer_system.h"
 
 #include "ctrlx_datalayer_helper.h"
 
-//! Get PLC apps from vector
-comm::datalayer::DlResult getApps(comm::datalayer::Variant &data, std::vector<std::string> &apps)
+comm::datalayer::IClient* client;
+comm::datalayer::Variant variant;
+
+std::string helloPlcApplication = "hello_plc_application";
+
+
+static comm::datalayer::DlResult getStrings(comm::datalayer::Variant& data, std::vector<std::string>& strings)
 {
-  if (data.getType() == comm::datalayer::VariantType::ARRAY_OF_STRING)
+  if (data.getType() != comm::datalayer::VariantType::ARRAY_OF_STRING)
   {
-    const char **str = data;
-    for (uint32_t i = 0; i < data.getCount(); i++)
-    {
-      std::cout << "Apps: " << str[i] << std::endl;
-      apps.push_back(str[i]);
-    }
-    return comm::datalayer::DlResult::DL_OK;
+    return comm::datalayer::DlResult::DL_RT_NOVALIDDATA;
   }
 
-  return comm::datalayer::DlResult::DL_RT_NOVALIDDATA;
+  strings.clear();
+
+  const char** str = data;
+  for (uint32_t i = 0; i < data.getCount(); i++)
+  {
+    std::cout << str[i] << std::endl;
+    strings.push_back(str[i]);
+  }
+  return comm::datalayer::DlResult::DL_OK;
 }
 
 // Function takes the value from "i" to "data" and
-// then writes the new "data" to the address "addr" of the data layer client "IClient"
-comm::datalayer::DlResult setIntValue(comm::datalayer::Variant &data, comm::datalayer::IClient *client, std::string addr, int16_t i)
+// then writes the new "data" to the address "addr" of the ctrlX Data Layer client "IClient"
+static comm::datalayer::DlResult setIntValue(comm::datalayer::Variant& data, comm::datalayer::IClient* client, std::string addr, int16_t i)
 {
   comm::datalayer::DlResult result;
   result = data.setValue(i);
@@ -72,8 +62,8 @@ comm::datalayer::DlResult setIntValue(comm::datalayer::Variant &data, comm::data
 }
 
 // Function takes the value from "str" to "data" and
-// then writes the new "data" to the address "addr" of the data layer client "IClient"
-comm::datalayer::DlResult setStringValue(comm::datalayer::Variant &data, comm::datalayer::IClient *client, std::string addr, std::string str)
+// then writes the new "data" to the address "addr" of the ctrlX Data Layer client "IClient"
+static comm::datalayer::DlResult setStringValue(comm::datalayer::Variant& data, comm::datalayer::IClient* client, std::string addr, std::string str)
 {
   comm::datalayer::DlResult result;
   result = data.setValue(str);
@@ -91,8 +81,8 @@ comm::datalayer::DlResult setStringValue(comm::datalayer::Variant &data, comm::d
 }
 
 // Function takes the value from "value" to "data" and
-// then writes the new "data" to the address "addr" of the data layer client "IClient"
-comm::datalayer::DlResult setFloatValue(comm::datalayer::Variant &data, comm::datalayer::IClient *client, std::string addr, float value)
+// then writes the new "data" to the address "addr" of the ctrlX Data Layer client "IClient"
+static comm::datalayer::DlResult setFloatValue(comm::datalayer::Variant& data, comm::datalayer::IClient* client, std::string addr, float value)
 {
   comm::datalayer::DlResult result;
   result = data.setValue(value);
@@ -109,114 +99,161 @@ comm::datalayer::DlResult setFloatValue(comm::datalayer::Variant &data, comm::da
   return comm::datalayer::DlResult::DL_FAILED;
 }
 
-int run(comm::datalayer::IClient *client)
+static void scanVariable(std::string address)
 {
+  auto writeNotAllowed = address.find(helloPlcApplication) == std::string::npos;
 
-  // getting all PLC Applications nodes
-  comm::datalayer::Variant data;
-  comm::datalayer::DlResult result = client->browseSync("plc/app", &data);
-  if (STATUS_FAILED(result))
+  comm::datalayer::DlResult result;
+
+  // determine the data type of the symbol-variable read
+  switch (variant.getType())
   {
-    std::cout << "ERROR Browsing of PLC nodes 'plc/app' failed with: " << result.toString() << std::endl;
-    return 1;
-  }
-
-  // Create dynamic string-array
-  std::vector<std::string> plcApp;
-  // write all Plc-Applications from "data" in the dynamic string-array "plcApp"
-  result = getApps(data, plcApp);
-  if (STATUS_FAILED(result))
-  {
-    std::cout << "ERROR Reading data of PLC nodes 'plc/app' failed with: " << result.toString() << std::endl;
-    return 1;
-  }
-
-  if (plcApp.size() <= 0)
-  {
-    std::cout << "ERROR No PLC application available" << std::endl;
-    return 4;
-  }
-
-  // set the path to the symbol variables of the first application in the plc-program "PLC_PRG"
-  std::string addr = "plc/app/" + plcApp[0] + "/sym/PLC_PRG/";
-  // read all symbol variables into "data"
-  result = client->browseSync(addr, &data);
-  if (STATUS_FAILED(result))
-  {
-    std::cout << "ERROR Browsing of symbols of '"<< addr << "' failed with: " << result.toString() << std::endl;
-    return 5;
-  }
-
-  // Create dynamic string-array
-  std::vector<std::string> symVar;
-  // write all symbol-variables from "data" in the dynamic string-array "symVar"
-  result = getApps(data, symVar);
-  if (STATUS_FAILED(result))
-  {
-    std::cout << "ERROR Reading data failed with: " << result.toString() << std::endl;
-    return 6;
-  }
-
-  // run through the loop for each symbol-variable in "data"
-  for (uint32_t i = 0; i < data.getCount(); i++)
-  {
-    comm::datalayer::Variant value;
-    // write the path to the current symbol variable in "temp"
-    // set the path to the symbol-variable
-    std::string temp = addr + symVar[i];
-    // read the value of this symbol-variable
-    result = client->readSync(temp, &value);
-    if (STATUS_FAILED(result))
-    {
-      std::cout << "WARN Reading of " << temp << "failed with: " << result.toString() << std::endl;
-    }
-
-    // determine the data type of the symbol-variable read
-    switch (value.getType())
-    {
-    // Set 'helloDeveloper' to string-Variable in the plc application
     case comm::datalayer::VariantType::STRING:
-      result = setStringValue(value, client, temp, "HelloDeveloper");
+
+      std::cout << "Actual value of '" << address << "' : " << std::string(variant) << std::endl;
+
+      if (writeNotAllowed) 
+      {
+        std::cout << "Skip writing of '" << address << std::endl;
+        return;
+      }
+      
+      result = setStringValue(variant, client, address, "HelloDeveloper");
       if (STATUS_FAILED(result))
       {
-        std::cout << "WARN Set STRING value into '" << temp << "' failed with: " << result.toString() << std::endl;
+        std::cout << "WARN Set STRING value into '" << address << "' failed with: " << result.toString() << std::endl;
       }
       else
       {
-        std::cout << "INFO Set STRING value into '" << temp << "' succeeded" << std::endl;
+        std::cout << "INFO Set STRING value into '" << address << "' succeeded" << std::endl;
       }
       break;
 
-    // Set '1337' to INT-Variable in the plc application
+      // Set '1337' to INT-Variable in the plc application
     case comm::datalayer::VariantType::INT16:
-      result = setIntValue(value, client, temp, 1337);
-      if (STATUS_FAILED(result))
-      {
-        std::cout << "WARN Set INT16 value into '" << temp << "' failed with: " << result.toString() << std::endl;
-      }
-      else
-      {
-        std::cout << "INFO Set INT16 value into '" << temp << "' succeeded" << std::endl;
-      }
-      break;
 
-    // Set '0.815f' to Float-Variable in the plc application
-    case comm::datalayer::VariantType::FLOAT32:
-      result = setFloatValue(value, client, temp, 0.815f);
+      std::cout << "Actual value of '" << address << "' : " << int16_t(variant) << std::endl;
+
+      if (writeNotAllowed) 
+      {
+        std::cout << "Skip writing of '" << address << std::endl;
+        return;
+      }
+
+      result = setIntValue(variant, client, address, 1337);
       if (STATUS_FAILED(result))
       {
-        std::cout << "WARN Set FLOAT32 value into '" << temp << "' failed with: " << result.toString() << std::endl;
+        std::cout << "WARN Set INT16 value into '" << address << "' failed with: " << result.toString() << std::endl;
       }
       else
       {
-        std::cout << "INFO Set FLOAT32 value into '" << temp << "' succeeded" << std::endl;
+        std::cout << "INFO Set INT16 value into '" << address << "' succeeded" << std::endl;
+      }
+      break;;
+
+      // Set '0.815f' to Float-Variable in the plc application
+    case comm::datalayer::VariantType::FLOAT32:
+
+      std::cout << "Actual value of '" << address << "' : " << float(variant) << std::endl;
+
+      if (writeNotAllowed) 
+      {
+        std::cout << "Skip writing of '" << address << std::endl;
+        return;
+      }
+
+      result = setFloatValue(variant, client, address, 0.815f);
+      if (STATUS_FAILED(result))
+      {
+        std::cout << "WARN Set FLOAT32 value into '" << address << "' failed with: " << result.toString() << std::endl;
+      }
+      else
+      {
+        std::cout << "INFO Set FLOAT32 value into '" << address << "' succeeded" << std::endl;
       }
       break;
 
     default:
-      std::cout << "WARN Variant type not supported  - only STRING, INT16 or FLOAT32 supported" << std::endl;
+      std::cout << "WARN Variant type of '" << address << "' not supported  - only STRING, INT16 or FLOAT32" << std::endl;
       break;
+  }
+}
+
+// address without / at the end
+static int scanFolder(std::string address)
+{
+  comm::datalayer::DlResult result = client->browseSync(address, &variant);
+  if (STATUS_FAILED(result))
+  {
+    std::cout << "ERROR Browsing of '" << address << "' failed with: " << result.toString() << std::endl;
+    return 1;
+  }
+
+  std::vector<std::string> children;
+  result = getStrings(variant, children);
+  if (STATUS_FAILED(result))
+  {
+    std::cout << "ERROR Reading '" << address << "' failed with: " << result.toString() << std::endl;
+    return 1;
+  }
+
+  if (children.size() <= 0)
+  {
+    std::cout << "ERROR '" << address << "' has no sub elements" << std::endl;
+    return 2;
+  }
+
+  // Loop over all children
+  int exitCode;
+  for (int i=0; i < children.size(); i++)
+  {
+    std::string childAddress = address +"/" + children[i];
+
+    // If readSync succeeds then we have a variable
+    result = client->readSync(childAddress, &variant);
+    if (STATUS_SUCCEEDED(result))
+    {
+      scanVariable(childAddress);
+      continue;
     }
+    
+    exitCode = scanFolder(childAddress);
+
+    if (exitCode != 0) return exitCode;
+  }
+
+  return 0;
+}
+static int scanPlcApp()
+{
+  std::string address = "plc/app";
+  comm::datalayer::DlResult result = client->browseSync(address, &variant);
+  if (STATUS_FAILED(result))
+  {
+    std::cout << "ERROR Browsing of '" << address << "' failed with: " << result.toString() << std::endl;
+    return 1;
+  }
+
+  std::vector<std::string> apps;
+  result = getStrings(variant, apps);
+  if (STATUS_FAILED(result))
+  {
+    std::cout << "ERROR Reading '" << address << "' failed with: " << result.toString() << std::endl;
+    return 2;
+  }
+
+  if (apps.size() <= 0)
+  {
+    std::cout << "ERROR '" << address << "' has no sub elements" << std::endl;
+    return 3;
+  }
+
+  // Loop over all apps
+  for (int i=0; i < apps.size(); i++)
+  {
+    std::string symAddress = address +"/" + apps[i] + "/sym";
+    auto result = scanFolder(symAddress);
+    if (result > 0) return result;
   }
 
   return 0;
@@ -228,13 +265,11 @@ int main()
   comm::datalayer::DatalayerSystem datalayer;
   datalayer.start(false);
 
-  comm::datalayer::IClient *client;
-
   // Try ctrlX CORE (virtual)
   client = getClient(datalayer);
   if (client == nullptr)
   {
-    // Try ctrlX CORE virtual with port forwarding
+    // Try ctrlX COREvirtual with port forwarding
     client = getClient(datalayer, "10.0.2.2", "boschrexroth", "boschrexroth", 8443);
   }
   if (client == nullptr)
@@ -244,7 +279,7 @@ int main()
   }
   else
   {
-    exitCode = run(client);
+    exitCode = scanPlcApp();
     delete client;
   }
 

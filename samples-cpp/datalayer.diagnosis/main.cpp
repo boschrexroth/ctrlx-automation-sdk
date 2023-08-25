@@ -1,29 +1,10 @@
-/**
- * MIT License
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
  *
- * Copyright (c) 2021-2022 Bosch Rexroth AG
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-License-Identifier: MIT
  */
 
 #include <iostream>
-#include <signal.h>
 #include <thread>
 
 #include "comm/datalayer/datalayer.h"
@@ -45,9 +26,9 @@
 
 #include "ctrlx_datalayer_helper.h"
 
-comm::datalayer::PublishCallback eventsCallback()
+static comm::datalayer::PublishCallback eventsCallback()
 {
-  return [&](comm::datalayer::DlResult status, const std::vector<comm::datalayer::NotifyItem> &items)
+  return [&](comm::datalayer::DlResult status, const std::vector<comm::datalayer::NotifyItem>& items)
   {
     std::cout << "  Got notification" << std::endl;
 
@@ -185,88 +166,78 @@ comm::datalayer::PublishCallback eventsCallback()
   };
 }
 
-int main()
+int main(void)
 {
-#ifdef MY_DEBUG
-  std::cout << "Raising SIGSTOP" << std::endl;
-  raise(SIGSTOP);
-  std::cout << "... Continue..." << std::endl;
-#endif
 
   comm::datalayer::DatalayerSystem datalayer;
   datalayer.start(false);
 
-  auto clientConnectionString = getConnectionString();
-  comm::datalayer::IClient2 *client = datalayer.factory()->createClient2(clientConnectionString);
-  if (client->isConnected() == false)
+  auto clientConnectionString = getConnectionString(); // default: ctrlX CORE or ctrlX COREvirtual with Network Adpater
+  //auto clientConnectionString = getConnectionString("10.0.2.2","boschrexroth","boschrexroth",8443); ctrlX COREvirtual with Port Forwarding
+  comm::datalayer::IClient2* client = datalayer.factory()->createClient2(clientConnectionString);
+  if (client == nullptr || client->isConnected() == false)
   {
     std::cout << "ERROR Client connection " << clientConnectionString << " failed" << std::endl;
     delete client;
-    client = nullptr;
     datalayer.stop();
-
     return 1;
   }
 
-  //////////////////////////////////////////////////////////////////////////////////
-  std::cout << "Register diagnostics" << std::endl;
-  //////////////////////////////////////////////////////////////////////////////////
+/*
+  std::cout << "Register diagnostics with file path on ctrlX CORE (Alternative 1)" << std::endl;
 
-  // std::cout << "Register diagnostics with file path on ctrlX CORE (Alternative 1)" << std::endl;
-  //// For this variant it is necessary to upload the json file to a path on control that is accessible.
-  //// It is possible to upload the file via WebDAV to the active configuration:
-  //// - Create the folder "diagnostics" in the root of the active configuration.
-  //// - Upload the json file (sdk_diagnosis_datalayer.diagnostics.en-US.json) to the folder "diagnostics".
-  //// - If you followed all steps of the description, it is sufficient to only declare the file name for the registration via Data Layer. See example below.
-  //// It is also possible to upload a complete configuration with the json file, e.g.:
-  //// - Save actual configuration and upload to PC.
-  //// - Unzip the configuration file.
-  //// - Add the json file to configuration (e.g. create folder "diagnostics" and copy the json file (sdk_diagnosis_datalayer.diagnostics.en-US.json) to it).
-  //// - Upload the configuration and load the configuration.
-  //// - The resulting accessible path of the json file should be "/var/snap/rexroth-solutions/common/solutions/DefaultSolution/configurations/appdata/diagnostics/sdk_diagnosis_datalayer.diagnostics.en-US.json".
-  //// Features supported later:
-  //// - Upload of a single file to the active configuration via configuration web interface.
-  // comm::datalayer::Variant registrationPathData;
-  // registrationPathData.setValue("sdk_diagnosis_datalayer.diagnostics.en-US.json");
-  //// registrationPathData.setValue("/var/snap/rexroth-solutions/common/solutions/DefaultSolution/configurations/appdata/diagnostics/sdk_diagnosis_datalayer.diagnostics.en-US.json");
-  // comm::datalayer::DlResult dlResult = dlClient->writeSync("diagnosis/registration/register-file", &registrationPathData);
-  // if (comm::datalayer::STATUS_FAILED(dlResult))
-  // {
-  //   std::cerr << "Register diagnostics failed with error code" << dlResult.toString() << std::endl;
-  //   return 1;
-  // }
+  // For this variant it is necessary to upload the json file to a path on control that is accessible.
+  // It is possible to upload the file via WebDAV to the active configuration:
+  // - Create the folder "diagnostics" in the root of the active configuration.
+  // - Upload the json file (sdk_diagnosis_datalayer.diagnostics.en-US.json) to the folder "diagnostics".
+  // - If you followed all steps of the description, it is sufficient to only declare the file name for the registration via ctrlX Data Layer. See example below.
+  // It is also possible to upload a complete configuration with the json file, e.g.:
+  // - Save actual configuration and upload to PC.
+  // - Unzip the configuration file.
+  // - Add the json file to configuration (e.g. create folder "diagnostics" and copy the json file (sdk_diagnosis_datalayer.diagnostics.en-US.json) to it).
+  // - Upload the configuration and load the configuration.
+  // - The resulting accessible path of the json file should be "/var/snap/rexroth-solutions/common/solutions/DefaultSolution/configurations/appdata/diagnostics/sdk_diagnosis_datalayer.diagnostics.en-US.json".
+  // Features supported later:
+  // - Upload of a single file to the active configuration via configuration web interface.
+  
+  comm::datalayer::Variant registrationPathData;
+  registrationPathData.setValue("sdk_diagnosis_datalayer.diagnostics.en-US.json");
+  // registrationPathData.setValue("/var/snap/rexroth-solutions/common/solutions/DefaultSolution/configurations/appdata/diagnostics/sdk_diagnosis_datalayer.diagnostics.en-US.json");
+  comm::datalayer::DlResult dlResult = dlClient->writeSync("diagnosis/registration/register-file", &registrationPathData);
+  if (comm::datalayer::STATUS_FAILED(dlResult))
+  {
+    std::cerr << "Register diagnostics failed with error code" << dlResult.toString() << std::endl;
+    return 1;
+  }
+*/
 
   std::cout << "Register diagnostics with file path on PC or with file path in own app for interprocess communication (Alternative 2)" << std::endl;
-  char workingDirectory[512];
-  char *buffer = getcwd(workingDirectory, 512);
-  if (nullptr == buffer)
+
+  auto basePath = snapPath();
+  if (nullptr == basePath)
   {
-    if (client)
+    // Not in snap environment
+    char workingDirectory[512];
+    basePath = getcwd(workingDirectory, 512);
+    if (nullptr == basePath)
     {
+      std::cerr << "ERROR Failed to get base directory" << std::endl;
       delete client;
-      client = nullptr;
+      datalayer.stop();
+      return 1;
     }
-
-    datalayer.stop();
-
-    return 1;
   }
 
-  std::string registrationFilePath = std::string(workingDirectory) + "/resources/diagnostics/sdk_diagnosis_datalayer.diagnostics.en-US.json";
+  std::string registrationFilePath = std::string(basePath) + "/resources/diagnostics/sdk_diagnosis_datalayer.diagnostics.en-US.json";
+  std::cerr << "Using type information from file " << registrationFilePath << std::endl;
+
   comm::datalayer::MetadataHelper metadataHelper;
   comm::datalayer::Variant binaryFileContent;
-
   comm::datalayer::DlResult dlResult = metadataHelper.getFileContent(registrationFilePath, binaryFileContent);
   if (comm::datalayer::STATUS_FAILED(dlResult))
   {
     std::cerr << "Failed to get type information of file " << registrationFilePath << ", error code: " << dlResult.toString() << std::endl;
-
-    if (client)
-    {
-      delete client;
-      client = nullptr;
-    }
-
+    delete client;
     datalayer.stop();
     return 1;
   }
@@ -276,12 +247,7 @@ int main()
   {
     std::cerr << "Register diagnostics failed with error code " << dlResult.toString() << std::endl;
 
-    if (client)
-    {
-      delete client;
-      client = nullptr;
-    }
-
+    delete client;
     datalayer.stop();
     return 1;
   }
@@ -489,13 +455,13 @@ int main()
   };
 
   std::vector<DiagIdentification> listDiagnosisIdentification =
-      {
-          {"0E0E0003", "00000001", "scheduler/watchdog"},
-          {"0E0F2001", "00000001", "motion/axs/z3"},
-          {"0E0F6001", "00000001", "notExisting"},
-      };
+  {
+      {"0E0E0003", "00000001", "scheduler/watchdog"},
+      {"0E0F2001", "00000001", "motion/axs/z3"},
+      {"0E0F6001", "00000001", "notExisting"},
+  };
 
-  for (const auto &listElement : listDiagnosisIdentification)
+  for (const auto& listElement : listDiagnosisIdentification)
   {
     std::cout << "Verify state of log {" << listElement.mainDiag << "," << listElement.detailedDiag << "," << listElement.entity << "}: ";
 
@@ -572,13 +538,18 @@ int main()
 
   dlResult = client->readSync("diagnosis/get/text/main", &dataGetText);
 
+  if (comm::datalayer::STATUS_FAILED(dlResult))
+  {
+    std::cerr << "read failed with error code " << dlResult.toString() << std::endl;
+  }
+
   if (comm::datalayer::VariantType::STRING != dataGetText.getType())
   {
     std::cerr << "Expected '" << comm::datalayer::DATALAYER_TYPE_STRING << "' as result type, but got '" << dataGetText.typeAsCharString() << "'" << std::endl;
   }
   else
   {
-    std::string diagnosisText = static_cast<const char *>(dataGetText);
+    std::string diagnosisText = static_cast<const char*>(dataGetText);
     std::cout << "Diagnosis text of main diagnosis number " << mainDiagnosisNumber << ":" << diagnosisText << std::endl;
   }
 
@@ -588,6 +559,10 @@ int main()
   dataGetText.shareFlatbuffers(builder);
 
   dlResult = client->readSync("diagnosis/get/text/detailed", &dataGetText);
+  if (comm::datalayer::STATUS_FAILED(dlResult))
+  {
+    std::cerr << "read failed with error code " << dlResult.toString() << std::endl;
+  }
 
   if (comm::datalayer::VariantType::STRING != dataGetText.getType())
   {
@@ -595,7 +570,7 @@ int main()
   }
   else
   {
-    std::string diagnosisText = static_cast<const char *>(dataGetText);
+    std::string diagnosisText = static_cast<const char*>(dataGetText);
     std::cout << "Diagnosis text of detailed diagnosis number " << detailedDiagnosisNumber << " with related main diagnosis number " << mainDiagnosisNumber << ":" << diagnosisText << std::endl;
   }
 
@@ -631,8 +606,6 @@ int main()
   }
 
   delete client;
-  client = nullptr;
-
   datalayer.stop();
 
   return 0;

@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 import { AfterViewInit, Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { IBook } from './book';

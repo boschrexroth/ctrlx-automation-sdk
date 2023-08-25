@@ -13,7 +13,7 @@
         </header>
         <div class="main">
             <div class="box">
-                <p><b>Read Data Layer Node</b></p>
+                <p><b>Read ctrlX Data Layer Node</b></p>
                 <form action="/python-webserver?token=$(token)" method="POST">
                     <p>Node: <input id="textbox" type="text" name="node" value="$(Server.readPath)" $(permissions_read_text) > <input id="button" type="submit" name="submit" value="Read Value" $(permissions_read_text) > </p>
                     <p>Value: $(Server.readValue) </p>
@@ -21,7 +21,7 @@
                 </form>
             </div>
             <div class="box">
-                <p><b>Write Data Layer Node</b></p>
+                <p><b>Write ctrlX Data Layer Node</b></p>
                 <form action="/python-webserver?token=$(token)" method="POST">
                     <p>Node: <input id="textbox" type="text" name="node" value="$(Server.writePath)" $(permissions_write_text) > </p>
                     <p>Value: <input id="textbox" type="text" name="value" value="$(Server.writeValue)" $(permissions_write_text)> <input id="button" type="submit" name="submit" value="Write Value" $(permissions_write_text)> </p>

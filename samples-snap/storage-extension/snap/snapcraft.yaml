@@ -1,0 +1,42 @@
+name: storage-extension-sample
+title: Storage extenstion sample app
+base: core22
+version: 0.0.1
+summary: Storage extension sample
+description: |
+  Storage extension sample
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+architectures:
+  - all
+
+parts:
+  sources:
+    plugin: dump
+    source: wrapper
+  backup:
+    plugin: nil
+    source: backup
+    override-build: |
+      snapcraftctl build
+      mkdir -p $SNAPCRAFT_PART_INSTALL/meta
+      cp $SNAPCRAFT_PART_SRC/snapshots.yaml $SNAPCRAFT_PART_INSTALL/meta
+plugs:
+  storage-extension-mnt:
+    interface: mount-control
+    mount:
+      - what: /writable/system-data/var/run/mnt/storage-extension/${SNAPCRAFT_PROJECT_NAME}
+        where: $SNAP_COMMON/storage-extension/${SNAPCRAFT_PROJECT_NAME}
+        options:
+          - rw
+          - bind
+
+apps:
+  sample:
+    command: bin/sample
+    daemon: simple
+    restart-condition: always
+    restart-delay: 5s
+    plugs:
+      - storage-extension-mnt
+      - mount-observe

@@ -6,14 +6,14 @@
 name: sdk-cpp-alldata
 version: "2.2.0"
 grade: stable
-summary: SDK sample app in cpp - provides Data Layer nodes with different data types
+summary: provides ctrlX Data Layer nodes with different data types
 description: |
-  This app provides two Data Layer branches, each branch initialy has nodes with all simple data types and one flatbuffers type.
+  This app provides two ctrlX Data Layer branches, each branch initialy has nodes with all simple data types and one flatbuffers type.
   The 'static' branch allows only read access.
   The 'dynamic' branch allows read and write access of each node.
   Furthermore nodes can be added.
 title: sdk-cpp-alldata
-base: core20
+base: core22
 confinement: strict
 
 # define how apps & services are exposed to host system

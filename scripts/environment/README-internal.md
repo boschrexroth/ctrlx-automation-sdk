@@ -2,83 +2,68 @@
 
 __Important__: 
 
-* The host operating system were the App Builder Environments are running must be Windows 64Bit.
+* The host operating system were the App Build Environments are running must be __Windows amd64.__
 
-* The user-image-files (see below) can only be build on a Linux system (e.g. an App Builder Environment).
+* The user-image-files (see below) can only be build on a Linux system (e.g. within an App Build Environment).
 
 ## Concept
 
-__cloud-config-amd64__ and __cloud-config-aarch64__ are so called cloud-config files. These files are compiled into user-data-image files. One for proxy usage, the other for none-proxy usage.
+Four different types of App Build Environments are supported:
 
-With the script __user-data-img-build-all.sh__ all user-data-image files are build.
+1. amd64 architecture with proxy
+2. amd64 architecture with NO proxy
+3. aarch64 architecture with proxy
+4. aarch64 architecture with NO proxy
 
-Remark: The user-data-image files for aarch64 are kept for future usage.
+An App Build Environment is a Ubuntu Server operating system installed with the help of the build-in cloud-init service. For more information see [cloud-init](https://cloud-init.io/).
 
-__Important: The user-data-image files for amd64 are used by ctrlX WORKS.__
+The configuration is provided by a so called cloud-config file.
 
-For more information see [cloud-init](https://cloud-init.io/)
+For informations on the content of cloud-config files see [Cloud config examples](https://cloudinit.readthedocs.io/en/latest/topics/examples.
+html).
 
-## Files
 
-### cloud-config Files
+For all types of App Build Environments one single configuration file is used: __cloud-config__. 
 
-Cloud-config files are containing settings (user/password, proxy,...) and a list of packages to be installed on the App Builder Environment:
+Type specific lines within this file are marked by these patterns:
 
-* cloud-config-amd64    For amd64 VMs
-* cloud-config-aarch64  For aarch64 VMs (reserved)
+* #amd64-ONLY: Only relevant for amd64 architecture
+* #aarch64-ONLY: Only relevant for aarch64 architecture
+* #proxy-ONLY: Only if a proxy server is used
+* insert-????-here: Indicates a text passage where during the build process a special text is inserted 
 
-For informations on the content of cloud-config files see [Cloud config examples](https://cloudinit.readthedocs.io/en/latest/topics/examples.html).
+## Building User Data Image Files
 
-### User Image Files
+During the build process the type specific configuration file is generated, compiled (by the tool cloud-localds) and provided in a so called user-data-image file:
 
-cloud-config file are compiled into image files:
+* builder/user-data-amd64-proxy.img     amd64 VM with proxy usage
+* builder/user-data-amd64-noproxy.img   amd64 VM without proxy usage
+* user-data-aarch64-proxy.img           aarch64 VM with proxy usage
+* user-data-aarch64-noproxy.img         aarch64 VM without proxy usage
 
-* ubuntu-20.04-server-cloudimg-amd64-user-data-proxy.img    amd64 VM with proxy usage
-* ubuntu-20.04-server-cloudimg-amd64-user-data-noproxy.img  amd64 VM without proxy usage
-* ubuntu-20.04-server-cloudimg-aarch64-user-data-proxy.img    aarch64 VM with proxy usage
-* ubuntu-20.04-server-cloudimg-aarch64-user-data-noproxy.img  aarch64 VM without proxy usage
+__Important:__ 
 
-### Linux Scripts
+The user-data-image files for amd64 are stored in the sub folder `builder`. This folder contains also other files needed by ctrlX WORKS to create and start App Build Enviroments.
 
-* user-data-img-build.sh, user-data-img-build-all.sh are used to compile the cloud-config files into user-data-image files.
+Hint: The user-data-image files for aarch64 are kept for future usage.
 
-### Windows Batch Files
+### Build Scripts
 
-* __scp_id_rsa.bat__ copies the id_rsa and id_rsa.pub file from the Windows host to the App Builder Environment guest operating system so that entering password on login is obsolete.
+* __build-0-user-data-img.sh__ is the build over all script. __Start this script to run the whole build process.__
+* build-1-cloud-configs.sh generates the architecture specific config files: cloud-config-aarch64-generated, cloud-config-amd64-generated
+* build-2-user-data-img-all.sh initiates the build off all user data images files calling calls build-9-user-data-img.sh
+* calls build-9-user-data-img.sh: Creates a single regarding the provided architecture and proxy settings
 
-* __ssh-keygen-copy-id.bat__ enables login without password by adding .ssh\id_rsa.pub of the host to ~/.authorized_keys of the QM VM.
+__replace-text.py__ is as simple text search and replace Python script which is able to handle special characters in both search and replace pattern.
 
-* __shrink-qcow2.bat__ shrinks the qcow2 snapshot file.
+### Scripts for the App Build Environment
 
-!!! important
-    This action takes some time, do not interrupt.
+Bash scripts e.g. to install programing language packages are stored in the folder scripts/.
+This folder and its files are packed into the zip archive scripts.zip. This file again is gzipped and inserted as base64 encoded text into the cloud-config file.
 
-* wget.bat calls PowerShell to download files.
-
-### Folder install-scripts
-
-Contains shell scripts packed into the cloud-config files.
+At the end of the first boot this zip archive is unpacked and installed into the folder /home/boschrexroth/scripts.
 
 ## License
 
-MIT License
-
-Copyright (c) 2021-2022 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+SPDX-FileCopyrightText: Bosch Rexroth AG
+SPDX-License-Identifier: MIT

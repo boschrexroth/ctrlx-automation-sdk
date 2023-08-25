@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+mount | grep /dev/mapper/storage-extension
+if [ $? -ne 0 ]; then
+    echo No storage extension found
+    exit 1
+fi
+STORAGE_EXTENSION=$SNAP_COMMON/storage-extension/$SNAP_NAME
+snapctl mount -o rw,bind /writable/system-data/var/run/mnt/storage-extension/$SNAP_NAME $STORAGE_EXTENSION
+
+while true; do
+    date +%Y-%m-%d-%H-%M-%S>>$STORAGE_EXTENSION/test-file.log
+    sleep 5
+done

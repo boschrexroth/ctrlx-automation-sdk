@@ -7,7 +7,7 @@ cmake_minimum_required( VERSION 3.9 )
 # Project information
 # Set project, VERSION should be same as snap version
 #
-set(VERSION 1.2.0)
+set(VERSION 2.2.0)
 project( datalayer_diagnosis_snap_project VERSION ${VERSION} )
 
 #
@@ -44,16 +44,16 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 #
 if( UNIX )
   IF( ${CMAKE_BUILD_KIT} MATCHES "aarch64")
-    MESSAGE(STATUS "Set Platformname to: ubuntu20-gcc-aarch64")
+    MESSAGE(STATUS "Set Platformname to: ubuntu22-gcc-aarch64")
     SET(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
     SET(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
-    SET(PLATFORM_NAME "ubuntu20-gcc-aarch64")
+    SET(PLATFORM_NAME "ubuntu22-gcc-aarch64")
     SET(SNAP_ARCH "arm64")
   ELSE()
-    MESSAGE(STATUS "Set Platformname to: ubuntu20-gcc-x64")
+    MESSAGE(STATUS "Set Platformname to: ubuntu22-gcc-x64")
     SET(CMAKE_C_COMPILER gcc)
     SET(CMAKE_CXX_COMPILER g++)
-    SET(PLATFORM_NAME "ubuntu20-gcc-x64")
+    SET(PLATFORM_NAME "ubuntu22-gcc-x64")
     SET(SNAP_ARCH "amd64")
   ENDIF()
 endif()

@@ -1,5 +1,5 @@
 name: ulimit-n-16384
-base: core20
+base: core22
 version: '1.0.0'
 summary: Ulimit demo snap
 description: |

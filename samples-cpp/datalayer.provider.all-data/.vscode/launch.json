@@ -9,8 +9,8 @@
             "name": "x64 Build Environment (local)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/allDataProvider",
-            "additionalSOLibSearchPath": "${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/usr/lib/",
+            "program": "${workspaceFolder}/generated/ubuntu22-gcc-x64/Debug/allDataProvider",
+            "additionalSOLibSearchPath": "${workspaceFolder}/generated/ubuntu22-gcc-x64/Debug/usr/lib/",
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -23,7 +23,7 @@
                 },
                 {
                     "description": "Set path variable to .",
-                    "text": "set env LD_LIBRARY_PATH=${workspaceFolder}/generated/ubuntu20-gcc-x64/Debug/usr/lib/",
+                    "text": "set env LD_LIBRARY_PATH=${workspaceFolder}/generated/ubuntu22-gcc-x64/Debug/usr/lib/",
                     "ignoreFailures": false
                 },
                 {
@@ -37,7 +37,7 @@
             "name": "aarch64 ctrlX (remote)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/generated/ubuntu20-gcc-aarch64/Debug/allDataProvider",
+            "program": "${workspaceFolder}/generated/ubuntu22-gcc-aarch64/Debug/allDataProvider",
             "args": ["boschrexroth:boschrexroth@192.168.1.1"],
             "cwd": "${workspaceFolder}",
             "miDebuggerPath": "/usr/bin/gdb-multiarch",

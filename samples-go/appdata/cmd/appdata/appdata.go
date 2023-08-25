@@ -1,10 +1,16 @@
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 package main
 
 import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
+	"log"
 	"net"
 	"net/http"
 	"os"
@@ -19,8 +25,8 @@ import (
 
 const (
 	//Setup HTTP listener and load/save routes we're interested in
-	RestUrlLoad = "ctrlx-go-appdata/api/v1/load"
-	RestUrlSave = "ctrlx-go-appdata/api/v1/save"
+	RestUrlLoad = "sdk-go-appdata/api/v1/load"
+	RestUrlSave = "sdk-go-appdata/api/v1/save"
 
 	// The name of the storage file
 	StorageFileName = "appdata.json"
@@ -68,27 +74,15 @@ func IsSnapped() bool {
 // Starts the Rest API
 func RestApiStart() error {
 
-	// Create http handle
-	http.HandleFunc("/"+RestUrlLoad, handler)
-	http.HandleFunc("/"+RestUrlSave, handler)
-
 	// Depending on running as snap or as external app, start webserver with unix sockets or tcp
 	if IsSnapped() {
-		fmt.Print("App is running as snap\n")
-		sockpath := filepath.Join(os.Getenv("SNAP_DATA"), "/package-run/ctrlx-go-appdata/")
-		sockfile := filepath.Join(sockpath, "web.sock")
-		if _, err := os.Stat(sockpath); os.IsNotExist(err) {
-			os.MkdirAll(sockpath, os.ModePerm)
-		}
-		os.Remove(sockfile)
-		unixListener, err := net.Listen("unix", sockfile)
-		if err != nil {
-			return err
-		}
-		fmt.Printf("Server UP - UNIX SOCKET - File: %s ", sockfile)
-		http.Serve(unixListener, nil)
-
+		err := unixSocketServe()
+		return err
 	} else {
+		// Create http handle
+		http.HandleFunc("/"+RestUrlLoad, handler)
+		http.HandleFunc("/"+RestUrlSave, handler)
+
 		fmt.Print("App is not running as snap\n")
 		tcpListener, err := net.Listen("tcp", ":"+strconv.Itoa(HttpPort))
 		if err != nil {
@@ -96,7 +90,44 @@ func RestApiStart() error {
 		}
 		fmt.Printf("Server UP - TCP - Port: %s \n", strconv.Itoa(HttpPort))
 		http.Serve(tcpListener, nil)
+	}
+	return nil
+}
 
+func unixSocketServe() error {
+	fmt.Println("App is running as snap")
+	sockpath := filepath.Join(os.Getenv("SNAP_DATA"), "/package-run/sdk-go-appdata/")
+	sockfile := filepath.Join(sockpath, "web.sock")
+	//remo
+	if _, err := os.Stat(sockpath); err == nil {
+		fmt.Println("Unix domain socket already exists, deleting")
+		_ = os.Remove(sockfile)
+	}
+
+	if _, err := os.Stat(sockpath); os.IsNotExist(err) {
+		fmt.Println("Unix domain socket creating")
+		os.MkdirAll(sockpath, os.ModePerm)
+	}
+	fmt.Println("App socket listening")
+	unixListener, err := net.Listen("unix", sockfile)
+	if err != nil {
+		fmt.Println("App Socket error: ", err)
+		return err
+	}
+
+	fmt.Print("App socket register handler\n")
+	m := http.NewServeMux()
+	m.HandleFunc("/"+RestUrlLoad, handler)
+	m.HandleFunc("/"+RestUrlSave, handler)
+
+	server := http.Server{
+		Handler: m,
+	}
+
+	fmt.Printf("Server UP - UNIX SOCKET - File: %s ", sockfile)
+	if err := server.Serve(unixListener); err != nil {
+		log.Fatal(err)
+		return err
 	}
 	return nil
 }
@@ -202,7 +233,7 @@ func LoadAppData() error {
 
 	}
 
-	jsonFile, err := ioutil.ReadFile(path)
+	jsonFile, err := os.ReadFile(path)
 	if err != nil {
 		fmt.Printf("Loading application data from file '%s' failed! %s", path, err.Error())
 		return err
@@ -243,7 +274,7 @@ func SaveAppData() error {
 		return err
 	}
 
-	err = ioutil.WriteFile(path, jsonb, 0644)
+	err = os.WriteFile(path, jsonb, 0644)
 	if err != nil {
 		fmt.Printf("Saving application data to file '%s' failed! %s\n", path, err.Error())
 		return err

@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { TranslateModule} from '@ngx-translate/core';

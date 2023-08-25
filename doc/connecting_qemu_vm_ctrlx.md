@@ -50,7 +50,7 @@ To connect the Windows host with the ctrlX CORE<sup>virtual</sup> a so called TA
 
 ![ctrlX CORE](images/ctrlx-sdk.png)
 
-The connection string for Data Layer access in this case is:
+The connection string for ctrlX Data Layer access in this case is:
 
     tcp://boschrexroth:boschrexroth@192.168.1.1
 
@@ -58,7 +58,7 @@ The connection string for Data Layer access in this case is:
 
 The ctrlX CORE is connected to the Windows host via its network adapter. 
 
-The connection string for Data Layer access e.g. is:
+The connection string for ctrlX Data Layer access e.g. is:
 
     tcp://boschrexroth:boschrexroth@10.52.244.123
 

@@ -133,7 +133,7 @@ Now you're ready to code .NET on ctrlX!
 
 ### Provider Concepts
 
-There different concepts to write a Data Layer provider:
+There different concepts to write a ctrlX Data Layer provider:
 
 #### Create and register nodes with individual node handlers
 
@@ -150,7 +150,7 @@ __Recommendation:__
 
 __Pros:__
 
-+ The Data Layer is managaging your node hierarchy: No implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
++ The ctrlX Data Layer is managaging your node hierarchy: No implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
 
 __Contras:__
 
@@ -175,7 +175,7 @@ __Recommendation:__
 
 __Pros:__
 
-+ The Data Layer is managaging your node hierarchy: No Implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
++ The ctrlX Data Layer is managaging your node hierarchy: No Implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
 
 __Contras:__
 
@@ -189,7 +189,7 @@ __Samples:__
 #### Virtual provider (lightweight): Register on wildcard and manage virtual nodes
 
 Create just _one_ node with a single node handler, registered to a _wildcard_ address  (e.g. myroot/**) and managing the nodes for your own. This _lightweight_ handler returns _virtual_ nodes in _OnBrowse()_ method. 
-See Data Layer documentation for details.
+See ctrlX Data Layer documentation for details.
 
             1 x CreateNode
             1 x Register
@@ -206,7 +206,7 @@ __Pros:__
 
 __Contras:__
 
-+ The Data Layer is _not_ managaging your node hierarchy: You have to return the valid data in _OnBrowse()_.
++ The ctrlX Data Layer is _not_ managaging your node hierarchy: You have to return the valid data in _OnBrowse()_.
 
 __Samples:__
 
@@ -257,27 +257,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 
 ## License
 
-MIT License
-
-Copyright (c) 2021-2022 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-
-
+SPDX-FileCopyrightText: Bosch Rexroth AG
+SPDX-License-Identifier: MIT

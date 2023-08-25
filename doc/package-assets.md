@@ -26,19 +26,19 @@ The following example shows the procedure step-by-step.
     name: rexroth-myapp
     [...]
     parts:
-    [...]
-    configs:
-        plugin: dump
-        source: ./configs
+      configs:
+          plugin: dump
+          source: ./configs
+          organize:
+            'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
     [...]
     slots: 
-    [...]
-    package-assets:
-        interface: content
-        content: package-assets
-        source:
-          read:
-          - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+      package-assets:
+          interface: content
+          content: package-assets
+          source:
+            read:
+            - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
     [...]
     ```
 
@@ -81,7 +81,9 @@ An item is defined as an object with the following elements:
 ??? example 
 
     ```json
-    [...]
+    {
+      "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.schema.json",
+      [...]
       "menus": {
         "sidebar": [
           {
@@ -147,8 +149,9 @@ An item is defined as an object with the following elements:
             ]
           }
         ]
-      }
-    [...]
+      },
+      [...]
+    }
     ```
 
 
@@ -171,25 +174,30 @@ If you want to open your application in your own tab, you can define the target 
 ??? Example
 
     ```json
-    ...
-    "menus": {
-    "sidebar": [
-        {
-        "id": "app-name",
-        "title": "My App Name",
-        "icon": "myApp-Icon",
-        "permissions": [],
-        "items": [
-            {
-            "id": "myApp-Id",
-            "title": "MySideBarTitle",
-            "link": "/app-name?access_token=${bearertoken}",
-            "target":"myApp-Id",
-            "permissions": []
-            },...
+    {
+      [...]
+      "menus": {
+        "sidebar": [
+          {
+            "id": "app-name",
+            "title": "My App Name",
+            "icon": "myApp-Icon",
+            "permissions": [],
+            "items": [
+              {
+                "id": "myApp-Id",
+                "title": "MySideBarTitle",
+                "link": "/app-name?access_token=${bearertoken}",
+                "target":"myApp-Id",
+                "permissions": []
+              },
+              [...]
+            ]
+          }
         ]
-        }]
-    [...]
+      },
+      [...]
+    }
     ```
 
 ### Reverse Proxy
@@ -207,20 +215,20 @@ The proxy mapping provides the configuration required by the reverse proxy to re
 
     ```json
     {
-    [...]
-    "services": {
+      [...]
+      "services": {
         "proxyMapping": [
-        {
+          {
             "name": "rexroth-solutions.web",
             "url": "/rexroth-solutions",
             "binding": ":5000",
             "restricted": [
-            "/rexroth-solutions/api/v1.0"
+              "/rexroth-solutions/api/v1.0"
             ]
-        }
+          }
         ]
-    }
-    [...]
+      },
+      [...]
     }
     ```
 
@@ -495,6 +503,17 @@ The following predefined folder structure applies to every certificate store:
 !!! hint
     You can store your keys using a [TPM](https://en.wikipedia.org/wiki/Trusted_Platform_Module).
 
+### Required apps (optional)
+
+You can prohibit the uninstallation and deactivation of your app by setting `"required": true`.
+
+!!! example
+
+    ```json
+    {
+      "required": true
+    }
+    ```
 
 ### Example package-manifest.json
 
@@ -600,7 +619,6 @@ The following predefined folder structure applies to every certificate store:
         }
     }
     ```
-
 ## The language files
 
 Language files are used to translate text sections into different languages. Bosch Rexroth Apps are shipped with english and german language files. Currently the multi language system (MLS) supports translations for the content of the [package manifest](#the-package-manifest) texts which are organized in the `./package-assets/i18n` folder of the app.
@@ -620,7 +638,7 @@ Additionally you have to provide the language files for the package-manifest in 
                 {
                 "id": "_myapp",
                 "title": "My App",
-                "description": "A cool app you should not miss",
+                "description": "A cool app, you should not miss",
                 "icon": "Bosch-Ic-home-outline",
                 "link": "/myapp/home",
                 "i18n": "sidebar.myapp"
@@ -633,7 +651,7 @@ Additionally you have to provide the language files for the package-manifest in 
     ```json title="i18n/myapp.package-manifest.de.json (dot notation)"
     {
         "sidebar.myapp.title": "Meine App",
-        "sidebar.myapp.description": "Eine kühle App die du nicht verpassen solltest"
+        "sidebar.myapp.description": "Eine coole App, die du nicht verpassen solltest"
     }
     ```
 
@@ -642,7 +660,7 @@ Additionally you have to provide the language files for the package-manifest in 
         "sidebar": {
             "myapp": {
                 "title": : "Meine App",
-                "description": "Eine kühle App die du nicht verpassen solltest"
+                "description": "Eine coole App, die du nicht verpassen solltest"
             }
         }
     }

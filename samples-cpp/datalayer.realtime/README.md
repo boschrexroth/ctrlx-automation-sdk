@@ -28,20 +28,20 @@ __main_owner.cpp__ implements the owner app and __main_user.cpp__ the user app.
 
 ### main_owner.cpp
 
-If the  app is running in the App Builder Environment it has to start the Data Layer system with the parameter `boStartBroker=true`.
-In this case the Data Layer broker which handles the shared memory features is started also within the App Builder Environment.
+If the  app is running in the App Builder Environment it has to start the ctrlX Data Layer system with the parameter `boStartBroker=true`.
+In this case the ctrlX Data Layer broker which handles the shared memory features is started also within the App Builder Environment.
 
-Running on the ctrlX CORE the owner has to start the Data Layer system with the parameter `boStartBroker=false` because the Data Layer broker has already been started by the rexroth-automationcore snap.
+Running on the ctrlX CORE the owner has to start the ctrlX Data Layer system with the parameter `boStartBroker=false` because the ctrlX Data Layer broker has already been started by the rexroth-automationcore snap.
 
-Because shared memory is used, the Data Layer (and it's broker) must run on the same environment. Accordingly, the provider connection string must always be __DL_IPC__ (ipc://).
+Because shared memory is used, the ctrlX Data Layer (and it's broker) must run on the same environment. Accordingly, the provider connection string must always be __DL_IPC__ (ipc://).
 
-After connecting to the Data Layer shared memories for input and output are created and both fitted with the same memory map. The memory map is internally a Flatbuffers describing the data structure of the shared memory.
+After connecting to the ctrlX Data Layer shared memories for input and output are created and both fitted with the same memory map. The memory map is internally a Flatbuffers describing the data structure of the shared memory.
 
 After the values of the shared memory are set to 0 the owner apps waits in an endless loop for our user app to read and change the values.
 
 ### main_user.cpp
 
-* The user app starts the Data Layer system always with `boStartBroker=false`. For the access of shared memory provided by an other process the user app does not require a Data Layer client connection.
+* The user app starts the ctrlX Data Layer system always with `boStartBroker=false`. For the access of shared memory provided by an other process the user app does not require a ctrlX Data Layer client connection.
 
 * The user tries to read the memory map of the input area. This is done in a loop until it succeeds.
 
@@ -56,7 +56,7 @@ Build and install the snap like described [here](../README.md).
 To use shared memory in the restricted snap environment of the ctrlX CORE our snap has to be connected to the datalayer-shm slot provided by the snp rexroth-automation-core snap.
 
 Unfortunately for unsigned snaps this is not done automatically during the ctrlX snap installation.
-   
+
 As a workaround this has to be done manually. Therefor open a ssh connection to the ctrlX and enter:
 
     sudo snap connect sdk-cpp-realtime:datalayer-shm rexroth-automationcore:datalayer-shm
@@ -64,7 +64,7 @@ As a workaround this has to be done manually. Therefor open a ssh connection to 
 ## Test the Snap
 
 * Open the web interface of your ctrlX CORE
-* Select Settings --> Data Layer 
+* Select Settings --> ctrlX Data Layer
 * Select the node sdk-cpp-realtime/rt/input/data
 * __The values in the byte array should be changed - AND NEVER be 0. This can be used by a test criterion.__
 
@@ -74,24 +74,6 @@ ___
 
 ## License
 
-MIT License
+SPDX-FileCopyrightText: Bosch Rexroth AG
+SPDX-License-Identifier: MIT
 
-Copyright (c) 2020-2022 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

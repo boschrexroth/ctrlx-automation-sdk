@@ -1,5 +1,5 @@
 #!/bin/bash
-flatc=$(dirname $0)/../bin/oss.flatbuffers/ubuntu20-gcc-x64/release/flatc
+flatc=$(dirname $0)/../bin/oss.flatbuffers/ubuntu22-gcc-x64/release/flatc
 # flatc=$0/../bin/oss.flatbuffers/win-msvc-x64/release/flatc.exe
 lang=$1
 fbs=$2

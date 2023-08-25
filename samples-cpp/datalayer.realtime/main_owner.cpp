@@ -1,48 +1,31 @@
-/**
- * MIT License
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
  *
- * Copyright (c) 2020-2022 Bosch Rexroth AG
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-License-Identifier: MIT
  */
 
 #include "comm/datalayer/datalayer.h"
 #include "comm/datalayer/datalayer_system.h"
 #include "comm/datalayer/memory_map_generated.h"
 #include <stdio.h>
-#include <signal.h>
+#include <csignal>
 #include <thread>
 #include <iostream>
 
 #define MEM_SIZE (100)
-// Revision should be unique for this Layout, if you need a new memory layout define a new revision, or use checksum algorithms
+ // Revision should be unique for this Layout, if you need a new memory layout define a new revision, or use checksum algorithms
 #define REVISION (0)
 
  // Create end process flag witch is set to true if SIGINT is send
-bool endProcess = false;
-static void hdl(int sig, siginfo_t* siginfo, void* context)
+static bool g_endProcess = false;
+static void signalHandler(int signal)
 {
-  endProcess = true;
+  std::cout << "signal: " << signal << std::endl;
+  g_endProcess = true;
 }
 
-void deleteOwnerMemory(comm::datalayer::DatalayerSystem* datalayer,
-                       std::shared_ptr<comm::datalayer::IMemoryOwner> ownerMemory)
+static void deleteOwnerMemory(comm::datalayer::DatalayerSystem* datalayer,
+                              std::shared_ptr<comm::datalayer::IMemoryOwner> ownerMemory)
 {
   if (ownerMemory == nullptr)
   {
@@ -58,10 +41,10 @@ void deleteOwnerMemory(comm::datalayer::DatalayerSystem* datalayer,
 }
 
 // Cleanup closes the memory and stop the datalayersystem
-void cleanup(comm::datalayer::DatalayerSystem* datalayer,
-             comm::datalayer::IProvider* provider,
-             std::shared_ptr<comm::datalayer::IMemoryOwner> input,
-             std::shared_ptr<comm::datalayer::IMemoryOwner> output)
+static void cleanup(comm::datalayer::DatalayerSystem* datalayer,
+                    comm::datalayer::IProvider* provider,
+                    std::shared_ptr<comm::datalayer::IMemoryOwner> input,
+                    std::shared_ptr<comm::datalayer::IMemoryOwner> output)
 {
   deleteOwnerMemory(datalayer, input);
   deleteOwnerMemory(datalayer, output);
@@ -75,7 +58,7 @@ void cleanup(comm::datalayer::DatalayerSystem* datalayer,
   datalayer->stop();
 }
 
-comm::datalayer::Variant createMemMap(size_t size, uint32_t revision)
+static comm::datalayer::Variant createMemMap(size_t size, uint32_t revision)
 {
   // A memory map defines the layout of memory
   // Memory Map contains:
@@ -123,22 +106,21 @@ static bool isSnap()
   return std::getenv("SNAP") != nullptr;
 }
 
-int main(int ac, char* av[])
+int main(void)
 {
   comm::datalayer::DlResult result;
-  comm::datalayer::Variant data;
   comm::datalayer::DatalayerSystem datalayer;
 
   if (isSnap())
   {
     // Running on ctrlX CORE: Start datalayer without a broker - a broker already exists in rexroth-automationcore snap
-    std::cout << "INFO Using existing Data Layer." << std::endl;
+    std::cout << "INFO Using existing ctrlX Data Layer." << std::endl;
     datalayer.start(false);
   }
   else
   {
     // Running in App Builder Env: Start datalayer WITH a broker - we need him for exchange of data via shared memory
-    std::cout << "INFO Starting own Data Layer." << std::endl;
+    std::cout << "INFO Starting own ctrlX Data Layer." << std::endl;
     datalayer.start(true);
   }
 
@@ -147,7 +129,7 @@ int main(int ac, char* av[])
   comm::datalayer::IProvider* provider = datalayer.factory()->createProvider(DL_IPC);
   if (provider == nullptr)
   {
-    std::cout << "ERROR Creating Data Layer provider connection." << std::endl;
+    std::cout << "ERROR Creating ctrlX Data Layer provider connection." << std::endl;
     cleanup(&datalayer, nullptr, nullptr, nullptr);
     return 1;
   }
@@ -229,11 +211,7 @@ int main(int ac, char* av[])
   input->endAccess();
 
   // Structure to interrupt the do while loop with SIGINT ----------------------------------
-  struct sigaction act;
-  memset(&act, '\0', sizeof(act));
-  act.sa_sigaction = &hdl;
-  act.sa_flags = SA_SIGINFO;
-  sigaction(SIGINT, &act, NULL);
+  std::signal(SIGINT, signalHandler);
 
   std::cout << "INFO Start copy output to input" << std::endl;
   do
@@ -267,7 +245,7 @@ int main(int ac, char* av[])
     input->endAccess();
     output->endAccess();
 
-  } while (!endProcess);
+  } while (!g_endProcess);
 
   cleanup(&datalayer, provider, input, output);
 

@@ -2,7 +2,7 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-hello-multilanguage
 version: '1.0.0'
-base: core20
+base: core22
 title: Hello Multilanguage
 summary: Multilanguage sample in Angular for ctrlX
 description: |

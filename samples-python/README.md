@@ -36,9 +36,13 @@ See [Samples Overview](../samples.md)
 
 ### Working with a Python Sample Project
 
-
 * From the main menu click File --> Open Folder and select the folder of your desired Python project.
 * Start a bash terminal within the main menu item - Terminal - New Terminal.
+* Install or upgrade the ctrlX Data Layer build and runtime environment.
+
+```bash
+sudo dpkg -i ../..deb/ctrlx-datalayer*.deb
+```
 
 #### Install a Virtual Environment
 
@@ -54,7 +58,11 @@ The script runs following commands:
     source venv/bin/activate
     pip3 install -r requirements.txt
 
-A subfolder venv/ will be created and activated as virtual environment which contains the Python runtime and all required packages.
+A subfolder venv/ will be created and activated as virtual environment which contains the Python runtime and all required packages. 
+
+*Hints:* The terminal console path begins with **(venv)**. With **Ctrl+Shift+P** open the *"Command Palette..."* and select *"Python: Select Interpreter"*, then *'venv/bin/python'* from the virtual environment.
+
+
 
 #### Debugging with Visual Studio Code 
 

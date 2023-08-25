@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 namespace Hello.Web.Asp
 {
     using Microsoft.AspNetCore.Hosting;

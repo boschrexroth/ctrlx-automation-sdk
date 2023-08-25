@@ -1,24 +1,6 @@
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2020-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 
 from comm.datalayer import Metadata
@@ -28,13 +10,17 @@ from ctrlxdatalayer.variant import Result, Variant, VariantType
 
 from app.ctrlx_datalayer_helper import get_client
 
+
 class DataLayer:
+    """DataLayer
+    """
 
     def __init__(self, ip="192.168.1.1",
                  user="boschrexroth",
                  password="boschrexroth",
                  ssl_port=443) -> None:
-
+        """__init__
+        """
         self.system = ctrlxdatalayer.system.System("")
         self.client = None
 
@@ -52,15 +38,34 @@ class DataLayer:
         self.client = None
 
     def start(self):
+        """
+        start
+        """
         self.system.start(False)
 
     def stop(self):
+        """
+        stop
+        """
         self.system.stop(False)
 
     def connect_client(self, ip="192.168.1.1",
                        user="boschrexroth",
                        password="boschrexroth",
                        https_port=443):
+        """
+        client connect
+
+        Args:
+            ip (str, optional): device address. Defaults to "192.168.1.1".
+            user (str, optional): username. Defaults to "boschrexroth".
+            password (str, optional): password. Defaults to "boschrexroth".
+            https_port (int, optional): port. Defaults to 443.
+
+        Returns:
+            client: client
+            connection_string: connection string
+        """
 
         self.client, connection_string = get_client(
             self.system, ip, user, password, https_port)
@@ -68,22 +73,48 @@ class DataLayer:
         return self.client, connection_string
 
     def read_node(self, address: str):
+        """
+        read node
 
+        Args:
+            address (str): address of the node
+
+        Returns:
+           see get_value
+        """
         result, value = self.get_value(address)
         return result.name, value
 
     def write_node(self, address: str, value: str):
+        """
+        write node
+        Args:
+            address (str): address of node
+            value (str): value
 
+        Returns:
+            Result: result
+        """
         result = self.set_value(address, value)
         return result.name
 
     def get_value(self, address):
+        """
+        get value
+
+        Args:
+            address (_type_): address of the node
+
+        Returns:
+            Result: result
+            Variant: data
+        """
 
         print("Reading", address, flush=True)
 
         result, data = self.client.read_sync(address)
         if result != Result.OK:
-            print("ERROR Reading Data Layer failed with:", result, flush=True)
+            print("ERROR Reading ctrlX Data Layer failed with:", result, flush=True)
             return result, data
 
         with data:
@@ -170,14 +201,22 @@ class DataLayer:
             return Result.UNSUPPORTED, None
 
     def getFlatbuffersAsJsonStr(self, addr: str, fbs_value: Variant):
+        """getFlatbuffersAsJsonStr
 
+        Args:
+            addr (str): address of the node
+            fbs_value (Variant): fbs value
+
+        Returns:
+            Result: result
+        """
         result, fbs_metadata = self.client.metadata_sync(addr)
         if result != Result.OK:
             return result, ""
 
         metadata_root = Metadata.Metadata.GetRootAsMetadata(
             fbs_metadata.get_flatbuffers())
-        if metadata_root == None:
+        if metadata_root is None:
             return result, ""
 
         address_read_type = ""
@@ -206,7 +245,15 @@ class DataLayer:
         return Result.OK, jsonVariant.get_string()
 
     def set_value(self, address, value):
+        """set_value
 
+        Args:
+            address (_type_): address of node
+            value (_type_): value
+
+        Returns:
+            Result: result
+        """
         print("Checking VarianType of", address, flush=True)
 
         # Read first to check VariantType
@@ -280,4 +327,3 @@ class DataLayer:
 
             print("ERROR Unsupported Variant Type:", variant_type, flush=True)
             return Result.UNSUPPORTED
-

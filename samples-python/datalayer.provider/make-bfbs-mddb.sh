@@ -6,10 +6,10 @@
 # Create compiled/sampleSchema.bfbs
 
 UNAME=$(uname -a)
-UDIR=ubuntu20-gcc-x64
+UDIR=ubuntu22-gcc-x64
 if grep -q "aarch64" <<<${UNAME}
 then
-  UDIR=ubuntu20-gcc-aarch64
+  UDIR=ubuntu22-gcc-aarch64
 fi
 
 mkdir -p bfbs

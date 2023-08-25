@@ -1,37 +1,20 @@
 /*
-MIT License
-
-Copyright (c) 2021-2023 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 using comm.datalayer;
 using Datalayer;
 using Google.FlatBuffers;
-using MQTTnet;
+using MQTTnet.Client;
 using MQTTnet.Protocol;
 using Samples.Datalayer.MQTT.Base;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Samples.Datalayer.MQTT.Sub
 {
@@ -222,35 +205,38 @@ namespace Samples.Datalayer.MQTT.Sub
         /// MQTT message received event handler
         /// </summary>
         /// <param name="args"></param>
-        protected override void OnMessageReceived(MqttApplicationMessageReceivedEventArgs args)
+        protected override Task OnMessageReceived(MqttApplicationMessageReceivedEventArgs args)
         {
-            //We have to filter for our subscription to prevent duplicates if any other SUB is interested in same topic
-            if (args.ApplicationMessage.SubscriptionIdentifiers[0] != SubscriptionId)
+            return Task.Run(() =>
             {
-                return;
-            }
+                //We have to filter for our subscription to prevent duplicates if any other SUB is interested in same topic
+                if (args.ApplicationMessage.SubscriptionIdentifiers[0] != SubscriptionId)
+                {
+                    return;
+                }
 
-            //Filter for null topic which may occure
-            if (args.ApplicationMessage.Topic == null)
-            {
-                return;
-            }
+                //Filter for null topic which may occure
+                if (args.ApplicationMessage.Topic == null)
+                {
+                    return;
+                }
 
-            //Filter for null payload which may occure
-            if (args.ApplicationMessage.Payload == null)
-            {
-                return;
-            }
+                //Filter for null payload which may occure
+                if (args.ApplicationMessage.PayloadSegment == null)
+                {
+                    return;
+                }
 
-            //Stringify the payload
-            var stringifiedPayload = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
+                //Stringify the payload
+                var stringifiedPayload = Encoding.UTF8.GetString(args.ApplicationMessage.PayloadSegment);
 
-            //Create a Variant of best matching type (Supported int32, double, string)
-            var value = ToVariant(stringifiedPayload);
-            var address = $"{FullAddress}/{args.ApplicationMessage.Topic}";
+                //Create a Variant of best matching type (Supported int32, double, string)
+                var value = ToVariant(stringifiedPayload);
+                var address = $"{FullAddress}/{args.ApplicationMessage.Topic}";
 
-            //Add node if not existing or update with current value
-            _nodes.AddOrUpdate(address, value, (k, v) => value);
+                //Add node if not existing or update with current value
+                _nodes.AddOrUpdate(address, value, (k, v) => value);
+            });
         }
 
         #endregion

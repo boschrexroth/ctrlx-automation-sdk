@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Bosch Rexroth AG
+#
+# SPDX-License-Identifier: MIT
 from setuptools import setup
 
 import calculations

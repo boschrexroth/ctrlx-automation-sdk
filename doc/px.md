@@ -48,7 +48,6 @@ For automatically run at startup do following steps:
     Px provides both http and https access via default port __3128__. If this port is not available on the host it can be changed in px.ini BUT: The alternative port has to be changed in the VM too - see [Setup a QEMU VM](setup_qemu_ubuntu.md) and [Setup a Virtual Box VM](setup_windows_virtualbox_ubuntu.md). 
 
 
-
 ## Proxy Settings in the App Build Environment
 
 As mentioned a VM running on a host without direct internet access has to use a proxy server too. 

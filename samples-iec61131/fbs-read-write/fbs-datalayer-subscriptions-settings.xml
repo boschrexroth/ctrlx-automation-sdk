@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Rexroth" productName="ctrlX PLC Engineering" productVersion="ctrlX PLC 2.1.0" creationDateTime="2023-07-13T10:31:13.7872699" />
+  <contentHeader name="fbs-datalayer-subscriptions-settings.project" modificationDateTime="2023-07-13T10:29:01.8718689">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous />
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/application" handleUnknown="implementation">
+      <resource name="Application">
+        <task name="MainTask" interval="PT2S" priority="30">
+          <pouInstance name="PLC_PRG" typeName="">
+            <documentation>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml" />
+            </documentation>
+          </pouInstance>
+          <addData>
+            <data name="http://www.3s-software.com/plcopenxml/tasksettings" handleUnknown="implementation">
+              <TaskSettings KindOfTask="Cyclic" Interval="2000" IntervalUnit="ms" WithinSPSTimeSlicing="true">
+                <Watchdog Enabled="false" Time="20" TimeUnit="ms" Sensitivity="1" />
+              </TaskSettings>
+            </data>
+            <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+              <ObjectId>a3774601-103a-4459-8d0b-d2da2e07e234</ObjectId>
+            </data>
+          </addData>
+        </task>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/pou" handleUnknown="implementation">
+            <pou name="PLC_PRG" pouType="program">
+              <interface>
+                <localVars>
+                  <variable name="bStart_read">
+                    <type>
+                      <BOOL />
+                    </type>
+                    <initialValue>
+                      <simpleValue value="TRUE" />
+                    </initialValue>
+                  </variable>
+                  <variable name="bStart_write">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                  <variable name="bExecute_read">
+                    <type>
+                      <BOOL />
+                    </type>
+                    <documentation>
+                      <xhtml xmlns="http://www.w3.org/1999/xhtml"> Read values</xhtml>
+                    </documentation>
+                  </variable>
+                  <variable name="fbDL_ReadNodeValue">
+                    <type>
+                      <derived name="DL_ReadNodeValue" />
+                    </type>
+                  </variable>
+                  <variable name="bActive_read">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                  <variable name="bDone_read">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                  <variable name="DataRead">
+                    <type>
+                      <derived name="DL_NodeValue" />
+                    </type>
+                  </variable>
+                  <variable name="bErrorRead">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                  <variable name="ErrorIDRead">
+                    <type>
+                      <derived name="ERROR_CODE" />
+                    </type>
+                  </variable>
+                  <variable name="ErrorIdent_read">
+                    <type>
+                      <derived name="ERROR_STRUCT" />
+                    </type>
+                  </variable>
+                  <variable name="fbR_TRIG_read">
+                    <type>
+                      <derived name="R_TRIG" />
+                    </type>
+                  </variable>
+                  <variable name="fbFlatbuffer">
+                    <type>
+                      <derived name="comm_datalayer_SubscriptionSettings" />
+                    </type>
+                  </variable>
+                  <variable name="iRead_X">
+                    <type>
+                      <INT />
+                    </type>
+                  </variable>
+                  <variable name="iRead_Y">
+                    <type>
+                      <INT />
+                    </type>
+                  </variable>
+                  <variable name="iRead_Z">
+                    <type>
+                      <INT />
+                    </type>
+                  </variable>
+                  <variable name="iRead">
+                    <type>
+                      <INT />
+                    </type>
+                  </variable>
+                  <variable name="fbBuilder">
+                    <type>
+                      <derived name="FlatBufferBuilder" />
+                    </type>
+                    <documentation>
+                      <xhtml xmlns="http://www.w3.org/1999/xhtml">Write values</xhtml>
+                    </documentation>
+                  </variable>
+                  <variable name="maximumBufferSize">
+                    <type>
+                      <UDINT />
+                    </type>
+                  </variable>
+                  <variable name="iWritten">
+                    <type>
+                      <INT />
+                    </type>
+                  </variable>
+                  <variable name="bExecute_write">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                  <variable name="fbDL_WriteNodeValue">
+                    <type>
+                      <derived name="DL_WriteNodeValue" />
+                    </type>
+                  </variable>
+                  <variable name="bActive_write">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                  <variable name="bDone_write">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                  <variable name="fbValueIn">
+                    <type>
+                      <derived name="DL_NodeValue" />
+                    </type>
+                  </variable>
+                  <variable name="fbValueOut">
+                    <type>
+                      <derived name="DL_NodeValue" />
+                    </type>
+                  </variable>
+                  <variable name="bError_write">
+                    <type>
+                      <BOOL />
+                    </type>
+                  </variable>
+                  <variable name="ErrorID_write">
+                    <type>
+                      <derived name="ERROR_CODE" />
+                    </type>
+                  </variable>
+                  <variable name="ErrorIdent_write">
+                    <type>
+                      <derived name="ERROR_STRUCT" />
+                    </type>
+                  </variable>
+                  <variable name="fbR_TRIG_write">
+                    <type>
+                      <derived name="R_TRIG" />
+                    </type>
+                  </variable>
+                  <variable name="strNodePath">
+                    <type>
+                      <string length="255" />
+                    </type>
+                    <initialValue>
+                      <simpleValue value="'datalayer/subscriptions/settings'" />
+                    </initialValue>
+                  </variable>
+                </localVars>
+              </interface>
+              <body>
+                <ST>
+                  <xhtml xmlns="http://www.w3.org/1999/xhtml">IF bStart_read THEN
+	bStart_read := FALSE;
+	bExecute_read := TRUE;	
+END_IF
+
+
+fbDL_ReadNodeValue(
+	Execute:= bExecute_read,
+	Done=&gt; bDone_read,
+	Active=&gt; bActive_read,
+	Error=&gt; bErrorRead,
+	ErrorID=&gt; ErrorIDRead,
+	ErrorIdent=&gt; ErrorIdent_read,
+	ClientId:= ,
+	NodeName:= strNodePath,
+	NodeValue:= DataRead);
+
+IF bDone_read AND bExecute_read THEN
+	bExecute_read := FALSE;
+
+	fbFlatbuffer.getRootAsSubscriptionSettings(data:=
+	DataRead.GetData(), size:= DataRead.GetSize());
+	
+	maximumBufferSize := fbFlatbuffer.getMaximumBufferSize();
+		
+	bStart_write := TRUE;
+END_IF
+
+	
+IF bStart_write THEN
+	bStart_write := FALSE;
+
+	maximumBufferSize := (maximumBufferSize + 1);
+	IF maximumBufferSize &gt; 55 THEN
+		maximumBufferSize := 50;
+	END_IF
+	
+	fbBuilder(forceDefaults := TRUE);
+	fbFlatbuffer.startSubscriptionSettings(fbBuilder);
+	
+	fbFlatbuffer.addMaximumBufferSize(maximumBufferSize);
+	
+	fbBuilder.finish(fbFlatbuffer.endSubscriptionSettings());
+	fbValueIn.SetFlatbuffer(fbBuilder);
+	
+	bExecute_write := TRUE;
+END_IF
+
+	
+fbDL_WriteNodeValue(
+	Execute:= bExecute_write,
+	Done=&gt; bDone_write,
+	Active=&gt; bActive_write,
+	Error=&gt; bError_write,
+	ErrorID=&gt; ErrorID_write,
+	ErrorIdent=&gt; ErrorIdent_write,
+	ClientId:= ,
+	NodeName:= strNodePath,
+	NodeValueIn:= fbValueIn,
+	NodeValueOut:= fbValueOut);
+
+IF bDone_write AND bExecute_write THEN
+	bExecute_write := FALSE;	
+	iWritten := iWritten + 1;
+	
+	bStart_read := TRUE;
+END_IF
+	
+</xhtml>
+                </ST>
+              </body>
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+                  <ObjectId>63ac73d1-ffba-4b01-9d0e-8b65a8ef1bb5</ObjectId>
+                </data>
+              </addData>
+            </pou>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/libraries" handleUnknown="implementation">
+            <Libraries>
+              <Library Name="#IoStandard" Namespace="IoStandard" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="true" DefaultResolution="IoStandard, 3.5.17.0 (System)" />
+              <Library Name="#CXA_BASE" Namespace="CXAC_Base" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="CXAC_Base, 1.18.2.0 (Bosch Rexroth AG)" />
+              <Library Name="#CXA_COMMONTYPES" Namespace="CXA_CommonTypes" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="CXA_CommonTypes, 1.18.0.0 (Bosch Rexroth AG)" />
+              <Library Name="#CXA_UTILITIES" Namespace="CXA_Utilities" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="CXA_Utilities, 1.20.0.0 (Bosch Rexroth AG)" />
+              <Library Name="#Standard" Namespace="Standard" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="Standard, 3.5.18.0 (System)" />
+              <Library Name="#3SLicense" Namespace="_3S_LICENSE" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="3SLicense, 0.0.0.0 (3S - Smart Software Solutions GmbH)" ResolverGuid="97c3b452-d9fa-4ac2-9d0c-3d420aa6d95b" />
+              <Library Name="#BreakpointLogging" Namespace="BPLog" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="true" LinkAllContent="false" DefaultResolution="Breakpoint Logging Functions, * (3S - Smart Software Solutions GmbH)" />
+              <Library Name="#CXA_DATALAYER" Namespace="CXA_Datalayer" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="CXA_Datalayer, 2.2.0.0 (Bosch Rexroth AG)" />
+              <Library Name="#CXA_FLATBUFFERS" Namespace="flatbuffers" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="CXA_Flatbuffers, 0.1.3.1 (Bosch Rexroth AG)" />
+              <Library Name="#SysExcept" Namespace="SysExcept" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="SysExcept, 3.5.17.0 (System)" />
+              <Library Name="#StringUtils" Namespace="Stu" HideWhenReferencedAsDependency="false" PublishSymbolsInContainer="false" SystemLibrary="false" LinkAllContent="false" DefaultResolution="StringUtils, * (System)" />
+              <addData>
+                <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+                  <ObjectId>537708a0-13a8-4eac-b3c1-951511e8106d</ObjectId>
+                </data>
+              </addData>
+            </Libraries>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>a756c95a-3bd5-44f9-990a-ff4d038fd9d1</ObjectId>
+          </data>
+        </addData>
+      </resource>
+    </data>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="Application" ObjectId="a756c95a-3bd5-44f9-990a-ff4d038fd9d1">
+          <Object Name="MainTask" ObjectId="a3774601-103a-4459-8d0b-d2da2e07e234" />
+          <Object Name="PLC_PRG" ObjectId="63ac73d1-ffba-4b01-9d0e-8b65a8ef1bb5" />
+          <Object Name="Bibliotheksverwalter" ObjectId="537708a0-13a8-4eac-b3c1-951511e8106d" />
+        </Object>
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

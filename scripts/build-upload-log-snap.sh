@@ -1,24 +1,32 @@
 #!/bin/bash
 
-SECONDS_TO_WAIT_AFTER_SHOW_ARGUMENTS=2
+ARCH=arm64
+
+ADDR=192.168.1.1
+SSL_PORT=443
+SSH_PORT=22
+
+ASK=y
+
+SECONDS_TO_WAIT_AFTER_SHOW_ARGUMENTS=5
 SECONDS_TO_WAIT_AFTER_UPLOAD=30
+SECONDS_TO_WAIT_AFTER_UNINSTALL=30
 
 BUILD=y
-
 UPLOAD=y
-ADDR=192.168.1.1
+UNINSTALL=n
+BUNDLE=""
 
-SSL_PORT=443
 SSL_USR=boschrexroth
 SSL_PWD=boschrexroth
 
-SVC=n
+SERVICE=y
+OPERATING=y
 
-ARCH=arm64
+SSH_USR=rexroot
+SSH_PWD=rexroot
 
 LOGS=y
-SSH_PORT=22
-SSH_USR=rexroot
 
 # Scanning parameter list
 
@@ -50,6 +58,19 @@ for arg in "$@"; do
 		UPLOAD=${!argNext}
 	fi
 
+
+	if grep -q "uninst" <<<${arg}
+	then
+		UNINSTALL=${!argNext}
+	fi
+
+	if [[ "-bundle" =~ ^$arg ]]
+	then
+		echo *********************************
+		BUNDLE=${!argNext}
+		echo BUNDLE $BUNDLE
+	fi
+
 	if grep -q "ip" <<<${arg}
 	then
 		ADDR=${!argNext}
@@ -75,9 +96,14 @@ for arg in "$@"; do
 		SSL_PWD=${!argNext}
 	fi
 
-	if grep -q "svc" <<<${arg}
+	if grep -q "serv" <<<${arg}
 	then
-		SVC=${!argNext}
+		SERVICE=${!argNext}
+	fi
+
+	if grep -q "oper" <<<${arg}
+	then
+		OPERATING=${!argNext}
 	fi
 
 	if grep -q "arch" <<<${arg}
@@ -85,7 +111,7 @@ for arg in "$@"; do
 		ARCH=${!argNext}
 	fi
 
-	if grep -q "logs" <<<${arg}
+	if grep -q "log" <<<${arg}
 	then
 		LOGS=${!argNext}
 	fi
@@ -121,20 +147,28 @@ for arg in "$@"; do
 		echo "  n             Skip snap build"
 		echo " "
 		echo "-upload         Upload snap"
-		echo "  y             Default: Servive State, Upload, Operation State"
+		echo "  y             Default: Upload"
 		echo "  n             Skip upload"
 		echo " "
+		echo "-bundle      	  Snap is a bundle"
+		echo "  y             Check"
+		echo "  n             Default: Skip check"
+		echo " "
+		echo "-uninstall      Uninstall snap"
+		echo "  y             Uninstall"
+		echo "  n             Default: Skip uninstall"
+		echo " "
 		echo "-logs           Show snap logs"
-		echo "  y             Start remote: sudo snap logs -f ... "
+		echo "  y             Default: sudo snap logs -f ... "
 		echo "  n             No logs"
 		echo " "
 		echo "-addr           IP address or name of the destination ctrlX CORE"
 		echo "  192.168.1.1   Default: ctrlX CORE"
-		echo "  10.0.2.2      ctrlX CORE virtual with port forwarding"
+		echo "  10.0.2.2      ctrlX COREvirtual with port forwarding"
 		echo " "
 		echo "-ssl-port       Port number for HTTPS (SSL) connection"
 		echo "  443           Default: ctrlX CORE"
-		echo "  8443          ctrlX CORE virtual with port forwarding"
+		echo "  8443          ctrlX COREvirtual with port forwarding"
 		echo " "
 		echo "-ssl-usr        User name for HTTPS (SSL) connection"
 		echo "  boschrexroth  default value"
@@ -142,26 +176,30 @@ for arg in "$@"; do
 		echo "-ssl-pwd        Password for HTTPS (SSL) connection"
 		echo "  boschrexroth  Default value"
 		echo " "
-		echo "-svc            Switch scheduler to state Service"
-		echo "  n             Do not swtich"
-		echo "  y             state=SERVICE -> install snap -> state=OPERATING"
+		echo "-service        Switch scheduler to state Service"
+		echo "  n             Default: Do not switch"
+		echo "  y             Switch to SERVICE"
+		echo " "
+		echo "-operating      Switch scheduler to state Operating"
+		echo "  n             Default: Do not switch"
+		echo "  y             Switch to OPERATING"
 		echo " "
 		echo "-arch           CPU architecture"
-		echo "  arm64         Default: CORE M3/4"
-		echo "  amd64         ctrlX CORE virtual, OS"
+		echo "  arm64         Default: CORE X3"
+		echo "  amd64         ctrlX COREvirtual, OS"
 		echo " "
 		echo "-ssh-port       Port number for HTTPS (SSL) connection"
 		echo "  22            Default: ctrlX CORE"
-		echo "  8022          ctrlX CORE virtual with port forwarding"
+		echo "  8022          ctrlX COREvirtual with port forwarding"
 		echo " "
 		echo "-ssh-usr        User name for SSH connection"
 		echo "  rexroot       Default value"
 		echo " "
 		echo " "
-		echo "-ctrlx-virt-PF  Use settings for ctrlX CORE virtual with Port Forwarding"
+		echo "-ctrlx-virt-PF  Use settings for ctrlX COREvirtual with Port Forwarding"
 		echo "                10.0.2.2, 8443, amd64, 8022"
 		echo " "
-		echo "-ctrlx-virt-NA  Use settings for ctrlX CORE virtual with Network Adapter"
+		echo "-ctrlx-virt-NA  Use settings for ctrlX COREvirtual with Network Adapter"
 		echo "                192.168.1.1, 443, amd64, 22"
 		echo " "
 
@@ -169,18 +207,22 @@ for arg in "$@"; do
 	fi
 done
 
-echo -build = ${BUILD}
+echo -arch ${ARCH}
+echo -addr ${ADDR}
+echo -ssl-port ${SSL_PORT}
+echo -ssl-usr ${SSL_USR} 
+echo -ssl-pwd ${SSL_PWD}
+echo -ssh-port ${SSH_PORT}
 echo " "
-echo -upload = ${UPLOAD}
-echo -addr = ${ADDR}
-echo -arch = ${ARCH}
-echo -svc = ${SVC}
-echo -ssl-port = ${SSL_PORT}
-echo -ssl-usr = ${SSL_USR} 
-echo -ssl-pwd = ${SSL_PWD}
+echo -build ${BUILD}
+echo -upload ${UPLOAD}
+echo -bundle ${BUNDLE}
+echo -uninstall ${UNINSTALL}
 echo " "
-echo -logs = ${LOGS}
-echo -ssh-port = ${SSH_PORT}
+echo -service ${SERVICE}
+echo -operating ${OPERATING}
+echo " "
+echo -logs ${LOGS}
 echo " "
 echo " "
 echo "Settings OK? Waiting" ${SECONDS_TO_WAIT_AFTER_SHOW_ARGUMENTS} "s ..."
@@ -194,23 +236,97 @@ then
 	echo " "
 	source build-snap-${ARCH}.sh
 fi
-	
-if grep -q "y" <<<${UPLOAD}
+
+echo " "
+echo -----------------------------------------------------------------
+echo Requesting new Bearer Token
+echo " "
+
+res=$(curl --insecure --no-progress-meter --request POST https://${ADDR}:${SSL_PORT}/identity-manager/api/v1/auth/token --header 'Content-Type: application/json' --data-raw '{"name":"'${SSL_USR}'","password":"'${SSL_PWD}'"}')
+# https://stackoverflow.com/questions/9733338/shell-script-remove-first-and-last-quote-from-a-variable
+# Remove first and last quote (") from a variable
+TOKEN=$(echo ${res} | jq .access_token | xargs)
+
+echo Bearer ${TOKEN}
+echo " "
+
+if grep -q "y" <<<${SERVICE}
 then
-	
 	echo " "
 	echo -----------------------------------------------------------------
-	echo Requesting new Bearer Token
+	echo Switching Scheduler to state SERVICE
 	echo " "
 
-	res=$(curl --insecure --no-progress-meter --request POST https://${ADDR}:${SSL_PORT}/identity-manager/api/v1/auth/token --header 'Content-Type: application/json' --data-raw '{"name":"'${SSL_USR}'","password":"'${SSL_PWD}'"}')
-	# https://stackoverflow.com/questions/9733338/shell-script-remove-first-and-last-quote-from-a-variable
-	# Remove first and last quote (") from a variable
-	TOKEN=$(echo ${res} | jq .access_token | xargs)
+	RESPONSE=$(curl -X 'PUT' \
+	  https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json \
+	  -H 'accept: application/json' \
+	  -H "Authorization: Bearer ${TOKEN}" \
+	  -H 'Content-Type: application/json' \
+	  -d '{"state":"SERVICE"}' \
+      --insecure --no-progress-meter --silent --show-error)
 
-	echo Bearer ${TOKEN}
+	if grep -q "SERVICE" <<<${RESPONSE}
+	then			 
+		echo OK
+	else 
+		echo WARNING Switching Scheduler to state SERVICE failed
+		read -t ${SECONDS_TO_WAIT_AFTER_UPLOAD} -p "Wait or press ENTER to continue"
+	fi
+
 	echo " "
+fi
 
+if grep -q "y" <<<${UNINSTALL}
+then
+
+	echo " "
+	echo -----------------------------------------------------------------
+	echo Uninstalling ${ARCH} snaps
+
+	# Read list of installed snaps
+	ALL_INSTALLED_SNAPS=$(curl -X 'GET' \
+		  https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages \
+		  -H 'accept: application/json' \
+		  -H "Authorization: Bearer ${TOKEN}" \
+		  -H 'Content-Type: application/json' \
+		  --insecure --no-progress-meter)
+
+	# Loop over all found snaps
+	for f in $(find . -name "*_${ARCH}.snap"); 
+	do 
+
+		# Get snap name without arch and version info
+		SNAP=$(basename $f)
+		SNAP=${SNAP%_*}
+		SNAP=${SNAP%_*}
+
+		if grep -q $SNAP <<<${ALL_INSTALLED_SNAPS}
+		then
+
+			echo " "  
+			echo Uninstalling $SNAP  --------------------------
+			echo " " 
+
+			curl -X POST \
+			https://${ADDR}:${SSL_PORT}/package-manager/api/v1/tasks \
+			-H 'accept: */*' \
+			-H "Authorization: Bearer ${TOKEN}" \
+			-H 'Content-Type: application/json' \
+			-d '{ "action": "uninstall", "parameters": { "id": "'${SNAP}'" } }' \
+			--insecure --no-progress-meter --silent --show-error
+
+			echo "Waiting ${SECONDS_TO_WAIT_AFTER_UNINSTALL}s after uninstallation ..."
+			read -t ${SECONDS_TO_WAIT_AFTER_UNINSTALL} -p "Wait or press ENTER to continue"
+			echo " "  
+
+		else
+			echo NOT installed: $SNAP
+		fi
+	done;
+fi
+
+if grep -q "y" <<<${UPLOAD}
+then
 
 	echo " "
 	echo -----------------------------------------------------------------
@@ -223,115 +339,184 @@ then
 	  -H "Authorization: Bearer ${TOKEN}" \
 	  -H 'Content-Type: application/json' \
 	  -d '{ "allowUnknownApps": true }' \
-	  --insecure --no-progress-meter
-
-	if grep -q "y" <<<${SVC}
-	then
-		echo " "
-		echo -----------------------------------------------------------------
-		echo Switching Scheduler to state SERVICE
-		echo " "
-
-		curl -X 'PUT' \
-		  https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json \
-		  -H 'accept: application/json' \
-		  -H "Authorization: Bearer ${TOKEN}" \
-		  -H 'Content-Type: application/json' \
-		  -d '{"state":"SERVICE"}' \
-		  --insecure --no-progress-meter
-	fi
-
+	  --insecure --no-progress-meter --silent --show-error
 
 	echo " "
 	echo -----------------------------------------------------------------
 	echo Uploading and installing ${ARCH} snaps
 
-	for f in $(find . -maxdepth 1 -name "*_${ARCH}.snap"); 
+	for f in $(find . -name "*_${ARCH}.snap"); 
 	do 
-	  echo " "  
-	  echo $f  
-	  echo " "  
-	  curl -X POST https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages \
-	  -H "accept: */*" \
-	  -H "Authorization: Bearer ${TOKEN}" \
-	  -H "Content-Type: multipart/form-data" \
-	  -F "file=@${f}" \
-	  -F update=true \
-	  --insecure --no-progress-meter
+		SNAP=$(basename $f)
+		SNAP=${SNAP%_*}
+		SNAP=${SNAP%_*}
+
+		echo " "  
+		echo Uploading ...
+		echo "     file" $f
+		echo "     snap" ${SNAP}
+		echo " "  
+		curl -X POST https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages \
+		-H "accept: */*" \
+		-H "Authorization: Bearer ${TOKEN}" \
+		-H "Content-Type: multipart/form-data" \
+		-F "file=@${f}" \
+		-F update=true \
+		--insecure --no-progress-meter --silent --show-error
+
+		echo "Waiting ${SECONDS_TO_WAIT_AFTER_UPLOAD}s after installation ..."
+		sleep ${SECONDS_TO_WAIT_AFTER_UPLOAD}
+
 	done;
 
-	echo "Waiting ${SECONDS_TO_WAIT_AFTER_UPLOAD}s after installation ..."
-	read -t ${SECONDS_TO_WAIT_AFTER_UPLOAD} -p "Wait or press ENTER to continue"
+	echo " "
+	echo -----------------------------------------------------------------
+	echo Checking if ${ARCH} snaps are installed
 
-	if grep -q "y" <<<${SVC}
-	then
+	# Read list of installed snaps
+	ALL_INSTALLED_SNAPS=$(curl -X 'GET' \
+		https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages \
+		-H 'accept: application/json' \
+		-H "Authorization: Bearer ${TOKEN}" \
+		-H 'Content-Type: application/json' \
+		--insecure --no-progress-meter)
+
+	for f in $(find . -name "*_${ARCH}.snap"); 
+	do 
+		SNAP=$(basename $f)
+		SNAP=${SNAP%_*}
+		SNAP=${SNAP%_*}
+
+		if grep -q ${SNAP} <<<${ALL_INSTALLED_SNAPS}
+		then
+			echo INFO Is installed ${SNAP}
+		else
+			echo ERROR Is NOT installed ${SNAP}
+		fi
+	done;
+fi
+
+if grep -q "y" <<<${OPERATING}
+then
+
+	for i in $(seq 1 5);
+	do
 
 		echo " "
 		echo -----------------------------------------------------------------
 		echo Switching Scheduler to state OPERATING
 		echo " "
 
-		RESPONSE=Error
-		while grep -q "Error" <<<${RESPONSE}
-		do
+		# Two steps are needed
+		# 1. Start rexroth-automationcore.control (scheduler)
+		NOT_USED_RESPONSE=$(curl -X 'PUT' \
+		  https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json \
+		  -H 'accept: application/json' \
+		  -H "Authorization: Bearer ${TOKEN}" \
+		  -H 'Content-Type: application/json' \
+		  -d '{"action":"start","parameters":{"service":"rexroth-automationcore.control","enable":"true"}}' \
+		  --insecure --no-progress-meter --silent)
 
-			RESPONSE=$(curl -X 'PUT' \
-			  https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json \
-			  -H 'accept: application/json' \
-			  -H "Authorization: Bearer ${TOKEN}" \
-			  -H 'Content-Type: application/json' \
-			  -d '{"state":"OPERATING"}' \
-			  --insecure --no-progress-meter)
-			 
-			if grep -q "Error" <<<${RESPONSE}
-			then			 
-				echo " "
-				echo WARNING Switching Scheduler to state OPERATING failed
-				echo "We are repeating in ${SECONDS_TO_WAIT_AFTER_UPLOAD}s ..."
-				read -t ${SECONDS_TO_WAIT_AFTER_UPLOAD} -p "Wait or press ENTER to continue"
-			fi
-		done
-				
-	fi
-
-	echo " "
-	echo -----------------------------------------------------------------
-	echo Deleting Bearer Token
-	echo " "
-	curl \
-	  --insecure --no-progress-meter \
-	  --request DELETE https://${ADDR}:${SSL_PORT}/identity-manager/api/v1/auth/token \
-	  -H 'accept: */*' -H "Authorization: Bearer ${TOKEN}"
-
+		# 2. Switch scheduler to OPERATING
+		RESPONSE=$(curl -X 'PUT' \
+		  https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json \
+		  -H 'accept: application/json' \
+		  -H "Authorization: Bearer ${TOKEN}" \
+		  -H 'Content-Type: application/json' \
+		  -d '{"state":"OPERATING"}' \
+		  --insecure --no-progress-meter --silent --show-error)
+		
+		if grep -q "Error" <<<${RESPONSE}
+		then			 
+			echo " "
+			echo WARNING Switching Scheduler to state OPERATING failed
+			echo "We are repeating in ${SECONDS_TO_WAIT_AFTER_UPLOAD}s ..."
+			read -t ${SECONDS_TO_WAIT_AFTER_UPLOAD} -p "Wait or press ENTER to continue"
+			echo " "
+		else 
+			echo OK
+			break
+		fi
+	done
+			
 fi
 
-SNAP_FILE=$(ls *${ARCH}.snap)
-SNAP_VERSION=${SNAP_FILE%_*}
-SNAP=${SNAP_VERSION%_*}
-
-echo Searching ${SNAP} in snap list...
-
-SNAP_LIST=$(ssh -o StrictHostKeyChecking=no -p ${SSH_PORT} ${SSH_USR}@${ADDR} snap list)
-echo " "
-
-if grep -q "${SNAP}" <<<${SNAP_LIST}
+# Not empty
+if [ -n "$BUNDLE" ]
 then
-	echo "Our snap is installed"
-else
-	echo "Our snap is NOT installed!"
-	read -t ${SECONDS_TO_WAIT_AFTER_UPLOAD} -p "Press Ctrl-C to exit"
+
+	# No logs
+	LOGS=n
+	
+		echo " "
+		echo -----------------------------------------------------------------
+		echo Checking bundle $BUNDLE ...
+		echo " "
+		BUNDLES=$(curl -X 'GET' \
+			https://${ADDR}:${SSL_PORT}/automation/api/v2/nodes/framework/bundles?type=browse \
+			-H 'accept: application/json' \
+			-H "Authorization: Bearer ${TOKEN}" \
+			--insecure --no-progress-meter)
+
+		echo " "
+		echo $BUNDLES
+		echo " "
+
+		if grep -q $BUNDLE <<<"$BUNDLES"; then
+			echo "INFO Is registered: $BUNDLE"
+			
+			STATE=$(curl -X 'GET' \
+				https://${ADDR}:${SSL_PORT}/automation/api/v2/nodes/framework/bundles/$BUNDLE \
+				-H 'accept: application/json' \
+				-H "Authorization: Bearer ${TOKEN}" \
+				--insecure --no-progress-meter)
+
+			echo $STATE
+			echo " "
+			echo "	name" $(echo $STATE | jq .value.name)
+			echo "	version" $(echo $STATE | jq .value.version)
+			echo "	components" $(echo $STATE | jq .value.components)
+			echo "	state" $(echo $STATE | jq .value.state)
+			echo "	active" $(echo $STATE | jq .value.active)
+			echo "	installed" $(echo $STATE | jq .value.installed)
+			
+		else
+			echo "ERROR Is NOT registered: $BUNDLE"
+		fi
 fi
 
 echo " "
+echo -----------------------------------------------------------------
+echo Deleting Bearer Token
+echo " "
+curl \
+  --insecure --no-progress-meter \
+  --request DELETE https://${ADDR}:${SSL_PORT}/identity-manager/api/v1/auth/token \
+  -H 'accept: */*' -H "Authorization: Bearer ${TOKEN}"
 
 if grep -q "y" <<<${LOGS}
 then
 	echo " "
 	echo -----------------------------------------------------------------
+	echo Activate SSH access 
+	echo " "
+
+	curl -X 'PUT' \
+			https://${ADDR}:${SSL_PORT}/ssh/api/v1/status \
+			-H 'accept: application/json' \
+			-H "Authorization: Bearer ${TOKEN}" \
+			-H 'Content-Type: application/json' \
+			-d '{"state": "activated"}' \
+		    --insecure --no-progress-meter --silent --show-error
+
+	echo " "
+
+	ssh-keygen -f "/home/boschrexroth/.ssh/known_hosts" -R "[${ADDR}]:${SSH_PORT}" 2>&1 1>/dev/null
+
+	echo " "
+	echo -----------------------------------------------------------------
 	echo Viewing logs 
 	echo " "
 
-	ssh -o StrictHostKeyChecking=no -p ${SSH_PORT} ${SSH_USR}@${ADDR} sudo snap logs -f ${SNAP}
+	sshpass -p ${SSH_PWD} ssh -o StrictHostKeyChecking=no -p ${SSH_PORT} ${SSH_USR}@${ADDR} sudo snap logs -f ${SNAP}
 fi
-	
-

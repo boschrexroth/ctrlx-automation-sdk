@@ -8,8 +8,8 @@ version: "2.2.0"
 grade: stable
 summary: Sample app for processing rt data from EtherCAT
 description: |
-  This app will read EtherCAT nodes from the Data Layer.
-base: core20
+  This app will read EtherCAT nodes from the ctrlX Data Layer.
+base: core22
 confinement: strict
 
 # define how apps & services are exposed to host system

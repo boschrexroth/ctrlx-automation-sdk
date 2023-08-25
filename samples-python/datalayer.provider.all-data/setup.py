@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Bosch Rexroth AG
+#
+# SPDX-License-Identifier: MIT
 from setuptools import setup
 
 setup(name = 'sdk-py-provider-alldata',
@@ -7,5 +10,5 @@ setup(name = 'sdk-py-provider-alldata',
       packages = ['alldataprovider', 'helper'],
       install_requires = ['ctrlx-datalayer', 'ctrlx-fbs'],
       scripts = ['main.py'],
-      license = 'Copyright (c) 2020-2022 Bosch Rexroth AG, Licensed under MIT License'
+      license = 'MIT License'
 )

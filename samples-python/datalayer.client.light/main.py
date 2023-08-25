@@ -1,26 +1,8 @@
 #!/usr/bin/env python3
 
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2021-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 import sys
 import time
@@ -35,7 +17,8 @@ from comm.datalayer import SubscriptionProperties, Metadata
 from helper.ctrlx_datalayer_helper import get_client
 
 def main():
-
+    """main
+    """
     print()
     print("=================================================================")
     print("sdk-py-datalayer-client - A ctrlX Data Layer Client App in Python")
@@ -52,7 +35,7 @@ def main():
         with datalayer_client: # datalayer_client is closed automatically when leaving with block
 
             if datalayer_client.is_connected() is False:
-                print("ERROR Data Layer is NOT connected:", datalayer_client_connection_string, flush=True)
+                print("ERROR ctrlX Data Layer is NOT connected:", datalayer_client_connection_string, flush=True)
                 sys.exit(2)
 
 
@@ -118,7 +101,7 @@ def main():
 
                 time.sleep(2.0)
 
-            print("ERROR Data Layer is NOT connected")
+            print("ERROR ctrlX Data Layer is NOT connected")
             print("INFO Closing subscription", flush=True)
             sub.close()
 
@@ -128,6 +111,8 @@ def main():
 
 # Response notify callback function
 def cb_subscription_sync(result: Result, items: List[ctrlxdatalayer.subscription.NotifyItem], userdata):
+    """cb_subscription_sync
+    """
     if result is not Result.OK:
         print("ERROR notify subscription:", result, flush=True)
         return

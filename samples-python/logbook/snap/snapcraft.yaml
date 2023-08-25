@@ -1,10 +1,10 @@
 name: sdk-py-logbook
-version: 2.3.0
+version: 2.4.0
 summary: Logbook sample written in Python for ctrlX
 title: sdk-py-logbook
 description: |
   This sample shows how to log with different loglevels
-base: core20
+base: core22
 confinement: strict
 grade: stable
 
@@ -23,6 +23,9 @@ parts:
   logbook:
     plugin: python
     source: .
+    stage-packages:
+      - libsystemd-dev
+
 
 plugs:
   datalayer:

@@ -1,24 +1,6 @@
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2020-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 import ctrlxdatalayer
 from comm.datalayer import NodeClass
@@ -29,21 +11,24 @@ from ctrlxdatalayer.variant import Result, Variant
 
 
 class ProviderNodeAllData:
+    """ProviderNodeAllData
+    """
 
-    def __init__(self, 
-        provider: Provider, 
-        addressType: str, 
-        address: str, 
-        name : str, 
-        unit : str, 
-        description : str, 
-        dynamic: bool,
-        data : Variant):
-
+    def __init__(self,
+                 provider: Provider,
+                 addressType: str,
+                 address: str,
+                 name: str,
+                 unit: str,
+                 description: str,
+                 dynamic: bool,
+                 data: Variant):
+        """__init__
+        """
         self.provider = provider
 
         self.address = address
-        self.name= name
+        self.name = name
         self.dynamic = dynamic
         self.data = data
 
@@ -63,32 +48,43 @@ class ProviderNodeAllData:
             type_path=addressType)
 
     def __on_create(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
+        """__on_create
+        """
         # print("__on_create", address, flush=True)
         cb(Result.OK, None)
 
     def __on_remove(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
+        """__on_remove
+        """
         # Not implemented because no wildcard is registered
         print("__on_remove", address, flush=True)
         cb(Result.UNSUPPORTED, None)
 
     def __on_browse(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
+        """__on_browse
+        """
         # print("__on_browse", address, flush=True)
         cb(Result.OK, None)
-        
+
     def __on_read(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
+        """__on_read
+        """
         # print("__on_read", address, flush=True) - this command slows the performance down
         new_data = self.data
         cb(Result.OK, new_data)
 
     def __on_write(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
-
+        """__on_write
+        """
         if self.dynamic is False:
-            print("__on_write PERMISSION_DENIED", address, data.get_type(), flush=True)
+            print("__on_write PERMISSION_DENIED",
+                  address, data.get_type(), flush=True)
             cb(Result.PERMISSION_DENIED, None)
             return
 
         if self.data.get_type() != data.get_type():
-            print("__on_write TYPE_MISMATCH", address, data.get_type(), flush=True)
+            print("__on_write TYPE_MISMATCH", address,
+                  data.get_type(), flush=True)
             cb(Result.TYPE_MISMATCH, None)
             return
 
@@ -97,5 +93,7 @@ class ProviderNodeAllData:
         cb(Result.OK, data)
 
     def __on_metadata(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
+        """__on_metadata
+        """
         # print("__on_metadata", address, flush=True)
         cb(Result.OK, self.metadata)

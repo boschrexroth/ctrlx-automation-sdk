@@ -11,7 +11,7 @@ confinement: strict
 #confinement: devmode 
 #icon: assets/icons/ICONHERE.png
 grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core20
+base: core22
 type: app
 
 apps:

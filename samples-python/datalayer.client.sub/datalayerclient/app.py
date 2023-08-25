@@ -1,24 +1,6 @@
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2020-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 import typing
 from datetime import datetime
@@ -31,6 +13,8 @@ from ctrlxdatalayer.variant import Result, Variant
 
 
 def rncb(result: Result, items: typing.List[ctrlxdatalayer.subscription.NotifyItem], userdata: ctrlxdatalayer.clib.userData_c_void_p):
+    """rncb
+    """
 
     now = datetime.now().time()
     print(now, "----------------------------------------------------------")
@@ -59,7 +43,8 @@ def rncb(result: Result, items: typing.List[ctrlxdatalayer.subscription.NotifyIt
 
 
 def subscribe_single(client: Client, subscription_properties: Variant):
-
+    """subscribe_single
+    """
     print("subscribe_single() +++++++++++++++++++++++++++++++++++++++++++++++", flush=True)
 
     result, subscription = client.create_subscription_sync(
@@ -79,6 +64,8 @@ def subscribe_single(client: Client, subscription_properties: Variant):
 
 
 def get_address_list(client: Client, addressBase: str):
+    """get_address_list
+    """
     result, data = client.browse_sync(addressBase)
     with data:
         if result != Result.OK:
@@ -95,7 +82,8 @@ def get_address_list(client: Client, addressBase: str):
 
 
 def subscribe_multi(client: Client, subscription_properties: Variant):
-
+    """subscribe_multi
+    """
     print("subscribe_multi() ++++++++++++++++++++++++++++++++++++++++++++++++", flush=True)
 
     addressBase = "framework/metrics/system/"

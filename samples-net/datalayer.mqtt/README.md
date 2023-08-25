@@ -1,6 +1,6 @@
 # README .NET datalayer.mqtt
 
-This .NET sample connects the __Data Layer__ to a __MQTT 5__ broker.
+This .NET sample connects the __ctrlX Data Layer__ to a __MQTT 5__ broker.
 The sample is based on [MQTT.net](https://github.com/chkr1011/MQTTnet).
 
 __IMPORTANT__:
@@ -11,7 +11,7 @@ Please read the _Best Practise_ section in common .NET documentation for more de
 
 ## Introduction
 
-MQTT sample showing PUB/SUB with Data Layer in full interaction.
+MQTT sample showing PUB/SUB with ctrlX Data Layer in full interaction.
 
 Connect Datalayer to any MQTT Broker for data synchronization (SUB) or publishing (PUB) or even full broker synchronisation (__Topic Scanner__).
 
@@ -29,17 +29,17 @@ We recommend to use [mosquitto MQTT Broker](https://mosquitto.org/download/), wh
 
 The MQTT sample demonstrates 
 
-+ How easy it is to interact __Data Layer with MQTT__
++ How easy it is to interact __ctrlX Data Layer with MQTT__
   
 + A proposal to organize a set of logical grouped provided nodes using a handler hierarchy and how to populate nodes using some __level node handlers__ , responsible for it's own set of children nodes 
   
 + How to create an __light-weight node handler__, returning just his own managed _virtual_ nodes on _OnBrowse()_ without the need of registering all nodes one-by-one which is very efficient for a large set of dynamically created nodes.
   
-+ A concept of creating configurable __PUB configurations__, publishing the value of a Data Layer source address to a MQTT topic.
++ A concept of creating configurable __PUB configurations__, publishing the value of a ctrlX Data Layer source address to a MQTT topic.
   
-+ A concept of creating configurable __SUB configurations__, subscribing a MQTT topic (wildcards supported) and writing it back to a Data Layer target address. 
++ A concept of creating configurable __SUB configurations__, subscribing a MQTT topic (wildcards supported) and writing it back to a ctrlX Data Layer target address. 
 
-+ On top a fully functional __Topic Scanner__, scanning all topics present on the broker and revealing it into the address space of the Data Layer, which is very handy for other Data Layer clients to access MQTT related data _immediately_ without connecting to MQTT itself. The most recent message of the topic will be memory-persisted as and accessible via a simple Data Layer address.
++ On top a fully functional __Topic Scanner__, scanning all topics present on the broker and revealing it into the address space of the ctrlX Data Layer, which is very handy for other ctrlX Data Layer clients to access MQTT related data _immediately_ without connecting to MQTT itself. The most recent message of the topic will be memory-persisted as and accessible via a simple ctrlX Data Layer address.
 
 __Notes__: 
 
@@ -57,7 +57,7 @@ Please read the common .NET docs [here](./../../doc/dotnet.md), first.
 3. Choose __Open Folder__.
 4. Open the directory __datalayer.mqtt__.
 5. Build and install snap as described [here](./../README.md).
-6. Checkout ctrlX Data Layer web frontend (System | Data Layer) 
+6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer) 
 7. Check the output using __Diagnostics__:
 
    - Login into your ctrlX
@@ -94,24 +94,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 
 ## License
 
-MIT License
-
-Copyright (c) 2021-2022 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+SPDX-FileCopyrightText: Bosch Rexroth AG
+SPDX-License-Identifier: MIT

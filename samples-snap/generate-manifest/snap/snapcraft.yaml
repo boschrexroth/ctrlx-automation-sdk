@@ -1,5 +1,5 @@
 name: changing-world
-base: core20
+base: core22
 version: '1.0.0'
 summary: Simple snap with random menu entry
 description: |

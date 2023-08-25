@@ -1,26 +1,8 @@
 /*
-MIT License
-
-Copyright (c) 2021-2023 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 using comm.datalayer;
 using Datalayer;
@@ -130,7 +112,7 @@ namespace Samples.Datalayer.MQTT.Pub
             }
             Nodes.Add(node.Address, node);
 
-            //Subscribe to Data layer
+            //Subscribe to ctrlX Data Layer
             if (SubscribeDatalayer().IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
@@ -333,7 +315,7 @@ namespace Samples.Datalayer.MQTT.Pub
         #region Private
 
         /// <summary>
-        /// Gets or creates a Data Layer subscription by current publish interval
+        /// Gets or creates a ctrlX Data Layer subscription by current publish interval
         /// </summary>
         /// <returns></returns>
         private (DLR_RESULT, ISubscription) GetOrCreateDatalayerSubscriptionByPublishInterval()
@@ -378,7 +360,7 @@ namespace Samples.Datalayer.MQTT.Pub
         private DLR_RESULT SubscribeDatalayer()
         {
             var address = GetNode(Names.SourceAddress).Value.ToString();
-            Console.WriteLine($"Subscribe Data Layer: {address}");
+            Console.WriteLine($"Subscribe ctrlX Data Layer: {address}");
 
             //Request matching subscription
             var (result, subscription) = GetOrCreateDatalayerSubscriptionByPublishInterval();
@@ -397,13 +379,13 @@ namespace Samples.Datalayer.MQTT.Pub
 
 
         /// <summary>
-        /// Unsubscribes the given address from the Data Layer
+        /// Unsubscribes the given address from the ctrlX Data Layer
         /// </summary>
         /// <returns></returns>
         private DLR_RESULT UnsubscribeDatalayer()
         {
             var address = GetNode(Names.SourceAddress).Value.ToString();
-            Console.WriteLine($"Unsubscribe Data Layer: {address}");
+            Console.WriteLine($"Unsubscribe ctrlX Data Layer: {address}");
 
             //Request matching Subscription
             var (result, subscription) = GetOrCreateDatalayerSubscriptionByPublishInterval();
@@ -427,7 +409,7 @@ namespace Samples.Datalayer.MQTT.Pub
         }
 
         /// <summary>
-        /// Indicates whether the given address can be unsubscribed from Data Layer
+        /// Indicates whether the given address can be unsubscribed from ctrlX Data Layer
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
@@ -438,7 +420,7 @@ namespace Samples.Datalayer.MQTT.Pub
         }
 
         /// <summary>
-        /// Data Layer subscription data changed event
+        /// ctrlX Data Layer subscription data changed event
         /// </summary>
         /// <param name="subscription"></param>
         /// <param name="args"></param>
@@ -465,7 +447,7 @@ namespace Samples.Datalayer.MQTT.Pub
         }
 
         /// <summary>
-        /// Publishes the value of a Data Layer address to current topic
+        /// Publishes the value of a ctrlX Data Layer address to current topic
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

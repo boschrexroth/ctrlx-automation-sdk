@@ -1,37 +1,20 @@
-/**
- * MIT License
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
  *
- * Copyright (c) 2020-2022 Bosch Rexroth AG
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-License-Identifier: MIT
  */
 
 #include <string>
 
 #include "providerNodeAllData.h"
 #include "sampleSchema_generated.h"
+#include "ctrlx_datalayer_helper.h"
 
 DataContainer* ProviderNodeAllData::getDataContainer(const std::string& address)
 {
-  for (auto dataContainer : _dataContainers)
+  for (auto dataContainer : m_dataContainers)
   {
-    if (dataContainer->Address == address)
+    if (dataContainer->m_address == address)
     {
       return dataContainer;
     }
@@ -52,11 +35,11 @@ comm::datalayer::DlResult ProviderNodeAllData::createDataContainer(
   auto metadata = createMetadata(data, address);
   auto dataContainer = new DataContainer(address, data, metadata);
 
-  _dataContainers.emplace_back(dataContainer);
+  m_dataContainers.emplace_back(dataContainer);
 
-  // We register the address of our datacontainer now so that the Data Layer will show it as "virtual node".
+  // We register the address of our datacontainer now so that the ctrlX Data Layer will show it as "virtual node".
   // The "virtual node" has as provider this instance.
-  return _provider->registerNode(address, this);
+  return m_provider->registerNode(address, this);
 }
 
 void ProviderNodeAllData::createDataContainer(
@@ -64,7 +47,7 @@ void ProviderNodeAllData::createDataContainer(
   const std::string& addressNode,
   const comm::datalayer::Variant& data)
 {
-  const std::string address = _addressBase + addressNode;
+  const std::string address = m_addressBase + addressNode;
   if (comm::datalayer::DlResult::DL_OK != setValueResult)
   {
     std::cout << "ERROR - Data could not be set: " << address;
@@ -83,7 +66,7 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
   auto description = builder.CreateString("This is a description for " + address);
   comm::datalayer::NodeClass nodeClass = comm::datalayer::NodeClass_Variable;
 
-  bool isBaseFolder = address == _addressBase;
+  bool isBaseFolder = address == m_addressBase;
   if (isBaseFolder)
   {
     nodeClass = comm::datalayer::NodeClass_Folder;
@@ -91,22 +74,22 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
 
   comm::datalayer::AllowedOperationsBuilder allowedOperations(builder);
   allowedOperations.add_read(!isBaseFolder);
-  allowedOperations.add_write(!isBaseFolder && _dynamic);
-  allowedOperations.add_create(!isBaseFolder && _dynamic);
-  allowedOperations.add_delete_(!isBaseFolder && _dynamic);
+  allowedOperations.add_write(!isBaseFolder && m_dynamic);
+  allowedOperations.add_create(!isBaseFolder && m_dynamic);
+  allowedOperations.add_delete_(!isBaseFolder && m_dynamic);
   auto operations = allowedOperations.Finish();
 
   flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<comm::datalayer::Reference>>> references;
   if (data.getType() == comm::datalayer::VariantType::FLATBUFFERS)
   {
-    const char* type_addr = "types/sampleSchema/inertialValue";
+    const char* typeAddr = "types/sampleSchema/inertialValue";
 
-    if (_dynamic)
+    if (m_dynamic)
     {
       flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
       {
-          comm::datalayer::CreateReferenceDirect(builder, "readType", type_addr),
-          comm::datalayer::CreateReferenceDirect(builder, "writeType", type_addr),
+          comm::datalayer::CreateReferenceDirect(builder, "readType", typeAddr),
+          comm::datalayer::CreateReferenceDirect(builder, "writeType", typeAddr),
       };
       references = builder.CreateVectorOfSortedTables(vecReferences, 2);
     }
@@ -114,7 +97,7 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
     {
       flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
       {
-          comm::datalayer::CreateReferenceDirect(builder, "readType", type_addr),
+          comm::datalayer::CreateReferenceDirect(builder, "readType", typeAddr),
       };
       references = builder.CreateVectorOfSortedTables(vecReferences, 1);
     }
@@ -140,22 +123,19 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
 }
 
 ProviderNodeAllData::ProviderNodeAllData(comm::datalayer::IProvider* provider, const std::string& addressRoot, bool dynamic)
+  : m_provider(provider)
+  , m_addressRoot(addressRoot)
+  , m_dynamic(dynamic)
+  , m_addressBase(dynamic ? m_addressRoot + "dynamic/" : m_addressRoot + "static/")
 {
-  _provider = provider;
-  _addressRoot = addressRoot;
-  _dynamic = dynamic;
-
-  _addressBase = dynamic ? _addressRoot + "dynamic/" : _addressRoot + "static/";
-
-  const comm::datalayer::Variant data;
-  _metadata = createMetadata(data, _addressBase);
+  m_metadata = createMetadata(comm::datalayer::Variant(), m_addressBase);
 }
 
-void ProviderNodeAllData::RegisterNodes()
+void ProviderNodeAllData::registerNodes()
 {
   comm::datalayer::DlResult result;
-  result = _provider->registerNode(_addressBase + "**", this);
-
+  result = m_provider->registerNode(m_addressBase + "**", this);
+  std::cout << "registerNodes: " << result.toString() << std::endl;
   comm::datalayer::Variant data;
 
   result = data.setValue(true);
@@ -207,54 +187,54 @@ void ProviderNodeAllData::RegisterNodes()
   createDataContainer(result, "timestamp-2014-07-13-germany-soccer-world-champion", data);
 
   // Arrays ----------------------
-  bool a_bool[] = {true, false, true};
-  result = data.setValue(a_bool);
+  bool abool[] = {true, false, true};
+  result = data.setValue(abool);
   createDataContainer(result, "array-of-bool8", data);
 
-  int8_t a_int8_t[] = {INT8_MIN, -1, 0, INT8_MAX};
-  result = data.setValue(a_int8_t);
+  int8_t aint8[] = {INT8_MIN, -1, 0, INT8_MAX};
+  result = data.setValue(aint8);
   createDataContainer(result, "array-of-int8", data);
 
-  uint8_t a_uint8_t[] = {0, UINT8_MAX};
-  result = data.setValue(a_uint8_t);
+  uint8_t auint8[] = {0, UINT8_MAX};
+  result = data.setValue(auint8);
   createDataContainer(result, "array-of-uint8", data);
 
-  int16_t a_int16_t[] = {INT16_MIN, -1, 0, INT16_MAX};
-  result = data.setValue(a_int16_t);
+  int16_t aint16[] = {INT16_MIN, -1, 0, INT16_MAX};
+  result = data.setValue(aint16);
   createDataContainer(result, "array-of-int16", data);
 
-  uint16_t a_uint16_t[] = {0, 32767, 32768, UINT16_MAX};
-  result = data.setValue(a_uint16_t);
+  uint16_t auint16[] = {0, 32767, 32768, UINT16_MAX};
+  result = data.setValue(auint16);
   createDataContainer(result, "array-of-uint16", data);
 
-  int32_t a_int32_t[] = {INT32_MIN, -1, 0, INT32_MAX};
-  result = data.setValue(a_int32_t);
+  int32_t aint32[] = {INT32_MIN, -1, 0, INT32_MAX};
+  result = data.setValue(aint32);
   createDataContainer(result, "array-of-int32", data);
 
-  uint32_t a_uint32_t[] = {0, UINT32_MAX};
-  result = data.setValue(a_uint32_t);
+  uint32_t auint32[] = {0, UINT32_MAX};
+  result = data.setValue(auint32);
   createDataContainer(result, "array-of-uint32", data);
 
-  int64_t a_int64_t[] = {INT64_MIN, -1, 0, INT64_MAX};
-  result = data.setValue(a_int64_t);
+  int64_t aint64[] = {INT64_MIN, -1, 0, INT64_MAX};
+  result = data.setValue(aint64);
   createDataContainer(result, "array-of-int64", data);
 
-  uint64_t a_uint64_t[] = {0, UINT64_MAX};
-  result = data.setValue(a_uint64_t);
+  uint64_t auint64[] = {0, UINT64_MAX};
+  result = data.setValue(auint64);
   createDataContainer(result, "array-of-uint64", data);
 
-  float a_float[] = {FLT_MIN, -1.0, 0.0, FLT_MAX};
-  result = data.setValue(a_float);
+  float afloat[] = {FLT_MIN, -1.0, 0.0, FLT_MAX};
+  result = data.setValue(afloat);
   createDataContainer(result, "array-of-float32", data);
 
-  double a_double[] = {DBL_MIN, -1.0, 0.0, DBL_MAX};
-  result = data.setValue(a_double);
+  double adouble[] = {DBL_MIN, -1.0, 0.0, DBL_MAX};
+  result = data.setValue(adouble);
   createDataContainer(result, "array-of-float64", data);
 
-  // std::string a_string[] = {"Blue", "Red", "Orange", "Yellow"};
-  // const char *a_string[] = {"Blue", "Red", "Orange", "Yellow"};
-  std::vector<std::string> a_string = {"Blue", "Red", "Orange", "Yellow"}; // Only vector is supported 03/2021
-  result = data.setValue(a_string);
+  // std::string astring[] = {"Blue", "Red", "Orange", "Yellow"};
+  // const char *astring[] = {"Blue", "Red", "Orange", "Yellow"};
+  std::vector<std::string> astring = {"Blue", "Red", "Orange", "Yellow"}; // Only vector is supported 03/2021
+  result = data.setValue(astring);
   createDataContainer(result, "array-of-string", data);
 
   unsigned char bytes[] = {0x43, 0x4d, 0x30, 0x30, 0x0f, 0x0D};
@@ -263,8 +243,8 @@ void ProviderNodeAllData::RegisterNodes()
 
   // Register the FlatBuffers type
   std::string typeAddress = "types/sampleSchema/inertialValue";
-  std::string bfbs = is_snap() ? std::string(snap_path()).append("/sampleSchema.bfbs") : "bfbs/sampleSchema.bfbs";
-  result = _provider->registerType(typeAddress, bfbs);
+  std::string bfbs = isSnap() ? std::string(snapPath()).append("/sampleSchema.bfbs") : "bfbs/sampleSchema.bfbs";
+  result = m_provider->registerType(typeAddress, bfbs);
   if (result != comm::datalayer::DlResult::DL_OK)
   {
     std::cout << "ERROR registerType(): " << typeAddress << " code: 0x" << std::hex << result.value << std::endl;
@@ -292,7 +272,7 @@ void ProviderNodeAllData::onCreate(
 {
   comm::datalayer::DlResult result;
 
-  if (_dynamic == false)
+  if (m_dynamic == false)
   {
     result = comm::datalayer::DlResult::DL_PERMISSION_DENIED;
     std::cout << "onCreate(): " << address << " " << result.toString() << std::endl;
@@ -326,8 +306,8 @@ void ProviderNodeAllData::onRead(
     return;
   }
 
-  comm::datalayer::Variant myData = dataContainer->Data;
-  result = dataContainer->ErrorCode >= 0 ? comm::datalayer::DlResult::DL_OK : comm::datalayer::DlResult::DL_INVALID_VALUE;
+  comm::datalayer::Variant myData = dataContainer->m_data;
+  result = dataContainer->m_errorCode >= 0 ? comm::datalayer::DlResult::DL_OK : comm::datalayer::DlResult::DL_INVALID_VALUE;
   //std::cout << "onRead(): " << address << " " << result.toString() << std::endl;
 
   callback(result, &myData);
@@ -341,7 +321,7 @@ void ProviderNodeAllData::onWrite(
 {
   comm::datalayer::DlResult result;
 
-  if (_dynamic == false)
+  if (m_dynamic == false)
   {
     result = comm::datalayer::DlResult::DL_PERMISSION_DENIED;
     std::cout << "onWrite(): " << address << " ";
@@ -355,7 +335,7 @@ void ProviderNodeAllData::onWrite(
   if (nullptr == dataContainer)
   {
     // A virtual node which is not registered should be written.
-    // We a creating and registering the virtual node now. This makes Data Layer usage easy for a client.
+    // We a creating and registering the virtual node now. This makes ctrlX Data Layer usage easy for a client.
     result = createDataContainer(address, *data);
     std::cout << "onWrite() CREATE: " << address << " " << result.toString() << std::endl;
   }
@@ -364,7 +344,7 @@ void ProviderNodeAllData::onWrite(
     // The virtual node is already registered.
     result = comm::datalayer::DlResult::DL_OK;
     // We are take the data without data type check.
-    dataContainer->Data = *data;
+    dataContainer->m_data = *data;
     // No trace to improve performance
     // std::cout << "onWrite(): " << address << " OK" << std::endl;
   }
@@ -379,7 +359,7 @@ void ProviderNodeAllData::onRemove(
 {
   comm::datalayer::DlResult result;
 
-  if (_dynamic == false)
+  if (m_dynamic == false)
   {
     result = comm::datalayer::DlResult::DL_PERMISSION_DENIED;
     std::cout << "onRemove(): " << address << " " << result.toString() << std::endl;
@@ -390,8 +370,8 @@ void ProviderNodeAllData::onRemove(
   DataContainer* dataContainer = getDataContainer(address);
   if (nullptr != dataContainer)
   {
-    _provider->unregisterNode(dataContainer->Address);
-    remove(_dataContainers.begin(), _dataContainers.end(), dataContainer);
+    m_provider->unregisterNode(dataContainer->m_address);
+    std::remove(m_dataContainers.begin(), m_dataContainers.end(), dataContainer);
     delete dataContainer;
   }
 
@@ -408,7 +388,7 @@ void ProviderNodeAllData::onBrowse(
   // No trace to improve performance
   //std::cout << "onBrowse(): " << address << std::endl;
 
-  callback(comm::datalayer::DlResult::DL_OK, nullptr); // Data Layer Broker "knows" all sub node, we don't add further nodes here.
+  callback(comm::datalayer::DlResult::DL_OK, nullptr); // ctrlX Data Layer Broker "knows" all sub node, we don't add further nodes here.
 }
 
 // Read function of metadata of an object. Function will be called whenever the metadata of a node should be written.
@@ -420,9 +400,9 @@ void ProviderNodeAllData::onMetadata(
   DataContainer* dataContainer = getDataContainer(address); // For .../dynamic or .../static we get also nullptr
   if (nullptr == dataContainer)
   {
-    if (address + "/" == _addressBase)
+    if (address + "/" == m_addressBase)
     {
-      callback(comm::datalayer::DlResult::DL_OK, &_metadata);
+      callback(comm::datalayer::DlResult::DL_OK, &m_metadata);
       return;
     }
     result = comm::datalayer::DlResult::DL_INVALID_ADDRESS;
@@ -430,5 +410,5 @@ void ProviderNodeAllData::onMetadata(
     callback(result, nullptr);
     return;
   }
-  callback(comm::datalayer::DlResult::DL_OK, &dataContainer->Metadata);
+  callback(comm::datalayer::DlResult::DL_OK, &dataContainer->m_metadata);
 }

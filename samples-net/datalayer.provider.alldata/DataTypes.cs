@@ -1,4 +1,9 @@
-﻿namespace Samples.Datalayer.Provider.Alldata
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
+namespace Samples.Datalayer.Provider.Alldata
 {
     /// <summary>
     /// Defines the <see cref="DataTypes" />.

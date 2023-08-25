@@ -4,7 +4,7 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-node-datalayer-client
 version: "1.0.0"
-summary: Data Layer client sample written in Node.js for ctrlX.
+summary: ctrlX Data Layer client sample written in Node.js for ctrlX CORE.
 description: |
   The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console. 
   A subscription is used to get values by data change event in a deterministic publish interval. 
@@ -13,7 +13,7 @@ confinement: strict
 #confinement: devmode
 #icon: assets/icons/ICONHERE.png
 grade: stable # must be 'stable' to release into candidate/stable channels
-base: core20
+base: core22
 type: app
 
 apps:
@@ -31,13 +31,14 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: "18.15.0"
+      - NODE_VERSION: "18.17.0"
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "18.15.0"
+    # npm-node-version: "18.17.0"
     plugin: nil
     override-build: |
+
       # set target arch
       if [ $SNAPCRAFT_TARGET_ARCH == "arm64" ]; then
           arch="arm64"
@@ -53,11 +54,12 @@ parts:
           curl $node_uri | tar xzf - -C $SNAPCRAFT_PART_INSTALL/ --no-same-owner --strip-components=1
       fi
 
-      # install the app (full) to compile (tsc -> ./dist)
-      npm install --unsafe-perm
+      # install and compile (tsc -> ./dist)
+      npm install --ignore-scripts --no-fund --unsafe-perm
+      npm run tsc
 
       # pack and install the app (only production)
-      npm install -g --prefix $SNAPCRAFT_PART_INSTALL $(npm pack . | tail -1) --only=prod --production --no-fund --unsafe-perm
+      npm install -g --prefix $SNAPCRAFT_PART_INSTALL $(npm pack . | tail -1) --ignore-scripts --omit=dev --no-fund --unsafe-perm
 
       # remove ctrlx-datalayer prebuilds of unused archs to reduce snap size
       package_name=$(npm run getName -s)

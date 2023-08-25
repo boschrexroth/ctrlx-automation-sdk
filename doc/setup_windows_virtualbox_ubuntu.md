@@ -9,9 +9,9 @@ This guide shows how to use an [Ubuntu Desktop](https://ubuntu.com/desktop/devel
 
 The software can be downloaded from here: <https://www.virtualbox.org/.>
 
-## Setup Virtual Machine and install Ubuntu Desktop 20.04 LTS
+## Setup Virtual Machine and Install Ubuntu Desktop 22.04 LTS
 
-Download an iso-image from <https://old-releases.ubuntu.com/releases/focal/>
+Download an iso-image from [Ubuntu 22.04.2 LTS](https://releases.ubuntu.com/releases/jammy/)
 
 Create a virtual machine, select these settings:
 

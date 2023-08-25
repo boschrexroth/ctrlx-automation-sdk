@@ -172,9 +172,9 @@ For each command, the following elements must be specified:
 
 By default there is no defined order of command execution. Starting with version XCR-V-0112, a command may declare that it needs to be executed **after** other commands. If this is required (which should be the exception), add an after element to your command declaration with an array containing the IDs of the predecessor commands.
 
->**Hint for developers providing Data Layer endpoints for loading and saving**
+>**Hint for developers providing ctrlX Data Layer endpoints for loading and saving**
 >
->In order to make the Data Layer endpoints for saving and loading a configuration consistent, the respective URLs should adhere to the following pattern:
+>In order to make the ctrlX Data Layer endpoints for saving and loading a configuration consistent, the respective URLs should adhere to the following pattern:
 >
 >\<datalayer-basepath\>/\<**technology**\>/admin/cfg/\<operation\>
 >
@@ -535,20 +535,21 @@ The configuration files are available via WebDAV protocol under the ctrlx-device
 
     https://localhost:8443/solutions/webdav/appdata/configuration.json
 
-See also: [golang WebDAV client](../samples-go/webdav.client/readme.md) and [nodejs WebDAV client](../samples-node/webdav-client/readme.md)
+See also: [golang WebDAV client](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/samples-go/webdav.client/README.md)
+and [nodejs WebDAV client](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/samples-node/solutions.webdav.interface/README.md)
 
 ### Accessing configuration files with WinSCP
 
 [WinSCP](https://winscp.net/) is a windows app, which allows access to a remote file system via WebDAV.
 
-#### Connect to a crtlX device
+#### Connect to a ctrlX CORE
 
 Start WinSCP, login with:
 
     File protocol:          WebDAV
-    Host name:              IP-address or hostname of the device
-    Port number:            443 or 8443 for a virtual control
-    User name and Password: credentials on the ctrlX-device
+    Host name:              IP-address or hostname of the ctrlX CORE
+    Port number:            443 or 8443 for a ctrlX CORE<sup>virtual</sup>
+    User name and Password: credentials on the ctrlX CORE
 
 ![](images/winscp-sites.png)
 

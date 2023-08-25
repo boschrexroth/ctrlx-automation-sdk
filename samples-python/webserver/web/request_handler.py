@@ -1,24 +1,6 @@
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2020-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 import os
 import traceback
@@ -30,15 +12,23 @@ import web.web_token
 from urllib.parse import unquote, parse_qs, urlparse
 from json import dumps, loads
 
-import app.datalayer 
+import app.datalayer
 
-data_layer : app.datalayer.DataLayer
+data_layer: app.datalayer.DataLayer
+
 
 class RequestHandler(http.server.BaseHTTPRequestHandler):
+    """RequestHandler
+
+    Args:
+        http (BaseHTTPRequestHandler): request handler
+
+    """
 
     # Form parameters saved server side
     # "datalayer/subscriptions/settings"
-    readPath = "datalayer/subscriptions/settings" # "framework/metrics/system/cpu-utilisation-percent"
+    # "framework/metrics/system/cpu-utilisation-percent"
+    readPath = "datalayer/subscriptions/settings"
     readValue = ""
     readResult = ""
     writePath = "sdk-py-provider-alldata/dynamic/int64"
@@ -46,9 +36,20 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
     writeResult = ""
 
     def do_HEAD(self):
+        """do_HEAD
+        """
         return
 
     def get_www_file_path(self, relative_path):
+        """def get_www_file_path(self, relative_path):
+
+
+        Args:
+            relative_path (string): relative path
+
+        Returns:
+            str: result path
+        """
         # relative_path: 'www/xxx' or '/python-webserver/stylesheet.css'
 
         if len(relative_path) <= 0:
@@ -67,12 +68,20 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         return result_path
 
     def send_response_and_header(self, response, content_type):
+        """send_response_and_header
+
+        Args:
+            response (Response): Response
+            content_type (str): content type
+        """
         self.send_response(response)
 
         self.send_header('Content-type', content_type)
         self.end_headers()
 
     def send_file_response(self, content_type, rel_path=""):
+        """send_file_response
+        """
         path = self.get_www_file_path(rel_path)
 
         try:
@@ -85,7 +94,11 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response_and_header(404, content_type)
 
     def send_html_file_response(self, rel_path=""):
+        """send_html_file_response
 
+        Args:
+            rel_path (str, optional): path. Defaults to "".
+        """
         path = self.get_www_file_path(rel_path)
         content_type = 'text/html'
 
@@ -99,6 +112,8 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response_and_header(404, content_type)
 
     def do_GET(self):
+        """do_GET
+        """
         # GET Requests from client
         print("GET", self.path, flush=True)
 
@@ -191,7 +206,8 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         self.send_response(404)
 
     def do_POST(self):
-
+        """do_POST
+        """
         # Get the size of data
         content_length = int(self.headers['Content-Length'])
         content = self.rfile.read(content_length).decode("utf-8")
@@ -207,7 +223,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
             if 'node' in data:
                 RequestHandler.readPath = data['node'][0]
 
-                # Data Layer access
+                # ctrlX Data Layer access
                 RequestHandler.readResult, RequestHandler.readValue = data_layer.read_node(
                     RequestHandler.readPath)
 
@@ -221,7 +237,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
                 RequestHandler.writePath = data['node'][0]
                 RequestHandler.writeValue = data['value'][0]
 
-                # Data Layer access
+                # ctrlX Data Layer access
                 RequestHandler.writeResult = data_layer.write_node(
                     RequestHandler.writePath, RequestHandler.writeValue)
 

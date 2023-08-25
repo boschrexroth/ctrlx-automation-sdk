@@ -10,7 +10,7 @@ summary: Simple Go-Webserver
 description: This sample app shows how to create a webserver app in ctrlX CORE
 grade: stable
 confinement: strict
-base: core20
+base: core22
 
 apps:
   my-server:

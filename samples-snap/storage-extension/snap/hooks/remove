@@ -1,0 +1,1 @@
+snapctl umount $SNAP_COMMON/storage-extension/$SNAP_NAME

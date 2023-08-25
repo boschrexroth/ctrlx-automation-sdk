@@ -1,25 +1,7 @@
-/**
- * MIT License
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
  *
- * Copyright (c) 2021 Bosch Rexroth AG
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-License-Identifier: MIT
  */
 
 #include <functional>
@@ -29,16 +11,21 @@
 #include "comm/datalayer/sub_properties_generated.h"
 
 #include "datalayerclientsub.h"
-DataLayerClientSub::DataLayerClientSub(const comm::datalayer::DatalayerSystem &datalayerSystem)
+DataLayerClientSub::DataLayerClientSub(const comm::datalayer::DatalayerSystem& datalayerSystem)
+  : m_datalayerSystem(datalayerSystem)
+  , m_datalayerClient(nullptr)
+{}
+
+DataLayerClientSub::~DataLayerClientSub()
 {
-  _datalayerSystem = datalayerSystem;
+  disconnect();
 }
 
-comm::datalayer::DlResult DataLayerClientSub::connect(const std::string &clientConnection)
+comm::datalayer::DlResult DataLayerClientSub::connect(const std::string& clientConnection)
 {
   std::cout << "_datalayerSystem.factory()->createClient2: " << clientConnection << std::endl;
-  _datalayerClient = _datalayerSystem.factory()->createClient2(clientConnection);
-  if (_datalayerClient == nullptr)
+  m_datalayerClient = m_datalayerSystem.factory()->createClient2(clientConnection);
+  if (m_datalayerClient == nullptr)
   {
     std::cout << "ERROR: Could not create datalayer client instance" << std::endl;
     return DL_CREATION_FAILED;
@@ -49,7 +36,7 @@ comm::datalayer::DlResult DataLayerClientSub::connect(const std::string &clientC
 
 comm::datalayer::DlResult DataLayerClientSub::isConnected()
 {
-  if (_datalayerClient == nullptr || _datalayerClient->isConnected() == false)
+  if (m_datalayerClient == nullptr || m_datalayerClient->isConnected() == false)
   {
     return DL_CLIENT_NOT_CONNECTED;
   }
@@ -57,7 +44,7 @@ comm::datalayer::DlResult DataLayerClientSub::isConnected()
   return DL_OK;
 }
 
-comm::datalayer::DlResult DataLayerClientSub ::createSubscriptionSync(const std::string &id)
+comm::datalayer::DlResult DataLayerClientSub::createSubscriptionSync(const std::string& id)
 {
   flatbuffers::FlatBufferBuilder builder;
   auto dataChange = comm::datalayer::CreateSampling(builder, 250000);
@@ -68,7 +55,7 @@ comm::datalayer::DlResult DataLayerClientSub ::createSubscriptionSync(const std:
   comm::datalayer::Variant subscriptionProperties;
   subscriptionProperties.shareFlatbuffers(builder);
 
-  auto result = _datalayerClient->createSubscriptionSync(subscriptionProperties, publishCallback());
+  auto result = m_datalayerClient->createSubscriptionSync(subscriptionProperties, publishCallback());
   if (STATUS_FAILED(result))
   {
     std::cout << "createSubscriptionSync failed with " << std::string(result.toString()) << std::endl;
@@ -84,7 +71,7 @@ comm::datalayer::DlResult DataLayerClientSub ::createSubscriptionSync(const std:
 // https://de.cppreference.com/w/cpp/language/lambda
 comm::datalayer::PublishCallback DataLayerClientSub::publishCallback()
 {
-  return [&](comm::datalayer::DlResult result, const std::vector<comm::datalayer::NotifyItem> &items)
+  return [&](comm::datalayer::DlResult result, const std::vector<comm::datalayer::NotifyItem>& items)
   {
     std::cout << "--------------- Data has been changed! Result: " << result.toString() << std::endl;
 
@@ -114,7 +101,7 @@ comm::datalayer::PublishCallback DataLayerClientSub::publishCallback()
       }
       else if (comm::datalayer::STATUS_SUCCEEDED(items[n].data.checkConvert(comm::datalayer::VariantType::STRING)))
       {
-        std::cout << "  value: " << static_cast<const char *>(items[n].data) << std::endl;
+        std::cout << "  value: " << static_cast<const char*>(items[n].data) << std::endl;
       }
       else
       {
@@ -139,9 +126,9 @@ comm::datalayer::PublishCallback DataLayerClientSub::publishCallback()
   };
 }
 
-comm::datalayer::DlResult DataLayerClientSub::subscribeSync(const std::string &id, const std::string &address)
+comm::datalayer::DlResult DataLayerClientSub::subscribeSync(const std::string& id, const std::string& address)
 {
-  auto result = _datalayerClient->subscribeSync(id, address);
+  auto result = m_datalayerClient->subscribeSync(id, address);
   if (STATUS_FAILED(result))
   {
     std::cout << "subscribeSync of " << address << " with " << id << " failed with: " << std::string(result.toString()) << std::endl;
@@ -152,23 +139,23 @@ comm::datalayer::DlResult DataLayerClientSub::subscribeSync(const std::string &i
   return result;
 }
 
-comm::datalayer::DlResult DataLayerClientSub::subscribeSync_Multi(const std::string &id, const std::set<std::string> &addresses)
+comm::datalayer::DlResult DataLayerClientSub::subscribeSyncMulti(const std::string& id, const std::set<std::string>& addresses)
 {
-  auto result = _datalayerClient->subscribeSync(id, addresses);
+  auto result = m_datalayerClient->subscribeSync(id, addresses);
   if (STATUS_FAILED(result))
   {
     std::cout << "subscribeSync_Multi "
-              << " with " << id << " failed with: " << std::string(result.toString()) << std::endl;
+      << " with " << id << " failed with: " << std::string(result.toString()) << std::endl;
     return result;
   }
   std::cout << "subscribeSync_Multi "
-            << " with " << id << " was successful " << std::string(result.toString()) << std::endl;
+    << " with " << id << " was successful " << std::string(result.toString()) << std::endl;
   return result;
 }
 
-comm::datalayer::DlResult DataLayerClientSub::unsubscribeSync(const std::string &id)
+comm::datalayer::DlResult DataLayerClientSub::unsubscribeSync(const std::string& id)
 {
-  auto result = _datalayerClient->unsubscribeSync(id);
+  auto result = m_datalayerClient->unsubscribeSync(id);
   if (STATUS_FAILED(result))
   {
     std::cout << "unsubscribeSync from " << id << " failed with: " << std::string(result.toString()) << std::endl;
@@ -180,5 +167,6 @@ comm::datalayer::DlResult DataLayerClientSub::unsubscribeSync(const std::string 
 
 void DataLayerClientSub::disconnect()
 {
-  delete _datalayerClient;
+  delete m_datalayerClient;
+  m_datalayerClient = nullptr;
 }

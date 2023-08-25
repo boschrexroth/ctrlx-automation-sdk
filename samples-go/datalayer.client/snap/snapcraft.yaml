@@ -1,5 +1,5 @@
 name: sdk-go-client
-base: core20
+base: core22
 version: '0.2'
 summary: ctrlX Data Layer client sample written in Go
 description: |

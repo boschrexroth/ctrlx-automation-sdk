@@ -10,11 +10,11 @@
 
 ## Find out the supported samples 
 
-
 ### Basic Samples
 
 * [Hello World](./hello.world/README.md) recommendation -> start with this example
 * [Hello PLC](./hello.plc/README.md)
+* [ctrlX Data Layer Easy Client](./datalayer.easy.client/README.md)
 * [ctrlX Data Layer Client](./datalayer.client/README.md)
 * [ctrlX Data Layer Client Subscription](./datalayer.client.sub/README.md)
 * [ctrlX Data Layer RegisterNode](./datalayer.register.node/README.md)
@@ -29,14 +29,16 @@
 
 ## Getting Started
 
-- Launch Visual Studio Code as your IDE
-- If the IDE is started remote connect via Remote Explorer extension to your builder environment (SSH target)
-- Ensure that Visual Studio Code extensions "C/C++ Extension Pack" and "CMake Tools" are installed in your SSH target.
-- Open the folder of the desired cpp sample under  `samples-cpp/`
+* Launch Visual Studio Code as your IDE
+* If the IDE is started remote connect via Remote Explorer extension to your builder environment (SSH target)
+* Ensure that Visual Studio Code extensions "C/C++ Extension Pack" and "CMake Tools" are installed in your SSH target.
+* Open the folder of the desired cpp sample under  `samples-cpp/`
 
 ### Build a Snap
 
 See [Samples Overview](../samples.md)
+
+__Important:__ Before building an arm64 snap run script `public/scripts/environment/scripts/install-cpp-aarch64-libs.sh` once!
 
 ### Create an Executable for Debugging
 
@@ -44,18 +46,18 @@ Select the CMake symbol in the sidebar, click '...' at the top of the explorer w
 
 Then make these settings in the status bar (blue area) :
 
-- CMake (Current build variant): Select 'Debug'
-- Active kit: Select 'GCC ... x86...'
-- Select 'x64...' as build target
+* CMake (Current build variant): Select 'Debug'
+* Active kit: Select 'GCC ... x86...'
+* Select 'x64...' as build target
 
 Click Build and observe the progress in the output window - the build process should finish without errors (exit code 0).
 
-Now the executable for debugging is available in the subdirectory: generated/__ubuntu20-gcc-x64/Debug/__
+Now the executable for debugging is available in the subdirectory: generated/__ubuntu22-gcc-x64/Debug/__
 
 To start debugging select 'Run and Debug' in the side bar, select 'x64...' as launch configuration an press F5 (or green start button).
 
 The executable will be started and the debugger will set automatically a breakpoint at the beginning of the main() function.
-                     
+
 ## Troubleshooting
 
 All automatically created files are located in subfolders `build` and `generated`.  

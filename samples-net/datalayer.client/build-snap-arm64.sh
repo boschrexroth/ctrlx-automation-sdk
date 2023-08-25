@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 TARGET_DOTNET=linux-arm64
 TARGET_ARCH=arm64
 

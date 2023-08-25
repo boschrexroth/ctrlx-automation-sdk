@@ -1,24 +1,6 @@
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2020-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 import logging
 import time
@@ -33,8 +15,12 @@ root_node = "sdk-cpp-alldata"
 
 
 class CallDataLayerClient:
+    """CallDataLayerClient
+    """
 
     def __init__(self, client: Client) -> None:
+        """__init__
+        """
         self.client = client
         self.waiting_for = ""
         logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s',
@@ -53,7 +39,8 @@ class CallDataLayerClient:
         self.client = None
 
     def run(self):
-
+        """run
+        """
         self.auth_token()
         self.ping()
         self.read()
@@ -64,6 +51,8 @@ class CallDataLayerClient:
         self.metadata()
 
     def wait_for_async_callback(self, result: Result):
+        """wait_for_async_callback
+        """
         if result != Result.OK:
             return
 
@@ -81,13 +70,16 @@ class CallDataLayerClient:
         logging.error("%s TIME OUT", self.waiting_for)
 
     def log_result(self, msg: str, result: Result):
+        """log_result
+        """
         if result == Result.OK:
             logging.debug('%s --> %s', msg, result)
             return
         logging.error('%s failed with: %s', msg, result)
 
     def auth_token(self):
-
+        """auth_token
+        """
         logging.info("get_auth_token()")
         the_auth_token = self.client.get_auth_token()
         if the_auth_token is None:
@@ -100,11 +92,14 @@ class CallDataLayerClient:
         self.client.set_auth_token(the_auth_token)
 
     def ping_async_callback(self, result: Result, data: Variant, userdata: ctrlxdatalayer.clib.userData_c_void_p):
+        """ping_async_callback
+        """
         self.waiting_for = None
         logging.info(">>>ping_async_callback: %s", result)
 
     def ping(self):
-
+        """ping
+        """
         self.waiting_for = "ping_async_callback"
         logging.info("ping_async()")
         result = self.client.ping_async(self.ping_async_callback, 105)
@@ -116,11 +111,15 @@ class CallDataLayerClient:
         self.log_result('ping_sync()', result)
 
     def read_async_callback(self, result: Result, data: Variant, userdata: ctrlxdatalayer.clib.userData_c_void_p):
+        """read_async_callback
+        """
         self.waiting_for = None
         self.log_result(">>>read_async_callback(): ", result)
         self.print_data(">>>read_async_callback(): ", result, "", data)
 
     def read_sync(self, node: str):
+        """read_sync
+        """
         addressBase = root_node + "/static/"
         address = addressBase + node
 
@@ -132,7 +131,8 @@ class CallDataLayerClient:
             self.print_data("read_async()", result, address, data)
 
     def print_data(self, msg: str, result: Result, address: str, data: Variant):
-
+        """print_data
+        """
         if result != Result.OK:
             return
 
@@ -241,7 +241,8 @@ class CallDataLayerClient:
         print("UNHANDLED ---------", flush=True)
 
     def read(self):
-
+        """read
+        """
         addressBase = root_node + "/static/"
 
         address = addressBase + "bool8"
@@ -301,11 +302,15 @@ class CallDataLayerClient:
         self.read_sync("array-of-uint64")
 
     def create_async_callback(self, result: Result, data: Variant, userdata: ctrlxdatalayer.clib.userData_c_void_p):
+        """create_async_callback
+        """
         self.waiting_for = None
         logging.info(">>>create_async_callback(): %s %s %s",
                      result, data, userdata)
 
     def create_async(self, path, node, data: Variant):
+        """create_async
+        """
         address = path + node
         # Remove node so that create will succeed
         result = self.client.remove_sync(address)  # Ignore error
@@ -318,6 +323,8 @@ class CallDataLayerClient:
         self.wait_for_async_callback(result)
 
     def create_sync(self, path, node, data: Variant):
+        """create_sync
+        """
         address = path + node
         # Remove node so that create will succeed
         result = self.client.remove_sync(address)  # Ignore error
@@ -328,6 +335,8 @@ class CallDataLayerClient:
         self.log_result("create_sync() " + address, result)
 
     def create(self):
+        """create
+        """
         with Variant() as data:
 
             addressBase = root_node + "/dynamic/_py/"
@@ -416,11 +425,14 @@ class CallDataLayerClient:
             self.create_sync(addressBase, "array-of-string", data)
 
     def remove_async_callback(self, result: Result, data: Variant, userdata: ctrlxdatalayer.clib.userData_c_void_p):
+        """remove_async_callback
+        """
         self.waiting_for = None
         logging.info(">>>create_async_callback(): %s %s", result, userdata)
 
     def remove(self):
-
+        """remove
+        """
         with Variant() as data:
 
             addressBase = root_node + "/dynamic/_py/"
@@ -443,12 +455,15 @@ class CallDataLayerClient:
             self.wait_for_async_callback(result)
 
     def browse_async_callback(self, result: Result, data: Variant, userdata: ctrlxdatalayer.clib.userData_c_void_p):
+        """browse_async_callback
+        """
         self.waiting_for = None
         logging.info(">>>browse_async_callback: %s %s %s",
                      result, data.get_array_string(), userdata)
 
     def browse(self):
-
+        """browse
+        """
         logging.info("browse_sync() /")
         result, data = self.client.browse_sync("")
         with data:
@@ -461,16 +476,22 @@ class CallDataLayerClient:
             self.wait_for_async_callback(result)
 
     def write_async_callback(self, result: Result, data: Variant, userdata: ctrlxdatalayer.clib.userData_c_void_p):
+        """write_async_callback
+        """
         self.waiting_for = None
         self.log_result(">>>write_async_callback:", result)
 
     def write_sync(self, addressBase: str, node: str, data: Variant):
+        """write_sync
+        """
         address = addressBase + node
         logging.info("write_sync() %s", address)
         result, _ = self.client.write_sync(address, data)
         self.log_result("write_sync()", result)
 
     def write(self):
+        """write
+        """
         with Variant() as data:
 
             addressBase = root_node + "/dynamic/"
@@ -505,10 +526,12 @@ class CallDataLayerClient:
             data.set_int64(0x8000000000000001)
             self.write_sync(addressBase, "int64", data)
 
-            data.set_string("Changed by python Data Layer Client")
+            data.set_string("Changed by python ctrlX Data Layer Client")
             self.write_sync(addressBase, "string", data)
 
     def print_metadata(self, text: str, result: Result, data: Variant):
+        """print_metadata
+        """
         if result != Result.OK:
             logging.error("%s failed with %s", text, result)
             return
@@ -533,11 +556,14 @@ class CallDataLayerClient:
               "metadata.DisplayFormat()", metadata.DisplayFormat(), flush=True)
 
     def metadata_async_callback(self, result: Result, data: Variant, userdata: ctrlxdatalayer.clib.userData_c_void_p):
+        """metadata_async_callback
+        """
         self.waiting_for = None
         self.print_metadata(">>>metadata_async_callback", result, data)
 
     def metadata(self):
-
+        """metadata
+        """
         address = root_node + "/dynamic/bool8"
         self.waiting_for = "metadata_async_callback"
         logging.info("metadata_async() %s", address)

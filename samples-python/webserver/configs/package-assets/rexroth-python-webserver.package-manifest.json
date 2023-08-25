@@ -1,11 +1,12 @@
 {
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.schema.json",
   "version": "1.0.0",
   "id": "rexroth-python-webserver",
   "scopes-declaration": [
     {
       "identifier": "rexroth-python-webserver.web",
       "name": "Python-Webserver",
-      "description": "Data Layer access permissions over webpage",
+      "description": "ctrlX Data Layer access permissions over webpage",
       "scopes": [
         {
           "identifier": "rexroth-python-webserver.web.r",

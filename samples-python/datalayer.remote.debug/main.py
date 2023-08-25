@@ -1,26 +1,8 @@
 #!/usr/bin/env python3
 
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2021-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 import sys
 
@@ -33,13 +15,40 @@ import ctrlxdatalayer
 from ctrlxdatalayer.variant import Result, Variant
 from comm.datalayer import SubscriptionProperties
 
-import debugging
+
+import debug
 
 from helper.ctrlx_datalayer_helper import get_client
 
-def main():
+def remote_debugging_wait_for_client(port: int):
+    """Waits until a debug client connects.
+    Detailed functions:
+    - Set the listen parameters: '0.0.0.0' means listen on all network interfaces
+    - Start the debug server
+    - Wait until debug client connects.
 
-    debugging.breakpoint()
+    Parameters:
+    port (int): Port number for the debug connection
+
+    Returns:
+    No value, the function blocks and returns if a debug client has been connected.
+
+    """
+
+    print('Accepting remote debug client attaches to port', port, flush=True)
+    address = ('0.0.0.0', port) # Accept incomming calls from all network interfaces
+    debugpy.listen(address)
+
+    debugpy.wait_for_client()
+    print('Debugger is attached!', flush=True)
+
+    debugpy.breakpoint()
+
+
+
+def main():
+    """main
+    """
 
     print()
     print("========================================================================")
@@ -56,26 +65,13 @@ def main():
         with client:
 
             # Define the subscription properties by using Flatbuffers class SubscriptionProperties
-            builder = flatbuffers.Builder(1024)
-            id = builder.CreateString("sdk-py-remote-debug")
-            SubscriptionProperties.SubscriptionPropertiesStart(builder)
-            SubscriptionProperties.SubscriptionPropertiesAddId(builder, id)
-            SubscriptionProperties.SubscriptionPropertiesAddKeepaliveInterval(
-                builder, 10000)
-            SubscriptionProperties.SubscriptionPropertiesAddPublishInterval(
-                builder, 1000)
-            SubscriptionProperties.SubscriptionPropertiesAddErrorInterval(
-                builder, 10000)
-            properties = SubscriptionProperties.SubscriptionPropertiesEnd(
-                builder)
-            builder.Finish(properties)
-            sub_prop = Variant()
-            sub_prop.set_flatbuffers(builder.Output())
+            sub_prop = __set_sub_prop()
 
             # Create subscription
             print("INFO Creating subscription", flush=True)
             result, sub = client.create_subscription_sync(
                 sub_prop, cb_subscription_sync)
+            sub_prop.close()
             if result is not Result.OK:
                 print("ERROR Creating subscription failed:", result, flush=True)
 
@@ -97,16 +93,38 @@ def main():
 
                 time.sleep(5.0)
 
-            print("ERROR Data Layer connection", flush=True)
+            print("ERROR ctrlX Data Layer connection", flush=True)
             print("INFO Close subscription", flush=True)
             sub.close()
 
-        print("INFO Stopping Data Layer system", flush=True)
+        print("INFO Stopping ctrlX Data Layer system", flush=True)
         datalayer_system.stop(True)
+
+def __set_sub_prop():
+    """__set_sub_prop
+    """
+    builder = flatbuffers.Builder(1024)
+    id = builder.CreateString("sdk-py-remote-debug")
+    SubscriptionProperties.SubscriptionPropertiesStart(builder)
+    SubscriptionProperties.SubscriptionPropertiesAddId(builder, id)
+    SubscriptionProperties.SubscriptionPropertiesAddKeepaliveInterval(
+                builder, 10000)
+    SubscriptionProperties.SubscriptionPropertiesAddPublishInterval(
+                builder, 1000)
+    SubscriptionProperties.SubscriptionPropertiesAddErrorInterval(
+                builder, 10000)
+    properties = SubscriptionProperties.SubscriptionPropertiesEnd(
+                builder)
+    builder.Finish(properties)
+    sub_prop = Variant()
+    sub_prop.set_flatbuffers(builder.Output())
+    return sub_prop
 
 
 # Response notify callback function
 def cb_subscription_sync(result: Result, items: List[ctrlxdatalayer.subscription.NotifyItem], userdata):
+    """cb_subscription_sync
+    """
     if result is not Result.OK:
         print("ERROR notify subscription:", result, flush=True)
         return
@@ -121,7 +139,8 @@ def cb_subscription_sync(result: Result, items: List[ctrlxdatalayer.subscription
 
 
 if __name__ == '__main__':
-    print('Number of arguments:', len(sys.argv), 'arguments.')
-    print('Argument List:', str(sys.argv), flush=True)
-    debugging.init()
+    # Wait for remote debug client
+    debug.remote_debugging_wait_for_client(port=15678)
+
+    # Run function
     main()

@@ -2,7 +2,7 @@
 
 ## Goal
 
-For a few use cases, it might be necessary to generate a package-manifest depending on the device or on the setup in is installed. This is possible during installation by using snap hook mechanism. This how-to describes how this can be resolved.
+For a few use cases, it might be necessary to generate a package-manifest depending on the ctrlX CORE or on the setup in is installed. This is possible during installation by using snap hook mechanism. This how-to describes how this can be resolved.
 
 The snap build in this examples takes two random words and uses them to generate a menu entry in the ctrlX CORE sidebar. It will look like this:
 
@@ -246,6 +246,6 @@ Therefore declaring all interfaces specific for each app and hook should be the 
 
 ## Build and run
 
-Now build the snap using "snapcraft" and install it on your device, on every reinstall, it will change the name of the menu entry.
+Now build the snap using "snapcraft" and install it on your ctrlX CORE, on every reinstall, it will change the name of the menu entry.
 
 Thats it.

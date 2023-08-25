@@ -1,4 +1,4 @@
-This document is part of the Bosch Rexroth ctrlX CORE App Development Guideline, and gives hints on how to use the License Manager service that is operated by Bosch Rexroth. 
+This document is part of the Bosch Rexroth ctrlX OS App Development Guideline, and gives hints on how to support user interface localization on ctrlX OS.
 
 Please refer to the App Development Guide for further information.
 
@@ -12,7 +12,7 @@ Please refer to the App Development Guide for further information.
 
 # 1 Introduction <a name="introduction"></a>
 
-ctrlX CORE uses the NGX-Translate library to localize Apps
+ctrlX OS uses the NGX-Translate library to localize Apps
 
 Details of this library can be found here:
 >http://www.ngx-translate.com/
@@ -64,7 +64,7 @@ Keys have to follow the following convention to avoid conflicts when several loc
 * **component**: denotes the building block (angular component, service etc.) within an app where the translatable text is located
 * **element**: denotes the ui-element within a component on which the text is placed
 * **type** (optional): denotes the type of the ui-element. This can give  translators additional information,  that may be relevant for translation. 
-For example, types in the ctrlX CORE are:
+For example, types in ctrlX OS are:
     * title  (page / dialog titles)
     * header (column headers etc.)
     * tab (tab page titles)
@@ -123,7 +123,7 @@ Comments and remarks are not supported in localization files
 
 **Note**:
 
-This chapter describes a ctrlX CORE best practice to add localization to an app.
+This chapter describes a ctrlX OS best practice to add localization to an app.
 Bosch Rexroth does not guarantee that this practice will work for Partner Apps.
 
 Please see http://www.ngx-translate.com/ for additional information.
@@ -190,7 +190,7 @@ export function createMultiTranslateHttpLoader(http: HttpClient): TranslateLoade
 
 Note that TranslateModule.forRoot() must be called.
 
-For ctrlX CORE, English (en) is defined as defaultLanguage. That means English is the fallback language if a translation is not available in the currently selected language.
+For ctrlX OS, English (en) is defined as defaultLanguage. That means English is the fallback language if a translation is not available in the currently selected language.
 
 ## 3.4 Localize the UI related parts of your app
 
@@ -199,5 +199,6 @@ Please see details here: https://github.com/ngx-translate/core
 
 ****
 **Copyright**
-© Bosch Rexroth AG 2022 - 
+© Bosch Rexroth AG 2022-2023 
+ 
 This document, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch

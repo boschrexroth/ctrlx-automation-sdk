@@ -1,10 +1,10 @@
 name: sdk-py-provider
 version: 2.4.0
-summary: Data Layer provider sample written in Python for ctrlX
+summary: ctrlX Data Layer provider sample written in Python for ctrlX
 title: sdk-py-provider
 description: |
   This sample shows how to provide data to the ctrlX Data Layer
-base: core20
+base: core22
 confinement: strict
 grade: stable
 

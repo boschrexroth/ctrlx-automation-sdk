@@ -6,12 +6,12 @@
 name: sdk-cpp-sub
 version: "2.2.0"
 grade: stable
-summary: SDK sample app in cpp - subscribes Data Layer nodes
+summary: SDK sample app in cpp - subscribes ctrlX Data Layer nodes
 description: |
-  This sample demonstrates how to use Data Layer subscriptions on Datalayer.
+  This sample demonstrates how to use ctrlX Data Layer subscriptions on Datalayer.
   It subscribes the nodes: framework/metrics/system/cpu-utilisation-percent and .../memavailable-mb.
   If a value of a node has changed it writes the new value to the console.
-base: core20
+base: core22
 confinement: strict
 
 # define how apps & services are exposed to the target operating system

@@ -1,10 +1,10 @@
 name: sdk-py-provider-alldata
-version: 2.4.0
+version: 2.5.0
 summary: ctrlX Data Layer provider sample in Python
 title: sdk-py-provider-alldata
 description: |
   ctrlX Data Layer provider in Python publishing nodes of all data types
-base: core20
+base: core22
 confinement: strict
 grade: stable
 

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.schema.json",
+  "version": "1.0.0",
+  "id": "sdk-py-appdata",
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "sdk-py-appdata.web",
+        "url": "/sdk-py-appdata",
+        "binding": "unix://{$SNAP_DATA}/package-run/sdk-py-appdata/web.sock",
+        "restricted": [
+          "/sdk-py-appdata/api/v1"
+        ]
+      }
+    ]
+  },
+  "commands": {
+    "activeConfiguration": {
+      "load": [
+        {
+          "id": "sdk-py-appdata",
+          "subject": "appdata.sample.py",
+          "url": "https://localhost/sdk-py-appdata/api/v1/load"
+        }
+      ],
+      "save": [
+        {
+          "id": "sdk-py-appdata",
+          "subject": "appdata.sample.py",
+          "url": "https://localhost/sdk-py-appdata/api/v1/save"
+        }
+      ]
+    }
+  },
+  "scopes-declaration": [
+    {
+      "identifier": "sdk-py-appdata.web",
+      "name": "sdk-py-appdata",
+      "description": "sdk-py-appdata permissions",
+      "scopes": [
+        {
+          "identifier": "sdk-py-appdata.web.rwx",
+          "name": "Manage AppData Sample",
+          "description": ""
+        },
+        {
+          "identifier": "sdk-py-appdata.web.r",
+          "name": "View AppData Sample",
+          "description": ""
+        }
+      ]
+    }
+  ],
+  "configuration": {
+    "appDirectories": [
+      {
+        "name": "AppDataSamplePy",
+        "description": "Python AppData Sample",
+        "icon": "bosch-ic-directory",
+        "scopes": [],
+        "copyOnLoad": true
+      }
+    ]
+  }
+}

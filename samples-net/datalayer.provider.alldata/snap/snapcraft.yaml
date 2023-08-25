@@ -4,7 +4,7 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-dotnet-datalayer-provider-alldata
 version: '1.0.0'
-summary: Data Layer provider all data sample written in .NET for ctrlX.
+summary: ctrlX Data Layer provider all data sample written in .NET for ctrlX CORE.
 description: |
   The sample demonstrates how to provide all available data types to the ctrlX Data Layer.
   The demo creates a 'static' and a 'dynamic' folder under the root node 'samples'.
@@ -14,7 +14,7 @@ confinement: strict
 #confinement: devmode
 #icon: assets/icons/ICONHERE.png
 grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core20
+base: core22
 type: app
 
 apps:
@@ -28,6 +28,7 @@ apps:
       restart-delay: 10s
 
     environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
 
 parts:

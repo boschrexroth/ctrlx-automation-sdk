@@ -4,14 +4,14 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 name: ctrlx-dotnet-datalayer-client-browse
 version: '1.0.0'
-summary: Data Layer browse sample written in .NET for ctrlX.
+summary: ctrlX Data Layer browse sample written in .NET for ctrlX CORE.
 description: |
-  The sample app shows how to browse the Data Layer tree.
+  The sample app shows how to browse the ctrlX Data Layer tree.
 confinement: strict 
 #confinement: devmode 
 #icon: assets/icons/ICONHERE.png
 grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core20
+base: core22
 type: app
 
 apps:
@@ -25,6 +25,7 @@ apps:
       restart-delay: 10s
 
     environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
  
 parts:

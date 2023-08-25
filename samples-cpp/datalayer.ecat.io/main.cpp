@@ -1,60 +1,37 @@
-/**
- * MIT License
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
  *
- * Copyright (c) 2020-2022 Bosch Rexroth AG
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-License-Identifier: MIT
  */
-
-#include "comm/datalayer/datalayer.h"
-#include "comm/datalayer/datalayer_system.h"
-#include "comm/datalayer/memory_map_generated.h"
 #include <stdio.h>
 #include <map>
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include "signal.h"
+#include <csignal>
+
+#include "comm/datalayer/datalayer.h"
+#include "comm/datalayer/datalayer_system.h"
+#include "comm/datalayer/memory_map_generated.h"
 
 #include "ctrlx_datalayer_helper.h"
 
-bool endProcess = false;
-static void hdl(int sig, siginfo_t *siginfo, void *context)
+static bool g_endProcess = false;
+static void signalHandler(int signal)
 {
-  endProcess = true;
+  std::cout << "signal: " << signal << std::endl;
+  g_endProcess = true;
 }
 
-int main(int ac, char *av[])
+int main(void)
 {
-#ifdef MY_DEBUG
-  std::cout << "Raising SIGSTOP" << std::endl;
-  raise(SIGSTOP);
-  std::cout << "... Continue..." << std::endl;
-#endif
-
   comm::datalayer::DlResult result;
   comm::datalayer::Variant data;
   comm::datalayer::Variant dataIn;
   comm::datalayer::DatalayerSystem datalayer;
   datalayer.start(false);
 
-  comm::datalayer::IClient *client = getClient(datalayer);
+  comm::datalayer::IClient* client = getClient(datalayer);
   if (client == nullptr)
   {
     std::cout << "ERROR Client connected" << std::endl;
@@ -68,28 +45,27 @@ int main(int ac, char *av[])
   result = client->readSync("fieldbuses/ethercat/master/instances/ethercatmaster/realtime_data/input/map", &dataIn);
   std::cout << "Read returned: " << result.toString() << std::endl;
 
-  // Create abort struct
-  struct sigaction act;
-  memset(&act, '\0', sizeof(act));
-  act.sa_sigaction = &hdl;
-  act.sa_flags = SA_SIGINFO;
-  sigaction(SIGINT, &act, NULL);
+  std::signal(SIGINT, signalHandler);
 
   // First we have to open the realtimememory, reading the whole outputs.
-  uint8_t *outData;
+  uint8_t* outData;
   std::cout << "Opening some realtime memory" << std::endl;
   std::shared_ptr<comm::datalayer::IMemoryUser> output;
   result = datalayer.factory()->openMemory(output, "fieldbuses/ethercat/master/instances/ethercatmaster/realtime_data/output");
   if (comm::datalayer::STATUS_FAILED(result))
+  {
     std::cout << "Open the memory failed with: " << result.toString() << std::endl;
+  }
 
   // We can read the Inputs to get a Start trigger for example
-  uint8_t *inData;
+  uint8_t* inData;
   std::cout << "Opening some realtime memory" << std::endl;
   std::shared_ptr<comm::datalayer::IMemoryUser> input;
   result = datalayer.factory()->openMemory(input, "fieldbuses/ethercat/master/instances/ethercatmaster/realtime_data/input");
   if (comm::datalayer::STATUS_FAILED(result))
+  {
     std::cout << "Open the memory failed with: " << result.toString() << std::endl;
+  }
 
   // After successful reading the outputs we must take the memorylayout.
   // A Memory owner defines the layout of the realtime memory
@@ -180,7 +156,9 @@ int main(int ac, char *av[])
 
     result = input->beginAccess(inData, revisionIn);
     if (comm::datalayer::STATUS_FAILED(result))
+    {
       break;
+    }
 
     uint8_t value = inData[it->second / 8];
     if (value)
@@ -194,7 +172,7 @@ int main(int ac, char *av[])
 
   // Begin to write outputs until SIGINT is send
   bool temp = false;
-  while (!endProcess)
+  while (!g_endProcess)
   {
     std::cout << "Start to toggle" << std::endl;
 
@@ -202,12 +180,14 @@ int main(int ac, char *av[])
     std::map<std::string, uint32_t>::iterator itInput = mapOfInputs.find("S20_EC_BK/S20_DI_16_1/Digital_Input_Channels.DI_Channel_01_Terminal_Point_00_");
     result = input->beginAccess(inData, revisionIn);
     if (comm::datalayer::STATUS_FAILED(result))
+    {
       break;
+    }
 
     uint8_t value = inData[itInput->second / 8];
     if (!value)
     {
-      endProcess = true;
+      g_endProcess = true;
     }
 
     input->endAccess();
@@ -222,7 +202,9 @@ int main(int ac, char *av[])
         // Memory is form beginAccess till endAccess locked, so do not do stuff you won't need
         result = output->beginAccess(outData, revision);
         if (comm::datalayer::STATUS_FAILED(result))
+        {
           break;
+        }
 
         // set toggle bit
         uint8_t value = outData[it->second / 8];
@@ -245,7 +227,9 @@ int main(int ac, char *av[])
         // Memory is form beginAccess till endAccess locked, so do not do stuff you won't need
         result = output->beginAccess(outData, revision);
         if (comm::datalayer::STATUS_FAILED(result))
+        {
           break;
+        }
 
         // Set toggle bit
         uint8_t value = outData[it->second / 8];
@@ -269,11 +253,14 @@ int main(int ac, char *av[])
     std::cout << "Shutting down application" << std::endl;
     result = output->beginAccess(outData, revision);
     if (comm::datalayer::STATUS_FAILED(result))
+    {
       break;
+    }
 
     // Shutting down application
     outData[it->second / 8] = 0x00;
     output->endAccess();
     it++;
   }
+  return 0;
 }

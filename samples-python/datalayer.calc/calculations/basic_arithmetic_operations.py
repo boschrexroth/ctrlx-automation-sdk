@@ -1,33 +1,14 @@
-# MIT License
+# SPDX-FileCopyrightText: Bosch Rexroth AG
 #
-# Copyright (c) 2021-2022 Bosch Rexroth AG
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# SPDX-License-Identifier: MIT
 
 import typing
 
-from comm.datalayer import NodeClass
-
 import ctrlxdatalayer
-from ctrlxdatalayer.provider import Provider
+from comm.datalayer import NodeClass
 from ctrlxdatalayer.client import Client
-from ctrlxdatalayer.provider_node import ProviderNodeCallbacks, NodeCallback
+from ctrlxdatalayer.provider import Provider
+from ctrlxdatalayer.provider_node import NodeCallback, ProviderNodeCallbacks
 from ctrlxdatalayer.variant import Result, Variant, VariantType
 
 from calculations.convert import Convert
@@ -36,14 +17,17 @@ type_address_string = "types/datalayer/string"
 
 
 class BasicArithmeticOperations:
+    """BasicArithmeticOperations
+    """
 
     def __init__(self, provider: Provider, client: Client,  addressRoot: str, id: str, mode: str, update_time: int):
-
+        """__init__
+        """
         self.provider = provider
         self.client = client
 
         self.addressRoot = addressRoot + "/" + id + "/"
-       
+
         self.in1_address = Variant()
         self.in1_address.set_string(
             "framework/metrics/system/cpu-utilisation-percent")
@@ -90,6 +74,8 @@ class BasicArithmeticOperations:
 
     def response_notify_callback(self, result: Result, items: typing.List[ctrlxdatalayer.subscription.NotifyItem],
                                  userdata: ctrlxdatalayer.clib.userData_c_void_p):
+        """response_notify_callback
+        """
 
         if result != Result.OK:
             print("response_notify_callback parameter result:", result, flush=True)
@@ -122,34 +108,37 @@ class BasicArithmeticOperations:
                 self.value_changed = True
 
     def get_float64_safe(self, v: Variant):
+        """get_float64_safe
+        """
 
         if v.get_type() == VariantType.FLOAT64:
             return v.get_float64()
 
         if v.get_type() == VariantType.FLOAT32:
-            self.float64_value.set_float64( v.get_float32())
+            self.float64_value.set_float64(v.get_float32())
             return self.float64_value.get_float64()
 
         if v.get_type() == VariantType.INT64:
-            self.float64_value.set_float64( v.get_int64())
+            self.float64_value.set_float64(v.get_int64())
             return self.float64_value.get_float64()
 
         if v.get_type() == VariantType.INT32:
-            self.float64_value.set_float64( v.get_int32())
+            self.float64_value.set_float64(v.get_int32())
             return self.float64_value.get_float64()
 
         if v.get_type() == VariantType.INT16:
-            self.float64_value.set_float64( v.get_int16())
+            self.float64_value.set_float64(v.get_int16())
             return self.float64_value.get_float64()
 
         if v.get_type() == VariantType.INT8:
-            self.float64_value.set_float64( v.get_int8())
+            self.float64_value.set_float64(v.get_int8())
             return self.float64_value.get_float64()
 
         return None
 
     def calc(self):
-
+        """calc
+        """
         self.calc_internal()
 
         print()
@@ -161,7 +150,8 @@ class BasicArithmeticOperations:
                   self.in2_value.get_float64(), "=", self.out.get_float64(), flush=True)
 
     def calc_internal(self):
-
+        """calc_internal
+        """
         self.out_error = False
 
         v1 = Convert.get_float64(self.in1_value)
@@ -170,13 +160,13 @@ class BasicArithmeticOperations:
             self.out_error = True
             return
         self.in1_value.set_float64(v1)
-        
+
         v2 = Convert.get_float64(self.in2_value)
         if v2 is None:
             self.out_error_text = "Converting in2 to float64 failed"
             self.out_error = True
             return
-        
+
         self.in2_value.set_float64(v2)
 
         mode = self.mode.get_string()
@@ -193,7 +183,7 @@ class BasicArithmeticOperations:
             self.out.set_float64(v1 * v2)
             return
 
-        if "/" in mode | ":" in mode:
+        if "/" in mode or ":" in mode:
             try:
                 self.out.set_float64(v1 / v2)
             except ZeroDivisionError:
@@ -213,29 +203,34 @@ class BasicArithmeticOperations:
         self.out_error_text = "Unsupported mode"
         self.out_error = True
 
-    def register_node(self, name: str):
+    def register_node(self, name: str) -> Result:
+        """register_node
+        """
         address = self.addressRoot + name
         print("Registering node", address, flush=True)
-        self.provider.register_node(
+        return self.provider.register_node(
             address, self.providerNode)
 
     def register_nodes(self):
+        """register_nodes
+        """
         result = self.register_node("in1")
         if result != ctrlxdatalayer.variant.Result.OK:
             return result
-        
+
         result = self.register_node("in2")
         if result != ctrlxdatalayer.variant.Result.OK:
             return result
-        
+
         result = self.register_node("mode")
         if result != ctrlxdatalayer.variant.Result.OK:
             return result
-        
+
         return self.register_node("out")
 
     def subscribe(self):
-
+        """subscribe
+        """
         self.subscription_changed = False
 
         if self.subscription_properties is None:
@@ -262,32 +257,42 @@ class BasicArithmeticOperations:
         return self.subscription.subscribe_multi(addressList)
 
     def unsubscribe(self):
+        """unsubscribe
+        """
         if self.subscription is None:
             return Result.OK
 
         return self.subscription.unsubscribe_all()
 
     def create_metadata(self, typeAddress: str, name: str, unit: str, description: str, allowWrite: bool):
-
+        """create_metadata
+        """
         return ctrlxdatalayer.metadata_utils.MetadataBuilder.create_metadata(
             name, description, unit, description+"_url", NodeClass.NodeClass.Variable,
             read_allowed=True, write_allowed=allowWrite, create_allowed=False, delete_allowed=False, browse_allowed=True,
             type_path="dummy")
 
     def __on_create(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
+        """__on_create
+        """
         cb(Result.OK, None)
 
     def __on_remove(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
+        """__on_remove
+        """
         # Not implemented because no wildcard is registered
         cb(Result.UNSUPPORTED, None)
 
     def __on_browse(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
-        new_data = Variant()
-        new_data.set_array_string([])
-        cb(Result.OK, new_data)
+        """__on_browse
+        """
+        with Variant() as new_data:
+            new_data.set_array_string([])
+            cb(Result.OK, new_data)
 
     def __on_read(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
-
+        """__on_read
+        """
         if address.endswith("in1"):
             cb(Result.OK, self.in1_address)
             return
@@ -315,7 +320,8 @@ class BasicArithmeticOperations:
         cb(Result.INVALID_ADDRESS, None)
 
     def __on_write(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
-
+        """__on_write
+        """
         if data.get_type() != VariantType.STRING:
             cb(Result.TYPE_MISMATCH, None)
             return
@@ -340,6 +346,8 @@ class BasicArithmeticOperations:
         cb(Result.INVALID_ADDRESS, None)
 
     def __on_metadata(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
+        """__on_metadata
+        """
         if address.endswith("in1"):
             cb(Result.OK, self.in1_metadata)
             return

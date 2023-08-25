@@ -31,7 +31,7 @@ build_mddb(registernodemddb "${MDDB_FILES}" ${CMAKE_CURRENT_LIST_DIR}/compiled "
 #
 # Option to Build the Snap
 #
-option (BUILD_SNAP "Build Snap Package" OFF)
+option (BUILD_SNAP "Build Snap Package" OFF)  
 
 MESSAGE( STATUS "Selected BuildKit: ${CMAKE_BUILD_KIT}")
 MESSAGE( STATUS "######################################")
@@ -52,12 +52,12 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -DMY_DEBUG")
 # set libraries dirs and includes
 #
 IF( ${CMAKE_BUILD_KIT} MATCHES "aarch64")
-  SET(PLATFORM_NAME "ubuntu20-gcc-aarch64")
+  SET(PLATFORM_NAME "ubuntu22-gcc-aarch64")
   SET(SNAP_ARCH "arm64")
   SET(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
   SET(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
 ELSE()
-  SET(PLATFORM_NAME "ubuntu20-gcc-x64")
+  SET(PLATFORM_NAME "ubuntu22-gcc-x64")
   SET(SNAP_ARCH "amd64")
   SET(CMAKE_C_COMPILER gcc)
   SET(CMAKE_CXX_COMPILER g++)
@@ -78,7 +78,6 @@ SET ( PRIVATE_INCLUDE_DIRS
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_LIST_DIR}/include
   ${USER_DEPENDENCY_DIR}/include
-  ${USER_DEPENDENCY_DIR}/include/oss.flatbuffers.1.12
   ${USER_DEPENDENCY_DIR}/include/comm.datalayer
   )
 
@@ -87,12 +86,12 @@ SET ( PRIVATE_INCLUDE_DIRS
 #
 execute_process(COMMAND uname -a OUTPUT_VARIABLE HOST_SYSTEM_ARCH)
 IF( ${HOST_SYSTEM_ARCH} MATCHES "aarch64")
-  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers.1.12/ubuntu20-gcc-aarch64/release/flatc)
+  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-aarch64/release/flatc)
 ELSE()
-  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers.1.12/ubuntu20-gcc-x64/release/flatc)
+  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-x64/release/flatc)
 ENDIF()
-set (FLATBUFFERS_INCLUDE_DIR ${USER_DEPENDENCY_DIR}/include/oss.flatbuffers.1.12)
-include (${USER_DEPENDENCY_DIR}/cmake/oss.flatbuffers.1.12/FindFlatBuffers.cmake)
+set (FLATBUFFERS_INCLUDE_DIR ${USER_DEPENDENCY_DIR}/include/oss.flatbuffers)
+include (${USER_DEPENDENCY_DIR}/cmake/oss.flatbuffers/FindFlatBuffers.cmake)
 set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-object-api")
 set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--no-warnings")
 set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-compare")

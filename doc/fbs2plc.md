@@ -33,14 +33,14 @@ For fbs2plc.exe:
 
 ### 3. sdk-cpp-alldata as Provider
 
-Reading and writing a Flatbuffer Data Layer node within our IEC 61131-3 code requires an instance which provides this node to the ctrlX Data Layer. Therefor we use the snap sdk-cpp-alldata deployed by the ctrlX AUTOMATION SDK in the folder __samples-cpp/datalayer.provider.all-data__. 
+Reading and writing a Flatbuffer ctrlX Data Layer node within our IEC 61131-3 code requires an instance which provides this node to the ctrlX Data Layer. Therefor we use the snap sdk-cpp-alldata deployed by the ctrlX AUTOMATION SDK in the folder __samples-cpp/datalayer.provider.all-data__. 
 
 This snap has to be build and installed in the ctrlX CORE, see:
 
 * [Quick Start Guide](setup_qemu_ctrlx_works.md)
 * [Building Snaps](samples.md)
 
-If the snap is installed and the ctrlX CORE is in Operation Mode it will provide a Flatbuffer variable with this Data Layer path:  __sdk-cpp-alldata/dynamic/fbs__
+If the snap is installed and the ctrlX CORE is in Operation Mode it will provide a Flatbuffer variable with this ctrlX Data Layer path:  __sdk-cpp-alldata/dynamic/fbs__
 
 This node can be read, changed and written by our IEC 61131-3 sample code.
 
@@ -137,7 +137,7 @@ The PLC program should run without failure.
 ### 4. Check the Flatbuffer Access
 
 * From a web browser login into your ctrlX CORE Web UI
-* Select Settings - Data Layer
-* Expand the Data Layer tree: sdk-cpp-alldata/dynamic/fbs
+* Select Settings - ctrlX Data Layer
+* Expand the ctrlX Data Layer tree: sdk-cpp-alldata/dynamic/fbs
 
 The values of the x, y, z variables should be changed by our PLC program.

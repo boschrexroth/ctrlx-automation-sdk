@@ -12,7 +12,7 @@ description: |
   - a data provider - mem owner - creates some memory 'input' and 'output'
   - a data consumer - mem user - can read 'input' and write 'output'
   When the user has written outputs once, the owner will start copying from output to input.
-base: core20
+base: core22
 confinement: strict
 
 # define how apps & services are exposed to host system

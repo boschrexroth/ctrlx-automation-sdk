@@ -1,7 +1,7 @@
 @echo off
 
 echo.
-echo App Builder Enviromment file:
+echo App Build Enviromment file:
 dir /B ubuntu*.qcow2
 echo.
 echo -----------------------------------------------------------------

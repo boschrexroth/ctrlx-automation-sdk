@@ -108,8 +108,8 @@ echo " "
 
 cd ${MY_DIR}/${DEST_DIR}
 
-chmod a+x bin/oss.flatbuffers*/ubuntu20-gcc-*/release/flatc 
-chmod a+x bin/framework/ubuntu20-gcc-*/rexroth-automation-frame
+chmod a+x bin/oss.flatbuffers*/ubuntu22-gcc-*/release/flatc 
+chmod a+x bin/framework/ubuntu22-gcc-*/rexroth-automation-frame
 chmod a+w -R include
 sudo chown -R boschrexroth:boschrexroth fbs/comm/ethercat/master/
 sudo chown -R boschrexroth:boschrexroth  bfbs/comm/ethercat/master/
@@ -146,10 +146,6 @@ else
 	echo "ERROR ${DEP_PACKAGE} not found!"
 fi
 
-echo " "
-echo "------------------------------------------------------"
-echo "Installing snapcraft..."
-echo " "
-
-sudo snap install snapcraft --classic
+REM Installing snapcraft
+~/scripts/install-snapcraft.sh" 
 

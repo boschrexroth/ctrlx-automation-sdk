@@ -1,26 +1,8 @@
 /*
-MIT License
-
-Copyright (c) 2021-2023 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 using Datalayer;
 
@@ -50,7 +32,7 @@ namespace Samples.Datalayer.Provider
             // Create a new ctrlX Data Layer system
             using var system = new DatalayerSystem();
 
-            // Starts the ctrlX Data Layer system without a new broker (startBroker = false) because one broker is already running on ctrlX device
+            // Starts the ctrlX Data Layer system without a new broker (startBroker = false) because one broker is already running on ctrlX CORE
             system.Start(startBroker: false);
             Console.WriteLine("ctrlX Data Layer system started.");
 
@@ -66,12 +48,12 @@ namespace Samples.Datalayer.Provider
             var (resultMyInt, _) = provider.RegisterNode(myIntNode.Address, new ReadOnlyNodeHandler(myIntNode));
             Console.WriteLine($"Registering Node with address='{myIntNode.Address}', result='{resultMyInt}'");
 
-            // Create and register node on given address and read-only callbacks.
+            // Create and register node on given address (read-only).
             var myDoubleNode = CreateReadOnlyNode($"{ROOT}/myDouble", "types/datalayer/float64", "MyDouble Description", new Variant(Math.PI));
             var (resultMyDouble, _) = provider.RegisterNode(myDoubleNode.Address, new ReadOnlyNodeHandler(myDoubleNode));
             Console.WriteLine($"Registering Node with address='{myDoubleNode.Address}', result='{resultMyDouble}'");
 
-            // Create and register node on given address and read-write callbacks.
+            // Create and register node on given address (read/write).
             var myStringNode = CreateReadWriteNode($"{ROOT}/myString", "types/datalayer/string", "MyDouble Description", new Variant("Hello ctrlX"));
             var (resultMyString, _) = provider.RegisterNode(myStringNode.Address, new ReadWriteNodeHandler(myStringNode));
             Console.WriteLine($"Registering Node with address='{myStringNode.Address}', result='{resultMyString}'");

@@ -1,0 +1,489 @@
+<ExportFile>
+  <StructuredView Guid="{d9b2b2cc-ea99-4c3b-aa42-1e5c49e65b84}">
+<Single xml:space="preserve" Type="{3daac5e4-660e-42e4-9cea-3711b98bfb63}" Method="IArchivable">
+  <Null Name="Profile" />
+  <List2 Name="EntryList">
+    <Single Type="{6198ad31-4b98-445c-927f-3258a0e82fe3}" Method="IArchivable">
+      <Single Name="IsRoot" Type="bool">True</Single>
+      <Single Name="MetaObject" Type="{81297157-7ec9-45ce-845e-84cab2b88ade}" Method="IArchivable">
+        <Single Name="Guid" Type="System.Guid">cd962606-261d-41b5-ac1c-cfc7177d4e1c</Single>
+        <Single Name="ParentGuid" Type="System.Guid">a8581699-cc10-451a-8b04-22e026abf1be</Single>
+        <Single Name="Name" Type="string">hello_plc_application</Single>
+        <Dictionary Type="{2c41fa04-1834-41c1-816e-303c7aa2c05b}" Name="Properties" />
+        <Single Name="TypeGuid" Type="System.Guid">639b491f-5557-464c-af91-1471bac9f549</Single>
+        <Null Name="EmbeddedTypeGuids" />
+        <Single Name="Timestamp" Type="long">638204288377458884</Single>
+      </Single>
+      <Single Name="Object" Type="{639b491f-5557-464c-af91-1471bac9f549}" Method="IArchivable">
+        <Single Name="DynamicMemory" Type="int">-1</Single>
+        <Single Name="DownloadContent" Type="bool">True</Single>
+        <Single Name="StopParentAppsOnException" Type="bool">False</Single>
+        <Single Name="GuidNetVarGVL" Type="System.Guid">801b75f1-f7a6-48ec-8fbc-c51265046882</Single>
+        <Single Name="GuidMemSettings" Type="System.Guid">00000000-0000-0000-0000-000000000000</Single>
+        <Single Name="BootAppSettings" Type="{2c29ea75-7cea-4f41-bab2-3128068c5387}" Method="IArchivable">
+          <Single Name="CreateAtDownload" Type="bool">True</Single>
+          <Single Name="CreateAtOnlineChange" Type="bool">True</Single>
+          <Single Name="EnableSystemCall" Type="bool">True</Single>
+          <Single Name="VerifyAfterCreation" Type="bool">True</Single>
+        </Single>
+        <Single Name="OverrideTargetMemorySizes" Type="bool">False</Single>
+        <Single Name="TargetInputSize" Type="int">8192</Single>
+        <Single Name="TargetOutputSize" Type="int">8192</Single>
+        <Single Name="TargetMemoryize" Type="int">8192</Single>
+        <Single Name="StaticSize" Type="int">0</Single>
+        <Single Name="AllowUserDefinedStaticSize" Type="bool">False</Single>
+        <Single Name="X509CommonName" Type="string"></Single>
+        <Single Name="X509EncryptionThumbprint" Type="string"></Single>
+        <Null Name="X509EncryptionThumbprints" />
+        <Single Name="SignDownloadWithX509Certificate" Type="bool">False</Single>
+        <Single Name="FirmCode" Type="uint">0</Single>
+        <Single Name="ProductCode" Type="uint">0</Single>
+        <Single Name="KeepOnParentOnlineChange" Type="bool">False</Single>
+      </Single>
+      <Single Name="ParentSVNodeGuid" Type="System.Guid">a8581699-cc10-451a-8b04-22e026abf1be</Single>
+      <Array Name="Path" Type="string">
+        <Single Type="string">Device</Single>
+        <Single Type="string">SPS-Logik</Single>
+      </Array>
+      <Single Name="Index" Type="int">-1</Single>
+    </Single>
+    <Single Type="{6198ad31-4b98-445c-927f-3258a0e82fe3}" Method="IArchivable">
+      <Single Name="IsRoot" Type="bool">False</Single>
+      <Single Name="MetaObject" Type="{81297157-7ec9-45ce-845e-84cab2b88ade}" Method="IArchivable">
+        <Single Name="Guid" Type="System.Guid">1b0bd995-630b-4c0f-87af-ff768741cffb</Single>
+        <Single Name="ParentGuid" Type="System.Guid">cd962606-261d-41b5-ac1c-cfc7177d4e1c</Single>
+        <Single Name="Name" Type="string">Library Manager</Single>
+        <Dictionary Type="{2c41fa04-1834-41c1-816e-303c7aa2c05b}" Name="Properties" />
+        <Single Name="TypeGuid" Type="System.Guid">adb5cb65-8e1d-4a00-b70a-375ea27582f3</Single>
+        <Null Name="EmbeddedTypeGuids" />
+        <Single Name="Timestamp" Type="long">638204288420588931</Single>
+      </Single>
+      <Single Name="Object" Type="{adb5cb65-8e1d-4a00-b70a-375ea27582f3}" Method="IArchivable">
+        <List2 Name="ParameterTable" />
+        <List Name="Items" Type="System.Collections.ArrayList">
+          <Single Type="{4723ebe7-5bfc-43c6-be6b-5097002ef6b4}" Method="IArchivable">
+            <Single Name="DefaultResolution" Type="string">IecVarAccess, 3.3.1.20 (System)</Single>
+            <Single Name="Optional" Type="bool">False</Single>
+            <Null Name="Params" />
+            <Single Name="PlaceholderName" Type="string">IecVarAccess</Single>
+            <Single Name="ResolverGuid" Type="System.Guid">b303f5ce-75ff-4668-a777-7da8debb449c</Single>
+            <Single Name="Id" Type="long">851852413</Single>
+            <Single Name="Namespace" Type="string">IecVarAccessLibrary</Single>
+            <Single Name="SystemLibrary" Type="bool">True</Single>
+            <Single Name="HideWhenReferencedAsDependency" Type="bool">False</Single>
+            <Single Name="PublishSymbolsInContainer" Type="bool">False</Single>
+            <Single Name="QualifiedOnly" Type="bool">False</Single>
+            <Single Name="LinkAllContent" Type="bool">False</Single>
+          </Single>
+          <Single Type="{4723ebe7-5bfc-43c6-be6b-5097002ef6b4}" Method="IArchivable">
+            <Single Name="DefaultResolution" Type="string">IoStandard, 3.5.17.0 (System)</Single>
+            <Single Name="Optional" Type="bool">False</Single>
+            <Null Name="Params" />
+            <Single Name="PlaceholderName" Type="string">IoStandard</Single>
+            <Single Name="ResolverGuid" Type="System.Guid">b303f5ce-75ff-4668-a777-7da8debb449c</Single>
+            <Single Name="Id" Type="long">2353270750</Single>
+            <Single Name="Namespace" Type="string">IoStandard</Single>
+            <Single Name="SystemLibrary" Type="bool">True</Single>
+            <Single Name="HideWhenReferencedAsDependency" Type="bool">False</Single>
+            <Single Name="PublishSymbolsInContainer" Type="bool">False</Single>
+            <Single Name="QualifiedOnly" Type="bool">False</Single>
+            <Single Name="LinkAllContent" Type="bool">True</Single>
+          </Single>
+          <Single Type="{4723ebe7-5bfc-43c6-be6b-5097002ef6b4}" Method="IArchivable">
+            <Single Name="DefaultResolution" Type="string">CXAC_Base, 1.18.2.0 (Bosch Rexroth AG)</Single>
+            <Single Name="Optional" Type="bool">False</Single>
+            <Null Name="Params" />
+            <Single Name="PlaceholderName" Type="string">CXA_BASE</Single>
+            <Single Name="ResolverGuid" Type="System.Guid">b303f5ce-75ff-4668-a777-7da8debb449c</Single>
+            <Single Name="Id" Type="long">1211194795</Single>
+            <Single Name="Namespace" Type="string">CXAC_Base</Single>
+            <Single Name="SystemLibrary" Type="bool">True</Single>
+            <Single Name="HideWhenReferencedAsDependency" Type="bool">False</Single>
+            <Single Name="PublishSymbolsInContainer" Type="bool">False</Single>
+            <Single Name="QualifiedOnly" Type="bool">False</Single>
+            <Single Name="LinkAllContent" Type="bool">False</Single>
+          </Single>
+          <Single Type="{4723ebe7-5bfc-43c6-be6b-5097002ef6b4}" Method="IArchivable">
+            <Single Name="DefaultResolution" Type="string">CXA_CommonTypes, 1.18.0.0 (Bosch Rexroth AG)</Single>
+            <Single Name="Optional" Type="bool">False</Single>
+            <Null Name="Params" />
+            <Single Name="PlaceholderName" Type="string">CXA_COMMONTYPES</Single>
+            <Single Name="ResolverGuid" Type="System.Guid">b303f5ce-75ff-4668-a777-7da8debb449c</Single>
+            <Single Name="Id" Type="long">3534099241</Single>
+            <Single Name="Namespace" Type="string">CXA_CommonTypes</Single>
+            <Single Name="SystemLibrary" Type="bool">True</Single>
+            <Single Name="HideWhenReferencedAsDependency" Type="bool">False</Single>
+            <Single Name="PublishSymbolsInContainer" Type="bool">False</Single>
+            <Single Name="QualifiedOnly" Type="bool">False</Single>
+            <Single Name="LinkAllContent" Type="bool">False</Single>
+          </Single>
+          <Single Type="{4723ebe7-5bfc-43c6-be6b-5097002ef6b4}" Method="IArchivable">
+            <Single Name="DefaultResolution" Type="string">CXA_Utilities, 1.20.0.0 (Bosch Rexroth AG)</Single>
+            <Single Name="Optional" Type="bool">False</Single>
+            <Null Name="Params" />
+            <Single Name="PlaceholderName" Type="string">CXA_UTILITIES</Single>
+            <Single Name="ResolverGuid" Type="System.Guid">b303f5ce-75ff-4668-a777-7da8debb449c</Single>
+            <Single Name="Id" Type="long">3372890138</Single>
+            <Single Name="Namespace" Type="string">CXA_Utilities</Single>
+            <Single Name="SystemLibrary" Type="bool">True</Single>
+            <Single Name="HideWhenReferencedAsDependency" Type="bool">False</Single>
+            <Single Name="PublishSymbolsInContainer" Type="bool">False</Single>
+            <Single Name="QualifiedOnly" Type="bool">False</Single>
+            <Single Name="LinkAllContent" Type="bool">False</Single>
+          </Single>
+          <Single Type="{4723ebe7-5bfc-43c6-be6b-5097002ef6b4}" Method="IArchivable">
+            <Single Name="DefaultResolution" Type="string">Standard, 3.5.18.0 (System)</Single>
+            <Single Name="Optional" Type="bool">False</Single>
+            <Null Name="Params" />
+            <Single Name="PlaceholderName" Type="string">Standard</Single>
+            <Single Name="ResolverGuid" Type="System.Guid">b303f5ce-75ff-4668-a777-7da8debb449c</Single>
+            <Single Name="Id" Type="long">575299980</Single>
+            <Single Name="Namespace" Type="string">Standard</Single>
+            <Single Name="SystemLibrary" Type="bool">True</Single>
+            <Single Name="HideWhenReferencedAsDependency" Type="bool">False</Single>
+            <Single Name="PublishSymbolsInContainer" Type="bool">False</Single>
+            <Single Name="QualifiedOnly" Type="bool">False</Single>
+            <Single Name="LinkAllContent" Type="bool">False</Single>
+          </Single>
+          <Single Type="{4723ebe7-5bfc-43c6-be6b-5097002ef6b4}" Method="IArchivable">
+            <Single Name="DefaultResolution" Type="string">3SLicense, 0.0.0.0 (3S - Smart Software Solutions GmbH)</Single>
+            <Single Name="Optional" Type="bool">False</Single>
+            <Null Name="Params" />
+            <Single Name="PlaceholderName" Type="string">3SLicense</Single>
+            <Single Name="ResolverGuid" Type="System.Guid">97c3b452-d9fa-4ac2-9d0c-3d420aa6d95b</Single>
+            <Single Name="Id" Type="long">1886350887</Single>
+            <Single Name="Namespace" Type="string">_3S_LICENSE</Single>
+            <Single Name="SystemLibrary" Type="bool">True</Single>
+            <Single Name="HideWhenReferencedAsDependency" Type="bool">False</Single>
+            <Single Name="PublishSymbolsInContainer" Type="bool">False</Single>
+            <Single Name="QualifiedOnly" Type="bool">False</Single>
+            <Single Name="LinkAllContent" Type="bool">False</Single>
+          </Single>
+          <Single Type="{4723ebe7-5bfc-43c6-be6b-5097002ef6b4}" Method="IArchivable">
+            <Single Name="DefaultResolution" Type="string">Breakpoint Logging Functions, * (3S - Smart Software Solutions GmbH)</Single>
+            <Single Name="Optional" Type="bool">False</Single>
+            <Null Name="Params" />
+            <Single Name="PlaceholderName" Type="string">BreakpointLogging</Single>
+            <Single Name="ResolverGuid" Type="System.Guid">b303f5ce-75ff-4668-a777-7da8debb449c</Single>
+            <Single Name="Id" Type="long">3635765733</Single>
+            <Single Name="Namespace" Type="string">BPLog</Single>
+            <Single Name="SystemLibrary" Type="bool">True</Single>
+            <Single Name="HideWhenReferencedAsDependency" Type="bool">False</Single>
+            <Single Name="PublishSymbolsInContainer" Type="bool">False</Single>
+            <Single Name="QualifiedOnly" Type="bool">False</Single>
+            <Single Name="LinkAllContent" Type="bool">False</Single>
+          </Single>
+        </List>
+        <Dictionary Type="System.Collections.Hashtable" Name="PlaceholderRedirectionTable">
+          <Entry>
+            <Key>
+              <Single Type="string">Standard</Single>
+            </Key>
+            <Value>
+              <Single Type="string">Standard, 3.5.18.0 (System)</Single>
+            </Value>
+          </Entry>
+          <Entry>
+            <Key>
+              <Single Type="string">StringUtils</Single>
+            </Key>
+            <Value>
+              <Single Type="string">StringUtils, 3.5.18.0 (System)</Single>
+            </Value>
+          </Entry>
+          <Entry>
+            <Key>
+              <Single Type="string">Util</Single>
+            </Key>
+            <Value>
+              <Single Type="string">Util, 3.5.19.0 (System)</Single>
+            </Value>
+          </Entry>
+          <Entry>
+            <Key>
+              <Single Type="string">CBML</Single>
+            </Key>
+            <Value>
+              <Single Type="string">Common Behaviour Model, 3.5.17.0 (3S - Smart Software Solutions GmbH)</Single>
+            </Value>
+          </Entry>
+        </Dictionary>
+      </Single>
+      <Single Name="ParentSVNodeGuid" Type="System.Guid">cd962606-261d-41b5-ac1c-cfc7177d4e1c</Single>
+      <Array Name="Path" Type="string">
+        <Single Type="string">Device</Single>
+        <Single Type="string">SPS-Logik</Single>
+        <Single Type="string">hello_plc_application</Single>
+      </Array>
+      <Single Name="Index" Type="int">-1</Single>
+    </Single>
+    <Single Type="{6198ad31-4b98-445c-927f-3258a0e82fe3}" Method="IArchivable">
+      <Single Name="IsRoot" Type="bool">False</Single>
+      <Single Name="MetaObject" Type="{81297157-7ec9-45ce-845e-84cab2b88ade}" Method="IArchivable">
+        <Single Name="Guid" Type="System.Guid">5b4f221c-da89-4f16-9097-7c41a638ab2d</Single>
+        <Single Name="ParentGuid" Type="System.Guid">cd962606-261d-41b5-ac1c-cfc7177d4e1c</Single>
+        <Single Name="Name" Type="string">PLC_PRG</Single>
+        <Dictionary Type="{2c41fa04-1834-41c1-816e-303c7aa2c05b}" Name="Properties" />
+        <Single Name="TypeGuid" Type="System.Guid">6f9dac99-8de1-4efc-8465-68ac443b7d08</Single>
+        <Array Name="EmbeddedTypeGuids" Type="System.Guid">
+          <Single Type="System.Guid">a9ed5b7e-75c5-4651-af16-d2c27e98cb94</Single>
+          <Single Type="System.Guid">3b83b776-fb25-43b8-99f2-3c507c9143fc</Single>
+        </Array>
+        <Single Name="Timestamp" Type="long">638204288377498908</Single>
+      </Single>
+      <Single Name="Object" Type="{6f9dac99-8de1-4efc-8465-68ac443b7d08}" Method="IArchivable">
+        <Single Name="SpecialFunc" Type="{0db3d7bb-cde0-4416-9a7b-ce49a0124323}">None</Single>
+        <Single Name="Implementation" Type="{3b83b776-fb25-43b8-99f2-3c507c9143fc}" Method="IArchivable">
+          <Single Name="TextDocument" Type="{f3878285-8e4f-490b-bb1b-9acbb7eb04db}" Method="IArchivable">
+            <Single Name="TextBlobForSerialisation" Type="string">// Dummy code to avoid warnings
+IF (strVar01 &lt;&gt; strVar02) THEN
+	; 
+END_IF
+
+IF (rVar01 &lt;&gt; rVar02) THEN
+	;
+END_IF
+
+IF (iVar01 &lt;&gt; iVar02) THEN
+	;
+END_IF</Single>
+            <Single Name="LineInfoPersistence" Type="string">5b4f221c-da89-4f16-9097-7c41a638ab2d_Impl_LineIds</Single>
+          </Single>
+        </Single>
+        <Single Name="Interface" Type="{a9ed5b7e-75c5-4651-af16-d2c27e98cb94}" Method="IArchivable">
+          <Single Name="TextDocument" Type="{f3878285-8e4f-490b-bb1b-9acbb7eb04db}" Method="IArchivable">
+            <Single Name="TextBlobForSerialisation" Type="string">{attribute 'symbol' := 'readwrite'}
+
+PROGRAM PLC_PRG
+VAR
+
+	strVar01	:	STRING(255):='Empty string #1';
+	strVar02	:	STRING(255):='Empty string #2';
+	
+	rVar01		:	REAL:=0.0;
+	rVar02		:	REAL:=0.0;
+	
+	iVar01		:	INT:=0;
+	iVar02		:	INT:=0;
+END_VAR</Single>
+            <Single Name="LineInfoPersistence" Type="string">5b4f221c-da89-4f16-9097-7c41a638ab2d_Decl_LineIds</Single>
+          </Single>
+        </Single>
+        <Single Name="UniqueIdGenerator" Type="string">40</Single>
+        <Single Name="POULevel" Type="{8e575c5b-1d37-49c6-941b-5c0ec7874787}">Standard</Single>
+        <List Name="ChildObjectGuids" Type="System.Collections.ArrayList" />
+        <Single Name="AddAttributeSubsequent" Type="bool">False</Single>
+      </Single>
+      <Single Name="ParentSVNodeGuid" Type="System.Guid">cd962606-261d-41b5-ac1c-cfc7177d4e1c</Single>
+      <Array Name="Path" Type="string">
+        <Single Type="string">Device</Single>
+        <Single Type="string">SPS-Logik</Single>
+        <Single Type="string">hello_plc_application</Single>
+      </Array>
+      <Single Name="Index" Type="int">-1</Single>
+    </Single>
+    <Single Type="{6198ad31-4b98-445c-927f-3258a0e82fe3}" Method="IArchivable">
+      <Single Name="IsRoot" Type="bool">False</Single>
+      <Single Name="MetaObject" Type="{81297157-7ec9-45ce-845e-84cab2b88ade}" Method="IArchivable">
+        <Single Name="Guid" Type="System.Guid">876188bf-34a4-4326-bbb5-93228b10c2c1</Single>
+        <Single Name="ParentGuid" Type="System.Guid">cd962606-261d-41b5-ac1c-cfc7177d4e1c</Single>
+        <Single Name="Name" Type="string">Symbols</Single>
+        <Dictionary Type="{2c41fa04-1834-41c1-816e-303c7aa2c05b}" Name="Properties" />
+        <Single Name="TypeGuid" Type="System.Guid">21d4fe94-4123-4e23-9091-ead220afbd1f</Single>
+        <Null Name="EmbeddedTypeGuids" />
+        <Single Name="Timestamp" Type="long">638204288377529265</Single>
+      </Single>
+      <Single Name="Object" Type="{21d4fe94-4123-4e23-9091-ead220afbd1f}" Method="IArchivable">
+        <Single Name="GVLGuid" Type="System.Guid">697af87d-6ae1-450f-bba7-a5ceb9dee719</Single>
+        <Single Name="POUGuid" Type="System.Guid">51dd0bca-5e16-4cc1-9e8c-9ad74a2e4a2b</Single>
+        <List2 Name="SelectionSigns">
+          <Single Type="{a7616865-54da-4628-9587-695c8e270109}" Method="IArchivable">
+            <Single Name="SignName" Type="string">PLC_PRG</Single>
+            <Single Name="SignLibIdIndex" Type="int">-1</Single>
+            <List2 Name="SignVariables">
+              <Single Type="{d8f96a30-175d-4274-9fd9-f7db39255531}" Method="IArchivable">
+                <Single Name="VarAccess" Type="int">3</Single>
+                <Single Name="MaxVarAccess" Type="int">3</Single>
+                <Single Name="VarType" Type="string">STRING(255)</Single>
+                <Single Name="VarName" Type="string">strVar01</Single>
+              </Single>
+              <Single Type="{d8f96a30-175d-4274-9fd9-f7db39255531}" Method="IArchivable">
+                <Single Name="VarAccess" Type="int">3</Single>
+                <Single Name="MaxVarAccess" Type="int">3</Single>
+                <Single Name="VarType" Type="string">STRING(255)</Single>
+                <Single Name="VarName" Type="string">strVar02</Single>
+              </Single>
+              <Single Type="{d8f96a30-175d-4274-9fd9-f7db39255531}" Method="IArchivable">
+                <Single Name="VarAccess" Type="int">3</Single>
+                <Single Name="MaxVarAccess" Type="int">3</Single>
+                <Single Name="VarType" Type="string">REAL</Single>
+                <Single Name="VarName" Type="string">rVar01</Single>
+              </Single>
+              <Single Type="{d8f96a30-175d-4274-9fd9-f7db39255531}" Method="IArchivable">
+                <Single Name="VarAccess" Type="int">3</Single>
+                <Single Name="MaxVarAccess" Type="int">3</Single>
+                <Single Name="VarType" Type="string">REAL</Single>
+                <Single Name="VarName" Type="string">rVar02</Single>
+              </Single>
+              <Single Type="{d8f96a30-175d-4274-9fd9-f7db39255531}" Method="IArchivable">
+                <Single Name="VarAccess" Type="int">3</Single>
+                <Single Name="MaxVarAccess" Type="int">3</Single>
+                <Single Name="VarType" Type="string">INT</Single>
+                <Single Name="VarName" Type="string">iVar01</Single>
+              </Single>
+              <Single Type="{d8f96a30-175d-4274-9fd9-f7db39255531}" Method="IArchivable">
+                <Single Name="VarAccess" Type="int">3</Single>
+                <Single Name="MaxVarAccess" Type="int">3</Single>
+                <Single Name="VarType" Type="string">INT</Single>
+                <Single Name="VarName" Type="string">iVar02</Single>
+              </Single>
+            </List2>
+            <Single Name="SignGuid" Type="System.Guid">5b4f221c-da89-4f16-9097-7c41a638ab2d</Single>
+            <Null Name="SymbolSetName" />
+          </Single>
+        </List2>
+        <List2 Name="SelectionTypeSigns" />
+        <Single Name="LibraryIds" Type="{475e2d23-d370-486a-bf04-61cd7f272d63}" Method="IArchivable">
+          <Dictionary2 Name="Table" />
+        </Single>
+        <Single Name="ChangePouGuid" Type="System.Guid">e72ff02e-aaa2-48c8-9018-8a4061e23a03</Single>
+        <Single Name="ExportSymbolComments" Type="bool">False</Single>
+        <Single Name="SupportOPCUA" Type="bool">False</Single>
+        <Single Name="UseEmptyNamespaceByDefault" Type="bool">False</Single>
+        <Single Name="ContentFeatureFlagsPartial" Type="{e4a5ef04-a758-4433-87ed-33f95f57640a}">None</Single>
+        <Single Name="SymbolAttributeFilterType" Type="{920738ca-88e7-4433-88f7-4a50c373436a}">None</Single>
+        <Null Name="SymbolAttributeFilterData" />
+        <Single Name="SymbolCommentFilterType" Type="{b2765d18-2203-42fd-a97c-fd0297101580}">None</Single>
+        <Single Name="EnableDirectIoAccess" Type="bool">False</Single>
+        <Single Name="PreoareOnlineChangePouGuid" Type="System.Guid">a03e0162-d1a8-4479-9e86-fe2da28c8869</Single>
+        <Single Name="ClientSideLayoutCalculator" Type="System.Guid">0141eb75-141b-4ea1-9a8c-75f952b22a6c</Single>
+        <List2 Name="SelectionSignaturesConfig" />
+        <List2 Name="SelectionTypeSignaturesConfig" />
+        <List2 Name="SymbolSetNames" />
+      </Single>
+      <Single Name="ParentSVNodeGuid" Type="System.Guid">cd962606-261d-41b5-ac1c-cfc7177d4e1c</Single>
+      <Array Name="Path" Type="string">
+        <Single Type="string">Device</Single>
+        <Single Type="string">SPS-Logik</Single>
+        <Single Type="string">hello_plc_application</Single>
+      </Array>
+      <Single Name="Index" Type="int">-1</Single>
+    </Single>
+    <Single Type="{6198ad31-4b98-445c-927f-3258a0e82fe3}" Method="IArchivable">
+      <Single Name="IsRoot" Type="bool">False</Single>
+      <Single Name="MetaObject" Type="{81297157-7ec9-45ce-845e-84cab2b88ade}" Method="IArchivable">
+        <Single Name="Guid" Type="System.Guid">990ce5e4-4198-425b-937a-e4802e73b225</Single>
+        <Single Name="ParentGuid" Type="System.Guid">cd962606-261d-41b5-ac1c-cfc7177d4e1c</Single>
+        <Single Name="Name" Type="string">Task Configuration</Single>
+        <Dictionary Type="{2c41fa04-1834-41c1-816e-303c7aa2c05b}" Name="Properties" />
+        <Single Name="TypeGuid" Type="System.Guid">ae1de277-a207-4a28-9efb-456c06bd52f3</Single>
+        <Null Name="EmbeddedTypeGuids" />
+        <Single Name="Timestamp" Type="long">638204288377589267</Single>
+      </Single>
+      <Single Name="Object" Type="{ae1de277-a207-4a28-9efb-456c06bd52f3}" Method="IArchivable">
+        <List Name="TaskConfigurationList" Type="{75fc8bb3-c744-4e99-b6eb-bb2796e19500}" />
+        <List Name="SystemEventList" Type="{7be1d5a4-d68c-4bc6-a7e5-e42a0ab42a09}" />
+        <Null Name="ExternalEventList" />
+        <Single Name="enum_guid" Type="System.Guid">8d2725f1-9099-584e-8f2d-94f41d5431f0</Single>
+        <Single Name="jitter_distribution_guid" Type="System.Guid">9b721cad-916f-54db-b9bc-ce7cfcbe05ad</Single>
+        <Single Name="task_struct_guid" Type="System.Guid">f97a4e6b-f936-5b8d-8890-e33d792d6b01</Single>
+        <Single Name="task_config_info_guid" Type="System.Guid">6a5a726b-b81c-5e83-b7a8-6da214124bc4</Single>
+        <Single Name="task_global_vars_guid" Type="System.Guid">6c5610ed-c230-5535-8ece-541e0c8e3b55</Single>
+        <Single Name="setup_call_pou_guid" Type="System.Guid">226e1216-5c02-5409-8ed2-6ae80d78720c</Single>
+        <Single Name="sys_setup_pou_guid" Type="System.Guid">f08ef53e-694c-5e67-a158-b933006027d6</Single>
+        <Single Name="profiler_global_vars_guid" Type="System.Guid">9eac5f19-ae03-5b39-8cac-39a23305e1da</Single>
+        <Single Name="profiler_init_code_guid" Type="System.Guid">d371bcc0-0a32-5b03-b89d-dbe7783629e3</Single>
+        <Single Name="profiler_cycle_code_guid" Type="System.Guid">29c60f57-817e-59e7-a756-c0e5db5f4e33</Single>
+        <Single Name="profiler_fb_guid" Type="System.Guid">bcf65e36-330e-5ff4-a71a-f45fe7ff1d2e</Single>
+        <Single Name="profiler_method_reset_guid" Type="System.Guid">dce2adf7-42ec-5e10-a67d-eec0ca7afa3e</Single>
+        <Single Name="profiler_method_starttiming_guid" Type="System.Guid">5e39ee03-fe05-5704-9ac4-aaf5127711af</Single>
+        <Single Name="profiler_method_stoptiming_guid" Type="System.Guid">12ea01a0-6f77-510b-8469-ce9b118b5998</Single>
+        <Single Name="profiler_iectaskgetprofiling_guid" Type="System.Guid">3443929a-8463-5da6-8769-ebc38af7ca21</Single>
+        <Null Name="alSysEventList" />
+        <List2 Name="alTaskGroups">
+          <Single Type="{609a42d4-f974-4041-8548-f80e229ca5ed}" Method="IArchivable">
+            <Single Name="Groupname" Type="string">IEC-Tasks</Single>
+            <Single Name="Core" Type="int">-2</Single>
+            <Single Name="DefaultGroup" Type="bool">True</Single>
+            <Single Name="Editable" Type="bool">False</Single>
+          </Single>
+        </List2>
+        <Single Name="sysevents_global_vars_guid" Type="System.Guid">c2db22ea-6cd9-5410-a049-a33babe1f1f4</Single>
+        <Single Name="sysevents_functionsblock_guid" Type="System.Guid">49ce8da9-ede7-5589-b6d7-b5ebb226e159</Single>
+        <Single Name="sysevents_fbinit_method_guid" Type="System.Guid">e51d0a6e-53a2-5638-b14c-11ce4bb74026</Single>
+        <Single Name="sysevents_fbexit_method_guid" Type="System.Guid">020d86e7-5573-565a-a88d-f6c7cd71e727</Single>
+        <Single Name="sysevents_eventcallback_method_guid" Type="System.Guid">de22d734-8a18-5d4e-9c42-b9fd619d1482</Single>
+        <Single Name="sysevents_resetget_property_guid" Type="System.Guid">0c1348e1-8ba2-5668-af12-0c2b1127830b</Single>
+        <Array Name="parent_tasks" Type="System.Guid" />
+        <Single Name="device_app" Type="System.Guid">00000000-0000-0000-0000-000000000000</Single>
+      </Single>
+      <Single Name="ParentSVNodeGuid" Type="System.Guid">cd962606-261d-41b5-ac1c-cfc7177d4e1c</Single>
+      <Array Name="Path" Type="string">
+        <Single Type="string">Device</Single>
+        <Single Type="string">SPS-Logik</Single>
+        <Single Type="string">hello_plc_application</Single>
+      </Array>
+      <Single Name="Index" Type="int">-1</Single>
+    </Single>
+    <Single Type="{6198ad31-4b98-445c-927f-3258a0e82fe3}" Method="IArchivable">
+      <Single Name="IsRoot" Type="bool">False</Single>
+      <Single Name="MetaObject" Type="{81297157-7ec9-45ce-845e-84cab2b88ade}" Method="IArchivable">
+        <Single Name="Guid" Type="System.Guid">0666f89d-a02a-4d36-b931-bb3a44300dc4</Single>
+        <Single Name="ParentGuid" Type="System.Guid">990ce5e4-4198-425b-937a-e4802e73b225</Single>
+        <Single Name="Name" Type="string">MainTask</Single>
+        <Dictionary Type="{2c41fa04-1834-41c1-816e-303c7aa2c05b}" Name="Properties" />
+        <Single Name="TypeGuid" Type="System.Guid">98a2708a-9b18-4f31-82ed-a1465b24fa2d</Single>
+        <Null Name="EmbeddedTypeGuids" />
+        <Single Name="Timestamp" Type="long">638204288377619275</Single>
+      </Single>
+      <Single Name="Object" Type="{98a2708a-9b18-4f31-82ed-a1465b24fa2d}" Method="IArchivable">
+        <Single Name="AllowEmpty" Type="bool">False</Single>
+        <Single Name="Kindoftask" Type="{38cb1f21-e463-4240-9171-f74fb561a060}">Cyclic</Single>
+        <List Name="CustomParameters" Type="{3e5ba045-1fc5-40ec-9ce7-4b62ec8ccfdf}" />
+        <List Name="IntervalParameters" Type="{3e5ba045-1fc5-40ec-9ce7-4b62ec8ccfdf}" />
+        <List Name="EventParameters" Type="{3e5ba045-1fc5-40ec-9ce7-4b62ec8ccfdf}" />
+        <List Name="ExternalEventParameters" Type="{3e5ba045-1fc5-40ec-9ce7-4b62ec8ccfdf}" />
+        <List Name="FreewheelingParameters" Type="{3e5ba045-1fc5-40ec-9ce7-4b62ec8ccfdf}" />
+        <Single Name="Priority" Type="string">30</Single>
+        <Single Name="Watchdog" Type="{97c20fcf-2c50-4dbb-8faa-06ff4f1e4275}" Method="IArchivable">
+          <Single Name="Enabled" Type="bool">True</Single>
+          <Single Name="Time" Type="{68e48988-4399-454b-ae43-e500b779c242}" Method="IArchivable">
+            <Single Name="Time" Type="string">20</Single>
+            <Single Name="Unit" Type="string">ms</Single>
+          </Single>
+          <Single Name="Sensitivity" Type="string">1</Single>
+        </Single>
+        <Single Name="Interval" Type="{68e48988-4399-454b-ae43-e500b779c242}" Method="IArchivable">
+          <Single Name="Time" Type="string">200</Single>
+          <Single Name="Unit" Type="string">ms</Single>
+        </Single>
+        <Single Name="Event" Type="string"></Single>
+        <Single Name="ExternalEvent" Type="string"></Single>
+        <Single Name="TaskGuid" Type="System.Guid">c3292d31-7a2a-4649-bd90-8335a03bc7b7</Single>
+        <Single Name="EventPOUGuid" Type="System.Guid">eb89a6e2-c523-4225-a7af-17a2aca8a03e</Single>
+        <List Name="PouList" Type="{33f568bb-4a2c-48cb-a762-34cca3066d03}">
+          <Single Type="{f194d1ef-7376-42ce-a729-4a5485a97a46}" Method="IArchivable">
+            <Single Name="Name" Type="string">PLC_PRG</Single>
+            <Single Name="Comment" Type="string"></Single>
+          </Single>
+        </List>
+        <Single Name="Implicit" Type="bool">False</Single>
+        <Single Name="WithinSPSTimeSlicing" Type="bool">True</Single>
+        <Single Name="Core" Type="int">-1</Single>
+        <Single Name="Core2" Type="int">-2</Single>
+        <Single Name="TaskGroup" Type="string">IEC-Tasks</Single>
+        <Single Name="SynchTask" Type="string"></Single>
+      </Single>
+      <Single Name="ParentSVNodeGuid" Type="System.Guid">990ce5e4-4198-425b-937a-e4802e73b225</Single>
+      <Array Name="Path" Type="string">
+        <Single Type="string">Device</Single>
+        <Single Type="string">SPS-Logik</Single>
+        <Single Type="string">hello_plc_application</Single>
+        <Single Type="string">Taskkonfiguration</Single>
+      </Array>
+      <Single Name="Index" Type="int">-1</Single>
+    </Single>
+  </List2>
+  <Single Name="ProfileName" Type="string">ctrlX PLC 2.1.0</Single>
+</Single>  </StructuredView>
+</ExportFile>

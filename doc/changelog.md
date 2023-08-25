@@ -1,9 +1,15 @@
 ## Software Development Kit for ctrlX AUTOMATION
 
-### Version 1.20.0 <small> April 02, 2023</small>
+### Version 2.2.0 <small> August, 2023</small>
 
-* Add new samples in angular and go
-* Update documentation
+* Use base: core22 as basis for each sample project
+* Bump sample projects to core22
+* Use new ctrlX Data Layer with version 2.x
+
+### Version 1.20.0 <small> March 10, 2023</small>
+
+* Documentation and examples for the use of (external) media added
+* Documentation how to use an extenable denylist
 
 ### Version 1.18.0 <small> November 30, 2022</small>
 

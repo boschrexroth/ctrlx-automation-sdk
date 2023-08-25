@@ -4,13 +4,13 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
 name: sdk-go-appdata
-version: '2.0.0'
+version: '3.0.0'
 summary: Application data sample written in go for ctrlX
 description: |
-  This sample demonstrates how to persist your application data in ctrlX environment
+  This sample demonstrates how to persist your application data in ctrlX CORE
 grade: stable
 confinement: strict
-base: core20
+base: core22
 
 apps:
   app:

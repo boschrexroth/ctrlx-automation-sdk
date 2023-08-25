@@ -2,26 +2,23 @@
 
 ## Introduction
 
-The sample project __hello.plc__ shows the write access to some ctrlX PLC variables as a Data Layer client on ctrlX CORE or ctrlX CORE <sup>virtual</sup>.
+This sample project shows the ctrlX Data Layer access to ctrlX PLC variables of a ctrlX CORE or ctrlX CORE<sup>virtual</sup>.
 
 ## Prerequisites
 
-* Running ctrlX CORE with app Rexroth PLC installed.
-* From ctrlX WORKS start `ctrlX PLC Engineering`:
-* Open, compile, download and start the PLC project hello.plc.project of the subfolder plc_application
-
-With a web browser login into your ctrlX CORE and check the Datalayer folder plc/app/hello_plc_application/sym/PLC_PRG.
-Here all PLC variables should appear.
+* ctrlX WORKS with `ctrlX PLC Engineering` installed.
+* ctrlX CORE with app PLC installed.
+* __IMPORTANT: Do not use this project in a control that is in production or in which the PLC program or its variables must not be changed.__
 
 ## Function Description
 
-When the app has been started, all variables from the PLC program "PLC_PRG" that are present in the PLC symbol configuration will be read out.
+The app browses all PLC variables mapped to the ctrlX Data Layer.
 
-Then the following is executed once:
+If the attached app 'hello_plc_application' has been installed, its variables will be overwritten:
 
-* the value "HelloDeveloper" is written to each variable of type STRING.
-* the value "1337" is written to each variable of type INT16 (ctrlX-Plc: INT).
-* the value "0.815f" is written in each variable of type FLOAT32 (ctrlX-Plc: REAL).
+* "HelloDeveloper" is written to each variable of type STRING.
+* "1337" is written to each variable of type INT16 (ctrlX-Plc: INT).
+* "0.815f" is written in each variable of type FLOAT32 (ctrlX-Plc: REAL).
 
 All variables with another data type are ignored.
 
@@ -31,47 +28,28 @@ Build and install the snap like described [here](../README.md).
 
 ## Test the Snap
 
-* Open the web interface of your ctrlX CORE
-* Login with `ctrlX PLC Engineering` and watch the values of the variables. Variables in the PLC program "PLC_PRG" that are available in the PLC symbol configuration should have the following values:
-    * STRING variables should have the value "HelloDeveloper".
-    * INTEGER variables should have the value "1337"
-    * REAL variables should have the value "0.815f"
+### Read Access to Variables of your PLC Application
 
-## Screenshots
+* Install your default PLC application in the ctrlX CORE.
+* Install this sample project as snap or start it in the App Build Environment
 
-![Declare some plc variables](docs/images/hello.plc/hello.plc.declare.variables.offline.png)
-_Declare some plc variables_
-![Declare some plc variables](docs/images/hello.plc/hello.plc.symbolconfiguration.png)
-_symbolconfiguration PLC_PRG selected_
-![Status of the plc-variables before the snap runs](docs/images/hello.plc/hello.plc.status.variables.online.png)
-_Status of the plc-variables before the snap runs_
-![Status of the plc-variables after the snap runs](docs/images/hello.plc/hello.plc.status.variables.online2.png)
-_Status of the plc-variables after the snap runs_
-![Output in diagnosis logbook](docs/images/hello.plc/messages.in.logbook.png)
-_Output in diagnosis logbook_
+All DL variables will be listet but not overwritten.
+
+### Read/Write Access to the Variables of our Test PLC Application
+
+* Download the file hello_plc_application.export from sub folder plc_application/
+* Create a new PLC project with ctrlX PLC Engineering.
+* Select the node PLC Logic in the project tree with the cursor.
+* Click main menu item Project -> Import... and import the whole content.
+* Login into your PLC runtime (project will be compiled and downloaded).
+* Start your PLC application (F5) - be sure your ctrlX is in Operting
+* Install this sample project as snap or start it in the App Build Environment
+
+All DL variables will be listet, INT, REAL (Float) and STRING values are overwritten.
 
 ___
 
 ## License
 
-MIT License
-
-Copyright (c) 2020-2022 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+SPDX-FileCopyrightText: Bosch Rexroth AG
+SPDX-License-Identifier: MIT

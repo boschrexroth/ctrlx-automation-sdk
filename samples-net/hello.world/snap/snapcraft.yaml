@@ -4,14 +4,14 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 version: '1.0.0'
 name: ctrlx-dotnet-hello-world
-summary: Hello World sample written in .NET for ctrlX.
+summary: Hello World sample written in .NET for ctrlX CORE.
 description: |
   Programm is prompting "Hello World" to standard output. Enter 'sudo snap logs ctrlx-dotnet-hello-world.app -f | more' to see the output.
 confinement: strict 
 #confinement: devmode 
 #icon: assets/icons/ICONHERE.png
 grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core20
+base: core22
 type: app
 
 apps:
@@ -23,6 +23,7 @@ apps:
       restart-delay: 10s
     
     environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
  
 parts:

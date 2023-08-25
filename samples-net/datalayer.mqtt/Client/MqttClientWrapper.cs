@@ -1,40 +1,17 @@
 
 /*
-MIT License
-
-Copyright (c) 2021-2023 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 using Datalayer;
 using MQTTnet;
 using MQTTnet.Client;
-using MQTTnet.Client.Connecting;
-using MQTTnet.Client.Disconnecting;
-using MQTTnet.Client.Options;
-using MQTTnet.Client.Publishing;
-using MQTTnet.Client.Subscribing;
-using MQTTnet.Client.Unsubscribing;
 using MQTTnet.Exceptions;
 using MQTTnet.Formatter;
 using MQTTnet.Protocol;
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -55,17 +32,17 @@ namespace Samples.Datalayer.MQTT.Client
         /// <summary>
         /// Message Received event
         /// </summary>
-        public event Action<MqttApplicationMessageReceivedEventArgs> MessageReceived;
+        public event Func<MqttApplicationMessageReceivedEventArgs, Task> MessageReceived;
 
         /// <summary>
         /// Connected event
         /// </summary>
-        public event Action<MqttClientConnectedEventArgs> Connected;
+        public event Func<MqttClientConnectedEventArgs, Task> Connected;
 
         /// <summary>
         /// Disconnected event
         /// </summary>
-        public event Action<MqttClientDisconnectedEventArgs> Disconnected;
+        public event Func<MqttClientDisconnectedEventArgs, Task> Disconnected;
 
         /// <summary>
         /// Creates a MQTT client wrapper
@@ -77,10 +54,11 @@ namespace Samples.Datalayer.MQTT.Client
             _client = new MqttFactory().CreateMqttClient();
 
             //Add handlers
-            _client.UseConnectedHandler(OnConnected);
-            _client.UseDisconnectedHandler(OnDisconnected);
-            _client.UseApplicationMessageReceivedHandler(OnMessageReceived);
+            _client.ConnectedAsync += OnConnected;
+            _client.DisconnectedAsync += OnDisconnected;
+            _client.ApplicationMessageReceivedAsync += OnMessageReceived;
         }
+
 
         #region Properties
 
@@ -112,7 +90,7 @@ namespace Samples.Datalayer.MQTT.Client
         /// <summary>
         /// Gets or sets the communication timeout
         /// </summary>
-        public TimeSpan CommunicationTimeout { get; set; } = TimeSpan.FromMilliseconds(10_000);
+        public TimeSpan Timeout { get; set; } = TimeSpan.FromMilliseconds(10_000);
 
         /// <summary>
         /// Gets or sets the keepalive period
@@ -162,7 +140,7 @@ namespace Samples.Datalayer.MQTT.Client
                     .WithProtocolVersion(MqttProtocolVersion.V500) //Version 5 is Mandatory, because we make use of the SubscriptionIdentifier feature
                     .WithCleanSession(CleanSession)
                     .WithCredentials(username: Username, password: Password)
-                    .WithCommunicationTimeout(CommunicationTimeout)
+                    .WithTimeout(Timeout)
                     .WithKeepAlivePeriod(KeepAlivePeriod)
                     //.WithSessionExpiryInterval(60000)
                     //.WithTls()
@@ -208,7 +186,7 @@ namespace Samples.Datalayer.MQTT.Client
 
             var options = new MqttClientDisconnectOptions
             {
-                ReasonCode = MqttClientDisconnectReason.NormalDisconnection,
+                Reason = MqttClientDisconnectOptionsReason.NormalDisconnection,
                 ReasonString = "normal disconnection"
             };
 
@@ -342,7 +320,7 @@ namespace Samples.Datalayer.MQTT.Client
                 var task = _client.SubscribeAsync(options);
                 await task;
 
-                var resultCode = task.Result.Items[0].ResultCode;
+                var resultCode = task.Result.Items.FirstOrDefault()?.ResultCode;
 
                 var success =
                     (quality == MqttQualityOfServiceLevel.AtMostOnce && resultCode == MqttClientSubscribeResultCode.GrantedQoS0) ||
@@ -400,7 +378,7 @@ namespace Samples.Datalayer.MQTT.Client
                 var task = _client.UnsubscribeAsync(options);
                 var result = await task;
 
-                var resultCode = result.Items[0].ReasonCode;
+                var resultCode = task.Result.Items.FirstOrDefault()?.ResultCode;
 
                 //Failed
                 if (resultCode != MqttClientUnsubscribeResultCode.Success)
@@ -465,36 +443,37 @@ namespace Samples.Datalayer.MQTT.Client
         /// Client connected event handler
         /// </summary>
         /// <param name="args"></param>
-        private void OnConnected(MqttClientConnectedEventArgs args)
+        private Task OnConnected(MqttClientConnectedEventArgs args)
         {
-            Console.WriteLine($"Client Connected. {args.AuthenticateResult?.ResultCode}");
+            Console.WriteLine($"Client Connected. {args.ConnectResult?.ResultCode}");
 
             //Forward
-            Connected?.Invoke(args);
+            return Connected?.Invoke(args);
         }
+
 
         /// <summary>
         /// Client disconnected event handler
         /// </summary>
         /// <param name="args"></param>
-        private void OnDisconnected(MqttClientDisconnectedEventArgs args)
+        private Task OnDisconnected(MqttClientDisconnectedEventArgs args)
         {
             Console.WriteLine($"Client Disconnected. WasConnected: {args.ClientWasConnected}, Reason: {args.Reason}");
 
             //Forward
-            Disconnected?.Invoke(args);
+            return Disconnected?.Invoke(args);
         }
 
         /// <summary>
         /// Client message received eventhandler
         /// </summary>
         /// <param name="args"></param>
-        private void OnMessageReceived(MqttApplicationMessageReceivedEventArgs args)
+        private Task OnMessageReceived(MqttApplicationMessageReceivedEventArgs args)
         {
-            //Console.WriteLine($"Message Received: {args.ApplicationMessage.Topic}, PayLoad: {Encoding.UTF8.GetString(args.ApplicationMessage.Payload)}, SubscriptionId: {args.ApplicationMessage.SubscriptionIdentifiers?[0]}");
+            //Console.WriteLine($"Message Received: {args.ApplicationMessage.Topic}, PayLoad: {Encoding.UTF8.GetString(args.ApplicationMessage.PayloadSegment)}, SubscriptionId: {args.ApplicationMessage.SubscriptionIdentifiers?[0]}");
 
             //Forward
-            MessageReceived?.Invoke(args);
+            return MessageReceived?.Invoke(args);
         }
         #endregion
     }

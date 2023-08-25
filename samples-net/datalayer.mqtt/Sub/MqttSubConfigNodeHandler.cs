@@ -1,35 +1,18 @@
 /*
-MIT License
-
-Copyright (c) 2021-2023 Bosch Rexroth AG
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 using Datalayer;
 using MQTTnet;
+using MQTTnet.Client;
 using MQTTnet.Protocol;
-using MQTTnet.Server;
 using Samples.Datalayer.MQTT.Base;
 using Samples.Datalayer.MQTT.Client;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Samples.Datalayer.MQTT.Sub
 {
@@ -257,7 +240,7 @@ namespace Samples.Datalayer.MQTT.Sub
         /// MQTT message received event handler
         /// </summary>
         /// <param name="args"></param>
-        protected override async void OnMessageReceived(MqttApplicationMessageReceivedEventArgs args)
+        protected override async Task OnMessageReceived(MqttApplicationMessageReceivedEventArgs args)
         {
             //We have to filter for our subscription to prevent duplicates if any other SUB is interested in same topic
             if (args.ApplicationMessage.SubscriptionIdentifiers[0] != SubscriptionId)
@@ -272,7 +255,7 @@ namespace Samples.Datalayer.MQTT.Sub
             }
 
             //Filter for null payload which may occure
-            if (args.ApplicationMessage.Payload == null)
+            if (args.ApplicationMessage.PayloadSegment== null)
             {
                 return;
             }
@@ -281,14 +264,14 @@ namespace Samples.Datalayer.MQTT.Sub
             var topic = GetNode(Names.Topic).Value.ToString();
 
             //Match (filter) for our topic
-            if (!MqttTopicFilterComparer.IsMatch(args.ApplicationMessage.Topic, topic))
+            if (MqttTopicFilterComparer.Compare(args.ApplicationMessage.Topic, topic) == MqttTopicFilterCompareResult.NoMatch)
             {
                 return;
             }
 
             var targetAddress = GetNode(Names.TargetAddress).Value.ToString();
             var jsonDataType = GetNode(Names.JsonDataType).Value.ToString();
-            var stringifiedPayload = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
+            var stringifiedPayload = Encoding.UTF8.GetString(args.ApplicationMessage.PayloadSegment);
 
             //Convert to write variant 
             var (result, writeValue) = ToVariant(jsonDataType, stringifiedPayload);
@@ -298,7 +281,7 @@ namespace Samples.Datalayer.MQTT.Sub
                 return;
             }
 
-            //Write the Value to the Data Layer
+            //Write the Value to the ctrlX Data Layer
             var task = Root.Client.WriteAsync(targetAddress, writeValue);
             var taskResult = await task;
             if (taskResult.Result.IsBad())

@@ -1,44 +1,27 @@
-/**
- * MIT License
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
  *
- * Copyright (c) 2020-2022 Bosch Rexroth AG
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * SPDX-License-Identifier: MIT
  */
 
 #include "comm/datalayer/datalayer.h"
 #include "comm/datalayer/datalayer_system.h"
 #include "comm/datalayer/memory_map_generated.h"
 #include <stdio.h>
-#include <signal.h>
+#include <csignal>
 #include <thread>
 #include <iostream>
 
  // Create end process flag witch is set to true if SIGINT is send
-bool endProcess = false;
-static void hdl(int sig, siginfo_t* siginfo, void* context)
+static bool g_endProcess = false;
+static void signalHandler(int signal)
 {
-  endProcess = true;
+  std::cout << "signal: " << signal << std::endl;
+  g_endProcess = true;
 }
 
-void closeUserMemory(comm::datalayer::DatalayerSystem* datalayer,
-                     std::shared_ptr<comm::datalayer::IMemoryUser> userMemory)
+static void closeUserMemory(comm::datalayer::DatalayerSystem* datalayer,
+                            std::shared_ptr<comm::datalayer::IMemoryUser> userMemory)
 {
   if (userMemory == nullptr)
   {
@@ -54,9 +37,9 @@ void closeUserMemory(comm::datalayer::DatalayerSystem* datalayer,
   }
 }
 // Cleanup closes the memory and stop the datalayersystem
-void cleanup(comm::datalayer::DatalayerSystem* datalayer,
-             std::shared_ptr<comm::datalayer::IMemoryUser> input,
-             std::shared_ptr<comm::datalayer::IMemoryUser> output)
+static void cleanup(comm::datalayer::DatalayerSystem* datalayer,
+                    std::shared_ptr<comm::datalayer::IMemoryUser> input,
+                    std::shared_ptr<comm::datalayer::IMemoryUser> output)
 {
   closeUserMemory(datalayer, input);
   closeUserMemory(datalayer, output);
@@ -64,7 +47,7 @@ void cleanup(comm::datalayer::DatalayerSystem* datalayer,
   datalayer->stop();
 }
 
-int main(int ac, char* av[])
+int main()
 {
   comm::datalayer::DlResult result;
   comm::datalayer::Variant data;
@@ -72,7 +55,7 @@ int main(int ac, char* av[])
   uint8_t* inData;
   uint8_t* outData;
 
-  // A realtime memory user always starts the Data Layer WITHOUT a broker:
+  // A realtime memory user always starts the ctrlX Data Layer WITHOUT a broker:
   // On the ctrlX the rexroth-automationcore snap has started the broker,
   // in an App Builder Env the realtime memory owner has started it.
   datalayer.start(false);
@@ -98,11 +81,7 @@ int main(int ac, char* av[])
   }
 
   // Structure to interrupt the do while loops with SIGINT
-  struct sigaction act;
-  memset(&act, '\0', sizeof(act));
-  act.sa_sigaction = &hdl;
-  act.sa_flags = SA_SIGINFO;
-  sigaction(SIGINT, &act, NULL);
+  std::signal(SIGINT, signalHandler);
 
   while (true)
   {
@@ -117,7 +96,7 @@ int main(int ac, char* av[])
 
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
-    if (endProcess)
+    if (g_endProcess)
     {
       cleanup(&datalayer, input, output);
       return 0;
@@ -173,7 +152,7 @@ int main(int ac, char* av[])
     input->endAccess();
     output->endAccess();
 
-  } while (!endProcess);
+  } while (!g_endProcess);
 
 
   cleanup(&datalayer, input, output);

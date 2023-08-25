@@ -1,11 +1,11 @@
 name: sdk-py-appdata
-version: 2.3.0
+version: 3.0.0
 summary: Application data sample written in Python for ctrlX
 title: sdk-py-appdata
 description: |
-  This sample demonstrates how to persist your application data in ctrlX environment
+  This sample demonstrates how to persist your application data in ctrlX CORE
 
-base: core20
+base: core22
 confinement: strict
 grade: stable
 

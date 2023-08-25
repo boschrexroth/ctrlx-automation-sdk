@@ -4,12 +4,12 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
 name: sdk-cpp-datalayerdiagnosis
-version: "1.2.0"
+version: "2.2.0"
 grade: stable
-summary: Sample app for processing diagnosis data via Data Layer
+summary: Sample app for processing diagnosis data via ctrlX Data Layer
 description: |
-  This app will call diagnosis functions via Data Layer
-base: core20
+  This app will call diagnosis functions via ctrlX Data Layer
+base: core22
 confinement: strict
 
 # define how apps & services are exposed to host system
@@ -35,6 +35,11 @@ parts:
     stage-packages:
       - libzmq5
       - ctrlx-datalayer
+  resourcesdiagnosis:
+    plugin: dump
+    source: ./resources/diagnostics
+    organize:
+      '*': ./resources/diagnostics/
 
 # describes which interface slots are supported by defining the plugs
 plugs:

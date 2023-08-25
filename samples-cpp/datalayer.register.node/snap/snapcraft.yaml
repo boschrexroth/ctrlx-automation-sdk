@@ -6,10 +6,10 @@
 name: sdk-cpp-registernode
 version: "2.2.0"
 grade: stable
-summary: Sample app in cpp to register a Data Layer branch with several nodes
+summary: Sample app in cpp to register a ctrlX Data Layer branch with several nodes
 description: |
-  This app will create a Data Layer branch 'sdk-cpp-registernode' with node of different data types.
-base: core20
+  This app will create a ctrlX Data Layer branch 'sdk-cpp-registernode' with node of different data types.
+base: core22
 confinement: strict
 
 # define how apps & services are exposed to host system

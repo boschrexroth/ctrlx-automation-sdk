@@ -1,5 +1,5 @@
 name: sdk-go-provider 
-base: core20 
+base: core22 
 version: '1.0' 
 summary: ctrlX Data Layer provider sample written in Go
 description: |

@@ -1,3 +1,8 @@
+/*
+ * SPDX-FileCopyrightText: Bosch Rexroth AG
+ *
+ * SPDX-License-Identifier: MIT
+ */
 package main
 
 import (
@@ -17,7 +22,7 @@ func main() {
 	if _, snapped = os.LookupEnv("SNAP"); !snapped {
 		fmt.Printf("App is running as external Application (Debug)")
 		dir, _ := os.Getwd()
-		www = filepath.FromSlash(filepath.Join(filepath.Dir(dir), "www"))
+		www = filepath.FromSlash(filepath.Join(dir, "www"))
 	} else {
 		fmt.Printf("App is running as snap inside ctrlX")
 		www = filepath.FromSlash(filepath.Join(os.Getenv("SNAP"), "www"))
