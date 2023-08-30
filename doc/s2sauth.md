@@ -30,7 +30,7 @@ The application must provide a file named `${SNAP_NAME}.scopes.json` located in 
 
 ```json
 {
-  "id": "myapp"
+  "id": "myapp",
   "required-permissions": ["logbook.diag.r", "rexroth-deviceadmin.web.licensemanager.r"]
 }
 ```
