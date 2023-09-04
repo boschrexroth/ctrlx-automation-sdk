@@ -2060,7 +2060,7 @@ sudo apt upgrade
 </div>
 <h3 id="dependencies-for-crossbuild-multiarch">Dependencies for Crossbuild (Multiarch)<a class="headerlink" href="#dependencies-for-crossbuild-multiarch" title="Permanent link">&para;</a></h3>
 <p><a href="https://wiki.ubuntu.com/MultiarchSpec">Multiarch</a> lets you install library packages from multiple architectures on the some machine. In our case we use the architectures amd64 and arm64.</p>
-<p>The according commands are also available in <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config">cloud-config-amd64</a>.</p>
+<p>The according commands are also available in <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config">cloud-config</a>.</p>
 <p>Therefor copy the commands under section runcmd: subtitle '# https://wiki.ubuntu.com/MultiarchSpec' and '# Qualify architecture'</p>
 <div class="codehilite"><pre><span></span><code>sudo dpkg --add-architecture arm64
 ...
@@ -2083,9 +2083,9 @@ sudo apt-get -y install libzmq3-dev:arm64
 
 <h3 id="important-install-scripts">Important Install Scripts<a class="headerlink" href="#important-install-scripts" title="Permanent link">&para;</a></h3>
 <p>In chapter <a href="install-scripts.html">Important Install Scripts</a> all install scripts of a QEMU VM created by ctrlX WORKS are explained.</p>
-<p>These scripts can be copied from the file <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config">cloud-config-amd64</a>.</p>
+<p>These scripts can be copied from the file <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config">cloud-config</a>.</p>
 <p>Open this file with a web browser by clicking the link, copy the according lines into new script files on your VM, set the x permission and run them.</p>
-<p>Each script file in cloud-config-amd64 is identified with a comment e.g. # install-sdk.sh, skip the line <code>- content:</code> and copy all lines until <code># Create in /tmp ...</code></p>
+<p>Each script file in cloud-config is identified with a comment e.g. # install-sdk.sh, skip the line <code>- content:</code> and copy all lines until <code># Create in /tmp ...</code></p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Running install-sdk.sh is mandatory.</p>
