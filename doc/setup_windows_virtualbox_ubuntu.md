@@ -90,7 +90,7 @@ Here you have to install them manually:
 
 [Multiarch](https://wiki.ubuntu.com/MultiarchSpec) lets you install library packages from multiple architectures on the some machine. In our case we use the architectures amd64 and arm64.
 
-The according commands are also available in [cloud-config-amd64](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config-amd64).
+The according commands are also available in [cloud-config-amd64](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config).
 
 Therefor copy the commands under section runcmd: subtitle '# https://wiki.ubuntu.com/MultiarchSpec' and '# Qualify architecture'
 
@@ -115,7 +115,7 @@ Furthermore run:
 
 In chapter [Important Install Scripts](install-scripts.md) all install scripts of a QEMU VM created by ctrlX WORKS are explained.
 
-These scripts can be copied from the file [cloud-config-amd64](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config-amd64).
+These scripts can be copied from the file [cloud-config-amd64](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config).
 
 Open this file with a web browser by clicking the link, copy the according lines into new script files on your VM, set the x permission and run them.
 
