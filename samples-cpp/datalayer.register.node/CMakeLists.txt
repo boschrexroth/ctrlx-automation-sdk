@@ -23,10 +23,15 @@ set (USER_DEPENDENCY_DIR ${CMAKE_CURRENT_LIST_DIR}/../../)
 #
 # Metadata Database
 #
-include(${USER_DEPENDENCY_DIR}/cmake/BuildMDDB.cmake)
+# use mdd_compiler from ctrlx-datalayer debian package
+exec_program(mddb_compiler 
+  ARGS "-in ${CMAKE_CURRENT_LIST_DIR}/metadata.csv -out ${CMAKE_CURRENT_LIST_DIR}/compiled/metadata.mddb"
+  RETURN_VALUE result 
+)
 
-set(MDDB_FILES  ${CMAKE_CURRENT_LIST_DIR}/metadata.csv)
-build_mddb(registernodemddb "${MDDB_FILES}" ${CMAKE_CURRENT_LIST_DIR}/compiled "")
+IF( ${result}) 
+  MESSAGE(FATAL_ERROR "mddb_compiler executable not found. Please install the ctrlx-datalayer-*.deb debian package.")
+ENDIF()
   
 #
 # Option to Build the Snap
@@ -96,7 +101,7 @@ set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-object-api")
 set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--no-warnings")
 set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-compare")
 
-build_flatbuffers("sampleSchema.fbs" "" "registernodeflatbuffers" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}/compiled" "")
+build_flatbuffers("sampleSchema.fbs" "" "registernodeflatbuffers" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}/compiled/" "")
 
 #
 # Set link directories
@@ -116,7 +121,6 @@ add_executable( ${TARGET_PROJECT_NAME}
 
 add_dependencies(${TARGET_PROJECT_NAME} 
   registernodeflatbuffers 
-  registernodemddb
   )
 
 #
