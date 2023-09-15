@@ -18,18 +18,13 @@ Additionally, the specifications given in the "Areas of Use and Application" for
 
 Any use of the source code and related documents of this repository in applications other than those specified above or under operating conditions other than those described in the documentation and the technical specifications is considered as "unintended". Furthermore, this software must not be used in any application areas not expressly approved by Bosch Rexroth.
 
-## License
-
-SPDX-FileCopyrightText: Bosch Rexroth AG
-SPDX-License-Identifier: MIT
-
 ## About
 
-Please note that any trademarks, logos and pictures contained or linked to in this Software are owned by or copyright © Bosch Rexroth AG 2021 and not licensed under the Software's license terms.
+SPDX-FileCopyrightText: Copyright (c) 2021 Bosch Rexroth AG
 
-<https://www.boschrexroth.com>
+<https://www.boschrexroth.com/en/dc/imprint/>
 
-Bosch Rexroth AG  
-Bgm.-Dr.-Nebel-Str. 2  
-97816 Lohr am Main  
-GERMANY
+
+## Licenses
+
+SPDX-License-Identifier: MIT
