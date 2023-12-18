@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-using Datalayer;
 using Microsoft.IdentityModel.JsonWebTokens;
 using System;
 using System.IO;
@@ -13,14 +12,11 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace Samples.Appdata
+namespace Samples.AppData
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     internal class MyApplication
     {
         //This samples uses a HTTP Listener as light-weight HTTP Server
@@ -28,19 +24,19 @@ namespace Samples.Appdata
         //An alternative solution would be use of 'Unix Domain Sockets' instead of an HTTP server, which is more safe, but would result in more complicated HTTP request/result handling here.
         //For those scenarious ASP.NET comes in place with a rich built-in web server supporting binding on unix sockets.
 
-        //Please see application manifest file ./configs/ctrlx-dotnet-appdata.package-manifest.json for details.
+        //Please see application manifest file ./configs/sdk-net-appdata.package-manifest.json for details.
 
         //Setup HTTP listener and load/save routes we're interested in
         private const int HttpPort = 5555; //We have to choose a free port we're listening on
-        private static readonly string HttpApiRouteLoad = $"http://localhost:{HttpPort}/ctrlx-dotnet-appdata/api/v1/load";
-        private static readonly string HttpApiRouteSave = $"http://localhost:{HttpPort}/ctrlx-dotnet-appdata/api/v1/save";
+        private static readonly string HttpApiRouteLoad = $"http://localhost:{HttpPort}/sdk-net-appdata/api/v1/load";
+        private static readonly string HttpApiRouteSave = $"http://localhost:{HttpPort}/sdk-net-appdata/api/v1/save";
 
         /// The name of the storage file
         private const string StorageFileName = "appdata.json";
 
         /// The name of the application storage folder
         /// MUST be same as specified in your *.package-manifest.json file
-        private const string StorageFolderName = "appdatasample";
+        private const string StorageFolderName = "sdk-net-appdata";
 
         //Fields
         private HttpListener _httpListener;
@@ -49,14 +45,9 @@ namespace Samples.Appdata
         private record AppDataHttpRequest(string ConfigurationPath, string Id, string Phase);
 
         // Represents our application data to be loaded/saved as JSON
-        private record AppData(string HostName, bool IsLinux, string OSArchitecture, DateTime TimeStamp, int SecretNumber);
+        private record AppData(string HostName, bool IsLinux, string OsArchitecture, DateTime TimeStamp, int SecretNumber);
 
         #region Properties
-
-        /// <summary>
-        /// Gets the application lock
-        /// </summary>
-        public ManualResetEvent Lock { get; } = new(false);
 
         /// <summary>
         /// Gets and sets the application data
@@ -74,10 +65,6 @@ namespace Samples.Appdata
         /// </summary>
         private static string SnapCommonLocation => Environment.GetEnvironmentVariable("SNAP_COMMON");
 
-        /// <summary>
-        /// Gets the SNAP_DATA location
-        /// </summary>
-        private static string SnapDataLocation => Environment.GetEnvironmentVariable("SNAP_DATA");
 
         /// <summary>
         /// Gets the base storage location for all applications
@@ -107,42 +94,42 @@ namespace Samples.Appdata
         /// Starts the handler
         /// </summary>
         /// <returns></returns>
-        public DLR_RESULT Start()
+        public bool Start()
         {
             // Check if the process is running inside a snap 
             Console.WriteLine($"Running inside snap: {IsSnapped}");
 
             //Load the application data
-            if (Load().IsBad())
+            if (!Load())
             {
-                return DLR_RESULT.DL_FAILED;
+                return false;
             }
 
             //Start the HTTP Listener
-            if (StartListenHttp().IsBad())
+            if (!StartListenHttp())
             {
-                return DLR_RESULT.DL_FAILED;
+                return false;
             }
 
-            return DLR_RESULT.DL_OK;
+            return true;
         }
 
         /// <summary>
         /// Stops the application
         /// </summary>
         /// <returns></returns>
-        public DLR_RESULT Stop()
+        public bool Stop()
         {
             //Save the application data (discard result)
-            Save();
+            if (!Save())
+            {
+                return false;
+            }
 
             //Stop HTTP listening (discard result)
             StopListenHttp();
 
-            //Unlock application
-            Lock.Set();
-
-            return DLR_RESULT.DL_OK;
+            return true;
         }
 
         #endregion
@@ -153,13 +140,13 @@ namespace Samples.Appdata
         /// Resets the application data
         /// </summary>
         /// <returns></returns>
-        private DLR_RESULT Reset()
+        private bool Reset()
         {
             //Create new application data
             MyAppData = new AppData(
                 HostName: Dns.GetHostName(),
                 IsLinux: RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
-                OSArchitecture: RuntimeInformation.OSArchitecture.ToString(),
+                OsArchitecture: RuntimeInformation.OSArchitecture.ToString(),
                 TimeStamp: DateTime.Now,
                 SecretNumber: 4711);
 
@@ -173,7 +160,7 @@ namespace Samples.Appdata
         /// Loads (deserializes) application data from a file (JSON)
         /// </summary>
         /// <returns></returns>
-        private DLR_RESULT Load()
+        private bool Load()
         {
             var path = StorageFile;
 
@@ -188,12 +175,12 @@ namespace Samples.Appdata
                 MyAppData = JsonSerializer.Deserialize<AppData>(jsonString);
 
                 Console.WriteLine($"Loaded application data from file '{path}'.");
-                return DLR_RESULT.DL_OK;
+                return true;
             }
             catch (Exception exc) when (exc is IOException || exc is JsonException)
             {
                 Console.WriteLine($"Loading application data from file '{path}' failed! {exc.Message}");
-                return DLR_RESULT.DL_FAILED;
+                return false;
             }
         }
 
@@ -201,12 +188,12 @@ namespace Samples.Appdata
         /// Saves (serializes) the application data into a file (JSON)
         /// </summary>
         /// <returns></returns>
-        private DLR_RESULT Save()
+        private bool Save()
         {
             //Ensure the storage location, first.
-            if (EnsureStorageLocation().IsBad())
+            if (!EnsureStorageLocation())
             {
-                return DLR_RESULT.DL_FAILED;
+                return false;
             }
 
             var path = StorageFile;
@@ -222,12 +209,12 @@ namespace Samples.Appdata
                 File.WriteAllText(path, jsonString, Encoding.UTF8);
 
                 Console.WriteLine($"Saved application data to file '{path}'.");
-                return DLR_RESULT.DL_OK;
+                return true;
             }
             catch (IOException exc)
             {
                 Console.WriteLine($"Saving application data to file '{path}' failed! {exc.Message}");
-                return DLR_RESULT.DL_FAILED;
+                return false;
             }
         }
 
@@ -235,7 +222,7 @@ namespace Samples.Appdata
         /// Ensures the Storage Location
         /// </summary>
         /// <returns></returns>
-        private static DLR_RESULT EnsureStorageLocation()
+        private static bool EnsureStorageLocation()
         {
             var path = StorageLocation;
 
@@ -249,11 +236,11 @@ namespace Samples.Appdata
                 catch (IOException exc)
                 {
                     Console.WriteLine($"Creating storage location '{path}' failed! {exc.Message}");
-                    return DLR_RESULT.DL_FAILED;
+                    return false;
                 }
             }
 
-            return DLR_RESULT.DL_OK;
+            return true;
         }
 
         /// <summary>
@@ -281,10 +268,17 @@ namespace Samples.Appdata
         /// Gets the JWT Token
         /// </summary>
         /// <returns></returns>
-        private static (DLR_RESULT, JsonWebToken) GetToken(HttpListenerRequest request)
+        private static JsonWebToken GetToken(HttpListenerRequest request)
         {
+
+            var authorization = request.Headers["Authorization"];
+            if (authorization == null)
+            {
+                return null;
+            }
+
             //Extract the token
-            var token = request.Headers["Authorization"].Split(" ").Last();
+            var token = authorization.Split(" ").Last();
 
             //Optional validate the request here
 #if (false)
@@ -306,18 +300,18 @@ namespace Samples.Appdata
             Console.WriteLine($"token valid: {validationResult.IsValid}");
             if (!validationResult.IsValid)
             {
-                return (DLR_RESULT.DL_FAILED, null);
+                return null;
             }
 #endif
             //Return the JWT
-            return (DLR_RESULT.DL_OK, new JsonWebToken(token));
+            return new JsonWebToken(token);
         }
 
         /// <summary>
         /// Starts the HTTP Listener
         /// </summary>
         /// <returns></returns>
-        private DLR_RESULT StartListenHttp()
+        private bool StartListenHttp()
         {
             try
             {
@@ -325,7 +319,7 @@ namespace Samples.Appdata
                 if (!HttpListener.IsSupported)
                 {
                     Console.WriteLine("HTTP Listening not supported!");
-                    return DLR_RESULT.DL_UNSUPPORTED;
+                    return false;
                 }
 
                 // Create a listener.
@@ -342,7 +336,7 @@ namespace Samples.Appdata
                 if (!_httpListener.IsListening)
                 {
                     Console.WriteLine($"Listening to HTTP failed!");
-                    return DLR_RESULT.DL_FAILED;
+                    return false;
                 }
 
                 Console.WriteLine($"Listening to HTTP: {string.Join(", ", _httpListener.Prefixes.ToArray())}");
@@ -361,8 +355,8 @@ namespace Samples.Appdata
                         Console.WriteLine($"Request: {request.Url}");
 
                         //Get the authentication token (Bearer)
-                        var (result, jwt) = GetToken(request);
-                        if (result.IsBad())
+                        var jwt = GetToken(request);
+                        if (jwt == null)
                         {
                             Console.WriteLine("Invalid authentication token (Bearer)!");
                             response.StatusCode = (int)HttpStatusCode.Unauthorized;
@@ -384,19 +378,24 @@ namespace Samples.Appdata
                             //Deserialize Request
                             using var reader = new StreamReader(request.InputStream, request.ContentEncoding);
 
-                            var appdataRequest = JsonSerializer.Deserialize<AppDataHttpRequest>(reader.ReadToEnd(), new JsonSerializerOptions
+                            var appDataHttpRequest = JsonSerializer.Deserialize<AppDataHttpRequest>(reader.ReadToEnd(), new JsonSerializerOptions
                             {
                                 PropertyNameCaseInsensitive = true
                             });
 
-                            Console.WriteLine($"Payload: {appdataRequest}");
+                            Console.WriteLine($"Payload: {appDataHttpRequest}");
+                            if (request.Url == null)
+                            {
+                                return false;
+                            }
+
                             var route = request.Url.ToString();
 
                             //Load Command
                             if (route.Equals(HttpApiRouteLoad))
                             {
                                 //Phases
-                                switch (appdataRequest.Phase)
+                                switch (appDataHttpRequest.Phase)
                                 {
                                     // Phases we don't care about in this sample can be implemented on demand.
 
@@ -418,7 +417,10 @@ namespace Samples.Appdata
                                     // load: Provide resources according to the data from the active configuration
                                     case "load":
                                         //This is were we can load our application data from current configuration
-                                        response.StatusCode = Load().IsGood() ? (int)HttpStatusCode.Accepted : (int)HttpStatusCode.InternalServerError;
+                                        response.StatusCode =
+                                            Load()
+                                                ? (int)HttpStatusCode.Accepted
+                                                : (int)HttpStatusCode.InternalServerError;
                                         break;
 
                                     default:
@@ -427,22 +429,28 @@ namespace Samples.Appdata
                                         break;
                                 }
                             }
-                            //Save Command
-                            else if (route.Equals(HttpApiRouteSave))
+                            else
                             {
-                                //Phases
-                                switch (appdataRequest.Phase)
+                                //Save Command
+                                if (route.Equals(HttpApiRouteSave))
                                 {
-                                    //save: Serialize current resources into active configuration
-                                    case "save":
-                                        //This is were we can save our application data into current configuration to be persistent
-                                        response.StatusCode = Save().IsGood() ? (int)HttpStatusCode.Accepted : (int)HttpStatusCode.InternalServerError;
-                                        break;
+                                    //Phases
+                                    switch (appDataHttpRequest.Phase)
+                                    {
+                                        //save: Serialize current resources into active configuration
+                                        case "save":
+                                            //This is were we can save our application data into current configuration to be persistent
+                                            response.StatusCode =
+                                                Save()
+                                                    ? (int)HttpStatusCode.Accepted
+                                                    : (int)HttpStatusCode.InternalServerError;
+                                            break;
 
-                                    default:
-                                        //We return 204 here to add upwards-compatibility for new phases
-                                        response.StatusCode = (int)HttpStatusCode.NoContent;
-                                        break;
+                                        default:
+                                            //We return 204 here to add upwards-compatibility for new phases
+                                            response.StatusCode = (int)HttpStatusCode.NoContent;
+                                            break;
+                                    }
                                 }
                             }
                         }
@@ -456,12 +464,12 @@ namespace Samples.Appdata
                         response.Close();
                     }
                 });
-                return DLR_RESULT.DL_OK;
+                return true;
             }
             catch (HttpListenerException exc)
             {
                 Console.WriteLine($"Listening to HTTP failed! {exc.Message}");
-                return DLR_RESULT.DL_FAILED;
+                return false;
             }
         }
 

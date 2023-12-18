@@ -28,6 +28,59 @@ SSH_PWD=rexroot
 
 LOGS=y
 
+# Function(s) ------------------------------------------------------------------------------
+function WaitForTaskFinished() {
+
+    local task_id=$1
+
+    # Wait some seconds for first try
+    sleep 10
+
+    local timeout=60
+    local counter=0
+    while true; do
+        local response=$(curl -X GET https://${ADDR}:${SSL_PORT}/package-manager/api/v1/tasks/$task_id \
+            -H "accept: application/json" \
+            -H "Authorization: Bearer ${TOKEN}" \
+            --insecure --silent)
+
+        # uncomment for debugging
+        # echo "----- DEBUG -----"
+        # echo $response
+        # echo "----- DEBUG -----"
+
+        local snap=$(echo $response | jq -r .parameters.id)
+        local action=$(echo $response | jq -r .action)
+        local state=$(echo $response | jq -r .state)
+        if [[ "$state" == "pending" ]]; then
+            echo "INFO action '$action' of '$snap' is pending"
+        fi
+
+        if [[ "$state" == "running" ]]; then
+            local progress=$(echo $response | jq .progress)
+            echo "INFO action '$action' of '$snap' is running, progress=$progress%"
+        fi
+
+        if [[ "$state" == "done" ]]; then
+            echo "INFO action '$action' of '$snap' is running is done!"
+			# Wait some seconds so that switchung to OPERATING Mode works
+			sleep 10
+            break
+        fi
+
+        local counter=$((counter + 1))
+        if [[ $counter == $timeout ]]; then
+            echo "ERROR action '$action' of '$snap' is timed out!"
+            RESULT="ERROR"
+            break
+        fi
+
+        # wait a second for next try
+        sleep 2
+    done
+
+}
+
 # Scanning parameter list
 
 i=0
@@ -356,17 +409,17 @@ then
 		echo "     file" $f
 		echo "     snap" ${SNAP}
 		echo " "  
-		curl -X POST https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages \
+		LOCATION=$(curl -X POST https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages \
 		-H "accept: */*" \
 		-H "Authorization: Bearer ${TOKEN}" \
 		-H "Content-Type: multipart/form-data" \
 		-F "file=@${f}" \
 		-F update=true \
-		--insecure --no-progress-meter --silent --show-error
+        --insecure --silent --include | tr -d '\r' | sed -En 's/^location: (.*)/\1/p')
 
-		echo "Waiting ${SECONDS_TO_WAIT_AFTER_UPLOAD}s after installation ..."
-		sleep ${SECONDS_TO_WAIT_AFTER_UPLOAD}
+    	TASK_ID=$(echo $LOCATION | cut -d'/' -f 3)
 
+ 		WaitForTaskFinished $TASK_ID
 	done;
 
 	echo " "

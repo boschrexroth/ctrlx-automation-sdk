@@ -183,7 +183,6 @@ __Contras:__
 
 __Samples:__
 
-+ datalayer.mqtt
 + datalayer.provider.alldata
 
 #### Virtual provider (lightweight): Register on wildcard and manage virtual nodes

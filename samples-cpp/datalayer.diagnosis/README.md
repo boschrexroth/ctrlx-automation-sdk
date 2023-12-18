@@ -17,6 +17,11 @@ It demonstrates how to
 
 * Installed app rexroth-automationcore
 
+## Debug and Run
+
+1. Build the executable via cmake plugin.
+2. Launch the app with the debugger attached by pressing __F5__.
+
 ## Build and Install the Snap
 
 Build and install the snap like described [here](../README.md).

@@ -4,7 +4,10 @@
 
 This sample shows how to load and save data according to the ctrlx storage concept.
 
-## Getting Started
+## Debug and Run
+Launch the app with the debugger attached by pressing __F5__.
+
+## Build and Install
 
 1. Launch Visual Studio Code.
 2. Click on the __Remote Explorer__ from the menu.

@@ -14,11 +14,11 @@ If the ctrlX Data Layer connection breaks the app will exit. After 10s it will b
 
 ## Prerequisites
 
-See the description on [ctrlX Data Layer client and provider library for golang](https://github.com/boschrexroth/ctrlx-datalayer-golang)
+See the description on [ctrlX Data Layer client and provider library for Go](https://github.com/boschrexroth/ctrlx-datalayer-golang)
 
 ## Visual Studio Code
 
-To use Golang within Visual Studio Code, we recommend using the [Go for Visual Studio Code](https://github.com/golang/vscode-go) extension. The corresponding documentation can also be found under this link.
+To use Go within Visual Studio Code, we recommend using the [Go for Visual Studio Code](https://github.com/golang/vscode-go) extension. The corresponding documentation can also be found under this link.
 
 Open this project folder directly, then the go build environment is set correctly.
 

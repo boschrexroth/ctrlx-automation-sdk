@@ -1,10 +1,11 @@
-    # Getting started
+# Getting started
 # See https://snapcraft.io/docs/getting-started
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
-name: sdk-cpp-dlecatio
-version: "2.2.0"
+name: sdk-cpp-ecat-io
+title: SDK C++ EtherCAT I/O
+version: 1.0.0
 grade: stable
 summary: Sample app for processing rt data from EtherCAT
 description: |
@@ -14,7 +15,7 @@ confinement: strict
 
 # define how apps & services are exposed to host system
 apps:
-  datalayerecatio:
+  app:
     command: datalayerEcatio
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
     plugs:
@@ -27,7 +28,7 @@ apps:
       restart-delay: 10s
 
 parts:
-  datalayerecatio:
+  app:
     plugin: dump
     source: ./generated/build
     stage-packages:
@@ -45,4 +46,3 @@ plugs:
     interface: system-files
     write:
       - /dev/shm
-

@@ -9,7 +9,9 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
-            "args": ["--debug-port=15678"],
+            "args": [
+                "--debug-port=15678"
+            ],
             "console": "integratedTerminal",
             "justMyCode": false
         },
@@ -20,13 +22,13 @@
             // IP address where the remote debug server is listening for debug connections.
             // From the QEMU SDK VM (guest) 10.0.2.2 will address the host.
             // From the host the ctrlX COREvirtual is connected via Port Forwarding.
-            "host": "10.0.2.2",  // NOT change
+            "host": "10.0.2.2", // NOT change
             // Port where the remote debug server is listening for debug connections.
             "port": 15678,
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}", 
-                    "remoteRoot": "/snap/sdk-py-datalayer-remote-debug/current/bin" 
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "/snap/sdk-py-remote-debug/current/bin"
                 }
             ]
         },
@@ -38,8 +40,8 @@
             "port": 15678,
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}", 
-                    "remoteRoot": "/snap/sdk-py-datalayer-remote-debug/current/bin" 
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "/snap/sdk-py-remote-debug/current/bin"
                 }
             ]
         },
@@ -51,10 +53,10 @@
             "port": 15678,
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}", 
-                    "remoteRoot": "/snap/sdk-py-datalayer-remote-debug/current/bin" 
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "/snap/sdk-py-remote-debug/current/bin"
                 }
             ]
-        }    
+        }
     ]
 }

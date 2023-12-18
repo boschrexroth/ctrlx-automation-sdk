@@ -5,6 +5,8 @@
 # SPDX-License-Identifier: MIT
 
 import os
+import time
+
 from http.server import HTTPServer
 
 from web.server import Server, UnixSocketHttpServer
@@ -28,11 +30,11 @@ def main():
 def create_webserver_tcp():
     """create_webserver_tcp
     """
-    serverPort = 1234
+    server_port = 1234
     hostname = 'localhost'
 
-    webserver = HTTPServer(('', serverPort), Server)
-    print("Server started, listening on TCP SOCKET", hostname, ':', serverPort, flush=True)
+    webserver = HTTPServer(('', server_port), Server)
+    print("Server started, listening on TCP SOCKET", hostname, ':', server_port, flush=True)
     return webserver
 
 
@@ -54,4 +56,6 @@ def create_webserver_unixsock():
 
 
 if __name__ == '__main__':
-    main()
+    while True:
+        main()
+        time.sleep(10.0)

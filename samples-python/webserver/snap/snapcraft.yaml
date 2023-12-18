@@ -1,9 +1,9 @@
 name: sdk-py-webserver
-version: 2.5.0
-summary: Webserver Sample written in Python for ctrlX
-title: sdk-py-webserver
+title: SDK Python Web Server
+version: 1.0.0
+summary: Web server Sample written in Python for ctrlX
 description: |
-  This sample shows how to create a webserver app in ctrlX
+  This sample shows how to create a web server app in ctrlX
 base: core22
 confinement: strict
 grade: stable
@@ -19,9 +19,6 @@ apps:
       - package-assets
       - package-run
     daemon: simple
-    restart-condition: always
-    passthrough:
-      restart-delay: 10s 
 
 parts:
   webserver:
@@ -56,7 +53,7 @@ slots:
     content: package-run
     source:
       write:
-      - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
 
 plugs:
   active-solution:
@@ -66,4 +63,4 @@ plugs:
   datalayer:
     interface: content
     content: datalayer
-    target: $SNAP_DATA/.datalayer 
+    target: $SNAP_DATA/.datalayer

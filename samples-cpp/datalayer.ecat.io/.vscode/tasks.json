@@ -30,6 +30,19 @@
       }
     },
     {
+      "label": "build debug",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "build-debug.sh"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
       "label": "Build upload snap - ctrlX COREvirtual Network Adapter",
       "type": "shell",
       "command": "../../scripts/build-upload-log-snap.sh",
@@ -80,7 +93,7 @@
         "${input:Upload}",
         "-logs",
         "${input:Logs}",
-        "-svc",
+        "-service",
         "${input:Service}",
         "-addr",
         "${input:IPAddress}",

@@ -1,16 +1,16 @@
 name: sdk-go-client-ext
-base: core22
-version: '0.1'
-summary: ctrlX Data Layer client sample written in Go
-description: |
-  This sample shows how to uses the subscription and bulk from the ctrlX Data Layer
-  
+title: SDK Go Client Subscription
+version: 1.0.0
+summary: ctrlX Data Layer client sample written in Go for ctrlX CORE.
+description: This sample shows how to uses the subscription and bulk from the ctrlX Data Layer.
+confinement: strict # use 'strict' once you have the right plugs and slot
 grade: stable
-confinement: strict
+base: core22
+type: app
 
 apps:
   client:
-    command: bin/datalayer.client.ext
+    command: bin/client
     plugs:
       - network
       - datalayer
@@ -23,18 +23,18 @@ parts:
   client:
     plugin: go
     source: .
-    build-snaps: ['go/1.19/stable']
+    build-snaps: ['go/1.21/stable']
     stage-packages:
       - libzmq5
       - ctrlx-datalayer
     build-packages:
       - on amd64:
-        - libsystemd-dev
-        - libzmq3-dev
-        - pkg-config
+          - libsystemd-dev
+          - libzmq3-dev
+          - pkg-config
       - on arm64:
-        - libsystemd-dev:arm64
-        - libzmq3-dev:arm64
+          - libsystemd-dev:arm64
+          - libzmq3-dev:arm64
         #- pkg-config:arm64
     override-build: |
       case $SNAPCRAFT_ARCH_TRIPLET in

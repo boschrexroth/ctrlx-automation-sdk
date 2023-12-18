@@ -4,7 +4,8 @@
 #
 # SPDX-License-Identifier: MIT
 
-import sys
+import signal
+import time
 
 from comm.datalayer import Metadata
 
@@ -13,27 +14,45 @@ from ctrlxdatalayer.variant import Result, VariantType
 
 from helper.ctrlx_datalayer_helper import get_client
 
+__close_app = False
 
-def main():
-    """main
-    """
+
+def handler(signum, frame):
+    """handler"""
+    global __close_app
+    __close_app = True
+    # print('Here you go signum: ', signum, __close_app, flush=True)
+
+
+def run():
+    """run"""
     with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
         datalayer_client, datalayer_client_connection_string = get_client(
-            datalayer_system)
+            datalayer_system, ip="10.0.2.2", ssl_port=8443
+        )
         if datalayer_client is None:
-            print("ERROR Connecting", datalayer_client_connection_string, "failed.", flush=True)
-            sys.exit(1)
+            print(
+                "ERROR Connecting",
+                datalayer_client_connection_string,
+                "failed.",
+                flush=True,
+            )
+            return
 
-        with datalayer_client:  # datalayer_client is closed automatically when leaving with block
-
+        with (
+            datalayer_client
+        ):  # datalayer_client is closed automatically when leaving with block
             # If not connected exit and retry with app daemon restart-delay (see snapcraft.yaml)
             if datalayer_client.is_connected() is False:
-
-                print("ERROR Not connected to", datalayer_client_connection_string,
-                      "- restarting app after a delay of 10 s ...", flush=True)
-                sys.exit(2)
+                print(
+                    "ERROR Not connected to",
+                    datalayer_client_connection_string,
+                    "- restarting app after a delay of 10 s ...",
+                    flush=True,
+                )
+                return
 
             # Browse the whole ctrlX Data Layer tree
             print("Browsing and reading nodes...", flush=True)
@@ -45,9 +64,22 @@ def main():
         print("System Stop", stop_ok, flush=True)
 
 
-def browse_tree(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.system.Converter, address=""):
-    """browse_tree
-    """
+def main():
+    """main"""
+    signal.signal(signal.SIGINT, handler)
+    signal.signal(signal.SIGTERM, handler)
+    signal.signal(signal.SIGABRT, handler)
+    while not __close_app:
+        run()
+        time.sleep(10.0)
+
+
+def browse_tree(
+    client: ctrlxdatalayer.client.Client,
+    converter: ctrlxdatalayer.system.Converter,
+    address="",
+):
+    """browse_tree"""
     # print current address and get value of node
     node_value = get_value(client, converter, address)
     if node_value is None:
@@ -67,16 +99,18 @@ def browse_tree(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.
             browse_tree(client, converter, address + "/" + node)
 
 
-def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.system.Converter, address: str):
-    """get_value
-    """
+def get_value(
+    client: ctrlxdatalayer.client.Client,
+    converter: ctrlxdatalayer.system.Converter,
+    address: str,
+):
+    """get_value"""
     # get data with read sync
     result, data = client.read_sync(address)
     if result != Result.OK:
         # print("ERROR Reading ctrlX Data Layer failed with: ", result, flush=True)
         return
     with data:
-
         vt = data.get_type()
 
         if vt == VariantType.ARRAY_BOOL8:
@@ -119,7 +153,6 @@ def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.sy
             return data.get_bool8()
 
         if vt == VariantType.FLATBUFFERS:
-
             # Get type address for flatbuffers information
             typeAddress = get_typeaddress(client, address)
             if typeAddress is None:
@@ -133,8 +166,7 @@ def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.sy
                 return
 
             # Convert variant flatbuffers data to json type
-            result, json = converter.converter_generate_json_complex(
-                data, typeVar, -1)
+            result, json = converter.converter_generate_json_complex(data, typeVar, -1)
             if result != Result.OK:
                 print("ERROR Converting json failed with: ", result, flush=True)
                 return
@@ -179,19 +211,21 @@ def get_value(client: ctrlxdatalayer.client.Client, converter: ctrlxdatalayer.sy
 
 
 def get_typeaddress(client: ctrlxdatalayer.client.Client, address: str):
-    """get_typeaddress
-    """
+    """get_typeaddress"""
     result, metadata = client.metadata_sync(address)
     if result != Result.OK:
-        print("ERROR Reading metadata of ", address, " failed with: ", result, flush=True)
-        return
+        print(
+            "ERROR Reading metadata of ", address, " failed with: ", result, flush=True
+        )
+        return None
 
-    metadata_root = Metadata.Metadata.GetRootAsMetadata(
-        metadata.get_flatbuffers())
+    metadata_root = Metadata.Metadata.GetRootAsMetadata(metadata.get_flatbuffers())
 
     if metadata_root.ReferencesLength() == 0:
         print("ERROR Metadata references are empty", flush=True)
-        return
+        return None
+
+    read_typeaddress = None
 
     for i in range(0, metadata_root.ReferencesLength()):
         reference = metadata_root.References(i)
@@ -199,12 +233,12 @@ def get_typeaddress(client: ctrlxdatalayer.client.Client, address: str):
         if reference is None:
             continue
 
-        if reference.Type().decode('utf-8').lower() == "readtype":
-            read_typeaddress = reference.TargetAddress().decode('utf-8')
+        if reference.Type().decode("utf-8").lower() == "readtype":
+            read_typeaddress = reference.TargetAddress().decode("utf-8")
             break
 
     return read_typeaddress
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -11,9 +11,11 @@
             "runtimeArgs": [
                 "--nolazy",
                 "-r",
-                "ts-node/register"
+                "ts-node/register",
+                "--force-node-api-uncaught-exceptions-policy=true"
             ],
-            "sourceMaps": true
+            "sourceMaps": true,
+            "preLaunchTask": "npm install"
         }
     ]
 }

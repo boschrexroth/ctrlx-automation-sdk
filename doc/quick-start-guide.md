@@ -41,6 +41,11 @@ To build a snap for a ctrlX CORE enter:
 
 As a result a snap file `sdk-cpp-registernode_...._amd64.snap` respectively `sdk-cpp-registernode_...._arm64.snap` will be created.
 
+!!! important
+    Please ignore the following warnings during snap builds like
+    'Unable to determine library dependencies for ...'. 
+    These warnings occur with cross builds (on amd64 for arm64) because the used tool 'ldd' used by snapcraft cannot resolve the dependencies of the arm64 snap on amd64 host systems.
+
 To copy the snap(s) into your Windows file system start cmd.exe on __your Windows host__ and enter this command:
 
     scp -P 10022 boschrexroth@localhost:~/ctrlx-automation-sdk/samples-cpp/datalayer.register.node/*.snap .

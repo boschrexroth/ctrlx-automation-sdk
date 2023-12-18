@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datalayer.client.bulkread", "datalayer.client.bulkread.csproj", "{F5F2DD86-D3F0-4354-B4A3-581487052486}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5F2DD86-D3F0-4354-B4A3-581487052486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5F2DD86-D3F0-4354-B4A3-581487052486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5F2DD86-D3F0-4354-B4A3-581487052486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5F2DD86-D3F0-4354-B4A3-581487052486}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6CF08A8-89D1-45E0-9880-955897986391}
+	EndGlobalSection
+EndGlobal

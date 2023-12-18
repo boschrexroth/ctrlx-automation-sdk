@@ -1,7 +1,7 @@
 {
     "name": "datalayer-provider-alldata",
     "version": "1.0.0",
-    "description": "Complex Node.js datalayer provider sample for ctrlX",
+    "description": "ctrlX Data Layer all-data provider sample for ctrlX CORE.",
     "bin": {
         "app": "dist/app.js"
     },
@@ -11,20 +11,21 @@
         "dist"
     ],
     "devDependencies": {
-        "@types/node": "^20.4.4",
-        "@typescript-eslint/parser": "^6.2.0",
-        "eslint": "^8.45.0",
+        "@types/node": "^20.9.0",
+        "@typescript-eslint/eslint-plugin": "^6.11.0",
+        "@typescript-eslint/parser": "^6.11.0",
+        "eslint": "^8.53.0",
         "ts-node": "^10.9.1",
-        "typescript": "^5.1.6"
+        "typescript": "^5.2.2"
     },
     "dependencies": {
-        "ctrlx-datalayer": "^2.0.0",
-        "ctrlx-datalayer-flatbuffers": "^2.2.0"
+        "ctrlx-datalayer": "^2.1.0",
+        "ctrlx-datalayer-flatbuffers": "^2.4.0"
     },
     "scripts": {
         "getName": "echo $npm_package_name",
         "prepare": "npm run copy-bfbs && npm run tsc",
         "tsc": "tsc",
-        "copy-bfbs": "mkdir -p ./dist && cp ./src/*.bfbs ./dist/"
+        "copy-bfbs": "mkdir -p ./dist && cp -r ./src/bfbs ./dist"
     }
 }

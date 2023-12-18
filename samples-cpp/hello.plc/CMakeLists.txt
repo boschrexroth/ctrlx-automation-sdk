@@ -3,12 +3,7 @@
 #
 cmake_minimum_required( VERSION 3.9 )
 
-#
-# Project information
-# Set project, VERSION should be same as snap version
-#
-set(VERSION 2.2.0)
-project( hello_plc_snap_project VERSION ${VERSION} )
+project( hello_plc_snap_project VERSION 3.0.0 )
 
 #
 # Set TARGET_PROJECT_NAME for each executable (same as snap "app name" =ExeName)
@@ -18,14 +13,14 @@ set(TARGET_PROJECT_NAME helloPlc)
 #
 # User dependency directories
 #
-set (USER_DEPENDENCY_DIR ${CMAKE_CURRENT_LIST_DIR}/../../)
+set (SDK_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../)
 
 #
 # Option to Build the Snap
 #
 option (BUILD_SNAP "Build Snap Package" OFF)
 
-MESSAGE( STATUS "Selected BuildKit: ${CMAKE_BUILD_KIT}")
+MESSAGE( STATUS "Selected BuildKit: ${BUILD_KIT}")
 MESSAGE( STATUS "######################################")
 MESSAGE( STATUS "Option: BUILD_SNAP ${BUILD_SNAP}")
 MESSAGE( STATUS "######################################")
@@ -34,31 +29,22 @@ MESSAGE( STATUS "######################################")
 # Compiler setting
 #
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
 #
 # set libraries dirs and includes
 #
-IF( ${CMAKE_BUILD_KIT} MATCHES "aarch64")
-  SET( PLATFORM_NAME "ubuntu22-gcc-aarch64")   
+IF( ${BUILD_KIT} MATCHES "aarch64")
+  SET( PLATFORM_NAME "ubuntu22-gcc-aarch64")
   SET( SNAP_ARCH "arm64")
-  set(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
   set(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
 ELSE()
   SET( PLATFORM_NAME "ubuntu22-gcc-x64")
   SET( SNAP_ARCH "amd64")
-  set(CMAKE_C_COMPILER gcc)
   set(CMAKE_CXX_COMPILER g++)
 ENDIF()
-
-#
-# set source files for each executable
-#
-set( SOURCE_FILES_HELLOPLC
-  ./main.cpp
-)
 
 #
 # set private include directories
@@ -67,8 +53,8 @@ SET ( PRIVATE_INCLUDE_DIRS
   ${CMAKE_CURRENT_LIST_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_LIST_DIR}/include
-  ${USER_DEPENDENCY_DIR}/include
-  ${USER_DEPENDENCY_DIR}/include/comm.datalayer
+  ${SDK_ROOT_DIR}/include
+  ${SDK_ROOT_DIR}/include/comm.datalayer
   )
 
 #
@@ -76,7 +62,7 @@ SET ( PRIVATE_INCLUDE_DIRS
 #
 MESSAGE( STATUS "Libraries directory: ${LIBRARY_DEP_DIR}")
 link_directories(
-  ${LIBRARY_DIR} 
+  ${LIBRARY_DIR}
   ${LIBRARY_DEP_DIR}
   )
 
@@ -84,10 +70,10 @@ link_directories(
 # Define Executables to add from project files and their depending source files
 #
 add_executable( ${TARGET_PROJECT_NAME}
-	${SOURCE_FILES_HELLOPLC}
-  )
+  ./main.cpp
+)
 
- 
+
 #
 # Set target include directories
 #
@@ -102,12 +88,12 @@ target_include_directories ( ${TARGET_PROJECT_NAME}
 #
 target_link_libraries(${TARGET_PROJECT_NAME} -Wl,--no-undefined)
 target_link_libraries(${TARGET_PROJECT_NAME}
-  libcomm_datalayer.so
-  pthread
-  systemd
-  zmq
-  ssl
-  crypto
+   libcomm_datalayer.so
+#   pthread
+#   systemd
+#   zmq
+#   ssl
+#   crypto
 )
 
 #
@@ -118,7 +104,7 @@ install( TARGETS ${TARGET_PROJECT_NAME}
   LIBRARY DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}
   ARCHIVE DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}
   COMPONENT ${BUNDLE_PROJECT_NAME}
-) 
+)
 
 if (BUILD_SNAP)
   #
@@ -129,7 +115,7 @@ if (BUILD_SNAP)
     LIBRARY DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build
     ARCHIVE DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build
     COMPONENT ${BUNDLE_PROJECT_NAME}
-  ) 
+  )
 endif(BUILD_SNAP)
 
 #

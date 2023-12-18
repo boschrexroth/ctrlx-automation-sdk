@@ -1,19 +1,19 @@
 # Getting started
 # See https://snapcraft.io/docs/getting-started
+
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-name: ctrlx-dotnet-hello-web-asp
 
-version: '1.0.0'
+name: sdk-net-hello-web-asp
+title: SDK .NET Hello Web ASP.NET
+base: core22
+version: 1.0.0
+#icon: assets/icons/ICONHERE.png
 summary: Hello World sample written in ASP.NET for ctrlX
 description: |
-   The sample provides a web page written in ASP.NET that shows some ctrlX Data Layer values. 
-confinement: strict 
-#confinement: devmode 
-#icon: assets/icons/ICONHERE.png
-grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core22
-type: app
+  The sample provides a web page written in ASP.NET that shows some ctrlX Data Layer values.
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
   app:
@@ -57,4 +57,4 @@ slots:
     content: package-assets
     source:
       read:
-      - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}

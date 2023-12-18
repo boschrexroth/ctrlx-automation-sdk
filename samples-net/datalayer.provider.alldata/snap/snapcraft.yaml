@@ -1,27 +1,30 @@
 # Getting started
 # See https://snapcraft.io/docs/getting-started
+
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-name: ctrlx-dotnet-datalayer-provider-alldata
-version: '1.0.0'
+
+name: sdk-net-provider-alldata
+title: SDK .NET Provider All Data
+base: core22
+version: 1.0.0
+#icon: assets/icons/ICONHERE.png
 summary: ctrlX Data Layer provider all data sample written in .NET for ctrlX CORE.
 description: |
   The sample demonstrates how to provide all available data types to the ctrlX Data Layer.
   The demo creates a 'static' and a 'dynamic' folder under the root node 'samples'.
   The 'static' folder provides nodes with constant values.
   In the 'dynamic' folder the same nodes are provided as in 'static' folder but with changing value every second.
-confinement: strict
-#confinement: devmode
-#icon: assets/icons/ICONHERE.png
-grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core22
-type: app
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
   app:
     command: datalayer.provider.alldata
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: [network, network-status, network-bind]
+    plugs:
+      - network
+      - datalayer
     daemon: simple
     restart-condition: always
     passthrough:

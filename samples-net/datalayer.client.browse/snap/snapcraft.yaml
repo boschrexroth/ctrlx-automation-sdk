@@ -1,33 +1,35 @@
 # Getting started
 # See https://snapcraft.io/docs/getting-started
+
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-name: ctrlx-dotnet-datalayer-client-browse
-version: '1.0.0'
+
+name: sdk-net-client-browse
+title: SDK .NET Client Browse
+base: core22
+version: 1.0.0
+#icon: assets/icons/ICONHERE.png
 summary: ctrlX Data Layer browse sample written in .NET for ctrlX CORE.
 description: |
   The sample app shows how to browse the ctrlX Data Layer tree.
-confinement: strict 
-#confinement: devmode 
-#icon: assets/icons/ICONHERE.png
-grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core22
-type: app
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
   app:
     command: datalayer.client.browse
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: [network, network-status, network-bind, process-control]
+    plugs:
+      - network
+      - datalayer
     daemon: simple
     restart-condition: always
-    passthrough:   
-      restart-delay: 10s
-
+    passthrough:
+      restart-delay: 1m
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
- 
+
 parts:
   app:
     plugin: dump
@@ -38,4 +40,4 @@ plugs:
   datalayer:
     interface: content
     content: datalayer
-    target: $SNAP_DATA/.datalayer 
+    target: $SNAP_DATA/.datalayer

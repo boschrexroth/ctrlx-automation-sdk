@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
+
+
 /**
  * The interface IDataType.
  */
@@ -11,28 +13,31 @@ interface IDataType {
     /**
      * Gets the name.
      */
-    getName(): string;
+    getName(): string
 
     /**
      * Gets the variant type.
      */
-    getVariantType(): string;
+    getVariantType(): string
 
     /**
      * Gets the target address.
      */
-    getTargetAddress(): string;
+    getTargetAddress(): string
 
     /**
      * Gets the data type as string.
      */
-    toString(): string;
+    toString(): string
 }
 
 /**
  * The class DataType.
  */
 class DataType implements IDataType {
+
+
+    static rootType = 'types/sdk/node/provider/all-data';
 
     /**
      * The name of the data type.

@@ -6,8 +6,8 @@
 ### Basic Samples
 
 * [Hello World](./hello.world/README.md)
-* [ctrlX Data Layer Client](./datalayer.client/README.md)
-* [ctrlX Data Layer Provider](./datalayer.provider/README.md)
+* [ctrlX Data Layer Client](./datalayer.client.simple/README.md)
+* [ctrlX Data Layer Provider](./datalayer.provider.simple/README.md)
 * [Diagnostics Logbook](./diagnostics.logbook/README.md)
 
 ### Advanced Samples
@@ -15,7 +15,6 @@
 * [Application Data](./appdata/README.md) 
 * [ctrlX Data Layer Client: Browser](./datalayer.client.browse/README.md)
 * [ctrlX Data Layer Client: Bulk Read](./datalayer.client.bulkread/README.md)
-* [ctrlX Data Layer Provider: MQTT 5 Publish / Subscribe / Mirror](./datalayer.mqtt/README.md)
 * [ctrlX Data Layer Provider: All Data Types](./datalayer.provider.alldata/README.md)
 * [ctrlX Data Layer Provider: Managing Virtual Nodes](./datalayer.provider.virtual/README.md)
 * [Hello ASP.NET](./hello.web.asp/README.md)

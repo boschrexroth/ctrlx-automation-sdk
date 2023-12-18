@@ -4,13 +4,14 @@
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
 name: sdk-go-appdata
-version: '3.0.0'
-summary: Application data sample written in go for ctrlX
-description: |
-  This sample demonstrates how to persist your application data in ctrlX CORE
+title: SDK Go App Data
+version: 1.0.0
+summary: Application data sample written in Go for ctrlX CORE.
+description: This sample demonstrates how to persist your application data in ctrlX CORE
+confinement: strict # use 'strict' once you have the right plugs and slot
 grade: stable
-confinement: strict
 base: core22
+type: app
 
 apps:
   app:
@@ -42,7 +43,7 @@ parts:
           ;;
       esac
       go build -buildvcs=false -o ../install/bin/ ./...
-      
+
   configs:
     source: ./configs
     plugin: dump
@@ -55,14 +56,14 @@ slots:
     content: package-assets
     source:
       read:
-      - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
 
   package-run:
     interface: content
     content: package-run
     source:
       write:
-      - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
 
 plugs:
   active-solution:

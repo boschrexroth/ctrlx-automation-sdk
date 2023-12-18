@@ -20,6 +20,7 @@ module.exports = {
         "codeFrame": true
     },
     "rules": {
+        "semi": ["error", "always"],
     },
     "plugins": [
         "@typescript-eslint"

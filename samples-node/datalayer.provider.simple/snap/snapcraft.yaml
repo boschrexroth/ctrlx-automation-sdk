@@ -1,0 +1,109 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+name: sdk-node-provider-simple
+title: SDK Node.js Provider Simple
+version: 1.0.0
+summary: ctrlX Data Layer simple provider sample written in Node.js for ctrlX CORE.
+description: |
+  The sample demonstrates how to provide nodes to the ctrlX Data Layer tree. 
+  The provider creates nodes with types of int/double/string. 
+  Also a complex type encoded by https://google.github.io/flatbuffers/ is provided.
+confinement: strict
+#confinement: devmode
+#icon: assets/icons/ICONHERE.png
+grade: stable # must be 'stable' to release into candidate/stable channels
+base: core22
+type: app
+
+apps:
+  app:
+    command: bin/app
+    daemon: simple
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs: [network, datalayer]
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+
+parts:
+  app:
+    source: .
+    build-environment:
+      # Set the node version here. We recommend to use the latest LTS version.
+      - NODE_VERSION: '18.18.2'
+
+    # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
+    # plugin: npm
+    # npm-node-version: "18.18.2"
+    plugin: nil
+    override-build: |
+
+      # detect target arch
+      if [ $SNAPCRAFT_TARGET_ARCH == "arm64" ]; then
+          target_arch="arm64"
+      else 
+          target_arch="x64"
+      fi     
+
+      # detect build arch
+      if [ $SNAP_ARCH == "arm64" ]; then
+          build_arch="arm64"
+      else 
+          build_arch="x64"
+      fi     
+
+      # fetch node for target arch to be packed
+      if [ ! -f "${SNAPCRAFT_PART_INSTALL}/bin/node" ]; then
+          node_path="${SNAPCRAFT_PART_INSTALL}/bin"
+          node_uri="https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${target_arch}.tar.gz"
+          echo fetching node for install: $node_uri
+          curl $node_uri | tar xzf - -C $SNAPCRAFT_PART_INSTALL --no-same-owner --strip-components=1
+      fi
+
+      # fetch node used for build (if not equal to target arch for cross build)
+      if [ $build_arch != $target_arch ]; then
+        node_path=$SNAPCRAFT_PART_BUILD/bin
+        if [ ! -f "${SNAPCRAFT_PART_BUILD}/bin/node" ]; then
+          node_uri="https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${build_arch}.tar.gz"
+          echo fetching node for build: $node_uri
+          curl $node_uri | tar xzf - -C $SNAPCRAFT_PART_BUILD --no-same-owner --strip-components=1
+        fi
+      fi
+
+      # set the path to build target node to be used for build
+      echo node path: $node_path
+      export PATH=$node_path:$PATH
+      node --version
+      npm --version
+
+      # install and compile (tsc -> ./dist)
+      npm install --ignore-scripts --no-fund --unsafe-perm
+      npm run tsc
+
+      # pack and install the app (only production)
+      npm install -g --prefix $SNAPCRAFT_PART_INSTALL $(npm pack . | tail -1) --ignore-scripts --omit=dev --no-fund --unsafe-perm
+
+      # remove ctrlx-datalayer prebuilds of unused archs to reduce snap size
+      package_name=$(npm run getName -s)
+      prebuilds_location="${SNAPCRAFT_PART_INSTALL}/lib/node_modules/${package_name}/node_modules/ctrlx-datalayer/prebuilds"
+      if [ -d "$prebuilds_location" ]; then
+        find $prebuilds_location -type f -not -ipath "*/linux-${target_arch}*" -delete
+      fi
+
+      # remove unused binaries
+      rm -rf ${SNAPCRAFT_PART_INSTALL}/bin/npm
+      rm -rf ${SNAPCRAFT_PART_INSTALL}/bin/npx
+      rm -rf ${SNAPCRAFT_PART_INSTALL}/bin/corepack
+
+      # remove unused node modules
+      rm -rf ${SNAPCRAFT_PART_INSTALL}/lib/node_modules/npm
+      rm -rf ${SNAPCRAFT_PART_INSTALL}/lib/node_modules/corepack
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer

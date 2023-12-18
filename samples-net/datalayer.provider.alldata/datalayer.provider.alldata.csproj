@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="sampleSchema.bfbs">
+    <None Update="bfbs/*.*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

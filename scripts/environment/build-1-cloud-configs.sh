@@ -3,25 +3,19 @@
 # Pack all files under scripts/ into a zip archive and insert this file
 # into the cloud-config files as gzip base64 encoded text.
 
-# scripts.zip handling ----------------------------------------------------
+# archive.zip handling ----------------------------------------------------
 echo "___________________________________________________________"
-rm scripts.zip
-mkdir -p scripts/cloud-config/ && cp cloud-config scripts/cloud-config/
+rm archive.zip 2>/dev/null
+mkdir -p cloud-init/ && cp cloud-config cloud-init/
 
-echo "Creating scripts.zip ..."
+echo "Creating archive.zip ..."
 
 # Add all files into one zip archive
-zip -q -r scripts.zip scripts/
+zip -q -r archive.zip install-sdk-from-github.sh check-cloud-init-log.sh cloud-init/
 
 # Create search and replace text --------------------------------------------
-SEARCH_ZIP=insert-scripts.zip-here
-SEARCH_SH=insert-check-cloud-init-log.sh-here
-
-# Cloud-init function write_files supports gzip format as base64 encoded text, so these steps are necessary:
-# 1. Convert zip archive into gzip format.
-# 2. Convert the gzip (binary) into base64 encoded text.
-REPLACE_ZIP=$(gzip -c scripts.zip | base64 --wrap=0)
-REPLACE_SH=$(base64 --wrap=0 check-cloud-init-log.sh)
+SEARCH_ZIP=insert-archive.zip-here
+REPLACE_ZIP=$(gzip -c archive.zip | base64 --wrap=0)
 
 # amd64 handling -----------------------------------------------------------------
 ARCH=amd64
@@ -30,7 +24,6 @@ ARCH_REMOVE=aarch64
 grep -v "#${ARCH_REMOVE}-ONLY" cloud-config >cloud-config-${ARCH}-generated
 # Insert base64 encoded content
 python3 replace-text.py cloud-config-${ARCH}-generated $SEARCH_ZIP $REPLACE_ZIP
-python3 replace-text.py cloud-config-${ARCH}-generated $SEARCH_SH $REPLACE_SH
 # Remove flags
 python3 replace-text.py cloud-config-${ARCH}-generated "#${ARCH}-ONLY" " "
 
@@ -41,7 +34,6 @@ ARCH_REMOVE=amd64
 grep -v "#${ARCH_REMOVE}-ONLY" cloud-config >cloud-config-${ARCH}-generated
 # Insert base64 encoded content
 python3 replace-text.py cloud-config-${ARCH}-generated $SEARCH_ZIP $REPLACE_ZIP
-python3 replace-text.py cloud-config-${ARCH}-generated $SEARCH_SH $REPLACE_SH
 
 # Remove flags
 python3 replace-text.py cloud-config-${ARCH}-generated "#${ARCH}-ONLY" " "

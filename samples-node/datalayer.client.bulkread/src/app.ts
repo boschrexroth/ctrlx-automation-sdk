@@ -20,18 +20,13 @@ async function main() {
     await system.start(false);
 
     // Create a remote address with the parameters according to your environment
-    const remote = Remote.build({ ip: "10.0.2.2", sslPort: 8443 })
-    console.log('connection string:', remote)
+    const remote = Remote.build({ ip: "10.0.2.2", sslPort: 8443 });
+    console.log('connection string:', remote);
 
     // Create the client with the given remote address
     const client = await system.createClient(remote);
 
-    if (client.isConnected() === false) {
-        console.log('client is not connected -> exit.')
-        return;
-    }
-
-    // Define node addresss for bulk read
+    // Define node addresses for bulk read
     const addresses = [
         "framework/metrics/system/cpu-utilisation-percent",
         "framework/metrics/system/memavailable-mb",
@@ -50,12 +45,20 @@ async function main() {
         console.log(`address: ${item.address}, value: ${item.value}, timestamp: ${item.timestamp.toISOString()}, result: ${item.result.text}`);
     });
 
-    // Keep the process alive until disconnected
+    //Keep the process alive until disconnected
     const intervalHandle = setInterval(() => {
         if (system.isStarted() === false || client.isConnected() === false) {
             clearInterval(intervalHandle);
         }
-    }, 10000);
+    }, 10_000);
+
+    // Handle process event 'SIGTERM'
+    process.on('SIGTERM', () => {
+        console.info('SIGTERM signal received.');
+
+        system.stop();
+        console.log('ctrlX Data Layer system stopped.');
+    });
 }
 
 // Call main function

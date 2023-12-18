@@ -1,14 +1,14 @@
 # README tpm2.srk
 
-The sample app __tpm2.srk__ shows the basic usage of a TPM2 in Golang with go-tpm and go-tpm-tools.
+The sample app __tpm2.srk__ shows the basic usage of a TPM2 in Go with go-tpm and go-tpm-tools.
 
 Also see ["TPM2"](../../tpm2.md).
 
 ## Introduction
 
-It demonstrates how you can use the TPM2.0 of the ctrlX CORE or the emulated TPM2.0 on the ctrlX CORE<sup>virtual</sup> inside a Golang application.
+It demonstrates how you can use the TPM2.0 of the ctrlX CORE or the emulated TPM2.0 on the ctrlX CORE<sup>virtual</sup> inside a Go application.
 
-## Getting Started
+## Build
 
 ```bash
 cd samples-go/tpm2.srk

@@ -5,16 +5,8 @@
     <RootNamespace>Samples.Appdata</RootNamespace>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
+
   <ItemGroup>
-    <None Update="sampleSchema.bfbs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="docs\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="ctrlX-DataLayer" Version="3.*" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.*" />
     <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="6.*" />
   </ItemGroup>

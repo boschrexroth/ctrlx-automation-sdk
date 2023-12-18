@@ -4,35 +4,38 @@
  * SPDX-License-Identifier: MIT
  */
 
-
-using Datalayer;
 using System;
+using System.Threading.Tasks;
+using Samples.AppData;
 
-namespace Samples.Appdata
+// Create TaskCompletionSource to wait for process termination  
+var tcs = new TaskCompletionSource();
+
+// Handle process exit event (SIGTERM)
+AppDomain.CurrentDomain.ProcessExit += (_, _) =>
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            //Create the application
-            var myApplication = new MyApplication();
+    Console.WriteLine("Received 'SIGTERM' event.");
 
-            //Start the application
-            if (myApplication.Start().IsBad())
-            {
-                //if not we exit and retry after app daemon restart-delay (see snapcraft.yaml)
-                Console.WriteLine($"Restarting app after restart-delay of 10 s ...");
-                return;
-            }
+    // Run task for graceful shutdown
+    tcs.SetResult();
+};
 
-            //We have to keep application alive
-            //This can be done waiting for a mutex
-            Console.WriteLine($"Waiting for cancellation ...");
-            myApplication.Lock.WaitOne();
+//Create the application
+var myApplication = new MyApplication();
 
-            //Stop the application
-            myApplication.Stop();
-            Console.WriteLine($"App exiting");
-        }
-    }
+//Start the application
+if (!myApplication.Start())
+{
+    //if not we exit and retry after app daemon restart-delay (see snapcraft.yaml)
+    Console.WriteLine("Restarting app after restart-delay of 10 s ...");
+    return;
 }
+
+// Wait for process termination
+Console.WriteLine("Waiting for process exit event 'SIGTERM' ...");
+await tcs.Task;
+Console.WriteLine("Gracefully shutdown app");
+
+//Stop the application
+myApplication.Stop();
+Console.WriteLine("App exiting");

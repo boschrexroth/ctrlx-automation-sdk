@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.3.schema.json",
+  "version": "1.0.0",
+  "id": "sdk-net-appdata",
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "sdk-net-appdata.web",
+        "url": "/sdk-net-appdata",
+        "binding": ":5555",
+        "restricted": [
+          "/sdk-net-appdata/api/v1"
+        ]
+      }
+    ]
+  },
+  "commands": {
+    "activeConfiguration": {
+      "load": [
+        {
+          "id": "sdk-net-appdata",
+          "subject": "Application data of the SDK .NET AppData Sample",
+          "url": "http://localhost:5555/sdk-net-appdata/api/v1/load"
+        }
+      ],
+      "save": [
+        {
+          "id": "sdk-net-appdata",
+          "subject": "Application data of the SDK .NET AppData Sample",
+          "url": "http://localhost:5555/sdk-net-appdata/api/v1/save"
+        }
+      ]
+    }
+  },
+  "scopes-declaration": [
+    {
+      "identifier": "sdk-net-appdata.web",
+      "name": "sdk-net-appdata",
+      "description": "sdk-net-appdata permissions",
+      "scopes": [
+        {
+          "identifier": "sdk-net-appdata.web.rwx",
+          "name": "Manage SDK .NET AppData Sample",
+          "description": ""
+        },
+        {
+          "identifier": "sdk-net-appdata.web.r",
+          "name": "View SDK .NET AppData Sample",
+          "description": ""
+        }
+      ]
+    }
+  ],
+  "configuration": {
+    "appDirectories": [
+      {
+        "name": "sdk-net-appdata",
+        "description": "Application data of the SDK .NET AppData Sample",
+        "icon": "bosch-ic-directory",
+        "copyOnLoad": true         
+      }
+    ]
+  }
+}

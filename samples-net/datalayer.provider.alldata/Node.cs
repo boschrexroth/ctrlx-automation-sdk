@@ -8,6 +8,7 @@ using Datalayer;
 
 namespace Samples.Datalayer.Provider.Alldata
 {
+    using comm.datalayer;
     using Google.FlatBuffers;
     using sample.schema;
     using System;
@@ -18,6 +19,11 @@ namespace Samples.Datalayer.Provider.Alldata
     /// </summary>
     internal class Node
     {
+
+        // Please define node folder names in ctrlX Data Layer
+        private const string Root = "sdk/net/provider/all-data";
+        private const string Static = "static";
+        private const string Dynamic = "dynamic";
         /// <summary>
         /// Gets the Address.
         /// </summary>
@@ -159,7 +165,7 @@ namespace Samples.Datalayer.Provider.Alldata
                     break;
 
                 case DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_ARRAY_OF_TIMESTAMP:
-                    Value = new Variant(Value.ToDateTimeArray().Select(v => utcNow).ToArray());
+                    Value = new Variant(Value.ToDateTimeArray().Select(_ => utcNow).ToArray());
                     break;
 
                 case DLR_VARIANT_TYPE.DLR_VARIANT_TYPE_FLATBUFFERS:
@@ -202,12 +208,51 @@ namespace Samples.Datalayer.Provider.Alldata
         /// <param name="y">The separator<see cref="string"/>.</param>
         /// <param name="z">The separator<see cref="string"/>.</param>
         /// <returns>The Variant containing the flatbuffers.</returns>
-        private static IVariant CreateInertialValue(short x, short y, short z)
+        public static IVariant CreateInertialValue(short x, short y, short z)
         {
             var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
             var offset = InertialValue.CreateInertialValue(builder, x, y, z);
             builder.Finish(offset.Value);
             return new Variant(builder);
+        }
+
+
+        /// <summary>
+        /// Creates a static node.
+        /// </summary>
+        /// <param name="value">The value<see cref="IVariant"/>.</param>
+        /// <param name="dataType">The dataType<see cref="DataType"/>.</param>
+        /// <returns>The <see cref="IProviderNode"/>.</returns>
+        public static Node CreateStatic(IVariant value, DataType dataType)
+        {
+            var address = $"{Root}/{Static}/{dataType.Name}";
+            var description = $"{Static} data with type {dataType.Name}";
+
+            var metaData = new MetadataBuilder(AllowedOperationFlags.Read | AllowedOperationFlags.Write, description)
+                .SetNodeClass(NodeClass.Variable)
+                .AddReference(ReferenceType.ReadType, dataType.Address)
+                .AddReference(ReferenceType.WriteType, dataType.Address)
+                .Build();
+
+            return new Node(address, value, metaData);
+        }
+
+        /// <summary>
+        /// Creates a dynamic node.
+        /// </summary>
+        /// <param name="value">The value<see cref="IVariant"/>.</param>
+        /// <param name="dataType">The dataType<see cref="DataType"/>.</param>
+        public static Node CreateDynamic(IVariant value, DataType dataType)
+        {
+            var address = $"{Root}/{Dynamic}/{dataType.Name}";
+            var description = $"{Dynamic} data with type {dataType.Name}";
+
+            var metaData = new MetadataBuilder(AllowedOperationFlags.Read, description)
+                  .SetNodeClass(NodeClass.Variable)
+                  .AddReference(ReferenceType.ReadType, dataType.Address)
+                  .Build();
+
+            return new Node(address, value, metaData);
         }
     }
 }

@@ -52,7 +52,7 @@ def main():
 
     print()
     print("========================================================================")
-    print("sdk-py-datalayer-client - A ctrlX Data Layer Client App in Python", flush=True)
+    print("sdk-py-remote-debug - A ctrlX Data Layer Client App in Python", flush=True)
 
     with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
@@ -144,3 +144,6 @@ if __name__ == '__main__':
 
     # Run function
     main()
+
+    while True:
+        time.sleep(10.0)

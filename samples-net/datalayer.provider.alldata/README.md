@@ -33,7 +33,10 @@ The sample demonstrates
 
 Please read the common .NET docs [here](./../../doc/dotnet.md), first.
 
-## Getting Started
+## Debug and Run
+Launch the app with the debugger attached by pressing __F5__.
+
+## Build and Install
 
 1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
@@ -47,13 +50,13 @@ Please read the common .NET docs [here](./../../doc/dotnet.md), first.
    - Navigate to __Diagnostics -> Logbook__
    - Click __Settings__ on the right top corner
    - Enable __Show system messages__
-   - Navigate to __Filter -> Units__ and check your __snap.ctrlx-dotnet-datalayer-provider-alldata.app.service__
+   - Navigate to __Filter -> Units__ and check your __snap.sdk-net-provider-alldata.app.service__
    - Now you should the see the app output diagnostics.
    - Press __Refresh__ to update.
 
 8. If you have root permissions, you can also watch the output on any ssh console with the command:
    ```bash
-   sudo snap logs ctrlx-dotnet-datalayer-provider-alldata.app -f | more
+   sudo snap logs sdk-net-provider-alldata.app -f | more
    ```
 ## Screenshot
 

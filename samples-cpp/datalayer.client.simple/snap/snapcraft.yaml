@@ -1,0 +1,42 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: sdk-cpp-client-simple
+title: SDK C++ Client Simple
+version: 1.0.0
+grade: stable
+summary: Sample app for datalayer client
+description: |
+  This app will read ctrlX Data Layer nodes and print out their value.
+base: core22
+confinement: strict
+
+# define how apps & services are exposed to host system
+apps:
+  app:
+    command: datalayerClientSimple
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    passthrough:
+      restart-condition: always
+      restart-delay: 10s
+
+parts:
+  datalayerclient:
+    plugin: dump
+    source: ./generated/build
+    stage-packages:
+      - libzmq5
+      - ctrlx-datalayer
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer

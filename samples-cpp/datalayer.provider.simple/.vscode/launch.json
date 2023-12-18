@@ -1,0 +1,86 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "1.0.0",
+    "configurations": [
+        {
+            "name": "local - x64 Build Environment",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/generated/ubuntu22-gcc-x64/Debug/datalayerProviderSimple",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "remote - aarch64 ctrlX CORE",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/generated/build/datalayerProviderSimple",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "miDebuggerServerAddress": "192.168.1.1:12345",
+            "stopAtEntry": true,
+            "targetArchitecture": "arm64",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+            ]
+        },
+        {
+            "name": "remote - x64 ctrlX CORE virtual Network Adapter",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/generated/build/datalayerProviderSimple",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "miDebuggerServerAddress": "192.168.1.1:12345",
+            "stopAtEntry": true,
+            "targetArchitecture": "x64",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "remote - x64 ctrlX CORE virtual Port Forwarding",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/generated/build/datalayerProviderSimple",
+            "cwd": "${workspaceFolder}",
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "miDebuggerServerAddress": "10.0.2.2:12345",
+            "stopAtEntry": true,
+            "targetArchitecture": "x64",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

@@ -123,7 +123,7 @@ To make this work we need to create the script template in the "dump/package-ass
 
 ```json
 {
-  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.schema.json",
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.3.schema.json",
   "version": "1.0.0",
   "id": "changing-world",
   "menus": {

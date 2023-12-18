@@ -47,16 +47,22 @@ Select 'App Build Environments' on the side bar of ctrlX WORKS. The list of inst
 
 #### Preparations
 
-On your Windows host start cmd.exe and run these commands:
+On your Windows host start cmd.exe and run these commands.
 
-* Delete entry regarding 127.0.0.1 in the file know_hosts
+Delete entry regarding 127.0.0.1 in the file know_hosts:
 
 	ssh-keygen.exe -R [127.0.0.1]:10022
 	
-* Copy your public key (here: id_rsa.pub) to the App Build Environment (on password promt enter: boschrexroth)
+Create the directory /home/boschrexroth/.ssh - on password prompt enter always enter boschrexroth:
 
 	ssh.exe -p 10022 boschrexroth@127.0.0.1 "mkdir -p ~/.ssh"
+
+Copy your public key (here: id_rsa.pub) to the App Build Environment:
+
 	scp.exe -P 10022 %USERPROFILE%\.ssh\id_rsa.pub boschrexroth@127.0.0.1:~/.ssh/id_rsa.pub.tmp
+
+Append the public key to the file authorized_keys, change file permissions and remove temporary file:
+
 	ssh.exe -p 10022 boschrexroth@127.0.0.1 "cat ~/.ssh/id_rsa.pub.tmp >>~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && rm ~/.ssh/id_rsa.pub.tmp"
 
 #### Start a ssh session

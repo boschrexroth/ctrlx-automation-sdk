@@ -56,7 +56,7 @@ An app can be integrated into the ctrlX CORE navigation by defining menu entries
 * Settings: To allow the navigation to your app settings
 * Home Overview: To provide a customized tile for your application
   
-![Integration](samples-go/hello.webserver/docs/images/integration.png)
+![Integration](samples-go/webserver/docs/images/integration.png)
 
 ### Declare menu items in the package-manifest
 
@@ -82,7 +82,7 @@ An item is defined as an object with the following elements:
 
     ```json
     {
-      "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.schema.json",
+      "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.3.schema.json",
       [...]
       "menus": {
         "sidebar": [

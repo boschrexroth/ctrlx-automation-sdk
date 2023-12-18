@@ -4,40 +4,70 @@
 #
 # SPDX-License-Identifier: MIT
 
-import sys
-
 import faulthandler
+import signal
+import sys
 import time
 
 import ctrlxdatalayer
 from ctrlxdatalayer.variant import Result
 
-from helper.ctrlx_datalayer_helper import get_client
 import datalayerclient.app
+from helper.ctrlx_datalayer_helper import get_client
+
+__close_app = False
 
 
-if __name__ == '__main__':
+def handler(signum, frame):
+    """handler"""
+    global __close_app
+    __close_app = True
+    # print('Here you go signum: ', signum, __close_app, flush=True)
+
+
+def main():
+    """main"""
 
     print()
-    print("=============================================================================")
-    print("Simple ctrlX Data Layer Client Snap in Python using ctrlX Data Layer subscriptions.")
+    print(
+        "============================================================================="
+    )
+    print(
+        "Simple ctrlX Data Layer Client Snap in Python using ctrlX Data Layer subscriptions."
+    )
     print("Will be restarted by the snap system.")
-    print("=============================================================================", flush=True)
+    print(
+        "=============================================================================",
+        flush=True,
+    )
+
+    signal.signal(signal.SIGINT, handler)
+    signal.signal(signal.SIGTERM, handler)
+    signal.signal(signal.SIGABRT, handler)
 
     faulthandler.enable()
 
     with ctrlxdatalayer.system.System("") as datalayer_system:
         datalayer_system.start(False)
 
-        datalayer_client, datalayer_client_connection_string = get_client(datalayer_system)
-        if datalayer_client  is None:
-            print("WARNING Connecting", datalayer_client_connection_string, "failed.", flush=True)
+        datalayer_client, datalayer_client_connection_string = get_client(
+            datalayer_system, ip="10.0.2.2", ssl_port=8443
+        )
+        if datalayer_client is None:
+            print(
+                "WARNING Connecting",
+                datalayer_client_connection_string,
+                "failed.",
+                flush=True,
+            )
             sys.exit(1)
 
-        with datalayer_client:  # datalayer_client is closed automatically when leaving with block
-
+        with (
+            datalayer_client
+        ):  # datalayer_client is closed automatically when leaving with block
             subscription_properties = ctrlxdatalayer.subscription.create_properties(
-                "python-datalayer-client-sub", publish_interval=100)
+                "python-datalayer-client-sub", publish_interval=1000
+            )
 
             if subscription_properties is None:
                 print("ERROR create_properties() returned: None", flush=True)
@@ -45,7 +75,8 @@ if __name__ == '__main__':
 
             with subscription_properties:
                 result, subscription = datalayerclient.app.subscribe_single(
-                    datalayer_client, subscription_properties)
+                    datalayer_client, subscription_properties
+                )
                 if result != Result.OK:
                     print("ERROR subscribe_single() failed with:", result, flush=True)
                     sys.exit(1)
@@ -59,7 +90,8 @@ if __name__ == '__main__':
                     subscription.unsubscribe_all()
 
                 result, subscription = datalayerclient.app.subscribe_multi(
-                    datalayer_client, subscription_properties)
+                    datalayer_client, subscription_properties
+                )
                 if result != Result.OK:
                     print("ERROR subscribe_multi() failed with:", result, flush=True)
                     sys.exit(1)
@@ -69,15 +101,16 @@ if __name__ == '__main__':
                     sys.exit(1)
 
                 with subscription:
-
                     # Endless loop
-                    while datalayer_client.is_connected():
+                    while datalayer_client.is_connected() and not __close_app:
                         time.sleep(1.0)
 
                     subscription.unsubscribe_all()
 
-    # Attention: Doesn't return if any provider or client instance is still running
-    stop_ok = datalayer_system.stop(False)
-    print("System Stop", stop_ok, flush=True)
+        # Attention: Doesn't return if any provider or client instance is still running
+        stop_ok = datalayer_system.stop(False)
+        print("System Stop", stop_ok, flush=True)
 
-    sys.exit(0)
+
+if __name__ == "__main__":
+    main()

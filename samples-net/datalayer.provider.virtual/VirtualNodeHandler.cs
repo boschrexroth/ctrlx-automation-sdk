@@ -50,29 +50,15 @@ namespace Samples.Datalayer.Provider.Virtual
         #region Properties
 
         /// <summary>
-        /// Gets the application lock
-        /// </summary>
-        public ManualResetEvent Lock { get; } = new(false);
-
-        /// <summary>
         /// Gets the ctrlX Data Layer provider
         /// </summary>
         public IProvider Provider { get; private set; }
 
-        /// <summary>
-        /// Gets the name
-        /// </summary>
-        public string Name { get; }
-
-        /// <summary>
-        /// Gets the base address
-        /// </summary>
-        public string BaseAddress { get; }
 
         /// <summary>
         /// Gets the full address with is BaseAddress/Name
         /// </summary>
-        public string FullAddress { get; }
+        public string Address { get; }
 
         #endregion
 
@@ -81,13 +67,10 @@ namespace Samples.Datalayer.Provider.Virtual
         /// </summary>
         /// <param name="baseAddress"></param>
         /// <param name="name"></param>
-        public VirtualNodeHandler(IProvider provider, string baseAddress, string name)
+        public VirtualNodeHandler(IProvider provider, string address)
         {
             Provider = provider;
-            BaseAddress = baseAddress ?? throw new ArgumentNullException(nameof(baseAddress));
-            Name = name ?? throw new ArgumentNullException(nameof(name));
-
-            FullAddress = $"{BaseAddress}/{Name}";
+            Address = address;
         }
 
         #region Public
@@ -99,18 +82,18 @@ namespace Samples.Datalayer.Provider.Virtual
         public DLR_RESULT Start()
         {
             //We just listen to our base address using a wildcard on '{FullAddress}/**'
-            var (result, _) = Provider.CreateNode(FullAddress, "**", this);
+            var (result, _) = Provider.CreateNode(Address, "**", this);
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
             }
-            var folderNode = new VirtualNode(FullAddress, Variant.Null, NodeClass.Folder, true, false, false, false, false);
+            var folderNode = new VirtualNode(Address, Variant.Null, NodeClass.Folder, true, false, false, false, false);
             _nodes.AddOrUpdate(folderNode.Address, folderNode, (k, v) => folderNode);
 
             //Create some virtual nodes here just for demonstration
-            Console.WriteLine($"Creating virtual nodes on address: {FullAddress}");
+            Console.WriteLine($"Creating virtual nodes on address: {Address}");
             int currentLevel = 0;
-            if (CreateDummyNodes(FullAddress, 3, ref currentLevel, 5).IsBad())
+            if (CreateDummyNodes(Address, 3, ref currentLevel, 5).IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
             }
@@ -138,9 +121,6 @@ namespace Samples.Datalayer.Provider.Virtual
 
             // Clear our nodes
             _nodes.Clear();
-
-            //Unlock application
-            Lock.Set();
 
             return DLR_RESULT.DL_OK;
         }

@@ -93,12 +93,13 @@ nav:
       - Guidelines:
         - Package Assets: package-assets.md
         - App Developer Guideline: appdevguide.md
-        - App persist configurations: persistdata.md
+        - Persisting Configurations: persistdata.md
+        - Persisting Device Settings: persist-device-settings.md
         - License Management: licensing.md
         - Service-to-Service Authentication: s2sauth.md
         - Using Flatbuffers in IEC 61131-3 Code: fbs2plc.md
         - Configure maximal Number of Open File Handles: numopenfilehandles.md
-        - Using Localizaction: localizaction.md
+        - Using Localization: localizaction.md
         - External Storages:
           - Date exchange: data-exchange.md
           - Storage extension: storage-extension.md

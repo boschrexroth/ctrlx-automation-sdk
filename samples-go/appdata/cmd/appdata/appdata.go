@@ -33,7 +33,7 @@ const (
 
 	// The name of the application storage folder
 	// MUST be same as specified in your *.package-manifest.json file
-	StorageFolderName = "AppDataSampleGo"
+	StorageFolderName = "sdk-go-appdata"
 )
 
 var (
@@ -65,57 +65,71 @@ type AppDataHttpRequest struct {
 	Phase             string
 }
 
-// Indicates whether the application is snapped or not (running inside linux snappy environment)
-func IsSnapped() bool {
-	_, isSnapped := os.LookupEnv("SNAP")
-	return isSnapped
+// Indicates whether the application is running inside a snap environment.
+func isSnap() bool {
+	return os.Getenv("SNAP") != ""
 }
 
-// Starts the Rest API
-func RestApiStart() error {
+var listener net.Listener
+
+// Starts the AppData listener.
+func StartAppDataServer() error {
 
 	// Depending on running as snap or as external app, start webserver with unix sockets or tcp
-	if IsSnapped() {
-		err := unixSocketServe()
-		return err
+	if isSnap() {
+		return unixSocketServe()
 	} else {
 		// Create http handle
 		http.HandleFunc("/"+RestUrlLoad, handler)
 		http.HandleFunc("/"+RestUrlSave, handler)
 
-		fmt.Print("App is not running as snap\n")
-		tcpListener, err := net.Listen("tcp", ":"+strconv.Itoa(HttpPort))
+		fmt.Print("app is not running as snap\n")
+		var err error
+		listener, err = net.Listen("tcp", ":"+strconv.Itoa(HttpPort))
 		if err != nil {
 			return err
 		}
-		fmt.Printf("Server UP - TCP - Port: %s \n", strconv.Itoa(HttpPort))
-		http.Serve(tcpListener, nil)
+		fmt.Printf("server UP - TCP - Port: %s \n", strconv.Itoa(HttpPort))
+		http.Serve(listener, nil)
+		fmt.Printf("server DOWN - TCP - Port: %s \n", strconv.Itoa(HttpPort))
+
 	}
 	return nil
 }
 
+// StopAppDataListener stopps the AppData listener
+func StopAppDataListener() {
+	if listener == nil {
+		return
+	}
+
+	listener.Close()
+	fmt.Println("stopped listening")
+}
+
 func unixSocketServe() error {
-	fmt.Println("App is running as snap")
+	fmt.Println("app is running as snap")
 	sockpath := filepath.Join(os.Getenv("SNAP_DATA"), "/package-run/sdk-go-appdata/")
 	sockfile := filepath.Join(sockpath, "web.sock")
 	//remo
 	if _, err := os.Stat(sockpath); err == nil {
-		fmt.Println("Unix domain socket already exists, deleting")
+		fmt.Println("unix domain socket already exists, deleting")
 		_ = os.Remove(sockfile)
 	}
 
 	if _, err := os.Stat(sockpath); os.IsNotExist(err) {
-		fmt.Println("Unix domain socket creating")
+		fmt.Println("unix domain socket creating")
 		os.MkdirAll(sockpath, os.ModePerm)
 	}
-	fmt.Println("App socket listening")
-	unixListener, err := net.Listen("unix", sockfile)
+	fmt.Println("app socket listening")
+	var err error
+	listener, err = net.Listen("unix", sockfile)
 	if err != nil {
-		fmt.Println("App Socket error: ", err)
+		fmt.Println("app Socket error: ", err)
 		return err
 	}
 
-	fmt.Print("App socket register handler\n")
+	fmt.Print("app socket register handler\n")
 	m := http.NewServeMux()
 	m.HandleFunc("/"+RestUrlLoad, handler)
 	m.HandleFunc("/"+RestUrlSave, handler)
@@ -124,18 +138,19 @@ func unixSocketServe() error {
 		Handler: m,
 	}
 
-	fmt.Printf("Server UP - UNIX SOCKET - File: %s ", sockfile)
-	if err := server.Serve(unixListener); err != nil {
+	fmt.Printf("server UP - UNIX SOCKET - File: %s ", sockfile)
+	if err := server.Serve(listener); err != nil {
 		log.Fatal(err)
 		return err
 	}
+	fmt.Printf("server DOWN - UNIX SOCKET - File: %s ", sockfile)
 	return nil
 }
 
 func handler(response http.ResponseWriter, request *http.Request) {
 	// Check if POST method is used
 	if request.Method != http.MethodPost {
-		fmt.Printf("Request method %s not allowed \n", request.Method)
+		fmt.Printf("request method %s not allowed \n", request.Method)
 		response.WriteHeader(http.StatusMethodNotAllowed)
 		return
 	}
@@ -146,16 +161,16 @@ func handler(response http.ResponseWriter, request *http.Request) {
 	fmt.Printf("REST Command: %s \n ", restUrl)
 
 	// Get token from http request
-	token, err := GetToken(request)
+	token, err := getToken(request)
 
 	if err != nil {
-		fmt.Print("Invalid authentication token (Bearer)")
+		fmt.Print("invalid authentication token (Bearer)")
 		response.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 
-	if !IsAuthorized(token) {
-		fmt.Print("Not authorized (Bearer invalid)")
+	if !isAuthorized(token) {
+		fmt.Print("not authorized (Bearer invalid)")
 		response.WriteHeader(http.StatusUnauthorized)
 		return
 	}
@@ -165,7 +180,7 @@ func handler(response http.ResponseWriter, request *http.Request) {
 
 	err = decoder.Decode(&appdataRequest)
 	if err != nil {
-		fmt.Printf("Error decoding json payload: %s", err.Error())
+		fmt.Printf("error decoding json payload: %s", err.Error())
 		response.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -192,7 +207,7 @@ func handler(response http.ResponseWriter, request *http.Request) {
 		// load: Provide resources according to the data from the active configuration
 		case "load":
 			//This is were we can load our application data from current configuration
-			err = LoadAppData()
+			err = loadAppData()
 			if err != nil {
 				response.WriteHeader(http.StatusInternalServerError)
 			}
@@ -210,7 +225,7 @@ func handler(response http.ResponseWriter, request *http.Request) {
 		//save: Serialize current resources into active configuration
 		case "save":
 			//This is were we can save our application data into current configuration to be persistent
-			err = SaveAppData()
+			err = saveAppData()
 			if err != nil {
 				response.WriteHeader(http.StatusInternalServerError)
 			}
@@ -219,18 +234,15 @@ func handler(response http.ResponseWriter, request *http.Request) {
 		default:
 			//We return 204 here to add upwards-compatibility for new phases
 			response.WriteHeader(http.StatusNoContent)
-
 		}
 	}
-
 }
 
-func LoadAppData() error {
+func loadAppData() error {
 	path := StorageFile
 
 	if _, err := os.Stat(path); os.IsNotExist(err) {
-		return ResetAppData()
-
+		return resetAppData()
 	}
 
 	jsonFile, err := os.ReadFile(path)
@@ -249,7 +261,7 @@ func LoadAppData() error {
 	return nil
 }
 
-func ResetAppData() error {
+func resetAppData() error {
 	MyAppData.HostName, _ = os.Hostname()
 	MyAppData.OS = runtime.GOOS
 	MyAppData.OSArchitecture = runtime.GOARCH
@@ -258,11 +270,11 @@ func ResetAppData() error {
 
 	fmt.Print("Created new application data.\n")
 
-	return SaveAppData()
+	return saveAppData()
 }
 
-func SaveAppData() error {
-	err := EnsureStorageLocation()
+func saveAppData() error {
+	err := ensureStorageLocation()
 	if err != nil {
 		return err
 	}
@@ -283,7 +295,7 @@ func SaveAppData() error {
 	return nil
 }
 
-func EnsureStorageLocation() error {
+func ensureStorageLocation() error {
 	path := StorageLocation
 
 	if _, err := os.Stat(path); os.IsNotExist(err) {
@@ -299,7 +311,7 @@ func EnsureStorageLocation() error {
 	return nil
 }
 
-func GetToken(request *http.Request) (*jwt.Token, error) {
+func getToken(request *http.Request) (*jwt.Token, error) {
 	//Extract the token
 	authHeader := request.Header.Get("Authorization")
 	if authHeader != "" {
@@ -317,16 +329,13 @@ func GetToken(request *http.Request) (*jwt.Token, error) {
 			*/
 			return token, nil
 		}
-
 		return nil, errors.New("invalid authorization token")
 	}
-
 	return nil, errors.New("an authorization header is required")
-
 }
 
 // Indicates whether the request is authorized to be executed
-func IsAuthorized(token *jwt.Token) bool {
+func isAuthorized(token *jwt.Token) bool {
 	if claims, ok := token.Claims.(jwt.MapClaims); ok {
 		checkScopes := claims["scope"].([]interface{})
 

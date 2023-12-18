@@ -99,13 +99,13 @@ static std::string getConnectionString(
 //! @param[in] password The password
 //! @param[in] sslPort  The port number for SSL: 8443 if ctrlX COREvirtual with port forwarding 8443:443
 //! @result IClient instance or nullptr on error
-static comm::datalayer::IClient* getClient(comm::datalayer::DatalayerSystem& datalayerSystem,
+static comm::datalayer::IClient2* getClient(comm::datalayer::DatalayerSystem& datalayerSystem,
                                            const std::string& ip = "192.168.1.1",
                                            const std::string& user = "boschrexroth",
                                            const std::string& password = "boschrexroth", int sslPort = 443)
 {
   std::string connectionString = getConnectionString(ip, user, password, sslPort);
-  comm::datalayer::IClient* client = datalayerSystem.factory()->createClient(connectionString);
+  comm::datalayer::IClient2* client = datalayerSystem.factory()->createClient2(connectionString);
   if (client->isConnected())
   {
     return client;
@@ -123,13 +123,13 @@ static comm::datalayer::IClient* getClient(comm::datalayer::DatalayerSystem& dat
 //! @param[in] password The password
 //! @param[in] sslPort  The port number for SSL: 8443 if ctrlX COREvirtual with port forwarding 8443:443
 //! @result IProvider instance or nullptr on error
-static comm::datalayer::IProvider* getProvider(comm::datalayer::DatalayerSystem& datalayerSystem,
+static comm::datalayer::IProvider2* getProvider(comm::datalayer::DatalayerSystem& datalayerSystem,
                                                const std::string& ip = "192.168.1.1",
                                                const std::string& user = "boschrexroth",
                                                const std::string& password = "boschrexroth", int sslPort = 443)
 {
   std::string connectionString = getConnectionString(ip, user, password, sslPort);
-  comm::datalayer::IProvider* provider = datalayerSystem.factory()->createProvider(connectionString);
+  comm::datalayer::IProvider2* provider = datalayerSystem.factory()->createProvider2(connectionString);
   if (provider->start() == DL_OK && provider->isConnected())
   {
     return provider;

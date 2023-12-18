@@ -5,11 +5,11 @@
 import logging
 from cysystemd import journal
 
+
 def run():
-    """run
-    """
+    """run"""
     print("Simple snap in Python using logging with different log levels", flush=True)
-        
+
     log = logging.getLogger()
     log.setLevel(logging.DEBUG)
     log.addHandler(journal.JournaldLogHandler())
@@ -20,6 +20,5 @@ def run():
     log.warning("I am a warning")
     log.info("I am an info message")
     log.debug("I am a debug message")
-    
-    #<timestamp>|<userId>|<mainDiagnosisCode>|<mainTitle>|<detailedDiagnosisCode>|<detailedTitle>|<entity>|<dynamicSource>|<dynamicDescription>
- 
+
+    # <timestamp>|<userId>|<mainDiagnosisCode>|<mainTitle>|<detailedDiagnosisCode>|<detailedTitle>|<entity>|<dynamicSource>|<dynamicDescription>

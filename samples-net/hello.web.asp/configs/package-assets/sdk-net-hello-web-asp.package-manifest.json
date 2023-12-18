@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.3.schema.json",
+  "version": "1.0.0",
+  "id": "sdk-net-hello-web-asp",
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "hello.web.asp",
+        "url": "/hello-web-asp",
+        "binding": ":5000"
+      }
+    ]
+  },
+  "menus": {
+    "sidebar": [
+      {
+        "icon": "bosch-ic-grid-view",
+        "id": "sdk-net-hello-web-asp",
+        "link": "/hello-web-asp",
+        "title": "Hello Web ASP.NET",
+        "target": "_blank"
+      }
+    ]
+  }
+}

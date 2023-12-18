@@ -1,7 +1,7 @@
 name: sdk-py-provider
-version: 2.4.0
+title: SDK Python Provider
+version: 1.0.0
 summary: ctrlX Data Layer provider sample written in Python for ctrlX
-title: sdk-py-provider
 description: |
   This sample shows how to provide data to the ctrlX Data Layer
 base: core22
@@ -16,8 +16,8 @@ apps:
       - datalayer
     daemon: simple
     restart-condition: always
-    passthrough:   
-      restart-delay: 10s
+    passthrough:
+      restart-delay: 30s
 
 parts:
   provider:
@@ -29,12 +29,12 @@ parts:
 
   bfbs:
     plugin: dump
-    source: ./bfbs 
+    source: ./bfbs
 
   mddb:
     plugin: dump
-    source: ./mddb 
-      
+    source: ./mddb
+
 plugs:
   datalayer:
     interface: content

@@ -1,5 +1,11 @@
 ## Software Development Kit for ctrlX AUTOMATION
 
+### Version 2.4.0 <small> November, 2023</small>
+
+* Fix: Some internal Bugfixes
+* Docu: Improve documentation
+* Allign sample names
+
 ### Version 2.2.0 <small> August, 2023</small>
 
 * Use base: core22 as basis for each sample project

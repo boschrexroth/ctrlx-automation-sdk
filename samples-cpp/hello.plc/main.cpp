@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <thread>
 #include <string_view>
 
 #include "comm/datalayer/datalayer.h"
@@ -18,10 +19,10 @@
 
 #include "ctrlx_datalayer_helper.h"
 
-comm::datalayer::IClient* client;
-comm::datalayer::Variant variant;
+static comm::datalayer::IClient* g_client;
+static comm::datalayer::Variant g_variant;
 
-std::string helloPlcApplication = "hello_plc_application";
+static std::string g_helloPlcApplication = "hello_plc_application";
 
 
 static comm::datalayer::DlResult getStrings(comm::datalayer::Variant& data, std::vector<std::string>& strings)
@@ -101,24 +102,24 @@ static comm::datalayer::DlResult setFloatValue(comm::datalayer::Variant& data, c
 
 static void scanVariable(std::string address)
 {
-  auto writeNotAllowed = address.find(helloPlcApplication) == std::string::npos;
+  auto writeNotAllowed = address.find(g_helloPlcApplication) == std::string::npos;
 
   comm::datalayer::DlResult result;
 
   // determine the data type of the symbol-variable read
-  switch (variant.getType())
+  switch (g_variant.getType())
   {
     case comm::datalayer::VariantType::STRING:
 
-      std::cout << "Actual value of '" << address << "' : " << std::string(variant) << std::endl;
+      std::cout << "Actual value of '" << address << "' : " << std::string(g_variant) << std::endl;
 
-      if (writeNotAllowed) 
+      if (writeNotAllowed)
       {
         std::cout << "Skip writing of '" << address << std::endl;
         return;
       }
-      
-      result = setStringValue(variant, client, address, "HelloDeveloper");
+
+      result = setStringValue(g_variant, g_client, address, "HelloDeveloper");
       if (STATUS_FAILED(result))
       {
         std::cout << "WARN Set STRING value into '" << address << "' failed with: " << result.toString() << std::endl;
@@ -132,15 +133,15 @@ static void scanVariable(std::string address)
       // Set '1337' to INT-Variable in the plc application
     case comm::datalayer::VariantType::INT16:
 
-      std::cout << "Actual value of '" << address << "' : " << int16_t(variant) << std::endl;
+      std::cout << "Actual value of '" << address << "' : " << int16_t(g_variant) << std::endl;
 
-      if (writeNotAllowed) 
+      if (writeNotAllowed)
       {
         std::cout << "Skip writing of '" << address << std::endl;
         return;
       }
 
-      result = setIntValue(variant, client, address, 1337);
+      result = setIntValue(g_variant, g_client, address, 1337);
       if (STATUS_FAILED(result))
       {
         std::cout << "WARN Set INT16 value into '" << address << "' failed with: " << result.toString() << std::endl;
@@ -149,20 +150,20 @@ static void scanVariable(std::string address)
       {
         std::cout << "INFO Set INT16 value into '" << address << "' succeeded" << std::endl;
       }
-      break;;
+      break;
 
       // Set '0.815f' to Float-Variable in the plc application
     case comm::datalayer::VariantType::FLOAT32:
 
-      std::cout << "Actual value of '" << address << "' : " << float(variant) << std::endl;
+      std::cout << "Actual value of '" << address << "' : " << float(g_variant) << std::endl;
 
-      if (writeNotAllowed) 
+      if (writeNotAllowed)
       {
         std::cout << "Skip writing of '" << address << std::endl;
         return;
       }
 
-      result = setFloatValue(variant, client, address, 0.815f);
+      result = setFloatValue(g_variant, g_client, address, 0.815f);
       if (STATUS_FAILED(result))
       {
         std::cout << "WARN Set FLOAT32 value into '" << address << "' failed with: " << result.toString() << std::endl;
@@ -182,7 +183,7 @@ static void scanVariable(std::string address)
 // address without / at the end
 static int scanFolder(std::string address)
 {
-  comm::datalayer::DlResult result = client->browseSync(address, &variant);
+  comm::datalayer::DlResult result = g_client->browseSync(address, &g_variant);
   if (STATUS_FAILED(result))
   {
     std::cout << "ERROR Browsing of '" << address << "' failed with: " << result.toString() << std::endl;
@@ -190,7 +191,7 @@ static int scanFolder(std::string address)
   }
 
   std::vector<std::string> children;
-  result = getStrings(variant, children);
+  result = getStrings(g_variant, children);
   if (STATUS_FAILED(result))
   {
     std::cout << "ERROR Reading '" << address << "' failed with: " << result.toString() << std::endl;
@@ -205,29 +206,33 @@ static int scanFolder(std::string address)
 
   // Loop over all children
   int exitCode;
-  for (int i=0; i < children.size(); i++)
+  for (int i = 0; i < children.size(); i++)
   {
-    std::string childAddress = address +"/" + children[i];
+    std::string childAddress = address + "/" + children[i];
 
     // If readSync succeeds then we have a variable
-    result = client->readSync(childAddress, &variant);
+    result = g_client->readSync(childAddress, &g_variant);
     if (STATUS_SUCCEEDED(result))
     {
       scanVariable(childAddress);
       continue;
     }
-    
+
     exitCode = scanFolder(childAddress);
 
-    if (exitCode != 0) return exitCode;
+    if (exitCode != 0)
+    {
+      return exitCode;
+    }
   }
 
   return 0;
 }
+
 static int scanPlcApp()
 {
   std::string address = "plc/app";
-  comm::datalayer::DlResult result = client->browseSync(address, &variant);
+  comm::datalayer::DlResult result = g_client->browseSync(address, &g_variant);
   if (STATUS_FAILED(result))
   {
     std::cout << "ERROR Browsing of '" << address << "' failed with: " << result.toString() << std::endl;
@@ -235,7 +240,7 @@ static int scanPlcApp()
   }
 
   std::vector<std::string> apps;
-  result = getStrings(variant, apps);
+  result = getStrings(g_variant, apps);
   if (STATUS_FAILED(result))
   {
     std::cout << "ERROR Reading '" << address << "' failed with: " << result.toString() << std::endl;
@@ -249,11 +254,14 @@ static int scanPlcApp()
   }
 
   // Loop over all apps
-  for (int i=0; i < apps.size(); i++)
+  for (int i = 0; i < apps.size(); i++)
   {
-    std::string symAddress = address +"/" + apps[i] + "/sym";
+    std::string symAddress = address + "/" + apps[i] + "/sym";
     auto result = scanFolder(symAddress);
-    if (result > 0) return result;
+    if (result > 0)
+    {
+      return result;
+    }
   }
 
   return 0;
@@ -261,29 +269,39 @@ static int scanPlcApp()
 
 int main()
 {
-  int exitCode = 0;
   comm::datalayer::DatalayerSystem datalayer;
-  datalayer.start(false);
 
-  // Try ctrlX CORE (virtual)
-  client = getClient(datalayer);
-  if (client == nullptr)
+  for (;;)
   {
-    // Try ctrlX COREvirtual with port forwarding
-    client = getClient(datalayer, "10.0.2.2", "boschrexroth", "boschrexroth", 8443);
-  }
-  if (client == nullptr)
-  {
-    std::cout << "ERROR Creating client connection failed." << std::endl;
-    exitCode = 1;
-  }
-  else
-  {
-    exitCode = scanPlcApp();
-    delete client;
+    datalayer.start(false);
+
+    // Try ctrlX CORE (virtual)
+    g_client = getClient(datalayer);
+    if (g_client == nullptr)
+    {
+      // Try ctrlX COREvirtual with port forwarding
+      g_client = getClient(datalayer, "10.0.2.2", "boschrexroth", "boschrexroth", 8443);
+    }
+    
+    if (g_client == nullptr)
+    {
+      std::cout << "ERROR Creating client connection failed." << std::endl;
+    }
+    else
+    {
+      // OK
+      while(scanPlcApp() == 0)
+      {
+          std::this_thread::sleep_for(std::chrono::seconds(10));
+      }
+    }
+
+    // ERROR --> retry
+    delete g_client;
+    datalayer.stop();
+    
+    std::this_thread::sleep_for(std::chrono::seconds(30));
   }
 
-  datalayer.stop();
-
-  return exitCode;
+  return 1;
 }

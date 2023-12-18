@@ -7,8 +7,16 @@
  * SPDX-License-Identifier: MIT
  */
 
-function helloWorld() {
-    setInterval(() => console.log('Hello World from Node.js!', new Date().toUTCString()), 1000)
-};
+async function helloWorld() {
+    // Keep the process alive until disconnected
+    setInterval(() => {
+        console.log('Hello World from Node.js!', new Date().toUTCString());
+    }, 5_000);
+
+    // Handle process event 'SIGTERM'
+    process.on('SIGTERM', () => {
+        console.info('SIGTERM signal received.');
+    });
+}
 
 helloWorld();

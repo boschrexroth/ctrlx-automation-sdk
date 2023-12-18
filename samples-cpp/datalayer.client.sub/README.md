@@ -19,6 +19,11 @@ In main.cpp the main function first creates an instance of DataLayerClientSub an
 
 Running as a snap in the ctrlX CORE it will be restarted by snapd because of the `restart-condition: always` entry in snap/snapcraft.yaml.
 
+## Debug and Run
+
+1. Build the executable via cmake plugin.
+2. Launch the app with the debugger attached by pressing __F5__.
+
 ## Build and Install the Snap
 
 Build and install the snap like described [here](../README.md).

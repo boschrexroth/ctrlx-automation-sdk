@@ -2,11 +2,18 @@
 
 ## Prerequisites
 
-* ctrlX AUTOMATION SDK build environment
-* ctrlX AUTOMATION SDK version
+* ctrlX WORKS 
+* ctrlX AUTOMATION App Build Environment
+* ctrlX AUTOMATION SDK installed in the App Build Environment
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE
 
-* Visual Studio Code installed on your host computer
+* Visual Studio Code installed on your host computer 
+
+Visual Studio Code extensions (Install in SSH):
+
+* C/C++ for Visual Studio Code (Microsoft)
+* C/C++ Extension Pack (Microsoft)
+* CMake Tools (Microsoft)
 
 ## Find out the supported samples 
 
@@ -27,7 +34,12 @@
 * [ctrlX Data Layer Realtime](./datalayer.realtime/README.md)
 * [ctrlX Data Layer Provider All Data Types](./datalayer.provider.all-data/README.md)
 
-## Getting Started
+## Debug and Run
+
+1. Build the executable via cmake plugin.
+2. Launch the app with the debugger attached by pressing __F5__.
+
+## Build and Install
 
 * Launch Visual Studio Code as your IDE
 * If the IDE is started remote connect via Remote Explorer extension to your builder environment (SSH target)

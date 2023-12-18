@@ -5,6 +5,7 @@
 
 ### Basic Samples
 
+* [ctrlX Data Layer Client Simple](datalayer.client.simple/README.md)
 * [ctrlX Data Layer Client Light](datalayer.client.light/README.md)
 * [ctrlX Data Layer Client Bulk](datalayer.client.bulk/README.md)
 * [ctrlX Data Layer Client](datalayer.client/README.md)

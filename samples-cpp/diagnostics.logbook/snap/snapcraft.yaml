@@ -3,8 +3,9 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
-name: sdk-cpp-diaglogbook
-version: "2.0.0"
+name: sdk-cpp-diagnostics-logbook
+title: SDK C++ Diagnostics Logbook
+version: 1.0.0
 grade: stable
 summary: Writes messages to journald and the ctrlX logbook
 description: |
@@ -17,11 +18,11 @@ apps:
   logbook:
     command: logbook
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: [ ]
+    plugs: []
     daemon: simple
+    restart-condition: always
     passthrough:
-      restart-condition: always
-      restart-delay: 30s 
+      restart-delay: 10s
 
 #  describes how to import, and potentially build, each required part of the snap:
 parts:

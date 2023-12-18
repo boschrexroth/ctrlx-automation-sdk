@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.schema.json",
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.3.schema.json",
   "version": "1.0.0",
   "id": "sdk-go-appdata",
   "services": {
@@ -19,14 +19,14 @@
       "load": [
         {
           "id": "sdk-go-appdata",
-          "subject": "Application data of the ctrlX go appdata.sample",
+          "subject": "Application data of the SDK Go AppData Sample",
           "url": "https://localhost/sdk-go-appdata/api/v1/load"
         }
       ],
       "save": [
         {
           "id": "sdk-go-appdata",
-          "subject": "Application data of the ctrlX go appdata.sample",
+          "subject": "Application data of the SDK Go AppData Sample",
           "url": "https://localhost/sdk-go-appdata/api/v1/save"
         }
       ]
@@ -40,12 +40,12 @@
       "scopes": [
         {
           "identifier": "sdk-go-appdata.web.rwx",
-          "name": "Manage AppData Sample",
+          "name": "Manage SDK Go AppData Sample",
           "description": ""
         },
         {
           "identifier": "sdk-go-appdata.web.r",
-          "name": "View AppData Sample",
+          "name": "View SDK Go AppData Sample",
           "description": ""
         }
       ]
@@ -54,10 +54,9 @@
   "configuration": {
     "appDirectories": [
       {
-        "name": "AppDataSampleGo",
-        "description": "Application data of the ctrlX go appdata.sample",
+        "name": "sdk-go-appdata",
+        "description": "Application data of the SDK Go AppData Sample",
         "icon": "bosch-ic-directory",
-        "scopes": [],
         "copyOnLoad": true
       }
     ]

@@ -22,6 +22,11 @@ If the attached app 'hello_plc_application' has been installed, its variables wi
 
 All variables with another data type are ignored.
 
+## Debug and Run
+
+1. Build the executable via cmake plugin.
+2. Launch the app with the debugger attached by pressing __F5__.
+
 ## Build and Install the Snap
 
 Build and install the snap like described [here](../README.md).

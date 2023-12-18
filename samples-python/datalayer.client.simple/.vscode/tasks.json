@@ -1,0 +1,205 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install venv",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "install-venv.sh"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build snap amd64",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "build-snap-amd64.sh"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build snap arm64",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "build-snap-arm64.sh"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build upload snap - ctrlX COREvirtual Network Adapter",
+      "type": "shell",
+      "command": "../../scripts/build-upload-log-snap.sh",
+      "args": [
+        "-ctrlx-virt-NA"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build upload snap - ctrlX COREvirtual Port Forwarding",
+      "type": "shell",
+      "command": "../../scripts/build-upload-log-snap.sh",
+      "args": [
+        "-ctrlx-virt-PF"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build upload snap - ctrlX CORE 192.168.1.1",
+      "type": "shell",
+      "command": "../../scripts/build-upload-log-snap.sh",
+      "args": [
+        "-addr",
+        "192.168.1.1"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Build upload snap - ctrlX CORE",
+      "type": "shell",
+      "command": "../../scripts/build-upload-log-snap.sh",
+      "args": [
+        "-build",
+        "${input:Build}",
+        "-upload",
+        "${input:Upload}",
+        "-logs",
+        "${input:Logs}",
+        "-svc",
+        "${input:Service}",
+        "-addr",
+        "${input:IPAddress}",
+        "-ssl-port",
+        "${input:SSLPort}",
+        "-ssl-usr",
+        "${input:SSLUser}",
+        "-ssl-pwd",
+        "${input:SSLPwd}",
+        "-arch",
+        "${input:Arch}",
+        "-ssh-port",
+        "${input:SSHPort}",
+        "-ssh-usr",
+        "${input:SSHUser}",
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+  ],
+  "inputs": [
+    {
+      "id": "Build",
+      "type": "pickString",
+      "description": "Build snap?",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "Upload",
+      "type": "pickString",
+      "description": "Upload snap?",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "IPAddress",
+      "type": "promptString",
+      "description": "IP address",
+      "default": "192.168.1.1"
+    },
+    {
+      "id": "SSLPort",
+      "type": "promptString",
+      "description": "HTTPS (SSL) port number",
+      "default": "443"
+    },
+    {
+      "id": "Service",
+      "type": "pickString",
+      "description": "Switch to state SERVICE before installing the snap: y/n",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "SSLUser",
+      "type": "promptString",
+      "description": "HTTPS (SSL) user name",
+      "default": "boschrexroth"
+    },
+    {
+      "id": "SSLPwd",
+      "type": "promptString",
+      "password": true,
+      "description": "HTTPS (SSL) password",
+      "default": "boschrexroth"
+    },
+    {
+      "id": "Arch",
+      "type": "pickString",
+      "description": "CPU architecture?",
+      "options": [
+        "arm64",
+        "amd64"
+      ],
+      "default": "arm64"
+    },
+    {
+      "id": "Logs",
+      "type": "pickString",
+      "description": "Show logs - SSH must be enabled on ctrlX: y/n",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "SSHPort",
+      "type": "promptString",
+      "description": "SSH port number",
+      "default": "22"
+    },
+    {
+      "id": "SSHUser",
+      "type": "promptString",
+      "description": "SSH user name",
+      "default": "rexroot"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+name: sdk-py-client-simple
+title: SDK Python Client Simple
+version: 1.0.0
+summary: ctrlX Data Layer client sample written in Python for ctrlX CORE.
+description: |
+  The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console.
+base: core22
+confinement: strict
+grade: stable
+
+apps:
+  client:
+    command: bin/main.py
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 30s
+
+parts:
+  client:
+    plugin: python
+    source: .
+    stage-packages:
+      - libzmq5
+      - ctrlx-datalayer
+
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer

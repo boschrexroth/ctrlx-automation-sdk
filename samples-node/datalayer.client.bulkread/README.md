@@ -20,7 +20,11 @@ The sample __datalayer.client.bulkread__ demonstrates
 
 Please read the common Node.js docs [here](./../README.md), first.
 
-## Getting Started
+## Debug and Run
+1. Run 'npm install' in the terminal.  
+2. Launch the app with the debugger attached by pressing __F5__.
+
+## Build and Install
 
 1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
@@ -33,13 +37,13 @@ Please read the common Node.js docs [here](./../README.md), first.
    + Navigate to __Diagnostics -> Logbook__ 
    + Click __Settings__ on the right top corner
    + Enable __Show system messages__
-   + Navigate to __Filter -> Units__ and check your __snap.ctrlx-node-datalayer-client-bulkread.app.service__
+   + Navigate to __Filter -> Units__ and check your __snap.sdk-node-client-bulkread.app.service__
    + Now you should the see the app output diagnostics. 
    + Press __Refresh__ to update.
 
 7. If you have root permissions, you can also watch the output on any ssh console with the command:
     ```bash
-    sudo snap logs ctrlx-node-datalayer-client-bulkread.app -f | more
+    sudo snap logs sdk-node-client-bulkread.app -f | more
     ```
 ## Console Output
 ```bash

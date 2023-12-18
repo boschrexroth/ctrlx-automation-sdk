@@ -65,6 +65,6 @@ const DATA_RANGES = {
      * float 64 bit
      */
     double: DataRange.create(-1.7976931348623157e+308, 1.7976931348623157e+308),
-}
+};
 
 export = DATA_RANGES;

@@ -73,7 +73,7 @@ namespace Samples.Datalayer.Client.Browse
             if (children == null)
             {
                 return;
-            };
+            }
 
             for (var i = 0; i < children.Length; i++)
             {
@@ -110,6 +110,7 @@ namespace Samples.Datalayer.Client.Browse
 
             return Truncate(valueVariant.Value.ToString(), MaxChars);
         }
+        
 
         /// <summary>
         /// Truncates the given string to a maximum count of characters defined by maxChars and append '...'

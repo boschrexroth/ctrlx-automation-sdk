@@ -1,24 +1,27 @@
 # Getting started
 # See https://snapcraft.io/docs/getting-started
+
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-name: ctrlx-dotnet-datalayer-provider-virtual
-version: '1.0.0'
+
+name: sdk-net-provider-virtual
+title: SDK .NET Provider Virtual
+base: core22
+version: 1.0.0
+#icon: assets/icons/ICONHERE.png
 summary: ctrlX Data Layer provider virtual sample written in .NET for ctrlX CORE.
 description: |
   This .NET sample demonstrates how to write a light-weight provider, listing to a wildcard address and managing virtual nodes.
-confinement: strict
-#confinement: devmode
-#icon: assets/icons/ICONHERE.png
-grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core22
-type: app
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
   app:
     command: datalayer.provider.virtual
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: [network, network-status, network-bind, process-control]
+    plugs:
+      - network
+      - datalayer
     daemon: simple
     restart-condition: always
     passthrough:

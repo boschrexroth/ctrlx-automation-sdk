@@ -4,15 +4,15 @@
 
 ### Basic Samples
 
-* [ctrlX Data Layer Client](./datalayer.client/README.md)
-* [ctrlX Data Layer Client Extensions](./datalayer.client.ext/README.md)
-* [ctrlX Data Layer Provider](./datalayer.provider/README.md)
-* [Hello Webserver](./hello.webserver/README.md)
+* [ctrlX Data Layer Client](./datalayer.client.simple/README.md)
+* [ctrlX Data Layer Client Extended (Subscribe, Bulk Read)](./datalayer.client.ext/README.md)
+* [ctrlX Data Layer Provider](./datalayer.provider.simple/README.md)
+* [Web Server](./webserver/README.md)
 * [WebDAV Client](./webdav.client/README.md)
 
 ### Advanced Samples
 
-* [Load/Save Application Data](./appdata/README.md)
+* [Application Data](./appdata/README.md)
 * [Usage of TPM2](./tpm2.srk/README.md)
 
 ## Build a Snap

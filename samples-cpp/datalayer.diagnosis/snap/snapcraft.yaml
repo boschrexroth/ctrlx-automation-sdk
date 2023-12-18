@@ -3,8 +3,9 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
-name: sdk-cpp-datalayerdiagnosis
-version: "2.2.0"
+name: sdk-cpp-diagnosis
+title: SDK C++ Diagnosis
+version: 1.0.0
 grade: stable
 summary: Sample app for processing diagnosis data via ctrlX Data Layer
 description: |
@@ -14,9 +15,10 @@ confinement: strict
 
 # define how apps & services are exposed to host system
 apps:
-  datalayerdiagnosis:
+  app:
     command: datalayerDiagnosis
-    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    # Interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    # TODO Werden diese Interfaces alle benötigt???
     plugs:
       - network
       - network-status
@@ -24,17 +26,18 @@ apps:
       - process-control
       - datalayer
     daemon: simple
+    restart-condition: always
     passthrough:
-      restart-condition: always
       restart-delay: 10s
 
 parts:
-  datalayerdiagnosis:
+  app:
     plugin: dump
     source: ./generated/build
     stage-packages:
       - libzmq5
       - ctrlx-datalayer
+
   resourcesdiagnosis:
     plugin: dump
     source: ./resources/diagnostics

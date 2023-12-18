@@ -2,10 +2,9 @@
 
 ## Find out the supported samples
 
-
 ### Basic Samples
 
-* [Hello Multilanguage ](./hello.multilanguage/README.md)
+* [Multi-language](./multi-language/README.md)
 
 ## Build a Snap
 

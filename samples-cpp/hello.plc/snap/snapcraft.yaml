@@ -3,8 +3,9 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
-name: sdk-cpp-helloplc
-version: "2.2.0"
+name: sdk-cpp-hello-plc
+title: SDK C++ Hello PLC
+version: 1.0.0
 grade: stable
 summary: Write PLC variables
 description: |
@@ -15,17 +16,16 @@ confinement: strict
 
 # define how apps & services are exposed to host system
 apps:
-  helloPlc:
+  app:
     command: helloPlc
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
     plugs:
-    - network
-    - datalayer
+      - network
+      - datalayer
     daemon: simple
+    restart-condition: always
     passthrough:
-      restart-condition: always
       restart-delay: 10s
-
 
 #  describes how to import, and potentially build, each required part of the snap:
 parts:

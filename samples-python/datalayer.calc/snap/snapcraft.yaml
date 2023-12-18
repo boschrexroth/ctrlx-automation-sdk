@@ -1,37 +1,31 @@
 name: sdk-py-calc
-version: 2.4.0
+title: SDK Python Calculation
+version: 1.0.0
 summary: Makes a calculation in Python
-title: SDK Python Calculation Sample
-description: 'Sample App in Python using ctrlX Data Layer subscriptions
-'
+description: 'Sample App in Python using ctrlX Data Layer subscriptions'
 base: core22
 confinement: strict
 grade: stable
 
 apps:
-
   client:
     command: bin/main.py
     plugs:
       - network
       - datalayer
     daemon: simple
-    passthrough:
-      restart-condition: always
-      restart-delay: 10s
 
 parts:
-
   client:
     plugin: python
     source: .
     stage-packages:
       - libzmq5
       - ctrlx-datalayer
-      
+
 # describes which interface slots are supported by defining the plugs
 plugs:
   datalayer:
     interface: content
     content: datalayer
-    target: $SNAP_DATA/.datalayer 
+    target: $SNAP_DATA/.datalayer

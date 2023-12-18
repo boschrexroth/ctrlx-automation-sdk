@@ -1,9 +1,9 @@
 name: sdk-py-logbook
-version: 2.4.0
+title: SDK Python Logbook
+version: 1.0.0
 summary: Logbook sample written in Python for ctrlX
-title: sdk-py-logbook
 description: |
-  This sample shows how to log with different loglevels
+  This sample shows how to log with different log levels
 base: core22
 confinement: strict
 grade: stable
@@ -15,9 +15,9 @@ apps:
       - network
       - datalayer
     daemon: simple
+    restart-condition: always
     passthrough:
-      restart-condition: always
-      restart-delay: 10s 
+      restart-delay: 30s
 
 parts:
   logbook:
@@ -26,9 +26,8 @@ parts:
     stage-packages:
       - libsystemd-dev
 
-
 plugs:
   datalayer:
     interface: content
     content: datalayer
-    target: $SNAP_DATA/.datalayer 
+    target: $SNAP_DATA/.datalayer

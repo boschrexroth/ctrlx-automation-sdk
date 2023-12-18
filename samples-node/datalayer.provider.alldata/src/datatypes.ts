@@ -12,6 +12,7 @@ import DataType from './datatype';
  * The data types with variant type and target address.
  */
 const DATA_TYPES = {
+    
     /**
      * bool 8 bit	
      */
@@ -75,77 +76,77 @@ const DATA_TYPES = {
     /**
      * timestamp (Date)
      */
-    timestamp: DataType.create('timestamp', VariantTypes.string, 'types/datalayer/timestamp'),
+    timestamp: DataType.create('timestamp', VariantTypes.timestamp, 'types/datalayer/timestamp'),
 
     /**
      * flatbuffers
      */
-    inertialValue: DataType.create('inertial-value', VariantTypes.flatbuffers, 'types/samples/nodejs/schema/inertial-value'),
+    inertialValue: DataType.create('inertial-value', VariantTypes.flatbuffers, `${DataType.rootType}/inertial-value`),
 
     /**
      * array of bool 8 bit
      */
-    arbool8: DataType.create('array-of-bool8', VariantTypes.arbool8, 'types/datalayer/array-of-bool8'),
+    arrayOfBool8: DataType.create('array-of-bool8', VariantTypes.arbool8, 'types/datalayer/array-of-bool8'),
 
     /**
      * array of signed int 8 bit
      */
-    arint8: DataType.create('array-of-int8', VariantTypes.arint8, 'types/datalayer/array-of-int8'),
+    arrayOfInt8: DataType.create('array-of-int8', VariantTypes.arint8, 'types/datalayer/array-of-int8'),
 
     /**
      * array of unsigned int 8 bit
      */
-    aruint8: DataType.create('array-of-uint8', VariantTypes.aruint8, 'types/datalayer/array-of-uint8'),
+    arrayOfUint8: DataType.create('array-of-uint8', VariantTypes.aruint8, 'types/datalayer/array-of-uint8'),
 
     /**
      * array of signed int 16 bit
      */
-    arint16: DataType.create('array-of-int16', VariantTypes.arint16, 'types/datalayer/array-of-int16'),
+    arrayOfInt16: DataType.create('array-of-int16', VariantTypes.arint16, 'types/datalayer/array-of-int16'),
 
     /**
      * array of unsigned int 16 bit
      */
-    aruint16: DataType.create('array-of-uint16', VariantTypes.aruint16, 'types/datalayer/array-of-uint16'),
+    arrayOfUint16: DataType.create('array-of-uint16', VariantTypes.aruint16, 'types/datalayer/array-of-uint16'),
 
     /**
      * array of signed int 32 bit
      */
-    arint32: DataType.create('array-of-int32', VariantTypes.arint32, 'types/datalayer/array-of-int32'),
+    arrayOfInt32: DataType.create('array-of-int32', VariantTypes.arint32, 'types/datalayer/array-of-int32'),
 
     /**
      * array of unsigned int 32 bit
      */
-    aruint32: DataType.create('array-of-uint32', VariantTypes.aruint32, 'types/datalayer/array-of-uint32'),
+    arrayOfUint32: DataType.create('array-of-uint32', VariantTypes.aruint32, 'types/datalayer/array-of-uint32'),
 
     /**
      * array of signed int 64 bit
      */
-    arint64: DataType.create('array-of-int64', VariantTypes.arint64, 'types/datalayer/array-of-int64'),
+    arrayOfInt64: DataType.create('array-of-int64', VariantTypes.arint64, 'types/datalayer/array-of-int64'),
 
     /**
      * array of unsigned int 64 bit
      */
-    aruint64: DataType.create('array-of-uint64', VariantTypes.aruint64, 'types/datalayer/array-of-uint64'),
+    arrayOfUint64: DataType.create('array-of-uint64', VariantTypes.aruint64, 'types/datalayer/array-of-uint64'),
 
     /**
      * array of float 32 bit
      */
-    arfloat: DataType.create('array-of-float32', VariantTypes.arfloat, 'types/datalayer/array-of-float32'),
+    arrayOfFloat: DataType.create('array-of-float32', VariantTypes.arfloat, 'types/datalayer/array-of-float32'),
 
     /**
      * array of float 64 bit
      */
-    ardouble: DataType.create('array-of-float64', VariantTypes.ardouble, 'types/datalayer/array-of-float64'),
+    arrayOfFloat64: DataType.create('array-of-float64', VariantTypes.ardouble, 'types/datalayer/array-of-float64'),
 
     /**
      * array of string (UTF-8)
      */
-    arstring: DataType.create('array-of-string', VariantTypes.arstring, 'types/datalayer/array-of-string'),
+    arrayOfString: DataType.create('array-of-string', VariantTypes.arstring, 'types/datalayer/array-of-string'),
 
     /**
      * array of timestamp (Date)
      */
-    artimestamp: DataType.create('array-of-timestamp', VariantTypes.arstring, 'types/datalayer/array-of-timestamp'),
-}
+    arrayOfTimestamp: DataType.create('array-of-timestamp', VariantTypes.artimestamp, 'types/datalayer/array-of-timestamp'),
+};
 
 export = DATA_TYPES;

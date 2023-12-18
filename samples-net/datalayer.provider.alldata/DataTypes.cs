@@ -143,6 +143,6 @@ namespace Samples.Datalayer.Provider.Alldata
         /// <summary>
         /// Defines the InertialValue.
         /// </summary>
-        public static DataType InertialValue = new("inertial-value", "types/samples/inertial-value");
+        public static DataType InertialValue = new("inertial-value", "types/sdk/net/provider/all-data/inertial-value");
     }
 }

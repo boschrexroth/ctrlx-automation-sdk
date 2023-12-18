@@ -58,7 +58,7 @@ func main() {
 		panic(err)
 	}
 	_, _ = w.Write([]byte(`
-	I was here!
+	I was there!
 	Best regards
 	webdav.client
 	`))

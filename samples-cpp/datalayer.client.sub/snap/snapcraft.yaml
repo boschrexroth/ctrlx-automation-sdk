@@ -3,8 +3,9 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
-name: sdk-cpp-sub
-version: "2.2.0"
+name: sdk-cpp-client-sub
+title: SDK C++ Client Subscription
+version: 1.0.0
 grade: stable
 summary: SDK sample app in cpp - subscribes ctrlX Data Layer nodes
 description: |
@@ -16,19 +17,19 @@ confinement: strict
 
 # define how apps & services are exposed to the target operating system
 apps:
-  datalayerClientSub:
+  app:
     command: datalayerClientSub
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
     plugs:
       - network
       - datalayer
     daemon: simple
+    restart-condition: always
     passthrough:
-      restart-condition: always
       restart-delay: 10s
 
 parts:
-  datalayerclientsub:
+  app:
     plugin: dump
     source: ./generated/build
     stage-packages:

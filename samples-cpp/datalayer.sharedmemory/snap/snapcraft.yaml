@@ -1,0 +1,63 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: sdk-cpp-sharedmemory
+title: SDK C++ Shared Memory
+version: 1.0.0
+grade: stable
+summary: Example app for using ctrlX Data Layer shared memory
+description: |
+  The example project shows the access to the ctrlX Data Layer shared memory:
+  - a data provider - shmOwner - creates some shared memory 'input' and 'output'
+  - a data consumer - shmUser - reads 'input' and writes 'output'
+  When the user has written outputs once, the owner will start copying from output to input.
+base: core22
+confinement: strict
+
+# define how apps & services are exposed to host system
+apps:
+  shmOwner:
+    command: shmOwner
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs:
+      - network
+      - datalayer
+      - datalayer-shm
+    daemon: simple
+    passthrough:
+      restart-condition: always
+      restart-delay: 10s
+
+  shmUser:
+    command: shmUser
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs:
+      - network
+      - datalayer
+      - datalayer-shm
+    daemon: simple
+    passthrough:
+      restart-condition: always
+      restart-delay: 10s
+
+#  describes how to import, and potentially build, each required part of the snap:
+parts:
+  app:
+    plugin: dump
+    source: ./generated/build
+    stage-packages:
+      - libzmq5
+      - ctrlx-datalayer
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer
+
+  datalayer-shm:
+    interface: shared-memory
+    shared-memory: datalayer-shm

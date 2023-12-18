@@ -19,6 +19,10 @@ There are eight log levels defined by the Linux kernel:
 
 __Be carefull with level EMERGENCY: Messages with this level are sent to all consoles!__
 
+## Debug and Run
+
+1. Build the executable via cmake plugin.
+2. Launch the app with the debugger attached by pressing __F5__.
 
 ## Build and Install the Snap
 

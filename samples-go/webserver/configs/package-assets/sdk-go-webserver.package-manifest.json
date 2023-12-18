@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.3.schema.json",
+  "version": "1.0.0",
+  "id": "sdk-go-webserver",
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "sdk-go-webserver",
+        "url": "/sdk-go-webserver/",
+        "binding": "unix://{$SNAP_DATA}/package-run/sdk-go-webserver/web.sock",
+        "restricted": []
+      }
+    ]
+  },
+  "menus": {
+    "sidebar": [
+      {
+        "id": "sdk-go-webserver",
+        "target": "_blank",
+        "title": "SDK go webserver",
+        "icon": "bosch-ic-worldwideweb",
+        "link": "/sdk-go-webserver/"
+      }
+    ],
+    "settings": [],
+    "overview": [
+      {
+        "id": "sdk-go-webserver",
+        "target": "_blank",
+        "title": "SDK go webserver",
+        "icon": "bosch-ic-worldwideweb",
+        "link": "/sdk-go-webserver/"
+      }
+    ]
+  }
+}

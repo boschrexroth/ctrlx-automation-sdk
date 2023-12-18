@@ -3,8 +3,9 @@
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
 
-name: sdk-cpp-helloworld
-version: "2.0.0"
+name: sdk-cpp-hello-world
+title: SDK C++ Hello World
+version: 1.0.0
 grade: stable
 summary: Print 'Hello World' to console output
 description: |
@@ -14,15 +15,15 @@ confinement: strict
 
 # define how apps & services are exposed to host system
 apps:
-  HelloWorld:
+  app:
     command: HelloWorld
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: 
+    plugs:
       - network
     daemon: simple
+    restart-condition: always
     passthrough:
-      restart-condition: always
-      restart-delay: 10s  
+      restart-delay: 10s
 
 #  describes how to import, and potentially build, each required part of the snap:
 parts:

@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "datalayer.mqtt": {
-      "commandName": "Project",
-      "nativeDebugging": false
-    }
-  }
-}

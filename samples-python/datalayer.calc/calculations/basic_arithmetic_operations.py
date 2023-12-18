@@ -17,42 +17,53 @@ type_address_string = "types/datalayer/string"
 
 
 class BasicArithmeticOperations:
-    """BasicArithmeticOperations
-    """
+    """BasicArithmeticOperations"""
 
-    def __init__(self, provider: Provider, client: Client,  addressRoot: str, id: str, mode: str, update_time: int):
-        """__init__
-        """
+    def __init__(
+        self,
+        provider: Provider,
+        client: Client,
+        addressRoot: str,
+        id: str,
+        mode: str,
+        update_time: int,
+    ):
+        """__init__"""
         self.provider = provider
         self.client = client
 
         self.addressRoot = addressRoot + "/" + id + "/"
 
+        self.float64_value = Variant()
+
         self.in1_address = Variant()
-        self.in1_address.set_string(
-            "framework/metrics/system/cpu-utilisation-percent")
+        self.in1_address.set_string("framework/metrics/system/cpu-utilisation-percent")
         self.in1_value = Variant()
         self.in1_metadata = self.create_metadata(
-            type_address_string, id, "", "Enter address of input value 1 here", True)
+            type_address_string, id, "", "Enter address of input value 1 here", True
+        )
 
         self.in2_address = Variant()
-        self.in2_address.set_string(
-            "framework/metrics/system/cpu-utilisation-percent")
+        self.in2_address.set_string("framework/metrics/system/cpu-utilisation-percent")
         self.in2_value = Variant()
         self.in2_metadata = self.create_metadata(
-            type_address_string, id, "", "Enter address of input value 2 here", True)
+            type_address_string, id, "", "Enter address of input value 2 here", True
+        )
 
         self.mode = Variant()
         self.mode.set_string(mode)
         self.mode_metadata = self.create_metadata(
-            type_address_string, id, "", "Enter the operation mode here: + - / *", True)
+            type_address_string, id, "", "Enter the operation mode here: + - / *", True
+        )
 
         self.out = Variant()
         self.out_metadata = self.create_metadata(
-            type_address_string, id, "", "The result of the operation", False)
+            type_address_string, id, "", "The result of the operation", False
+        )
 
         self.subscription_properties = ctrlxdatalayer.subscription.create_properties(
-            "python-datalayer-client-sub", publish_interval=update_time)
+            "python-datalayer-client-sub", publish_interval=update_time
+        )
 
         self.subscription_changed = False
 
@@ -67,15 +78,20 @@ class BasicArithmeticOperations:
             self.__on_browse,
             self.__on_read,
             self.__on_write,
-            self.__on_metadata
+            self.__on_metadata,
         )
 
         self.providerNode = ctrlxdatalayer.provider_node.ProviderNode(self.cbs)
 
-    def response_notify_callback(self, result: Result, items: typing.List[ctrlxdatalayer.subscription.NotifyItem],
-                                 userdata: ctrlxdatalayer.clib.userData_c_void_p):
-        """response_notify_callback
-        """
+        self.subscription = None
+
+    def response_notify_callback(
+        self,
+        result: Result,
+        items: typing.List[ctrlxdatalayer.subscription.NotifyItem],
+        userdata: None,
+    ):
+        """response_notify_callback"""
 
         if result != Result.OK:
             print("response_notify_callback parameter result:", result, flush=True)
@@ -83,7 +99,6 @@ class BasicArithmeticOperations:
             return
 
         for item in items:
-
             print()
             print("Notification -------------------------")
             print("address:", item.get_address())
@@ -108,8 +123,7 @@ class BasicArithmeticOperations:
                 self.value_changed = True
 
     def get_float64_safe(self, v: Variant):
-        """get_float64_safe
-        """
+        """get_float64_safe"""
 
         if v.get_type() == VariantType.FLOAT64:
             return v.get_float64()
@@ -137,8 +151,7 @@ class BasicArithmeticOperations:
         return None
 
     def calc(self):
-        """calc
-        """
+        """calc"""
         self.calc_internal()
 
         print()
@@ -146,12 +159,17 @@ class BasicArithmeticOperations:
         if self.out_error:
             print("ERROR", self.out_error_text, flush=True)
         else:
-            print(self.in1_value.get_float64(), self.mode.get_string(),
-                  self.in2_value.get_float64(), "=", self.out.get_float64(), flush=True)
+            print(
+                self.in1_value.get_float64(),
+                self.mode.get_string(),
+                self.in2_value.get_float64(),
+                "=",
+                self.out.get_float64(),
+                flush=True,
+            )
 
     def calc_internal(self):
-        """calc_internal
-        """
+        """calc_internal"""
         self.out_error = False
 
         v1 = Convert.get_float64(self.in1_value)
@@ -204,16 +222,13 @@ class BasicArithmeticOperations:
         self.out_error = True
 
     def register_node(self, name: str) -> Result:
-        """register_node
-        """
+        """register_node"""
         address = self.addressRoot + name
         print("Registering node", address, flush=True)
-        return self.provider.register_node(
-            address, self.providerNode)
+        return self.provider.register_node(address, self.providerNode)
 
     def register_nodes(self):
-        """register_nodes
-        """
+        """register_nodes"""
         result = self.register_node("in1")
         if result != ctrlxdatalayer.variant.Result.OK:
             return result
@@ -229,8 +244,7 @@ class BasicArithmeticOperations:
         return self.register_node("out")
 
     def subscribe(self):
-        """subscribe
-        """
+        """subscribe"""
         self.subscription_changed = False
 
         if self.subscription_properties is None:
@@ -247,7 +261,8 @@ class BasicArithmeticOperations:
         addressList.append(address)
 
         result, self.subscription = self.client.create_subscription_sync(
-            self.subscription_properties, self.response_notify_callback)
+            self.subscription_properties, self.response_notify_callback
+        )
         if result != Result.OK:
             return result
 
@@ -257,42 +272,69 @@ class BasicArithmeticOperations:
         return self.subscription.subscribe_multi(addressList)
 
     def unsubscribe(self):
-        """unsubscribe
-        """
+        """unsubscribe"""
         if self.subscription is None:
             return Result.OK
 
         return self.subscription.unsubscribe_all()
 
-    def create_metadata(self, typeAddress: str, name: str, unit: str, description: str, allowWrite: bool):
-        """create_metadata
-        """
+    def create_metadata(
+        self, typeAddress: str, name: str, unit: str, description: str, allowWrite: bool
+    ):
+        """create_metadata"""
         return ctrlxdatalayer.metadata_utils.MetadataBuilder.create_metadata(
-            name, description, unit, description+"_url", NodeClass.NodeClass.Variable,
-            read_allowed=True, write_allowed=allowWrite, create_allowed=False, delete_allowed=False, browse_allowed=True,
-            type_path="dummy")
+            name,
+            description,
+            unit,
+            description + "_url",
+            NodeClass.NodeClass.Variable,
+            read_allowed=True,
+            write_allowed=allowWrite,
+            create_allowed=False,
+            delete_allowed=False,
+            browse_allowed=True,
+            type_path="dummy",
+        )
 
-    def __on_create(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
-        """__on_create
-        """
+    def __on_create(
+        self,
+        userdata: ctrlxdatalayer.clib.userData_c_void_p,
+        address: str,
+        data: Variant,
+        cb: NodeCallback,
+    ):
+        """__on_create"""
         cb(Result.OK, None)
 
-    def __on_remove(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
-        """__on_remove
-        """
+    def __on_remove(
+        self,
+        userdata: ctrlxdatalayer.clib.userData_c_void_p,
+        address: str,
+        cb: NodeCallback,
+    ):
+        """__on_remove"""
         # Not implemented because no wildcard is registered
         cb(Result.UNSUPPORTED, None)
 
-    def __on_browse(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
-        """__on_browse
-        """
+    def __on_browse(
+        self,
+        userdata: ctrlxdatalayer.clib.userData_c_void_p,
+        address: str,
+        cb: NodeCallback,
+    ):
+        """__on_browse"""
         with Variant() as new_data:
             new_data.set_array_string([])
             cb(Result.OK, new_data)
 
-    def __on_read(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
-        """__on_read
-        """
+    def __on_read(
+        self,
+        userdata: ctrlxdatalayer.clib.userData_c_void_p,
+        address: str,
+        data: Variant,
+        cb: NodeCallback,
+    ):
+        """__on_read"""
         if address.endswith("in1"):
             cb(Result.OK, self.in1_address)
             return
@@ -319,9 +361,14 @@ class BasicArithmeticOperations:
 
         cb(Result.INVALID_ADDRESS, None)
 
-    def __on_write(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, data: Variant, cb: NodeCallback):
-        """__on_write
-        """
+    def __on_write(
+        self,
+        userdata: ctrlxdatalayer.clib.userData_c_void_p,
+        address: str,
+        data: Variant,
+        cb: NodeCallback,
+    ):
+        """__on_write"""
         if data.get_type() != VariantType.STRING:
             cb(Result.TYPE_MISMATCH, None)
             return
@@ -345,9 +392,13 @@ class BasicArithmeticOperations:
 
         cb(Result.INVALID_ADDRESS, None)
 
-    def __on_metadata(self, userdata: ctrlxdatalayer.clib.userData_c_void_p, address: str, cb: NodeCallback):
-        """__on_metadata
-        """
+    def __on_metadata(
+        self,
+        userdata: ctrlxdatalayer.clib.userData_c_void_p,
+        address: str,
+        cb: NodeCallback,
+    ):
+        """__on_metadata"""
         if address.endswith("in1"):
             cb(Result.OK, self.in1_metadata)
             return

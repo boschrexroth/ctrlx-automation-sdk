@@ -80,7 +80,7 @@
         "${input:Upload}",
         "-logs",
         "${input:Logs}",
-        "-svc",
+        "-service",
         "${input:Service}",
         "-addr",
         "${input:IPAddress}",

@@ -11,7 +11,7 @@ It executes some file operations on the ctrlX-filesystem.
 
 ## Visual Studio Code
 
-To use Golang within Visual Studio Code, we recommend using the [Go for Visual Studio Code](https://github.com/golang/vscode-go) extension. The corresponding documentation can also be found under this link.
+To use Go within Visual Studio Code, we recommend using the [Go for Visual Studio Code](https://github.com/golang/vscode-go) extension. The corresponding documentation can also be found under this link.
 
 Open this project folder directly, then the go build environment is set correctly.
 

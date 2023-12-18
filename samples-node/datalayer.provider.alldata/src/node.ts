@@ -6,10 +6,10 @@
 
 // Flatbuffers
 import * as flatbuffers from 'flatbuffers';
-import { InertialValue } from './sample/schema/inertial-value';
+import { InertialValue } from './sampleSchema_generated';
 
 import DataType from './datatype';
-import DATA_TYPES from './datatypes';
+import DataTypes from './datatypes';
 import DatalayerSystem from 'ctrlx-datalayer/dist/datalayersystem';
 
 // Utils
@@ -22,27 +22,27 @@ interface INode {
     /**
      * Gets the name.
      */
-    getName(): string;
+    getName(): string
 
     /**
      * Gets the address.
      */
-    getAddress(): string;
+    getAddress(): string
 
     /**
      * Gets the value.
      */
-    getValue(): any;
+    getValue(): any
 
     /**
      * Gets the data type.
      */
-    getDataType(): DataType;
+    getDataType(): DataType
 
     /**
      * Gets the meta data.
      */
-    getMetadata(): Uint8Array;
+    getMetadata(): Uint8Array
 }
 
 /**
@@ -50,10 +50,8 @@ interface INode {
  */
 class Node implements INode {
 
-    // Root node for all static nodes.
-    private static staticRoot = 'samples/nodejs/alldata/static';
-    // Root node for all dynamic nodes.
-    private static dynamicRoot = 'samples/nodejs/alldata/dynamic'
+    // Root node for all nodes
+    private static rootNode = 'sdk/node/provider/all-data';
 
     private address: string;
     private value: any;
@@ -77,7 +75,7 @@ class Node implements INode {
      * @returns The node
      */
     public static createStatic(dataType: DataType, value: any): Node {
-        const address = this.staticRoot + "/" + dataType.getName();
+        const address = this.rootNode + "/static/" + dataType.getName();
         const allowedOperationFlags = MetadataUtils.AllowedOperationFlags.Read | MetadataUtils.AllowedOperationFlags.Write;
         const description = `Static data with type ${dataType.getName()}`;
         const metadata = new MetadataUtils.MetadataBuilder(allowedOperationFlags, description)
@@ -101,7 +99,7 @@ class Node implements INode {
      * @returns The node
      */
     public static createDynamic(dataType: DataType, value: any): Node {
-        const address = this.dynamicRoot + "/" + dataType.getName();
+        const address = this.rootNode + "/dynamic/" + dataType.getName();
         const allowedOperationFlags = MetadataUtils.AllowedOperationFlags.Read;
         const description = `Dynamic data with type ${dataType.getName()}`;
         const metadata = new MetadataUtils.MetadataBuilder(allowedOperationFlags, description)
@@ -172,89 +170,79 @@ class Node implements INode {
      */
     public incrementValue(now: Date) {
         switch (this.dataType) {
-            case DATA_TYPES.bool8:
+            case DataTypes.bool8:
                 this.value = !this.value;
                 break;
-
-            case DATA_TYPES.int8:
-            case DATA_TYPES.uint8:
-            case DATA_TYPES.int16:
-            case DATA_TYPES.uint16:
-            case DATA_TYPES.int32:
-            case DATA_TYPES.uint32:
+            case DataTypes.int8:
+            case DataTypes.uint8:
+            case DataTypes.int16:
+            case DataTypes.uint16:
+            case DataTypes.int32:
+            case DataTypes.uint32:
                 this.value += 1;
                 break;
-
-            case DATA_TYPES.int64:
-            case DATA_TYPES.uint64:
+            case DataTypes.int64:
+            case DataTypes.uint64:
                 this.value += 1n;
                 break;
-
-            case DATA_TYPES.float:
-            case DATA_TYPES.double:
+            case DataTypes.float:
+            case DataTypes.double:
                 this.value += 0.1;
                 break;
-
-            case DATA_TYPES.string:
+            case DataTypes.string:
                 this.value = this.incrementStringValue(this.value, '_');
                 break;
-
-            case DATA_TYPES.timestamp:
+            case DataTypes.timestamp:
                 this.value = now;
                 break;
-
-            case DATA_TYPES.arbool8:
+            case DataTypes.arrayOfBool8:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = !this.value[i];
                 }
                 break;
-
-            case DATA_TYPES.arint8:
-            case DATA_TYPES.aruint8:
-            case DATA_TYPES.arint16:
-            case DATA_TYPES.aruint16:
-            case DATA_TYPES.arint32:
-            case DATA_TYPES.aruint32:
+            case DataTypes.arrayOfInt8:
+            case DataTypes.arrayOfUint8:
+            case DataTypes.arrayOfInt16:
+            case DataTypes.arrayOfUint16:
+            case DataTypes.arrayOfInt32:
+            case DataTypes.arrayOfUint32:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = this.value[i] + 1;
                 }
                 break;
-
-            case DATA_TYPES.arfloat:
-            case DATA_TYPES.ardouble:
+            case DataTypes.arrayOfFloat:
+            case DataTypes.arrayOfFloat64:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = this.value[i] + 0.1;
                 }
                 break;
-
-            case DATA_TYPES.arint64:
-            case DATA_TYPES.aruint64:
+            case DataTypes.arrayOfInt64:
+            case DataTypes.arrayOfUint64:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = this.value[i] + 1n;
                 }
                 break;
-
-            case DATA_TYPES.arstring:
+            case DataTypes.arrayOfString:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = this.incrementStringValue(this.value[i], '_');
                 }
                 break;
-
-            case DATA_TYPES.artimestamp:
+            case DataTypes.arrayOfTimestamp:
                 for (let i = 0; i < this.value.length; ++i) {
                     this.value[i] = now;
                 }
                 break;
-
-            case DATA_TYPES.inertialValue:
-                const oldInertialValue = InertialValue.getRootAsInertialValue(new flatbuffers.ByteBuffer(this.value))
-                const builder = new flatbuffers.Builder(DatalayerSystem.defaultFlatbuffersInitialSize);
-                const offset = InertialValue.createInertialValue(builder,
-                    oldInertialValue.x() + 1,
-                    oldInertialValue.y() + 1,
-                    oldInertialValue.z() + 1);
-                builder.finish(offset);
-                this.value = builder.asUint8Array();
+            case DataTypes.inertialValue:
+                {
+                    const builder = new flatbuffers.Builder(DatalayerSystem.defaultFlatbuffersInitialSize);
+                    const inertialValue = InertialValue.getRootAsInertialValue(new flatbuffers.ByteBuffer(this.value)).unpack();
+                    inertialValue.x += 1;
+                    inertialValue.y += 1;
+                    inertialValue.z += 1;
+                    const offset = inertialValue.pack(builder);
+                    builder.finish(offset);
+                    this.value = builder.asUint8Array();
+                }
                 break;
         }
     }

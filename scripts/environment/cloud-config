@@ -5,15 +5,10 @@ chpasswd: { expire: False }
 ssh_pwauth: True
 
 write_files:
-  - encoding: b64
-    content: insert-check-cloud-init-log.sh-here
-    path: /tmp/cloud-config/check-cloud-init-log.sh
-    permissions: '0775'
-
   - encoding: gzip
     content: !!binary |
-      insert-scripts.zip-here
-    path: /tmp/cloud-config/scripts.zip
+      insert-archive.zip-here
+    path: /tmp/cloud-config/archive.zip
     permissions: '0554'
 
 # Proxy settings for apt                                               #proxy-ONLY
@@ -48,6 +43,12 @@ packages:
   - libsystemd-dev
   - libzmq3-dev   
   - libssl-dev
+  - libzip-dev
+  - uuid-dev
+  - libssl-dev
+  - libcurl4-openssl-dev
+  - libjansson-dev
+  - libffi-dev
 
 # Run commands on first boot  
 runcmd:
@@ -80,12 +81,11 @@ runcmd:
 
   # Now move all written files to /home/boschrexroth/ and change their owner and group
   - mv /tmp/cloud-config/* /home/boschrexroth/
-  - unzip -d /home/boschrexroth/ /home/boschrexroth/scripts.zip && rm /home/boschrexroth/scripts.zip 
-  - mkdir -p /home/boschrexroth/scripts/cloud-config/
-  - cp /var/log/cloud-init*.log /home/boschrexroth/scripts/cloud-config/
-  - chmod 664 /home/boschrexroth/scripts/cloud-config/*.log
+  - unzip -d /home/boschrexroth/ /home/boschrexroth/*.zip && rm /home/boschrexroth/*.zip 
+  - cp /var/log/cloud-init*.log /home/boschrexroth/cloud-init/
+  - chmod 664 /home/boschrexroth/cloud-init/*.log
   - chown -R boschrexroth:boschrexroth /home/boschrexroth/*
-  - echo "source /home/boschrexroth/check-cloud-init-log.sh" >>/home/boschrexroth/.bashrc
+  - echo "source ~/check-cloud-init-log.sh" >>/home/boschrexroth/.bashrc
  
 power_state:
   mode: poweroff

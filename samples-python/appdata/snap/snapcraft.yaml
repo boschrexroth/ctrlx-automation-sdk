@@ -1,7 +1,7 @@
 name: sdk-py-appdata
-version: 3.0.0
+title: SDK Python App Data
+version: 1.0.0
 summary: Application data sample written in Python for ctrlX
-title: sdk-py-appdata
 description: |
   This sample demonstrates how to persist your application data in ctrlX CORE
 
@@ -19,9 +19,6 @@ apps:
       - package-assets
       - package-run
     daemon: simple
-    restart-condition: always
-    passthrough:
-      restart-delay: 10s 
 
 parts:
   appdata:
@@ -46,7 +43,7 @@ slots:
     content: package-run
     source:
       write:
-      - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
 
 plugs:
   active-solution:

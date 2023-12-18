@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.3.schema.json",
+  "version": "1.0.0",
+  "id": "sdk-py-webserver",
+  "scopes-declaration": [
+    {
+      "identifier": "rexroth-python-webserver.web",
+      "name": "Python-Webserver",
+      "description": "ctrlX Data Layer access permissions over webpage",
+      "scopes": [
+        {
+          "identifier": "rexroth-python-webserver.web.r",
+          "name": "Read",
+          "description": "Only read commands can be submitted over webpage"
+        },
+        {
+          "identifier": "rexroth-python-webserver.web.rw",
+          "name": "Read and write",
+          "description": "Read and write commands can be submitted over webpage"
+        }
+      ]
+    }
+  ], 
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "sdk-py-webserver",
+        "url": "/python-webserver",
+        "binding": "unix://{$SNAP_DATA}/package-run/sdk-py-webserver/web.sock",
+        "restricted": [
+        ]        
+      }
+    ]
+  },
+  "menus": {
+    "sidebar": [
+      {
+        "id": "sdk-py-webserver",
+        "target": "_blank",
+        "title": "Python-Webserver",
+        "icon": "bosch-ic-worldwideweb",
+        "link": "/python-webserver?token=${bearertoken}"
+      }
+    ],
+    "settings": [
+    ],
+    "overview": [
+      {
+        "id": "sdk-py-webserver",
+        "title": "Python-Webserver",
+        "icon": "bosch-ic-worldwideweb",
+        "link": "/python-webserver?token=${bearertoken}"
+      }
+    ]    
+  }
+}

@@ -57,10 +57,10 @@ class Browser {
                 return this.truncate(json, 100);
             }
         } catch (error) {
-            return ''
+            return '';
         }
 
-        return ''
+        return '';
     }
 
     /**

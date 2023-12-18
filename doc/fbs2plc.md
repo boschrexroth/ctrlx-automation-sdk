@@ -1,143 +1,100 @@
-The ctrlX Data Layer provides nodes containing structured data in the [Flatbuffers](https://google.github.io/flatbuffers/) format.
+# fbs2plc.exe - Use Flatbuffers in your PLC project
 
-Hereby in a Flatbuffer schema file (fbs file) the data structure is defined. The  FlatBuffers compiler [flatc](https://google.github.io/flatbuffers/flatbuffers_guide_tutorial.html) is able to compile such a fbs file into code for several programming languages including IEC 61131-3 Structured Text (ST).
+A lot of ctrlX Data Layer nodes contain structured data stored in the [Flatbuffers](https://google.github.io/flatbuffers/) format.
 
-This guide describes how a fbs file can be compiled into IEC 61131-3 ST code and how this code can be imported and used in your IEC 61131-3 project to handle Flatbuffers.
+The data structure is defined in a schema file (.fbs file). The  FlatBuffers compiler [flatc](https://google.github.io/flatbuffers/flatbuffers_guide_tutorial.html) is able to compile such a .fbs file into code for several programming languages including IEC 61131-3 Structured Text (ST).
+
+This guide describes how one or more fbs files can be compiled into IEC 61131-3 ST code and how this code can be imported and used in your IEC 61131-3 project to handle Flatbuffers.
 
 The described workflow and the tools are currently running __only under Windows 10__.
 
 ## Prerequisites
 
-### 1. ctrlX WORKS
+### ctrlX WORKS
 
-Install ctrlX WORKS >= 1.14 with the functions 'ctrlX PLC Engineering' and 'App Build Environment'. 
+Install ctrlX WORKS >= 1.20 with the function 'ctrlX PLC Engineering' and 'App Build Environment'.
 
-As installation path we recommend to use __"C:\Program Files\Rexroth\ctrlX WORKS"__
+We recommend to use __"C:\Program Files\Rexroth\ctrlX WORKS"__ as installation path.
+In this case the path to ctrlX PLC Engineering is __"C:\Program Files\Rexroth\ctrlX WORKS\Studio\Common\ctrlX-PLC-Engineering.exe"__ 
 
-If you did so the path to ctrlX PLC Engineering is __"C:\Program Files\Rexroth\ctrlX WORKS\Studio\Common\ctrlX-PLC-Engineering.exe"__ 
+#### ctrlX CORE
 
-### 2. ctrlX AUTOMATION SDK
+* Create a ctrlX CORE<sup>virtual</sup> with __Port Forwarding__ and start it.
+* Install the PLC snap.
+
+### ctrlX AUTOMATION SDK
+
+#### On your Windows host
 
 Download the [ctrlX AUTOMATION SDK](https://github.com/boschrexroth/ctrlx-automation-sdk/releases) and extract it to __c:\ctrlx-automation-sdk__
 
-The extracted archive contains two executables. Add the storage locations of these tools to the environment variable PATH. 
+Now two executables are available:
 
-For flatc.exe:
+* c:\ctrlx-automation-sdk\bin\oss.flatbuffers\win-msvc-x64\release\flatc.exe
+* c:\ctrlx-automation-sdk\bin\fbs2plc\win-x64\fbs2plc.exe
 
-    setx "%PATH%;c:\ctrlx-automation-sdk\bin\oss.flatbuffers\win-msvc-x64\release"
+#### On your App Build Environment
 
+* From ctrlX WORKS, create and start an App Build Environment.
+* Login into your App Build Environment: ssh -p 10022 boschrexroth@127.0.0.1
+* Password is boschrexroth
+* Install the ctrlX AUTOMATION SDK
 
-For fbs2plc.exe:
+    $ ~/scripts/install-sdk.sh
 
-    setx "%PATH%;c:\ctrlx-automation-sdk\bin\fbs2plc\win-x64"
+* Build a required snap (here amd64) and install it on the ctrlX CORE<sup>virtual</sup>
 
-### 3. sdk-cpp-alldata as Provider
+    $ cd ~/ctrlx-automation-sdk/samples-cpp/datalayer.provider.all-data
+    $ ../../scripts/build-upload-log-snap.sh -PF
 
-Reading and writing a Flatbuffer ctrlX Data Layer node within our IEC 61131-3 code requires an instance which provides this node to the ctrlX Data Layer. Therefor we use the snap sdk-cpp-alldata deployed by the ctrlX AUTOMATION SDK in the folder __samples-cpp/datalayer.provider.all-data__. 
+* Open a web browser, login into your ctrlX CORE<sup>virtual</sup>. A Data Layer node __sdk-cpp-alldata/dynamic/fbs__ should exist.
 
-This snap has to be build and installed in the ctrlX CORE, see:
+This node later can be read, changed and written by our IEC 61131-3 PLC code.
 
-* [Quick Start Guide](setup_qemu_ctrlx_works.md)
-* [Building Snaps](samples.md)
+## Reading and writing a flatbuffers ctrlX Data Layer node in your PLC project
 
-If the snap is installed and the ctrlX CORE is in Operation Mode it will provide a Flatbuffer variable with this ctrlX Data Layer path:  __sdk-cpp-alldata/dynamic/fbs__
+The basic steps are:
 
-This node can be read, changed and written by our IEC 61131-3 sample code.
+1. Create a PLC library which contains the IEC61131 ST code to handle a Flatbuffers variable
+2. Create a new PLC project
+3. Import the created PLC library and provided sample code into your project
+4. Compile the project and log into your ctrl CORE<sup>virtual</sup> 
 
-## From fbs File to a PLC library
+### Create a PLC library
 
-### 1. Working Directory
+Start cmd.exe and enter these commands:
 
-Start a Windows the console app cmd.exe and create a working directory.
-
-    c: & mkdir \fbs2plc & cd \fbs2plc
-
-Copy the start.bat file from the ctrlX AUTOMATION SDK into this directory
-
-    copy c:\ctrlx-automation-sdk\samples-iec61131\fbs-read-write\start.bat .
-
-Copy the sampleSchema.fbs file from the ctrlX AUTOMATION SDK into this directory
-
-    copy c:\ctrlx-automation-sdk\samples-cpp\datalayer.provider.all-data\sampleSchema.fbs .
-
-### 2. ctrlX PLC Engineering
-
- Open ctrlX WORKS, select Engineering Tools and open ctrlX PLC Engineering.
-
- Within ctrlX PLC Engineering:
-
-* Create a new empty library with the name sampleSchema
-* Store it under c:\fbs2plc
-
-### 3. Prepare start.bat
-
-The batch file start.bat calls the executable fbs2plc.exe stored in c:\ctrlx-automation-sdk\bin\fbs2plc\win-x64
-Open start.bat with a txt editor, check/change the parameter values below and save the file
-
-    -title "Flatbuffer sampleSchema Handling" ^
-    -company "Bosch Rexroth AG" ^
-    -version 1.0.0.1 ^
-    -released ^
-    -author "Bosch Rexroth AG" ^
-    -placeHolder "SampleSchema" ^
-    -description "Makes sampleSchema.fbs available in PLC code" ^
-    -defaultNamespace sampleSchema ^
-
-
-*) If you do not want to release your library at once set this line under comment: 
-
-`REM -released ^`
-
-!!! important
-    Do not delete the ^ character at the end of each line!
-
-### 4. Run start.bat
-
-Within the working directory launch the start.bat file: 
-
+    c:
+    cd \ctrlx-automation-sdk\samples-fbs2plc\sampleSchema
     start.bat
 
-This file starts the fbs2plc executable. From here flatc is called to create ST code, which is then imported into the opened PLC library.
+Result:
+* The file c:\ctrlx-automation-sdk\samples-cpp\datalayer.provider.all-data\sampleSchema.fbs was compiled into IEC61131 code. 
+* A new PLC library __fbs-sampleSchema__ was created, using c:\ctrlx-automation-sdk\plc\CXA_fbs_Template.library as template.
+* All required standard libraries were imported.
+* ctrlX PLC Engineering now has the new library opened.
 
-You can watch the progress in the trace output. If an error occurs the execution is stopped. Warnings can be ignored.
+Store the new library so that you can use it in your PLC project:
 
-### 5. Check Imported Code
+* Select File - Save project and install into library repository
+* Close the libray
+* Keep ctrlX PLC Engineering running
 
-In ctrlX PLC Engineering check all imported content under the tab page __POUs__.
+### Create a PLC project
 
-If everything is OK save the library: Main menu time __File: Store project and install in library system__
+* In ctrlX PLC Engineering create a new PLC project use 'ctrlX CORE x64 Project' as template.
+* Select the node Application and delete it.
+* Select the node PLC Logic
+* Select menu item Project - PLCopenXML import..., select c:\ctrlx-automation-sdk\samples-fbs2plc\sampleSchema\fbs-read-write.xml 
+* Double click the node library manager
+* Add the library CXA_DATALAYER to your project.
+* Connect the device of ypur PLC project with the ctrlX CORE<sup>virtual</sup> 
+* Login into your ctrlX CORE<sup>virtual</sup> 
 
-## Using the PLC library in a PLC Project
+### Check the Flatbuffer Access
 
-### 1. Create a new PLC Project
-
-In ctrlX PLC Engineering
-
-* Create a new Project,
-* Use an according ctrlX CORE template.
-* Name : sampleSchema 
-* Save it under c:\fbs2plc
-
-### 2. Add Library
-
-* Double click Libray Manager
-* Select Add Library
-* Search the generated library: Flatbuffer sampleSchema Handling
-
-### 3. Import PLC Code
-
-* Select main menu item Project: Import
-* Select the file __c:\ctrlx-automation-sdk\samples-iec61131\fbs-read-write\ctrlxVirtual.export __
-* Click the Login icon in the tool bar (Alt + F8)
-* The project will be complied and downloaded into the PLC runtime system of the ctrlX CORE - an existing PLC application in the ctrlX CORE will be overwritten.
-* Start the PLC application with the start icon of the tool bar.
-
-The PLC program should run without failure.
-
-### 4. Check the Flatbuffer Access
-
-* From a web browser login into your ctrlX CORE Web UI
-* Select Settings - ctrlX Data Layer
-* Expand the ctrlX Data Layer tree: sdk-cpp-alldata/dynamic/fbs
+* From a web browser login into your ctrlX CORE<sup>virtual</sup> Web UI
+* Select Settings - Data Layer
+* Expand the Data Layer tree: sdk-cpp-alldata/dynamic/fbs
 
 The values of the x, y, z variables should be changed by our PLC program.

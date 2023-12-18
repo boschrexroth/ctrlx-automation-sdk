@@ -1,31 +1,34 @@
 # Getting started
 # See https://snapcraft.io/docs/getting-started
+
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-name: ctrlx-dotnet-appdata
-version: '1.0.0'
+
+name: sdk-net-appdata
+title: SDK .NET App Data
+base: core22
+version: 1.0.0
+#icon: assets/icons/ICONHERE.png
 summary: Application data sample written in .NET for ctrlX CORE.
 description: |
   The sample demonstrates how to persist your application data inside ctrlX CORE.
-confinement: strict
-#confinement: devmode
-#icon: assets/icons/ICONHERE.png
-grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core22
-type: app
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
   app:
     command: appdata
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: [network, network-status, network-bind, process-control]
+    plugs:
+      - network
+      - network-bind
+      - active-solution
     daemon: simple
     restart-condition: always
     passthrough:
       restart-delay: 10s
 
     environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
 
 parts:
@@ -45,21 +48,16 @@ slots:
     content: package-assets
     source:
       read:
-      - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
   package-run:
     interface: content
     content: package-run
     source:
       write:
-      - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
 
 # describes which interface slots are supported by defining the plugs
 plugs:
-  datalayer:
-    interface: content
-    content: datalayer
-    target: $SNAP_DATA/.datalayer
-    
   active-solution:
     interface: content
     content: solutions

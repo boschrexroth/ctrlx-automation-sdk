@@ -8,8 +8,8 @@
  * The IDataRange interface.
  */
 interface IDataRange {
-    getMin(): any;
-    getMax(): any;
+    getMin(): any
+    getMax(): any
 }
 
 /**

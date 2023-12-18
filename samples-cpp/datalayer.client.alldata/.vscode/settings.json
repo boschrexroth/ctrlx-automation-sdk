@@ -1,0 +1,9 @@
+{
+    "cmake.configureArgs": [
+        "-DBUILD_KIT=${buildKit}"
+    ],
+    "files.associations": {
+        "ostream": "cpp"
+    }
+    
+}

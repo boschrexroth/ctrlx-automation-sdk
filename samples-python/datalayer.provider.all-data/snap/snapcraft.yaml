@@ -1,7 +1,7 @@
 name: sdk-py-provider-alldata
-version: 2.5.0
+title: SDK Python Provider All Data
+version: 1.0.0
 summary: ctrlX Data Layer provider sample in Python
-title: sdk-py-provider-alldata
 description: |
   ctrlX Data Layer provider in Python publishing nodes of all data types
 base: core22
@@ -15,9 +15,9 @@ apps:
       - network
       - datalayer
     daemon: simple
+    restart-condition: always
     passthrough:
-      restart-condition: always
-      restart-delay: 10s 
+      restart-delay: 30s
 
 parts:
   provider:
@@ -31,4 +31,4 @@ plugs:
   datalayer:
     interface: content
     content: datalayer
-    target: $SNAP_DATA/.datalayer 
+    target: $SNAP_DATA/.datalayer

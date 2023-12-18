@@ -7,4 +7,5 @@ wget-log*
 *.bak
 *.zip
 cloud-config-*
-scripts/cloud-config/*
+cloud-init/*
+scripts/*

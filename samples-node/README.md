@@ -6,8 +6,8 @@
 ### Basic Samples
 
 * [Hello World](./hello-world/README.md)
-* [ctrlX Data Layer Client](./datalayer.client/README.md)
-* [ctrlX Data Layer Provider](./datalayer.provider/README.md)
+* [ctrlX Data Layer Client](./datalayer.client-simple/README.md)
+* [ctrlX Data Layer Provider](./datalayer.provider-simple/README.md)
 * [ctrlX Solutions WebDAV Interface](./solutions.webdav.interface/README.md)
 
 ### Advanced Samples

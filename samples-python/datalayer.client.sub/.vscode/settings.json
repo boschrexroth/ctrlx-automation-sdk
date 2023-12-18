@@ -1,8 +1,3 @@
 {
-    "python.envFile": "${workspaceFolder}/.env",
-    "python.linting.pylintEnabled": false,
-    "python.linting.enabled": true,
-    "python.linting.pylintPath": "${workspaceFolder}/venv/bin/pylint",
-    "python.pythonPath": "${workspaceFolder}/venv/bin/python3.8",
-    "python.linting.flake8Enabled": true
-  }
+    "python.envFile": "${workspaceFolder}/.env"
+}

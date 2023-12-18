@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "datalayer.provider.simple": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

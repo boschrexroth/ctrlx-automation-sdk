@@ -7,7 +7,7 @@ cmake_minimum_required( VERSION 3.9 )
 # Project information
 # Set project, VERSION should be same as snap version
 #
-set(VERSION 2.2.0)
+set(VERSION 3.0.0)
 project( datalayer_ecat_io_project VERSION ${VERSION} )
 
 #
@@ -25,7 +25,7 @@ set (USER_DEPENDENCY_DIR ${CMAKE_CURRENT_LIST_DIR}/../../)
 #
 option (BUILD_SNAP "Build Snap Package" OFF)
 
-MESSAGE( STATUS "Selected BuildKit: ${CMAKE_BUILD_KIT}")
+MESSAGE( STATUS "Selected BuildKit: ${BUILD_KIT}")
 MESSAGE( STATUS "######################################")
 MESSAGE( STATUS "Option: BUILD_SNAP ${BUILD_SNAP}")
 MESSAGE( STATUS "######################################")
@@ -34,14 +34,14 @@ MESSAGE( STATUS "######################################")
 # Compiler setting
 #
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti")
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
 #
 # set libraries dirs and includes
 #
-IF( ${CMAKE_BUILD_KIT} MATCHES "aarch64")
+IF( ${BUILD_KIT} MATCHES "aarch64")
   SET(PLATFORM_NAME "ubuntu22-gcc-aarch64")
   SET(SNAP_ARCH "arm64")
   SET(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
@@ -53,7 +53,7 @@ ELSE()
   SET(CMAKE_CXX_COMPILER g++)
 ENDIF()
 
-  
+
 #
 # set source files for each executable
 #
@@ -77,7 +77,7 @@ SET ( PRIVATE_INCLUDE_DIRS
 #
 MESSAGE( STATUS "Libraries directory: ${LIBRARY_DEP_DIR}")
 link_directories(
-  ${LIBRARY_DIR} 
+  ${LIBRARY_DIR}
   ${LIBRARY_DEP_DIR}
   )
 
@@ -119,7 +119,7 @@ install( TARGETS ${TARGET_PROJECT_NAME}
   LIBRARY DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}
   ARCHIVE DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/${PLATFORM_NAME}/${CMAKE_BUILD_TYPE}
   COMPONENT ${BUNDLE_PROJECT_NAME}
-) 
+)
 
 if (BUILD_SNAP)
   #
@@ -130,7 +130,7 @@ if (BUILD_SNAP)
     LIBRARY DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build
     ARCHIVE DESTINATION ${CMAKE_CURRENT_LIST_DIR}/generated/build
     COMPONENT ${BUNDLE_PROJECT_NAME}
-  ) 
+  )
 endif(BUILD_SNAP)
 
 #

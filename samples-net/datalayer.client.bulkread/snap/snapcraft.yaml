@@ -1,34 +1,37 @@
 # Getting started
 # See https://snapcraft.io/docs/getting-started
+
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-name: ctrlx-dotnet-datalayer-client-bulkread
-version: '1.0.0'
+
+name: sdk-net-client-bulkread
+title: SDK .NET Client Bulk Read
+base: core22
+version: 1.0.0
+#icon: assets/icons/ICONHERE.png
 summary: ctrlX Data Layer client bulk read sample written in .NET for ctrlX CORE.
 description: |
   The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console. 
   The bulk read is performed synchron and asynchron every 10 seconds in an endless loop.
-confinement: strict 
-#confinement: devmode 
-#icon: assets/icons/ICONHERE.png
-grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core22
-type: app
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
   app:
     command: datalayer.client.bulkread
     # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
-    plugs: [network, network-status, network-bind, process-control]
+    plugs:
+      - network
+      - datalayer
     daemon: simple
     restart-condition: always
-    passthrough:   
+    passthrough:
       restart-delay: 10s
 
     environment:
       LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
- 
+
 parts:
   app:
     plugin: dump
@@ -39,4 +42,4 @@ plugs:
   datalayer:
     interface: content
     content: datalayer
-    target: $SNAP_DATA/.datalayer 
+    target: $SNAP_DATA/.datalayer

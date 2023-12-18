@@ -1,0 +1,5 @@
+address;nodeClass;operations.read;operations.write;operations.create;operations.remove;operations.browse;description;descriptionURL;displayName;displayFormat;unit;references.readType;references.writeType;references.createType;comment
+sdk/cpp/datalayer/provider/simple/myString;Variable;true;true;true;true;true;String value;;;;;types/datalayer/string;types/datalayer/string;types/datalayer/string;
+sdk/cpp/datalayer/provider/simple/myFloat;Variable;true;true;true;true;true;Float32 value;;;;;types/datalayer/float32;types/datalayer/float32;types/datalayer/float32;
+sdk/cpp/datalayer/provider/simple/myInt64;Variable;true;true;true;true;true;Int64 value;;;;;types/datalayer/int64;types/datalayer/int64;types/datalayer/int64;
+sdk/cpp/datalayer/provider/simple/myFlatbuffer;Variable;true;true;true;true;true;Flatbuffer 'Inertial Value';;;;;types/sampleSchema/inertialValue;types/sampleSchema/inertialValue;types/sampleSchema/inertialValue;

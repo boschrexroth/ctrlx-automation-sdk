@@ -1,31 +1,31 @@
 # Getting started
 # See https://snapcraft.io/docs/getting-started
+
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-version: '1.0.0'
-name: ctrlx-dotnet-logbook
+
+name: sdk-net-logbook
+title: SDK .NET Logbook
+base: core22
+version: 1.0.0
+#icon: assets/icons/ICONHERE.png
 summary: Logbook sample written in .NET for ctrlX CORE.
 description: |
-  Programm is logging messages to the logbook of the ctrlX CORE.
-confinement: strict 
-#confinement: devmode 
-#icon: assets/icons/ICONHERE.png
-grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core22
-type: app
+  Program is logging messages to the logbook of the ctrlX CORE.
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
   app:
     command: diagnostics.logbook
     daemon: simple
     restart-condition: always
-    passthrough:   
+    passthrough:
       restart-delay: 10s
-    
+
     environment:
-      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP
       DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
- 
+
 parts:
   app:
     plugin: dump
