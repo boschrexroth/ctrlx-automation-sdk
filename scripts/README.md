@@ -23,9 +23,6 @@ This folder contains several helper scripts to install the ctrlX AUTOMATION SDK,
 
 * __build-upload-log-snap.sh__ Build a sample project, upload the snap and redirect log printout of the snap
 
-## Further Helper Scripts
-
-* __build_flatbuffers.sh/.bat__ Calls flatc to compile a fbs schema file
 
 ## License
 

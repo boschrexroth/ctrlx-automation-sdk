@@ -16,10 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
 // import ngx-translate and the http loader
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpBackend } from '@angular/common/http';
 
-export function createMultiTranslateHttpLoader(http: HttpClient): TranslateLoader {
-    return new MultiTranslateHttpLoader(http, [
+export function createMultiTranslateHttpLoader(_httpBackend: HttpBackend): TranslateLoader {
+    return new MultiTranslateHttpLoader(_httpBackend, [
         { prefix: './assets/i18n/multi-language.', suffix: '.json' }
     ]);
 }
@@ -40,7 +40,7 @@ export function createMultiTranslateHttpLoader(http: HttpClient): TranslateLoade
       loader: {
           provide: TranslateLoader,
           useFactory: createMultiTranslateHttpLoader,
-          deps: [HttpClient]
+          deps: [HttpBackend]
       },
       defaultLanguage: 'en'
     }),

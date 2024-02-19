@@ -20,7 +20,7 @@ parts:
   www:
     source: .
     plugin: npm
-    npm-node-version: '14.15.0'
+    npm-node-version: '20.10.0'
     override-build: |
       # install node
       snapcraftctl build

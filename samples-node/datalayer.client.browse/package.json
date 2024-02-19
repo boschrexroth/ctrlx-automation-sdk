@@ -19,7 +19,7 @@
         "typescript": "^5.2.2"
     },
     "dependencies": {
-        "ctrlx-datalayer": "^2.1.0",
+        "ctrlx-datalayer": "^2.1.1",
         "ctrlx-datalayer-flatbuffers": "^2.4.0"
     },
     "scripts": {

@@ -4,7 +4,6 @@
 
 * Fix: Some internal Bugfixes
 * Docu: Improve documentation
-* Allign sample names
 
 ### Version 2.2.0 <small> August, 2023</small>
 
