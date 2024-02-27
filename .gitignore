@@ -3,15 +3,6 @@
 
 *.snap
 build
-private/dependencies
-private/generated
-private/log
-private/make/bin
-private/make/buildbuddylog.txt
-private/wheel/comm
-private/wheel/common
-private/wheel/motion
-private/wheel/script
 
 .snapcraft
 
