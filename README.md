@@ -1,7 +1,8 @@
 # Software Development Kit for ctrlX AUTOMATION
 
 This is the software development kit (SDK) for [ctrlX AUTOMATION](https://www.ctrlx-automation.com). It can be used to program Apps for ctrlX CORE. 
-Browse through the manual via: <https://boschrexroth.github.io/ctrlx-automation-sdk>
+
+Browse through the manual via: [ctrlX AUTOMATION Software Development Kit](https://boschrexroth.github.io/ctrlx-automation-sdk)
 
 ## Important directions for use
 
@@ -18,54 +19,47 @@ Additionally, the specifications given in the "Areas of Use and Application" for
 
 Any use of the source code and related documents of this repository in applications other than those specified above or under operating conditions other than those described in the documentation and the technical specifications is considered as "unintended". Furthermore, this software must not be used in any application areas not expressly approved by Bosch Rexroth.
 
-## Installation
+## Installation of the App Build Environment
 
-__To develop ctrlX Apps we recommend to use a ctrlX App Build Enviroment.__ Otherwise a Ubuntu Server or Desktop system is needed.
-### Using a ctrlX App Build Enviroment
+__To develop ctrlX Apps we recommend to use a ctrlX App Build Environment.__ Otherwise a Ubuntu Server or Desktop system is needed.
 
-How to create and start a ctrlX App Build Enviroment is described in [ctrlX WORKS App Build Environment](https://boschrexroth.github.io/ctrlx-automation-sdk/setup_qemu_ctrlx_works.html)
+How to create and start a ctrlX App Build Environment is described in [ctrlX WORKS App Build Environment](https://boschrexroth.github.io/ctrlx-automation-sdk/setup_qemu_ctrlx_works.html)
 
-If your ctrlX App Build Enviroment is running, you can log in and install the ctrlX AUTOMATION SDK - see below.
+If your ctrlX App Build Environment is running, you can log in and install the ctrlX AUTOMATION SDK - see below.
 
-### Using Ubuntu Server or Desktop system as development environment
+## Installation of the ctrlX AUTOMATION SDK
 
-If you do not want to use the ctrlX App Build Enviroment, you will need a __Ubuntu Server or Desktop system.__
+The installation of the ctrlX AUTOMATION SDK takes place in three steps:
 
-In this case two important preparations steps have to be done, before you are able to install and use the ctrlX AUTOMATION SDK.
+1. Install required Debian packages.
+2. Install [snapcraft](https://snapcraft.io/snapcraft)
+3. Clone the ctrlX AUTOMATION SDK github repo and install the content of the ctrlX AUTOMATION SDK zip file
 
-__Step 1, if your system has no direct internet access:__
-Register HTTP and HTTPS proxy server URLs in /etc/wgetrc and /etc/environment
+__These installation steps are required on both an App Build Environment and an Ubuntu Server or Desktop System.__
 
-This can be done manually, but we recommend to use a script provided by the ctrlX AUTOMATION SDK:
+### Install required Debian packages
 
-Start a web browser (outside of your development environment), download [install-proxy.sh](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/install-proxy.sh) and copy the script to your development environment.
+Start a console session and enter these commands sequentially:
 
-On your development environment, make it executable and start it:
+	wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/install-required-packages.sh
+	chmod a+x *.sh
+	./install-required-packages.sh
 
-    chmod a+x install-proxy.sh
-    ./install-proxy.sh
+### Install snapcraft
 
-The script will ask for the according URLs and make entries into the files mentioned above.
+Start a console session and enter these commands sequentially:
 
-After registering the proxy URLs log out and log in again to make the settings effective.
+	wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/install-snapcraft.sh
+	chmod a+x *.sh
+	./install-snapcraft.sh
 
-__Step 2 Install required Debian packages:__
+### Clone and Install the ctrlX AUTOMATION SDK
 
-Open a shell within your Ubuntu system (be shure it has internet access - with or without proxy) and enter:
+Start a console session, change to your destination directory and enter these commands sequentially:
 
-    curl -s https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/environment/install-packages.sh | bash
-
-### Installation of the ctrlX AUTOMATION SDK
-
-The SDK should be installed using the provided script 'clone-install-sdk.sh'.
-
-The script will clone this repository, checkout a specific version and create a branch. So during the script processing you will be asked for these values. 
-
-After cloning, the appropriate zip archive will be downloaded and all required files will be copied into the local repository.
-
-To start the installation open a shell on your development system, change to the directory into which the SDK should be installed and enter:
-
-    curl -s https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh | bash 
+	wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh
+	chmod a+x *.sh
+	./clone-install-sdk.sh
 
 As a result, your local copy of the github repo is stored within the directory ctrlx-automation-sdk/
 
@@ -78,7 +72,7 @@ SPDX-License-Identifier: MIT
 
 ## About
 
-Please note that any trademarks, logos and pictures contained or linked to in this Software are owned by or copyright © Bosch Rexroth AG 2021 and not licensed under the Software's license terms.
+Please note that any trademarks, logos and pictures contained or linked to in this Software are owned by or copyright © Bosch Rexroth AG 2021-2024 and not licensed under the Software's license terms.
 
 <https://www.boschrexroth.com>
 
