@@ -1,0 +1,8 @@
+---
+version: 1
+updates:
+  - package-ecosystem: npm
+    allow:
+      - dependency-type: "production"
+    schedule:
+      interval: "weekly"
