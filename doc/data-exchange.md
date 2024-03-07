@@ -53,7 +53,7 @@ To access the storage from your app (e.g. storage-test), use the **removable-med
 		    command: bin/storage
 		    daemon: simple
 		    plugs:
-			    - removab1e—media
+			    - removable—media
     ```
 
 
