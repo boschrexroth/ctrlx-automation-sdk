@@ -33,11 +33,11 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '20.11.0'
+      - NODE_VERSION: '20.12.0'
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "20.11.0"
+    # npm-node-version: "20.12.0"
     plugin: nil
     override-build: |
 
@@ -46,14 +46,15 @@ parts:
           target_arch="arm64"
       else 
           target_arch="x64"
-      fi     
+      fi
 
       # detect build arch
-      if [ $SNAP_ARCH == "arm64" ]; then
+      SNAPCRAFT_BUILD_ARCH=$(dpkg --print-architecture)
+      if [ $SNAPCRAFT_BUILD_ARCH == "arm64" ]; then
           build_arch="arm64"
       else 
           build_arch="x64"
-      fi     
+      fi
 
       # fetch node for target arch to be packed
       if [ ! -f "${SNAPCRAFT_PART_INSTALL}/bin/node" ]; then

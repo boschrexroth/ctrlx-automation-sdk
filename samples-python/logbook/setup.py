@@ -9,7 +9,7 @@ setup(name = 'sdk-py-logbook',
       description = 'Logbook sample written in Python for ctrlX',
       author = 'SDK Team',
       packages = ['logbook'],
-      install_requires=['cysystemd'], 
+#      install_requires=['cysystemd==1.5.4'], 
       scripts = ['main.py'],
       license = 'MIT License'
 )

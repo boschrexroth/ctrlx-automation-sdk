@@ -10,24 +10,23 @@ If the ctrlX Data Layer connection breaks the app will exit. After 10s it will b
 
 ## Preparation
 
-This sample uses a flatbuffers node defined in sampleSchema.fbs and metadata information defined in metadata.csv.
+This sample uses a flatbuffers node defined in sampleSchema.fbs.
 
 For easy of use the project contains the according compiled files:
 
-* sampleSchema.fbs: ./bfbs/sampleSchema.bfbs, ./schema/InertialValue.py
-* metadata.csv: ./mddb/metadata.mddb
+* sampleSchema.fbs: ./bfbs/sampleSchema.bfbs, ./sample/schema/InertialValue.py
 
 With these compilation files the project can instantly debugged or snaps can be build.
 
-If changes have been made to the definition files, the compiles must be regenerated. This is done by the script __make-bfbs-mddb.sh__.
+If changes have been made to the definition files, the compiles must be regenerated. This is done by the script __make-bfbs.sh__.
 
 The script can be called from the console:
 
-    ./make-bfbs-mddb.sh
+    ./make-bfbs.sh
 
 It can also be called from Visual Studio Code:
 
-    Main menu -> Terminal --> Run Task... --> make bfbs mddb
+    Main menu -> Terminal --> Run Task... --> Make bfbs
 
 
 ## Implementation Description
@@ -37,11 +36,6 @@ It can also be called from Visual Studio Code:
 #### Flatbuffers 
 
 * sampleSchema.fbs: Defines a flatbuffers value (structed value). If changed compile it - see above.
-
-#### Metadata
-
-* metadata.csv: Defines metadata for the provided ctrlX Data Layer nodes. If changed compile it - see above.
-* metadata.mddb: Compiled information of metadata.csv.
 
 ### Modules
 

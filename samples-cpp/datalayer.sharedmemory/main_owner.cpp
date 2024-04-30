@@ -113,7 +113,7 @@ int main(void)
   comm::datalayer::DlResult result;
   comm::datalayer::DatalayerSystem datalayerSystem;
 
-  std::string dlBasePath = "sdk/cpp/datalayer/shardedmemory/";
+  std::string dlBasePath = "sdk/cpp/datalayer/sharedmemory/";
 
   if (isSnap())
   {

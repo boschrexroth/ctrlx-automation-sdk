@@ -20,15 +20,14 @@
         }
       ]
     }
-  ], 
+  ],
   "services": {
     "proxyMapping": [
       {
         "name": "sdk-py-webserver",
         "url": "/python-webserver",
         "binding": "unix://{$SNAP_DATA}/package-run/sdk-py-webserver/web.sock",
-        "restricted": [
-        ]        
+        "restricted": []
       }
     ]
   },
@@ -42,8 +41,7 @@
         "link": "/python-webserver?token=${bearertoken}"
       }
     ],
-    "settings": [
-    ],
+    "settings": [],
     "overview": [
       {
         "id": "sdk-py-webserver",
@@ -51,6 +49,6 @@
         "icon": "bosch-ic-worldwideweb",
         "link": "/python-webserver?token=${bearertoken}"
       }
-    ]    
+    ]
   }
 }

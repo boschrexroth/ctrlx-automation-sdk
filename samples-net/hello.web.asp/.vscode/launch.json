@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build project",
-            "program": "${workspaceFolder}/bin/Debug/net6.0/hello.web.asp.dll",
+            "program": "${workspaceFolder}/bin/Debug/net8.0/hello.web.asp.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

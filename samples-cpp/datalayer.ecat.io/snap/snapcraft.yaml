@@ -7,9 +7,9 @@ name: sdk-cpp-ecat-io
 title: SDK C++ EtherCAT I/O
 version: 1.0.0
 grade: stable
-summary: Sample app for processing rt data from EtherCAT
+summary: Sample app for copying EtherCAT I/Os.
 description: |
-  This app will read EtherCAT nodes from the ctrlX Data Layer.
+  This app will copy EtherCAT digital inputs to outputs.
 base: core22
 confinement: strict
 

@@ -8,7 +8,7 @@ package node
 import (
 	"fmt"
 
-	"github.com/boschrexroth/ctrlx-datalayer-golang/pkg/datalayer"
+	"github.com/boschrexroth/ctrlx-datalayer-golang/v2/pkg/datalayer"
 )
 
 const addressroot = "sdk/go/provider/simple/"
@@ -53,14 +53,17 @@ func (n *NodeData) Value() *datalayer.Variant {
 // NodeData is accessed via the interface NodeDataHandler
 func StartNodeDataHandler(d NodeDataHandler) {
 	for {
+
 		if d.Node() == nil {
 			return
 		}
+
 		select {
 		case event, ok := <-d.Node().Channels().OnCreate:
 			if !ok {
 				return
 			}
+
 			fmt.Println("event: oncreate: ", d.Name())
 			event.Callback(datalayer.Result(0), nil)
 
@@ -73,30 +76,30 @@ func StartNodeDataHandler(d NodeDataHandler) {
 			event.Callback(datalayer.ResultUnsupported, nil)
 
 		case event, ok := <-d.Node().Channels().OnBrowse:
-			func() {
-				if !ok {
-					return
-				}
+			if !ok {
+				return
+			}
 
+			func(e datalayer.ProviderNodeEvent) {
 				newData := datalayer.NewVariant()
 				defer datalayer.DeleteVariant(newData)
 				newData.SetArrayString([]string{})
 				fmt.Println("event: OnBrowse: ", d.Name())
-				event.Callback(datalayer.Result(0), newData)
-			}()
+				e.Callback(datalayer.Result(0), newData)
+			}(event)
 
 		case event, ok := <-d.Node().Channels().OnRead:
-			func() {
-				if !ok {
-					return
-				}
+			if !ok {
+				return
+			}
 
+			func(e datalayer.ProviderNodeEventData) {
 				newData := datalayer.NewVariant()
 				defer datalayer.DeleteVariant(newData)
 				d.Value().Copy(newData)
 				fmt.Println("event: OnRead: ", d.Name())
-				event.Callback(datalayer.Result(0), newData)
-			}()
+				e.Callback(datalayer.Result(0), newData)
+			}(event)
 
 		case event, ok := <-d.Node().Channels().OnWrite:
 			if !ok {
@@ -108,17 +111,16 @@ func StartNodeDataHandler(d NodeDataHandler) {
 			event.Callback(datalayer.Result(0), event.Data)
 
 		case event, ok := <-d.Node().Channels().OnMetadata:
-			func() {
-				if !ok {
-					return
-				}
+			if !ok {
+				return
+			}
 
+			func(e datalayer.ProviderNodeEvent) {
 				fmt.Println("event: OnMetadata: ", d.Name())
-
 				r, v := d.OnMetadata()
 				defer datalayer.DeleteVariant(v)
-				event.Callback(r, v)
-			}()
+				e.Callback(r, v)
+			}(event)
 
 		case <-d.Node().Channels().Done:
 			fmt.Println("event: Done: ", d.Name())

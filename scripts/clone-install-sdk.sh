@@ -133,32 +133,3 @@ sudo apt-get update
 # Install newest ctrlx-datalayer package
 sudo apt-get install -y ctrlx-datalayer
 
-cd "${SDK_DIR}"/scripts || exit
-
-echo ""
-echo $SEPARATION_LINE_1
-echo "Installing aarch64 libs required for C++ cross compiling ..."
-echo $SEPARATION_LINE_2
-
-INSTALL_AARCH64LIBS_SCRIPT=$(find . -name 'install-cpp-aarch64-libs.sh')
-if [ -n "$INSTALL_AARCH64LIBS_SCRIPT" ]; then
-	source "$INSTALL_AARCH64LIBS_SCRIPT"
-else
-	sudo apt-get -y install libsystemd-dev:arm64
-	sudo apt-get -y install libssl-dev:arm64
-	sudo apt-get -y install libzmq3-dev:arm64
-	sudo apt-get -y install libzip-dev:arm64
-	sudo apt-get -y install uuid-dev:arm64
-	sudo apt-get -y install libssl-dev:arm64
-	sudo apt-get -y install libcurl4-openssl-dev:arm64
-	sudo apt-get -y install libjansson-dev:arm64
-	sudo apt-get -y install libffi-dev:arm64
-fi
-
-INSTALL_SNAPCRAFT_SCRIPT=$(find . -name 'install-snapcraft.sh')
-if [ -n "$INSTALL_SNAPCRAFT_SCRIPT" ]; then
-	source "$INSTALL_SNAPCRAFT_SCRIPT"
-else
-	echo "WARNING snapcraft could not be installed!"
-	echo "INFO Search install-snapcraft.sh and start manually."
-fi

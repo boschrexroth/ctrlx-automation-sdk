@@ -79,9 +79,9 @@ SET ( PRIVATE_INCLUDE_DIRS
 #
 execute_process(COMMAND uname -a OUTPUT_VARIABLE HOST_SYSTEM_ARCH)
 IF( ${HOST_SYSTEM_ARCH} MATCHES "aarch64")
-  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-aarch64/release/flatc)
+  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-aarch64/flatc)
 ELSE()
-  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-x64/release/flatc)
+  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-x64/flatc)
 ENDIF()
 execute_process(COMMAND chmod +x ${FLATBUFFERS_FLATC_EXECUTABLE})
 set (FLATBUFFERS_INCLUDE_DIR ${USER_DEPENDENCY_DIR}/include/oss.flatbuffers)

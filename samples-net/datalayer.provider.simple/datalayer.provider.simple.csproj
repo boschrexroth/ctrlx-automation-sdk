@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Samples.Datalayer.Provider</RootNamespace>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ctrlX-DataLayer" Version="3.*" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.*" />
+    <PackageReference Include="ctrlX-DataLayer" Version="4.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.*" />
   </ItemGroup>
 
   <ItemGroup>

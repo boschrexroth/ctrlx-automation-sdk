@@ -57,7 +57,7 @@
         "name": "sdk-net-appdata",
         "description": "Application data of the SDK .NET AppData Sample",
         "icon": "bosch-ic-directory",
-        "copyOnLoad": true         
+        "copyOnLoad": true
       }
     ]
   }

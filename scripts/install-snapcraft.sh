@@ -1,10 +1,6 @@
 #!/usr/bin/env bash     
 
-INFO=$(snap list snapcraft)
-if [[ ${INFO} != *"6."* ]]; then
-    echo Removing: $INFO
-    sudo snap remove snapcraft
-fi
+set -e
 
 echo " "
 echo "============================================"

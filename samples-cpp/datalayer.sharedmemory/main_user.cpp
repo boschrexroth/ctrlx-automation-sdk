@@ -61,7 +61,7 @@ int main()
   std::shared_ptr<comm::datalayer::IMemoryUser> outputMemUser;
   uint8_t* outData;
 
-  std::string dlBasePath = "sdk/cpp/datalayer/shardedmemory/";
+  std::string dlBasePath = "sdk/cpp/datalayer/sharedmemory/";
 
   // Structure to interrupt the do while loops with SIGINT
   std::signal(SIGINT, sigIntHandler);

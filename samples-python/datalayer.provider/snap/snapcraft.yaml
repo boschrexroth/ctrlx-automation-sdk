@@ -31,10 +31,6 @@ parts:
     plugin: dump
     source: ./bfbs
 
-  mddb:
-    plugin: dump
-    source: ./mddb
-
 plugs:
   datalayer:
     interface: content

@@ -1,0 +1,29 @@
+{
+    "name": "sdk-webdav-client",
+    "version": "1.0.0",
+    "description": "WebDAV-Client in Node.js for ctrlX",
+    "bin": {
+        "app": "dist/app.js"
+    },
+    "author": "",
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "devDependencies": {
+        "@types/node": "^20.12.2",
+        "@typescript-eslint/eslint-plugin": "^7.5.0",
+        "@typescript-eslint/parser": "^7.5.0",
+        "eslint": "^8.57.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.3"
+    },
+    "dependencies": {
+        "webdav": "^5.5.0"
+    },
+    "scripts": {
+        "getName": "echo $npm_package_name",
+        "prepare": "npm run tsc",
+        "tsc": "tsc"
+    }
+}

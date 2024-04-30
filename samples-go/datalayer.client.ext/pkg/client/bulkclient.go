@@ -5,7 +5,7 @@
  */
 package client
 
-import "github.com/boschrexroth/ctrlx-datalayer-golang/pkg/datalayer"
+import "github.com/boschrexroth/ctrlx-datalayer-golang/v2/pkg/datalayer"
 
 // bulkClient is the a bulk client wrapper.
 type bulkClient struct {

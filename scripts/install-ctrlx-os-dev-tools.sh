@@ -17,3 +17,16 @@ echo "============================================"
 echo " "
 
 sudo snap install ubuntu-image --classic
+
+echo " "
+echo "============================================"
+echo Installing required debian packages
+echo "============================================"
+echo " "
+
+sudo apt-get install -y ncurses-dev
+sudo apt-get install -y flex
+sudo apt-get install -y bison
+
+
+

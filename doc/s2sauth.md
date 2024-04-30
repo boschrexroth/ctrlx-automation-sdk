@@ -13,7 +13,9 @@ slots:
   secure-assets:
     interface: content
     content: secure-assets
-    target: $SNAP/secure-assets/${SNAPCRAFT_PROJECT_NAME}
+    source:
+      read:
+        - $SNAP/secure-assets/${SNAPCRAFT_PROJECT_NAME}
   service-token:
     interface: content
     content: service-token

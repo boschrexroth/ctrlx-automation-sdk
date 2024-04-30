@@ -1,9 +1,10 @@
-name: changing-world
+name: sdk-generate-manifest
+title: SDK Generate Manifest
 base: core22
-version: '1.0.0'
-summary: Simple snap with random menu entry
+version: 1.0.0
+summary: Simple snap with random menu entry.
 description: |
-  This is a sample snap that generates a random menu entry when getting installed or updated
+  This is a sample snap that generates a random menu entry when getting installed or updated.
 
 grade: stable
 confinement: strict

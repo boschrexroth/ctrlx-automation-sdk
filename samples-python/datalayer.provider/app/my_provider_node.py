@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 import ctrlxdatalayer
-from comm.datalayer import DisplayFormat, Metadata, NodeClass
+from comm.datalayer import NodeClass
 from ctrlxdatalayer.provider import Provider
 from ctrlxdatalayer.provider_node import (
     ProviderNode,
@@ -21,7 +21,8 @@ from ctrlxdatalayer.metadata_utils import (
 class MyProviderNode:
     """MyProviderNode"""
 
-    def __init__(self, provider: Provider, address: str, initialValue: Variant):
+    def __init__(self, provider: Provider, nodeAddress: str, typeAddress: str,
+                 initialValue: Variant):
         """__init__"""
         self._cbs = ProviderNodeCallbacks(
             self.__on_create,
@@ -33,31 +34,29 @@ class MyProviderNode:
         )
 
         self._providerNode = ProviderNode(self._cbs)
-
         self._provider = provider
-        self._address = address
+        self._nodeAddress = nodeAddress
+        self._typeAddress = typeAddress
         self._data = initialValue
-        self._metadata = MyProviderNode.__get_metadata(address)
+        self._metadata = self.create_metadata()
 
-    @staticmethod
-    def __get_metadata(address: str) -> Variant:
-        builder = MetadataBuilder(
-            allowed=AllowedOperation.READ | AllowedOperation.WRITE
-        )
-        builder = builder.set_display_name(address)
+    def create_metadata(self) -> Variant:
+        builder = MetadataBuilder(allowed=AllowedOperation.READ
+                                  | AllowedOperation.WRITE)
+        builder = builder.set_display_name(self._nodeAddress)
         builder = builder.set_node_class(NodeClass.NodeClass.Variable)
-        if address.rfind("string") != -1:
-            builder.add_reference(ReferenceType.read(), "types/datalayer/string")
-            builder.add_reference(ReferenceType.write(), "types/datalayer/string")
+        builder.add_reference(ReferenceType.read(), self._typeAddress)
+        builder.add_reference(ReferenceType.write(), self._typeAddress)
         return builder.build()
 
     def register_node(self):
         """register_node"""
-        return self._provider.register_node(self._address, self._providerNode)
+        return self._provider.register_node(self._nodeAddress,
+                                            self._providerNode)
 
     def unregister_node(self):
         """unregister_node"""
-        self._provider.unregister_node(self._address)
+        self._provider.unregister_node(self._nodeAddress)
         self._metadata.close()
         self._data.close()
 
@@ -73,7 +72,12 @@ class MyProviderNode:
         cb: NodeCallback,
     ):
         """__on_create"""
-        print("__on_create()", "address:", address, "userdata:", userdata, flush=True)
+        print("__on_create()",
+              "address:",
+              address,
+              "userdata:",
+              userdata,
+              flush=True)
         cb(Result.OK, data)
 
     def __on_remove(
@@ -83,7 +87,12 @@ class MyProviderNode:
         cb: NodeCallback,
     ):
         """__on_remove"""
-        print("__on_remove()", "address:", address, "userdata:", userdata, flush=True)
+        print("__on_remove()",
+              "address:",
+              address,
+              "userdata:",
+              userdata,
+              flush=True)
         cb(Result.UNSUPPORTED, None)
 
     def __on_browse(
@@ -93,7 +102,12 @@ class MyProviderNode:
         cb: NodeCallback,
     ):
         """__on_browse"""
-        print("__on_browse()", "address:", address, "userdata:", userdata, flush=True)
+        print("__on_browse()",
+              "address:",
+              address,
+              "userdata:",
+              userdata,
+              flush=True)
         with Variant() as new_data:
             new_data.set_array_string([])
             cb(Result.OK, new_data)
@@ -153,4 +167,4 @@ class MyProviderNode:
     ):
         """__on_metadata"""
         print("__on_metadata()", "address:", address, flush=True)
-        cb(Result.OK, self._metadata)  # Take metadata from metadata.mddb
+        cb(Result.OK, self._metadata)

@@ -76,7 +76,7 @@ Before the validation process starts, the partner / app developer must provide t
 * a description of a typical standard scenario
 
 
-The architecture overview should be stored as "**architecture-overview.x**" in the {app-name} folder and should be delivered with each new app version.
+The architecture overview should be stored as "**architecture-overview.x**" in the {app-name} folder. Initially, provide the architecture overview, and if there are any changes in the architecture, update and provide the new overview.
 
 This document typically will be provided for an initial meeting with the partner / app developer, the relevant Bosch Rexroth partner manager and the Bosch Rexroth app validation team.
 At this point, the partner should also already have uploaded the necessary artifacts to be able to clarify any open points.
@@ -243,10 +243,10 @@ The basic app information is checked as a prerequisite by Bosch Rexroth, before 
 
 #### 4.1.1 Artifacts Folder Template
 
-The ctrlX World Partner Portal provides a file (artifacts.zip), which can be downloaded and extracted locally.
+Please find the sample artifacts in the [artifacts.zip](artifacts.zip), which can be downloaded and extracted locally.
 This will create the required folder structure for the mandatory artifacts out-of-the-box, with default descriptions and schema files.
 
-!!!! important 
+!!! important 
      Please use the given structure, folder names and file names unchanged. This will support an efficient validation process.
 
 ![image](images/artifacts.png)
@@ -481,14 +481,15 @@ For information how to adapt an app to the licensing service please have look on
 To make sure that only apps that have successfully passed the validation process are available as a ctrlX app, these Apps need to be signed by Bosch Rexroth.
 During the signing process, the app binaries are checked and combined with a signature. This signature guarantees that the app cannot be modified after the validation and signing process.
 
-!!! note
-    At the moment, only Bosch Rexroth can sign ctrlX apps
+Note: Currently only Bosch Rexroth can sign ctrlX apps
 
 ## 8 ctrlX Security System (<span style="color:green;">**OPTIONAL**</span>)<a name="security"></a>
 
 ### 8.1 ctrlX CORE reverse proxy (<span style="color:green;">**OPTIONAL**</span>)
 
 The proxy URL is the most important setting in the **package-manifest.json** file for the app to be integrated seamlessly into the ctrlX CORE. The reverse proxy will forward requests to the URL that are defined for the app web service.
+
+**Please make sure that your App provides unique URLs for the ctrlX reverse proxy**
 
 An app is to be bound to a Unix socket instead of a local port. This will also prevent potential collisions with other services.
 
@@ -516,6 +517,8 @@ If the mechanisms the ctrlX CORE provides are not used, hardcoded accounts/crede
 The ctrlX CORE's so called "scopes" are to be used to model app permissions. Scopes allow permissions to be assigned to users & groups via the web interface. If case permissions are used, the permissions must be enforced within the app
 (package-manifest.json)
 
+**If your app supports scopes, unique scopes must be provided to the ctrlX permission manager**
+
 
 ## 9 ctrlX User Interface and Project Handling (<span style="color:green;">**OPTIONAL**</span>)<a name="userinterface"></a>
 
@@ -534,6 +537,8 @@ The so-called "Solution" is an essential part of any ctrlX CORE device. It provi
 - It does not contain data that is related to a specific device, e.g. certificates, network configurations, users and their permissions, or should be valid for multiple configurations (e.g. app settings).
 
 - Should be non-binary (in future version control system / GIT will be used). However, if there is no alternative and the files do not change too often, small binaries can be stored in a configuration.
+
+**Apps must use separate, unique repositories in ctrlX configurations.**
 
 
 #### 9.2.2 Environment Variables (<span style="color:blue;">**CONDITIONAL**</span>)

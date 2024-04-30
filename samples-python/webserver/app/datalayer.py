@@ -185,10 +185,10 @@ class DataLayer:
                 return Result.OK, data.get_string()
 
             if variant_type == VariantType.UINT16:
-                return Result.Ok, data.get_uint16()
+                return Result.OK, data.get_uint16()
 
             if variant_type == VariantType.UINT32:
-                return Result.Ok, data.get_uint32()
+                return Result.OK, data.get_uint32()
 
             if variant_type == VariantType.UINT64:
                 return Result.OK, data.get_uint64()

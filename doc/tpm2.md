@@ -43,7 +43,7 @@ apps:
     plugs: [tpm2-socket, system-configuration, network]
 ```
 
-See also the sample in [samples-sh/tpm2.consumer](./samples-sh/tpm2.consumer/README.md)
+See also the sample in [samples-snap/tpm2-webserver](./samples-snap/tpm2-webserver/README.md)
 
 ### Integration with Certificate Manager
 

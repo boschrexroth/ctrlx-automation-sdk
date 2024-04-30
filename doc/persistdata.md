@@ -168,7 +168,7 @@ For each command, the following elements must be specified:
 
 - **id** (required): a string serving as the identifier of the save or load command; must be unique within the “commands/activeConfiguration/save” and “commands/activeConfiguration/load” paths, respectively
 - **subject** (required): a string denoting what will be saved or loaded; used to inform users, e.g. in messages like “Loading *motion settings*” or “Failed to load *motion settings*”
-- **url** (required): a string representing the request URL; URLs starting with a slash are interpreted to be relative to <https://\<host\>> (the control itself). Declare an absolute URL if you need to specify a port, e.g. `http://localhost:5555/my-app/api/v1/save`. The URL is used for HTTP POST requests which include command parameters in the request body (see section "Request parameters" for details)
+- **url** (required): a string representing the request URL; URLs starting with a slash are interpreted to be relative to `https://localhost`. The URL is used for HTTP POST requests which include command parameters in the request body (see section "Request parameters" for details)
 
 By default there is no defined order of command execution. Starting with version XCR-V-0112, a command may declare that it needs to be executed **after** other commands. If this is required (which should be the exception), add an after element to your command declaration with an array containing the IDs of the predecessor commands.
 
@@ -267,7 +267,7 @@ The field may contain “\n“ to separate cause and hint in the result output o
 
 #### Diagnostic messages
 
-The Solutions app only logs a general diagnostic message on start and finish of a save and load operation. Each participant should additionally log its own activities and occurred problems into the control’s Logbook. Any diagnostic message or trace message related to saving or loading should include the current id at the end of the dynamic description in square brackets.
+The Solutions app only logs a general diagnostic message on start and finish of a save and load operation. Each participant should additionally log its own activities and occurred problems into the device’s Logbook. Any diagnostic message or trace message related to saving or loading should include the current id at the end of the dynamic description in square brackets.
 
 Example of diagnostic entries as they would appear in the Logbook:
 

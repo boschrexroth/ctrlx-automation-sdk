@@ -1,0 +1,10 @@
+{
+    "id": "tpm2-webserver",
+    "certificatestores": [
+      {
+        "id": "tpm2-webserver",
+        "title": "TPM2 Webserver",
+        "description": "Testing some TPM functions by a webserver"
+      }
+    ]
+}

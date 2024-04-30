@@ -1,5 +1,5 @@
 {
-  "product": "<PRODUCT_VERSION (e.g. XCR-V-0114)>",
+  "product": "<PRODUCT_VERSION (e.g. XCR-V-0204)>",
   "mainDiagnostics": {
     "<MAIN_DIAG_1_NUMBER>": {
       "text": "<MAIN_DIAG_1_TEXT_ENGLISH>",

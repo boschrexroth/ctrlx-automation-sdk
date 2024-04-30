@@ -130,8 +130,6 @@ nav:
       - Samples Python: samples-python/README.md
       - Samples .NET: samples-net/README.md
       - Samples Nodejs: samples-node/README.md
-      - Samples ANGULAR: samples-angular/README.md
-      - Samples Shell: samples-sh/README.md
       - Samples Snap: samples-snap/README.md
       - Samples IEC 61131-3: samples-iec61131/README.md
     - Debugging:

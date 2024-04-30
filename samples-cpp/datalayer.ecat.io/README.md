@@ -4,7 +4,7 @@ This sample app toggles some Fieldbus I/O's.
 
 ## Introduction
 
-It demonstrate how it is possible to read inputs and write outputs. It starts to toggle the outputs while the first channel of the input is set to true.
+It demonstrate how it is possible to read inputs and write outputs.
 
 ## Prerequisites for the ctrlX CORE
 

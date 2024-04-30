@@ -1,4 +1,4 @@
 autopep8
 isort
-ctrlx_fbs
-ctrlx_datalayer
+ctrlx-fbs
+ctrlx-datalayer

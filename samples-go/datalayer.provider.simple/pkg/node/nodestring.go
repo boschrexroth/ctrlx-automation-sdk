@@ -6,8 +6,8 @@
 package node
 
 import (
-	"github.com/boschrexroth/ctrlx-datalayer-golang/pkg/datalayer"
-	fbs "github.com/boschrexroth/ctrlx-datalayer-golang/pkg/fbs/comm/datalayer"
+	"github.com/boschrexroth/ctrlx-datalayer-golang/v2/pkg/datalayer"
+	fbs "github.com/boschrexroth/ctrlx-datalayer-golang/v2/pkg/fbs/comm/datalayer"
 )
 
 const typeaddressstring = "types/datalayer/string"

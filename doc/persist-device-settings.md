@@ -1,34 +1,46 @@
 ### **Table of content**
 
-[1 Introduction](#introduction)
+[Introduction](#introduction)
 
-[2 Register app settings](#register)
+[Using REST API endpoints](#rest)
 
-[3 Implement settings endpoints](#implement)
+[Using Ubuntu’s snapshot mechanism](#snapshot)
 
-## 1 Introduction<a name="introduction"></a>
+## Introduction<a name="introduction"></a>
 
-Third-party apps can integrate into the ctrlX Setup functionality so that their device-specific app settings are saved
-or restored when a setup is created or applied. Therefore, an app must provide REST API endpoints to access its settings.
-Settings of third-party apps that are not accessible through settings endpoints will not be included in a ctrlX setup.
+Apps can integrate into the ctrlX Setup functionality so that their device-specific app settings are saved
+or restored when a backup is created or restored. There are two ways of integration:
 
-## 2 Register app settings<a name="register"></a>
+| Using REST API endpoints                                                     | Using Ubuntu’s snapshot mechanism                                                                                  |
+|:-----------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------|
+| Fine-grained control with respect to the settings format and content         | Limited control with respect to the settings format and content                                                    |
+| App settings can be saved or restored in any system state                    | The app will be disabled before taking or restoring its snapshot, which requires the system to be in SERVICE state |
+| Secrets can be stored as encrypted files                                     | Snapshot contents are stored unencrypted so that they must not include secrets                                     |
+| Unchanged settings are skipped on restore                                    | Snapshot contents are always completely restored                                                                   |
+| Requires a web server and the implementation of API endpoints | Minimal implementation effort                                                                                      |
 
-An app declares the settings to be included into a setup in the "apps"/"rexroth-setup" section of its package manifest.
+## Using REST API endpoints<a name="rest"></a>
+
+For using this integration approach, an app must provide REST API endpoints that allow to access its settings.
+Settings of apps that are not accessible through settings endpoints will not be included in a backup.
+
+### Register app settings
+
+An app declares the settings to be included into a backup in the "apps"/"rexroth-setup" section of its package manifest.
 
 Each setting consists of a setting name, a description, a URL used to read and update the settings value, and a value
 type:
 
-- **name** (required): Name of the setting. Must be unique within the app's settings list.
-  Serves as key in the ctrlx-setup.json file.
+- **name** (required): Name of the setting. Must be unique within the app’s settings list.
+  Serves as key in the ctrlx-backup.json file. Note that the name "$path" is reserved.
 - **description**: Short localized description of the setting.
 - **url** (required): URL used to read (GET) and update (PUT) the setting. A URL starting
-  with a slash is interpreted to be relative to https://\<host\>.
+  with a slash is interpreted to be relative to `https://localhost`.
 - **type**: One of
   - **"text"** (default): The value is saved as a quoted string.
   - **"json"**: The value is saved in JSON object format (see "Merge operation for JSON-formatted settings").
   - **"file"**: The value is persisted as a file.
-  - **"encryptedFile"**: The value is persisted as a file. The Setup app encrypts the file content if the setup is
+  - **"encryptedFile"**: The value is persisted as an encrypted file if the backup is
 created with a password.
 
 **package-manifest.json:**
@@ -68,12 +80,12 @@ created with a password.
 }
 ```
 
-The Setup app calls the URLs with GET or PUT to read or update the settings when a ctrlX setup is created or applied. 
+The Setup app calls the URLs with GET or PUT to read or update the settings when a backup is created or restored. 
 
-Creating a setup with the above setting declarations might, e.g., result in the following ctrlx-setup.json output. The
-respective files (baz.bin, secret.bin.aes) would be included in the enclosing ctrlx-setup.zip archive.
+Creating a backup with the above setting declarations might, e.g., result in the following `ctrlx-backup.json` output. The
+respective files (`baz.bin`, `secret.bin.aes`) would be included in the enclosing `ctrlx-backup.zip` archive.
 
-**ctrlx-setup.json:**
+**ctrlx-backup.json:**
 
 ```json
 {
@@ -97,27 +109,27 @@ respective files (baz.bin, secret.bin.aes) would be included in the enclosing ct
 }
 ```
 
-## 3 Implement settings endpoints<a name="implement"></a>
+### Implement settings endpoints
 
-Third-party apps must consider the following conditions and constraints in their implementations:
+Apps must consider the following conditions and constraints in their implementations:
 
-- Third-party app settings are applied after apps have been updated and device admin settings (users, scopes, licenses,
+- App settings are applied after apps have been updated and device admin settings (users, scopes, licenses,
 ...) have been applied.
 - The order in which requests are sent to read or update the settings is undefined.
 - Persisted settings must be usable with newer versions of the app. A newer app version may introduce new settings and
 properties which must be tolerated (ignored) by older app versions. Incompatible changes (e.g. changing the meaning of
 enum values) between app versions must be avoided.
-- Third-party apps using the settings type "json" must implement the special semantics described in the following
+- Apps using the settings type "json" must implement the special semantics described in the following
 section.
   
-### Merge operation for JSON-formatted settings
+#### Merging JSON-formatted settings
 
-Setup supports fine-grained modifications by merging the setup content with the current state of the device. The merge
-operation will extend JSON objects with new properties, e.g. to add users to a users list. Conversely, a property can be
-removed by setting its value to `null`.
+The restore operation allows fine-grained modifications by merging the backup content with the current state of the device.
+This way, new properties may be added to JSON objects (new users may, e.g., be added to the existing ones on the device).
+Conversely, properties can be removed by setting their values to `null`.
 
-Third-party apps can use the merge feature by providing their property settings with type "json" and by implementing the
-following behavior:
+Apps can use the merge feature by providing their property settings with type "json" and by implementing the following
+behavior:
 
 | Use case                                                                                                    | Example                                      | Description                             |
 |:------------------------------------------------------------------------------------------------------------|:---------------------------------------------|:----------------------------------------|
@@ -126,7 +138,7 @@ following behavior:
 | A new property in the JSON structure will be added on the device.                                           | `"users": {"jane": {"passwordHash": "..."}}` | Adds new user "jane"                    |
 | A property with a `null` value in the JSON structure will remove the corresponding property on the device.  | `"users": {"john": null}`                    | Deletes user "john"                     |
 
-### Success behavior
+#### Success behavior
 
 - **GET**: Apps must respond with status code 200 if the request has succeeded. The response body must contain the
 setting value in the following format:
@@ -136,12 +148,12 @@ setting value in the following format:
 - **PUT**: Apps must apply the setting value contained in the request body and respond with status code 204 and an empty
 response body if the request has succeeded.
 
-### Failure behavior
+#### Failure behavior
 
 - Apps must respond with an error status code (4xx or 5xx) if a GET or PUT request has failed.
 - The response body must contain a JSON object describing the problem by providing an appropriate status code and title
 (cf. example and schema below). 
-- The Setup app reports the problem response of a failed request as an error in the logbook and via Web UI. Processing
+- The Setup app reports the problem response of a failed request as an error in the Logbook and via Web UI. Processing
 is continued with the next setting.
 
 **Problem response body (example)**
@@ -241,8 +253,7 @@ Problem:
       example: value = -4.5
     severity:
       type: string
-      description: '
-        Severity of a problem as defined RFC5424 of the Syslog standard, see https://tools.ietf.org/html/rfc5424'
+      description: 'Severity of a problem as defined RFC5424 of the Syslog standard, see https://tools.ietf.org/html/rfc5424'
       example: Error
       enum:
         - Emergency
@@ -282,4 +293,50 @@ Problem:
         action, cause is an array. E.g. Loading failed because several components where not able to load the configuration.
       items:
         $ref: "#/Problem"
+```
+
+## Using Ubuntu’s snapshot mechanism<a name="snapshot"></a>
+
+An app may use Ubuntu’s snapshot mechanism to save and restore its settings, cf. https://snapcraft.io/docs/snapshots.
+While this minimizes the implementation effort, the following issues should be considered:
+
+- A snapshot typically contains much more files than should be part of the apps settings, e.g. log files, cached files, etc.  In order to keep backup file sizes manageable, apps should exclude irrelevant content from their snapshots if possible (cf. https://forum.snapcraft.io/t/excluding-data-from-snapshots/33643).
+- Secrets are saved unencrypted in the snapshot and the backup file, respectively.
+- Taking a snapshot fails if a file is locked or modified while taking the snapshot. Therefore, the Setup app disables apps before taking a snapshot, which requires that the system is in SERVICE state. Apps must be prepared to consistently save their state on "disable" events. When the snapshot has been taken, the Setup app enables the app again.
+- Before restoring a snapshot, the Setup app disables the app. After the snapshot has been restored, the Setup app enables the app so that the app can initialize itself with the restored data. As the Setup app cannot find out if a snapshot contains changed settings, snapshots are always completely restored.
+
+The following entry in an app’s package manifest enables the use of Ubuntu’s snapshot mechanism for saving and restoring
+its settings:
+
+**package-manifest.json:**
+
+```json
+{
+  "apps": {
+    "rexroth-setup": {
+      "settings": [
+        {
+          "type": "snapshot"
+        }
+      ]
+    }
+  }
+}
+```
+
+Creating a backup with the above settings declaration would result in the following `ctrlx-backup.json` output. The
+respective snapshot file (`app.snapshot`) would be included in the enclosing `ctrlx-backup.zip` archive.
+
+**ctrlx-backup.json:**
+
+```json
+{
+  "apps": {
+    "myApp" : {
+      "settings": {
+        "$path": "apps/myApp/settings/app.snapshot"
+      }
+    }
+  }
+}
 ```

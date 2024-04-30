@@ -14,7 +14,7 @@ import (
 	"datalayer.client/pkg/client"
 	"datalayer.client/pkg/utils"
 
-	"github.com/boschrexroth/ctrlx-datalayer-golang/pkg/datalayer"
+	"github.com/boschrexroth/ctrlx-datalayer-golang/v2/pkg/datalayer"
 )
 
 // Get client connection

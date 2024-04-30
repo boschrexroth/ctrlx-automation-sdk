@@ -1,5 +1,5 @@
 #!/bin/bash
-flatc=$(dirname $0)/../../../public/bin/oss.flatbuffers/ubuntu22-gcc-x64/release/flatc
+flatc=$(dirname $0)/../../../public/bin/oss.flatbuffers/ubuntu22-gcc-x64/flatc
 rm -frv ./bfbs 
 rm -frv ./comm/datalayer/daq 
 mkdir -pv ./bfbs 

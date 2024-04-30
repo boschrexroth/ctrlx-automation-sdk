@@ -13,11 +13,11 @@
       "problemMatcher": []
     },
     {
-      "label": "Make bfbs mddb",
+      "label": "Make bfbs",
       "type": "shell",
       "command": "bash",
       "args": [
-        "make-bfbs-mddb.sh"
+        "make-bfbs.sh"
       ],
       "problemMatcher": []
     },

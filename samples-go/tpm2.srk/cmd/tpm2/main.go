@@ -13,11 +13,10 @@ import (
 	"io/ioutil"
 	"os"
 
-	"tpm2.srk/cmd/tpm2/util"
-
-	"github.com/google/go-tpm-tools/tpm2tools"
-	"github.com/google/go-tpm/tpm2"
+	"github.com/google/go-tpm-tools/client"
+	"github.com/google/go-tpm/legacy/tpm2"
 	"github.com/google/go-tpm/tpmutil"
+	"tpm2.srk/cmd/tpm2/util"
 )
 
 const TpmSrkHandle = 0x81000001
@@ -65,7 +64,7 @@ var (
 func LoadWithCachedSrk(rw io.ReadWriter, publicBlob []byte, privateBlob []byte) (keyhandle tpmutil.Handle, err error) {
 
 	srkHandle := tpmutil.Handle(TpmSrkHandle)
-	key, err := tpm2tools.NewCachedKey(rw, tpm2.HandleOwner, defaultSrkTemplate, srkHandle)
+	key, err := client.NewCachedKey(rw, tpm2.HandleOwner, defaultSrkTemplate, srkHandle)
 	if err != nil {
 		return 0, err
 	}
@@ -77,7 +76,7 @@ func LoadWithCachedSrk(rw io.ReadWriter, publicBlob []byte, privateBlob []byte) 
 		if err = tpm2.EvictControl(rw, "", tpm2.HandleOwner, srkHandle, srkHandle); err != nil {
 			return 0, err
 		}
-		key, err := tpm2tools.NewCachedKey(rw, tpm2.HandleOwner, defaultSrkTemplate, srkHandle)
+		key, err := client.NewCachedKey(rw, tpm2.HandleOwner, defaultSrkTemplate, srkHandle)
 		if err != nil {
 			return 0, err
 		}
@@ -113,7 +112,7 @@ func createKey() error {
 			return err
 		}
 	}
-	key, err := tpm2tools.NewCachedKey(rwc, tpm2.HandleOwner, defaultSrkTemplate, handle)
+	key, err := client.NewCachedKey(rwc, tpm2.HandleOwner, defaultSrkTemplate, handle)
 	if err != nil {
 		return err
 	}

@@ -12,7 +12,7 @@ If the ctrlX Data Layer connection breaks the app will exit. After 10s it will b
 
 ## Prerequisites
 
-see the description on [ctrlX Data Layer client and provider library for Go](https://github.com/boschrexroth/ctrlx-datalayer-golang)
+see the description on [ctrlX Data Layer client and provider library for Go](https://github.com/boschrexroth/ctrlx-datalayer-golang/v2)
 
 ## Visual Studio Code
 

@@ -64,7 +64,6 @@ Add a "menus" element to the package manifest of your snap. The "menus" element 
 
 * sidebar: An array of items to be integrated into the main menu
 * settings: An array of items to be integrated into the settings menu
-* system: An array of items to be integrated into the system menu
 * overview: An array of items to be integrated into the app overview
 
 An item is defined as an object with the following elements:
@@ -124,15 +123,6 @@ An item is defined as an object with the following elements:
             "link": "/solutions/settings",
             "permissions": [
               "solutions.rw"
-            ]
-          }
-        ],
-        "system": [
-          {
-            "id": "reboot",
-            "title": "Reboot",
-            "icon": "bosch-ic-gear",
-            "link": "/reboot-manager"
             ]
           }
         ],
@@ -199,6 +189,44 @@ If you want to open your application in your own tab, you can define the target 
       [...]
     }
     ```
+
+### Dashboard Widgets
+
+You can provide own widgets to be shown in the Home screen. These widgets need to be implemented as [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
+
+In short, widgets are provided in a JavaScript file and define a custom HTML tag. This JavaScript file can be loaded into any web page and the widget is instantiated by just inserting its tag into an HTML file (just like standard tags like \<div> or \<table>). One JavaScript file can contain several Web Components. Your app must serve this JavaScript file, just like other assets, so that it can be addressed via a URL.
+
+For the Home screen to know about all the widgets, these need to be made publicly known in some way. This is done in the app's manifest in "uiExtensions" → "dashboard". Each element here defines one widget by providing the information needed to instantiate the widget (like the URL of the JavaScript file, where the widget is implemented, and the widget's tag name, size information) and metadata to display in the widget catalog. For a detailed description see the PackageManager-API, schema "DashboardWidget".
+
+Example
+  ```json
+  "uiExtensions": {
+    "dashboard": [
+      {
+        "order": 10,
+        "src": "/motion/widgets.js",
+        "tag": "rexroth-axes-widget",
+        "title": "Axes",
+        "description": "Shows the status of your axes",
+        "categories": ["Motion"],
+        "i18n": "dashboard.motion.axes",
+        "image": "/motion/assets/img/DC_AE_ctrlX_DRIVE-axes_Symbol_bl_192x192_202102.svg",
+        "initialSize": {
+          "rows": 3,
+          "cols": 3
+        },
+        "minSize": {
+          "rows": 3,
+          "cols": 3
+        },
+        "maxSize": {
+          "rows": 3,
+          "cols": 3
+        }
+      }
+    ]
+  }
+  ```
 
 ### Reverse Proxy
 
@@ -411,7 +439,7 @@ The following snippet shows the definition of the admin scope. You can see (and 
 
 !!! Example
 
-    ```json
+  ```json
     {
         "identifier": "rexroth-device",
         "name": "Global device administration",
@@ -424,7 +452,24 @@ The following snippet shows the definition of the admin scope. You can see (and 
             }
         ]
     }
-    ```
+  ```
+
+### Licenses
+
+The app shall provide information in the package-manifest about each license that is supported. Description and title shall be human readable.
+The "required" flag indicates whether a license is mandatory to use the application. Set the flag to true when the license is required and to false, when the license is optional. Multiple licenses can have the "required" flag set to true simultaneously. In this case, the app must ensure that it works if any of the 'required' licenses is available.
+
+!!! Example
+  ```json
+  "licenses": [
+      {
+        "name": "SWL-XC*-RUN-DLACCESSNRT**-NNNN",
+        "title": "ctrlX OS License - Customer App",
+        "description": "Integration of customer apps into ctrlX OS with access to the ctrlX Data Layer",
+        "required": true
+      }     
+    ],
+  ```
 
 ### Certificate Management (optional)
 
@@ -459,7 +504,13 @@ The certificate store block defines whether a snap service has to handle cryptog
           {
               "id": "examplestore",
               "title": "Example Store",
-              "description": "This is only an example store for documentation purposes."
+              "description": "This is only an example store for documentation purposes.",
+              "scopesR":[
+                "example.permission.r"
+              ],
+              "scopesRWX":[
+                "example.permission.rwx"
+              ]
           }
       ],
     ```
@@ -473,6 +524,14 @@ The certificate store block defines whether a snap service has to handle cryptog
   * VPN Manager
   * ...
 * **description:** Optional and displayed in the front end. To describe the application and provide some more information. 
+* **scopesR:** Optional list of scopes that allow the user to have read access to this certificate store.
+  * rexroth-solutions.web.all.r
+  * example.permission.r
+  * ...
+* **scopesRWX:** Optional list of scopes that allow the user to have full access to this certificate store.
+  * rexroth-solutions.web.all.rw
+  * example.permission.rwx
+  * ...
 
 The following predefined folder structure applies to every certificate store:
 

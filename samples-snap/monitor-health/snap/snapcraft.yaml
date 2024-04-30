@@ -2,9 +2,10 @@
 # See https://snapcraft.io/docs/getting-started
 # Snapcraft references
 # See https://snapcraft.io/docs/snapcraft-yaml-reference
-version: '1.0.0'
-name: ctrlx-monitor-health
-summary: App health monitoring demo app
+version: 1.0.0
+name: sdk-monitor-health
+title: SDK Monitor Health
+summary: App health monitoring demo app for ctrlX CORE.
 description: |
   This app demonstrates how you can add health monitoring capability to your app.
 confinement: strict 

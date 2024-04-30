@@ -11,9 +11,10 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/boschrexroth/ctrlx-datalayer-golang/v2/pkg/datalayer"
+
 	"datalayer.provider/pkg/node"
 	"datalayer.provider/pkg/utils"
-	"github.com/boschrexroth/ctrlx-datalayer-golang/pkg/datalayer"
 )
 
 func main() {

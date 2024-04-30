@@ -5,3 +5,5 @@
 * [Generate Manifest](generate-manifest/README.md)
 * [Monitor Health](monitor-health/README.md)
 * [Storage extension](storage-extension/README.md)
+* [TPM2](tpm2/README.md) How to use the TPM inside your application.
+* [ulimit](ulimit/README.md) How to increase the maximal number of opened files.

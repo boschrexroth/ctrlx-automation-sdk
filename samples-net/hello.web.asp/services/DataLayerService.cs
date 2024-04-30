@@ -19,46 +19,63 @@ namespace Hello.Web.Asp.services
         /// <summary>
         /// Gets the Client.
         /// </summary>
-        public IClient Client { get; }
+        public static IClient Client { get; private set; }
+
+        /// <summary>
+        /// Gets the DatalayerSystem.
+        /// </summary>
+        public static IDatalayerSystem System { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DataLayerService"/> class.
         /// </summary>
-        public DataLayerService()
+        static DataLayerService()
         {
-            Client = CreateClient();
+            CreateClient();
         }
 
         /// <summary>
         /// The CreateClient.
         /// </summary>
         /// <returns>The <see cref="IClient"/>.</returns>
-        private static IClient CreateClient()
+        private static void CreateClient()
         {
             // Create a new ctrlX Data Layer system
-            var system = new DatalayerSystem();
+            System = new DatalayerSystem();
 
             // Starts the ctrlX Data Layer system without a new broker (startBroker = false) because one broker is already running on ctrlX CORE
-            system.Start(startBroker: false);
-            Console.WriteLine("ctrlX Data Layer system started.");
+            System.Start(startBroker: false);
+
+            if (!System.IsStarted)
+            {
+                Console.WriteLine("Failed to connect ctrlX Data Layer client!");
+                return;
+            }
 
             // Create a remote address with the parameters according to your environment
             var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
             // Create the client with remote connection string
-            using var client = system.Factory.CreateClient(remote);
-            Console.WriteLine("ctrlX Data Layer client created.");
+            Client = System.Factory.CreateClient(remote);
 
-            return client;
+            if (!Client.IsConnected)
+            {
+                Console.WriteLine("Failed to connect ctrlX Data Layer client!");
+            }         
         }
 
         /// <summary>
-        /// The ReadNodeValue.
+        /// Reads a value from the address.
         /// </summary>
         /// <param name="address">The address<see cref="string"/>.</param>
         /// <returns>The <see cref="NodeValue"/>.</returns>
         public NodeValue ReadNodeValue(string address)
         {
+            if (Client == null) {
+                Console.WriteLine("Failed to read node value from ctrlX Data Layer client!");
+                return null;
+            }
+
             var (result, variant) = Client.Read(address);
             var node = new NodeValue
             {

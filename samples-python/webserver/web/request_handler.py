@@ -31,7 +31,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
     readPath = "datalayer/subscriptions/settings"
     readValue = ""
     readResult = ""
-    writePath = "sdk-py-provider-alldata/dynamic/int64"
+    writePath = "sdk/py/provider/alldata/dynamic/int64"
     writeValue = "123456789"
     writeResult = ""
 

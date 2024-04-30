@@ -4,12 +4,16 @@
  * SPDX-License-Identifier: MIT
  */
 
-#include <stdio.h>
-#include <map>
-#include <iostream>
 #include <chrono>
-#include <thread>
+#include <comm/datalayer/memory_generated.h>
 #include <csignal>
+#include <cstddef>
+#include <iostream>
+#include <map>
+#include <ostream>
+#include <stdio.h>
+#include <thread>
+#include <vector>
 
 #include "comm/datalayer/datalayer.h"
 #include "comm/datalayer/datalayer_system.h"
@@ -18,349 +22,255 @@
 #include "ctrlx_datalayer_helper.h"
 
 static bool g_endProcess = false;
-static void signalHandler(int signal)
-{
+static void signalHandler(int signal) {
   std::cout << "INFO Signal received: " << signal << std::endl;
   g_endProcess = true;
 }
 
-int run(comm::datalayer::DatalayerSystem& datalayerSystem, comm::datalayer::IClient* client)
-{
+bool getMemoryMap(comm::datalayer::DatalayerSystem &datalayerSystem,
+                  comm::datalayer::IClient *client,
+                  std::shared_ptr<comm::datalayer::IMemoryUser> &memoryUser,
+                  const std::string &address, uint32_t *revision,
+                  std::vector<uint32_t> *byteIndices,
+                  std::vector<uint8_t> *bitIndices) {
+
   comm::datalayer::DlResult dlResult;
-  comm::datalayer::Variant outputMap;
-  comm::datalayer::Variant inputMap;
+  comm::datalayer::Variant variantMap;
 
-  std::string address = "fieldbuses/ethercat/master/instances/ethercatmaster/realtime_data/output/map";
-  std::cout << "INFO Reading " << address << std::endl;
-  dlResult = client->readSync(address, &outputMap);
-  if (comm::datalayer::STATUS_FAILED(dlResult))
-  {
-    std::cout << "ERROR Reading " << address << " failed with: " << dlResult.toString() << std::endl;
-    return 1;
+  const std::string addressMap = address + "/map";
+  std::cout << "INFO Reading " << addressMap << std::endl;
+  dlResult = client->readSync(addressMap, &variantMap);
+  if (comm::datalayer::STATUS_FAILED(dlResult)) {
+    std::cout << "ERROR Reading " << addressMap
+              << " failed with: " << dlResult.toString() << std::endl;
+    return false;
   }
 
-  address = "fieldbuses/ethercat/master/instances/ethercatmaster/realtime_data/input/map";
-  std::cout << "INFO Reading " << address << std::endl;
-  dlResult = client->readSync(address, &inputMap);
-  if (comm::datalayer::STATUS_FAILED(dlResult))
-  {
-    std::cout << "ERROR Reading " << address << " failed with: " << dlResult.toString() << std::endl;
-    return 1;
-  }
-
-  // First we have to open the realtime memory, reading the whole outputs.
-  uint8_t* outData;
-  address = "fieldbuses/ethercat/master/instances/ethercatmaster/realtime_data/output";
   std::cout << "INFO Opening " << address << std::endl;
-  std::shared_ptr<comm::datalayer::IMemoryUser> rtMemUserOutput;
-  dlResult = datalayerSystem.factory()->openMemory(rtMemUserOutput, address);
-  if (comm::datalayer::STATUS_FAILED(dlResult))
-  {
-    std::cout << "ERROR Opening " << address << " failed with: " << dlResult.toString() << std::endl;
-    return 1;
+  dlResult = datalayerSystem.factory()->openMemory(memoryUser, address);
+  if (comm::datalayer::STATUS_FAILED(dlResult)) {
+    std::cout << "ERROR Opening " << address
+              << " failed with: " << dlResult.toString() << std::endl;
+    return false;
   }
 
-  // We can read the inputs to get a start trigger for example
-  uint8_t* inData;
-  address = "fieldbuses/ethercat/master/instances/ethercatmaster/realtime_data/input";
-  std::cout << "INFO Opening " << address << std::endl;
-  std::shared_ptr<comm::datalayer::IMemoryUser> rtMemUserInput;
-  dlResult = datalayerSystem.factory()->openMemory(rtMemUserInput, address);
-  if (comm::datalayer::STATUS_FAILED(dlResult))
-  {
-    std::cout << "ERROR Opening " << address << " failed with: " << dlResult.toString() << std::endl;
-    return 1;
-  }
-
-  // After successful reading the outputs we must take the memory layout.
-  // A memory owner defines the layout of the realtime memory.
-  // You see it in the datalayer.realtime example (memoryowner.cpp)
-  std::cout << "INFO Try to get output memory map" << std::endl;
   int tries = 10;
-  do
-  {
-    if (g_endProcess)
-    {
-      return 0;
+
+  do {
+    if (g_endProcess) {
+      return false;
     }
 
-    dlResult = rtMemUserOutput->getMemoryMap(outputMap);
-    if (comm::datalayer::STATUS_SUCCEEDED(dlResult))
-    {
+    std::cout << "INFO Try #" << std::to_string(tries) << " to get memory map"
+              << std::endl;
+
+    dlResult = memoryUser->getMemoryMap(variantMap);
+    if (comm::datalayer::STATUS_SUCCEEDED(dlResult)) {
       break;
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     tries--;
   } while (tries > 0);
-  if (comm::datalayer::STATUS_FAILED(dlResult))
-  {
-    std::cout << "ERROR Getting output memory map failed with: " << dlResult.toString() << std::endl;
-    return 1;
+  if (comm::datalayer::STATUS_FAILED(dlResult)) {
+    std::cout << "ERROR getMemoryMap() failed with: " << dlResult.toString()
+              << std::endl;
+    return false;
   }
 
-  std::cout << "INFO Try to get input memory map" << std::endl;
-  tries = 10;
-  do
-  {
-    if (g_endProcess)
-    {
-      return 0;
-    }
-
-    dlResult = rtMemUserInput->getMemoryMap(inputMap);
-    if (comm::datalayer::STATUS_SUCCEEDED(dlResult))
-    {
-      break;
-    }
-
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    tries--;
-  } while (tries > 0);
-  if (comm::datalayer::STATUS_FAILED(dlResult))
-  {
-    std::cout << "ERROR Getting input memory map failed with: " << dlResult.toString() << std::endl;
-    return 1;
+  dlResult =
+      variantMap.verifyFlatbuffers(comm::datalayer::VerifyMemoryMapBuffer);
+  if (comm::datalayer::STATUS_FAILED(dlResult)) {
+    std::cout << "ERROR verifyFlatbuffers() failed with: "
+              << dlResult.toString() << std::endl;
+    return false;
   }
 
-  // Now we got the layout, but we have to convert it cause it is a flatbuffer
-  // To imagen the result after converting the data you can take a look at the datalayertree
-  // "devices/ethercatmaster/0/outputs -> map"
-  dlResult = outputMap.verifyFlatbuffers(comm::datalayer::VerifyMemoryMapBuffer);
-  if (comm::datalayer::STATUS_FAILED(dlResult))
-  {
-    std::cout << "ERROR Verify output map flatbuffers failed with: " << dlResult.toString() << std::endl;
-    return -1;
-  }
+  // At this point we can take the data. It is important to always check the
+  // revision number. The revision number will be different if the layout will
+  // be changed.
+  auto memMap = comm::datalayer::GetMemoryMap(variantMap.getData());
+  *revision = memMap->revision();
 
-  // Verify the Input layout, similar to the output
-  dlResult = inputMap.verifyFlatbuffers(comm::datalayer::VerifyMemoryMapBuffer);
-  if (comm::datalayer::STATUS_FAILED(dlResult))
-  {
-    std::cout << "ERROR Verify input map flatbuffers failed with: " << dlResult.toString() << std::endl;
-    return -1;
-  }
-
-  // At this point we can take the data. It is important to always check the revision number.
-  // The revision number will be different if the layout will be changed.
-  auto memMap = comm::datalayer::GetMemoryMap(outputMap.getData());
-  auto revision = memMap->revision();
   std::string name;
   uint32_t offset = 0;
-  std::map<std::string, uint32_t> mapOfOutputs;
+  uint32_t byteIndex = 0;
+  uint8_t bitIndex = 0;
 
-  std::cout << "INFO Reading Bitoffset and Name of DOs" << std::endl;
-  // Save all the outputs (name and offset) into a map
-  for (auto variable = memMap->variables()->begin(); variable != memMap->variables()->end(); variable++)
-  {
-    if (variable->bitsize() == 1)
-    {
+  std::cout << "INFO Reading Bitoffset and Name" << std::endl;
+  for (auto variable = memMap->variables()->begin();
+       variable != memMap->variables()->end(); variable++) {
+    if (variable->bitsize() == 1) {
       name = variable->name()->str();
       offset = variable->bitoffset();
-      std::cout << "INFO Name: " << name << " Bitoffset: " << offset << std::endl;
-      mapOfOutputs.insert(std::make_pair(name, offset));
+      byteIndex = offset >> 3;
+      bitIndex = offset & 7;
+      byteIndices->push_back(byteIndex);
+      bitIndices->push_back(bitIndex);
+      std::cout << "INFO Name: " << name << " Bitoffset: " << offset
+                << " Byte index: " << byteIndex << " Bit index: " << bitIndex
+                << std::endl;
     }
   }
 
-  // Iputs
-  auto memMapInputs = comm::datalayer::GetMemoryMap(inputMap.getData());
-  auto revisionIn = memMapInputs->revision();
-  std::string nameIn;
-  uint32_t offsetIn = 0;
-  std::map<std::string, uint32_t> mapOfInputs;
-
-  std::cout << "INFO Reading Bitoffset and Name of DIs" << std::endl;
-  // Save all the inputs (name and offset) into a map
-  for (auto variable = memMapInputs->variables()->begin(); variable != memMapInputs->variables()->end(); variable++)
-  {
-    if (variable->bitsize() == 1)
-    {
-      name = variable->name()->str();
-      offset = variable->bitoffset();
-      std::cout << "INFO Name: " << name << " Bitoffset: " << offset << std::endl;
-      mapOfInputs.insert(std::make_pair(nameIn, offsetIn));
-    }
+  if (byteIndices->size() == 0) {
+    std::cout << "ERROR No bit values (bitsize=1) found" << std::endl;
+    return false;
   }
 
-  // Check every second the first input channel if it's true start to toggle
-  bool startbit = false;
-  while (!startbit)
-  {
-    if (g_endProcess)
-    {
-      return 0;
-    }
-
-    std::map<std::string, uint32_t>::iterator it = mapOfInputs.find("S20_EC_BK/S20_DI_16_1/Digital_Input_Channels.DI_Channel_01_Terminal_Point_00_");
-    std::cout << "INFO Read Input: " << it->first << " at Offset " << it->second << std::endl;
-
-    dlResult = rtMemUserInput->beginAccess(inData, revisionIn);
-    if (comm::datalayer::STATUS_FAILED(dlResult))
-    {
-      break;
-    }
-
-    uint8_t value = inData[it->second / 8];
-    if (value)
-    {
-      startbit = true;
-    }
-
-    rtMemUserInput->endAccess();
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-  }
-
-  // Begin to write outputs until SIGINT is send
-  bool temp = false;
-  while (true)
-  {
-    if (g_endProcess)
-    {
-      return 0;
-    }
-
-    std::cout << "INFO Start to toggle" << std::endl;
-
-    // If first channel would be unset -> end toggle
-    std::map<std::string, uint32_t>::iterator itInput = mapOfInputs.find("S20_EC_BK/S20_DI_16_1/Digital_Input_Channels.DI_Channel_01_Terminal_Point_00_");
-    dlResult = rtMemUserInput->beginAccess(inData, revisionIn);
-    if (comm::datalayer::STATUS_FAILED(dlResult))
-    {
-      break;
-    }
-
-    uint8_t value = inData[itInput->second / 8];
-    if (!value)
-    {
-      g_endProcess = true;
-    }
-
-    rtMemUserInput->endAccess();
-    if (!temp)
-    {
-      // Create iterator for the map, after that we can iterate through all variables and set the
-      std::map<std::string, uint32_t>::iterator it = mapOfOutputs.begin();
-      while (it != mapOfOutputs.end())
-      {
-        if (g_endProcess)
-        {
-          return 0;
-        }
-
-        std::cout << "INFO Set Output: " << it->first << " :: Offset " << it->second << std::endl;
-
-        // Memory is form beginAccess till endAccess locked, so do not do stuff you won't need
-        dlResult = rtMemUserOutput->beginAccess(outData, revision);
-        if (comm::datalayer::STATUS_FAILED(dlResult))
-        {
-          break;
-        }
-
-        // set toggle bit
-        uint8_t value = outData[it->second / 8];
-        value |= 1 << (it->second % 8);
-        outData[it->second / 8] = value;
-
-        rtMemUserOutput->endAccess();
-        it++;
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-      }
-
-      temp = true;
-    }
-    else
-    {
-      std::map<std::string, uint32_t>::iterator it = mapOfOutputs.begin();
-      while (it != mapOfOutputs.end())
-      {
-        if (g_endProcess)
-        {
-          return 0;
-        }
-
-        std::cout << "INFO Unset Output: " << it->first << " :: Offset " << it->second << std::endl;
-
-        // Memory is form beginAccess till endAccess locked, so do not do stuff you won't need
-        dlResult = rtMemUserOutput->beginAccess(outData, revision);
-        if (comm::datalayer::STATUS_FAILED(dlResult))
-        {
-          break;
-        }
-
-        // Set toggle bit
-        uint8_t value = outData[it->second / 8];
-        value &= ~(1 << (it->second % 8));
-        outData[it->second / 8] = value;
-
-        rtMemUserOutput->endAccess();
-        it++;
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-      }
-
-      temp = false;
-    }
-
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-  }
-
-  // Set all outputs to save state
-  std::map<std::string, uint32_t>::iterator it = mapOfOutputs.begin();
-  while (it != mapOfOutputs.end())
-  {
-    if (g_endProcess)
-    {
-      return 0;
-    }
-
-    dlResult = rtMemUserOutput->beginAccess(outData, revision);
-    if (comm::datalayer::STATUS_FAILED(dlResult))
-    {
-      break;
-    }
-
-    outData[it->second / 8] = 0x00;
-    
-    rtMemUserOutput->endAccess();
-    it++;
-  }
-
-  return 0;
+  std::cout << "INFO " << byteIndices->size() << " bit values (bitsize=1) found"
+            << std::endl;
+  return true;
 }
 
-comm::datalayer::IClient* getClientRetry(comm::datalayer::DatalayerSystem& datalayerSystem)
-{
+bool copyInputToOutput(
+    comm::datalayer::DatalayerSystem &datalayerSystem,
+    comm::datalayer::IClient *client,
+    std::shared_ptr<comm::datalayer::IMemoryUser> &memoryUserInput,
+    uint32_t revisionInput, std::vector<uint32_t> &byteIndicesInput,
+    std::vector<uint8_t> &bitIndicesInput,
+    std::shared_ptr<comm::datalayer::IMemoryUser> &memoryUserOutput,
+    uint32_t revisionOutput, std::vector<uint32_t> &byteIndicesOutput,
+    std::vector<uint8_t> &bitIndicesOutput, bool *buffer) {
 
-  comm::datalayer::IClient* client = getClient(datalayerSystem);
-  if (client != nullptr)
-  {
+  // Read input values -------------------------------------
+  uint8_t *dataInput;
+  comm::datalayer::DlResult dlResult =
+      memoryUserInput->beginAccess(dataInput, revisionInput);
+  if (comm::datalayer::STATUS_FAILED(dlResult)) {
+    std::cout << "ERROR beginAccess() input memory failed with: "
+              << dlResult.toString() << std::endl;
+    return false;
+  }
+
+  for (size_t i = 0; i < sizeof(buffer); i++) {
+    uint8_t allBits = dataInput[byteIndicesInput[i]];
+    buffer[i] = (allBits & (1 << bitIndicesInput[i])) > 0;
+  }
+
+  memoryUserInput->endAccess();
+
+  // Write putput values ---------------------------------------
+  uint8_t *dataOutput;
+  dlResult = memoryUserOutput->beginAccess(dataOutput, revisionOutput);
+  if (comm::datalayer::STATUS_FAILED(dlResult)) {
+    std::cout << "ERROR beginAccess() output memory failed with: "
+              << dlResult.toString() << std::endl;
+    return false;
+  }
+
+  for (size_t i = 0; i < sizeof(buffer); i++) {
+    uint8_t allBits = dataOutput[byteIndicesOutput[i]];
+    uint8_t bitMask = 1 << bitIndicesOutput[i];
+    if (buffer[i]) {
+      allBits |= bitMask;
+    } else {
+      bitMask = ~bitMask;
+      allBits &= bitMask;
+    }
+    dataOutput[byteIndicesOutput[i]] = allBits;
+  }
+
+  memoryUserOutput->endAccess();
+
+  return true;
+}
+
+comm::datalayer::IClient *
+getClientRetry(comm::datalayer::DatalayerSystem &datalayerSystem) {
+
+  // ctrlX OS virtual with network adapter
+  comm::datalayer::IClient *client = getClient(datalayerSystem);
+  if (client != nullptr) {
     return client;
   }
 
-  return getClient(datalayerSystem, "10.0.2.2", "boschrexroth", "boschrexroth", 8443);
+  // ctrlX OS virtual with port forwarding
+  return getClient(datalayerSystem, "10.0.2.2", "boschrexroth", "boschrexroth",
+                   8443);
 }
 
-int main(void)
-{
+int main(void) {
+
   std::signal(SIGINT, signalHandler);
 
   comm::datalayer::DatalayerSystem datalayerSystem;
   datalayerSystem.start(false);
 
-  comm::datalayer::IClient* client = getClientRetry(datalayerSystem);
+  comm::datalayer::IClient *client = nullptr;
+  while (g_endProcess == false) {
 
-  int exitCode = 1;
-  if (client == nullptr)
-  {
-    std::cout << "ERROR Client connection failed" << std::endl;
-  }
-  else
-  {
-    exitCode = run(datalayerSystem, client);
-    std::cout << "INFO Shutting down application" << std::endl;
+    // Sleep after error (or at startup)
+    std::this_thread::sleep_for(std::chrono::seconds(10));
+
+    if (client != nullptr) {
+      // In case of retry
+      delete client;
+    }
+    comm::datalayer::IClient *client = getClientRetry(datalayerSystem);
+
+    if (client == nullptr) {
+      std::cout << "ERROR Client connection failed" << std::endl;
+      continue;
+    }
+
+    // Get input map
+    std::shared_ptr<comm::datalayer::IMemoryUser> memoryUserInput;
+    std::string dlAddressInput =
+        "fieldbuses/ethercat/master/instances/ethercatmaster/realtime_data/input";
+    uint32_t revisionInput;
+    std::vector<uint32_t> byteIndicesInput;
+    std::vector<uint8_t> bitIndicesInput;
+
+    bool boolResult =
+        getMemoryMap(datalayerSystem, client, memoryUserInput, dlAddressInput,
+                     &revisionInput, &byteIndicesInput, &bitIndicesInput);
+    if (boolResult == false) {
+      continue;
+    }
+
+    // Get output map
+    std::shared_ptr<comm::datalayer::IMemoryUser> memoryUserOutput;
+    std::string dlAddressOutput =
+        "fieldbuses/ethercat/master/instances/ethercatmaster/realtime_data/output";
+    uint32_t revisionOutput;
+    std::vector<uint32_t> byteIndicesOutput;
+    std::vector<uint8_t> bitIndicesOutput;
+
+    boolResult =
+        getMemoryMap(datalayerSystem, client, memoryUserOutput, dlAddressOutput,
+                     &revisionOutput, &byteIndicesOutput, &bitIndicesOutput);
+    if (boolResult == false) {
+      continue;
+    }
+
+    // Find minimal size of bytes
+    size_t minSize = byteIndicesInput.size() < byteIndicesOutput.size()
+                         ? byteIndicesInput.size()
+                         : byteIndicesOutput.size();
+    bool *buffer = new bool[minSize];
+
+    // Copy loop
+    while (g_endProcess == false) {
+
+     std::cout << "INFO Copying input to output..." << std::endl;
+
+      boolResult = copyInputToOutput(
+          datalayerSystem, client, memoryUserInput, revisionInput,
+          byteIndicesInput, bitIndicesInput, memoryUserOutput, revisionOutput,
+          byteIndicesOutput, bitIndicesOutput, buffer);
+      if (boolResult == false) {
+        break;
+      }
+
+      // Sleep before nect copy
+      std::this_thread::sleep_for(std::chrono::seconds(5));
+    }
   }
 
   delete client;
+
   datalayerSystem.stop();
 
-  return exitCode;
+  return 0;
 }

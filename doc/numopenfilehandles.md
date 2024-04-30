@@ -54,7 +54,7 @@ Therefor we recommend to:
 
 ## Complete Example Snap
 
-In this SDK an complete example project creating a demo snap is stored under __samples-sh/ulimit-snap__.
+In this SDK an complete example project creating a demo snap is stored under __samples-snap/ulimit__.
 
 The sample project folder also contains a README.md file with further informations.
 

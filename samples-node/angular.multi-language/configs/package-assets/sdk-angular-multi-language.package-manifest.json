@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.3.schema.json",
+  "version": "1.0.0",
+  "id": "sdk-angular-multi-language",
+  "menus": {
+    "sidebar": [
+      {
+        "id": "sdk-angular-multi-language",
+        "title": "SDK Angular Multi-Language",
+        "icon": "bosch-ic-translate",
+        "link": "/sdk-angular-multi-language",
+        "target": "_blank"
+      }
+    ]
+  },
+  "services": {
+    "proxyMapping": [
+      {
+        "binding": "unix://{$PACKAGE_WWW_SOCKET}",
+        "name": "sdk-angular-multi-language",
+        "url": "/sdk-angular-multi-language"
+      }
+    ]
+  }
+}

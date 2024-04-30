@@ -76,6 +76,11 @@ class InertialValueT(object):
         return cls.InitFromObj(inertialValue)
 
     @classmethod
+    def InitFromPackedBuf(cls, buf, pos=0):
+        n = flatbuffers.encode.Get(flatbuffers.packer.uoffset, buf, pos)
+        return cls.InitFromBuf(buf, pos+n)
+
+    @classmethod
     def InitFromObj(cls, inertialValue):
         x = InertialValueT()
         x._UnPack(inertialValue)

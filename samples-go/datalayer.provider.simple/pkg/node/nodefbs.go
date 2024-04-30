@@ -10,9 +10,10 @@ import (
 	"os"
 	"path"
 
+	"github.com/boschrexroth/ctrlx-datalayer-golang/v2/pkg/datalayer"
+	fbs "github.com/boschrexroth/ctrlx-datalayer-golang/v2/pkg/fbs/comm/datalayer"
+
 	"datalayer.provider/pkg/sample/schema"
-	"github.com/boschrexroth/ctrlx-datalayer-golang/pkg/datalayer"
-	fbs "github.com/boschrexroth/ctrlx-datalayer-golang/pkg/fbs/comm/datalayer"
 	flatbuffers "github.com/google/flatbuffers/go"
 )
 

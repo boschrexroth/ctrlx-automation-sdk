@@ -31,6 +31,7 @@ The content of this document may be subject of change in further versions of the
 
 - **Schema for snapcraft.yaml:** https://github.com/snapcore/snapcraft/blob/master/schema/snapcraft.json
 - **Schema for technical app  name:** "ctrlx-{company name}-{app name}-{app version}_arm64/amd64.snap"
+- **ctrlX Device Portal: App name in Private Repository:** If the App is provided in a Private Repository for the ctrlX Device Portal, the Name in the Artifact Description in the Repository should be identical to the Name in snapcraft.yaml. Please see https://docs.automation.boschrexroth.com/doc/2056862327/ctrlx-device-portal/latest/en/ for additional information about the ctrlX Device Portal and the Private Repository.
 
 
 
@@ -43,7 +44,8 @@ The content of this document may be subject of change in further versions of the
 | **Item** | **Criteria** |
 | --- | --- |
 | **licenses** | list of all used licenses (`licenses.name, .title, .description .required`) |
-| **certificatestores** | snap service to handle keys and certificates (ptional) |
+| **certificatestores** | snap service to handle keys and certificates (optional) |
+| **menus** | optional: entries for sidebar integration (if use, the entries must be unique)
 
 For each given Proxy Mapping `services.proxyMapping[i]`:
 | **Item** | **Criteria** |
