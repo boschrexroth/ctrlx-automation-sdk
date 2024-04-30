@@ -12,28 +12,24 @@
         <meta name="author" content="Bosch Rexroth AG">
       
       
-        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/samples-angular/index.html">
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/webdav.client/index.html">
       
       
-        <link rel="prev" href="../samples-node/index.html">
       
       
-        <link rel="next" href="../samples-sh/index.html">
-      
-      
-      <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
     
     
       
-        <title>Samples ANGULAR - Software Development Kit</title>
+        <title>Example: Using a WebDAV client to access the app data. - Software Development Kit</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
   
@@ -93,9 +89,9 @@
       
     
     
-      <link rel="stylesheet" href="../stylesheets/sdk.css">
+      <link rel="stylesheet" href="../../stylesheets/sdk.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -121,7 +117,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#find-out-the-supported-samples" class="md-skip">
+        <a href="#example-using-a-webdav-client-to-access-the-app-data" class="md-skip">
           Skip to content
         </a>
       
@@ -135,7 +131,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="../../index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -155,7 +151,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Samples ANGULAR
+              Example: Using a WebDAV client to access the app data.
             
           </span>
         </div>
@@ -225,7 +221,7 @@
         <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     boschrexroth/ctrlx-automation-sdk
@@ -252,7 +248,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../index.html" class="md-tabs__link">
+      <a href="../../index.html" class="md-tabs__link">
         
   
     
@@ -271,7 +267,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../overview.html" class="md-tabs__link">
+        <a href="../../overview.html" class="md-tabs__link">
           
   
   Getting Started
@@ -289,7 +285,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../setup_overview.html" class="md-tabs__link">
+        <a href="../../setup_overview.html" class="md-tabs__link">
           
   
   Setup
@@ -303,13 +299,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../samples.html" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../samples.md" class="md-tabs__link">
           
   
   Samples
@@ -327,7 +321,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../debug-overview.html" class="md-tabs__link">
+        <a href="../../debug-overview.html" class="md-tabs__link">
           
   
   Debugging
@@ -345,7 +339,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../references.html" class="md-tabs__link">
+        <a href="../../references.html" class="md-tabs__link">
           
   
   References
@@ -361,7 +355,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../about.html" class="md-tabs__link">
+      <a href="../../about.html" class="md-tabs__link">
         
   
     
@@ -395,7 +389,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+    <a href="../../index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -408,7 +402,7 @@
       <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     boschrexroth/ctrlx-automation-sdk
@@ -425,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../index.html" class="md-nav__link">
+      <a href="../../index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -485,7 +479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../overview.html" class="md-nav__link">
+      <a href="../../overview.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -506,7 +500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ctrlx_automation.html" class="md-nav__link">
+      <a href="../../ctrlx_automation.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -567,7 +561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../package-assets.html" class="md-nav__link">
+      <a href="../../package-assets.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -588,7 +582,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../appdevguide.html" class="md-nav__link">
+      <a href="../../appdevguide.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -609,7 +603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../persistdata.html" class="md-nav__link">
+      <a href="../../persistdata.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -630,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../persist-device-settings.html" class="md-nav__link">
+      <a href="../../persist-device-settings.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -651,7 +645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../licensing.html" class="md-nav__link">
+      <a href="../../licensing.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -672,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../s2sauth.html" class="md-nav__link">
+      <a href="../../s2sauth.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -693,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fbs2plc.html" class="md-nav__link">
+      <a href="../../fbs2plc.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -714,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../numopenfilehandles.html" class="md-nav__link">
+      <a href="../../numopenfilehandles.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -735,7 +729,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../localizaction.html" class="md-nav__link">
+      <a href="../../localizaction.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -796,7 +790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../data-exchange.html" class="md-nav__link">
+      <a href="../../data-exchange.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -817,7 +811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../storage-extension.html" class="md-nav__link">
+      <a href="../../storage-extension.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -846,7 +840,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../extenable-denylist.html" class="md-nav__link">
+      <a href="../../extenable-denylist.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -915,7 +909,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../changelog.html" class="md-nav__link">
+      <a href="../../changelog.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -991,7 +985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_overview.html" class="md-nav__link">
+      <a href="../../setup_overview.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1012,7 +1006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quick-start-guide.html" class="md-nav__link">
+      <a href="../../quick-start-guide.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1033,7 +1027,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_qemu_ctrlx_works.html" class="md-nav__link">
+      <a href="../../setup_qemu_ctrlx_works.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1054,7 +1048,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install-scripts.html" class="md-nav__link">
+      <a href="../../install-scripts.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1075,7 +1069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_qemu_ubuntu.html" class="md-nav__link">
+      <a href="../../setup_qemu_ubuntu.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1096,7 +1090,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
+      <a href="../../setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1117,7 +1111,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../setup_ubuntu.html" class="md-nav__link">
+      <a href="../../setup_ubuntu.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1138,7 +1132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install-sources-from-github.html" class="md-nav__link">
+      <a href="../../install-sources-from-github.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1199,7 +1193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../px.html" class="md-nav__link">
+      <a href="../../px.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1220,7 +1214,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../connecting_qemu_vm_ctrlx.html" class="md-nav__link">
+      <a href="../../connecting_qemu_vm_ctrlx.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1241,7 +1235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../working-with-app-builder-envs.html" class="md-nav__link">
+      <a href="../../working-with-app-builder-envs.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1262,7 +1256,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ssh_connection.html" class="md-nav__link">
+      <a href="../../ssh_connection.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1283,7 +1277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vscode.html" class="md-nav__link">
+      <a href="../../vscode.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1304,7 +1298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dotnet.html" class="md-nav__link">
+      <a href="../../dotnet.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1325,7 +1319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../remote-build.html" class="md-nav__link">
+      <a href="../../remote-build.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1358,30 +1352,25 @@
       
   
   
-    
   
   
-  
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1392,7 +1381,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Samples
@@ -1406,7 +1395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples.html" class="md-nav__link">
+      <a href="../../samples.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1427,7 +1416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-cpp/index.html" class="md-nav__link">
+      <a href="../../samples-cpp/index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1448,7 +1437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-go/index.html" class="md-nav__link">
+      <a href="../../samples-go/index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1469,7 +1458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-python/index.html" class="md-nav__link">
+      <a href="../../samples-python/index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1490,7 +1479,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-net/index.html" class="md-nav__link">
+      <a href="../../samples-net/index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1511,7 +1500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-node/index.html" class="md-nav__link">
+      <a href="../index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1529,121 +1518,10 @@
                 
   
   
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Samples ANGULAR
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    Samples ANGULAR
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#find-out-the-supported-samples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Find out the supported samples
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Find out the supported samples">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#basic-samples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Basic Samples
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-a-snap" class="md-nav__link">
-    <span class="md-ellipsis">
-      Build a Snap
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
   
   
     <li class="md-nav__item">
-      <a href="../samples-sh/index.html" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Samples Shell
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../samples-snap/index.html" class="md-nav__link">
+      <a href="../../samples-snap/index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1664,7 +1542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../samples-iec61131/index.html" class="md-nav__link">
+      <a href="../../samples-iec61131/index.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1732,7 +1610,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../debug-overview.html" class="md-nav__link">
+      <a href="../../debug-overview.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1753,7 +1631,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../remote-debug-cpp.html" class="md-nav__link">
+      <a href="../../remote-debug-cpp.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1774,7 +1652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../remote-debug-python.html" class="md-nav__link">
+      <a href="../../remote-debug-python.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1842,7 +1720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../references.html" class="md-nav__link">
+      <a href="../../references.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1960,7 +1838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../about.html" class="md-nav__link">
+      <a href="../../about.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1990,6 +1868,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -1998,19 +1878,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#find-out-the-supported-samples" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     <span class="md-ellipsis">
-      Find out the supported samples
+      Introduction
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Find out the supported samples">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debug-and-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debug and Run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Support">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-samples" class="md-nav__link">
+  <a href="#developer-community" class="md-nav__link">
     <span class="md-ellipsis">
-      Basic Samples
+      Developer Community
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdk-forum" class="md-nav__link">
+    <span class="md-ellipsis">
+      SDK Forum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issues
     </span>
   </a>
   
@@ -2022,9 +1947,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#build-a-snap" class="md-nav__link">
+  <a href="#license" class="md-nav__link">
     <span class="md-ellipsis">
-      Build a Snap
+      License
     </span>
   </a>
   
@@ -2048,16 +1973,27 @@
   
 
 
-  <h1>Samples ANGULAR</h1>
-
-<p><img alt="ANGULAR" src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg" width="120" /></p>
-<h2 id="find-out-the-supported-samples">Find out the supported samples<a class="headerlink" href="#find-out-the-supported-samples" title="Permanent link">&para;</a></h2>
-<h3 id="basic-samples">Basic Samples<a class="headerlink" href="#basic-samples" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="multi-language/index.html">Multi-language</a></li>
-</ul>
-<h2 id="build-a-snap">Build a Snap<a class="headerlink" href="#build-a-snap" title="Permanent link">&para;</a></h2>
-<p>See <a href="../samples.html">Samples Overview</a></p>
+<h1 id="example-using-a-webdav-client-to-access-the-app-data">Example: Using a WebDAV client to access the app data.<a class="headerlink" href="#example-using-a-webdav-client-to-access-the-app-data" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>The sample demonstrates how to access the active and archived configurations of a ctrlX CORE remotely using the WebDAV protocol.</p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<p>The application creates a WebDAV client and connects to a ctrlX CORE (localhost:8443) with the default credentials.
+It executes some file operations using the following WebDAV library: https://github.com/perry-mitchell/webdav-client.</p>
+<h2 id="debug-and-run">Debug and Run<a class="headerlink" href="#debug-and-run" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Run 'npm install' in the terminal.  </li>
+<li>Launch the app with the debugger attached by pressing <strong>F5</strong>.</li>
+</ol>
+<h2 id="support">Support<a class="headerlink" href="#support" title="Permanent link">&para;</a></h2>
+<h3 id="developer-community">Developer Community<a class="headerlink" href="#developer-community" title="Permanent link">&para;</a></h3>
+<p>Please join the <a href="https://developer.community.boschrexroth.com/">Developer Community</a></p>
+<h3 id="sdk-forum">SDK Forum<a class="headerlink" href="#sdk-forum" title="Permanent link">&para;</a></h3>
+<p>Please visit the <a href="https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/">SDK Forum</a></p>
+<h3 id="issues">Issues<a class="headerlink" href="#issues" title="Permanent link">&para;</a></h3>
+<p>If you've found an error in these sample, please <a href="https://github.com/boschrexroth">file an issue</a></p>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p>SPDX-FileCopyrightText: Bosch Rexroth AG
+SPDX-License-Identifier: MIT</p>
 
 
 
@@ -2108,7 +2044,7 @@
       
     
     <a href="https://github.com/boschrexroth" target="_blank" rel="noopener" title="github.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
     </a>
   
     
@@ -2119,7 +2055,7 @@
       
     
     <a href="https://twitter.com/boschrexroth" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
     </a>
   
 </div>
@@ -2134,10 +2070,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.dd8806f2.min.js"></script>
       
     
   </body>
