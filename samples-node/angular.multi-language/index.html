@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.25">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -303,7 +303,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../samples.html" class="md-tabs__link">
+        <a href="../../samples.md" class="md-tabs__link">
           
   
   Samples
@@ -687,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../fbs2plc.html" class="md-nav__link">
+      <a href="../../fbs2plc.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1395,7 +1395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../samples.html" class="md-nav__link">
+      <a href="../../samples.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2312,58 +2312,58 @@ This means that both formats are equivalent and represent the same localization 
 </code></pre></div>
 
 <h3 id="add-the-translatemodule-to-appmodulets"><strong>Add the TranslateModule to app.module.ts</strong><a class="headerlink" href="#add-the-translatemodule-to-appmodulets" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="p">{</span> <span class="n">TranslateModule</span><span class="p">,</span> <span class="n">TranslateLoader</span> <span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@ngx-translate/core&#39;</span><span class="p">;</span>
-<span class="kn">import</span> <span class="p">{</span> <span class="n">MultiTranslateHttpLoader</span> <span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;ngx-translate-multi-http-loader&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">TranslateModule</span><span class="p">,</span><span class="w"> </span><span class="n">TranslateLoader</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kn">from</span><span class="w"> </span><span class="s1">&#39;@ngx-translate/core&#39;</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">MultiTranslateHttpLoader</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kn">from</span><span class="w"> </span><span class="s1">&#39;ngx-translate-multi-http-loader&#39;</span><span class="p">;</span>
 
-<span class="n">export</span> <span class="n">function</span> <span class="n">createMultiTranslateHttpLoader</span><span class="p">(</span><span class="n">http</span><span class="p">:</span> <span class="n">HttpClient</span><span class="p">):</span> <span class="n">TranslateLoader</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">new</span> <span class="n">MultiTranslateHttpLoader</span><span class="p">(</span><span class="n">http</span><span class="p">,</span> <span class="p">[</span>
+<span class="n">export</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">createMultiTranslateHttpLoader</span><span class="p">(</span><span class="n">http</span><span class="p">:</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">):</span><span class="w"> </span><span class="n">TranslateLoader</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">MultiTranslateHttpLoader</span><span class="p">(</span><span class="n">http</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
 
-<span class="o">//</span><span class="n">This</span> <span class="ow">is</span> <span class="n">how</span> <span class="n">it</span> <span class="n">goes</span> <span class="k">for</span> <span class="n">apps</span> <span class="n">that</span> <span class="n">uses</span> <span class="n">lazy</span> <span class="n">loaded</span> <span class="n">modules</span> <span class="p">(</span><span class="n">example</span><span class="p">:</span> <span class="n">firewall</span> <span class="n">app</span><span class="p">)</span>
-<span class="p">{</span> <span class="n">prefix</span><span class="p">:</span> <span class="s1">&#39;./&lt;webapp-name&gt;/assets/i18n/&lt;webapp-name&gt;.&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="s1">&#39;.json&#39;</span> <span class="p">},</span>   <span class="o">&lt;=</span> <span class="n">add</span> <span class="n">this</span> <span class="k">for</span> <span class="n">the</span> <span class="n">webapp</span>
-<span class="p">{</span> <span class="n">prefix</span><span class="p">:</span> <span class="s1">&#39;./&lt;webapp-name&gt;/assets/i18n/&lt;weblib-name.&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="s1">&#39;.json&#39;</span> <span class="p">},</span>    <span class="o">&lt;=</span> <span class="n">add</span> <span class="n">such</span> <span class="n">a</span> <span class="n">line</span> <span class="k">for</span> <span class="n">each</span> <span class="n">weblib</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">webapp</span>
+<span class="o">//</span><span class="n">This</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">goes</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">apps</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">uses</span><span class="w"> </span><span class="n">lazy</span><span class="w"> </span><span class="n">loaded</span><span class="w"> </span><span class="n">modules</span><span class="w"> </span><span class="p">(</span><span class="n">example</span><span class="p">:</span><span class="w"> </span><span class="n">firewall</span><span class="w"> </span><span class="n">app</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span><span class="n">prefix</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;./&lt;webapp-name&gt;/assets/i18n/&lt;webapp-name&gt;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">suffix</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.json&#39;</span><span class="w"> </span><span class="p">},</span><span class="w">   </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">webapp</span>
+<span class="p">{</span><span class="w"> </span><span class="n">prefix</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;./&lt;webapp-name&gt;/assets/i18n/&lt;weblib-name.&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">suffix</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.json&#39;</span><span class="w"> </span><span class="p">},</span><span class="w">    </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">weblib</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">webapp</span>
 
-<span class="o">//</span><span class="n">This</span> <span class="ow">is</span> <span class="n">how</span> <span class="n">it</span> <span class="n">goes</span> <span class="k">for</span> <span class="n">apps</span> <span class="n">that</span> <span class="n">does</span> <span class="n">NOT</span> <span class="n">use</span> <span class="n">lazy</span> <span class="n">loaded</span> <span class="n">modules</span> <span class="p">(</span><span class="n">example</span><span class="p">:</span> <span class="n">webapp</span><span class="o">.</span><span class="n">motion</span><span class="p">)</span>
-<span class="p">{</span> <span class="n">prefix</span><span class="p">:</span> <span class="s1">&#39;./assets/i18n/&lt;webapp-name&gt;.&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="s1">&#39;.json&#39;</span> <span class="p">},</span>                 <span class="o">&lt;=</span> <span class="n">add</span> <span class="n">this</span> <span class="k">for</span> <span class="n">the</span> <span class="n">webapp</span>
-<span class="p">{</span> <span class="n">prefix</span><span class="p">:</span> <span class="s1">&#39;./assets/i18n/&lt;weblib-name.&#39;</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="s1">&#39;.json&#39;</span> <span class="p">},</span>                  <span class="o">&lt;=</span> <span class="n">add</span> <span class="n">such</span> <span class="n">a</span> <span class="n">line</span> <span class="k">for</span> <span class="n">each</span> <span class="n">weblib</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">webapp</span>
+<span class="o">//</span><span class="n">This</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">goes</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">apps</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="n">NOT</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">lazy</span><span class="w"> </span><span class="n">loaded</span><span class="w"> </span><span class="n">modules</span><span class="w"> </span><span class="p">(</span><span class="n">example</span><span class="p">:</span><span class="w"> </span><span class="n">webapp</span><span class="o">.</span><span class="n">motion</span><span class="p">)</span>
+<span class="p">{</span><span class="w"> </span><span class="n">prefix</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;./assets/i18n/&lt;webapp-name&gt;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">suffix</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.json&#39;</span><span class="w"> </span><span class="p">},</span><span class="w">                 </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">webapp</span>
+<span class="p">{</span><span class="w"> </span><span class="n">prefix</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;./assets/i18n/&lt;weblib-name.&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">suffix</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;.json&#39;</span><span class="w"> </span><span class="p">},</span><span class="w">                  </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">weblib</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">webapp</span>
 <span class="p">]);</span>
 <span class="p">}</span>
 
 <span class="nd">@NgModule</span><span class="p">({</span>
-  <span class="n">declarations</span><span class="p">:</span> <span class="p">[</span>
-    <span class="n">AppComponent</span>
-  <span class="p">],</span>
-  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">...</span><span class="p">,</span>
-    <span class="n">TranslateModule</span><span class="o">.</span><span class="n">forRoot</span><span class="p">({</span>
-      <span class="n">loader</span><span class="p">:</span> <span class="p">{</span>
-        <span class="n">provide</span><span class="p">:</span> <span class="n">TranslateLoader</span><span class="p">,</span>
-        <span class="n">useFactory</span><span class="p">:</span> <span class="n">createMultiTranslateHttpLoader</span><span class="p">,</span>
-        <span class="n">deps</span><span class="p">:</span> <span class="p">[</span><span class="n">HttpClient</span><span class="p">]</span>
-      <span class="p">},</span>
-      <span class="n">defaultLanguage</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span>
-   <span class="p">}),</span>
-   <span class="o">...</span>
+<span class="w">  </span><span class="n">declarations</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="n">AppComponent</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="n">imports</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="o">...</span><span class="p">,</span>
+<span class="w">    </span><span class="n">TranslateModule</span><span class="o">.</span><span class="n">forRoot</span><span class="p">({</span>
+<span class="w">      </span><span class="n">loader</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">provide</span><span class="p">:</span><span class="w"> </span><span class="n">TranslateLoader</span><span class="p">,</span>
+<span class="w">        </span><span class="n">useFactory</span><span class="p">:</span><span class="w"> </span><span class="n">createMultiTranslateHttpLoader</span><span class="p">,</span>
+<span class="w">        </span><span class="n">deps</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">HttpClient</span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="n">defaultLanguage</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;en&#39;</span>
+<span class="w">   </span><span class="p">}),</span>
+<span class="w">   </span><span class="o">...</span>
 </code></pre></div>
 
 <p><em>NOTE</em></p>
 <p>Note that in webapp modules TranslateModule.forRoot() must be called.
 Note that English (en) is defined as defaultLanguage. That means English is the fallback language if a translation is not available in the currently selected language.</p>
 <h3 id="add-the-translatemodule-to-lazy-loaded-feature-modules-in-modulets">Add the TranslateModule to lazy-loaded feature modules in <feature-name>.module.ts<a class="headerlink" href="#add-the-translatemodule-to-lazy-loaded-feature-modules-in-modulets" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="p">{</span> <span class="n">HttpClientModule</span><span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
-<span class="kn">import</span> <span class="p">{</span> <span class="n">TranslateModule</span> <span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@ngx-translate/core&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">HttpClientModule</span><span class="p">}</span><span class="w"> </span><span class="kn">from</span><span class="w"> </span><span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">TranslateModule</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kn">from</span><span class="w"> </span><span class="s1">&#39;@ngx-translate/core&#39;</span><span class="p">;</span>
 
 <span class="nd">@NgModule</span><span class="p">({</span>
-  <span class="n">declarations</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">...</span>
-  <span class="p">],</span>
-  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">...</span><span class="p">,</span>
-    <span class="n">HttpClientModule</span><span class="p">,</span>
-    <span class="n">TranslateModule</span><span class="o">.</span><span class="n">forChild</span><span class="p">({</span>
-      <span class="n">extend</span><span class="p">:</span> <span class="n">true</span>
-    <span class="p">}),</span>
-    <span class="o">...</span>
-  <span class="p">],</span>
+<span class="w">  </span><span class="n">declarations</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="n">imports</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="o">...</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HttpClientModule</span><span class="p">,</span>
+<span class="w">    </span><span class="n">TranslateModule</span><span class="o">.</span><span class="n">forChild</span><span class="p">({</span>
+<span class="w">      </span><span class="n">extend</span><span class="p">:</span><span class="w"> </span><span class="n">true</span>
+<span class="w">    </span><span class="p">}),</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="w">  </span><span class="p">],</span>
 </code></pre></div>
 
 <p><em>NOTE</em></p>
@@ -2373,21 +2373,21 @@ Note that English (en) is defined as defaultLanguage. That means English is the 
 <h3 id="add-the-translatemodule-for-unit-tests">Add the TranslateModule for unit tests<a class="headerlink" href="#add-the-translatemodule-for-unit-tests" title="Permanent link">&para;</a></h3>
 <p>Because of injected translate service it is necessary to modify unit tests of app.component (app.component.spec.ts) and other components (<other>.component.spec.ts).</p>
 <p>It is also very important to make the change in the "app-routing.module.spec.ts" as well.</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="p">{</span> <span class="n">TranslateModule</span><span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@ngx-translate/core&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">TranslateModule</span><span class="p">}</span><span class="w"> </span><span class="kn">from</span><span class="w"> </span><span class="s1">&#39;@ngx-translate/core&#39;</span><span class="p">;</span>
 
-<span class="n">describe</span><span class="p">(</span><span class="s1">&#39;AppComponent&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="o">...</span>
-  <span class="n">beforeEach</span><span class="p">(</span><span class="n">waitForAsync</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-   <span class="n">TestBed</span><span class="o">.</span><span class="n">configureTestingModule</span><span class="p">({</span>
-      <span class="n">imports</span><span class="p">:</span> <span class="p">[</span>
-        <span class="o">...</span><span class="p">,</span>
-        <span class="n">TranslateModule</span><span class="o">.</span><span class="n">forRoot</span><span class="p">(),</span>   <span class="o">//</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">sufficcient</span><span class="o">.</span> <span class="n">Note</span> <span class="n">that</span> <span class="n">only</span> <span class="n">the</span> <span class="n">text</span> <span class="n">keys</span> <span class="n">are</span> <span class="n">displayed</span> <span class="n">when</span> <span class="n">unit</span> <span class="n">tests</span> <span class="n">are</span> <span class="n">executed</span><span class="o">.</span>
-       <span class="o">...</span>
-     <span class="p">],</span>
-      <span class="o">...</span>
-    <span class="p">})</span>
-    <span class="o">.</span><span class="n">compileComponents</span><span class="p">();</span>
-  <span class="p">}));</span>
+<span class="n">describe</span><span class="p">(</span><span class="s1">&#39;AppComponent&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">...</span>
+<span class="w">  </span><span class="n">beforeEach</span><span class="p">(</span><span class="n">waitForAsync</span><span class="p">(()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">TestBed</span><span class="o">.</span><span class="n">configureTestingModule</span><span class="p">({</span>
+<span class="w">      </span><span class="n">imports</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="o">...</span><span class="p">,</span>
+<span class="w">        </span><span class="n">TranslateModule</span><span class="o">.</span><span class="n">forRoot</span><span class="p">(),</span><span class="w">   </span><span class="o">//</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">sufficcient</span><span class="o">.</span><span class="w"> </span><span class="n">Note</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">keys</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">displayed</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="n">tests</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">executed</span><span class="o">.</span>
+<span class="w">       </span><span class="o">...</span>
+<span class="w">     </span><span class="p">],</span>
+<span class="w">      </span><span class="o">...</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="o">.</span><span class="n">compileComponents</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}));</span>
 </code></pre></div>
 
 <h2 id="translation-process">Translation process<a class="headerlink" href="#translation-process" title="Permanent link">&para;</a></h2>
@@ -2417,34 +2417,34 @@ As there are multiple locales per language (e.g. en-US, en-GB) , we must either 
 <li>Register the localeData for the German language.</li>
 </ul>
 <p>Here are the changes necessary to make this work. Everything is located in the app.module file.</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="p">{</span> <span class="n">APP_INITIALIZER</span><span class="p">,</span> <span class="n">LOCALE_ID</span><span class="p">,</span> <span class="n">NgModule</span><span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
-<span class="kn">import</span> <span class="p">{</span> <span class="n">registerLocaleData</span> <span class="p">}</span> <span class="kn">from</span> <span class="s2">&quot;@angular/common&quot;</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">localeDe</span> <span class="kn">from</span> <span class="s2">&quot;@angular/common/locales/de&quot;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">APP_INITIALIZER</span><span class="p">,</span><span class="w"> </span><span class="n">LOCALE_ID</span><span class="p">,</span><span class="w"> </span><span class="n">NgModule</span><span class="p">}</span><span class="w"> </span><span class="kn">from</span><span class="w"> </span><span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">registerLocaleData</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kn">from</span><span class="w"> </span><span class="s2">&quot;@angular/common&quot;</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">localeDe</span><span class="w"> </span><span class="kn">from</span><span class="w"> </span><span class="s2">&quot;@angular/common/locales/de&quot;</span><span class="p">;</span>
 
 <span class="nd">@NgModule</span><span class="p">({</span>
-  <span class="n">declarations</span><span class="p">:</span> <span class="p">[</span>
-  <span class="o">//</span> <span class="n">existing</span> <span class="n">code</span> <span class="n">omitted</span>
-  <span class="p">],</span>
-  <span class="n">imports</span><span class="p">:</span> <span class="p">[</span>
-  <span class="o">//</span> <span class="n">existing</span> <span class="n">code</span> <span class="n">omitted</span>
-  <span class="p">],</span>
-  <span class="n">providers</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span>
-    <span class="o">//</span> <span class="n">existing</span> <span class="n">code</span> <span class="n">omitted</span>
-    <span class="p">},</span> <span class="p">{</span>
-        <span class="n">provide</span><span class="p">:</span> <span class="n">LOCALE_ID</span><span class="p">,</span>
-        <span class="n">deps</span><span class="p">:</span> <span class="p">[</span><span class="n">TranslateService</span><span class="p">],</span>
-        <span class="n">useFactory</span><span class="p">:</span> <span class="p">(</span><span class="n">translateService</span><span class="p">:</span> <span class="n">TranslateService</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="n">translateService</span><span class="o">.</span><span class="n">currentLang</span>
-       <span class="p">}</span>
-  <span class="p">],</span>
-  <span class="n">bootstrap</span><span class="p">:</span> <span class="p">[</span><span class="n">AppComponent</span><span class="p">]</span>
+<span class="w">  </span><span class="n">declarations</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">omitted</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="n">imports</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">omitted</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="n">providers</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">existing</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">omitted</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">provide</span><span class="p">:</span><span class="w"> </span><span class="n">LOCALE_ID</span><span class="p">,</span>
+<span class="w">        </span><span class="n">deps</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">TranslateService</span><span class="p">],</span>
+<span class="w">        </span><span class="n">useFactory</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">translateService</span><span class="p">:</span><span class="w"> </span><span class="n">TranslateService</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">translateService</span><span class="o">.</span><span class="n">currentLang</span>
+<span class="w">       </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="n">bootstrap</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">AppComponent</span><span class="p">]</span>
 <span class="p">})</span>
 
-<span class="n">export</span> <span class="k">class</span> <span class="nc">AppModule</span> <span class="p">{</span>
-  <span class="n">constructor</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">registerLocaleData</span><span class="p">(</span><span class="n">localeDe</span><span class="p">);</span>
-  <span class="p">}</span>
- <span class="p">}</span>
+<span class="n">export</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">AppModule</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">registerLocaleData</span><span class="p">(</span><span class="n">localeDe</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 
 <h2 id="gratulations-were-finished-lets-start-coding">Gratulations - We're finished - Let's start coding!<a class="headerlink" href="#gratulations-were-finished-lets-start-coding" title="Permanent link">&para;</a></h2>
@@ -2537,7 +2537,7 @@ SPDX-License-Identifier: MIT</p>
     <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.dd8806f2.min.js"></script>
+      <script src="../../assets/javascripts/bundle.081f42fc.min.js"></script>
       
     
   </body>
