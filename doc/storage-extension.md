@@ -148,7 +148,7 @@ This will be done by adding a "part" in your snapcraft.yaml and add a snapshots.
 
 # Sample app
 
-This sample app ( [storage-extension-sample](./samples-go/storage-extension)) is the minimum set to use storage extension.
+This sample app ( [storage-extension-sample](./samples-snap/storage-extension/README.md) ) is the minimum set to use storage extension.
 Feel free to add the content to your app.
 
 # Use storage extension

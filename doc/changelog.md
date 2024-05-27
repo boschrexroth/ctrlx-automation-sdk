@@ -1,5 +1,14 @@
 ## Software Development Kit for ctrlX AUTOMATION
 
+### Version 2.6.0 <small> May, 2024</small>
+
+* Docu: Improve documentation
+* Moved angular sample to node samples
+* C#: Upgrade to .NET 8
+* Go: Use package `ctrlx-datalayer-golang/v2`
+* Node: Use node version 20.12.0
+* ctrlX Data Layer: Use version 2.6.1
+
 ### Version 2.4.0 <small> November, 2023</small>
 
 * Fix: Some internal Bugfixes
@@ -30,7 +39,7 @@
 * Revisions regarding Virtual Box and Native Ubuntu 20.04
 * Deploy fbs only in namepaces
 
-See also [Changes of the App Build Environment ](app_builder_env_changes.md)
+See also [Changes of the App Build Environment](app_builder_env_changes.md)
 
 ### Version 1.14.0 <small> March 15, 2022</small>
 

@@ -10,7 +10,7 @@ __Self-contained__ means, your App contains an already matching and optimized .N
 
 All samples generate Apps (snaps) for the targets
 
-+ ctrlX CORE<sup>virtual</sup> (amd64)
++ ctrlX CORE^virtual^ (amd64)
 + ctrlX CORE (arm64)
 
 ## Prerequisites
@@ -113,11 +113,11 @@ Just press __F5__ or
 + Choose Run -> __.NET Core Launch (console)__.
 + Press the green  __Play__ button.
 
-### Debug snap on ctrlX CORE<sup>virtual</sup>
+### Debug snap on ctrlX CORE^virtual^
 
 + Click on Terminal -> __Run Task__.
 + Choose any Task __make snap amd64__.
-+ Install snap on ctrlX CORE<sup>virtual</sup> via ctrlX web interface
++ Install snap on ctrlX CORE^virtual^ via ctrlX web interface
 + For debugging snaps see [here](https://snapcraft.io/docs/debug-snaps)
 
 ### Debug snap on ctrlX CORE
