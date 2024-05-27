@@ -166,6 +166,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples.html</loc>
+         <lastmod>2024-05-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/setup_overview.html</loc>
          <lastmod>2024-05-27</lastmod>
          <changefreq>daily</changefreq>
