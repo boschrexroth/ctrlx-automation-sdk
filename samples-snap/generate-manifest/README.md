@@ -38,7 +38,6 @@ The folder "dump" contains files that will be copied into our snap. This include
 
 After that open the snapcraft.yaml file and edit it as following
 
-
 ```yaml
 name: changing-world
 base: core20
@@ -77,7 +76,6 @@ The slot "package-assets" is similar to the one described in the SDK, the only d
 
 We added here a my-service app, this is just a simple daemon which logs a string to stdout for demo purpose, see
 
-
 ```bash
 #!/bin/bash
  
@@ -99,7 +97,6 @@ dump/
 ```
 
 Here you will find the content
-
 
 ```bash
 #!/bin/bash -x
@@ -154,7 +151,6 @@ snap/
 
 Both need to be executable (chmod +x). Both have the same content as below:
 
-
 ```bash
 #!/bin/bash
  
@@ -170,6 +166,7 @@ Interfaces (slots and plugs) can be declared in two different ways:
 
 - Specific for each app and hook (Preferred solution)
 - Globally to be valid for all defined apps and hooks
+
 ### Examples
 
 Specific declaration:
@@ -214,8 +211,6 @@ plugs:
   x11:
 ```
 
-
-
 Both definitions lead to the same result.
 
 Nevertheless if you mix these two, this could lead to unexpected behaviour.
@@ -241,8 +236,7 @@ plugs:
   x11:
 ```
 
-Therefore declaring all interfaces specific for each app and hook should be the preferred solution. If your snapcraft.yaml does not contain any apps or hooks at all, then declaring interfaces globally is the right approach. 
-
+Therefore declaring all interfaces specific for each app and hook should be the preferred solution. If your snapcraft.yaml does not contain any apps or hooks at all, then declaring interfaces globally is the right approach.
 
 ## Build and run
 

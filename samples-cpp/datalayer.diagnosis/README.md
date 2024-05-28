@@ -5,6 +5,7 @@ This sample app uses some ctrlX Data Layer addresses to handle with diagnostics.
 ## Introduction
 
 It demonstrates how to
+
 * register and unregister diagnostics
 * subscribe to specific diagnostic events
 * set and reset diagnostic logs
@@ -30,7 +31,6 @@ Build and install the snap like described [here](../README.md).
 
 * Open the web interface of your ctrlX CORE
 * Check output in the web interface
-
 
 ![Output in diagnosis logbook](docs/images/datalayer.diagnosis/datalayer_tree_diagnosis.png)
 

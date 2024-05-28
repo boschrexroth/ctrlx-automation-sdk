@@ -56,14 +56,6 @@ def main():
         with (
                 provider
         ):  # provider.close() is called automatically when leaving with... block
-            result = provider.start()
-            if result != Result.OK:
-                print(
-                    "ERROR Starting ctrlX Data Layer Provider failed with:",
-                    result,
-                    flush=True,
-                )
-                return
 
             # Path to compiled files
             snap_path = os.getenv("SNAP")
@@ -91,7 +83,7 @@ def main():
             provider_node_fbs = provide_fbs(provider,
                                             "sdk/py/provider/inertial-value",
                                             type_sampleSchema_inertialValue)
-            
+
             provider_node_str = provide_string(provider,
                                                "sdk/py/provider/string-value",
                                                "types/datalayer/string")
@@ -100,8 +92,10 @@ def main():
             while provider.is_connected() and not __close_app:
                 time.sleep(1.0)  # Seconds
 
-            print("ERROR ctrlX Data Layer Provider is disconnected",
-                  flush=True)
+
+            if provider.is_connected() == False:
+                print("WARNING ctrlX Data Layer Provider is disconnected",
+                    flush=True)
 
             provider_node_fbs.unregister_node()
             del provider_node_fbs
@@ -165,8 +159,7 @@ def provide_string(provider: ctrlxdatalayer.provider, nodeAddress: str,
 
 def provide_node(provider: ctrlxdatalayer.provider, nodeAddress: str,
                  typeAddress: str, value: Variant):
-    node = MyProviderNode(provider, nodeAddress, typeAddress,
-                                       value)
+    node = MyProviderNode(provider, nodeAddress, typeAddress, value)
     result = node.register_node()
     if result != ctrlxdatalayer.variant.Result.OK:
         print(

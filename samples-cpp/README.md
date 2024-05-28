@@ -1,13 +1,15 @@
+# Samples C/C++
+
 ![C++](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/120px-ISO_C%2B%2B_Logo.svg.png)
 
 ## Prerequisites
 
-* ctrlX WORKS 
+* ctrlX WORKS
 * ctrlX AUTOMATION App Build Environment
 * ctrlX AUTOMATION SDK installed in the App Build Environment
-* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
+* ctrlX CORE^virtual^ or ctrlX CORE
 
-* Visual Studio Code installed on your host computer 
+* Visual Studio Code installed on your host computer
 
 Visual Studio Code extensions (Install in SSH):
 
@@ -15,24 +17,24 @@ Visual Studio Code extensions (Install in SSH):
 * C/C++ Extension Pack (Microsoft)
 * CMake Tools (Microsoft)
 
-## Find out the supported samples 
+## Find out the supported samples
 
 ### Basic Samples
 
 * [Hello World](./hello.world/README.md) recommendation -> start with this example
 * [Hello PLC](./hello.plc/README.md)
-* [ctrlX Data Layer Easy Client](./datalayer.easy.client/README.md)
-* [ctrlX Data Layer Client](./datalayer.client/README.md)
+* [ctrlX Data Layer Provider Simple](./datalayer.provider.simple/README.md)
+* [ctrlX Data Layer Client Simple](./datalayer.client.simple/README.md)
 * [ctrlX Data Layer Client Subscription](./datalayer.client.sub/README.md)
-* [ctrlX Data Layer RegisterNode](./datalayer.register.node/README.md)
 * [Diagnostics Logbook](./diagnostics.logbook/README.md)
 * [ctrlX Data Layer Diagnosis](./datalayer.diagnosis/README.md)
 
 ### Advanced Samples
 
 * [ctrlX Data Layer EtherCAT I/O's](./datalayer.ecat.io/README.md)
-* [ctrlX Data Layer Realtime](./datalayer.realtime/README.md)
-* [ctrlX Data Layer Provider All Data Types](./datalayer.provider.all-data/README.md)
+* [ctrlX Data Layer Shared Memory](./datalayer.sharedmemory/README.md)
+* [ctrlX Data Layer Provider All Data Types](./datalayer.provider.alldata/README.md)
+* [ctrlX Data Layer Client All Data Types](./datalayer.client.alldata/README.md)
 
 ## Debug and Run
 

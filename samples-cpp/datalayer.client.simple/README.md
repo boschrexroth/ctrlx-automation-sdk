@@ -38,7 +38,7 @@ Build and install the snap like described [here](../README.md).
 
 ## Test the Snap running on a ctrlX CORE
 
-__ Only if SSH access is available!__
+__Only if SSH access is available!__
 
 * Install the snap
 * Open a SSH connection to your ctrlX CORE

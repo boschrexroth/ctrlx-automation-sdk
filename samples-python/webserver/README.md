@@ -12,8 +12,7 @@ Once the installation of the snap was finished, you can access to the provided w
 
 ![ctrlX Integration](docs/images/ctrlx_integration.png)
 
-
-The Python-Webpage allows you to read and write at the ctrlX Data Layer (depends on permissions of the current user) and shows permissions of the current user. 
+The Python-Webpage allows you to read and write at the ctrlX Data Layer (depends on permissions of the current user) and shows permissions of the current user.
 
 ![Python Webserver](docs/images/python_webserver.png)
 
@@ -21,7 +20,7 @@ You can find the configuration of user permissions (scopes) on the ctrlX at  <in
 
 ![ctrlX User Permissions](docs/images/ctrlx_userpermissions.png)
 
-The integration of the app inside ctrlX Core webpage (sidebar and overview integration, reverse proxy, bearertoken, scopes) is done by the package-manifest (<ins>./configs/package-assets/rexroth-python-webserver.package-manifest.json</ins>). 
+The integration of the app inside ctrlX Core webpage (sidebar and overview integration, reverse proxy, bearertoken, scopes) is done by the package-manifest (<ins>./configs/package-assets/rexroth-python-webserver.package-manifest.json</ins>).
 
 ## Implementation Description
 

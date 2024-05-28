@@ -7,7 +7,7 @@
 To increase the maximal number of opened files the command
 
     ulimit -n xxx
-    
+
 can be used.
 
 This command can be called within a snap defining a daemon which starts a script with this command.
@@ -26,7 +26,7 @@ This script calls the ulimit command.
 
 This section causes the script to be packed into the snap archive:
 
-```
+```yaml
 parts:
   ulimit-script:
     plugin: dump
@@ -35,14 +35,12 @@ parts:
 
 Here the daemon is defined to call the script when the snap is started:
 
-```
+```yaml
 apps:
   ulimit:
     daemon: simple
     command: increase-ulimit.sh
-
 ```
-
 
 ## License
 

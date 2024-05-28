@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This sample project shows the ctrlX Data Layer access to ctrlX PLC variables of a ctrlX CORE or ctrlX CORE<sup>virtual</sup>.
+This sample project shows the ctrlX Data Layer access to ctrlX PLC variables of a ctrlX CORE or ctrlX CORE^virtual^.
 
 ## Prerequisites
 

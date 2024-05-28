@@ -6,10 +6,10 @@ This python app runs ctrlX Data Layer client operations like read, write and so 
 
 ## Function Description
 
-This Python app depends from the C++ sample samples-cpp/datalayer.provider.all-data. 
+This Python app depends from the C++ sample samples-cpp/datalayer.provider.all-data.
 It handles the ctrlX Data Layer nodes created by the C++ sample.
 
-## Implementation Description 
+## Implementation Description
 
 __main.py__ creates the ctrlX Data Layer connection and and an instance of CallDataLayerClient.
 

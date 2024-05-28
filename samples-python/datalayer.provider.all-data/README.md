@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This Python app provides ctrlX Data Layer nodes representing different data types. 
+This Python app provides ctrlX Data Layer nodes representing different data types.
 
 ## Function Description
 
-When this app is started it connects to the ctrlX Data Layer and creates two subtrees with data nodes. 
+When this app is started it connects to the ctrlX Data Layer and creates two subtrees with data nodes.
 
 The values of the nodes in the 'static' subtree cannot be changed by clients but they can be used to test reading different types of data and their numerical limits.
 
