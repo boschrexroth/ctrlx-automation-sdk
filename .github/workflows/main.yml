@@ -31,4 +31,8 @@ jobs:
       -
         run: |
           ls -alh
-          mkdocs gh-deploy --force
+          find samples-*/ -name "*.md" | cpio -pd doc/
+          find samples-*/ -name "*.png" | cpio -pd doc/
+          find scripts/ -name "*.md" | cpio -pd doc/
+          find scripts/ -name "*.png" | cpio -pd doc/
+          mkdocs gh-deploy --strict --force
