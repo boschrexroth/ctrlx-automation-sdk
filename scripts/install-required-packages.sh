@@ -6,16 +6,22 @@
 #
 # https://wiki.ubuntu.com/MultiarchSpec
 
-sudo dpkg --add-architecture arm64
+ARCH=$(uname -m)
+OS_NAME=$(lsb_release -si)
 
-DIST="$(lsb_release -sc)"
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST} main restricted universe multiverse" | sudo tee /etc/apt/sources.list.d/multiarch-libs.list
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST}-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST}-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST}-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
-
-# Qualify architecture
-sudo sed -i 's/deb http:/deb [arch=amd64] http:/g' /etc/apt/sources.list
+if [[ "$ARCH" == "x86_64" ]] && [[ "$OS_NAME" == "Ubuntu" ]] 
+then
+  sudo dpkg --add-architecture arm64
+  DIST="$(lsb_release -sc)"
+  sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST} main restricted universe multiverse" | sudo tee /etc/apt/sources.list.d/multiarch-libs.list
+  sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST}-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
+  sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST}-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
+  sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST}-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
+  # Qualify architecture
+  sudo sed -i 's/deb http:/deb [arch=amd64] http:/g' /etc/apt/sources.list
+else
+  echo "[Warning] Crosscompiling not enabled ! CPU Architecture != x86_64 detected or the systemen isn't running Ubuntu"
+fi
 
 # Environment variable to enable/disable the use of certain CPU capabilities.
 # 0x1: Disable all run-time detected optimizations
