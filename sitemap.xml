@@ -2,587 +2,587 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/about.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/app_builder_env_changes.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/appdevguide.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/appdevguide_basechecks.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/appdevguide_docker.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/appdevguide_other-technologies.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/appdevguide_reserved-interfaces.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/appdevguide_systemreport.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/changelog.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/connecting_qemu_vm_ctrlx.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/ctrlx_automation.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/data-exchange.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/datalayer.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/debug-overview.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/dotnet.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/extenable-denylist.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/fbs2plc.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/install-scripts.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/install-sources-from-github.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/licensing.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/localizaction.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/log.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/numopenfilehandles.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/overview.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/package-assets.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/persist-device-settings.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/persistdata.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/px.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/quick-start-guide.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/references.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/remote-build.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/remote-debug-cpp.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/remote-debug-python.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/s2sauth.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/setup_overview.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/setup_qemu_ctrlx_works.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/setup_qemu_ubuntu.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/setup_ubuntu.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/setup_windows_virtualbox_ubuntu.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/ssh_connection.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/storage-extension.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/tpm2.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/vscode.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/working-with-app-builder-envs.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/datalayer.client.alldata/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/datalayer.client.simple/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/datalayer.client.sub/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/datalayer.diagnosis/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/datalayer.ecat.io/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/datalayer.provider.alldata/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/datalayer.provider.simple/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/datalayer.sharedmemory/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/diagnostics.logbook/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/hello.plc/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-cpp/hello.world/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/appdata/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/appdata/assets/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/appdata/cmd/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/appdata/vendor/github.com/golang-jwt/jwt/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/appdata/vendor/github.com/golang-jwt/jwt/MIGRATION_GUIDE.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/appdata/vendor/github.com/golang-jwt/jwt/VERSION_HISTORY.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/datalayer.client.ext/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/datalayer.client.simple/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/datalayer.provider.simple/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/tpm2.srk/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/webdav.client/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-go/webserver/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-iec61131/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-iec61131/fbs-read-write/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-iec61131/fbs2plc/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/appdata/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/datalayer.client.browse/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/datalayer.client.bulkread/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/datalayer.client.simple/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/datalayer.provider.alldata/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/datalayer.provider.simple/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/datalayer.provider.virtual/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/diagnostics.logbook/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/hello.web.asp/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-net/hello.world/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/angular.multi-language/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/datalayer.client.browse/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/datalayer.client.bulkread/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/datalayer.client.simple/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/datalayer.provider.alldata/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/datalayer.provider.simple/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/hello-world/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-node/webdav.client/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/appdata/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.calc/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.client/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.client.browse/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.client.bulk/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.client.light/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.client.simple/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.client.sub/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.provider/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.provider.all-data/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/datalayer.remote.debug/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/logbook/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-python/webserver/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-snap/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-snap/generate-manifest/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-snap/monitor-health/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-snap/storage-extension/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-snap/tpm2-webserver/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/samples-snap/ulimit/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/scripts/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/scripts/environment/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://boschrexroth.github.io/ctrlx-automation-sdk/scripts/environment/builder/index.html</loc>
-         <lastmod>2024-06-04</lastmod>
+         <lastmod>2024-06-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
