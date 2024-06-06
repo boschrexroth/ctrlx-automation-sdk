@@ -20,7 +20,7 @@ then
   # Qualify architecture
   sudo sed -i 's/deb http:/deb [arch=amd64] http:/g' /etc/apt/sources.list
 else
-  echo "[Warning] Crosscompiling not enabled ! CPU Architecture != x86_64 detected or the systemen isn't running Ubuntu"
+  echo "[Warning] Crosscompiling not enabled ! CPU Architecture != x86_64 detected or the system isn't running Ubuntu"
 fi
 
 # Environment variable to enable/disable the use of certain CPU capabilities.
