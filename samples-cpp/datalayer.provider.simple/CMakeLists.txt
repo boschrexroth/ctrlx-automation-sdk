@@ -20,17 +20,14 @@ set(TARGET_PROJECT_NAME datalayerProviderSimple)
 set (SDK_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/../../)
 
 #
+# Flatbuffers
+#
+execute_process (COMMAND bash ${CMAKE_CURRENT_LIST_DIR}/build-fbs.sh)
+
+#
 # Metadata Database
 #
-# use mdd_compiler from ctrlx-datalayer debian package
-exec_program(mddb_compiler
-  ARGS "-in ${CMAKE_CURRENT_LIST_DIR}/metadata.csv -out ${CMAKE_CURRENT_LIST_DIR}/compiled/metadata.mddb"
-  RETURN_VALUE result
-)
-
-IF( ${result})
-  MESSAGE(FATAL_ERROR "mddb_compiler executable not found. Please install the ctrlx-datalayer-*.deb debian package.")
-ENDIF()
+execute_process (COMMAND bash ${CMAKE_CURRENT_LIST_DIR}/build-mddb.sh)
 
 #
 # Option to Build the Snap
@@ -71,29 +68,8 @@ SET ( PRIVATE_INCLUDE_DIRS
   ${SDK_ROOT_DIR}/include
 )
 
-#
-# Flatbuffers
-#
-execute_process(COMMAND uname -a OUTPUT_VARIABLE HOST_SYSTEM_ARCH)
-IF( ${HOST_SYSTEM_ARCH} MATCHES "aarch64")
-  set (FLATBUFFERS_FLATC_EXECUTABLE ${SDK_ROOT_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-aarch64/flatc)
-ELSE()
-  set (FLATBUFFERS_FLATC_EXECUTABLE ${SDK_ROOT_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-x64/flatc)
-ENDIF()
-set (FLATBUFFERS_INCLUDE_DIR ${SDK_ROOT_DIR}/include/oss.flatbuffers)
-include (${SDK_ROOT_DIR}/cmake/oss.flatbuffers/FindFlatBuffers.cmake)
-set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-object-api")
-set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--no-warnings")
-set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-compare")
-
-build_flatbuffers("sampleSchema.fbs" "" "cppDatalayerFlatbuffers" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}/compiled/" "")
-
 add_executable( ${TARGET_PROJECT_NAME}
   ./main.cpp
-)
-
-add_dependencies(${TARGET_PROJECT_NAME}
-  cppDatalayerFlatbuffers
 )
 
 #

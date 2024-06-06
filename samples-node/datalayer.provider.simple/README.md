@@ -1,6 +1,6 @@
 # README Node.js datalayer.provider
 
-This Node.js sample provides some registered nodes to the ctrlX Data Layer tree. 
+This Node.js sample provides some registered nodes to the ctrlX Data Layer tree.
 
 __IMPORTANT__:
 
@@ -10,13 +10,13 @@ Please read the _Best Practise_ section in common Node.js documentation for more
 
 ## Introduction
 
-The sample demonstrates how to provide nodes to ctrlX Data Layer tree. 
-The provider creates nodes with types of int/double/string. 
+The sample demonstrates how to provide nodes to ctrlX Data Layer tree.
+The provider creates nodes with types of int/double/string.
 Also a complex type encoded by [FlatBuffers](https://google.github.io/flatbuffers/) is provided.
 
 ## Description
 
-The sample demonstrates 
+The sample demonstrates
 
 + How to provide nodes with different data types to __ctrlX Data Layer__
 
@@ -38,21 +38,22 @@ This tool is provided by this SDK under /bin/oss.flatbuffers/..insert OS version
 
 Do following steps
 
-* Create a binary flatbuffers file with Visual Studio Code tasks:
++ Create a binary flatbuffers file with Visual Studio Code tasks:
 
-   - "flatc binary (x64)"
-   - "flatc binary (arm64)"
+  + "flatc binary (x64)"
+  + "flatc binary (arm64)"
 
    The generated file is stored in src/sampleSchema.bfbs
 
-* Generate the Node.js class with Visual Studio Code tasks:
++ Generate the Node.js class with Visual Studio Code tasks:
 
-    - "flatc class (x64)"
-    - "flatc class (arm64)"
+  + "flatc class (x64)"
+  + "flatc class (arm64)"
 
    The generated code is stored in src/sampleSchema_generated.js
-   
+
 ## Debug and Run
+
 1. Run 'npm install' in the terminal.  
 2. Launch the app with the debugger attached by pressing __F5__.
 
@@ -63,22 +64,23 @@ Do following steps
 3. Choose __Open Folder in QEMU VM__.
 4. Open the directory __datalayer.provider__.
 5. Build and install snap as described [here](./../README.md).
-6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer) 
+6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer)
 7. Check the output using __Diagnostics__:
 
-   - Login into your ctrlX
-   - Navigate to __Diagnostics -> Logbook__
-   - Click __Settings__ on the right top corner
-   - Enable __Show system messages__
-   - Navigate to __Filter -> Units__ and check your __snap.sdk-node-provider-simple.app.service__
-   - Now you should the see the app output diagnostics.
-   - Press __Refresh__ to update.
+   + Login into your ctrlX
+   + Navigate to __Diagnostics -> Logbook__
+   + Click __Settings__ on the right top corner
+   + Enable __Show system messages__
+   + Navigate to __Filter -> Units__ and check your __snap.sdk-node-provider-simple.app.service__
+   + Now you should the see the app output diagnostics.
+   + Press __Refresh__ to update.
 
 8. If you have root permissions, you can also watch the output on any ssh console with the command:
-   
+
    ```bash
    sudo snap logs sdk-node-provider-simple.app -f | more
    ```
+
 ## Screenshot
 
 ![crtrX ctrlX Data Layer tree](./docs/images/datalayer.provider/datalayer.provider.png)
@@ -87,17 +89,17 @@ Do following steps
 
 Login into ctrlX and install the App (Apps).
 
-## Gratulations - We're finished - Let's start coding!
-
+## Gratulations - We're finished - Let's start coding
 
 ## Support
+
 ### Developer Community
 
-Please join the [Developer Community](https://developer.community.boschrexroth.com/) 
+Please join the [Developer Community](https://developer.community.boschrexroth.com/)
 
 ### SDK Forum
 
-Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/) 
+Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/)
 
 ### Issues
 

@@ -35,4 +35,4 @@ jobs:
           find samples-*/ -name "*.png" | cpio -pd doc/
           find scripts/ -name "*.md" | cpio -pd doc/
           find scripts/ -name "*.png" | cpio -pd doc/
-          mkdocs gh-deploy --force
+          mkdocs gh-deploy --strict --force

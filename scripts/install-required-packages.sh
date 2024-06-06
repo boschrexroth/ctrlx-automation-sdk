@@ -1,80 +1,107 @@
 #!/usr/bin/env bash
 
-#
-# This script installs debian packages required to build apps
-# with the ctrlX AUTOMATION SDK.
-#
-# https://wiki.ubuntu.com/MultiarchSpec
 
-sudo dpkg --add-architecture arm64
+# Exit immediately if a command exits with a non-zero status.
+set -e
 
-DIST="$(lsb_release -sc)"
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST} main restricted universe multiverse" | sudo tee /etc/apt/sources.list.d/multiarch-libs.list
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST}-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST}-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ubuntu-ports/ ${DIST}-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
+etc_environment=$(cat /etc/environment)
+if [[ ${etc_environment} != *"DEBIAN_FRONTEND=noninteractive"* ]];then
+    # https://unix.stackexchange.com/questions/701285/is-debian-frontend-noninteractive-redundant-with-apt-get-yqq
+    # DEBIAN_FRONTEND is read by debconf
 
-# Qualify architecture
-sudo sed -i 's/deb http:/deb [arch=amd64] http:/g' /etc/apt/sources.list
+    echo "-------------------------------------------------------"
+    echo "Disable debian fronted ..."
+    echo "-------------------------------------------------------"
 
-# Environment variable to enable/disable the use of certain CPU capabilities.
-# 0x1: Disable all run-time detected optimizations
-# see https://gnutls.org/manual/html_node/Debugging-and-auditing.html
-# Fixes issue: "Method https has died unexpectedly! Sub-process https received signal 4"
-# see https://askubuntu.com/questions/1420966/method-https-has-died-unexpectedly-sub-process-https-received-signal-4-after
-export GNUTLS_CPUID_OVERRIDE=0x1
+    export DEBIAN_FRONTEND=noninteractive
+    sudo apt-get install -y debconf
+    sudo echo "DEBIAN_FRONTEND=noninteractive" | sudo tee -a /etc/environment
+fi
 
-# Prevent prompt that ask to restart services
-export DEBIAN_FRONTEND=noninteractive
+# Get architecture, define x-build architecture
+echo "-------------------------------------------------------"
+echo "Define cross-build architecture ..."
+echo "-------------------------------------------------------"
+arch=$(dpkg --print-architecture)
+if [[ ${arch} == "amd64" ]];then
+    arch_x=arm64
+    repository_url_x="http://ports.ubuntu.com/ubuntu-ports"
+else
+    arch_x=amd64
+    repository_url_x="http://archive.ubuntu.com/ubuntu"
+fi
 
-sudo -E apt update
-sudo -E apt upgrade
+echo arch: $arch
+echo arch_x: $arch_x
+echo repository_url_x: $repository_url_x
 
-# install base packages ...
-sudo -E apt install -y \
-  zip \
-  unzip \
-  p7zip-full \
-  git \
-  apt-transport-https \
-  whois \
-  net-tools \
-  pkg-config \
-  jq \
-  sshpass \
-  dpkg-dev
+# Add an extra architecture for x-build and print it
+echo "-------------------------------------------------------"
+echo "Add cross-build architecture $arch_x ..."
+echo "-------------------------------------------------------"
+sudo dpkg --add-architecture $arch_x
+echo foreign-architectures: $(sudo dpkg --print-foreign-architectures)
 
-# install python tools ...
-sudo -E apt install -y \
-  python3-pip \
-  virtualenv
+echo "-------------------------------------------------------"
+echo "Patch '/etc/apt/sources.list.d/multiarch-libs.list' ..."
+echo "-------------------------------------------------------"
+# Get distribution name
+dist="$(lsb_release -sc)"
+sudo echo "deb [arch=$arch_x] $repository_url_x ${dist} main restricted universe multiverse" | sudo tee /etc/apt/sources.list.d/multiarch-libs.list
+sudo echo "deb [arch=$arch_x] $repository_url_x ${dist}-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
+sudo echo "deb [arch=$arch_x] $repository_url_x ${dist}-security main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
+sudo echo "deb [arch=$arch_x] $repository_url_x ${dist}-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
 
-# install amd64 build tools ...
-sudo -E apt install -y \
-  build-essential \
-  gdb \
-  cmake
+echo "-------------------------------------------------------"
+echo "Patch '/etc/apt/sources.list' ..."
+echo "-------------------------------------------------------"
+sudo sed -i "s/deb http:/deb [arch=$arch] http:/g" /etc/apt/sources.list
+cat /etc/apt/sources.list
 
-# install arm64 cross build tools ...
-sudo -E apt install -y \
-  crossbuild-essential-arm64 \
-  gdb-multiarch
+echo "-------------------------------------------------------"
+echo "Update packages ..."
+echo "-------------------------------------------------------"
+sudo apt-get update
 
-# install required amd64 packages ...
-sudo -E apt install -y \
-  libxml2-dev \
-  uuid-dev \
-  libbz2-1.0 \
-  libzmq3-dev \
-  libsystemd-dev \
-  libssl-dev \
+echo "-------------------------------------------------------"
+echo "Install required packages for $arch ..."
+echo "-------------------------------------------------------"
+# TODO Ist bereits im AppBuildEnv
+sudo apt-get install zip -y
+sudo apt-get install unzip -y
+sudo apt-get install p7zip-full -y
+sudo apt-get install git -y
+sudo apt-get install apt-transport-https -y
+sudo apt-get install whois -y
+sudo apt-get install net-tools -y
+sudo apt-get install pkg-config -y
+sudo apt-get install jq -y
+sudo apt-get install sshpass -y
+sudo apt-get install dpkg-dev -y
 
-# install required arm64 packages ...
-sudo -E apt install -y \
-  libxml2-dev:arm64 \
-  uuid-dev:arm64 \
-  libbz2-1.0:arm64 \
-  libzmq3-dev:arm64 \
-  libsystemd-dev:arm64 \
-  libssl-dev:arm64 \
+sudo apt-get install python3-pip -y
+sudo apt-get install virtualenv -y
 
+sudo apt-get install build-essential -y
+sudo apt-get install gdb -y
+
+sudo apt-get install gdb-multiarch -y
+sudo apt-get install cmake -y
+
+sudo apt-get install libxml2-dev -y
+sudo apt-get install uuid-dev -y
+sudo apt-get install libbz2-1.0 -y
+sudo apt-get install libzmq3-dev -y
+sudo apt-get install libsystemd-dev -y
+sudo apt-get install libssl-dev -y
+
+echo "-------------------------------------------------------"
+echo "Install required packages for $arch_x ..."
+echo "-------------------------------------------------------"
+sudo apt-get install crossbuild-essential-$arch_x -y
+sudo apt-get install libxml2-dev:${arch_x} -y
+sudo apt-get install uuid-dev:${arch_x} -y
+sudo apt-get install libbz2-1.0:${arch_x} -y
+sudo apt-get install libzmq3-dev:${arch_x} -y
+sudo apt-get install libsystemd-dev:${arch_x} -y
+sudo apt-get install libssl-dev:${arch_x} -y

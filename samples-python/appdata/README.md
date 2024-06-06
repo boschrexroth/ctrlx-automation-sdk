@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This Python sample app shows how to persist application data in ctrlX CORE. 
+This Python sample app shows how to persist application data in ctrlX CORE.
 
 ## Function Description
 
@@ -16,7 +16,7 @@ __main.py__ starts the web server in TCP or Unix socket mode.
 
 The package __web__  contains the web server implementation using the build in Python module http.server. For encoding and decoding JSON Web Tokens the Python library pyjwt is used.
 
-The folder __configs__ contains the file package-manifest.json. It is used to register the snap within the ctrlX CORE as participant of the configuration load/store mechanism. 
+The folder __configs__ contains the file package-manifest.json. It is used to register the snap within the ctrlX CORE as participant of the configuration load/store mechanism.
 
 ___
 

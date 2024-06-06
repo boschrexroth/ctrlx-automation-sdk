@@ -2,14 +2,14 @@
 
 ## Introduction
 
-This sample project shows how shared memory is used for data exchange between two applications. 
+This sample project shows how shared memory is used for data exchange between two applications.
 
 Therefor the features of the ctrlX Data Layer are used.
 
 Normally realtime applications (Celix bundles) are using sharded memory for data exchange, but non realtime apps are also able to use it - like our two executables.
 
 !!! important
-    Executables using shared memory for data exchange have to run within the same environment (ctrlX CORE or App Builder Environment). 
+    Executables using shared memory for data exchange have to run within the same environment (ctrlX CORE or App Builder Environment).
     Shared memory over a TCP connection is NOT possible.
 
 ## Function Description
@@ -24,7 +24,6 @@ Normally realtime applications (Celix bundles) are using sharded memory for data
 * When the numerical value has reached 225, the user app sets it back to 1.
 
 __If the input values are 0 this indicates that the user had no access - this is an error situation.__
-
 
 ## Implementation
 
@@ -85,4 +84,3 @@ ___
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
 SPDX-License-Identifier: MIT
-

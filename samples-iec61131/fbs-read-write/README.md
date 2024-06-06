@@ -1,4 +1,4 @@
-# Using Flatbuffers in IEC 61131-3 ST Code 
+# Using Flatbuffers in IEC 61131-3 ST Code
 
 The ctrlX data layer contains many nodes that provide their data in Flatbuffers.
 
@@ -8,13 +8,12 @@ The sample shows how a Flatbuffers node can be read, changed and written.
 
 * ctrlX WORKS >= 2.3.0 installed
 * ctrlX PLC Engineering >= 2.3.0 installed
-* ctrlX CORE<sup>virtual<sup/> with running app PLC
-* ctrlX AUTOMATION SDK >= 2.2.0 installed 
-
+* ctrlX CORE^virtual^ with running app PLC
+* ctrlX AUTOMATION SDK >= 2.2.0 installed
 
 ## Steps to build and download the PLC project
 
-We describe the usage of a ctrlX CORE<sup>virtual<sup/>.
+We describe the usage of a ctrlX CORE^virtual^.
 
 * Start ctrlX PLC Engineering.
 * Create a new project, use __ctrlX CORE x64 Project__ as template.
@@ -31,12 +30,12 @@ We describe the usage of a ctrlX CORE<sup>virtual<sup/>.
 The fbs file is compiled into IEC61131 Structed Text and imported into your PLC project.
 
 * Compile the project - there should by no error
-* Connect your PLC device node with the CORE<sup>virtual<sup/>
+* Connect your PLC device node with the CORE^virtual^
 * Login (download) and start your PLC project.
 
 ## Test the project
 
-* Open a web browser, log in into your ctrlX CORE<sup>virtual<sup/>
+* Open a web browser, log in into your ctrlX CORE^virtual^
 * Select Settings - Data layer
 * Select node datalayer/subscriptions/settings
 

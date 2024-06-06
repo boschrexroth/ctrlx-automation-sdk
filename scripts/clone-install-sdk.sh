@@ -5,41 +5,32 @@
 # installes the required files from ctrlx-automation-sdk-*.zip.
 #
 
-WORKING_DIR=$(pwd)
-SDK_DIR=${WORKING_DIR}/ctrlx-automation-sdk
-SEPARATION_LINE_1="===================================================================================================="
-SEPARATION_LINE_2="----------------------------------------------------------------------------------------------------"
-
 if [[ "--help" = $1 ]]; then
 	echo ""
 	echo "This script creates a local copy of the ctrlX AUTOMATION SDK github repository"
 	echo "and installs the required files from the ctrlX AUTOMATION SDK zip archive."
 	echo ""
-	echo "During this process please enter the desired version (release) of the zip archive to install."
+	echo "During this process please enter the desired release tag to be installed."
 	echo ""
 	exit 1
 fi
 
-echo ""
-echo $SEPARATION_LINE_1
-echo "Enter the desired version of the zip archive to install (e.g. 2.4.0)."
-echo "This will be used as 'Tag' for the local github repository."
-echo $SEPARATION_LINE_2
-TAG=2.4.0
-read -rp "Version ($TAG)? " TAG
-if [ -z "$TAG" ]; then
-	TAG=2.4.0
+WORKING_DIR=$(pwd)
+SDK_DIR=${WORKING_DIR}/ctrlx-automation-sdk
+SEPARATION_LINE_1="===================================================================================================="
+SEPARATION_LINE_2="----------------------------------------------------------------------------------------------------"
+
+if [ -d ${SDK_DIR} ]; then
+	echo ""
+	read -rp "Delete existing directory ${SDK_DIR} Y/n? " ANS
+	if [[ "$ANS" == *"n"* ]]; then
+		echo "Change your working directory or delete the directory yourself ctrlx-automation-sdk/"
+		exit 1
+	fi
+
+	# Older versions have directories without x-permission so sudo ...
+	sudo rm -rf "${SDK_DIR}"/ 2>/dev/null
 fi
-
-echo ""
-echo $SEPARATION_LINE_1
-echo "Local SDK github repo: ${SDK_DIR}"
-echo "Version (release):     ${TAG}"
-echo $SEPARATION_LINE_2
-read -rt 20 -p "OK? "
-
-# Older versions have directories without x-permission so sudo ...
-sudo rm -rf "${SDK_DIR}"/ 2>/dev/null
 
 echo ""
 echo $SEPARATION_LINE_1
@@ -50,9 +41,27 @@ cd "$SDK_DIR" || exit
 
 echo ""
 echo $SEPARATION_LINE_1
-echo "Checking out version (tag) ${TAG} ..."
+echo "Enter the desired tag to be checked out from this list:"
+git tag
 echo $SEPARATION_LINE_2
-# git checkout tags/${TAG}
+TAG_LATEST=$(git describe --tags --abbrev=0)
+read -rp "Version ($TAG_LATEST)? " TAG
+if [ -z "$TAG" ]; then
+	TAG=$TAG_LATEST
+fi
+
+echo ""
+echo $SEPARATION_LINE_1
+echo "Local SDK github repo: ${SDK_DIR}"
+echo "Version (release):     ${TAG}"
+echo $SEPARATION_LINE_2
+read -rt 20 -p "OK? "
+
+echo ""
+echo $SEPARATION_LINE_1
+echo "Checking out tag ${TAG} ..."
+echo $SEPARATION_LINE_2
+git checkout tags/${TAG}
 
 cd "$WORKING_DIR" || exit
 
@@ -81,7 +90,7 @@ mkdir "$ZIP_DIR"
 
 echo ""
 echo $SEPARATION_LINE_1
-echo "Unzipping ctrlx-automation-sdk zip ..."
+echo "Unzipping ${ZIP_ARCHIVE} ..."
 echo $SEPARATION_LINE_2
 unzip -xKq "${ZIP_ARCHIVE}" -d "$ZIP_DIR"
 
@@ -104,32 +113,14 @@ echo $SEPARATION_LINE_2
 
 # Set drwxrwxr-x for directories and -rw-rw-r-- for files
 find . \( -type d -exec chmod 775 {} \; \) -o \( -type f -exec chmod 664 {} \; \)
-# oss.flatbuffers* so that oss.flatbuffers.1.12 also fits
-chmod a+x bin/comm.datalayer/ubuntu*/release/mddb_compiler
-chmod a+x bin/comm.datalayer/ubuntu*/release/dl_compliance
-chmod a+x bin/oss.flatbuffers*/ubuntu*/release/flatc
-chmod a+x bin/framework/ubuntu*/rexroth-automation-frame
-# Add x permission to all .sh files
+
+# Add x permission (path independ solution)
+find $SDK_DIR/bin -name mddb_compiler -exec chmod +x {} \;
+find $SDK_DIR/bin -name dl_compliance -exec chmod +x {} \;
+find $SDK_DIR/bin -name flatc -exec chmod +x {} \;
+# All scripts
 find . -name '*.sh' -exec chmod +x {} \;
+# Former versions are containing  rexroth-automation-frame
+find $SDK_DIR/bin -name rexroth-automation-frame -exec chmod +x {} \;
 
-cd "${SDK_DIR}"/deb || exit
-
-echo ""
-echo $SEPARATION_LINE_1
-echo "Installing required component dpkg-scanpackages ..."
-echo $SEPARATION_LINE_2
-sudo apt-get install -y dpkg-dev
-
-# Install debian package locally so that 'apt-get install' will find it (for building sample project snaps)
-dpkg-scanpackages -m . >Packages
-
-# Add package to sources list
-FULL_PATH=$(pwd)
-echo "deb [trusted=yes] file:${FULL_PATH} ./" | sudo tee /etc/apt/sources.list.d/ctrlx-automation.list
-
-# Use newest sources list
-sudo apt-get update
-
-# Install newest ctrlx-datalayer package
-sudo apt-get install -y ctrlx-datalayer
 

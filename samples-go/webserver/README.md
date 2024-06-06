@@ -7,7 +7,7 @@ The sample __sdk-go-webserver__ contains simple webserver.
 ## Pre-requisites
 
 * Recommended: ctrlX WORKS App Build Environment (QEMU Virtual Machine) - see Setup
-* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
+* ctrlX CORE^virtual^ or ctrlX CORE
 
 ## Debug and Run
 Launch the app with the debugger attached by pressing __F5__.

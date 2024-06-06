@@ -19,5 +19,3 @@ fi
 
 node --version
 npm --version
-
-source ~/scripts/install-snapcraft.sh

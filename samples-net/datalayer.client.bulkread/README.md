@@ -1,10 +1,10 @@
 # README .NET datalayer.client.bulkread
 
-This .NET sample reads values in bulk mode from ctrlX Data Layer. 
+This .NET sample reads values in bulk mode from ctrlX Data Layer.
 
 ## Introduction
 
-The sample demonstrates how to bulk read values from ctrlX Data Layer and write out the values to console. 
+The sample demonstrates how to bulk read values from ctrlX Data Layer and write out the values to console.
 The bulk read is performed every 10 seconds in an endless loop.
 
 ## Description
@@ -13,15 +13,16 @@ The implementation include the following steps:
 
 + Create and start the 'DatalayerSystem' service
 + Create a client
-+ Bulk Read values synchron with method client.BulkRead(addresses) 
++ Bulk Read values synchron with method client.BulkRead(addresses)
 + Bulk Read values asynchron with mehtod client.BulkReadAsync(addresses)
 + Bulk Read methods are called in an endless loop every 10s.
 
 ## Prerequisites
 
-Please read the common .NET docs [here](./../../doc/dotnet.md), first.
+Please read the common .NET docs [here](../../dotnet.md), first.
 
 ## Debug and Run
+
 Launch the app with the debugger attached by pressing __F5__.
 
 ## Build and Install
@@ -34,18 +35,21 @@ Launch the app with the debugger attached by pressing __F5__.
 6. Check the output using __Diagnostics__:
 
    + Login into your ctrlX
-   + Navigate to __Diagnostics -> Logbook__ 
+   + Navigate to __Diagnostics -> Logbook__
    + Click __Settings__ on the right top corner
    + Enable __Show system messages__
    + Navigate to __Filter -> Units__ and check your __snap.sdk-net-client-bulkread.app.service__
-   + Now you should the see the app output diagnostics. 
+   + Now you should the see the app output diagnostics.
    + Press __Refresh__ to update.
 
 7. If you have root permissions, you can also watch the output on any ssh console with the command:
+
     ```bash
     sudo snap logs sdk-net-client-bulkread.app -f | more
     ```
+
 ## Console Output
+
 ```bash
 ctrlX Data Layer system started.
 ctrlX Data Layer client created.
@@ -71,17 +75,17 @@ address: framework/metrics/system/memused-percent, value: 52,6, timestamp: 29.09
 
 Login into ctrlX and install the App (Apps).
 
-## Gratulations - We're finished - Let's start coding!
-
+## Gratulations - We're finished - Let's start coding
 
 ## Support
+
 ### Developer Community
 
-Please join the [Developer Community](https://developer.community.boschrexroth.com/) 
+Please join the [Developer Community](https://developer.community.boschrexroth.com/)
 
 ### SDK Forum
 
-Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/) 
+Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/)
 
 ### Issues
 

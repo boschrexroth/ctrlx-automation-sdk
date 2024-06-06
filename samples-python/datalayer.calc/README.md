@@ -1,4 +1,4 @@
-# ctrlX Data Layer Calculation operations 
+# ctrlX Data Layer Calculation operations
 
 ## Introduction
 
@@ -14,17 +14,19 @@ How the out value is calculated can be configured as string value with the node 
 
  Supported operations are:
 
-- +
-- -
-- *
-- /
+```text
++
+-
+*
+/
+```
 
-## Implementation Description 
+## Implementation Description
 
 There are two Python scripts:
 
-- main.py - the main function
-- calculations.basic_arithmetic_operations.py - Class called BasicArithmeticOperations which reads the input values and calculates the output value.
++ main.py - the main function
++ calculations.basic_arithmetic_operations.py - Class called BasicArithmeticOperations which reads the input values and calculates the output value.
 
 ### main.py
 
@@ -38,7 +40,8 @@ If the client connection is lost the main function exits with an error code. If 
 
 This class BasicArithmeticOperations has several functions.
 
-It is a ctrlX Data Layer Provider for four nodes: 
+It is a ctrlX Data Layer Provider for four nodes:
+
 1. in1: string, specifies the DL address of the first operand
 2. in2: string, specifies the DL address of the second operand
 3. mode: string, specifies the operation
@@ -46,7 +49,7 @@ It is a ctrlX Data Layer Provider for four nodes:
 
 !!! important
     The operands have to be __double__ values (FLOAT64)!
-    
+
 With the address values of in1 and in2 a subscription is started. Every time when new values are published the value of 'out' is recalculated.
 
 ___

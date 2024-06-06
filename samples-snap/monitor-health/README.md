@@ -12,6 +12,7 @@ This is monitoring the state of the service and setting the health.
 |disabled   |error      |app disabled!  |-
 
 ## Description
+
 The sample contains a dummy production app _./app/dummy-app_, which is monitored for it's health.
 
 ## Setup health monitoring for your own app
@@ -39,6 +40,7 @@ The sample contains a dummy production app _./app/dummy-app_, which is monitored
             source: ./health
 
 ## Support
+
 ### Developer Community
 
 Please join the [Developer Community](https://developer.community.boschrexroth.com/)

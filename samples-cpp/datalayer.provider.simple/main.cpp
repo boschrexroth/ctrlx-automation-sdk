@@ -54,8 +54,8 @@ private:
     {
       flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
           {
-              comm::datalayer::CreateReferenceDirect(builder, "readType", "types/sampleSchema/inertialValue"),
-              comm::datalayer::CreateReferenceDirect(builder, "writeType", "types/sampleSchema/inertialValue"),
+              comm::datalayer::CreateReferenceDirect(builder, "readType", "types/sdk/cpp/provider/simple/inertialValue"),
+              comm::datalayer::CreateReferenceDirect(builder, "writeType", "types/sdk/cpp/provider/simple/inertialValue"),
           };
 
       references = builder.CreateVectorOfSortedTables(vecReferences, 2);
@@ -155,6 +155,8 @@ int main()
 
   std::string dlBasePath = "sdk/cpp/datalayer/provider/simple/";
 
+  std::string typeInertialValue = "types/sdk/cpp/provider/simple/inertialValue";
+
   comm::datalayer::DatalayerSystem datalayerSystem;
   // Starts the ctrlX Data Layer system without a new broker because one broker is already running on ctrlX CORE
   datalayerSystem.start(false);
@@ -216,11 +218,11 @@ int main()
   }
 
   std::filesystem::path fileBfbs = dir / "sampleSchema.bfbs";
-  std::cout << "INFO Register type 'types/sampleSchema/inertialValue' " << fileBfbs << std::endl;
-  result = provider->registerType("types/sampleSchema/inertialValue", fileBfbs);
+  std::cout << "INFO Register type '" << typeInertialValue << "' " << fileBfbs << std::endl;
+  result = provider->registerType(typeInertialValue, fileBfbs);
   if (STATUS_FAILED(result))
   {
-    std::cout << "WARN Register type 'types/sampleSchema/inertialValue' " << fileBfbs << " failed with: " << result.toString() << std::endl;
+    std::cout << "WARN Register type '" << typeInertialValue << "' " << fileBfbs << " failed with: " << result.toString() << std::endl;
   }
 
   std::filesystem::path fileMddb = dir / "metadata.mddb";
@@ -267,7 +269,7 @@ int main()
     std::cout << "INFO Restarting automatically" << std::endl;
   }
 
-  provider->unregisterType("types/sampleSchema/inertialValue");
+  provider->unregisterType(typeInertialValue);
 
   provider->unregisterNode(dlBasePath + "myString");
   provider->unregisterNode(dlBasePath + "myFloat");

@@ -21,6 +21,12 @@ set(TARGET_PROJECT_NAME datalayerClient)
 set (USER_DEPENDENCY_DIR ${CMAKE_CURRENT_LIST_DIR}/../..)
 
 #
+# Flatbuffers
+#
+execute_process (COMMAND bash ${CMAKE_CURRENT_LIST_DIR}/build-fbs.sh)
+
+
+#
 # Option to Build the Snap
 #
 option (BUILD_SNAP "Build Snap Package" OFF)
@@ -73,25 +79,6 @@ SET ( PRIVATE_INCLUDE_DIRS
   ${USER_DEPENDENCY_DIR}/include/comm.datalayer
   )
 
-
-#
-# Flatbuffers
-#
-execute_process(COMMAND uname -a OUTPUT_VARIABLE HOST_SYSTEM_ARCH)
-IF( ${HOST_SYSTEM_ARCH} MATCHES "aarch64")
-  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-aarch64/flatc)
-ELSE()
-  set (FLATBUFFERS_FLATC_EXECUTABLE ${USER_DEPENDENCY_DIR}/bin/oss.flatbuffers/ubuntu22-gcc-x64/flatc)
-ENDIF()
-execute_process(COMMAND chmod +x ${FLATBUFFERS_FLATC_EXECUTABLE})
-set (FLATBUFFERS_INCLUDE_DIR ${USER_DEPENDENCY_DIR}/include/oss.flatbuffers)
-include (${USER_DEPENDENCY_DIR}/cmake/oss.flatbuffers/FindFlatBuffers.cmake)
-set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-object-api")
-set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--no-warnings")
-set( FLATBUFFERS_FLATC_SCHEMA_EXTRA_ARGS "--gen-compare")
-
-build_flatbuffers("sampleSchema.fbs" "" "sampleSchemaflatbuffers" "${CMAKE_CURRENT_LIST_DIR}" "${CMAKE_CURRENT_LIST_DIR}" "" "")
-
 #
 # Set link directories
 #
@@ -108,8 +95,6 @@ link_directories(
 add_executable( ${TARGET_PROJECT_NAME}
 	${SOURCE_FILES_DATALAYERCLIENT}
   )
-
-add_dependencies(${TARGET_PROJECT_NAME} sampleSchemaflatbuffers)
 
 #
 # Set target include directories

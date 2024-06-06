@@ -16,9 +16,9 @@ see the description on [ctrlX Data Layer client and provider library for Go](htt
 
 ## Visual Studio Code
 
-To use Go within Visual Studio Code, we recommend using the [Go for Visual Studio Code](https://github.com/golang/vscode-go) extension. The corresponding documentation can also be found under this link. 
+To use Go within Visual Studio Code, we recommend using the [Go for Visual Studio Code](https://github.com/golang/vscode-go) extension. The corresponding documentation can also be found under this link.
 
-Open this project folder directly, then the go build environment is set correctly. 
+Open this project folder directly, then the go build environment is set correctly.
 
 ## Compile Flatbuffers Schema
 

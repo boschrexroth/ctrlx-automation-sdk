@@ -1,7 +1,8 @@
+# Samples Python
+
 ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/120px-Python-logo-notext.svg.png)
 
 ## Find out the supported samples
-
 
 ### Basic Samples
 
@@ -51,23 +52,25 @@ We recommend to create and activate a virtual Python environment for your projec
 
 Call this script from the command line:
 
-    ./install-venv.sh
+```bash
+./install-venv.sh
+```
 
 The script runs following commands:
 
-    virtualenv -p python3 venv
-    source venv/bin/activate
-    pip3 install -r requirements.txt
+```bash
+virtualenv -p python3 venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+```
 
-A subfolder venv/ will be created and activated as virtual environment which contains the Python runtime and all required packages. 
+A subfolder venv/ will be created and activated as virtual environment which contains the Python runtime and all required packages.
 
 *Hints:* The terminal console path begins with **(venv)**. With **Ctrl+Shift+P** open the *"Command Palette..."* and select *"Python: Select Interpreter"*, then *'venv/bin/python'* from the virtual environment.
 
+#### Debugging with Visual Studio Code
 
-
-#### Debugging with Visual Studio Code 
-
-* Open main.py 
+* Open main.py
 * Select the Python interpreter: Shift+Ctrl+P --> Select 'Python ... ('venv':venv) ... Recommended' *)
 * Set a breakpoint to the first code line e.g. import ...
 * Press F5 (Start Debugging)
@@ -86,7 +89,7 @@ A subfolder venv/ will be created and activated as virtual environment which con
 
 ### Developer Community
 
-Please join the [Developer Community](https://developer.community.boschrexroth.com/) 
+Please join the [Developer Community](https://developer.community.boschrexroth.com/)
 
 ### Issues
 

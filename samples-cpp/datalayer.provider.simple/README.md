@@ -22,10 +22,9 @@ All actions are implemented in main.cpp:
 * Endless loop where the ctrlX Data Layer connection is observed
 * Shutdown if the ctrlX Data Layer connection is broken
 
-
 !!! important
     If the app is running as snap on a ctrlX CORE it will be restarted if it has exited on error.
-	
+ 
 ___
 
 ## License

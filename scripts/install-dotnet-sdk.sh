@@ -17,5 +17,3 @@ sudo GNUTLS_CPUID_OVERRIDE=0x1 apt install -y dotnet-sdk-8.0
 
 # Test installation
 dotnet --version
-
-source ~/scripts/install-snapcraft.sh

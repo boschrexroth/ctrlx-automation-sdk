@@ -22,7 +22,6 @@ datalayerclient.cpp und datalayerclient.h are defining a class which manages the
 * Access of ctrlX Data Layer nodes of different data type
 * Callback methods for ctrlX Data Layer access
 
-
 In main.cpp an endless loop is running:
 
 * An instance of the class DataLayerClient is created

@@ -18,9 +18,10 @@ The sample creates some virtual nodes hold by an self-managed dictionary using t
 
 ## Prerequisites
 
-Please read the common .NET docs [here](./../../doc/dotnet.md), first.
+Please read the common .NET docs [here](../../dotnet.md), first.
 
 ## Debug and Run
+
 Launch the app with the debugger attached by pressing __F5__.
 
 ## Build and Install
@@ -30,7 +31,7 @@ Launch the app with the debugger attached by pressing __F5__.
 3. Choose __Open Folder__.
 4. Open the directory __datalayer.provider.virtual__.
 5. Build and install snap as described [here](./../README.md).
-6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer) 
+6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer)
 7. Check the output using __Diagnostics__:
 
    - Login into your ctrlX
@@ -42,6 +43,7 @@ Launch the app with the debugger attached by pressing __F5__.
    - Press __Refresh__ to update.
 
 8. If you have root permissions, you can also watch the output on any ssh console with the command:
+
    ```bash
    sudo snap logs sdk-net-provider-virtual.app -f | more
    ```
@@ -50,17 +52,17 @@ Launch the app with the debugger attached by pressing __F5__.
 
 Login into ctrlX and install the App (Apps).
 
-## Gratulations - We're finished - Let's start coding!
-
+## Gratulations - We're finished - Let's start coding
 
 ## Support
+
 ### Developer Community
 
-Please join the [Developer Community](https://developer.community.boschrexroth.com/) 
+Please join the [Developer Community](https://developer.community.boschrexroth.com/)
 
 ### SDK Forum
 
-Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/) 
+Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/)
 
 ### Issues
 

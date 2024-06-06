@@ -287,6 +287,14 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant* data)
     return comm::datalayer::DlResult::DL_OK;
   }
 
+  if (variantType == comm::datalayer::VariantType::UINT8)
+  {
+    auto value = uint8_t(*data);
+    std::cout << value;
+
+    return comm::datalayer::DlResult::DL_OK;
+  }
+
   if (variantType == comm::datalayer::VariantType::UINT16)
   {
     auto value = uint16_t(*data);
@@ -405,7 +413,7 @@ void DataLayerClient::read()
 {
 
   std::cout << "readAsync()" << m_result.toString() << std::endl;
-  m_result = m_client->readAsync( m_dataLayerAddressStatic + "bool8", m_data, responseCallback());
+  m_result = m_client->readAsync(m_dataLayerAddressStatic + "bool8", m_data, responseCallback());
   waitForResponseCallback(10);
 
   readSync("bool8");

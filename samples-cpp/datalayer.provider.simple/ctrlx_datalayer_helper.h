@@ -131,7 +131,7 @@ static comm::datalayer::IProvider* getProvider(comm::datalayer::DatalayerSystem&
 {
   std::string connectionString = getConnectionString(ip, user, password, sslPort);
   comm::datalayer::IProvider* provider = datalayerSystem.factory()->createProvider(connectionString);
-  if (provider->start() == DL_OK && provider->isConnected())
+  if (provider->start() == DL_OK)
   {
     return provider;
   }

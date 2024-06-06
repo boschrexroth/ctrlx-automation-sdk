@@ -35,44 +35,46 @@ int main(void)
   // Outer loop
   for (;;)
   {
-    // Wait before (re)connecting to the ctrlX Data Layer.
-    std::this_thread::sleep_for(std::chrono::seconds(10));
 
     // ip="192.168.1.1" or any other IP address if a ctrlX CORE or ctrlX COREvirtual
     // ip="10.0.2.2"    ctrlX COREvirtual with port forwarding
     auto* provider = getProvider(datalayerSystem);
 
-    if (provider != nullptr)
+    if (provider == nullptr) {
+      // Wait before (re)connecting to the ctrlX Data Layer.
+      std::cout << "INFO Wait before (re)connecting to the ctrlX Data Layer " << std::endl;
+      std::this_thread::sleep_for(std::chrono::seconds(10));
+      continue;
+    }
+
+    g_errorReported = false;
+
+    std::cout << "INFO Creating ctrlX Data Layer node branch " << g_dataLayerAddrBase << std::endl;
+
+    auto providerNodeStatic = new ProviderNodeAllData(provider, g_dataLayerAddrBase, false);
+    providerNodeStatic->registerNodes();
+
+    auto providerNodeDynamic = new ProviderNodeAllData(provider, g_dataLayerAddrBase, true);
+    providerNodeDynamic->registerNodes();
+
+    // Inner loop
+    std::cout << "INFO Running endless loop - will be ended on connection error or user input of Ctrl+C" << std::endl;
+    while (g_endProcess == false && provider->isConnected())
     {
-      g_errorReported = false;
+      std::this_thread::sleep_for(std::chrono::seconds(10));
+    }
 
-      std::cout << "INFO Creating ctrlX Data Layer node branch " << g_dataLayerAddrBase << std::endl;
+    delete providerNodeStatic;
+    delete providerNodeDynamic;
 
-      auto providerNodeStatic = new ProviderNodeAllData(provider, g_dataLayerAddrBase, false);
-      providerNodeStatic->registerNodes();
+    provider->stop();
+    delete provider;
 
-      auto providerNodeDynamic = new ProviderNodeAllData(provider, g_dataLayerAddrBase, true);
-      providerNodeDynamic->registerNodes();
-
-      // Inner loop
-      std::cout << "INFO Running endless loop - will be ended on connection error or user input of Ctrl+C" << std::endl;
-      while (g_endProcess == false && provider->isConnected())
-      {
-        std::this_thread::sleep_for(std::chrono::seconds(10));
-      }
-
-      delete providerNodeStatic;
-      delete providerNodeDynamic;
-
-      provider->stop();
-      delete provider;
-
-      if (g_endProcess)
-      {
-        std::cout << "INFO Terminating process due to user input of Ctrl+C (signal SIGINT)" << std::endl;
-        datalayerSystem.stop();
-        return 0;
-      }
+    if (g_endProcess)
+    {
+      std::cout << "INFO Terminating process due to user input of Ctrl+C (signal SIGINT)" << std::endl;
+      datalayerSystem.stop();
+      return 0;
     }
 
     // ctrlX Data Layer is disconnected
