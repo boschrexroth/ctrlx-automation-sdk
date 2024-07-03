@@ -1,8 +1,6 @@
-The directory __/home/boschrexroth/scripts/__ of an App Build Environment contains a set of important scripts.
+The repository https://github.com/boschrexroth/ctrlx-automation-sdk contains a set of important scripts.
 
-In the file `/home/boschrexroth/scripts/README.md` all files are listed and described. 
-
-__Hint:__ The ctrlX AUTOMATION SDK contains these scripts also in the folder scripts/environment/scripts.
+In the file `./scripts/README.md` all files are listed and described. 
 
 ## Some important scripts
 
@@ -13,7 +11,10 @@ __Hint:__ The ctrlX AUTOMATION SDK contains these scripts also in the folder scr
     
 In addition to the ctrlX AUTOMATION SDK, the ctrlx-datalayer debian package, snapcraft and libraries for cross build are installed.
 
-    ~/scripts/install-sdk.sh
+```shell
+    apt install unzip
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh)"
+```
 
 Now the directory ctrlx-automation-sdk/ contains the files of the ctrlX AUTOMATION SDK.
 
