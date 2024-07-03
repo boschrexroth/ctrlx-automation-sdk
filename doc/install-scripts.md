@@ -13,7 +13,7 @@ __Hint:__ The ctrlX AUTOMATION SDK contains these scripts also in the folder scr
     
 In addition to the ctrlX AUTOMATION SDK, the ctrlx-datalayer debian package, snapcraft and libraries for cross build are installed.
 
-    ~/scripts/install-sdk.sh
+    `sh -c "$(curl -fsSL https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh)"`
 
 Now the directory ctrlx-automation-sdk/ contains the files of the ctrlX AUTOMATION SDK.
 
