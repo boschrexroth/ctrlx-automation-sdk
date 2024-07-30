@@ -1,4 +1,4 @@
-If in the ctrlX WORKS setup the function 'ctrlX CORE App Build Environment' is enabled ctrlX WORKS allows to create App Build Environments. Internally these are QEMU Virtual Machines running Ubuntu server LTS which are configured during first startup. 
+If in the ctrlX WORKS setup the function 'ctrlX CORE App Build Environment' is enabled ctrlX WORKS allows to create App Build Environments. Internally these are QEMU Virtual Machines running Ubuntu server LTS which are configured during first startup.
 
 From the ctrlX WORKS UI each environment can be started, stopped or deleted. Furthermore a SSH shell can be started to login.
 
@@ -25,7 +25,7 @@ Select 'App Build Environments' on the side bar of ctrlX WORKS. The list of inst
 
 ### Create an App Build Environment
 
-* Click the `+` icon in the right corner of the page. 
+* Click the `+` icon in the right corner of the page.
 * The dialog 'Add ctrlX CORE App Build Environment' will appear.  Now the new instance can be configured.
 * Name: Enter a unique name.
 * Storage location: Enter/select a destination directory where the files are stored.
@@ -39,7 +39,7 @@ Select 'App Build Environments' on the side bar of ctrlX WORKS. The list of inst
 ### Start an App Build Environment
 
 * Start a App Build Environment with the play `>` icon.
-* On first start the Ubuntu image will be downloaded and the environment will be installed. This will take some time. In this phase no login will be possible. When the initialization phase is finished the VM will shutdown automatically. 
+* On first start the Ubuntu image will be downloaded and the environment will be installed. This will take some time. In this phase no login will be possible. When the initialization phase is finished the VM will shutdown automatically.
 * Click the play icon again to restart the App Build Environment.
 * When the environment is up ctrlX WORKS will show 'Online' in column State.
 
@@ -47,12 +47,14 @@ Select 'App Build Environments' on the side bar of ctrlX WORKS. The list of inst
 
 #### Preparations
 
+Additional information on ssh see: [SSH Connection](ssh_connection.md)
+
 On your Windows host start cmd.exe and run these commands.
 
 Delete entry regarding 127.0.0.1 in the file know_hosts:
 
 	ssh-keygen.exe -R [127.0.0.1]:10022
-	
+
 Create the directory /home/boschrexroth/.ssh - on password prompt enter always enter boschrexroth:
 
 	ssh.exe -p 10022 boschrexroth@127.0.0.1 "mkdir -p ~/.ssh"
@@ -84,11 +86,11 @@ Please regard instructions in chapter [Important Install Scripts](install-script
 
 ### Change an App Build Environment
 
-If the environment has the State Offline a click of the Pencil icon opens the configuration page. 
+If the environment has the State Offline a click of the Pencil icon opens the configuration page.
 
 !!! important
     Once created the parameters 'Storage location' and 'Use HTTP...' cannot be changed.
 
-### Delete an App Build Environment 
+### Delete an App Build Environment
 
 If the environment is Offline you can delete it by clicking the Waste Bin icon. The whole folder will be deleted.

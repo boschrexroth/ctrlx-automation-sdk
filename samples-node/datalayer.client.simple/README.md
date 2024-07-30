@@ -1,16 +1,16 @@
 # README Node.js datalayer.client
 
-This Node.js sample reads values from ctrlX Data Layer. 
+This Node.js sample reads values from ctrlX Data Layer.
 
 ## Introduction
 
-The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console. 
+The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console.
 
 ## Description
 
-The sample __datalayer.client__ demonstrates 
+The sample __datalayer.client__ demonstrates
 
-+ How easy to create a client for ctrlX Data Layer 
++ How easy to create a client for ctrlX Data Layer
 
 + How to read values from ctrlX Data Layer nodes
 
@@ -21,6 +21,7 @@ The sample __datalayer.client__ demonstrates
 Please read the common Node.js docs [here](./../README.md), first.
 
 ## Debug and Run
+
 1. Run 'npm install' in the terminal.  
 2. Launch the app with the debugger attached by pressing __F5__.
 
@@ -34,18 +35,21 @@ Please read the common Node.js docs [here](./../README.md), first.
 6. Check the output using __Diagnostics__:
 
    + Login into your ctrlX
-   + Navigate to __Diagnostics -> Logbook__ 
+   + Navigate to __Diagnostics -> Logbook__
    + Click __Settings__ on the right top corner
    + Enable __Show system messages__
    + Navigate to __Filter -> Units__ and check your __snap.sdk-node-client-simple.app.service__
-   + Now you should the see the app output diagnostics. 
+   + Now you should the see the app output diagnostics.
    + Press __Refresh__ to update.
 
 7. If you have root permissions, you can also watch the output on any ssh console with the command:
+
     ```bash
     sudo snap logs sdk-node-client-simple.app -f | more
     ```
+
 ## Console Output
+
 ```bash
 running inside snap: false
 client remote address: tcp://boschrexroth:boschrexroth@10.0.2.2
@@ -63,17 +67,17 @@ framework/metrics/system/memused-percent:{"value":19.4,"type":"double","timestam
 
 Login into ctrlX and install the App (Apps).
 
-## Gratulations - We're finished - Let's start coding!
-
+## Gratulations - We're finished - Let's start coding
 
 ## Support
+
 ### Developer Community
 
-Please join the [Developer Community](https://developer.community.boschrexroth.com/) 
+Please join the [Developer Community](https://developer.community.boschrexroth.com/)
 
 ### SDK Forum
 
-Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/) 
+Please visit the [SDK Forum](https://developer.community.boschrexroth.com/t5/ctrlX-AUTOMATION/ct-p/dcdev_community-bunit-dcae/)
 
 ### Issues
 

@@ -1,7 +1,7 @@
 module datalayer.client
 
-go 1.21
+go 1.22
 
-require github.com/boschrexroth/ctrlx-datalayer-golang/v2 v2.2.0
+require github.com/boschrexroth/ctrlx-datalayer-golang/v2 v2.3.1
 
-require github.com/google/flatbuffers v23.5.26+incompatible // indirect
+require github.com/google/flatbuffers v24.3.25+incompatible // indirect

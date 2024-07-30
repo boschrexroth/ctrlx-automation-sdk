@@ -1,7 +1,8 @@
+# Samples .NET
+
 ![.NET](https://upload.wikimedia.org/wikipedia/commons/7/7d/Microsoft_.NET_logo.svg){width=120}
 
 ## Find out the supported samples
-
 
 ### Basic Samples
 
@@ -12,7 +13,7 @@
 
 ### Advanced Samples
 
-* [Application Data](./appdata/README.md) 
+* [Application Data](./appdata/README.md)
 * [ctrlX Data Layer Client: Browser](./datalayer.client.browse/README.md)
 * [ctrlX Data Layer Client: Bulk Read](./datalayer.client.bulkread/README.md)
 * [ctrlX Data Layer Provider: All Data Types](./datalayer.provider.alldata/README.md)

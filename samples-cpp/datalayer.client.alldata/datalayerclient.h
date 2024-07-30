@@ -17,7 +17,7 @@
 class DataLayerClient final
 {
 private:
-  std::string m_dataLayerAddressDynamic = "sdk/cpp/datalayer/provider/alldata/dynamic/";
+  std::string m_dataLayerAddressDynamic = "sdk/cpp/datalayer/provider/alldata/dynamic/cpp.client.alldata/";
   std::string m_dataLayerAddressStatic = "sdk/cpp/datalayer/provider/alldata/static/";
   std::string m_ip;
   std::string m_user;

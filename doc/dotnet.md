@@ -39,16 +39,15 @@ Check your Runtime:
 
       dotnet --list-runtimes
 
-
-### Install the Visual Studio Code Extension from Marketplace
+### Install the Visual Studio Code C# extension from Marketplace
 
 We recommend to use __Microsoft Visual Studio Code__ on your host computer as IDE - [see here](vscode.md).
 
-To develop and test .NET application for the ctrlX we have to install the C# extension in the VM.
+To develop and test .NET application for the ctrlX we have to install the __C#__ extension in the VM.
 
 * Start Visual Studio Code and connect it with the QEMU VM.
-* Select the extension icon in the left side bar and enter c#
-* Select this extension and click 'Install in SSH'
+* Select the extension icon in the left side bar and enter __c#__
+* Select the C# extension and click 'Install in SSH'
 
 ![C# extension](images/csharpextension.png)
 

@@ -82,14 +82,12 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
   flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<comm::datalayer::Reference>>> references;
   if (data.getType() == comm::datalayer::VariantType::FLATBUFFERS)
   {
-    const char* typeAddr = "types/sampleSchema/inertialValue";
-
     if (m_dynamic)
     {
       flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
       {
-          comm::datalayer::CreateReferenceDirect(builder, "readType", typeAddr),
-          comm::datalayer::CreateReferenceDirect(builder, "writeType", typeAddr),
+          comm::datalayer::CreateReferenceDirect(builder, "readType", m_typeInertialValue.c_str()),
+          comm::datalayer::CreateReferenceDirect(builder, "writeType", m_typeInertialValue.c_str()),
       };
       references = builder.CreateVectorOfSortedTables(vecReferences, 2);
     }
@@ -97,7 +95,7 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
     {
       flatbuffers::Offset<comm::datalayer::Reference> vecReferences[] =
       {
-          comm::datalayer::CreateReferenceDirect(builder, "readType", typeAddr),
+          comm::datalayer::CreateReferenceDirect(builder, "readType", m_typeInertialValue.c_str()),
       };
       references = builder.CreateVectorOfSortedTables(vecReferences, 1);
     }
@@ -242,12 +240,11 @@ void ProviderNodeAllData::registerNodes()
   createDataContainer(result, "array-of-bytes", data);
 
   // Register the FlatBuffers type
-  std::string typeAddress = "types/sampleSchema/inertialValue";
   std::string bfbs = isSnap() ? std::string(snapPath()).append("/sampleSchema.bfbs") : "bfbs/sampleSchema.bfbs";
-  result = m_provider->registerType(typeAddress, bfbs);
+  result = m_provider->registerType(m_typeInertialValue, bfbs);
   if (result != comm::datalayer::DlResult::DL_OK)
   {
-    std::cout << "ERROR registerType(): " << typeAddress << " code: 0x" << std::hex << result.value << std::endl;
+    std::cout << "ERROR registerType(): " << m_typeInertialValue << " code: 0x" << std::hex << result.value << std::endl;
     return;
   }
 

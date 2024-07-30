@@ -26,13 +26,13 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '20.12.0'
+      - NODE_VERSION: '20.15.1'
     organize:
       '${SNAPCRAFT_PART_BUILD}/dist/app': package-www/${SNAPCRAFT_PROJECT_NAME}/
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "20.12.0"
+    # npm-node-version: "20.15.1"
     plugin: nil
     override-build: |
 

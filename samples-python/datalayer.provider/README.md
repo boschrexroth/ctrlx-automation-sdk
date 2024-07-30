@@ -28,12 +28,11 @@ It can also be called from Visual Studio Code:
 
     Main menu -> Terminal --> Run Task... --> Make bfbs
 
-
 ## Implementation Description
 
 ### Definition Files
 
-#### Flatbuffers 
+#### Flatbuffers
 
 * sampleSchema.fbs: Defines a flatbuffers value (structed value). If changed compile it - see above.
 

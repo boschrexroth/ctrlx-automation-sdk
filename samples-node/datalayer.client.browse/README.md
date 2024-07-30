@@ -8,17 +8,13 @@ The sample demonstrates how to traverse the whole ctrlX Data Layer tree. The val
 
 ## Description
 
-The sample demonstrates how to browse th values from ctrlX Data Layer tree and write out the values to console. A subscription is used to get values by data change event in a deterministic publish interval. The single read is performed every 10 seconds in an endless loop.
-
-## Description
-
-The sample demonstrates 
+The sample __datalayer.client.browse__ demonstrates
 
 + How to browse nodes of the __ctrlX Data Layer__
-
-+ How to read value as json from a node 
++ How to read value as json from a node
 
 ## Debug and Run
+
 1. Run 'npm install' in the terminal.  
 2. Launch the app with the debugger attached by pressing __F5__.
 
@@ -31,15 +27,16 @@ The sample demonstrates
 5. Build and install snap as described [here](./../README.md).
 6. Check the output using __Diagnostics__:
 
-   - Login into your ctrlX
-   - Navigate to __Diagnostics -> Logbook__
-   - Click __Settings__ on the right top corner
-   - Enable __Show system messages__
-   - Navigate to __Filter -> Units__ and check your __snap.sdk-node-client-browse.app.service__
-   - Now you should the see the app output diagnostics.
-   - Press __Refresh__ to update.
+   + Login into your ctrlX
+   + Navigate to __Diagnostics -> Logbook__
+   + Click __Settings__ on the right top corner
+   + Enable __Show system messages__
+   + Navigate to __Filter -> Units__ and check your __snap.sdk-node-client-browse.app.service__
+   + Now you should the see the app output diagnostics.
+   + Press __Refresh__ to update.
 
 7. If you have root permissions, you can also watch the output on any ssh console with the command:
+
    ```bash
    sudo snap logs sdk-node-client-browse.app -f | more
    ```
@@ -81,7 +78,7 @@ Client connected: True
 
 Login into ctrlX and install the App (Apps).
 
-## Gratulations - We're finished - Let's start coding!
+## Gratulations - We're finished - Let's start coding
 
 ## Support
 

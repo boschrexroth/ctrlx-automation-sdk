@@ -8,7 +8,7 @@
 
 PROXY=n
 echo "------------------------------------------------------------------"
-echo "If you are using a HTPP/HTTPS proxy and the URLs are not already"
+echo "If you are using a HTTP/HTTPS proxy and the URLs are not already"
 echo "registered in /etc/wgetrc and /etc/environment"
 echo "answer y and enter the URLs."
 echo "If you restart this script this step must be skipped, enter N."

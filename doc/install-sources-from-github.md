@@ -1,36 +1,18 @@
 ## Introduction
 
-If you want to contribute the ctrlX AUTOMATION SDK you have to clone the github repository https://github.com/boschrexroth/ctrlx-automation-sdk.git.
-
-After this step you have to merge the runtime content of ths ctrlX AUTOMATION SDKs zip archive into this repo.
-
-These jobs can be initiated by __install-sdk-from-github.sh__ located in the ctrlX AUTOMATION SDK folder __scripts/__
-
-## Installing a Runnable Repository
-
-* Open the github site [https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/scripts](https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/scripts)
-* Download the script install-sdk-from-github.sh
-* Install the script e.g. in the home directory of your App Build Environment
-* Create a working directory e.g. ~/github
-* Change into this directory and call the script
-
-    ~/install-sdk-from-github.sh
-
-When the script is finished the ctrlX AUTOMATION SDK is installed into the directory ctrlx-automation-sdk and sample projects can be build at once.
+Follow the installation instructions of [ctrlX AUTOMATION SDK](https://github.com/boschrexroth/ctrlx-automation-sdk.git).
 
 ## Build Sample Project
 
 To build a sample project do following steps:
 
-Change directory e.g.: 
+Change directory e.g.:
 
-    cd ctrlx-automation-sdk/public/samples-cpp/datalayer.provider.all-data
+    cd ~/ctrlx-automation-sdk/samples-cpp/datalayer.provider.all-data
 
+Build snap:
 
-Build snap: 
-
-    build-snap-amd64.sh
-
+    ./build-snap-amd64.sh
 
 ## Troubleshooting
 

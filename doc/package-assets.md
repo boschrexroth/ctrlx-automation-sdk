@@ -46,7 +46,13 @@ The following example shows the procedure step-by-step.
 
 An app can provide own menu entries, use the reverse proxy infrastructure including permissions and the storage solution. This document describes the different integration points and how they work.
 
-The package-manifest is essential for the integration points. Beside the snapcraft.yaml, it is strongly recommended that the app has to provide the package manifest to be integrated into the ctrlX CORE system.
+The package-manifest is essential for the integration points. Beside the snapcraft.yaml, it is strongly recommended that the app has to provide the package manifest to be integrated into the ctrlX CORE system. The package-manifest file should follow the naming structure `<app name>.<package-manifest>.json` where `<app name>` and the `id` property in the package-manifest are both set to the `name (technical app name)` as mentioned in the [snapcraft](appdevguide_basechecks.md) documentation.
+
+The package-manifest file name should follow the pattern: 
+
+    <snap name>.package-manifest.json
+
+The _snap name_ is the _name_ of your app, configured by the _snapcraft.yaml_.
 
 ### Menus
 
@@ -536,7 +542,7 @@ The certificate store block defines whether a snap service has to handle cryptog
 The following predefined folder structure applies to every certificate store:
 
 !!! hint
-    SNAPCRAFT_PROJECT_NAME has to be replaced with the real name!
+    SNAPCRAFT_PROJECT_NAME has to be replaced with the technical app name!
 
 
 
@@ -564,7 +570,7 @@ The following predefined folder structure applies to every certificate store:
 
 ### Required apps (optional)
 
-You can prohibit the uninstallation and deactivation of your app by setting `"required": true`.
+In specific scenarios (e.g. Brandlabeling (Theming App) or as ctrlX OS Partner) you might want to prohibit the uninstallation and deactivation of your app. To do so, you can set `"required": true` in your package-manifest. This option is only allowed in specific scenarios and requires a justification as part of validation of the app.
 
 !!! example
 
@@ -686,7 +692,15 @@ Language files are used to translate text sections into different languages. Bos
 
 One aspect of the MLS is the translation of the text fields provided by the package manifest, e.g. menu items, descriptions etc. To enable the app developer to provide translations for these fields a new property `i18n` was introduced. This property behaves as a tag for the parent object that requires translation for its childs. The value is defining the name of the tag in *dot notation*.
 
-Additionally you have to provide the language files for the package-manifest in the `./package-assets/i18n` folder. Their name should follow the pattern `<app name>.package-manifest.<language tag>.json`. In case of an app "my-app" that provides german translations, this would be `my-app.package-manifest.de.json`. It is recommended to provide a language file for english and german. The structure inside the language file must reflect the tags defined including the propery you would like to translate. You can either use dot, bracket or mixed notation in the file. Arrays are not supported.
+Additionally you have to provide the language files for the package-manifest in the `./package-assets/i18n` folder. 
+
+The package-manifest language file name should follow the pattern:
+
+     <snap name>.package-manifest.<language tag>.json
+
+The _snap name_ is the _name_ of your app, configured by the _snapcraft.yaml_.
+
+In case of an app "my-app" that provides german translations, this would be `my-app.package-manifest.de.json`. It is recommended to provide a language file for english and german. The structure inside the language file must reflect the tags defined including the propery you would like to translate. You can either use dot, bracket or mixed notation in the file. Arrays are not supported.
 
 !!! Example
 

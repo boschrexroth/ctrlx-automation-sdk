@@ -2,12 +2,13 @@ This chapter describes how to setup and run App Build Environments __without usi
 
 Remember ctrlX WORKS provides all necessary actions required to deal with App Build Environments.
 
-
 This is the recommended constellation:
 
 * Despite QEMU supports both Windows and Linux we are recommending to use a Windows host operating system .
 
 * Host and guest machine should use CPU architecture amd64. Snaps for a arm64 targets are build via cross build.
+
+* The following assumes that ctrlX AUTOMATION SDK has been installed in the __/home/boschrexroth/ctrlx-automation-sdk__  (or simplified __~/ctrlx-automation-sdk__) directory.
 
 ## Installation on Windows 10 Host
 
@@ -22,7 +23,7 @@ Download and install the newest version of QEMU for Windows from [https://qemu.w
 
 ### Install Windows Hypervisor Platform
 
-We recommend to install __Windows Hypervisor Platform__: 
+We recommend to install __Windows Hypervisor Platform__:
 
 * Right click on the Windows button and select ‘Apps and Features’.
 * Select Programs and Features on the right under related settings.
@@ -33,11 +34,11 @@ We recommend to install __Windows Hypervisor Platform__:
 This feature can also be installed via command line:
 
 * Start cmd.exe as administrator (run as ...)
-* Enter 
+* Enter
 
     __dism /online /Enable-Feature /FeatureName:HypervisorPlatform /All__
 
-__Hints:__ 
+__Hints:__
 
 * After enabling Windows Hypervisor Platform a system restart may be required.
 * The feature Hyper-V is automatically disabled.
@@ -47,19 +48,16 @@ __Hints:__
 
 * If you use Virtual Box also please enable the internal Hyper-V option for each virtual machine.
 
-* If Windows Hypervisor Platform cannot be installed for any reason, we recommend using the Intel Hardware Accelerated Execution Manager (HAXM). The installation is described here [Installing HAXM](https://docs.microsoft.com/en-us/xamarin/android/get-started/installation/android-emulator/hardware-acceleration?pivots=windows#installing-haxm)
-
-
-### Install Px.exe as Local Proxy Server 
+### Install Px.exe as Local Proxy Server
 
 See [Use PX.exe as Local Proxy on a Windows Host](./px.md).
 
 ## Installation on Linux Host
 
-You have to install both QEMU and KVM on your host system. 
+You have to install both QEMU and KVM on your host system.
 Therefor you can run this script:
 
-    scripts/environment/install-qemu.sh
+    ~/ctrlx-automation-sdk/scripts/environment/install-qemu.sh
 
 ## Running the QEMU Virtual Machine
 
@@ -68,12 +66,11 @@ Therefor you can run this script:
 Do following steps:
 
 * Create a new folder (on a disk with enough free disk space)
-* Copy the content of the SDK folder __public/scripts/environment__ into your instance folder.
+* Copy the content of the SDK folder __~/ctrlx-automation-sdk/scripts/environment__ into your instance folder.
 
 __Hint:__ You can download the folder from here
 
-[ctrlx-automation-sdk/scripts/environment/](https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/scripts/environment)
-
+[~/ctrlx-automation-sdk/scripts/environment/](https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/scripts/environment)
 
 ### Start the QEMU Virtual Machine
 
@@ -114,16 +111,15 @@ During the first connection with Visual Studio Code enter: __ssh -p 10022 boschr
 It's very important to shutdown the __QEMU VM__ properly. So initiate a shutdown e.g. with this command on your VM console:
 
     sudo poweroff
-	
 
 ## QEMU Virtual Machine Networking
 
-The QEMU software represents a virtual network between the host operating system and the virtual machine. 
+The QEMU software represents a virtual network between the host operating system and the virtual machine.
 
 !!! important
     This virtual network is __only seen by the virtual machine__ NOT by the host operating system.
 
-Furthermore QEMU provides a gateway, a DNS and an optional SMB server for its VM. 
+Furthermore QEMU provides a gateway, a DNS and an optional SMB server for its VM.
 
 Per default this virtual network has the subnet 10.0.2.0/24 and from the perspective of the QEMU VM these IP addresses are assigned:
 
@@ -131,7 +127,6 @@ Per default this virtual network has the subnet 10.0.2.0/24 and from the perspec
 * 10.0.2.2  Gateway and __host operating system__
 * 10.0.2.3  DNS server
 * 10.0.2.4  SMB server
-
 
 For deeper information visit [QEMU Documentation/Networking](https://wiki.qemu.org/Documentation/Networking)
 
@@ -150,16 +145,15 @@ An emulated _AARCH64_ QEMU VM is slow - be patient.
 ### http/https Access
 
 Check the http/https access of your host to the internet - respectively to the Ubuntu sites e.g. with:
-    
+
     wget -p http://ports.ubuntu.com/ubuntu-ports
 
 If failed check your DNS settings and server(s).
-  
+
 ### Snap Store Status
 
 Check the [Snap Store Status](https://status.snapcraft.io/) if snaps cannot be installed.
-  
 
 ### WinSCP and Putty
-On your Windows host you can use [WinSCP](https://winscp.net/) combined with [PuTTy](https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html) instead of the Windows ssh and scp.
 
+On your Windows host you can use [WinSCP](https://winscp.net/) combined with [PuTTy](https://www.chiark.greenend.org.uk/~sgtatham/putty/docs.html) instead of the Windows ssh and scp.

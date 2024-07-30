@@ -50,7 +50,10 @@ protected:
   // Root path combined with 'static' or 'dynamic'
   std::string m_addressBase;
 
-  //metadata for the providerNode
+  // Path of the inertial value type
+  std::string m_typeInertialValue = "types/sdk/cpp/provider/alldata/inertialValue";
+
+  // Metadata for the providerNode
   comm::datalayer::Variant m_metadata;
 
   // Search an existing DataContainer instance for this address
