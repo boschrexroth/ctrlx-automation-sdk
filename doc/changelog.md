@@ -1,5 +1,19 @@
 ## Software Development Kit for ctrlX AUTOMATION
 
+### Version 2.6.2 <small> July, 2024</small>
+
+* Docu: Improve documentation
+* Fix flatbuffers constant in all generated c# files to 'FLATBUFFERS_24_3_25'
+* Fix download of SDK version
+* Node: Use node version 20.15.1
+
+
+### Version 2.6.1 <small> June, 2024</small>
+
+* Docu: Improve documentation
+* Some internal Bugfixes
+* Increase internal dependencies
+
 ### Version 2.6.0 <small> May, 2024</small>
 
 * Docu: Improve documentation
