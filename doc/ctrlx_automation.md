@@ -9,6 +9,4 @@ Visit the official website to get additional information:
 
 Find out fundamental informations and technical data about [ctrlX CORE](https://apps.boschrexroth.com/microsites/ctrlx-automation/en/portfolio/ctrlx-core#techdata)
 
-
 ![ctrlX CORE Picture](https://apps.boschrexroth.com/microsites/ctrlx-automation/assets/images/1/DC-AE_ctrlX_CORE_PST3315_02_1000x750px-40f3d32a.png)
-

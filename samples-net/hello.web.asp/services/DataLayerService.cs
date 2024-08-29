@@ -55,13 +55,13 @@ namespace Hello.Web.Asp.services
             // Create a remote address with the parameters according to your environment
             var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
-            // Create the client with remote connection string
+            // Create a Datalayer Client instance and connect. Automatically reconnects if the connection is interrupted.
             Client = System.Factory.CreateClient(remote);
 
             if (!Client.IsConnected)
             {
                 Console.WriteLine("Failed to connect ctrlX Data Layer client!");
-            }         
+            }
         }
 
         /// <summary>
@@ -71,7 +71,8 @@ namespace Hello.Web.Asp.services
         /// <returns>The <see cref="NodeValue"/>.</returns>
         public NodeValue ReadNodeValue(string address)
         {
-            if (Client == null) {
+            if (Client == null)
+            {
                 Console.WriteLine("Failed to read node value from ctrlX Data Layer client!");
                 return null;
             }

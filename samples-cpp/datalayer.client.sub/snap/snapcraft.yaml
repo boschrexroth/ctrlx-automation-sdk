@@ -15,6 +15,12 @@ description: |
 base: core22
 confinement: strict
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 # define how apps & services are exposed to the target operating system
 apps:
   app:
@@ -33,7 +39,6 @@ parts:
     plugin: dump
     source: ./generated/build
     stage-packages:
-      - libzmq5
       - ctrlx-datalayer
 
 # describes which interface slots are supported by defining the plugs

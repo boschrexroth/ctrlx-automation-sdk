@@ -23,7 +23,7 @@ For a lot of apps the number of 1024 maximal opened file handles is sufficient.
 If a larger number of opened file handles is required this can be done with the command `ulimit`, for example:
 
     ulimit -n 16384
-    
+
 Your app should run this command in the startup phase of your app.
 
 Therefor we recommend to:
@@ -45,7 +45,7 @@ Therefor we recommend to:
     ulimit-script:
         plugin: dump
         source: ./ulimit-snap
-    
+
     apps:
     ulimit:
         daemon: simple
@@ -57,4 +57,3 @@ Therefor we recommend to:
 In this SDK an complete example project creating a demo snap is stored under __samples-snap/ulimit__.
 
 The sample project folder also contains a README.md file with further informations.
-

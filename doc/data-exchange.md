@@ -4,13 +4,11 @@ You can use external storage (μSD card / USB device) for data exchange purpose 
 
 If a storage extension is required, please see documentation of [Storage extension](storage-extension.md).
 
-
 !!! attention
     - **The data on the external storage (μSD card / USB device) is not encrypted. Others can unplug the device and can read the data on another devices.**
     - **The storage with ext4 and fat32 format are supported (formatting can be done in ctrlX UI: Settings->Storage).**
     - **There is no exclusive access to the medium for a singe application. Your data can be overwritten by other applications.**
     - **The data written to the storage cannot be encrypted.**
-
 
 ## Requirements
 
@@ -25,12 +23,12 @@ After the storage is mounted, the path is displayed on the details page of the s
 Alternatively, the mount point is determinable in the ctrlX Data Layer (in Settings menu) under **system/resources/storage**
 
 ## Configuration steps
-To access the storage from your app (e.g. storage-test), use the **removable-media** interface as plug in the **[snapcraft.yaml](https://snapcraft.io/docs/snapcraft-yaml-reference)** of your application:
 
+To access the storage from your app (e.g. storage-test), use the **removable-media** interface as plug in the **[snapcraft.yaml](https://snapcraft.io/docs/snapcraft-yaml-reference)** of your application:
 
 !!! example
     ```yaml title="snapcraft.yaml"
-    name: storage—test # you probably want to 'snapcraft register <name>'
+    name: storage—test # you probably want to 'snapcraft register name'
     base: core20 # the base snap is the execution environment for this snap
     version: '0.1' # just for humans, typically 'i.2+git' or '1.3.2'
     summary: Single—line elevator pitch for your amazing snap # 79 char long summary
@@ -47,7 +45,7 @@ To access the storage from your app (e.g. storage-test), use the **removable-med
     parts:
         storage:
 	        plugin: dump
-		    source: storage 
+		    source: storage
     apps:
 	    storage:
 		    command: bin/storage
@@ -55,7 +53,6 @@ To access the storage from your app (e.g. storage-test), use the **removable-med
 		    plugs:
 			    - removable—media
     ```
-
 
 ## Usage
 

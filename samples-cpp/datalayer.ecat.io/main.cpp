@@ -27,7 +27,7 @@ static void signalHandler(int signal) {
   g_endProcess = true;
 }
 
-bool getMemoryMap(comm::datalayer::DatalayerSystem &datalayerSystem,
+static bool getMemoryMap(comm::datalayer::DatalayerSystem &datalayerSystem,
                   comm::datalayer::IClient *client,
                   std::shared_ptr<comm::datalayer::IMemoryUser> &memoryUser,
                   const std::string &address, uint32_t *revision,
@@ -123,7 +123,7 @@ bool getMemoryMap(comm::datalayer::DatalayerSystem &datalayerSystem,
   return true;
 }
 
-bool copyInputToOutput(
+static bool copyInputToOutput(
     comm::datalayer::DatalayerSystem &datalayerSystem,
     comm::datalayer::IClient *client,
     std::shared_ptr<comm::datalayer::IMemoryUser> &memoryUserInput,
@@ -176,7 +176,7 @@ bool copyInputToOutput(
   return true;
 }
 
-comm::datalayer::IClient *
+static comm::datalayer::IClient *
 getClientRetry(comm::datalayer::DatalayerSystem &datalayerSystem) {
 
   // ctrlX OS virtual with network adapter

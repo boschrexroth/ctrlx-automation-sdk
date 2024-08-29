@@ -39,7 +39,7 @@ protected:
   std::vector<DataContainer*> m_dataContainers;
 
   // The ctrlX Data Layer Provider instance
-  comm::datalayer::IProvider* m_provider;
+  comm::datalayer::IProvider3* m_provider;
 
   // ctrlX Data Layer root path
   std::string m_addressRoot;
@@ -70,7 +70,7 @@ protected:
 
 public:
   // Constructor
-  ProviderNodeAllData(comm::datalayer::IProvider* provider, const std::string& addressRoot, bool dynamic);
+  ProviderNodeAllData(comm::datalayer::IProvider3* provider, const std::string& addressRoot, bool dynamic);
 
   virtual ~ProviderNodeAllData() = default;
   // Create virtual nodes and register them in the ctrlX Data Layer

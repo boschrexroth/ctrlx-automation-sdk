@@ -10,17 +10,24 @@ This TPM can be used additionally to Certificate Management described in __Getti
 
 The app.deviceadmin provides a socket interface, which allows to use the TPM2. Behind the scenes, there is a "Access Broker/Ressource Manager" working, managing concurrent sessions accessing the TPM2.
 
-!!! check  "**Following steps are necessary to connect to TPM2 socket:**"
-
-    - Adapt your snapcraft.yaml
-      - Needed plugs
-        - tpm2-socket: Provides your snap with the tpm2.sock file.
-        - (Optional) system-configuration: Provides a file with environment variables for configuring your TSS, called "envvars".
-      - Provide your app with the plugs
-    - Use the TPM inside your application
-      - Compile the TSS as you need
-      - Source the envvars
-      - Use the TSS as usual ...
+!!! check  "__Following steps are necessary to connect to TPM2 socket:__"
+    <ul>
+      <li>Adapt your snapcraft.yaml</li>
+        <ul>
+          <li>Needed plugs</li>
+            <ul>
+              <li>tpm2-socket: Provides your snap with the tpm2.sock file.</li>
+              <li>(Optional) system-configuration: Provides a file with environment variables for configuring your TSS, called "envvars".</li>
+            </ul>
+          <li>Provide your app with the plugs</li>
+        </ul>
+      <li>Use the TPM inside your application</li>
+        <ul>
+          <li>Compile the TSS as you need</li>
+          <li>Source the envvars</li>
+          <li>Use the TSS as usual ...</li>
+        </ul>
+    </ul>
 
 More details on the Trusted Software Stack (TSS) below.
 
@@ -54,21 +61,15 @@ If you provide the package-certificate slots, and use the appropriate directory 
 After having everything in place, the usage of the TPM is straightforward. Instead of connecting to `/dev/tpmrm0`, use `$SNAP_DATA/tpm2-socket/tpm2.sock`. `envvars` provides you with everything needed, for example:
 
 ```bash
-export TPM2TOOLS_TCTI="cmd:nc -U $SNAP_DATA/tpm2-socket/tpm2.sock"
+  export TPM2TOOLS_TCTI="cmd:nc -U $SNAP_DATA/tpm2-socket/tpm2.sock"
 ```
 
 ### Storage Root Key (SRK)
 
-The SRK of the TPM is permanently stored at **0x81000001** provided by TPM2_SRK_PARENT environment variable.
+The SRK of the TPM is permanently stored at __0x81000001__ provided by TPM2_SRK_PARENT environment variable.
 
----
-**NOTE**
-
-Although the SRK is stored in NVRAM of TPM, it cannot be guaranteed to be always present.
-
-It must be tolerable by your application, that the SRK was replaced by another key, or even is totally absent.
-
----
+!!! note
+    Although the SRK is stored in NVRAM of TPM, it cannot be guaranteed to be always present. It must be tolerable by your application, that the SRK was replaced by another key, or even is totally absent.
 
 Following two examples or snippets, how to generate the SRK with the correct Primary-Key-Template.
 
@@ -114,15 +115,15 @@ For further details for golang, please see the [Golang example](./samples-go/tpm
 
 You will need some of the following parts of the TSS inside your snap:
 
- - tpm2-tss [https://github.com/tpm2-software/tpm2-tss](https://github.com/tpm2-software/tpm2-tss)
- - tpm2-tools [https://github.com/tpm2-software/tpm2-tools](https://github.com/tpm2-software/tpm2-tools)
- - tpm2-tss-engine [https://github.com/tpm2-software/tpm2-tss-engine](https://github.com/tpm2-software/tpm2-tss-engine) 
- - tpm2-openssl [https://github.com/tpm2-software/tpm2-openssl](https://github.com/tpm2-software/tpm2-openssl)
+- tpm2-tss [https://github.com/tpm2-software/tpm2-tss](https://github.com/tpm2-software/tpm2-tss)
+- tpm2-tools [https://github.com/tpm2-software/tpm2-tools](https://github.com/tpm2-software/tpm2-tools)
+- tpm2-tss-engine [https://github.com/tpm2-software/tpm2-tss-engine](https://github.com/tpm2-software/tpm2-tss-engine)
+- tpm2-openssl [https://github.com/tpm2-software/tpm2-openssl](https://github.com/tpm2-software/tpm2-openssl)
 
 More information and more tools:
 
- - [https://tpm2-software.github.io/](https://tpm2-software.github.io/)
- - [https://github.com/tpm2-software](https://github.com/tpm2-software)
+- [https://tpm2-software.github.io/](https://tpm2-software.github.io/)
+- [https://github.com/tpm2-software](https://github.com/tpm2-software)
 
 #### Usage with OpenSSL
 
@@ -144,12 +145,14 @@ tpm2tss-genkey -P $TPM2_SRK_PARENT -u key.pub -r key.priv key.tpm2tss
 Useful projects:
 
 Golang
- - [https://github.com/google/go-tpm](https://github.com/google/go-tpm)
- - [https://github.com/google/go-tpm-tools](https://github.com/google/go-tpm-tools)
- - [https://github.com/salrashid123/signer](https://github.com/salrashid123/signer)
+
+- [https://github.com/google/go-tpm](https://github.com/google/go-tpm)
+- [https://github.com/google/go-tpm-tools](https://github.com/google/go-tpm-tools)
+- [https://github.com/salrashid123/signer](https://github.com/salrashid123/signer)
 
 !!! attention
     If using go-tpm, you need to implement your own functions for opening, reading and writing the TPM socket, as the integrated functions close and reopen the socket with every read/write sequence. See: [https://github.com/google/go-tpm/blob/master/tpmutil/run_other.go](https://github.com/google/go-tpm/blob/master/tpmutil/run_other.go)
 
 Python
- - [https://github.com/tpm2-software/tpm2-pytss](https://github.com/tpm2-software/tpm2-pytss)
+
+- [https://github.com/tpm2-software/tpm2-pytss](https://github.com/tpm2-software/tpm2-pytss)

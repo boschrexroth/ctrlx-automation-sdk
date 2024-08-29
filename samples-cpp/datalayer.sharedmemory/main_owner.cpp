@@ -44,7 +44,7 @@ static void deleteOwnerMemory(comm::datalayer::DatalayerSystem& datalayerSystem,
 
 // Cleanup closes the memory and stop the datalayersystem
 static void cleanup(comm::datalayer::DatalayerSystem& datalayerSystem,
-                    comm::datalayer::IProvider* provider,
+                    comm::datalayer::IProvider3* provider,
                     std::shared_ptr<comm::datalayer::IMemoryOwner>& input,
                     std::shared_ptr<comm::datalayer::IMemoryOwner>& output)
 {
@@ -131,8 +131,8 @@ int main(void)
   std::shared_ptr<comm::datalayer::IMemoryOwner> input;
   std::shared_ptr<comm::datalayer::IMemoryOwner> output;
 
-  // Get provider instance
-  comm::datalayer::IProvider* provider = datalayerSystem.factory()->createProvider(DL_IPC);
+  // Create a Datalayer Provider instance and connect. Automatically reconnects if the connection is interrupted.
+  comm::datalayer::IProvider3* provider = datalayerSystem.factory4()->createProvider3(DL_IPC);
   if (provider == nullptr)
   {
     std::cout << "ERROR Creating ctrlX Data Layer provider connection." << std::endl;
@@ -148,6 +148,7 @@ int main(void)
     return 1;
   }
 
+  // Initially exit if not connected and use the restart delay of the snap.
   if (provider->isConnected() == false)
   {
     std::cout << "ERROR Provider is NOT connected." << std::endl;

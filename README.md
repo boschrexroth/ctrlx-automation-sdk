@@ -1,6 +1,6 @@
 # Software Development Kit for ctrlX AUTOMATION
 
-This is the software development kit (SDK) for [ctrlX AUTOMATION](https://www.ctrlx-automation.com). It can be used to program Apps for ctrlX CORE. 
+This is the software development kit (SDK) for [ctrlX AUTOMATION](https://www.ctrlx-automation.com). It can be used to program Apps for ctrlX CORE.
 
 Browse through the manual via: [ctrlX AUTOMATION Software Development Kit](https://boschrexroth.github.io/ctrlx-automation-sdk)
 
@@ -29,41 +29,55 @@ If your ctrlX App Build Environment is running, you can log in and install the c
 
 ## Installation of the ctrlX AUTOMATION SDK
 
-The installation of the ctrlX AUTOMATION SDK takes place in three steps:
-
-1. Install required Debian packages.
-2. Install [snapcraft](https://snapcraft.io/snapcraft)
-3. Clone the ctrlX AUTOMATION SDK github repo and install the content of the ctrlX AUTOMATION SDK zip file
-
 __These installation steps are required on both an App Build Environment and an Ubuntu Server or Desktop System.__
-
-### Install required Debian packages
-
-Start a console session and enter these commands sequentially:
-
-	wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/install-required-packages.sh
-	chmod a+x *.sh
-	./install-required-packages.sh
-
-### Install snapcraft
-
-Start a console session and enter these commands sequentially:
-
-	wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/install-snapcraft.sh
-	chmod a+x *.sh
-	./install-snapcraft.sh
 
 ### Clone and Install the ctrlX AUTOMATION SDK
 
-Start a console session, change to your destination directory and enter these commands sequentially:
+Start a console session, change to your destination directory and enter:
 
-	wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh
-	chmod a+x *.sh
-	./clone-install-sdk.sh
+	wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh && chmod a+x *.sh && ./clone-install-sdk.sh
 
-As a result, your local copy of the github repo is stored within the directory ctrlx-automation-sdk/
+As a result, your local copy of the github repo is stored within the directory __ctrlx-automation-sdk/__
 
-Now you are able to build the sample projects or develop Apps with own projects.
+### Install required Debian packages
+
+Stay in the directory and enter:
+
+	ctrlx-automation-sdk/scripts/install-required-packages.sh
+
+### Install snapcraft
+
+Stay in the directory and enter:
+
+	ctrlx-automation-sdk/scripts/install-snapcraft.sh
+
+### Install ctrlx-datalayer Debian package
+
+Stay in the directory and enter:
+
+	ctrlx-automation-sdk/scripts/install-ctrlx-datalayer.sh ctrlx-automation-sdk/deb
+
+### Building Sample Projects
+
+Now you are able to build the C++ and Python sample projects.
+
+To build sample projects in other programming languages further installation steps are required.
+
+Change to the directory `ctrlx-automation-sdk/scripts` and start the according install script.
+
+For go samples:
+
+	install-go.sh
+
+For .NET samples:
+
+	install-dotnet-sdk.sh
+
+For nodejs samples:
+
+	install-nodejs-npm.sh
+
+Overview of all scripts: [Description of the scripts](scripts/README.md)
 
 ## License
 

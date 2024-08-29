@@ -1,5 +1,3 @@
-# Document Overview
-
 This document is part of the Bosch Rexroth ctrlX OS App Development Guideline, and describes which interfaces (port, plugs and slots) are reserved and may not be used by a ctrlX OS App
 
 Please refer to the App Development Guide for further information.
@@ -8,9 +6,7 @@ The content of this document may be subject of change in future.
 
 # 1. Reserved slots and plugs
 
-
-
-The following operating system interfaces are denied or restricted for usage. See also https://snapcraft.io/docs/supported-interfaces.
+The following operating system interfaces are denied or restricted for usage. See also <https://snapcraft.io/docs/supported-interfaces>.
 
 | Interface | Direction | Parameters | Exceptions | Reason |
 | --- | --- | --- |--- | --- |
@@ -92,9 +88,8 @@ The following operating system interfaces are denied or restricted for usage. Se
 |tpm|Plug|null|null|tpm allows access to the Trusted Platform Module (tpm) device, /dev/tpm0, and to the in-kernel resource manager, /dev/tpmrm0, on recent kernels (at least v4.12)|
 |uhid|Plug|null|null|Enables the creation of kernel USB Human Interface Devices (HID) from user-space, via /dev/uhid , giving privileged access to HID transport drivers|
 |uinput|Plug|null|null|Super privileged interface to allows write access to /dev/uinput on the host system for emulating input devices from userspace that can send input events|
- 
 
- # 2. Blocked ports
+# 2. Blocked ports
 
 The following ports are blocked and cannot be used by an app.
 
@@ -105,5 +100,5 @@ The following ports are blocked and cannot be used by an app.
 
  ****
 **Copyright**
-© Bosch Rexroth AG 2023 - 
+© Bosch Rexroth AG 2024 -
 This document, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch

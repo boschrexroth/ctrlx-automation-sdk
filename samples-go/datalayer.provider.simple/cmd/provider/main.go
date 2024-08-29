@@ -35,6 +35,7 @@ func main() {
 
 // run provider and its nodes
 func runProvider(system *datalayer.System, con string) {
+	// Create a Datalayer Provider instance and connect. Automatically reconnects if the connection is interrupted.
 	provider := system.Factory().CreateProvider(con)
 	defer datalayer.DeleteProvider(provider)
 

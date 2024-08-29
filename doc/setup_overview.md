@@ -13,4 +13,3 @@ To develop ctrlX CORE applications with the ctrlX AUTOMATION SDK we need a so ca
 * [Native Ubuntu](setup_ubuntu.md) shows how to setup a bare-metal machine to use it as App Build Environment.
 
 * [Install Sources from github](install-sources-from-github.md) describes how to download and install the github repository __ctrlX AUTOMATION Software Development Kit__ [https://github.com/boschrexroth/ctrlx-automation-sdk](https://github.com/boschrexroth/ctrlx-automation-sdk)
-

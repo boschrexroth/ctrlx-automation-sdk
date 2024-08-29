@@ -13,5 +13,5 @@ then
 fi
 
 mkdir -p bfbs
-../../bin/oss.flatbuffers/${UDIR}/flatc -o bfbs/ -b --schema sampleSchema.fbs
-../../bin/oss.flatbuffers/${UDIR}/flatc --python --gen-object-api --gen-mutable sampleSchema.fbs
+../../bin/oss.flatbuffers/${UDIR}/flatc -o bfbs/ --schema --binary --bfbs-comments --bfbs-builtins --no-warnings sampleSchema.fbs
+../../bin/oss.flatbuffers/${UDIR}/flatc --python --gen-object-api --gen-mutable --no-warnings sampleSchema.fbs

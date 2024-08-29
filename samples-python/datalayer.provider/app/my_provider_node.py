@@ -41,6 +41,7 @@ class MyProviderNode:
         self._metadata = self.create_metadata()
 
     def create_metadata(self) -> Variant:
+        """create_metadata"""
         builder = MetadataBuilder(allowed=AllowedOperation.READ
                                   | AllowedOperation.WRITE)
         builder = builder.set_display_name(self._nodeAddress)

@@ -7,8 +7,12 @@ description: |
   This app demonstrates how you can use the storage extension.
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
+
 architectures:
-  - all
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
 
 parts:
   sources:
@@ -18,15 +22,15 @@ parts:
     plugin: nil
     source: backup
     override-build: |
-      snapcraftctl build
-      mkdir -p $SNAPCRAFT_PART_INSTALL/meta
-      cp $SNAPCRAFT_PART_SRC/snapshots.yaml $SNAPCRAFT_PART_INSTALL/meta
+      craftctl default
+      mkdir -p $CRAFT_PART_INSTALL/meta
+      cp $CRAFT_PART_SRC/snapshots.yaml $CRAFT_PART_INSTALL/meta
 plugs:
   storage-extension-mnt:
     interface: mount-control
     mount:
-      - what: /writable/system-data/var/run/mnt/storage-extension/${SNAPCRAFT_PROJECT_NAME}
-        where: $SNAP_COMMON/storage-extension/${SNAPCRAFT_PROJECT_NAME}
+      - what: /writable/system-data/var/run/mnt/storage-extension/${CRAFT_PROJECT_NAME}
+        where: $SNAP_COMMON/storage-extension/${CRAFT_PROJECT_NAME}
         options:
           - rw
           - bind

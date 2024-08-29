@@ -68,7 +68,7 @@ You might want to update your distribution and install essential packages for de
 
 ### Setup Standard Packages
 
-In QEMU based VMs created by ctrlX WORKS, required packages are installed automatically. 
+In QEMU based VMs created by ctrlX WORKS, required packages are installed automatically.
 
 Here you have to install them manually:
 
@@ -77,8 +77,7 @@ Here you have to install them manually:
     packages:
         - zip
         - unzip
-        
- 
+
 2. Copy the package list, remove the '-' character and create a comand line e.g.
 
     sudo apt-get install -y zip unzip ...
@@ -92,7 +91,7 @@ Here you have to install them manually:
 
 The according commands are also available in [cloud-config](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config).
 
-Therefor copy the commands under section runcmd: subtitle '# https://wiki.ubuntu.com/MultiarchSpec' and '# Qualify architecture'
+Therefor copy the commands under section runcmd: subtitle '# <https://wiki.ubuntu.com/MultiarchSpec>' and '# Qualify architecture'
 
     sudo dpkg --add-architecture arm64
     ...

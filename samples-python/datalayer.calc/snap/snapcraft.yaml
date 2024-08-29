@@ -7,6 +7,12 @@ base: core22
 confinement: strict
 grade: stable
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 apps:
   client:
     command: bin/main.py
@@ -20,8 +26,8 @@ parts:
     plugin: python
     source: .
     stage-packages:
-      - libzmq5
       - ctrlx-datalayer
+      - libzmq5
 
 # describes which interface slots are supported by defining the plugs
 plugs:

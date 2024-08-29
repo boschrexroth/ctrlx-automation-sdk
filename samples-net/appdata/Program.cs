@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: MIT
  */
 
+using Samples.AppData;
 using System;
 using System.Threading.Tasks;
-using Samples.AppData;
 
 // Create TaskCompletionSource to wait for process termination  
 var tcs = new TaskCompletionSource();
@@ -26,7 +26,7 @@ var myApplication = new MyApplication();
 //Start the application
 if (!myApplication.Start())
 {
-    //if not we exit and retry after app daemon restart-delay (see snapcraft.yaml)
+    // Initially exit and retry after app restart-delay (see snapcraft.yaml)
     Console.WriteLine("Restarting app after restart-delay of 10 s ...");
     return;
 }

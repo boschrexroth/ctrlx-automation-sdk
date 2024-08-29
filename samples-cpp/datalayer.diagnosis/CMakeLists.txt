@@ -152,8 +152,8 @@ COMMAND make install
 if (BUILD_SNAP)
   add_custom_command( TARGET ${TARGET_PROJECT_NAME}
     POST_BUILD
-    COMMAND snapcraft clean --destructive-mode
-    COMMAND snapcraft --enable-experimental-target-arch --target-arch=${SNAP_ARCH} --destructive-mode
+    COMMAND sudo snapcraft clean
+    COMMAND sudo snapcraft --build-for=${SNAP_ARCH} --verbosity=verbose
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
   )
 endif(BUILD_SNAP)

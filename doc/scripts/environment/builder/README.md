@@ -6,7 +6,7 @@ This folder contains bat and image files to launch an App Build Environment with
 An App Build Environment is a Ubuntu Server guest operating running within a [QEMU](https://www.qemu.org/) virtual machine.
 
 The installation and configuration of the Ubuntu Server guest operating system is automatically done
-on first boot by the build-in Ubuntu Cloud-Init Technology. For this purpose, a so-called user image file is specified when the App Build Environment is started. 
+on first boot by the build-in Ubuntu Cloud-Init Technology. For this purpose, a so-called user image file is specified when the App Build Environment is started.
 This file contains the compiled information of a cloud-config file which is processed by the cloud-init service.
 
 For more informations see [cloud-init](https://cloud-init.io/)
@@ -21,14 +21,14 @@ ctrlX WORKS copies a set of files into the specific destination directory. Depen
 
 ### Starting an App Build Environment for the first time
 
-An new created App Build Environment instance can be launched by clicking the '>' icon in ctrlX WORKS. 
+An new created App Build Environment instance can be launched by clicking the '>' icon in ctrlX WORKS.
 
-Each time ctrlX WORKS generates the batch file start.bat. 
+Each time ctrlX WORKS generates the batch file start.bat.
 Here the Windows environment variable PATH is extended so that the ctrlX WORKS internal QEMU installation will be used. Then launch.bat is called.
 
 launch.bat downloads the Ubuntu Server image, creates a snapshot file (.qcow2) and launches the QEMU executable. The image file remains unchanged, all changes are saved in the snapshot file.
 
-During startup the App Build Environment will be configured by the Ubuntu Cloud-Init Technology. Therefor the cloud-config file contained in the user-data-image file is used. 
+During startup the App Build Environment will be configured by the Ubuntu Cloud-Init Technology. Therefor the cloud-config file contained in the user-data-image file is used.
 
 In this initialization phase login is not possible.
 
@@ -36,13 +36,13 @@ When this phase is finished, the guest operating system will automatically shut 
 
 ### Restarting an App Build Environment
 
-The restart is initiated by clicking the '>' icon on the ctrlX WORKS UI. 
+The restart is initiated by clicking the '>' icon on the ctrlX WORKS UI.
 
-start.bat is called and the App Build Environment will start directly into the run phase. 
+start.bat is called and the App Build Environment will start directly into the run phase.
 
 Logging in - directly or via SSH - is enabled.
 
-### Logging in 
+### Logging in
 
 We recommend to login in via SSH - using a RSA public / private key pair.
 
@@ -94,7 +94,7 @@ The virtual size is increased by 10GB.
 
 You can repeat this procudure if needed.
 
-## Windows Helper File wget.bat  
+## Windows Helper File wget.bat
 
 This batch file is used to download the Ubuntu Server image. Internally is uses the Windows PowerShell.
 

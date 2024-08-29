@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.2",
-    "@angular/cli": "^17.3.2",
-    "@angular/compiler-cli": "^17.3.2",
-    "@types/node": "^20.12.2",
+    "@angular-devkit/build-angular": "^17.3.8",
+    "@angular/cli": "^17.3.8",
+    "@angular/compiler-cli": "^17.3.12",
+    "@types/node": "^20.14.14",
     "ngx-translate-extract": "^1.0.0",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "@angular/animations": "^17.1.0",
@@ -16,16 +16,16 @@
     "@angular/common": "^17.1.0",
     "@angular/compiler": "^17.1.0",
     "@angular/core": "^17.1.0",
-    "@angular/forms": "^17.3.2",
-    "@angular/material": "^17.3.2",
+    "@angular/forms": "^17.3.12",
+    "@angular/material": "^17.3.10",
     "@angular/platform-browser": "^17.1.0",
-    "@angular/platform-browser-dynamic": "^17.3.2",
+    "@angular/platform-browser-dynamic": "^17.3.12",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "ngx-translate-multi-http-loader": "^17.0.0",
     "snap": "^1.1.0",
-    "tslib": "^2.6.2",
-    "zone.js": "^0.14.4"
+    "tslib": "^2.6.3",
+    "zone.js": "^0.14.10"
   },
   "scripts": {
     "ng": "ng",

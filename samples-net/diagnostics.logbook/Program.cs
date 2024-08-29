@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: MIT
  */
 
+using Samples.Diagnostics.Logbook;
 using System;
 using System.Threading.Tasks;
-using Samples.Diagnostics.Logbook;
 
 // Create TaskCompletionSource to wait for process termination  
 var tcs = new TaskCompletionSource();

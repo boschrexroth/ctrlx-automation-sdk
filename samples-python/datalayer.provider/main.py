@@ -159,6 +159,7 @@ def provide_string(provider: ctrlxdatalayer.provider, nodeAddress: str,
 
 def provide_node(provider: ctrlxdatalayer.provider, nodeAddress: str,
                  typeAddress: str, value: Variant):
+    """provide_node"""
     node = MyProviderNode(provider, nodeAddress, typeAddress, value)
     result = node.register_node()
     if result != ctrlxdatalayer.variant.Result.OK:

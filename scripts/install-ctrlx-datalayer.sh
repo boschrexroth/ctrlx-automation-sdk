@@ -17,6 +17,9 @@ dpkg-scanpackages -m . >Packages
 full_path=$(pwd)
 echo "deb [trusted=yes] file:${full_path} ./" | sudo tee /etc/apt/sources.list.d/ctrlx-automation.list
 
+# Fix the APT Error Download that is performed unsandboxed as root as
+echo "APT::Sandbox::User \"root\";" | sudo tee /etc/apt/apt.conf.d/10sandbox 
+
 sudo apt-get update
 
 # Install newest ctrlx-datalayer package

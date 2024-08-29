@@ -23,8 +23,8 @@ DataLayerClientSub::~DataLayerClientSub()
 
 comm::datalayer::DlResult DataLayerClientSub::connect(const std::string& clientConnection)
 {
-  std::cout << "_datalayerSystem.factory()->createClient2: " << clientConnection << std::endl;
-  m_datalayerClient = m_datalayerSystem.factory()->createClient2(clientConnection);
+  std::cout << "_datalayerSystem.factory()->createClient3: " << clientConnection << std::endl;
+  m_datalayerClient = m_datalayerSystem.factory()->createClient3(clientConnection);
   if (m_datalayerClient == nullptr)
   {
     std::cout << "ERROR: Could not create datalayer client instance" << std::endl;

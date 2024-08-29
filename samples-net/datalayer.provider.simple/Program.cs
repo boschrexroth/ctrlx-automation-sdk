@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: MIT
  */
 
-using System;
-using System.IO;
-using System.Threading.Tasks;
 using Datalayer;
 using Google.FlatBuffers;
 using sample.schema;
 using Samples.Datalayer.Provider;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 // Please define the node root folder in ctrlX Data Layer
 const string root = "sdk/net/provider/simple";
@@ -37,7 +37,7 @@ Console.WriteLine("ctrlX Data Layer system started.");
 // Create a remote address with the parameters according to your environment
 var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
-// Create the provider with remote connection string
+// Create a Datalayer Provider instance and connect. Automatically reconnects if the connection is interrupted.
 using var provider = system.Factory.CreateProvider(remote);
 Console.WriteLine("ctrlX Data Layer provider created.");
 
@@ -81,7 +81,7 @@ Console.WriteLine(value: $"Provider started: {startResult}");
 // Check if provider is connected
 if (!provider.IsConnected)
 {
-    // We exit and retry after app daemon restart-delay (see snapcraft.yaml)
+    // Initially exit and retry after app restart-delay (see snapcraft.yaml)
     Console.WriteLine($"Provider is not connected -> exit");
     return;
 }

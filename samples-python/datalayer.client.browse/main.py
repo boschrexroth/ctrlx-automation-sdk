@@ -44,7 +44,7 @@ def run():
         with (
             datalayer_client
         ):  # datalayer_client is closed automatically when leaving with block
-            # If not connected exit and retry with app daemon restart-delay (see snapcraft.yaml)
+            # If not connected exit and retry with app restart-delay (see snapcraft.yaml)
             if datalayer_client.is_connected() is False:
                 print(
                     "ERROR Not connected to",

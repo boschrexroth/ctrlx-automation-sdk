@@ -5,13 +5,16 @@ version: 1.0.0
 summary: Ulimit demo snap for ctrlX CORE.
 description: |
   This app demonstrates how you can increase the maximum number of open files with the command 'ulimit -n 16384' called by a command-chain wrapper.
-architectures:
-  - arm64
-  - amd64
- 
+
 grade: stable
 confinement: strict
  
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 parts:
   ulimit-script:
     plugin: dump

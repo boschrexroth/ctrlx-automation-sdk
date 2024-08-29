@@ -120,7 +120,7 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
   return variant;
 }
 
-ProviderNodeAllData::ProviderNodeAllData(comm::datalayer::IProvider* provider, const std::string& addressRoot, bool dynamic)
+ProviderNodeAllData::ProviderNodeAllData(comm::datalayer::IProvider3* provider, const std::string& addressRoot, bool dynamic)
   : m_provider(provider)
   , m_addressRoot(addressRoot)
   , m_dynamic(dynamic)

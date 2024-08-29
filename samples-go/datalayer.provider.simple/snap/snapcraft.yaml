@@ -9,6 +9,12 @@ grade: stable
 base: core22
 type: app
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 apps:
   provider:
     command: bin/provider
@@ -26,7 +32,6 @@ parts:
     source: .
     build-snaps: ['go/1.22/stable']
     stage-packages:
-      - libzmq5
       - ctrlx-datalayer
     build-packages:
       - on amd64:
@@ -38,7 +43,7 @@ parts:
           - libzmq3-dev:arm64
         #- pkg-config:arm64
     override-build: |
-      case $SNAPCRAFT_ARCH_TRIPLET in
+      case $CRAFT_ARCH_TRIPLET in
         aarch64-linux-gnu)
           export GOARCH=arm64
           export GOARM=7

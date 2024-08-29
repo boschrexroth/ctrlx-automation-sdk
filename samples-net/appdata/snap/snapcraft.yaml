@@ -15,6 +15,12 @@ description: |
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 apps:
   app:
     command: appdata
@@ -34,13 +40,13 @@ apps:
 parts:
   app:
     plugin: dump
-    source: ./publish/${SNAPCRAFT_TARGET_ARCH}
+    source: ./publish
 
   configs:
     source: ./configs
     plugin: dump
     organize:
-      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
+      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
 
 slots:
   package-assets:
@@ -48,13 +54,13 @@ slots:
     content: package-assets
     source:
       read:
-        - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP/package-assets/${CRAFT_PROJECT_NAME}
   package-run:
     interface: content
     content: package-run
     source:
       write:
-        - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP_DATA/package-run/${CRAFT_PROJECT_NAME}
 
 # describes which interface slots are supported by defining the plugs
 plugs:

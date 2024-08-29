@@ -1,4 +1,4 @@
-# Logging 
+# Logging
 
 ## Introduction
 
@@ -21,15 +21,13 @@ The interface to journald depends from the programming language. But for all the
 
 __Be carefull with level EMERGENCY: Messages with this level are sent to all consoles!__
 
-
 ## Logging Samples in the SDK
 
 These folders of the ctrlX AUTOMATION SDK contain logging samples for different programming languages:
 
 - samples-cpp/diagnostics.logbook
 - samples-net/diagnostics.logbook
-- samples-python/python.logbook 
-
+- samples-python/python.logbook
 
 ## Support
 
@@ -39,8 +37,10 @@ ___
 
 ## License
 
+```code
 /*
  * SPDX-FileCopyrightText: Bosch Rexroth AG
  *
  * SPDX-License-Identifier: MIT
  */
+```

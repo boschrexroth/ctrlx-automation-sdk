@@ -27,7 +27,7 @@ func main() {
 	// Create a remote string with the parameters according to your environment (see remote.go in package utils)
 	remote := utils.NewRemote().Ip("10.0.2.2").SslPort(8443).Build()
 
-	// Create client
+	// Create a Datalayer Client instance and connect. Automatically reconnects if the connection is interrupted.
 	c := system.Factory().CreateClient(remote)
 
 	// Create a client wrapper

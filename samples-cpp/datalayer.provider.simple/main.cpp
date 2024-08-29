@@ -163,7 +163,7 @@ int main()
 
   std::cout << "INFO Register '" << dlBasePath << "' with these sub nodes 'myFlatbuffer', 'myFloat', 'myString' and 'myInt64'" << std::endl;
 
-  comm::datalayer::IProvider* provider = getProvider(datalayerSystem); // ctrlX CORE (virtual)
+  comm::datalayer::IProvider3* provider = getProvider(datalayerSystem); // ctrlX CORE (virtual)
   if (provider == nullptr)
   {
     provider = getProvider(datalayerSystem, "10.0.2.2", "boschrexroth", "boschrexroth", 8443); // ctrlX COREvirtual with port forwarding

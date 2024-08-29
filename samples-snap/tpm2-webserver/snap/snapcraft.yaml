@@ -9,6 +9,12 @@ description: |
 grade: devel
 confinement: strict
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 plugs:
   tpm2-socket:
     interface: content
@@ -24,24 +30,24 @@ slots:
     content: package-certificates
     source:
       write:
-      - $SNAP_COMMON/package-certificates/${SNAPCRAFT_PROJECT_NAME}
+      - $SNAP_COMMON/package-certificates/${CRAFT_PROJECT_NAME}
   package-assets:
     interface: content
     content: package-assets
     source:
       read:
-      - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+      - $SNAP/package-assets/${CRAFT_PROJECT_NAME}
 
 parts:
   configs:
     plugin: dump
     source: ./configs
     organize:
-      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
+      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
   tpm2-tools:
     plugin: autotools
     build-environment:
-      - LDFLAGS: "$LDFLAGS -Wl,-rpath-link,$SNAPCRAFT_STAGE/lib"
+      - LDFLAGS: "$LDFLAGS -Wl,-rpath-link,$CRAFT_STAGE/lib"
     source: https://github.com/tpm2-software/tpm2-tools
     source-type: git
     source-tag: "5.2"
@@ -73,8 +79,8 @@ parts:
       - tpm2-tss
     override-build: |
       ACLOCAL_PATH="/usr/share/gnulib/m4" ./bootstrap
-      ./configure --prefix=$SNAPCRAFT_PART_INSTALL/usr/ --host=$SNAPCRAFT_ARCH_TRIPLET
-      #snapcraftctl build
+      ./configure --prefix=$CRAFT_PART_INSTALL/usr/ --host=$CRAFT_ARCH_TRIPLET
+      #craftctl default
       # Run all tests shipped by default
       make check -j$(nproc)
       make install
@@ -111,19 +117,19 @@ parts:
       - -include
     override-build: |
       ACLOCAL_PATH="/usr/share/gnulib/m4" ./bootstrap #https://github.com/tpm2-software/tpm2-tss/commit/d1106347ef2f8e7296f1bd6af7aa6e046f6a5a38
-      ./configure --prefix=$SNAPCRAFT_PART_INSTALL/usr/ --host=$SNAPCRAFT_ARCH_TRIPLET
+      ./configure --prefix=$CRAFT_PART_INSTALL/usr/ --host=$CRAFT_ARCH_TRIPLET
       make check -j$(nproc) || cat ./test-suite.log
       make install
-      #chmod g-s $SNAPCRAFT_PART_INSTALL/usr/var/run/tpm2-tss/eventlog
-      #chmod g-s $SNAPCRAFT_PART_INSTALL/usr/var/lib/tpm2-tss/system/keystore #https://github.com/tpm2-software/tpm2-tss/commit/811e451c9
+      #chmod g-s $CRAFT_PART_INSTALL/usr/var/run/tpm2-tss/eventlog
+      #chmod g-s $CRAFT_PART_INSTALL/usr/var/lib/tpm2-tss/system/keystore #https://github.com/tpm2-software/tpm2-tss/commit/811e451c9
 
   tpm2-tss-engine:
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/usr
-      - --host=$SNAPCRAFT_ARCH_TRIPLET
+      - --host=$CRAFT_ARCH_TRIPLET
     build-environment:
-      - LDFLAGS: "$LDFLAGS -Wl,-rpath-link,$SNAPCRAFT_STAGE/lib"
+      - LDFLAGS: "$LDFLAGS -Wl,-rpath-link,$CRAFT_STAGE/lib"
     source: https://github.com/tpm2-software/tpm2-tss-engine
     source-type: git
     source-tag: v1.1.0

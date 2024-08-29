@@ -17,7 +17,13 @@ namespace Samples.Datalayer.Provider.Alldata
     /// <summary>
     /// Represents a node with an address and a value.
     /// </summary>
-    internal class Node
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="Node"/> class.
+    /// </remarks>
+    /// <param name="address">The address<see cref="string"/>.</param>
+    /// <param name="value">The value<see cref="IVariant"/>.</param>
+    /// <param name="metadata">The metadata<see cref="IVariant"/>.</param>
+    internal class Node(string address, IVariant value, IVariant metadata)
     {
 
         // Please define node folder names in ctrlX Data Layer
@@ -27,30 +33,17 @@ namespace Samples.Datalayer.Provider.Alldata
         /// <summary>
         /// Gets the Address.
         /// </summary>
-        public string Address { get; }
+        public string Address { get; } = address;
 
         /// <summary>
         /// Gets or sets the Value.
         /// </summary>
-        public IVariant Value { get; set; }
+        public IVariant Value { get; set; } = value;
 
         /// <summary>
         /// Gets the Metadata.
         /// </summary>
-        public IVariant Metadata { get; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Node"/> class.
-        /// </summary>
-        /// <param name="address">The address<see cref="string"/>.</param>
-        /// <param name="value">The value<see cref="IVariant"/>.</param>
-        /// <param name="metadata">The metadata<see cref="IVariant"/>.</param>
-        public Node(string address, IVariant value, IVariant metadata)
-        {
-            Address = address;
-            Value = value;
-            Metadata = metadata;
-        }
+        public IVariant Metadata { get; } = metadata;
 
         /// <summary>
         /// Changes the value.
@@ -181,7 +174,7 @@ namespace Samples.Datalayer.Provider.Alldata
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Unknown DataType");
             }
         }
 
@@ -194,8 +187,8 @@ namespace Samples.Datalayer.Provider.Alldata
         private static string IncrementString(string text, string separator)
         {
             var separatorIndex = text.IndexOf(separator, StringComparison.Ordinal);
-            var prefix = text.Substring(0, separatorIndex);
-            var postfix = text.Substring(separatorIndex + 1);
+            var prefix = text[..separatorIndex];
+            var postfix = text[(separatorIndex + 1)..];
             var number = uint.Parse(postfix);
 
             return $"{prefix}{separator}{++number}";

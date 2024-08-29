@@ -118,7 +118,7 @@ def get_provider(system: ctrlxdatalayer.system.System,
     connection_string = get_connection_string(
         ip, user, password, ssl_port)
     provider = system.factory().create_provider(connection_string)
-    if (provider.start() == ctrlxdatalayer.variant.Result.OK):
+    if provider.start() == ctrlxdatalayer.variant.Result.OK:
          return provider, connection_string
      
     provider.close()

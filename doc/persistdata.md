@@ -60,27 +60,29 @@ plugs:
 
 The `$SNAP_COMMON/solution` directory contains an `activeConfiguration` symlink. Use this symlink to get the path to the appdata directory which contains the currently active app data: `$SNAP_COMMON/solutions/activeConfiguration` → `$SNAP_COMMON/solutions/DefaultSolution/configurations/appdata/`
 
->**Note:**
->
->Your app might start before the **active-solution** interface is connected by the system. You can handle this scenario in two ways:
->
->- Use an entry-point script and check status of the **active-solution** interface using snapctl is-connected active-solution; e.g. create a script which has the following content and is defined in your snapcraft.yaml as the command to execute:
->
->       #!/bin/bash
-> 
->        while ! snapctl is-connected active-solution
->        do
->            sleep 5
->        done
->        
->        $SNAP/bin/<your executable>
->
->- Check existence of the folder `$SNAP_COMMON/solutions/activeConfiguration` in your application logic
->
->In a development environment, you can check the connection of the **active-solution interface** by
->
->- calling *snap connections* and checking whether there is an entry with > **interface content[solutions]** for the **plug \<your app name\>:active-solution** and **slot rexroth-solutions:active-solution**
->- running a shell in the context of your app and checking the content of the folder `$SNAP_COMMON/solutions` which must contain a folder **DefaultSolution** and the two symlinks **activeSolution** and **activeConfiguration**. The shell can be started with *snap run --shell \<your app name\>.\<your app command\>*
+**Note:**
+
+Your app might start before the **active-solution** interface is connected by the system. You can handle this scenario in two ways:
+
+- Use an entry-point script and check status of the **active-solution** interface using snapctl is-connected active-solution; e.g. create a script which has the following content and is defined in your snapcraft.yaml as the command to execute:
+
+```bash
+  #!/bin/bash
+
+    while ! snapctl is-connected active-solution
+    do
+        sleep 5
+    done
+
+    $SNAP/bin/<your executable>
+```
+
+- Check existence of the folder `$SNAP_COMMON/solutions/activeConfiguration` in your application logic
+
+In a development environment, you can check the connection of the **active-solution interface** by
+
+- calling *snap connections* and checking whether there is an entry with **interface content[solutions]** for the **plug \<your app name\>:active-solution** and **slot rexroth-solutions:active-solution**
+- running a shell in the context of your app and checking the content of the folder `$SNAP_COMMON/solutions` which must contain a folder **DefaultSolution** and the two symlinks **activeSolution** and **activeConfiguration**. The shell can be started with *snap run --shell \<your app name\>.\<your app command\>*
 
 ## 3 Specify your app directories<a name="specify"></a>
 
@@ -111,7 +113,7 @@ You should also explicitly declare ownership of your app directories in your pac
 
 - **icon**: The app icon to display in the "Manage app data" content view (should be consistent with icon used e.g. in sidebar menu); if omitted or empty, no icon is displayed in the content view
 
-- **copyOnLoad** (default: *false*): Set *true* to instruct the Solutions app to copy the data from your app directory 
+- **copyOnLoad** (default: *false*): Set *true* to instruct the Solutions app to copy the data from your app directory
 in the archive to the active configuration on load; omit (or set *false*) to enable custom "smart loading"; see section
 "From copying to smart loading" for details
 
@@ -122,7 +124,7 @@ in the archive to the active configuration on load; omit (or set *false*) to ena
 against changes through the WebDAV interface and the Solutions UI by default. Set *false* to allow changes for a
 directory and its subdirectories, which requires that your app can detect and handle potential changes appropriately.
 Since XCR-V-0112.
-  
+
   > Since XCR-V-0120, the default value of the writeProtected attribute is *true* in order to protect app directories
   > against unintended changes.
 
@@ -134,8 +136,8 @@ Configuration contents should generally have the following properties:
 
 We recommend JSON as the file format where possible, as it supports these properties. You may also consider to provide corresponding JSON-schema files to enable guidance and validation. In any case, JSON files should contain a root object (NOT an array) to enable schema references and extendibility.
 
-> **Note:**
-> An app may specify "private files" inside its appdata directories in order to exclude them from save and load operations. See appendix "App-private files" for details.
+!!! Note
+    An app may specify "private files" inside its appdata directories in order to exclude them from save and load operations. See appendix "App-private files" for details.
 
 ## 4 Register for saving and loading<a name="register"></a>
 
@@ -220,7 +222,7 @@ A more detailed description of the load phases and example sequences can be foun
 
 The following information is sent as request parameters to all participants in all save and load phases:
 
-- **configurationPath**: the directory of the configuration to be loaded, starting from the solutions directory, e.g. "solutions/DefaultSolution/configurations/<configuration>"; in case of a save operation, the configuration path should be ignored, as the target of saving is always the active configuration (appdata directory)
+- **configurationPath**: the directory of the configuration to be loaded, starting from the solutions directory, e.g. "solutions/DefaultSolution/configurations/`<configuration>`"; in case of a save operation, the configuration path should be ignored, as the target of saving is always the active configuration (appdata directory)
 - **id**: a random code which identifies the instance of save or load operation, e.g. "282xy5"; also used to find corresponding messages in the Logbook; should be included in the dynamic description of diagnostic messages and trace messages by all participants; convention: put in square brackets at the end of diagnostic messages and trace messages; see section "Diagnostic messages" for details
 - **phase**: specifies the current processing phase of a save or load operation; one of the phases described in section "Processing sequences"; e.g., "load"
 
@@ -312,21 +314,26 @@ The following example shows how a set of copyOnLoad declarations would be applie
 
 **Example app directory declarations (pseudo code):**
 
+```code
     a/b: copyOnLoad=false
     a/b/c: copyOnLoad=true
     a/b/c/h: copyOnLoad=false
+```
 
 **Directories in the configuration to load:**
 
+```code
     a
     a/b
     a/b/c/d
     a/b/c/h
     a/b/e/f
     a/g
+```
 
 **Result showing which directories would be copied (and why):**
 
+```code
     a: true (default, as not declared)
     b: false (declared)
     c: true (declared)
@@ -335,6 +342,7 @@ The following example shows how a set of copyOnLoad declarations would be applie
     e: false (inherited from b)
     f: false (inherited from e)
     g: true (inherited from a)
+```
 
 However, an app might improve the load functionality by evaluating the changes to be applied during load. The app may determine that state changes (e.g., stopping the PLC for loading) are actually not required depending on the kind of data to load. Some participants may even be able to skip a load operation completely if their part of the configuration has not changed.
 
@@ -370,7 +378,7 @@ For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is execu
 
 Failure responses to command requests must adhere to the following schema:
 
-**Problem.yaml**
+#### Problem.yaml
 
 ```yaml
 Problem:
@@ -496,7 +504,7 @@ An app can specify such files using the "appPrivateFiles" element in the configu
 
 The following example shows the declaration of "appPrivateFiles" with 3 regular expressions and the declaration of the app's root directory:
 
-**package-manifest.json**
+#### package-manifest.json
 
 ```json
 
@@ -533,7 +541,9 @@ Examples for regular expressions (with an app root directory of "my-app")
 
 The configuration files are available via WebDAV protocol under the ctrlx-device web address with base path of "solutions/webdav", eg. access the configuration.json file content of appdata:
 
+```code
     https://localhost:8443/solutions/webdav/appdata/configuration.json
+```
 
 See also: [golang WebDAV client](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/samples-go/webdav.client/README.md)
 and [nodejs WebDAV client](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/samples-node/solutions.webdav.interface/README.md)
@@ -546,17 +556,19 @@ and [nodejs WebDAV client](https://github.com/boschrexroth/ctrlx-automation-sdk/
 
 Start WinSCP, login with:
 
+```code
     File protocol:          WebDAV
     Host name:              IP-address or hostname of the ctrlX CORE
-    Port number:            443 or 8443 for a ctrlX CORE<sup>virtual</sup>
+    Port number:            443 or 8443 for a ctrlX CORE^virtual^
     User name and Password: credentials on the ctrlX CORE
+```
 
-![](images/winscp-sites.png)
+![winscp login](images/winscp-sites.png)
 
 The user needs manage configuration rights to access the files.
 
 Access the configuration files located in **/solutions/webdav**
 
-![](images/winscp-files.png)
+![winscp files](images/winscp-files.png)
 
 The folder "appdata" contains the files of the active configuration. The other folders are configuration archives.

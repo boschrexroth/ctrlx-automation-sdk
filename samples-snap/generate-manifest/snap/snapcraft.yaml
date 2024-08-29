@@ -9,6 +9,12 @@ description: |
 grade: stable
 confinement: strict
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 parts:
   dump:
     plugin: dump
@@ -27,4 +33,4 @@ slots:
     content: package-assets
     source:
       read:
-      - $SNAP_DATA/package-assets/$SNAPCRAFT_PROJECT_NAME
+      - $SNAP_DATA/package-assets/$CRAFT_PROJECT_NAME

@@ -16,8 +16,8 @@ The following example shows the procedure step-by-step.
 
 1. Create the folder "configs/package-assets” in the root of your snap project.
 2. Update your snapcraft.yaml
-    * Add a new part which copies the content of the "configs" directory to your $SNAP folder using the dump plugin.
-    * Add the slot "package-assets" to your slot configuration
+    - Add a new part which copies the content of the "configs" directory to your $SNAP folder using the dump plugin.
+    - Add the slot "package-assets" to your slot configuration
 3. Add the relevant files to "configs/package-assets" folder, for detailed information on each file see below.
 
 !!! Example
@@ -32,7 +32,7 @@ The following example shows the procedure step-by-step.
           organize:
             'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
     [...]
-    slots: 
+    slots:
       package-assets:
           interface: content
           content: package-assets
@@ -48,7 +48,7 @@ An app can provide own menu entries, use the reverse proxy infrastructure includ
 
 The package-manifest is essential for the integration points. Beside the snapcraft.yaml, it is strongly recommended that the app has to provide the package manifest to be integrated into the ctrlX CORE system. The package-manifest file should follow the naming structure `<app name>.<package-manifest>.json` where `<app name>` and the `id` property in the package-manifest are both set to the `name (technical app name)` as mentioned in the [snapcraft](appdevguide_basechecks.md) documentation.
 
-The package-manifest file name should follow the pattern: 
+The package-manifest file name should follow the pattern:
 
     <snap name>.package-manifest.json
 
@@ -58,32 +58,32 @@ The _snap name_ is the _name_ of your app, configured by the _snapcraft.yaml_.
 
 An app can be integrated into the ctrlX CORE navigation by defining menu entries. There are three possible integration points:
 
-* Sidebar: To allow the navigation to the main functionality of your apps
-* Settings: To allow the navigation to your app settings
-* Home Overview: To provide a customized tile for your application
-  
+- Sidebar: To allow the navigation to the main functionality of your apps
+- Settings: To allow the navigation to your app settings
+- Home Overview: To provide a customized tile for your application
+
 ![Integration](samples-go/webserver/docs/images/integration.png)
 
 ### Declare menu items in the package-manifest
 
 Add a "menus" element to the package manifest of your snap. The "menus" element is defined as an object that comprises three elements:
 
-* sidebar: An array of items to be integrated into the main menu
-* settings: An array of items to be integrated into the settings menu
-* overview: An array of items to be integrated into the app overview
+- sidebar: An array of items to be integrated into the main menu
+- settings: An array of items to be integrated into the settings menu
+- overview: An array of items to be integrated into the app overview
 
 An item is defined as an object with the following elements:
 
-* id: A string used as unique item identifier to order items (required)
-* title: A string used as display title of the item (required)
-* description: A string providing an additional description (optional and only used by overview items)
-* icon: A string representing the icon name of the item (optional)
-* link: A string representing the target address of this item, including the application base href (required if no "items" are provided)
-* target: A string that specifies where the link is shown. Use "_blank" or a specific name to open the link in a new tab (recommended for 3rd-party apps)
-* items: An array of sub-items of this item (required if no link is provided. It is currently only supported for main menu items and restricted to one sub-level)
-* permissions: An array of scope identifiers representing the permissions required to enable the item (optional)
+- id: A string used as unique item identifier to order items (required)
+- title: A string used as display title of the item (required)
+- description: A string providing an additional description (optional and only used by overview items)
+- icon: A string representing the icon name of the item (optional)
+- link: A string representing the target address of this item, including the application base href (required if no "items" are provided)
+- target: A string that specifies where the link is shown. Use "_blank" or a specific name to open the link in a new tab (recommended for 3rd-party apps)
+- items: An array of sub-items of this item (required if no link is provided. It is currently only supported for main menu items and restricted to one sub-level)
+- permissions: An array of scope identifiers representing the permissions required to enable the item (optional)
 
-??? example 
+??? example
 
     ```json
     {
@@ -150,7 +150,6 @@ An item is defined as an object with the following elements:
     }
     ```
 
-
 If the third-party app uses a specified port and not our reverse proxy infrastructure, use the template variable "${hostname}" to allow the ctrlX CORE to replace it dynamically. E.g.:
 
 !!! example
@@ -204,46 +203,47 @@ In short, widgets are provided in a JavaScript file and define a custom HTML tag
 
 For the Home screen to know about all the widgets, these need to be made publicly known in some way. This is done in the app's manifest in "uiExtensions" → "dashboard". Each element here defines one widget by providing the information needed to instantiate the widget (like the URL of the JavaScript file, where the widget is implemented, and the widget's tag name, size information) and metadata to display in the widget catalog. For a detailed description see the PackageManager-API, schema "DashboardWidget".
 
-Example
-  ```json
-  "uiExtensions": {
-    "dashboard": [
-      {
-        "order": 10,
-        "src": "/motion/widgets.js",
-        "tag": "rexroth-axes-widget",
-        "title": "Axes",
-        "description": "Shows the status of your axes",
-        "categories": ["Motion"],
-        "i18n": "dashboard.motion.axes",
-        "image": "/motion/assets/img/DC_AE_ctrlX_DRIVE-axes_Symbol_bl_192x192_202102.svg",
-        "initialSize": {
-          "rows": 3,
-          "cols": 3
-        },
-        "minSize": {
-          "rows": 3,
-          "cols": 3
-        },
-        "maxSize": {
-          "rows": 3,
-          "cols": 3
-        }
+!!! Example
+
+    ```json
+      "uiExtensions": {
+        "dashboard": [
+          {
+            "order": 10,
+            "src": "/motion/widgets.js",
+            "tag": "rexroth-axes-widget",
+            "title": "Axes",
+            "description": "Shows the status of your axes",
+            "categories": ["Motion"],
+            "i18n": "dashboard.motion.axes",
+            "image": "/motion/assets/img/DC_AE_ctrlX_DRIVE-axes_Symbol_bl_192x192_202102.svg",
+            "initialSize": {
+              "rows": 3,
+              "cols": 3
+            },
+            "minSize": {
+              "rows": 3,
+              "cols": 3
+            },
+            "maxSize": {
+              "rows": 3,
+              "cols": 3
+            }
+          }
+        ]
       }
-    ]
-  }
-  ```
+    ```
 
 ### Reverse Proxy
 
 The reverse proxy handles all **external** web-based (HTTP/HTTPS) requests to the device. The reverse proxy provides the following functionality:
 
-* **Automatic HTTPS:** By default, all data exchanged between client and server is encrypted.
-* **Token validation:** By default, only authenticated users may access resources on the device (except the login page). Requests with invalid tokens (lifetime expired, invalid signature) are rejected.
+- **Automatic HTTPS:** By default, all data exchanged between client and server is encrypted.
+- **Token validation:** By default, only authenticated users may access resources on the device (except the login page). Requests with invalid tokens (lifetime expired, invalid signature) are rejected.
 
 The proxy mapping provides the configuration required by the reverse proxy to redirect requests for a specific URL to a web server running on the device.
 
-**Proxy Mapping**
+#### Proxy Mapping
 
 !!! Example
 
@@ -268,19 +268,19 @@ The proxy mapping provides the configuration required by the reverse proxy to re
 
 Providing a proxy configuration is optional in some cases (e.g. if your snap does not provide a web service). If a proxy configuration is provided, the following parameters are valid:
 
-* **name (mandatory):** Name of the web service.  The format is: `<id>.<service>`The name has to be unique. Examples:
-  * `rexroth-solutions.web`
-  * `rexroth-hmi.web`
-  * ...
-* **url (mandatory):** URL provided by the reverse proxy. When a client tries to access this URL, the reverse proxy transparently redirects the request to the web server. Thus, your web server has to be configured to listen to e.g. "/cool-app" and not "/". Must not conflict with other web service URLs. Examples:
-  * /solutions
-  * /hmi
-  * ...
-* **binding (mandatory):** Resource identifier to which the reverse proxy redirects the requests. The resource can either be a port or a Unix socket. Using a Unix socket is highly recommended. Examples:
-  * :5000
-  * 192.168.1.17:5000
-  * "unix://{$SNAP_DATA}/package-run/rexroth-solutions/rexroth-solutions.web.sock"
-* **restricted:** Restricted URL. Only authenticated clients can access the URLs defined here. One important example is the API URL(s) - those URLs should be restricted in most use cases. Examples:
+- **name (mandatory):** Name of the web service.  The format is: `<id>.<service>`The name has to be unique. Examples:
+  - `rexroth-solutions.web`
+  - `rexroth-hmi.web`
+  - ...
+- **url (mandatory):** URL provided by the reverse proxy. When a client tries to access this URL, the reverse proxy transparently redirects the request to the web server. Thus, your web server has to be configured to listen to e.g. "/cool-app" and not "/". Must not conflict with other web service URLs. Examples:
+  - /solutions
+  - /hmi
+  - ...
+- **binding (mandatory):** Resource identifier to which the reverse proxy redirects the requests. The resource can either be a port or a Unix socket. Using a Unix socket is highly recommended. Examples:
+  - :5000
+  - 192.168.1.17:5000
+  - "unix://{$SNAP_DATA}/package-run/rexroth-solutions/rexroth-solutions.web.sock"
+- **restricted:** Restricted URL. Only authenticated clients can access the URLs defined here. One important example is the API URL(s) - those URLs should be restricted in most use cases. Examples:
  "/rexroth-solutions/api/v1.0"
 
 !!! info
@@ -288,7 +288,7 @@ Providing a proxy configuration is optional in some cases (e.g. if your snap doe
 
 #### Binding
 
-**Unix sockets (recommended)**
+##### Unix sockets (recommended)
 
 To use Unix sockets, the web server of your application has to bind against a [Unix Domain Socket](https://en.wikipedia.org/wiki/Unix_domain_socket). Most web server frameworks already support this functionality. The benefit of Unix sockets is the additional security (file access can be restricted via file permissions) and the lower attack surface on network level (the service cannot be reached externally). To enable your snap and to provide the reverse proxy access to your Unix socket, use the content interface slot "package-run". It uses the same mechanism as the "package-assets" interface.
 
@@ -326,7 +326,7 @@ Now, publish the information on the socket file using the package-manifest via t
     [...]
     ```
 
-**Local host (not recommended)**
+##### Local host (not recommended)
 
 Only bind to a local host if a Unix domain socket (see above) cannot be used. Your app has to bind to a specified port that is not used by other apps.
 
@@ -377,58 +377,59 @@ If access is restricted to specific resources, define scopes. When using the Ide
       ],
     ```
 
-**Remark: Restrictions apply on the scope namings, identifiers, etc. (see below)**
+!!! Remark
+    **Restrictions apply on the scope namings, identifiers, etc. (see below)**
 
-Use the following schema for the main identifier of the scope: 
+Use the following schema for the main identifier of the scope:
 
 `<id>.<service>`
 
-* id: Package identifier. Has to correspond to the snap name
-  * Example: rexroth-solutions, rexroth-vpnmanager, ...
-* service: Service identifier
-  * Example: web
+- id: Package identifier. Has to correspond to the snap name
+  - Example: rexroth-solutions, rexroth-vpnmanager, ...
+- service: Service identifier
+  - Example: web
 
 Some examples:
 
-* rexroth-solutions.web
-* rexroth-vpnmanager.web
+- rexroth-solutions.web
+- rexroth-vpnmanager.web
 
-Use this schema for the identifier of the scope: 
+Use this schema for the identifier of the scope:
 
 `<id>.<service>.<scope_name>.<access>`
 
-* id : Package identifier. Has to correspond to the snap name
-  * Example: rexroth-solutions, rexroth-vpnmanager, ...
-* service: Service identifier
-  * Example: web
-* scope_name: Name of the specific scope
-  * Example: solutions, connections, configurations, users, ...
-* access: Type of access to the resource represented by this scope. Supported are:
-  * r (read-only): Allows read-only access to specific resources
-  * w (write-only): Allows write-only access to specific resources
-  * rw (read/write): Allows read-only and write access to specific resources
-  * x (execute): Executes a specific action represented by a resource
+- id : Package identifier. Has to correspond to the snap name
+  - Example: rexroth-solutions, rexroth-vpnmanager, ...
+- service: Service identifier
+  - Example: web
+- scope_name: Name of the specific scope
+  - Example: solutions, connections, configurations, users, ...
+- access: Type of access to the resource represented by this scope. Supported are:
+  - r (read-only): Allows read-only access to specific resources
+  - w (write-only): Allows write-only access to specific resources
+  - rw (read/write): Allows read-only and write access to specific resources
+  - x (execute): Executes a specific action represented by a resource
 
 Some examples:
 
-* rexroth-vpnmanager.web.shortcuts.r: Read-only access to VPN shortcuts
-* rexroth-vpnmanager.web.shortcuts.rw: Read and create VPN connection shortcuts
-* rexroth-deviceadmin.web.own_password.w: Update (but not read) the password of the user currently logged in
-* rexroth-vpnmanager.web.shortcuts.x: Start/stop VPN connections via existing starters (shortcuts)
+- rexroth-vpnmanager.web.shortcuts.r: Read-only access to VPN shortcuts
+- rexroth-vpnmanager.web.shortcuts.rw: Read and create VPN connection shortcuts
+- rexroth-deviceadmin.web.own_password.w: Update (but not read) the password of the user currently logged in
+- rexroth-vpnmanager.web.shortcuts.x: Start/stop VPN connections via existing starters (shortcuts)
 
 #### Enforcing permissions in your service
 
-The web server has to enforce the defined permissions. The following pseudo code snippet shows a simple example in which the function ListAddresses checks whether the client has the permission to execute the function. The scope "rexroth-device.all.rwx" is a special scope reflecting an administrative access permission (see below). 
+The web server has to enforce the defined permissions. The following pseudo code snippet shows a simple example in which the function ListAddresses checks whether the client has the permission to execute the function. The scope "rexroth-device.all.rwx" is a special scope reflecting an administrative access permission (see below).
 
 !!! Example
 
     ```golang
     func ListAddresses(w http.ResponseWriter, r *http.Request) {
-        
+
         // Define valid scopes for resource access
         scope := []string{"networkmanager.all.r", "networkmanager.all.rw", "rexroth-device.all.rwx"}
-    
-    
+
+
         // Extract scopes from http request and compare them to valid scopes
         // Return if not authorized
         if ok, _ := checkPermissions(r, scope); !ok {
@@ -445,20 +446,20 @@ The following snippet shows the definition of the admin scope. You can see (and 
 
 !!! Example
 
-  ```json
-    {
-        "identifier": "rexroth-device",
-        "name": "Global device administration",
-        "description": "Global device administration permissions allow unrestricted access to all system resources",
-        "scopes":[
-            {
-                "identifier": "rexroth-device.all.rwx",
-                "name": "Administration access",
-                "Description": "Unrestricted, administrative access to system resources"
-            }
-        ]
-    }
-  ```
+    ```json
+      {
+          "identifier": "rexroth-device",
+          "name": "Global device administration",
+          "description": "Global device administration permissions allow unrestricted access to all system resources",
+          "scopes":[
+              {
+                  "identifier": "rexroth-device.all.rwx",
+                  "name": "Administration access",
+                  "Description": "Unrestricted, administrative access to system resources"
+              }
+          ]
+      }
+    ```
 
 ### Licenses
 
@@ -466,21 +467,89 @@ The app shall provide information in the package-manifest about each license tha
 The "required" flag indicates whether a license is mandatory to use the application. Set the flag to true when the license is required and to false, when the license is optional. Multiple licenses can have the "required" flag set to true simultaneously. In this case, the app must ensure that it works if any of the 'required' licenses is available.
 
 !!! Example
-  ```json
-  "licenses": [
-      {
-        "name": "SWL-XC*-RUN-DLACCESSNRT**-NNNN",
-        "title": "ctrlX OS License - Customer App",
-        "description": "Integration of customer apps into ctrlX OS with access to the ctrlX Data Layer",
-        "required": true
-      }     
-    ],
-  ```
+
+    ```json
+    "licenses": [
+        {
+          "name": "SWL-XC*-RUN-DLACCESSNRT**-NNNN",
+          "title": "ctrlX OS License - Customer App",
+          "description": "Integration of customer apps into ctrlX OS with access to the ctrlX Data Layer",
+          "required": true
+        }
+      ],
+    ```
+
+### Documentation
+
+The API of the app can optionally be integrated in the API reference section of the help menu. Therefor you have to do following steps:
+
+**Step 1:**
+
+!!! Example
+
+    ```json
+    [...]
+    "documentation": [
+        {
+          "type": "api",
+          "name": "ctrlX OS - Solutions API",
+          "url": "/doc/api/?url=/solutions/doc/api/api.solutions.json",
+          "description": "Provides functionalities for persisting and managing app data on ctrlX OS devices.",
+          "i18n": "documentation.solutions"
+        }
+      ],
+    [...]
+    ```
+
+
+- **type:** Type of the document is "api".
+- **name:** Name of the api, shown in the API Reference table (usually use the name of the API)
+- **url:**  Contains the url, where the api is available
+- **description:** Description of the api, shown in the API Reference table (usually use the description of the API)
+- **i18n:**  Key for translation (see section 'The language files')
+
+**Step 2:**
+
+Provide the api itself as json file.
+1. Create the folder "api/solutions” in the root of your snap project.
+2. Copy the json file to this location
+
+**Step 3:**
+
+An entry 'api' in the 'parts' section of the snapcraft.yaml file is necessary.
+
+!!! Example
+
+    ```yaml
+    name: rexroth-solutions
+    [...]
+    parts:
+      [...]
+      api:
+        plugin: nil
+        source: api
+        override-build: make DESTDIR=$SNAPCRAFT_PART_INSTALL
+      [...]
+    [...]
+    ```
+
+**Step 4:**
+
+A makefile 'Makefile' in the api folder of your project is required, where you handle the copy of the api during installation of your app:
+
+!!! Example
+    ```
+    dirs := $(shell ls -d */)
+    DESTDIR ?= $(PWD)/dist
+
+    install:
+      install -d -m 755 $(DESTDIR)/static/doc/api
+      cp solutions/public/*.json $(DESTDIR)/static/doc/api
+    ```
 
 ### Certificate Management (optional)
 
 The certificate manager handles cryptographic material for all applications on the device. The certificate manager can add/delete/list certificates or keys to/from a specific application. It also issues a warning if a certificate expires soon or is already invalid. If a snap handles cryptographic material, it can use this centralized service following the instructions:
-
 
 First, the snap has to provide the content interface "package-certificates". Via this interface, the certificate manager can add and access certificates and keys of a specific snap. Thus, write permissions are required.
 
@@ -489,7 +558,7 @@ First, the snap has to provide the content interface "package-certificates". Via
     ```yaml
     name: rexroth-solutions
     [...]
-    slots: 
+    slots:
     [...]
     package-certificates:
         interface: content
@@ -505,6 +574,7 @@ First, the snap has to provide the content interface "package-certificates". Via
 The certificate store block defines whether a snap service has to handle cryptographic keys or certificates. A snap should have different certificate stores for different services. These stores are defined in the package-assets file (see following code snippet)
 
 !!! example
+
     ```json
     "certificatestores": [
           {
@@ -521,30 +591,28 @@ The certificate store block defines whether a snap service has to handle cryptog
       ],
     ```
 
-* **id (mandatory):** Use a unique ID, as it is used to identify the store via the REST interface.
-  * opcua
-  * vpnmanager
-  * ...
-* **title (mandatory):** Name used in the front end.
-  * OPCUA
-  * VPN Manager
-  * ...
-* **description:** Optional and displayed in the front end. To describe the application and provide some more information. 
-* **scopesR:** Optional list of scopes that allow the user to have read access to this certificate store.
-  * rexroth-solutions.web.all.r
-  * example.permission.r
-  * ...
-* **scopesRWX:** Optional list of scopes that allow the user to have full access to this certificate store.
-  * rexroth-solutions.web.all.rw
-  * example.permission.rwx
-  * ...
+- **id (mandatory):** Use a unique ID, as it is used to identify the store via the REST interface.
+  - opcua
+  - vpnmanager
+  - ...
+- **title (mandatory):** Name used in the front end.
+  - OPCUA
+  - VPN Manager
+  - ...
+- **description:** Optional and displayed in the front end. To describe the application and provide some more information.
+- **scopesR:** Optional list of scopes that allow the user to have read access to this certificate store.
+  - rexroth-solutions.web.all.r
+  - example.permission.r
+  - ...
+- **scopesRWX:** Optional list of scopes that allow the user to have full access to this certificate store.
+  - rexroth-solutions.web.all.rw
+  - example.permission.rwx
+  - ...
 
 The following predefined folder structure applies to every certificate store:
 
 !!! hint
     SNAPCRAFT_PROJECT_NAME has to be replaced with the technical app name!
-
-
 
 !!! example
 
@@ -684,15 +752,16 @@ In specific scenarios (e.g. Brandlabeling (Theming App) or as ctrlX OS Partner) 
         }
     }
     ```
+
 ## The language files
 
 Language files are used to translate text sections into different languages. Bosch Rexroth Apps are shipped with english and german language files. Currently the multi language system (MLS) supports translations for the content of the [package manifest](#the-package-manifest) texts which are organized in the `./package-assets/i18n` folder of the app.
 
 ### Translation of the Package Manifest
 
-One aspect of the MLS is the translation of the text fields provided by the package manifest, e.g. menu items, descriptions etc. To enable the app developer to provide translations for these fields a new property `i18n` was introduced. This property behaves as a tag for the parent object that requires translation for its childs. The value is defining the name of the tag in *dot notation*.
+One aspect of the MLS is the translation of the text fields provided by the package manifest, e.g. menu items, descriptions etc. To enable the app developer to provide translations for these fields a new property `i18n` was introduced. This property behaves as a tag for the parent object that requires translation for its childs. The value is defining the name of the tag in _dot notation_.
 
-Additionally you have to provide the language files for the package-manifest in the `./package-assets/i18n` folder. 
+Additionally you have to provide the language files for the package-manifest in the `./package-assets/i18n` folder.
 
 The package-manifest language file name should follow the pattern:
 

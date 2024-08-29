@@ -20,3 +20,9 @@
 ## Build a Snap
 
 See [Samples Overview](../samples.md)
+
+### Install ctrlX Data Layer build and runtime environment
+
+```bash
+ctrlx-automation-sdk/scripts/install-ctrlx-datalayer.sh
+```

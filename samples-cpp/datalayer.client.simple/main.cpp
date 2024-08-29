@@ -60,9 +60,10 @@ int main()
   comm::datalayer::DatalayerSystem datalayerSystem;
   datalayerSystem.start(false);
 
+  // Creates a Datalayer Client instance and connects. Automatically reconnects if the connection is interrupted.
   auto connectionString = getConnectionString(); // default: ctrlX CORE or ctrlX COREvirtual with Network Adpater
   std::cout << "INFO Creating ctrlX Data Layer client connection to " << connectionString << " ..." << std::endl;
-  auto dataLayerClient = datalayerSystem.factory()->createClient(connectionString);
+  auto dataLayerClient = datalayerSystem.factory()->createClient3(connectionString);
 
   if (dataLayerClient->isConnected() == false)
   {
@@ -71,7 +72,7 @@ int main()
     auto connectionString2 = getConnectionString("10.0.2.2", "boschrexroth", "boschrexroth", 8443); // ctrlX COREvirtual with Port Forwarding
     std::cout << "WARNING Cannot connect to " << connectionString << " trying " << connectionString2 << std::endl;
 
-    auto dataLayerClient = datalayerSystem.factory()->createClient(connectionString2);
+    auto dataLayerClient = datalayerSystem.factory()->createClient3(connectionString2);
   }
 
   int counter = 1;

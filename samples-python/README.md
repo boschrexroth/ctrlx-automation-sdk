@@ -19,6 +19,7 @@
 * [ctrlX Data Layer Calculation operations](datalayer.calc/README.md)
 * [ctrlX Data Layer Client Browse](datalayer.client.browse/README.md)
 * [ctrlX Data Layer Client Subscription](datalayer.client.sub/README.md)
+* [ctrlX Data Layer Provider Subscription](datalayer.provider.sub/README.md)
 * [ctrlX Data Layer Provider All Data Types](datalayer.provider.all-data/README.md)
 * [Example Remote Debugging with Python](datalayer.remote.debug/README.md)
 * [ctrlX Data Layer + Webserver](webserver/README.md)
@@ -43,7 +44,7 @@ See [Samples Overview](../samples.md)
 * Install or upgrade the ctrlX Data Layer build and runtime environment.
 
 ```bash
-sudo dpkg -i ../..deb/ctrlx-datalayer*.deb
+ctrlx-automation-sdk/scripts/install-ctrlx-datalayer.sh
 ```
 
 #### Install a Virtual Environment

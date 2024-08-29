@@ -93,20 +93,20 @@ static std::string getConnectionString(
   return connectionString + std::string("?sslport=") + std::to_string(sslPort);
 }
 
-//! Get Datalayer Client instance
+//! Creates a Datalayer Client instance and connects. Automatically reconnects if the connection is interrupted.
 //! @param[in] datalayerSystem Datalayer.System instance
 //! @param[in] ip       IP address of the ctrlX CORE: 10.0.2.2 is ctrlX COREvirtual with port forwarding
 //! @param[in] user     User name
 //! @param[in] password The password
 //! @param[in] sslPort  The port number for SSL: 8443 if ctrlX COREvirtual with port forwarding 8443:443
 //! @result IClient instance or nullptr on error
-static comm::datalayer::IClient* getClient(comm::datalayer::DatalayerSystem& datalayerSystem,
+static comm::datalayer::IClient3* getClient(comm::datalayer::DatalayerSystem& datalayerSystem,
                                            const std::string& ip = "192.168.1.1",
                                            const std::string& user = "boschrexroth",
                                            const std::string& password = "boschrexroth", int sslPort = 443)
 {
   std::string connectionString = getConnectionString(ip, user, password, sslPort);
-  comm::datalayer::IClient* client = datalayerSystem.factory()->createClient(connectionString);
+  comm::datalayer::IClient3* client = datalayerSystem.factory()->createClient3(connectionString);
   if (client->isConnected())
   {
     return client;
@@ -117,20 +117,20 @@ static comm::datalayer::IClient* getClient(comm::datalayer::DatalayerSystem& dat
   return nullptr;
 }
 
-//! Get Datalayer Provider instance
+//! Creates a Datalayer Provider instance and connects. Automatically reconnects if the connection is interrupted.
 //! @param[in] datalayerSystem Datalayer.System instance
 //! @param[in] ip       IP address of the ctrlX CORE: 10.0.2.2 is ctrlX COREvirtual with port forwarding
 //! @param[in] user     User name
 //! @param[in] password The password
 //! @param[in] sslPort  The port number for SSL: 8443 if ctrlX COREvirtual with port forwarding 8443:443
 //! @result IProvider instance or nullptr on error
-static comm::datalayer::IProvider* getProvider(comm::datalayer::DatalayerSystem& datalayerSystem,
+static comm::datalayer::IProvider3* getProvider(comm::datalayer::DatalayerSystem& datalayerSystem,
                                                const std::string& ip = "192.168.1.1",
                                                const std::string& user = "boschrexroth",
                                                const std::string& password = "boschrexroth", int sslPort = 443)
 {
   std::string connectionString = getConnectionString(ip, user, password, sslPort);
-  comm::datalayer::IProvider* provider = datalayerSystem.factory()->createProvider(connectionString);
+  comm::datalayer::IProvider3* provider = datalayerSystem.factory4()->createProvider3(connectionString);
   if (provider->start() == DL_OK)
   {
     return provider;

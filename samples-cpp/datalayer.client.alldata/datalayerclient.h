@@ -23,7 +23,7 @@ private:
   std::string m_user;
   std::string m_password;
   int m_sslPort;
-  comm::datalayer::IClient* m_client;
+  comm::datalayer::IClient3* m_client;
   comm::datalayer::DlResult m_result;
   comm::datalayer::DlResult m_resultAsync;
   comm::datalayer::Variant m_data;

@@ -15,41 +15,47 @@ grade: stable # must be 'stable' to release into candidate/stable channels
 base: core22
 type: app
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 parts:
   configs:
     source: ./configs
     plugin: dump
     organize:
-      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
+      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
 
   www:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '20.15.1'
+      - NODE_VERSION: '20.16.0'
     organize:
-      '${SNAPCRAFT_PART_BUILD}/dist/app': package-www/${SNAPCRAFT_PROJECT_NAME}/
+      '${CRAFT_PART_BUILD}/dist/app': package-www/${CRAFT_PROJECT_NAME}/
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "20.15.1"
+    # npm-node-version: "20.16.0"
     plugin: nil
     override-build: |
 
       # detect build arch
-      SNAPCRAFT_BUILD_ARCH=$(dpkg --print-architecture)
-      if [ $SNAPCRAFT_BUILD_ARCH == "arm64" ]; then
+      CRAFT_BUILD_ARCH=$(dpkg --print-architecture)
+      if [ $CRAFT_BUILD_ARCH == "arm64" ]; then
           build_arch="arm64"
       else 
           build_arch="x64"
       fi
 
       # fetch node used for build
-      if [ ! -f "${SNAPCRAFT_PART_INSTALL}/bin/node" ]; then
-          node_path=$SNAPCRAFT_PART_BUILD/bin
+      if [ ! -f "${CRAFT_PART_INSTALL}/bin/node" ]; then
+          node_path=$CRAFT_PART_BUILD/bin
           node_uri="https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${build_arch}.tar.gz"
           echo fetching node for build: $node_uri
-          curl $node_uri | tar xzf - -C $SNAPCRAFT_PART_BUILD --no-same-owner --strip-components=1
+          curl $node_uri | tar xzf - -C $CRAFT_PART_BUILD --no-same-owner --strip-components=1
       fi  
 
       # set the path to build target node to be used for build
@@ -65,7 +71,7 @@ parts:
       npm run build
 
       # remove node
-      rm -rf ${SNAPCRAFT_PART_INSTALL}
+      rm -rf ${CRAFT_PART_INSTALL}
 
 slots:
   package-assets:
@@ -73,11 +79,11 @@ slots:
     content: package-assets
     source:
       read:
-      - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+      - $SNAP/package-assets/${CRAFT_PROJECT_NAME}
 
   package-www:
     interface: content
     content: package-www
     source:
       read:
-      - $SNAP/package-www/${SNAPCRAFT_PROJECT_NAME}
+      - $SNAP/package-www/${CRAFT_PROJECT_NAME}

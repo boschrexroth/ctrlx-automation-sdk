@@ -24,6 +24,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hello.web.asp", "hello.web.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datalayer.client.bulkread", "datalayer.client.bulkread\datalayer.client.bulkread.csproj", "{9453497C-90F8-4811-AA2C-CC89D4E86F8F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datalayer.client.simple", "datalayer.client.simple\datalayer.client.simple.csproj", "{E8B5D8E6-633B-49DC-A597-2920AA846FE9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "datalayer.provider.simple", "datalayer.provider.simple\datalayer.provider.simple.csproj", "{1444B96B-6F0E-4375-8A96-F520264450DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +66,14 @@ Global
 		{9453497C-90F8-4811-AA2C-CC89D4E86F8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9453497C-90F8-4811-AA2C-CC89D4E86F8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9453497C-90F8-4811-AA2C-CC89D4E86F8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8B5D8E6-633B-49DC-A597-2920AA846FE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8B5D8E6-633B-49DC-A597-2920AA846FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8B5D8E6-633B-49DC-A597-2920AA846FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8B5D8E6-633B-49DC-A597-2920AA846FE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1444B96B-6F0E-4375-8A96-F520264450DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1444B96B-6F0E-4375-8A96-F520264450DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1444B96B-6F0E-4375-8A96-F520264450DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1444B96B-6F0E-4375-8A96-F520264450DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

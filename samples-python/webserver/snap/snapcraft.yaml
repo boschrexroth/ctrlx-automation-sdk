@@ -8,6 +8,12 @@ base: core22
 confinement: strict
 grade: stable
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 apps:
   webserver:
     command: bin/main.py
@@ -25,15 +31,15 @@ parts:
     plugin: python
     source: .
     stage-packages:
-      - libzmq5
       - ctrlx-datalayer
       - libsystemd-dev
+      - libzmq5
 
   configs:
     plugin: dump
     source: ./configs
     organize:
-      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
+      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
 
   www:
     plugin: dump
@@ -47,13 +53,13 @@ slots:
     content: package-assets
     source:
       read:
-        - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP/package-assets/${CRAFT_PROJECT_NAME}
   package-run:
     interface: content
     content: package-run
     source:
       write:
-        - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP_DATA/package-run/${CRAFT_PROJECT_NAME}
 
 plugs:
   active-solution:

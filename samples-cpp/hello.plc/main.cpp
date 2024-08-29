@@ -19,7 +19,7 @@
 
 #include "ctrlx_datalayer_helper.h"
 
-static comm::datalayer::IClient* g_client;
+static comm::datalayer::IClient3* g_client;
 static comm::datalayer::Variant g_variant;
 
 static std::string g_helloPlcApplication = "hello_plc_application";
@@ -45,7 +45,7 @@ static comm::datalayer::DlResult getStrings(comm::datalayer::Variant& data, std:
 
 // Function takes the value from "i" to "data" and
 // then writes the new "data" to the address "addr" of the ctrlX Data Layer client "IClient"
-static comm::datalayer::DlResult setIntValue(comm::datalayer::Variant& data, comm::datalayer::IClient* client, std::string addr, int16_t i)
+static comm::datalayer::DlResult setIntValue(comm::datalayer::Variant& data, comm::datalayer::IClient3* client, std::string addr, int16_t i)
 {
   comm::datalayer::DlResult result;
   result = data.setValue(i);
@@ -64,7 +64,7 @@ static comm::datalayer::DlResult setIntValue(comm::datalayer::Variant& data, com
 
 // Function takes the value from "str" to "data" and
 // then writes the new "data" to the address "addr" of the ctrlX Data Layer client "IClient"
-static comm::datalayer::DlResult setStringValue(comm::datalayer::Variant& data, comm::datalayer::IClient* client, std::string addr, std::string str)
+static comm::datalayer::DlResult setStringValue(comm::datalayer::Variant& data, comm::datalayer::IClient3* client, std::string addr, std::string str)
 {
   comm::datalayer::DlResult result;
   result = data.setValue(str);
@@ -83,7 +83,7 @@ static comm::datalayer::DlResult setStringValue(comm::datalayer::Variant& data, 
 
 // Function takes the value from "value" to "data" and
 // then writes the new "data" to the address "addr" of the ctrlX Data Layer client "IClient"
-static comm::datalayer::DlResult setFloatValue(comm::datalayer::Variant& data, comm::datalayer::IClient* client, std::string addr, float value)
+static comm::datalayer::DlResult setFloatValue(comm::datalayer::Variant& data, comm::datalayer::IClient3* client, std::string addr, float value)
 {
   comm::datalayer::DlResult result;
   result = data.setValue(value);

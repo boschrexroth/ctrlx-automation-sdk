@@ -40,7 +40,7 @@ namespace Samples.Datalayer.Provider.Virtual
             // Create a remote address with the parameters according to your environment
             var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
-            // Create the provider with remote connection string
+            // Create a Datalayer Provider instance and connect. Automatically reconnects if the connection is interrupted.
             using var provider = system.Factory.CreateProvider(remote);
             Console.WriteLine("ctrlX Data Layer provider created.");
 
@@ -50,7 +50,7 @@ namespace Samples.Datalayer.Provider.Virtual
             //Start the handler
             if (virtualHandler.Start().IsBad())
             {
-                //if not we exit and retry after app daemon restart-delay (see snapcraft.yaml)
+                // Initially exit and retry after app restart-delay (see snapcraft.yaml)
                 Console.WriteLine($"Restarting app after restart-delay of 10 s ...");
                 return;
             }

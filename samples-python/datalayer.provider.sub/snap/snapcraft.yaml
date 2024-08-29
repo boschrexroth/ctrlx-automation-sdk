@@ -1,0 +1,51 @@
+name: sdk-py-provider-sub
+title: SDK Python Provider Subscription
+version: 1.0.0
+summary: ctrlX Data Layer provider sample written in Python for ctrlX
+description: |
+  This sample shows how a provider supports ctrlX Data Layer subscription interface
+base: core22
+confinement: strict
+grade: stable
+
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
+apps:
+  provider:
+    command: bin/provider.py
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 30s
+
+  client:
+    command: bin/client.py
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    after:
+      - provider
+    restart-condition: always
+    passthrough:
+      restart-delay: 30s
+
+parts:
+  provider:
+    plugin: python
+    source: .
+    stage-packages:
+      - ctrlx-datalayer
+
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer

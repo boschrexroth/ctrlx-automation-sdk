@@ -6,9 +6,9 @@ echo " "
 
 sudo add-apt-repository -y ppa:snappy-dev/image
 
-source ~/scripts/install-snapcraft.sh
+source ./install-snapcraft.sh
 
-source ~/scripts/install-go.sh
+source ./install-go.sh
 
 echo " "
 echo "============================================"

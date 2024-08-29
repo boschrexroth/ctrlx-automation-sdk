@@ -27,7 +27,7 @@ async function main() {
     const remote = Remote.build({ ip: "10.0.2.2", sslPort: 8443 });
     console.log('connection string:', remote);
 
-    // Create the client with the given remote address
+    // Create a Datalayer Client instance and connect. Automatically reconnects if the connection is interrupted.
     const client = await system.createClient(remote);
 
     // Create a data changed event callback function

@@ -29,6 +29,3 @@ From
 change to e.g.
 
     LATEST=$(curl -s -u usrxyz:tokenxyz ...
-
-
-

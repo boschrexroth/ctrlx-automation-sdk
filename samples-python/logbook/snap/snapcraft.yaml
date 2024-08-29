@@ -8,6 +8,12 @@ base: core22
 confinement: strict
 grade: stable
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 apps:
   logbook:
     command: bin/main.py
@@ -24,15 +30,15 @@ parts:
     plugin: python
     source: .
     build-environment:
-      - SNAPCRAFT_PYTHON_INTERPRETER: python3.10
+      - CRAFT_PYTHON_INTERPRETER: python3.10
       - GITHUB_CYSYSTEMD: https://github.com/mosquito/cysystemd/releases/download/1.5.4
       - PLATFORM_CYSYSTEMD: manylinux_2_28_x86_64
-      - TARGET_PATH: ${SNAPCRAFT_PART_INSTALL}/lib/${SNAPCRAFT_PYTHON_INTERPRETER}/site-packages 
+      - TARGET_PATH: ${CRAFT_PART_INSTALL}/lib/${CRAFT_PYTHON_INTERPRETER}/site-packages 
     stage-packages:
       - libsystemd-dev
     override-build: |
-      snapcraftctl build
-      case $SNAPCRAFT_ARCH_TRIPLET in
+      craftctl default
+      case $CRAFT_ARCH_TRIPLET in
         aarch64-linux-gnu)
           export PLATFORM_CYSYSTEMD=manylinux_2_28_aarch64
           ;;

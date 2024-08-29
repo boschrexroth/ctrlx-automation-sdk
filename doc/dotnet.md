@@ -25,7 +25,7 @@ Start a SSH session and login into the VM with boschrexroth/boschrexroth:
 
       ssh -p 10022 boschrexroth@localhost
 
-Start the script to install .NET as snap on your VM:
+Start the script to install .NET as snap on your VM (~/ctrlx-automation-sdk/scripts):
 
       ./install-dotnet-sdk.sh
 
@@ -45,9 +45,9 @@ We recommend to use __Microsoft Visual Studio Code__ on your host computer as ID
 
 To develop and test .NET application for the ctrlX we have to install the __C#__ extension in the VM.
 
-* Start Visual Studio Code and connect it with the QEMU VM.
-* Select the extension icon in the left side bar and enter __c#__
-* Select the C# extension and click 'Install in SSH'
++ Start Visual Studio Code and connect it with the QEMU VM.
++ Select the extension icon in the left side bar and enter __c#__
++ Select the C# extension and click 'Install in SSH'
 
 ![C# extension](images/csharpextension.png)
 
@@ -63,7 +63,7 @@ Edit the NuGet configuration file with your preferred editor or with Visual Stud
 
 __Example:__
 
-The following sample uses the [Px Proxy](https://pypi.org/project/px-proxy) running on the host computer. From the VM's point of view, this proxy can be reached with the URL http://10.0.2.2:3128.
+The following sample uses the [Px Proxy](https://pypi.org/project/px-proxy) running on the host computer. From the VM's point of view, this proxy can be reached with the URL <http://10.0.2.2:3128>.
 
       <configuration>
             <config>
@@ -73,8 +73,8 @@ The following sample uses the [Px Proxy](https://pypi.org/project/px-proxy) runn
       ...
       </configuration>
 
-
 ## Building a .NET Sample Project
+
 Each .NET sample provides a rich set of tasks for your convenience.
 
 ![Tasks](images/tasks.png)
@@ -91,8 +91,8 @@ Each .NET sample provides a rich set of tasks for your convenience.
 
 + Click on Terminal -> __Run Task__.
 + Choose Task __clean__.
-  
-### Publish your (self-contained) application 
+
+### Publish your (self-contained) application
 
 + Click on Terminal -> __Run Task__.
 + Choose any Task __publish *__ matching your architecture and mode.
@@ -126,7 +126,7 @@ Just press __F5__ or
 + Install snap on ctrlX CORE via ctrlX web interface
 + For debugging snaps see [here](https://snapcraft.io/docs/debug-snaps)
 
-Now you're ready to code .NET on ctrlX! 
+Now you're ready to code .NET on ctrlX!
 
 ## Best Practise
 
@@ -136,7 +136,7 @@ There different concepts to write a ctrlX Data Layer provider:
 
 #### Create and register nodes with individual node handlers
 
-Create a provider, which creates and registers _all_ nodes with an _individual_ node handler 
+Create a provider, which creates and registers _all_ nodes with an _individual_ node handler
 
             n x CreateNode
             n x Register
@@ -186,7 +186,7 @@ __Samples:__
 
 #### Virtual provider (lightweight): Register on wildcard and manage virtual nodes
 
-Create just _one_ node with a single node handler, registered to a _wildcard_ address  (e.g. myroot/**) and managing the nodes for your own. This _lightweight_ handler returns _virtual_ nodes in _OnBrowse()_ method. 
+Create just _one_ node with a single node handler, registered to a _wildcard_ address  (e.g. myroot/**) and managing the nodes for your own. This _lightweight_ handler returns _virtual_ nodes in _OnBrowse()_ method.
 See ctrlX Data Layer documentation for details.
 
             1 x CreateNode
@@ -221,11 +221,11 @@ The following operators perform arithmetic operations with operands of numeric t
 
 Those operators are supported by all integral and floating-point numeric types.
 
-In the case of integral types, those operators (except the ++ and -- operators) are defined for the __int__, __uint__, __long__, and __ulong__ types. 
+In the case of integral types, those operators (except the ++ and -- operators) are defined for the __int__, __uint__, __long__, and __ulong__ types.
 
-When operands are of other integral types (__sbyte__, __byte__, __short__, __ushort__, or __char__), their values are __converted to the int type__, which is also the __result type__ of an operation. 
+When operands are of other integral types (__sbyte__, __byte__, __short__, __ushort__, or __char__), their values are __converted to the int type__, which is also the __result type__ of an operation.
 
-When operands are of __different integral or floating-point__ types, their values are __converted to the closest containing type__, if such a type exists. For more information, see the Numeric promotions section of the C# language specification. 
+When operands are of __different integral or floating-point__ types, their values are __converted to the closest containing type__, if such a type exists. For more information, see the Numeric promotions section of the C# language specification.
 
 The ++ and -- operators are defined for all integral and floating-point numeric types and the char type.
 

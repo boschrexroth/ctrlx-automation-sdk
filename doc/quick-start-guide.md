@@ -27,7 +27,7 @@ See the installation instructions on: [Installation of the ctrlX AUTOMATION SDK]
 
 * __Build one or both snaps__
 
-To build a snap for a ctrlX CORE<sup>virtual</sup> enter:
+To build a snap for a ctrlX CORE^virtual^ enter:
 
     ./build-snap-amd64.sh
 
@@ -62,4 +62,3 @@ There should appear several nodes created by the snap.
 * [SSH Connection](ssh_connection.md)
 
 * [All sample projects](samples.md)
-

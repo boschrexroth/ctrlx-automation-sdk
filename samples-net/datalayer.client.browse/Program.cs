@@ -5,9 +5,9 @@
  */
 
 using Datalayer;
+using Samples.Datalayer.Client.Browse;
 using System;
 using System.Threading.Tasks;
-using Samples.Datalayer.Client.Browse;
 
 // Create TaskCompletionSource to wait for process termination  
 var tcs = new TaskCompletionSource();
@@ -31,7 +31,7 @@ Console.WriteLine("ctrlX Data Layer system started.");
 // Create a remote address with the parameters according to your environment
 var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
-// Create the client with remote connection string
+// Create a Datalayer Client instance and connect. Automatically reconnects if the connection is interrupted.
 using var client = system.Factory.CreateClient(remote);
 Console.WriteLine("ctrlX Data Layer client created.");
 

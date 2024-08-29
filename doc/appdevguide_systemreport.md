@@ -4,8 +4,8 @@ Please refer to the App Development Guide for further information.
 
 The content of this document may be subject of change in future.
 
-
 # Introduction
+
 The ctrlX OS system report is provided as zip file. ctrlX OS Apps can participate in this mechanism and provide their own log information and other files.
 This document describes, which interfaces are available in ctrlX OS to automatically add App specific information to the system report.
 
@@ -45,16 +45,19 @@ The files, which will be part of the System Report, will be provided in this dir
 ```yaml
 $SNAP_DATA/package-run/$SNAP_INSTANCE_NAME/logs
 ```
+
 - Access mode for files: 0644
 - Access mode for the directory: 0755
 
-
 # Example
-With    
+
+With
+
 ```yaml
 $SNAP_INSTANCE_NAME: my-snap
 $SNAP_DATA: /var/snap/my-snap/current
 ```
+
 and the directory structure
 
 ```yaml
@@ -67,6 +70,7 @@ drwxr-xr-x  root root  /var/snap/my-snap/current/package-run/my-snap/logs/my-dir
 -rw-r--r--  root root  /var/snap/my-snap/current/package-run/my-snap/logs/my-dir/my-other-file.dat
 drwxr-xr-x  root root  /var/snap/my-snap/current/package-run/my-snap/logs/my-empty-dir
 ```
+
 the following files and directories are added to the system report:
 
 ```yaml

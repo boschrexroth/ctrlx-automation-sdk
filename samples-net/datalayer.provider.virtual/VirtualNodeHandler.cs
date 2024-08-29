@@ -10,7 +10,6 @@ using Google.FlatBuffers;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
-using System.Threading;
 
 namespace Samples.Datalayer.Provider.Virtual
 {

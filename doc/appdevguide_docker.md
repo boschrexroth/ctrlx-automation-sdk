@@ -1,11 +1,8 @@
-# Document Overview
-
 This document is part of the Bosch Rexroth ctrlX OS App Development Guideline, and describes specific topics for Apps which are based on the Docker container technology
 
 Please refer to the App Development Guide for further information about general requirements and checks
 
 The content of this document may be subject of change in future.
-
 
 # 1. Artifacts / Files
 
@@ -13,7 +10,7 @@ In addition to a native Ubuntu Core App, a Docker App shall provide the files in
 
 | Files | Description | Value(s) | Optional / Mandatory |
 | --- | --- | --- |--- |
-| Docker-compose.yml | The docker-compose.yml file contains the configuration and options to run the services required by the snap | docker-compose.yml	| Mandatory
+| Docker-compose.yml | The docker-compose.yml file contains the configuration and options to run the services required by the snap | docker-compose.yml	| Mandatory |
 | Docker-compose.env | The docker-compose.env file contains the environment variable(s) set to run the snaps | docker-compose.env |Optional |
 
 # 2. Base Checks
@@ -28,6 +25,7 @@ In addition to the checks for snap.yaml which are described [here](appdevguide_b
 | docker-volumes | manage app data | Mandatory |
 
 The mandatory entries must be provided like the following:
+
 ```yaml
 parts:
   docker-compose:
@@ -50,7 +48,9 @@ slots:
         - $SNAP_DATA/docker-volumes/${SNAPCRAFT_PROJECT_NAME}
 
 ```
+
 ## 2.2 docker-compose.yml
+
 | Item | Content | Optional / Mandatory |
 | --- | --- | --- |
 | version | version of the docker-compose | Mandatory |
@@ -58,8 +58,7 @@ slots:
 | volumes | mounted volumes | Optional |
 | ports | described ports are not conflicting with standard/blocked ports. and app uses only described ports | Optional |
 
-
-Note: For example, here you can find information about syntax of a compose file: https://github.com/compose-spec/compose-spec/blob/master/spec.md
+Note: For example, here you can find information about syntax of a compose file: <https://github.com/compose-spec/compose-spec/blob/master/spec.md>
 
 ## 2.3 docker-compose.env
 

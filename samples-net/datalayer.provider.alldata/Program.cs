@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: MIT
  */
 
+using Datalayer;
+using Samples.Datalayer.Provider.Alldata;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Datalayer;
-using Samples.Datalayer.Provider.Alldata;
 
 // Create TaskCompletionSource to wait for process termination  
 var tcs = new TaskCompletionSource();
@@ -32,7 +32,7 @@ Console.WriteLine("ctrlX Data Layer system started.");
 // Create a remote address with the parameters according to your environment
 var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
-// Create the provider with remote connection string
+// Create a Datalayer Provider instance and connect. Automatically reconnects if the connection is interrupted.
 using var provider = system.Factory.CreateProvider(remote);
 
 // Register type with binary flatbuffers schema file: sampleSchema.bfbs (auto generated from sampleSchema.fbs by flatc compiler)
@@ -131,7 +131,7 @@ Console.WriteLine($"Provider started: {startResult}");
 // Check if provider is connected
 if (!provider.IsConnected)
 {
-    // We exit and retry after app daemon restart-delay (see snapcraft.yaml)
+   // Initially exit and retry after app restart-delay (see snapcraft.yaml)
     Console.WriteLine($"Provider is not connected -> exit");
     return;
 }

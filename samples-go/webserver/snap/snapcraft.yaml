@@ -13,6 +13,12 @@ grade: stable
 confinement: strict # use 'strict' once you have the right plugs and slot
 base: core22
 
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 apps:
   my-server:
     command: ./bin/webserver
@@ -34,7 +40,7 @@ parts:
     source: .
     plugin: go
     override-build: |
-      case $SNAPCRAFT_ARCH_TRIPLET in
+      case $CRAFT_ARCH_TRIPLET in
         aarch64-linux-gnu)
           export GOARCH=arm64
           export GOARM=7
@@ -51,7 +57,7 @@ parts:
     source: ./configs
     plugin: dump
     organize:
-      'package-assets/*': package-assets/${SNAPCRAFT_PROJECT_NAME}/
+      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
 
   my-server:
     plugin: dump
@@ -66,13 +72,13 @@ slots:
     content: package-assets
     source:
       read:
-        - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP/package-assets/${CRAFT_PROJECT_NAME}
   package-run:
     interface: content
     content: package-run
     source:
       write:
-        - $SNAP_DATA/package-run/${SNAPCRAFT_PROJECT_NAME}
+        - $SNAP_DATA/package-run/${CRAFT_PROJECT_NAME}
 
 plugs:
   active-solution:
