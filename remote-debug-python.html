@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -2225,11 +2225,11 @@
 <h3 id="ip-address-of-a-ctrlx-core">IP Address of a ctrlX CORE<a class="headerlink" href="#ip-address-of-a-ctrlx-core" title="Permanent link">&para;</a></h3>
 <p>From the build environment ctrlX CORE devices are connected via TCP/IP. Assuming we are using a (QEMU) virtual machine as build environment the different kind of ctrlX CORE devices are reachable over these IP addresses:</p>
 <ol>
-<li>ctrlX CORE<sup>virtual</sup> with port forwarding: 10.0.2.2 </li>
+<li>ctrlX CORE<sup>virtual</sup> with port forwarding: 10.0.2.2</li>
 <li>ctrlX CORE<sup>virtual</sup> with network adapter: 192.168.1.1</li>
 <li>ctrlX CORE: real IP address</li>
 </ol>
-<p>To point 1.: 
+<p>To point 1.:
 From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE<sup>virtual</sup> has no own IP address. The connections to the control are realized via port forwarding.</p>
 <h3 id="set-up-ssh-public-key-authentication">Set up SSH Public Key Authentication<a class="headerlink" href="#set-up-ssh-public-key-authentication" title="Permanent link">&para;</a></h3>
 <p>Debugging is based on SSH, so SSH should be set up between the debugger client on the host computer and the debugger server on the ctrlX CORE. To make logging in easier public key authentification should be installed.</p>
@@ -2238,9 +2238,9 @@ From the point of view of the virtual machine this is the IP address of the host
 <p class="admonition-title">Important</p>
 <p>You need an account with root rights and a home directory on the ctrlX CORE.</p>
 </div>
-<p>Creating the key pair and the installation both on the host computer and on the ctrlX CORE (remote computer) is described here </p>
-<p><a href="https://kb.iu.edu/d/aews">Set up SSH public key authentication to connect to a remote system</a> </p>
-<p>or here (in German) </p>
+<p>Creating the key pair and the installation both on the host computer and on the ctrlX CORE (remote computer) is described here</p>
+<p><a href="https://kb.iu.edu/d/aews">Set up SSH public key authentication to connect to a remote system</a></p>
+<p>or here (in German)</p>
 <p><a href="https://www.thomas-krenn.com/de/wiki/OpenSSH_Public_Key_Authentifizierung_unter_Ubuntu">OpenSSH Public Key Authentifizierung unter Ubuntu</a>.</p>
 <p>Additional hints:</p>
 <div class="highlight"><pre><span></span><code>- Use standard file names: &quot;id_rsa&quot; for the private and &quot;id_rsa.pub&quot; for the public key file.
@@ -2251,7 +2251,7 @@ From the point of view of the virtual machine this is the IP address of the host
 <p>This chapter describes remote debugging of snap written in Python.</p>
 <p>In the sample project samples-python/datalayer.remote.debug all the features described in this chapter have been implemented.</p>
 <h3 id="using-visual-studio-code-additional-tasks-in-launchjson">Using Visual Studio Code - Additional Tasks in launch.json<a class="headerlink" href="#using-visual-studio-code-additional-tasks-in-launchjson" title="Permanent link">&para;</a></h3>
-<p>On the host computer Visual Studio Code is used as Integrated Development Environment (IDE). </p>
+<p>On the host computer Visual Studio Code is used as Integrated Development Environment (IDE).</p>
 <p>For general informations regarding Python debugging in Visual Studio Code see <a href="https://code.visualstudio.com/docs/python/debugging">https://code.visualstudio.com/docs/python/debugging</a>, chapter "Debugging by attaching over a network connection".</p>
 <p>The Python Visual Studio Code extension has a Python debug client. For a remote debugging session we have add a configuration set with these parameters/values:</p>
 <ul>
@@ -2261,58 +2261,59 @@ From the point of view of the virtual machine this is the IP address of the host
 <li>and a link to the exe</li>
 </ul>
 <p>Here you can find the complete file: samples-python/datalayer.remote.debug/.vscode/launch.json</p>
-<p>There are three launch configurations for remote debugging:
-* "Remote ctrlX COREvirtual - Port forwarding"
-* "Remote ctrlX COREvirtual - Network adapter"
-* "Remote ctrlX CORE"</p>
+<p>There are three launch configurations for remote debugging:</p>
+<ul>
+<li>"Remote ctrlX COREvirtual - Port forwarding"</li>
+<li>"Remote ctrlX COREvirtual - Network adapter"</li>
+<li>"Remote ctrlX CORE"</li>
+</ul>
 <h3 id="preparing-your-python-project-for-remote-debugging">Preparing your Python Project for Remote Debugging<a class="headerlink" href="#preparing-your-python-project-for-remote-debugging" title="Permanent link">&para;</a></h3>
 <p>Installing the required Python packages into your build environment ist described here: samples-python/python.md</p>
-<p>In our sample project the Python package  <strong>debugpy</strong> is used for remote debugging of Python code. </p>
+<p>In our sample project the Python package  <strong>debugpy</strong> is used for remote debugging of Python code.</p>
 <h4 id="the-python-package-debugpy">The Python Package debugpy<a class="headerlink" href="#the-python-package-debugpy" title="Permanent link">&para;</a></h4>
-<p>The package debugpy provides a debug server and functions to configure the debug connection and to set breakpoints. </p>
+<p>The package debugpy provides a debug server and functions to configure the debug connection and to set breakpoints.</p>
 <p>The configuration of the debug connection and the start of the debug server have to be called in the Python application program so that the application stops (preferred in the startup phase) and waits for a debug client whow wants attach to the process.</p>
 <p>Setting breakpoints by program code is optional.</p>
 <p>To make the usage of debugpy easier the essential function calls are extracted and provided in the script samples-python/datalayer.remote.debug/debugging.py.</p>
 <ul>
 <li>debugging.init() scans the applications parameter list for --debug-port=... If this parameter is not found remote debugging will be not enabled. Usage see main.py.</li>
-<li>debugging.wait_for_client(port: int) is an internal function called by init(). It configures the remote debug connections and starts the debug server. The application is stopped until a debug client connects. </li>
+<li>debugging.wait_for_client(port: int) is an internal function called by init(). It configures the remote debug connections and starts the debug server. The application is stopped until a debug client connects.</li>
 <li>With debugging.breakpoint() breakpoints can be set by the Python code itself - see main.py.</li>
 </ul>
 <h4 id="packing-debugpy-into-your-snap">Packing debugpy into your snap<a class="headerlink" href="#packing-debugpy-into-your-snap" title="Permanent link">&para;</a></h4>
 <p>snapcraft will pack debugpy into the snap because it is listed in the parameter "install_requires" of the function setup() in setup.py.</p>
 <h3 id="creating-and-installing-a-snap">Creating and Installing a snap<a class="headerlink" href="#creating-and-installing-a-snap" title="Permanent link">&para;</a></h3>
 <p>Start a terminal and enter</p>
-<div class="codehilite"><pre><span></span><code>snapcraft clean --destructive-mode
-snapcraft --destructive-mode
+<div class="highlight"><pre><span></span><code>    snapcraft clean --destructive-mode
+    snapcraft --destructive-mode
 </code></pre></div>
-
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>To create a snap for a ctrlX CORE you need an aarch64 (arm64) building environment e.g. a QEMU VM with aarch64 emulation.</p>
 </div>
-<p>Install the snap on your ctrlX CORE. </p>
+<p>Install the snap on your ctrlX CORE.</p>
 <p>After installation of the snap the app will be started at once - but without remote debugging enabled.</p>
 <h3 id="start-your-python-app-in-remote-debugging-mode">Start your Python App in Remote Debugging Mode<a class="headerlink" href="#start-your-python-app-in-remote-debugging-mode" title="Permanent link">&para;</a></h3>
 <p>Connect via SSH to your ctrlX and start your app in debugging mode.</p>
 <p>Stop the snap:</p>
-<div class="codehilite"><pre><span></span><code>sudo snap stop sdk-py-remote-debug
+<div class="highlight"><pre><span></span><code>    sudo snap stop sdk-py-remote-debug
 </code></pre></div>
-
 <p>Start the app providing a debug port as command line parameter:</p>
-<div class="codehilite"><pre><span></span><code>sudo snap run sdk-py-remote-debug.app --debug-port=12345
+<div class="highlight"><pre><span></span><code>    sudo snap run sdk-py-remote-debug.app --debug-port=12345
 </code></pre></div>
-
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Ensure that the port number is the same as configured in launch.json.</p>
 </div>
 <p>Now the app holds on startup and waits for a debug client to connect.</p>
 <h3 id="do-remote-debugging-with-visual-studio-code">Do Remote Debugging with Visual Studio Code<a class="headerlink" href="#do-remote-debugging-with-visual-studio-code" title="Permanent link">&para;</a></h3>
-<p>In Visual Studio Code 
-* Click the 'Run and Debug' icon in the side bar,
-* select the according launch configuration for remote debugging
-* and enter F5</p>
-<p>Visual Studio Code will connect to the debug server on the ctrlX CORE and attach to the process. </p>
+<p>In Visual Studio Code</p>
+<ul>
+<li>Click the 'Run and Debug' icon in the side bar,</li>
+<li>select the according launch configuration for remote debugging</li>
+<li>and enter F5</li>
+</ul>
+<p>Visual Studio Code will connect to the debug server on the ctrlX CORE and attach to the process.</p>
 <p>Breakpoints can be set within the Python editor. Furthermore breakpoints set programatically are active.</p>
 <h3 id="using-python-package-debugpy-in-your-own-projects">Using Python Package debugpy in your own Projects<a class="headerlink" href="#using-python-package-debugpy-in-your-own-projects" title="Permanent link">&para;</a></h3>
 <p>To use remote debugging in your own projects just do following steps:</p>
@@ -2400,7 +2401,7 @@ snapcraft --destructive-mode
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -1918,17 +1918,19 @@ This document describes, which interfaces are available in ctrlX OS to automatic
 </code></pre></div>
 <h2 id="files-for-system-report">Files for System Report<a class="headerlink" href="#files-for-system-report" title="Permanent link">&para;</a></h2>
 <p>The files, which will be part of the System Report, will be provided in this directory:</p>
-<p><div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">$SNAP_DATA/package-run/$SNAP_INSTANCE_NAME/logs</span>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">$SNAP_DATA/package-run/$SNAP_INSTANCE_NAME/logs</span>
 </code></pre></div>
-- Access mode for files: 0644
-- Access mode for the directory: 0755</p>
+<ul>
+<li>Access mode for files: 0644</li>
+<li>Access mode for the directory: 0755</li>
+</ul>
 <h1 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h1>
-<p>With  <br />
+<p>With</p>
 <div class="highlight"><pre><span></span><code><span class="nt">$SNAP_INSTANCE_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-snap</span>
 <span class="nt">$SNAP_DATA</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/snap/my-snap/current</span>
 </code></pre></div>
-and the directory structure</p>
-<p><div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">drwxr-xr-x  root root  /var/snap/my-snap/current</span>
+<p>and the directory structure</p>
+<div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">drwxr-xr-x  root root  /var/snap/my-snap/current</span>
 <span class="l l-Scalar l-Scalar-Plain">drwxr-xr-x  root root  /var/snap/my-snap/current/package-run</span>
 <span class="l l-Scalar l-Scalar-Plain">drwxr-xr-x  root root  /var/snap/my-snap/current/package-run/my-snap</span>
 <span class="l l-Scalar l-Scalar-Plain">drwxr-xr-x  root root  /var/snap/my-snap/current/package-run/my-snap/logs</span>
@@ -1937,7 +1939,7 @@ and the directory structure</p>
 <span class="l l-Scalar l-Scalar-Plain">-rw-r--r--  root root  /var/snap/my-snap/current/package-run/my-snap/logs/my-dir/my-other-file.dat</span>
 <span class="l l-Scalar l-Scalar-Plain">drwxr-xr-x  root root  /var/snap/my-snap/current/package-run/my-snap/logs/my-empty-dir</span>
 </code></pre></div>
-the following files and directories are added to the system report:</p>
+<p>the following files and directories are added to the system report:</p>
 <div class="highlight"><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">my-log-file.log</span>
 <span class="l l-Scalar l-Scalar-Plain">my-dir/my-other-file.dat</span>
 <span class="l l-Scalar l-Scalar-Plain">my-empty-dir</span>
@@ -2021,7 +2023,7 @@ the following files and directories are added to the system report:</p>
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

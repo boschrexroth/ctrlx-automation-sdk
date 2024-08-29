@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -2058,7 +2058,7 @@
 <ul>
 <li>10.0.2.2 is the IP address of the host computer</li>
 <li>10.0.2.2 is also used as gateway address *1)</li>
-<li>http://10.0.2.2:3128 is the URL of the proxy server px.exe running on the Windows host</li>
+<li><a href="http://10.0.2.2:3128">http://10.0.2.2:3128</a> is the URL of the proxy server px.exe running on the Windows host</li>
 </ul>
 <p>*1) The QEMU instance emulates a gateway server. This makes it possible that other network participants can be reached via their IP address. The QEMU internal gateway service routes the network packages to their destinations.</p>
 <h2 id="connection-between-host-and-ctrlx-core-controls">Connection Between Host and ctrlX CORE Controls<a class="headerlink" href="#connection-between-host-and-ctrlx-core-controls" title="Permanent link">&para;</a></h2>
@@ -2074,7 +2074,7 @@
 <p>In the picture above port 12345 is used for C++ remote debugging and its forwarding has to be configured in ctrlX WORKS too.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>If port 8443 of the host is forwarded to port 443 of the ctrlX (default) add sslport=8443 to the TCP connection string: </p>
+<p>If port 8443 of the host is forwarded to port 443 of the ctrlX (default) add sslport=8443 to the TCP connection string:</p>
 </div>
 <p>In this case the connection string has this suffix <strong>?sslport=8443</strong>:</p>
 <div class="codehilite"><pre><span></span><code><span class="nl">tcp</span><span class="p">:</span><span class="c1">//boschrexroth:boschrexroth@10.0.2.0?sslport=8443</span>
@@ -2090,7 +2090,7 @@
 </code></pre></div>
 
 <h3 id="ctrlx-core">ctrlX CORE<a class="headerlink" href="#ctrlx-core" title="Permanent link">&para;</a></h3>
-<p>The ctrlX CORE is connected to the Windows host via its network adapter. </p>
+<p>The ctrlX CORE is connected to the Windows host via its network adapter.</p>
 <p>The connection string for ctrlX Data Layer access e.g. is:</p>
 <div class="codehilite"><pre><span></span><code><span class="nl">tcp</span><span class="p">:</span><span class="c1">//boschrexroth:boschrexroth@10.52.244.123</span>
 </code></pre></div>
@@ -2173,7 +2173,7 @@
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -2521,7 +2521,7 @@
 <div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="n">ssh</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mi">10022</span><span class="w"> </span><span class="n">boschrexroth</span><span class="nv">@localhost</span>
 </code></pre></div>
 
-<p>Start the script to install .NET as snap on your VM:</p>
+<p>Start the script to install .NET as snap on your VM (~/ctrlx-automation-sdk/scripts):</p>
 <div class="codehilite"><pre><span></span><code>  ./install-dotnet-sdk.sh
 </code></pre></div>
 
@@ -2551,7 +2551,7 @@
 
 <p>Edit the NuGet configuration file with your preferred editor or with Visual Studio Code and add a <em>config</em> section containing the <strong>http_proxy</strong> and <strong>https_proxy</strong> inside the <em>configuration</em> section like shown below.</p>
 <p><strong>Example:</strong></p>
-<p>The following sample uses the <a href="https://pypi.org/project/px-proxy">Px Proxy</a> running on the host computer. From the VM's point of view, this proxy can be reached with the URL http://10.0.2.2:3128.</p>
+<p>The following sample uses the <a href="https://pypi.org/project/px-proxy">Px Proxy</a> running on the host computer. From the VM's point of view, this proxy can be reached with the URL <a href="http://10.0.2.2:3128">http://10.0.2.2:3128</a>.</p>
 <div class="codehilite"><pre><span></span><code><span class="w">  </span><span class="nt">&lt;configuration&gt;</span>
 <span class="w">        </span><span class="nt">&lt;config&gt;</span>
 <span class="w">              </span><span class="nt">&lt;add</span><span class="w"> </span><span class="na">key=</span><span class="s">&quot;http_proxy&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;http://10.0.2.2:3128&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
@@ -2610,12 +2610,12 @@
 <li>Install snap on ctrlX CORE via ctrlX web interface</li>
 <li>For debugging snaps see <a href="https://snapcraft.io/docs/debug-snaps">here</a></li>
 </ul>
-<p>Now you're ready to code .NET on ctrlX! </p>
+<p>Now you're ready to code .NET on ctrlX!</p>
 <h2 id="best-practise">Best Practise<a class="headerlink" href="#best-practise" title="Permanent link">&para;</a></h2>
 <h3 id="provider-concepts">Provider Concepts<a class="headerlink" href="#provider-concepts" title="Permanent link">&para;</a></h3>
 <p>There different concepts to write a ctrlX Data Layer provider:</p>
 <h4 id="create-and-register-nodes-with-individual-node-handlers">Create and register nodes with individual node handlers<a class="headerlink" href="#create-and-register-nodes-with-individual-node-handlers" title="Permanent link">&para;</a></h4>
-<p>Create a provider, which creates and registers <em>all</em> nodes with an <em>individual</em> node handler </p>
+<p>Create a provider, which creates and registers <em>all</em> nodes with an <em>individual</em> node handler</p>
 <div class="codehilite"><pre><span></span><code>        n x CreateNode
         n x Register
         Node : Handler = 1:1
@@ -2663,7 +2663,7 @@
 <li>datalayer.provider.alldata</li>
 </ul>
 <h4 id="virtual-provider-lightweight-register-on-wildcard-and-manage-virtual-nodes">Virtual provider (lightweight): Register on wildcard and manage virtual nodes<a class="headerlink" href="#virtual-provider-lightweight-register-on-wildcard-and-manage-virtual-nodes" title="Permanent link">&para;</a></h4>
-<p>Create just <em>one</em> node with a single node handler, registered to a <em>wildcard</em> address  (e.g. myroot/**) and managing the nodes for your own. This <em>lightweight</em> handler returns <em>virtual</em> nodes in <em>OnBrowse()</em> method. 
+<p>Create just <em>one</em> node with a single node handler, registered to a <em>wildcard</em> address  (e.g. myroot/**) and managing the nodes for your own. This <em>lightweight</em> handler returns <em>virtual</em> nodes in <em>OnBrowse()</em> method.
 See ctrlX Data Layer documentation for details.</p>
 <div class="codehilite"><pre><span></span><code>        1 x CreateNode
         1 x Register
@@ -2695,9 +2695,9 @@ See ctrlX Data Layer documentation for details.</p>
 <li><strong>Binary</strong>: * (multiplication), / (division), % (remainder), + (addition), and - (subtraction) operators</li>
 </ul>
 <p>Those operators are supported by all integral and floating-point numeric types.</p>
-<p>In the case of integral types, those operators (except the ++ and -- operators) are defined for the <strong>int</strong>, <strong>uint</strong>, <strong>long</strong>, and <strong>ulong</strong> types. </p>
-<p>When operands are of other integral types (<strong>sbyte</strong>, <strong>byte</strong>, <strong>short</strong>, <strong>ushort</strong>, or <strong>char</strong>), their values are <strong>converted to the int type</strong>, which is also the <strong>result type</strong> of an operation. </p>
-<p>When operands are of <strong>different integral or floating-point</strong> types, their values are <strong>converted to the closest containing type</strong>, if such a type exists. For more information, see the Numeric promotions section of the C# language specification. </p>
+<p>In the case of integral types, those operators (except the ++ and -- operators) are defined for the <strong>int</strong>, <strong>uint</strong>, <strong>long</strong>, and <strong>ulong</strong> types.</p>
+<p>When operands are of other integral types (<strong>sbyte</strong>, <strong>byte</strong>, <strong>short</strong>, <strong>ushort</strong>, or <strong>char</strong>), their values are <strong>converted to the int type</strong>, which is also the <strong>result type</strong> of an operation.</p>
+<p>When operands are of <strong>different integral or floating-point</strong> types, their values are <strong>converted to the closest containing type</strong>, if such a type exists. For more information, see the Numeric promotions section of the C# language specification.</p>
 <p>The ++ and -- operators are defined for all integral and floating-point numeric types and the char type.</p>
 <p><strong>Example</strong>:</p>
 <p>Let' say we just wan't to increment a <strong>sbyte</strong> Variant value by keeping the data type, we have cast the result after performing the arithmetic operation:</p>
@@ -2798,7 +2798,7 @@ SPDX-License-Identifier: MIT</p>
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

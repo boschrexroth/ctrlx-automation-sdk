@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -2043,32 +2043,31 @@
 <li>Click px-v?.?.?-windows.zip (v?.?.? e.g. v0.8.4)</li>
 <li>The zip archive will be downloaded</li>
 <li>Unzip the content e.g. to c:\tools\px</li>
-<li>
-<p>Create a px-start.bat file in  with the content: </p>
-<p>cd c:\tools\px</p>
-<p>px.exe</p>
-</li>
-<li>
-<p>Manually call this bat file</p>
-</li>
+<li>Create a px-start.bat file in  with the content:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>    cd c:\tools\px
+
+    px.exe
+</code></pre></div>
+<ul>
+<li>Manually call this bat file</li>
 </ul>
 <p>Enter this command for further usage of Px:</p>
-<div class="codehilite"><pre><span></span><code>px.exe --help
+<div class="highlight"><pre><span></span><code>    px.exe --help
 </code></pre></div>
-
 <p>For automatically run at startup do following steps:</p>
 <ul>
 <li>Create a link to px-start.bat</li>
-<li>Open the startup folder with Windows logo key + R, enter <strong>shell:startup</strong> </li>
+<li>Open the startup folder with Windows logo key + R, enter <strong>shell:startup</strong></li>
 <li>Move the link to px-start.bat into this folder</li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Px provides both http and https access via default port <strong>3128</strong>. If this port is not available on the host it can be changed in px.ini BUT: The alternative port has to be changed in the VM too - see <a href="setup_qemu_ubuntu.html">Setup a QEMU VM</a> and <a href="setup_windows_virtualbox_ubuntu.html">Setup a Virtual Box VM</a>. </p>
+<p>Px provides both http and https access via default port <strong>3128</strong>. If this port is not available on the host it can be changed in px.ini BUT: The alternative port has to be changed in the VM too - see <a href="setup_qemu_ubuntu.html">Setup a QEMU VM</a> and <a href="setup_windows_virtualbox_ubuntu.html">Setup a Virtual Box VM</a>.</p>
 </div>
 <h2 id="proxy-settings-in-the-app-build-environment">Proxy Settings in the App Build Environment<a class="headerlink" href="#proxy-settings-in-the-app-build-environment" title="Permanent link">&para;</a></h2>
-<p>As mentioned a VM running on a host without direct internet access has to use a proxy server too. </p>
-<p>For the VM Px on the host is reachable via the URL <strong>http://10.0.2.2:3128</strong></p>
+<p>As mentioned a VM running on a host without direct internet access has to use a proxy server too.</p>
+<p>For the VM Px on the host is reachable via the URL <strong><a href="http://10.0.2.2:3128">http://10.0.2.2:3128</a></strong></p>
 <p>Note: 10.0.2.2 is the IP address of the host from the perspective of the App Build Environment. See also <a href="setup_qemu_ubuntu.html#qemu-virtual-machine-networking">QEMU Virtual Machine Networking</a></p>
 <p>For your information only - do not change if not necessary:</p>
 <p>This URL is stored as so called "Proxy Settings" in the VM e.g. in following files:</p>
@@ -2079,26 +2078,24 @@
 </ul>
 <p>*1) Here these environment variables are defined:</p>
 <ul>
-<li>http_proxy="http://10.0.2.2:3128"</li>
-<li>https_proxy="http://10.0.2.2:3128"</li>
-<li>HTTP_PROXY="http://10.0.2.2:3128"</li>
-<li>HTTPS_PROXY="http://10.0.2.2:3128"</li>
-<li>no_proxy=localhost,127.0.0.1,.local</li>
+<li><code>http_proxy="http://10.0.2.2:3128"</code></li>
+<li><code>https_proxy="http://10.0.2.2:3128"</code></li>
+<li><code>HTTP_PROXY="http://10.0.2.2:3128"</code></li>
+<li><code>HTTPS_PROXY="http://10.0.2.2:3128"</code></li>
+<li><code>no_proxy=localhost,127.0.0.1,.local</code></li>
 </ul>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <p>Check proxy function in the App Build Environment:</p>
-<div class="codehilite"><pre><span></span><code>wget http://www.boschrexroth.com
+<div class="highlight"><pre><span></span><code>    wget http://www.boschrexroth.com
 </code></pre></div>
-
 <p>If no error occurs the internet access via the proxy server is working. In this case remove the downloaded file.</p>
-<div class="codehilite"><pre><span></span><code>rm index.html*
+<div class="highlight"><pre><span></span><code>    rm index.html*
 </code></pre></div>
-
 <p>Check the following points if there are problems with Px:</p>
 <ul>
 <li>Are the proxy settings Proxy Settings in the App Build Environment fitting to the px.ini file on the host?</li>
 <li>For more informations about the settings in px.in see <a href="https://github.com/genotrance/px/blob/master/px.ini">px.ini on github</a></li>
-<li>Host PC: Is another proxy running e.g. cntlm? </li>
+<li>Host PC: Is another proxy running e.g. cntlm?</li>
 <li>Host PC: Enable logging with parameter log = 1 in px.ini</li>
 </ul>
 
@@ -2180,7 +2177,7 @@
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

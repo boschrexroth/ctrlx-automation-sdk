@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -1871,6 +1871,122 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-document-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Document Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-windows-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Windows Applications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Windows Applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-general-aspects" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. General Aspects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-specific-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Specific Topics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-plc-libraries-and-function-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. PLC Libraries and Function Blocks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. PLC Libraries and Function Blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-general-aspects" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. General Aspects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-specific-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Specific Topics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-node-red-palettes" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Node-RED Palettes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Node-RED Palettes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-general-aspects" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. General Aspects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-specific-topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Specific Topics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1888,34 +2004,42 @@
 
 
 <h1 id="appendix-to-the-ctrlx-app-development-guidelines">APPENDIX TO THE CTRLX APP DEVELOPMENT GUIDELINES<a class="headerlink" href="#appendix-to-the-ctrlx-app-development-guidelines" title="Permanent link">&para;</a></h1>
-<h1 id="1-document-overview">1. Document Overview<a class="headerlink" href="#1-document-overview" title="Permanent link">&para;</a></h1>
+<h2 id="1-document-overview">1. Document Overview<a class="headerlink" href="#1-document-overview" title="Permanent link">&para;</a></h2>
 <p>This document is part of the Bosch Rexroth ctrlX CORE App Development Guidelines, and gives hints for Components and Apps, which are not provided as Linux Ubuntu Core App.
 Please make sure that you know the App Development Guidelines, that you can easily understand the content of this document.</p>
-<p>The following deployment technologies are considered here
-- Windows Application (usually Engineering Tools for ctrlX CORE and ctrlX CORE Apps)
-- PLC Libraries, which are used in the ctrlX CORE PLC App based on Codesys
-- Node-RED palettes which are loaded into the ctrlX CORE Node-RED App</p>
-<p>For each technology this document povides
-- A List of aspects which have to be considered in general for onboarding to ctrlX World. Please refer to the App Development Guide for further information on these aspects.
-- A brief description of aspects, which are specific to the used deployment technology</p>
+<p>The following deployment technologies are considered here</p>
+<ul>
+<li>Windows Application (usually Engineering Tools for ctrlX CORE and ctrlX CORE Apps)</li>
+<li>PLC Libraries, which are used in the ctrlX CORE PLC App based on Codesys</li>
+<li>Node-RED palettes which are loaded into the ctrlX CORE Node-RED App</li>
+</ul>
+<p>For each technology this document povides</p>
+<ul>
+<li>A List of aspects which have to be considered in general for onboarding to ctrlX World. Please refer to the App Development Guide for further information on these aspects.</li>
+<li>A brief description of aspects, which are specific to the used deployment technology</li>
+</ul>
 <p>The content of this document may be subject of change in further versions of the Validation Process.</p>
-<h1 id="2-windows-applications">2. Windows Applications<a class="headerlink" href="#2-windows-applications" title="Permanent link">&para;</a></h1>
-<h2 id="21-general-aspects">2.1. General Aspects<a class="headerlink" href="#21-general-aspects" title="Permanent link">&para;</a></h2>
-<p>These aspects, which are also part of the App Development Guidelines main document, must be supported by Windows Applications:
-- <strong>Basic App Information</strong> - App Documentation (see App Development Guide Chapter 4.2)
-- <strong>Basic App Information</strong> - FOSS Info Provisioning (see App Development Guide Chapter 4.4)
-- <strong>Further App Information</strong> - FOSS Sources (see App Development Guide Chapter 5.1)
-- <strong>Further App Information</strong> - Semantic Versioning Scheme (see App Development Guide Chapter 5.2)
-- <strong>Working Set Overview</strong> - Test Setup for Typical Usage Scenario (see App Development Guide Chapter 6.4)
-- <strong>ctrlX Basic Mechanisms</strong> - License Handling (see App Development Guide Chapter 7.1) - this is applicable to Windows Applications only 
+<h2 id="2-windows-applications">2. Windows Applications<a class="headerlink" href="#2-windows-applications" title="Permanent link">&para;</a></h2>
+<h3 id="21-general-aspects">2.1. General Aspects<a class="headerlink" href="#21-general-aspects" title="Permanent link">&para;</a></h3>
+<p>These aspects, which are also part of the App Development Guidelines main document, must be supported by Windows Applications:</p>
+<ul>
+<li><strong>Basic App Information</strong> - App Documentation (see App Development Guide Chapter 4.2)</li>
+<li><strong>Basic App Information</strong> - FOSS Info Provisioning (see App Development Guide Chapter 4.4)</li>
+<li><strong>Further App Information</strong> - FOSS Sources (see App Development Guide Chapter 5.1)</li>
+<li><strong>Further App Information</strong> - Semantic Versioning Scheme (see App Development Guide Chapter 5.2)</li>
+<li><strong>Working Set Overview</strong> - Test Setup for Typical Usage Scenario (see App Development Guide Chapter 6.4)</li>
+<li><strong>ctrlX Basic Mechanisms</strong> - License Handling (see App Development Guide Chapter 7.1) - this is applicable to Windows Applications only
 which require licenses.
-Please get in touch with your ctrlX World partner manager at Bosch Rexroth for further information about Licensing on Windows</p>
-<h2 id="22-specific-topics">2.2 Specific Topics<a class="headerlink" href="#22-specific-topics" title="Permanent link">&para;</a></h2>
-<p>In addition to general aspects, Windows Applications must support the following topics:
-- <strong>Signed installation file</strong> (msi) with accordings certificate - the Application is protected against unwanted / unauthorized modification (like e.g. code injections)
-- <strong>System Requirements</strong> - Overview about minimum and recommended environment, like Windows version, Memory, Processor</p>
-<h1 id="3-plc-libraries-and-function-blocks">3. PLC Libraries and Function Blocks<a class="headerlink" href="#3-plc-libraries-and-function-blocks" title="Permanent link">&para;</a></h1>
-<h2 id="31-general-aspects">3.1. General Aspects<a class="headerlink" href="#31-general-aspects" title="Permanent link">&para;</a></h2>
+Please get in touch with your ctrlX World partner manager at Bosch Rexroth for further information about Licensing on Windows</li>
+</ul>
+<h3 id="22-specific-topics">2.2 Specific Topics<a class="headerlink" href="#22-specific-topics" title="Permanent link">&para;</a></h3>
+<p>In addition to general aspects, Windows Applications must support the following topics:</p>
+<ul>
+<li><strong>Signed installation file</strong> (msi) with accordings certificate - the Application is protected against unwanted / unauthorized modification (like e.g. code injections)</li>
+<li><strong>System Requirements</strong> - Overview about minimum and recommended environment, like Windows version, Memory, Processor</li>
+</ul>
+<h2 id="3-plc-libraries-and-function-blocks">3. PLC Libraries and Function Blocks<a class="headerlink" href="#3-plc-libraries-and-function-blocks" title="Permanent link">&para;</a></h2>
+<h3 id="31-general-aspects">3.1. General Aspects<a class="headerlink" href="#31-general-aspects" title="Permanent link">&para;</a></h3>
 <p>These aspects, which are also part of the App Development Guidelines main document, must be supported by PLC Libraries and Function Blocks:</p>
 <ul>
 <li><strong>Basic App Information</strong> - App Documentation (see App Development Guide Chapter 4.2)</li>
@@ -1928,7 +2052,7 @@ Please get in touch with your ctrlX World partner manager at Bosch Rexroth for f
 <li><strong>ctrlX Basic Mechanisms</strong> - License Handling (see App Development Guide Chapter 7.1)</li>
 <li><strong>ctrlX Basic Mechanisms</strong> - Library Signing (see App Development Guide Chapter 7.2) <em>Note: signing process currently in development at Rexroth</em></li>
 </ul>
-<h2 id="32-specific-topics">3.2 Specific Topics<a class="headerlink" href="#32-specific-topics" title="Permanent link">&para;</a></h2>
+<h3 id="32-specific-topics">3.2 Specific Topics<a class="headerlink" href="#32-specific-topics" title="Permanent link">&para;</a></h3>
 <p>In addition to general aspects, PLC Libraries and Function Blocks must support the following topics:</p>
 <ul>
 <li><strong>Library Header</strong> with official supplier info (Lib info)</li>
@@ -1936,8 +2060,8 @@ Please get in touch with your ctrlX World partner manager at Bosch Rexroth for f
 <li><strong>Compiled Library</strong> strongly recommended</li>
 <li><strong>System Requirements</strong> - PLC App version</li>
 </ul>
-<h1 id="4-node-red-palettes">4. Node-RED Palettes<a class="headerlink" href="#4-node-red-palettes" title="Permanent link">&para;</a></h1>
-<h2 id="41-general-aspects">4.1. General Aspects<a class="headerlink" href="#41-general-aspects" title="Permanent link">&para;</a></h2>
+<h2 id="4-node-red-palettes">4. Node-RED Palettes<a class="headerlink" href="#4-node-red-palettes" title="Permanent link">&para;</a></h2>
+<h3 id="41-general-aspects">4.1. General Aspects<a class="headerlink" href="#41-general-aspects" title="Permanent link">&para;</a></h3>
 <p>These aspects, which are also part of the App Development Guidelines main document, must be supported by Node-RED Palettes:</p>
 <ul>
 <li><strong>Basic App Information</strong> - App Documentation (see App Development Guide Chapter 4.2)</li>
@@ -1949,9 +2073,11 @@ Please get in touch with your ctrlX World partner manager at Bosch Rexroth for f
 <li><strong>Working Set Overview</strong> - Test Setup for Typical Usage Scenario (see App Development Guide Chapter 6.4)</li>
 <li><strong>ctrlX Basic Mechanisms</strong> - License Handling (see App Development Guide Chapter 7.1)</li>
 </ul>
-<h2 id="42-specific-topics">4.2 Specific Topics<a class="headerlink" href="#42-specific-topics" title="Permanent link">&para;</a></h2>
-<p>In addition to general aspects, Node-RED Palettes must support the following topics:
-- <strong>Provisioning / Deployment</strong> via Node-RED palette manager</p>
+<h3 id="42-specific-topics">4.2 Specific Topics<a class="headerlink" href="#42-specific-topics" title="Permanent link">&para;</a></h3>
+<p>In addition to general aspects, Node-RED Palettes must support the following topics:</p>
+<ul>
+<li><strong>Provisioning / Deployment</strong> via Node-RED palette manager</li>
+</ul>
 <p><strong>Copyright</strong>
 SPDX-FileCopyrightText: Bosch Rexroth AG</p>
 
@@ -2033,7 +2159,7 @@ SPDX-FileCopyrightText: Bosch Rexroth AG</p>
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

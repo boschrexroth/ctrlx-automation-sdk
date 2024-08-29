@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -121,7 +121,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#introduction" class="md-skip">
+        <a href="#requirements" class="md-skip">
           Skip to content
         </a>
       
@@ -1918,7 +1918,6 @@
   
 
 
-<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
 <p>Storage extension is a feature to extend the internal storage by an external media like μSD card or USB device. Storage extension was introduced with Device Admin 1.18.</p>
 <p>This storage is encrypted and bond to one ctrlX CORE, so it cannot be used to transfer data from one ctrlX CORE to another one. If a data transfer is required, please see documentation of <a href="data-exchange.html">Data exchange</a>.</p>
 <div class="admonition attention">
@@ -1940,27 +1939,23 @@
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 </div>
-<p><strong>Root user required</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="nv">The</span><span class="w"> </span><span class="nv">storage</span><span class="w"> </span><span class="nv">extension</span><span class="w"> </span><span class="nv">plug</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">on</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">denylist</span>.
-<span class="nv">Therefore</span><span class="w"> </span><span class="nv">only</span><span class="w"> </span><span class="nv">signed</span><span class="w"> </span><span class="nv">apps</span><span class="w"> </span><span class="nv">can</span><span class="w"> </span><span class="nv">use</span><span class="w"> </span><span class="nv">storage</span><span class="w"> </span><span class="nv">extension</span>.
-<span class="nv">To</span><span class="w"> </span><span class="nv">avoid</span><span class="w"> </span><span class="nv">trouble</span><span class="w"> </span><span class="nv">during</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">development</span>,<span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">ctrlX</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">required</span>
-<span class="nv">and</span><span class="w"> </span><span class="nv">the</span><span class="w"> </span><span class="nv">denylist</span><span class="w"> </span><span class="nv">has</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">be</span><span class="w"> </span><span class="nv">empty</span>.
+<h2 id="root-user-required">Root user required<a class="headerlink" href="#root-user-required" title="Permanent link">&para;</a></h2>
+<p>The storage extension plug is on the denylist.
+Therefore only signed apps can use storage extension.
+To avoid trouble during the development, a root user for the ctrlX is required
+and the denylist has to be empty.</p>
+<h2 id="empty-the-denylist">Empty the denylist<a class="headerlink" href="#empty-the-denylist" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="w">    </span>sudo<span class="w"> </span>-s
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>/etc/writable/integrity
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span>&gt;/etc/writable/integrity/denylist.json
+<span class="w">    </span>snap<span class="w"> </span>restart<span class="w"> </span>rexroth-deviceadminw.web
 </code></pre></div>
-
-<p><strong>Empty the denylist</strong></p>
-<div class="codehilite"><pre><span></span><code>sudo -s
-mkdir -p /etc/writable/integrity
-echo [] &gt;/etc/writable/integrity/denylist.json
-snap restart rexroth-deviceadminw.web
-</code></pre></div>
-
 <p>After clearing the denylist it's possible to test storage extension without signed apps.</p>
 <h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
 <p>Some modifications in your app are required to use storage extension.</p>
 <h1 id="snapcraftyaml">Snapcraft.yaml<a class="headerlink" href="#snapcraftyaml" title="Permanent link">&para;</a></h1>
 <p>The storage extension plug is required in <strong><a href="https://snapcraft.io/docs/snapcraft-yaml-reference">snapcraft.yaml</a></strong>. The type of the plug is <strong>mount-control</strong>, the necessary parameters are shown in the sample:</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <div class="highlight"><span class="filename">snapcraft.yaml</span><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storage-extension-sample</span>
 <span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Storage extension sample app</span>
 <span class="nt">base</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">core20</span>
@@ -1985,29 +1980,27 @@ snap restart rexroth-deviceadminw.web
 <span class="w">    </span><span class="nt">storage-extension-mnt</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mount-control</span>
 <span class="w">        </span><span class="nt">mount</span><span class="p">:</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">what</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/writable/system-data/var/run/mnt/storage-extension/${SNAPCRAFT_PROJECT_NAME}</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">what</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/writable/system-data/var/run/mnt/storage-extension/${SNAPCRAFT_PROJECT_NAME}</span>
 <span class="w">            </span><span class="nt">where</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$SNAP_COMMON/storage-extension/${SNAPCRAFT_PROJECT_NAME}</span>
 <span class="w">            </span><span class="nt">options</span><span class="p">:</span>
-<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rw</span>
-<span class="w">              </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bind</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rw</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bind</span>
 
 <span class="nt">apps</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">sample</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bin/sample</span>
 <span class="w">        </span><span class="nt">plugs</span><span class="p">:</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storage-extension-mnt</span>
-<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mount-observe</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">storage-extension-mnt</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mount-observe</span>
 </code></pre></div>
-</div>
 <p>Remark: the variable <code>${SNAPCRAFT_PROJECT_NAME}</code> is a known variable by snapcraft and will be replaced with the project name (here: <strong>storage-extension-sample</strong>). So no modifications in this block is required! The variable <code>$SNAP_COMMON</code> is known in the snap context.</p>
 <p>Your app needs the plugs <strong>mount-observe</strong> and the defined storage extension plug (here: <strong>storage-extension-mnt</strong>). If one of the plugs are missing, your app won't run like expected.</p>
 <h1 id="remove-hook">Remove hook<a class="headerlink" href="#remove-hook" title="Permanent link">&para;</a></h1>
 <p>There has to be a remove hook in your app. Otherwise, it's not possible to remove your app if a storage extension is available.</p>
 <p>To add the remove hook, the file <code>remove</code> has to be placed in the <code>snap/hooks</code> folder.</p>
 <p>Don't forget to mark the file as executable:</p>
-<div class="codehilite"><pre><span></span><code>chmod +x remove
+<div class="highlight"><pre><span></span><code><span class="w">    </span>chmod<span class="w"> </span>+x<span class="w"> </span>remove
 </code></pre></div>
-
 <div class="admonition remove">
 <p class="admonition-title">Remove</p>
 <div class="highlight"><pre><span></span><code> snapctl umount $SNAP_COMMON/storage-extension/$SNAP_NAME
@@ -2016,8 +2009,7 @@ snap restart rexroth-deviceadminw.web
 <p>Remark: The variables <code>$SNAP_COMMON</code> and <code>$SNAP_NAME</code> are known in the snap context.</p>
 <h1 id="app-start-script">App start script<a class="headerlink" href="#app-start-script" title="Permanent link">&para;</a></h1>
 <p>Before your app can start and use the storage extension, the storage extension mount must be done. Therefore, your start script has to mount the storage extension.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
+<h2 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h2>
 <div class="highlight"><span class="filename">script.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="c1"># check if storage extension is ready to use (prepared by Device Admin)</span>
@@ -2033,17 +2025,14 @@ snapctl<span class="w"> </span>mount<span class="w"> </span>-o<span class="w"> <
 
 <span class="nv">$SNAP</span>/your-app.sh
 </code></pre></div>
-</div>
 <h1 id="exclude-from-backup-support">Exclude from backup support<a class="headerlink" href="#exclude-from-backup-support" title="Permanent link">&para;</a></h1>
 <p>All your data from the storage extension are added to the backup by default. You typically use the storage extension when you have increased memory requirements in your app. Therefore it is necessary to exclude the storage extension from the backup.</p>
 <p>This will be done by adding a "part" in your snapcraft.yaml and add a snapshots.yaml to the project.</p>
-<div class="admonition example">
-<p class="admonition-title">Example</p>
+<h2 id="example_2">Example<a class="headerlink" href="#example_2" title="Permanent link">&para;</a></h2>
 <div class="highlight"><span class="filename">snapshots.yaml</span><pre><span></span><code><span class="nt">exclude</span><span class="p">:</span>
 <span class="w">    </span><span class="c1"># Exclude storage-extension partition from backup</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$SNAP_COMMON/storage-extension/*</span>
 </code></pre></div>
-</div>
 <h1 id="sample-app">Sample app<a class="headerlink" href="#sample-app" title="Permanent link">&para;</a></h1>
 <p>This sample app ( <a href="samples-snap/storage-extension/index.html">storage-extension-sample</a> ) is the minimum set to use storage extension.
 Feel free to add the content to your app.</p>
@@ -2065,9 +2054,7 @@ Feel free to add the content to your app.</p>
 <p class="admonition-title">Warning</p>
 Be careful: You cannot reuse the partition without formatting and encrypting it again. So all data will be lost!</div>
 </li>
-<li>
-<p><strong>Only one</strong> partition can be used as storage-extension at one time</p>
-</li>
+<li><strong>Only one</strong> partition can be used as storage-extension at one time</li>
 <li>Data on storage-extension is <strong>not</strong> part of backup/restore</li>
 <li>If necessary, you have to switch to service state to mount or unmount storage-extension partitions</li>
 </ul>
@@ -2151,7 +2138,7 @@ Be careful: You cannot reuse the partition without formatting and encrypting it 
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

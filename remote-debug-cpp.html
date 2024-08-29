@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -2327,11 +2327,11 @@
 <h3 id="ip-address-of-a-ctrlx-core">IP Address of a ctrlX CORE<a class="headerlink" href="#ip-address-of-a-ctrlx-core" title="Permanent link">&para;</a></h3>
 <p>From the build environment ctrlX CORE devices are connected via TCP/IP. Assuming we are using a (QEMU) virtual machine as build environment the different kind of ctrlX CORE devices are reachable over these IP addresses:</p>
 <ol>
-<li>ctrlX CORE<sup>virtual</sup> with port forwarding: 10.0.2.2 </li>
+<li>ctrlX CORE<sup>virtual</sup> with port forwarding: 10.0.2.2</li>
 <li>ctrlX CORE<sup>virtual</sup> with network adapter: 192.168.1.1</li>
 <li>ctrlX CORE: real IP address</li>
 </ol>
-<p>To point 1.: 
+<p>To point 1.:
 From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE<sup>virtual</sup> has no own IP address. The connections to the control are realized via port forwarding.</p>
 <h3 id="set-up-ssh-public-key-authentication">Set up SSH Public Key Authentication<a class="headerlink" href="#set-up-ssh-public-key-authentication" title="Permanent link">&para;</a></h3>
 <p>Debugging is based on SSH, so SSH should be set up between the debugger client on the host computer and the debugger server on the ctrlX CORE. To make logging in easier public key authentification should be installed.</p>
@@ -2340,34 +2340,37 @@ From the point of view of the virtual machine this is the IP address of the host
 <p class="admonition-title">Important</p>
 <p>You need an account with root rights and a home directory on the ctrlX CORE.</p>
 </div>
-<p>Creating the key pair and the installation both on the host computer and on the ctrlX CORE (remote computer) is described here </p>
-<p><a href="https://kb.iu.edu/d/aews">Set up SSH public key authentication to connect to a remote system</a> </p>
-<p>or here (in German) </p>
+<p>Creating the key pair and the installation both on the host computer and on the ctrlX CORE (remote computer) is described here</p>
+<p><a href="https://kb.iu.edu/d/aews">Set up SSH public key authentication to connect to a remote system</a></p>
+<p>or here (in German)</p>
 <p><a href="https://www.thomas-krenn.com/de/wiki/OpenSSH_Public_Key_Authentifizierung_unter_Ubuntu">OpenSSH Public Key Authentifizierung unter Ubuntu</a>.</p>
 <p>Additional hints:</p>
-<div class="highlight"><pre><span></span><code>- Use standard file names: &quot;id_rsa&quot; for the private and &quot;id_rsa.pub&quot; for the public key file.
-- On the host computer set the (UNIX) permissions attributes for &quot;id_rsa&quot; to 600 (-rw-------)
-- On the host computer use the file &quot;~/.ssh/config&quot; to configure several ssh connections to different ctrlX CORE devices.
-</code></pre></div>
+<ul>
+<li>Use standard file names: "id_rsa" for the private and "id_rsa.pub" for the public key file.</li>
+<li>On the host computer set the (UNIX) permissions attributes for "id_rsa" to 600 (-rw-------)</li>
+<li>On the host computer use the file "~/.ssh/config" to configure several ssh connections to different ctrlX CORE devices.</li>
+</ul>
 <h2 id="remote-debugging-c">Remote Debugging C++<a class="headerlink" href="#remote-debugging-c" title="Permanent link">&para;</a></h2>
 <h3 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h3>
-<p>Debugging C++ applications in their snap environment is done by two debugging tools:
-1. The <strong>gdb server</strong> is running on the remote target. During a debug session he will attach to the running process to be debugged.
-2. The <strong>gdb debugger</strong> is running on the build environment. At the start of a remote debugging session he will connect to the gdb server. For debugging all commands are sent to the server whow will execute them and send to response back to the gdb debugger.</p>
+<p>Debugging C++ applications in their snap environment is done by two debugging tools:</p>
+<ul>
+<li>The <strong>gdb server</strong> is running on the remote target. During a debug session he will attach to the running process to be debugged.</li>
+<li>The <strong>gdb debugger</strong> is running on the build environment. At the start of a remote debugging session he will connect to the gdb server. For debugging all commands are sent to the server whow will execute them and send to response back to the gdb debugger.</li>
+</ul>
 <p>The snap daemon (snapd) provides the gdb server as buildin tool.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-</div>
 <p>The application has to stop on startup so that the gdb server can attach to the running process.</p>
+</div>
 <p>For more informations about using gdb and gdb server in snap environment see <a href="https://snapcraft.io/docs/using-gdb-gdbserver">https://snapcraft.io/docs/using-gdb-gdbserver</a>.</p>
-<p>'Debugging with GDB' provides general informations about this debugging tool:<a href="https://sourceware.org/gdb/current/onlinedocs/gdb/"> https://sourceware.org/gdb/current/onlinedocs/gdb/</a></p>
+<p>'Debugging with GDB' provides general informations about this debugging tool:<a href="https://sourceware.org/gdb/current/onlinedocs/gdb/">https://sourceware.org/gdb/current/onlinedocs/gdb/</a></p>
 <h3 id="overview_1">Overview<a class="headerlink" href="#overview_1" title="Permanent link">&para;</a></h3>
 <p>This overview will give you a short explenation how remote debugging of a C++ snap application will work. A detailed description will follow in the next chapters.</p>
 <p>These are the basics points:</p>
 <ul>
 <li>Your C++ code has to raise a SIGSTOP signal in debug mode. This is done typically in the startup sequence or somewhere else where needed.</li>
 <li>You have to build your C++ snap in <strong>debug mode</strong> and install it on your ctrlX CORE.</li>
-<li>The snap application will be restarted manually via ssh with the command <code>sudo snap run --experimental-gdbserver=:12345 &lt;Snapname&gt;.&lt;Appname&gt;</code>  </li>
+<li>The snap application will be restarted manually via ssh with the command <code>sudo snap run --experimental-gdbserver=:12345 &lt;Snapname&gt;.&lt;Appname&gt;</code></li>
 <li>The execution of the application will stop when the SIGSTOP signal is raised so that the gdb server is able to connect.</li>
 <li>From your build environment the gdb debugger is started in remote mode. Provided with IP address and port nummber he can communicate with the gdb server on the ctrlX CORE.</li>
 <li>Now the debug process can be started using gdb debugger commands. Normally this is done from an IDE like VisualStudio Code.</li>
@@ -2391,13 +2394,12 @@ From the point of view of the virtual machine this is the IP address of the host
 <p>So start Visual Studio Code, connect to your build enviroment and open this folder.</p>
 <h4 id="raising-sigstop-in-the-c-code">Raising SIGSTOP in the C++ Code<a class="headerlink" href="#raising-sigstop-in-the-c-code" title="Permanent link">&para;</a></h4>
 <p>In main.cpp at the beginning of the 'int main()' function the code for raising the SIGSTOP signal is placed. The code is only compiled in debug mode:</p>
-<div class="codehilite"><pre><span></span><code><span class="cp">#ifdef MY_DEBUG</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Starting &#39;raise(SIGSTOP)&#39;, waiting for debugger..&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="w">    </span><span class="n">raise</span><span class="p">(</span><span class="n">SIGSTOP</span><span class="p">);</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Debugger connected, continuing program...&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-<span class="cp">#endif</span>
+<div class="highlight"><pre><span></span><code>    #ifdef MY_DEBUG
+        std::cout &lt;&lt; &quot;Starting &#39;raise(SIGSTOP)&#39;, waiting for debugger..&quot; &lt;&lt; std::endl;
+        raise(SIGSTOP);
+        std::cout &lt;&lt; &quot;Debugger connected, continuing program...&quot; &lt;&lt; std::endl;
+    #endif
 </code></pre></div>
-
 <h4 id="build-the-debug-snap">Build the Debug Snap<a class="headerlink" href="#build-the-debug-snap" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Select the Visual Studio Code extension CMake in the sidebar. At the top of the explorer window click on '...' (Views and more actions) and select 'Clean all Projects'.</li>
@@ -2408,65 +2410,61 @@ From the point of view of the virtual machine this is the IP address of the host
 <h4 id="install-the-debug-snap">Install the Debug Snap<a class="headerlink" href="#install-the-debug-snap" title="Permanent link">&para;</a></h4>
 <p>Install the debug snap on your ctrlX CORE. The application will be started but stops immediately because of raising the SIGSTOP signal at the beginning of the main function.</p>
 <h4 id="configuring-remote-debugging-in-visualstudio-code">Configuring Remote Debugging in VisualStudio Code<a class="headerlink" href="#configuring-remote-debugging-in-visualstudio-code" title="Permanent link">&para;</a></h4>
-<p>From Visual Studio Code we want to start the application with the snap run command. </p>
+<p>From Visual Studio Code we want to start the application with the snap run command.</p>
 <p>For this the file <strong>tasks.json</strong> contains the task <code>Launch Remote GDB Server</code></p>
-<div class="codehilite"><pre><span></span><code>{
-<span class="w">  </span>&quot;label&quot;:<span class="w"> </span>&quot;Launch<span class="w"> </span>Remote<span class="w"> </span>GDB<span class="w"> </span>Server&quot;,
-<span class="w">  </span>&quot;type&quot;:<span class="w"> </span>&quot;shell&quot;,
-<span class="w">  </span>&quot;problemMatcher&quot;:<span class="w"> </span>&quot;<span class="nv">$gcc</span>&quot;,
-<span class="w">  </span>&quot;command&quot;:<span class="w"> </span>&quot;ssh<span class="w"> </span><span class="cp">${</span><span class="nb">input</span><span class="p">:</span><span class="n">Root</span><span class="o">-</span><span class="n">User</span><span class="cp">}</span>@<span class="cp">${</span><span class="nb">input</span><span class="p">:</span><span class="n">Target</span><span class="o">-</span><span class="n">IP</span><span class="cp">}</span><span class="w">  </span>\&quot;sudo<span class="w"> </span>snap<span class="w"> </span>run<span class="w"> </span>--experimental-gdbserver=:12345<span class="w"> </span>registernode.registerNode\&quot;<span class="w"> </span>&quot;,
-}
+<div class="highlight"><pre><span></span><code>    {
+      &quot;label&quot;: &quot;Launch Remote GDB Server&quot;,
+      &quot;type&quot;: &quot;shell&quot;,
+      &quot;problemMatcher&quot;: &quot;$gcc&quot;,
+      &quot;command&quot;: &quot;ssh ${input:Root-User}@${input:Target-IP}  \&quot;sudo snap run --experimental-gdbserver=:12345 registernode.registerNode\&quot; &quot;,
+    }
 </code></pre></div>
-
 <p>The tag 'command' starts the application under the gdb server via ssh.</p>
 <p>As second action we want to start the gdb debugger in remote mode so that he connects to the remote gdb server. Therefor in <strong>launch.json</strong> the configuration set <code>aarch64 ctrlX (remote)</code> is stored.</p>
-<div class="codehilite"><pre><span></span><code>{
-<span class="w">    </span>&quot;name&quot;:<span class="w"> </span>&quot;aarch64<span class="w"> </span>ctrlX<span class="w"> </span>(remote)&quot;,
-<span class="w">    </span>&quot;type&quot;:<span class="w"> </span>&quot;cppdbg&quot;,
-<span class="w">    </span>&quot;request&quot;:<span class="w"> </span>&quot;launch&quot;,
-<span class="w">    </span>&quot;program&quot;:<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">workspaceFolder</span><span class="cp">}</span>/generated/ubuntu22-gcc-aarch64/Debug/registerNode&quot;,
-<span class="w">    </span>&quot;cwd&quot;:<span class="w"> </span>&quot;<span class="cp">${</span><span class="n">workspaceFolder</span><span class="cp">}</span>&quot;,
-<span class="w">    </span>&quot;miDebuggerPath&quot;:<span class="w"> </span>&quot;/usr/bin/gdb-multiarch&quot;,
-<span class="w">    </span>&quot;miDebuggerServerAddress&quot;:<span class="w"> </span>&quot;192.168.1.1:12345&quot;,
-<span class="w">    </span>&quot;stopAtEntry&quot;:<span class="w"> </span>true,
-<span class="w">    </span>&quot;targetArchitecture&quot;:<span class="w"> </span>&quot;arm64&quot;,
-<span class="w">    </span>&quot;externalConsole&quot;:<span class="w"> </span>false,
-<span class="w">    </span>&quot;MIMode&quot;:<span class="w"> </span>&quot;gdb&quot;,
-<span class="w">    </span>&quot;setupCommands&quot;:<span class="w"> </span>[
-<span class="w">        </span>{
-<span class="w">            </span>&quot;description&quot;:<span class="w"> </span>&quot;Enable<span class="w"> </span>pretty-printing<span class="w"> </span>for<span class="w"> </span>gdb&quot;,
-<span class="w">            </span>&quot;text&quot;:<span class="w"> </span>&quot;-enable-pretty-printing&quot;,
-<span class="w">            </span>&quot;ignoreFailures&quot;:<span class="w"> </span>true
-<span class="w">        </span>},
-<span class="w">    </span>]
-}
+<div class="highlight"><pre><span></span><code>    {
+        &quot;name&quot;: &quot;aarch64 ctrlX (remote)&quot;,
+        &quot;type&quot;: &quot;cppdbg&quot;,
+        &quot;request&quot;: &quot;launch&quot;,
+        &quot;program&quot;: &quot;${workspaceFolder}/generated/ubuntu22-gcc-aarch64/Debug/registerNode&quot;,
+        &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
+        &quot;miDebuggerPath&quot;: &quot;/usr/bin/gdb-multiarch&quot;,
+        &quot;miDebuggerServerAddress&quot;: &quot;192.168.1.1:12345&quot;,
+        &quot;stopAtEntry&quot;: true,
+        &quot;targetArchitecture&quot;: &quot;arm64&quot;,
+        &quot;externalConsole&quot;: false,
+        &quot;MIMode&quot;: &quot;gdb&quot;,
+        &quot;setupCommands&quot;: [
+            {
+                &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,
+                &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
+                &quot;ignoreFailures&quot;: true
+            },
+        ]
+    }
 </code></pre></div>
-
 <p>The tag 'miDebuggerPath' select gdb-multiarch as debugger, 'miDebuggerServerAddress' set IP address and port number to connect to the remote gdb server.</p>
 <h4 id="starting-the-application-with-visualstudio-code">Starting the Application with VisualStudio Code<a class="headerlink" href="#starting-the-application-with-visualstudio-code" title="Permanent link">&para;</a></h4>
 <p>Select Main menu item Terminal --&gt; Run Task... --&gt; Launch GDB-Server</p>
 <p>In the Terminal window a wellcome message will appear:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="s2">&quot;snap run --gdbserver&quot;</span><span class="o">.</span>
-<span class="n">You</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">before</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">application</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">run</span><span class="o">.</span>
-<span class="n">Please</span><span class="w"> </span><span class="n">open</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">different</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">run</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code>    Welcome to &quot;snap run --gdbserver&quot;.
+    You are right before your application is run.
+    Please open a different terminal and run:
 
-<span class="n">gdb</span><span class="w"> </span><span class="o">-</span><span class="n">ex</span><span class="o">=</span><span class="s2">&quot;target remote :12345&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">ex</span><span class="o">=</span><span class="k">continue</span><span class="w"> </span><span class="o">-</span><span class="n">ex</span><span class="o">=</span><span class="s2">&quot;signal SIGCONT&quot;</span>
-<span class="p">(</span><span class="n">gdb</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span>
-
-<span class="ow">or</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">favorite</span><span class="w"> </span><span class="n">gdb</span><span class="w"> </span><span class="n">frontend</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">connect</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="p">:</span><span class="mi">12345</span>
+    gdb -ex=&quot;target remote :12345&quot; -ex=continue -ex=&quot;signal SIGCONT&quot;
+    (gdb) continue
 </code></pre></div>
-
+<p>or use your favorite gdb frontend and connect to :12345</p>
 <p>The gdb server has started the application which stops because of SIGSTOP. We are ready to connect with the gdb debugger.</p>
 <h4 id="start-snap-debugging-with-the-visual-studio-code">Start Snap Debugging with the Visual Studio Code<a class="headerlink" href="#start-snap-debugging-with-the-visual-studio-code" title="Permanent link">&para;</a></h4>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Attaching to the snap application succeeds only when there are no breakpoints active!</p>
+<p>Attaching to the snap application succeeds only when there are no breakpoints active!
 <ul>
-<li>Select main menu Run --&gt; Remove All Breakpoints</li>
-<li>Select the 'Run and Debug' icon in the extension side bar.</li>
-<li>Select 'aarch64 ctrlX' in the top line of the explorer window</li>
-<li>Click the green start icon</li>
-</ul>
+  <li>Select main menu Run --&gt; Remove All Breakpoints</li>
+  <li>Select the 'Run and Debug' icon in the extension side bar.</li>
+  <li>Select 'aarch64 ctrlX' in the top line of the explorer window</li>
+  <li>Click the green start icon</li>
+</ul></p>
 </div>
 <p>Now gdb is started and connected to the gdb server. With the DEBUG CONSOLE window Visual Studio Code provides an output area and a command line to enter gdb commands - see green area in picture below.</p>
 <ul>
@@ -2558,7 +2556,7 @@ From the point of view of the virtual machine this is the IP address of the host
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

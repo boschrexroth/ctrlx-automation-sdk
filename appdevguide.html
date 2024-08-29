@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -715,6 +715,30 @@
       2.2 Artifacts’ Delivery
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2.2 Artifacts’ Delivery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-folder-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      General Folder structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handover-of-artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handover of artifacts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2718,6 +2742,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="2.2 Artifacts’ Delivery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-folder-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      General Folder structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handover-of-artifacts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Handover of artifacts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -3384,7 +3432,7 @@
 <p><a href="#automation">10 ctrlX AUTOMATION System Functions (optional)</a></p>
 <p><a href="#realtime">11 Real Time Extension (optional)</a></p>
 <h2 id="1-introduction">1 Introduction<a name="introduction"></a><a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
-<p>This guideline provides guidance for app developers and partners who want to contribute to the ctrlX World Ecosystem with new apps. </p>
+<p>This guideline provides guidance for app developers and partners who want to contribute to the ctrlX World Ecosystem with new apps.</p>
 <p>This is a living document. New apps might lead to new topics and may result in new guidelines at any time.</p>
 <h3 id="11-app-development-for-ctrlx-automation">1.1 App Development for ctrlX AUTOMATION<a class="headerlink" href="#11-app-development-for-ctrlx-automation" title="Permanent link">&para;</a></h3>
 <p>The open ctrlX AUTOMATION system architecture allows developers to implement further system functions with little effort at any time as apps and as open source software. This document provides guidance on how to create apps to integrate them perfectly into ctrlX AUTOMATION.</p>
@@ -3395,7 +3443,7 @@ Some aspects are <strong>mandatory</strong>, both from a legal and technical vie
 <p>This document describes the technical aspects for ctrlX apps. These aspects each have one of the following obligations:</p>
 <ul>
 <li><span style="color:red;"><strong>MANDATORY</strong></span> - This aspect is strictly required and <strong>must</strong> be implemented.</li>
-<li><span style="color:green;"><strong>OPTIONAL</strong></span> This aspect brings added value and <strong>can</strong> or <strong>should</strong> be implemented. </li>
+<li><span style="color:green;"><strong>OPTIONAL</strong></span> This aspect brings added value and <strong>can</strong> or <strong>should</strong> be implemented.</li>
 <li><span style="color:blue;"><strong>CONDITIONAL</strong></span> - This aspect is to be implemented in specific cases**. Bosch Rexroth and the partner identify the requirements during the app integration process.</li>
 </ul>
 <h3 id="13-partner-contract-and-legal-framework">1.3 Partner Contract and Legal Framework<a class="headerlink" href="#13-partner-contract-and-legal-framework" title="Permanent link">&para;</a></h3>
@@ -3411,7 +3459,10 @@ Some aspects are <strong>mandatory</strong>, both from a legal and technical vie
 <p>For handover, Bosch Rexroth accordingly provides a partner folder in the ctrlX World Portal, which will be prepared during the partner contracting process.</p>
 <h3 id="21-initial-meeting-for-app-validation">2.1 Initial Meeting for App Validation<a class="headerlink" href="#21-initial-meeting-for-app-validation" title="Permanent link">&para;</a></h3>
 <p>Before the validation process starts, the partner / app developer must provide the app architecture</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
 <p><strong>A picture of the main communication paths is needed, including</strong></p>
+</div>
 <ul>
 <li>
 <p>a modular overview of the app</p>
@@ -3433,24 +3484,16 @@ At this point, the partner should also already have uploaded the necessary artif
 <p>Bosch Rexroth checks the provided artifacts and the described behavior of an app that is to be signed as an official ctrlX app in an automated validation framework.</p>
 <p>This validation framework requires a standard format for artifacts and information.</p>
 <p>To simplify the delivery of artifacts, we provide a base folder structure with description and schema files. This helps app developers to deliver the required artifacts and us to simplify the validation work. Please use the given structure, folder names and file names as given below, without any renaming:</p>
-<p><strong>General Folder structure</strong></p>
+<h4 id="general-folder-structure">General Folder structure<a class="headerlink" href="#general-folder-structure" title="Permanent link">&para;</a></h4>
 <ul>
-<li>
-<p><strong>{company-name}\</strong> - Partner company name. Folder name is created by Bosch Rexroth</p>
-<ul>
-<li>
-<p><strong>{app-name}\</strong>  - Technical app name. This app name is unique. A folder will be created by the partner</p>
-</li>
-<li>
-<p><strong>{version}\</strong> - The version folder separates the different versions. Format is three numbers separated by dots, e.g. "1.0.2". Each version has to be stored in a separate folder. A folder will be created by the partner</p>
-<ul>
+<li><strong>{company-name}\</strong> - Partner company name. Folder name is created by Bosch Rexroth</li>
+<li><strong>{app-name}\</strong>  - Technical app name. This app name is unique. A folder will be created by the partner<ul>
+<li><strong>{version}\</strong> - The version folder separates the different versions. Format is three numbers separated by dots, e.g. "1.0.2". Each version has to be stored in a separate folder. A folder will be created by the partner</li>
 <li><strong>{artifacts}\</strong> - The required documents as input for the validation process (see 4.1)</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<p><strong>Handover of artifacts</strong></p>
+<h4 id="handover-of-artifacts">Handover of artifacts<a class="headerlink" href="#handover-of-artifacts" title="Permanent link">&para;</a></h4>
 <p>Once all the required information is available in your local folder, zip the folder using Windows-zip and upload it as "<strong>artifacts.zip</strong>" to the ctrlX World Partner Portal space in the "<strong>.../{company-name}/{app-name}/{version}/</strong>" path.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -3497,7 +3540,7 @@ They can also be sure that the app contributes to the basic ctrlX CORE security 
 <p>Additional app properties according to Linux Ubuntu conventions</p>
 </li>
 <li>
-<p>FOSS information </p>
+<p>FOSS information</p>
 </li>
 </ul>
 <p>Working set overview:</p>
@@ -3605,13 +3648,13 @@ This will create the required folder structure for the mandatory artifacts out-o
 <p><img alt="image" src="images/artifacts.png" /></p>
 <p>The artifacts are organized in five sub folders:</p>
 <h4 id="412-disclosure-folder-mandatory">4.1.2 "Disclosure" folder (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#412-disclosure-folder-mandatory" title="Permanent link">&para;</a></h4>
-<p>The FOSS source files and license text files are stored in the disclosure folder </p>
+<p>The FOSS source files and license text files are stored in the disclosure folder</p>
 <ul>
 <li>
 <p><strong>"fossinfo.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - license texts for all an app’s used open source software. For more information about format and content, refer to the json example and the corresponding json schema in the standard "artifacts.zip" file.</p>
 </li>
 <li>
-<p><strong>"foss-sources.zip" (<span style="color:blue;"></strong>CONDITIONAL<strong></span>)</strong> - In the foss-sources.zip file, the sources of all used open source libraries / packages are zipped without a password. </p>
+<p><strong>"foss-sources.zip" (<span style="color:blue;"></strong>CONDITIONAL<strong></span>)</strong> - In the foss-sources.zip file, the sources of all used open source libraries / packages are zipped without a password.</p>
 </li>
 <li><strong>"foss-offer.x" (<span style="color:blue;"></strong>CONDITIONAL<strong></span>)</strong> - If the foss-sources.zip file is not provided, a human-readable file with the name "offer.x" is needed. It explains how the user can get the sources.</li>
 </ul>
@@ -3621,7 +3664,7 @@ This will create the required folder structure for the mandatory artifacts out-o
 <p>Note: For the <code>{xxx}-description</code> files, a default file (with explanation) and the corresponding schema is provided in the standard <code>artifacts.zip</code> example.</p>
 <ul>
 <li>
-<p><strong>"snapcraft.yaml" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The snapcraft.yaml file is the main entry point to create a snap through Snapcraft. It contains all the details the snapcraft command needs to build a snap. See also https://snapcraft.io/docs/snapcraft-yaml-reference</p>
+<p><strong>"snapcraft.yaml" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The snapcraft.yaml file is the main entry point to create a snap through Snapcraft. It contains all the details the snapcraft command needs to build a snap. See also <a href="https://snapcraft.io/docs/snapcraft-yaml-reference">https://snapcraft.io/docs/snapcraft-yaml-reference</a></p>
 </li>
 <li>
 <p><strong>"package-manifest.json" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The package-manifest.json covers essential settings, like the proxy URL</p>
@@ -3638,7 +3681,7 @@ This will create the required folder structure for the mandatory artifacts out-o
 </ul>
 <p><strong>The <a href="appdevguide_basechecks.html">Base checklist</a> contains the criteria which are checked in these files.</strong></p>
 <h4 id="414-documentation-folder-mandatory">4.1.4 "Documentation" folder (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#414-documentation-folder-mandatory" title="Permanent link">&para;</a></h4>
-<p>All documentation relevant to the app is provided here </p>
+<p>All documentation relevant to the app is provided here</p>
 <ul>
 <li><strong>"manual.pdf" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The app description (user manual) documents the app’s overall functionality</li>
 <li><strong>"test-setup-description.pdf" (<span style="color:red;"></strong>MANDATORY<strong></span>)</strong> - The app setup describes how to configure the app on a ctrlX CORE for a typical usage and test scenario</li>
@@ -3671,14 +3714,14 @@ The user manual must describe typical user actions for commissioning and operati
 <h4 id="422-test-setup-description-mandatory">4.2.2 Test Setup Description (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#422-test-setup-description-mandatory" title="Permanent link">&para;</a></h4>
 <p>A test setup description must be delivered together with the app.
 The test setup description must contain instructions to realize a test scenario.
-It must include a description of sequences and dependencies, e.g. additional hardware. If you use plugs and slots, please provide an explanation here. </p>
+It must include a description of sequences and dependencies, e.g. additional hardware. If you use plugs and slots, please provide an explanation here.</p>
 <h4 id="423-release-notes-mandatory">4.2.3 Release Notes (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#423-release-notes-mandatory" title="Permanent link">&para;</a></h4>
 <p>Release note documentation must be delivered together with the app.</p>
 <h4 id="424-general-app-description-for-the-ctrlx-app-zone-conditional">4.2.4 General App Description for the ctrlX App Zone (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#424-general-app-description-for-the-ctrlx-app-zone-conditional" title="Permanent link">&para;</a></h4>
 <p>Each app needs product information as part of the sales package. The description shall be generated based on the app description template (from the ctrlX World Partner Portal)</p>
 <p>The app description package is necessary in case the app is also to be shown in the ctrlX AUTOMATION Community App Zone or other marketing channels.</p>
 <h3 id="43-additional-app-information-according-to-linux-ubuntu-conventions-mandatory">4.3 Additional App Information According to Linux Ubuntu Conventions (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#43-additional-app-information-according-to-linux-ubuntu-conventions-mandatory" title="Permanent link">&para;</a></h3>
-<p>The following properties must be defined within the <strong>"snapcraft.yaml"</strong> file (see https://snapcraft.io/docs/snapcraft-yaml-reference), which also need to be exclusively part of the app and have to be collision free with other apps.</p>
+<p>The following properties must be defined within the <strong>"snapcraft.yaml"</strong> file (see <a href="https://snapcraft.io/docs/snapcraft-yaml-reference">https://snapcraft.io/docs/snapcraft-yaml-reference</a>), which also need to be exclusively part of the app and have to be collision free with other apps.</p>
 <ul>
 <li>
 <p><strong>Title</strong> - The general name of the app that will be shown on all sales channels and customer touch points, e.g. app overview or ctrlX App Store. This is defined together with the partner manager, as part of the business model definitions. Example: "My App"</p>
@@ -3687,22 +3730,22 @@ It must include a description of sequences and dependencies, e.g. additional har
 <p><strong>Name</strong> - The technical name of the snap. The name has to be unique in the snap universe and across all snap developer and device vendors. The snap name has to <strong>start with "ctrlx-"</strong> and must be <strong>lowercase</strong> and a <strong>maximum length of 32 characters</strong>. ctrlX World Partners add their company name to the snap name. Example: "ctrlx-partnername-myapp"</p>
 </li>
 <li>
-<p><strong>Confinement</strong> - Must be set to <strong>"strict"</strong> for releases. See also https://snapcraft.io/docs/snap-confinement</p>
+<p><strong>Confinement</strong> - Must be set to <strong>"strict"</strong> for releases. See also <a href="https://snapcraft.io/docs/snap-confinement">https://snapcraft.io/docs/snap-confinement</a></p>
 </li>
 <li>
 <p><strong>Grade</strong> - Defines the quality grade of the app. During development, you may choose to use <strong>"devel"</strong>. When releasing the application, the grade must be set to <strong>"stable"</strong>.</p>
 </li>
 </ul>
 <h3 id="44-foss-info-provisioning-mandatory">4.4 FOSS Info Provisioning (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#44-foss-info-provisioning-mandatory" title="Permanent link">&para;</a></h3>
-<p>If the app uses Free and Open Source Software (FOSS), certain license information must be delivered together  with the app.  </p>
-<p>With <strong>"fossinfo.xml"</strong> the open source license text must be disclosed for copyright reasons. Bosch Rexroth offers the possibility to display the license texts for the used open source software in the ctrlX web interface. For more information about "fossinfo.xml" please refer to the guideline in the SDK. If FOSS license texts are displayed within the app, at least a reference to the license display in the app must be provided in the "fossinfo.xml". </p>
+<p>If the app uses Free and Open Source Software (FOSS), certain license information must be delivered together  with the app.</p>
+<p>With <strong>"fossinfo.xml"</strong> the open source license text must be disclosed for copyright reasons. Bosch Rexroth offers the possibility to display the license texts for the used open source software in the ctrlX web interface. For more information about "fossinfo.xml" please refer to the guideline in the SDK. If FOSS license texts are displayed within the app, at least a reference to the license display in the app must be provided in the "fossinfo.xml".</p>
 <p>Since users must be able to view the license texts before the open source software is installed, the "fossinfo.xml" must also be stored outside the app in the "disclosure" directory (see section 3.1.2). In addition, the license texts must be listed within the user documentation or at least a reference must be inserted where the FOSS license texts are located.</p>
 <h2 id="5-further-app-information-conditional">5 Further App Information (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a name="further"></a><a class="headerlink" href="#5-further-app-information-conditional" title="Permanent link">&para;</a></h2>
 <h3 id="51-foss-sources-conditional">5.1 FOSS Sources (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#51-foss-sources-conditional" title="Permanent link">&para;</a></h3>
-<p>Bosch Rexroth recommends putting all FOSS sources in a zip file with the file name <strong>"foss-sources.zip"</strong> and storing it in the <strong>"disclosure"</strong> directory, where the <strong>"fossinfo.xml"</strong> is provided. </p>
+<p>Bosch Rexroth recommends putting all FOSS sources in a zip file with the file name <strong>"foss-sources.zip"</strong> and storing it in the <strong>"disclosure"</strong> directory, where the <strong>"fossinfo.xml"</strong> is provided.</p>
 <p>In the event that the FOSS sources are not provided directly, a written offer is mandatory for open source software with copyleft clause (e.g. GPLv2 or GPLv3) . This means, a human-readable file with the name "foss-offer.x" needs to be provided, which explains how the user can get the app’s FOSS sources.</p>
 <h3 id="52-semantic-versioning-scheme-optional">5.2 Semantic Versioning Scheme (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#52-semantic-versioning-scheme-optional" title="Permanent link">&para;</a></h3>
-<p>It is recommended that a versioning scheme is used based on https://semver.org/ for the app’s versioning. This setting is also relevant in the <strong>snapcraft.yaml</strong> file while creating the snap.</p>
+<p>It is recommended that a versioning scheme is used based on <a href="https://semver.org/">https://semver.org/</a> for the app’s versioning. This setting is also relevant in the <strong>snapcraft.yaml</strong> file while creating the snap.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Increasing version numbers are mandatory, regardless of the versioning scheme used</p>
@@ -3724,7 +3767,7 @@ It must include a description of sequences and dependencies, e.g. additional har
 <p>Used interfaces (Slots &amp; Plugs) must be documented in the <strong>snapcraft.yaml</strong> file. The following considerations must be taken into account:</p>
 <ul>
 <li>
-<p><strong>Use as few interfaces (slots/plugs) as possible</strong>. The amount of interfaces (slots &amp; plugs) shall be <strong>limited to a minimum</strong>. The app should only declare the interfaces (slots and/or plugs) that are absolutely required to minimize the attack surface. When reviewing the app, Bosch Rexroth needs to know for which purpose a specific slot and/or plug is required by an app. Corresponding justification must be provided together with the app. </p>
+<p><strong>Use as few interfaces (slots/plugs) as possible</strong>. The amount of interfaces (slots &amp; plugs) shall be <strong>limited to a minimum</strong>. The app should only declare the interfaces (slots and/or plugs) that are absolutely required to minimize the attack surface. When reviewing the app, Bosch Rexroth needs to know for which purpose a specific slot and/or plug is required by an app. Corresponding justification must be provided together with the app.</p>
 </li>
 <li>
 <p><strong>No global slots &amp; plugs</strong>. App developers must avoid assigning global slots &amp; plugs that are valid for all applications. Global slots &amp; plugs should only be used if absolutely necessary.</p>
@@ -3787,7 +3830,7 @@ The app must keep its network footprint as low as possible:</p>
 <p>Videos and further media can be attached.</p>
 <h2 id="7-ctrlx-basic-mechanisms-mandatory">7 ctrlX Basic Mechanisms (<span style="color:red;"><strong>MANDATORY</strong></span>)<a name="basicmechanisms"></a><a class="headerlink" href="#7-ctrlx-basic-mechanisms-mandatory" title="Permanent link">&para;</a></h2>
 <h3 id="71-ctrlx-license-handling-mandatory">7.1 ctrlX License Handling (<span style="color:red;"><strong>MANDATORY</strong></span>)<a class="headerlink" href="#71-ctrlx-license-handling-mandatory" title="Permanent link">&para;</a></h3>
-<p>ctrlX World Partner apps must use the licensing service that is operated by Bosch Rexroth. </p>
+<p>ctrlX World Partner apps must use the licensing service that is operated by Bosch Rexroth.</p>
 <p>A license model must be defined for each app. To ensure maximum usability for a ctrlX CORE user, the app must call up the ctrlX license manager API when it starts or is running to check if a license is activated.  If a license is missing, the missing license will be shown to the user on a user interface. A warning or error must be shown in case the license is missing.</p>
 <p>Each software license (SWL) bought by a customer generates one or more capabilities:</p>
 <ul>
@@ -3801,7 +3844,7 @@ The app must keep its network footprint as low as possible:</p>
 <p>The usage of other licensing mechanisms is not allowed</p>
 </li>
 </ul>
-<p>For information how to adapt an app to the licensing service please have look on the <a href="licensing.html">Licensing guideline</a> </p>
+<p>For information how to adapt an app to the licensing service please have look on the <a href="licensing.html">Licensing guideline</a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Currently, the License Manager does not return licenses on a ctrlX COREvirtual.</p>
@@ -3813,7 +3856,10 @@ During the signing process, the app binaries are checked and combined with a sig
 <h2 id="8-ctrlx-security-system-optional">8 ctrlX Security System (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a name="security"></a><a class="headerlink" href="#8-ctrlx-security-system-optional" title="Permanent link">&para;</a></h2>
 <h3 id="81-ctrlx-core-reverse-proxy-optional">8.1 ctrlX CORE reverse proxy (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#81-ctrlx-core-reverse-proxy-optional" title="Permanent link">&para;</a></h3>
 <p>The proxy URL is the most important setting in the <strong>package-manifest.json</strong> file for the app to be integrated seamlessly into the ctrlX CORE. The reverse proxy will forward requests to the URL that are defined for the app web service.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
 <p><strong>Please make sure that your App provides unique URLs for the ctrlX reverse proxy</strong></p>
+</div>
 <p>An app is to be bound to a Unix socket instead of a local port. This will also prevent potential collisions with other services.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -3822,7 +3868,7 @@ During the signing process, the app binaries are checked and combined with a sig
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Example code can be found here:
-https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationWebServer-to-Reverse-Proxy/m-p/20193#M216</p>
+<a href="https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationWebServer-to-Reverse-Proxy/m-p/20193#M216">https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationWebServer-to-Reverse-Proxy/m-p/20193#M216</a></p>
 </div>
 <h3 id="82-ctrlx-key-certificate-management-optional">8.2 ctrlX Key &amp; Certificate Management (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a class="headerlink" href="#82-ctrlx-key-certificate-management-optional" title="Permanent link">&para;</a></h3>
 <p>The ctrlX CORE certificate management is to be used to manage your application’s certificates through the web interface.
@@ -3833,7 +3879,10 @@ https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationW
 <p>If the mechanisms the ctrlX CORE provides are not used, hardcoded accounts/credentials have to be avoided.</p>
 <p>The ctrlX CORE's so called "scopes" are to be used to model app permissions. Scopes allow permissions to be assigned to users &amp; groups via the web interface. If case permissions are used, the permissions must be enforced within the app
 (package-manifest.json)</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
 <p><strong>If your app supports scopes, unique scopes must be provided to the ctrlX permission manager</strong></p>
+</div>
 <h2 id="9-ctrlx-user-interface-and-project-handling-optional">9 ctrlX User Interface and Project Handling (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a name="userinterface"></a><a class="headerlink" href="#9-ctrlx-user-interface-and-project-handling-optional" title="Permanent link">&para;</a></h2>
 <h3 id="91-ctrlx-configuration-storage-conditional">9.1 ctrlX Configuration Storage (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#91-ctrlx-configuration-storage-conditional" title="Permanent link">&para;</a></h3>
 <p>The ctrlX CORE system provides multiple ways for an app to store its data. The app data must be persisted within one of these locations to provide consistent backup and restore mechanism to users.</p>
@@ -3855,7 +3904,7 @@ https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationW
 </ul>
 <p><strong>Apps must use separate, unique repositories in ctrlX configurations.</strong></p>
 <h4 id="922-environment-variables-conditional">9.2.2 Environment Variables (<span style="color:blue;"><strong>CONDITIONAL</strong></span>)<a class="headerlink" href="#922-environment-variables-conditional" title="Permanent link">&para;</a></h4>
-<p>Environment variables are widely used across Linux to provide convenient access to system and application properties (see also https://snapcraft.io/docs/environment-variables)</p>
+<p>Environment variables are widely used across Linux to provide convenient access to system and application properties (see also <a href="https://snapcraft.io/docs/environment-variables">https://snapcraft.io/docs/environment-variables</a>)</p>
 <p>In the specific context of ctrlX, the environment variables <strong>$SNAP_COMMON</strong> or <strong>$SNAP_DATA</strong>...</p>
 <ul>
 <li>
@@ -3887,7 +3936,7 @@ https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationW
 </ul>
 <h2 id="10-ctrlx-automation-system-functions-optional">10 ctrlX AUTOMATION System Functions (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a name="automation"></a><a class="headerlink" href="#10-ctrlx-automation-system-functions-optional" title="Permanent link">&para;</a></h2>
 <h3 id="101-ctrlx-logbook-and-diagnostic-system">10.1 ctrlX Logbook and Diagnostic System<a class="headerlink" href="#101-ctrlx-logbook-and-diagnostic-system" title="Permanent link">&para;</a></h3>
-<p>For further information see https://docs.automation.boschrexroth.com</p>
+<p>For further information see <a href="https://docs.automation.boschrexroth.com">https://docs.automation.boschrexroth.com</a></p>
 <h2 id="11-real-time-extension-optional">11 Real Time Extension (<span style="color:green;"><strong>OPTIONAL</strong></span>)<a name="realtime"></a><a class="headerlink" href="#11-real-time-extension-optional" title="Permanent link">&para;</a></h2>
 <p>Please contact your partner manager if a real-time extension might be required for your app.</p>
 <h1 id="appendices">Appendices<a class="headerlink" href="#appendices" title="Permanent link">&para;</a></h1>
@@ -3978,7 +4027,7 @@ https://developer.community.boschrexroth.com/t5/ctrlX-WORKS/Example-IntegrationW
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

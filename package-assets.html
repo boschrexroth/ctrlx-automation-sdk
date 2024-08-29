@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -684,11 +684,44 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#proxy-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proxy Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#binding" class="md-nav__link">
     <span class="md-ellipsis">
       Binding
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Binding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unix-sockets-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unix sockets (recommended)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-host-not-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local host (not recommended)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -734,6 +767,15 @@
   <a href="#licenses" class="md-nav__link">
     <span class="md-ellipsis">
       Licenses
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
     </span>
   </a>
   
@@ -2188,11 +2230,44 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#proxy-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proxy Mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#binding" class="md-nav__link">
     <span class="md-ellipsis">
       Binding
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Binding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unix-sockets-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unix sockets (recommended)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-host-not-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local host (not recommended)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2238,6 +2313,15 @@
   <a href="#licenses" class="md-nav__link">
     <span class="md-ellipsis">
       Licenses
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
     </span>
   </a>
   
@@ -2365,7 +2449,7 @@
 <span class="w">      </span><span class="nt">organize</span><span class="p">:</span>
 <span class="w">        </span><span class="s">&#39;package-assets/*&#39;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">package-assets/${SNAPCRAFT_PROJECT_NAME}/</span>
 <span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
-<span class="nt">slots</span><span class="p">:</span><span class="w"> </span>
+<span class="nt">slots</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">package-assets</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content</span>
 <span class="w">      </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">package-assets</span>
@@ -2378,7 +2462,7 @@
 <h2 id="the-package-manifest">The package manifest<a class="headerlink" href="#the-package-manifest" title="Permanent link">&para;</a></h2>
 <p>An app can provide own menu entries, use the reverse proxy infrastructure including permissions and the storage solution. This document describes the different integration points and how they work.</p>
 <p>The package-manifest is essential for the integration points. Beside the snapcraft.yaml, it is strongly recommended that the app has to provide the package manifest to be integrated into the ctrlX CORE system. The package-manifest file should follow the naming structure <code>&lt;app name&gt;.&lt;package-manifest&gt;.json</code> where <code>&lt;app name&gt;</code> and the <code>id</code> property in the package-manifest are both set to the <code>name (technical app name)</code> as mentioned in the <a href="appdevguide_basechecks.html">snapcraft</a> documentation.</p>
-<p>The package-manifest file name should follow the pattern: </p>
+<p>The package-manifest file name should follow the pattern:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nx">snap</span><span class="w"> </span><span class="nx">name</span><span class="p">&gt;.</span><span class="kn">package</span><span class="o">-</span><span class="nx">manifest</span><span class="p">.</span><span class="nx">json</span>
 </code></pre></div>
 
@@ -2520,34 +2604,36 @@
 <p>You can provide own widgets to be shown in the Home screen. These widgets need to be implemented as <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">Web Components</a>.</p>
 <p>In short, widgets are provided in a JavaScript file and define a custom HTML tag. This JavaScript file can be loaded into any web page and the widget is instantiated by just inserting its tag into an HTML file (just like standard tags like \<div> or \<table>). One JavaScript file can contain several Web Components. Your app must serve this JavaScript file, just like other assets, so that it can be addressed via a URL.</p>
 <p>For the Home screen to know about all the widgets, these need to be made publicly known in some way. This is done in the app's manifest in "uiExtensions" → "dashboard". Each element here defines one widget by providing the information needed to instantiate the widget (like the URL of the JavaScript file, where the widget is implemented, and the widget's tag name, size information) and metadata to display in the widget catalog. For a detailed description see the PackageManager-API, schema "DashboardWidget".</p>
-<p>Example
-  <div class="highlight"><pre><span></span><code><span class="nt">&quot;uiExtensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;dashboard&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/motion/widgets.js&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rexroth-axes-widget&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axes&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Shows the status of your axes&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Motion&quot;</span><span class="p">],</span>
-<span class="w">      </span><span class="nt">&quot;i18n&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dashboard.motion.axes&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/motion/assets/img/DC_AE_ctrlX_DRIVE-axes_Symbol_bl_192x192_202102.svg&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;initialSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;rows&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;cols&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;minSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;rows&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;cols&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;maxSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;rows&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;cols&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;uiExtensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;dashboard&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;order&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;src&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/motion/widgets.js&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rexroth-axes-widget&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Axes&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Shows the status of your axes&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Motion&quot;</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;i18n&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dashboard.motion.axes&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/motion/assets/img/DC_AE_ctrlX_DRIVE-axes_Symbol_bl_192x192_202102.svg&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;initialSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;rows&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;cols&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;minSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;rows&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;cols&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;maxSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;rows&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;cols&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="p">}</span>
 <span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div></p>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
+</div>
 <h3 id="reverse-proxy">Reverse Proxy<a class="headerlink" href="#reverse-proxy" title="Permanent link">&para;</a></h3>
 <p>The reverse proxy handles all <strong>external</strong> web-based (HTTP/HTTPS) requests to the device. The reverse proxy provides the following functionality:</p>
 <ul>
@@ -2555,7 +2641,7 @@
 <li><strong>Token validation:</strong> By default, only authenticated users may access resources on the device (except the login page). Requests with invalid tokens (lifetime expired, invalid signature) are rejected.</li>
 </ul>
 <p>The proxy mapping provides the configuration required by the reverse proxy to redirect requests for a specific URL to a web server running on the device.</p>
-<p><strong>Proxy Mapping</strong></p>
+<h4 id="proxy-mapping">Proxy Mapping<a class="headerlink" href="#proxy-mapping" title="Permanent link">&para;</a></h4>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -2598,7 +2684,7 @@
 <p><strong>Remark:</strong> If a snap provides multiple web servers, multiple ProxyMapping entries are allowed.</p>
 </div>
 <h4 id="binding">Binding<a class="headerlink" href="#binding" title="Permanent link">&para;</a></h4>
-<p><strong>Unix sockets (recommended)</strong></p>
+<h5 id="unix-sockets-recommended">Unix sockets (recommended)<a class="headerlink" href="#unix-sockets-recommended" title="Permanent link">&para;</a></h5>
 <p>To use Unix sockets, the web server of your application has to bind against a <a href="https://en.wikipedia.org/wiki/Unix_domain_socket">Unix Domain Socket</a>. Most web server frameworks already support this functionality. The benefit of Unix sockets is the additional security (file access can be restricted via file permissions) and the lower attack surface on network level (the service cannot be reached externally). To enable your snap and to provide the reverse proxy access to your Unix socket, use the content interface slot "package-run". It uses the same mechanism as the "package-assets" interface.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
@@ -2632,7 +2718,7 @@
 <span class="p">[</span><span class="err">...</span><span class="p">]</span>
 </code></pre></div>
 </div>
-<p><strong>Local host (not recommended)</strong></p>
+<h5 id="local-host-not-recommended">Local host (not recommended)<a class="headerlink" href="#local-host-not-recommended" title="Permanent link">&para;</a></h5>
 <p>Only bind to a local host if a Unix domain socket (see above) cannot be used. Your app has to bind to a specified port that is not used by other apps.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
@@ -2677,8 +2763,11 @@
 <span class="w">  </span><span class="p">],</span>
 </code></pre></div>
 </details>
-<p><strong>Remark: Restrictions apply on the scope namings, identifiers, etc. (see below)</strong></p>
-<p>Use the following schema for the main identifier of the scope: </p>
+<div class="admonition remark">
+<p class="admonition-title">Remark</p>
+<p><strong>Restrictions apply on the scope namings, identifiers, etc. (see below)</strong></p>
+</div>
+<p>Use the following schema for the main identifier of the scope:</p>
 <p><code>&lt;id&gt;.&lt;service&gt;</code></p>
 <ul>
 <li>id: Package identifier. Has to correspond to the snap name</li>
@@ -2691,7 +2780,7 @@
 <li>rexroth-solutions.web</li>
 <li>rexroth-vpnmanager.web</li>
 </ul>
-<p>Use this schema for the identifier of the scope: </p>
+<p>Use this schema for the identifier of the scope:</p>
 <p><code>&lt;id&gt;.&lt;service&gt;.&lt;scope_name&gt;.&lt;access&gt;</code></p>
 <ul>
 <li>id : Package identifier. Has to correspond to the snap name</li>
@@ -2714,7 +2803,7 @@
 <li>rexroth-vpnmanager.web.shortcuts.x: Start/stop VPN connections via existing starters (shortcuts)</li>
 </ul>
 <h4 id="enforcing-permissions-in-your-service">Enforcing permissions in your service<a class="headerlink" href="#enforcing-permissions-in-your-service" title="Permanent link">&para;</a></h4>
-<p>The web server has to enforce the defined permissions. The following pseudo code snippet shows a simple example in which the function ListAddresses checks whether the client has the permission to execute the function. The scope "rexroth-device.all.rwx" is a special scope reflecting an administrative access permission (see below). </p>
+<p>The web server has to enforce the defined permissions. The following pseudo code snippet shows a simple example in which the function ListAddresses checks whether the client has the permission to execute the function. The scope "rexroth-device.all.rwx" is a special scope reflecting an administrative access permission (see below).</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">ListAddresses</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -2736,7 +2825,6 @@
 <p>The following snippet shows the definition of the admin scope. You can see (and assign) the permission to users and/or groups.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-</div>
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;identifier&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rexroth-device&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Global device administration&quot;</span><span class="p">,</span>
@@ -2750,21 +2838,79 @@
 <span class="w">      </span><span class="p">]</span>
 <span class="w">  </span><span class="p">}</span>
 </code></pre></div>
+</div>
 <h3 id="licenses">Licenses<a class="headerlink" href="#licenses" title="Permanent link">&para;</a></h3>
 <p>The app shall provide information in the package-manifest about each license that is supported. Description and title shall be human readable.
 The "required" flag indicates whether a license is mandatory to use the application. Set the flag to true when the license is required and to false, when the license is optional. Multiple licenses can have the "required" flag set to true simultaneously. In this case, the app must ensure that it works if any of the 'required' licenses is available.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-</div>
 <div class="highlight"><pre><span></span><code><span class="nt">&quot;licenses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SWL-XC*-RUN-DLACCESSNRT**-NNNN&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ctrlX OS License - Customer App&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Integration of customer apps into ctrlX OS with access to the ctrlX Data Layer&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="w">    </span><span class="p">}</span><span class="w">     </span>
+<span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">],</span>
 </code></pre></div>
+</div>
+<h3 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h3>
+<p>The API of the app can optionally be integrated in the API reference section of the help menu. Therefor you have to do following steps:</p>
+<p><strong>Step 1:</strong></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<span class="nt">&quot;documentation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ctrlX OS - Solutions API&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/doc/api/?url=/solutions/doc/api/api.solutions.json&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Provides functionalities for persisting and managing app data on ctrlX OS devices.&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;i18n&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;documentation.solutions&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="p">[</span><span class="err">...</span><span class="p">]</span>
+</code></pre></div>
+</div>
+<ul>
+<li><strong>type:</strong> Type of the document is "api".</li>
+<li><strong>name:</strong> Name of the api, shown in the API Reference table (usually use the name of the API)</li>
+<li><strong>url:</strong>  Contains the url, where the api is available</li>
+<li><strong>description:</strong> Description of the api, shown in the API Reference table (usually use the description of the API)</li>
+<li><strong>i18n:</strong>  Key for translation (see section 'The language files')</li>
+</ul>
+<p><strong>Step 2:</strong></p>
+<p>Provide the api itself as json file.
+1. Create the folder "api/solutions” in the root of your snap project.
+2. Copy the json file to this location</p>
+<p><strong>Step 3:</strong></p>
+<p>An entry 'api' in the 'parts' section of the snapcraft.yaml file is necessary.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rexroth-solutions</span>
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+<span class="nt">parts</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">api</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">plugin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nil</span>
+<span class="w">    </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">api</span>
+<span class="w">    </span><span class="nt">override-build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">make DESTDIR=$SNAPCRAFT_PART_INSTALL</span>
+<span class="w">  </span><span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+<span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+</div>
+<p><strong>Step 4:</strong></p>
+<p>A makefile 'Makefile' in the api folder of your project is required, where you handle the copy of the api during installation of your app:</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<div class="highlight"><pre><span></span><code>dirs := $(shell ls -d */)
+DESTDIR ?= $(PWD)/dist
+
+install:
+  install -d -m 755 $(DESTDIR)/static/doc/api
+  cp solutions/public/*.json $(DESTDIR)/static/doc/api
+</code></pre></div>
+</div>
 <h3 id="certificate-management-optional">Certificate Management (optional)<a class="headerlink" href="#certificate-management-optional" title="Permanent link">&para;</a></h3>
 <p>The certificate manager handles cryptographic material for all applications on the device. The certificate manager can add/delete/list certificates or keys to/from a specific application. It also issues a warning if a certificate expires soon or is already invalid. If a snap handles cryptographic material, it can use this centralized service following the instructions:</p>
 <p>First, the snap has to provide the content interface "package-certificates". Via this interface, the certificate manager can add and access certificates and keys of a specific snap. Thus, write permissions are required.</p>
@@ -2772,7 +2918,7 @@ The "required" flag indicates whether a license is mandatory to use the applicat
 <p class="admonition-title">Example</p>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rexroth-solutions</span>
 <span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
-<span class="nt">slots</span><span class="p">:</span><span class="w"> </span>
+<span class="nt">slots</span><span class="p">:</span>
 <span class="p p-Indicator">[</span><span class="nv">...</span><span class="p p-Indicator">]</span>
 <span class="nt">package-certificates</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content</span>
@@ -2811,7 +2957,7 @@ The "required" flag indicates whether a license is mandatory to use the applicat
 <li>OPCUA</li>
 <li>VPN Manager</li>
 <li>...</li>
-<li><strong>description:</strong> Optional and displayed in the front end. To describe the application and provide some more information. </li>
+<li><strong>description:</strong> Optional and displayed in the front end. To describe the application and provide some more information.</li>
 <li><strong>scopesR:</strong> Optional list of scopes that allow the user to have read access to this certificate store.</li>
 <li>rexroth-solutions.web.all.r</li>
 <li>example.permission.r</li>
@@ -2964,7 +3110,7 @@ The "required" flag indicates whether a license is mandatory to use the applicat
 <p>Language files are used to translate text sections into different languages. Bosch Rexroth Apps are shipped with english and german language files. Currently the multi language system (MLS) supports translations for the content of the <a href="#the-package-manifest">package manifest</a> texts which are organized in the <code>./package-assets/i18n</code> folder of the app.</p>
 <h3 id="translation-of-the-package-manifest">Translation of the Package Manifest<a class="headerlink" href="#translation-of-the-package-manifest" title="Permanent link">&para;</a></h3>
 <p>One aspect of the MLS is the translation of the text fields provided by the package manifest, e.g. menu items, descriptions etc. To enable the app developer to provide translations for these fields a new property <code>i18n</code> was introduced. This property behaves as a tag for the parent object that requires translation for its childs. The value is defining the name of the tag in <em>dot notation</em>.</p>
-<p>Additionally you have to provide the language files for the package-manifest in the <code>./package-assets/i18n</code> folder. </p>
+<p>Additionally you have to provide the language files for the package-manifest in the <code>./package-assets/i18n</code> folder.</p>
 <p>The package-manifest language file name should follow the pattern:</p>
 <div class="codehilite"><pre><span></span><code><span class="w"> </span><span class="p">&lt;</span><span class="nx">snap</span><span class="w"> </span><span class="nx">name</span><span class="p">&gt;.</span><span class="kn">package</span><span class="o">-</span><span class="nx">manifest</span><span class="p">.&lt;</span><span class="nx">language</span><span class="w"> </span><span class="nx">tag</span><span class="p">&gt;.</span><span class="nx">json</span>
 </code></pre></div>
@@ -3083,7 +3229,7 @@ The "required" flag indicates whether a license is mandatory to use the applicat
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

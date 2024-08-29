@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -737,6 +737,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="2.1 Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ctrlx-corevirtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      ctrlX COREvirtual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-other-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      All other cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -947,6 +971,15 @@
   <a href="#36-license-management-in-windows-applications" class="md-nav__link">
     <span class="md-ellipsis">
       3.6 License Management in Windows Applications
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copyright" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copyright
     </span>
   </a>
   
@@ -2220,6 +2253,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="2.1 Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ctrlx-corevirtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      ctrlX COREvirtual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-other-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      All other cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2435,6 +2492,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#copyright" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copyright
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2462,8 +2528,7 @@
 <p>Please refer to the App Development Guide for further information.</p>
 <h3 id="table-of-contents"><strong>Table of Contents</strong><a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h3>
 <p><a href="#introduction">1 Introduction</a></p>
-<p><a href="#modes">2 Licensing Modes </a></p>
-<blockquote>
+<p><a href="#modes">2 Licensing Modes</a></p>
 <p><a href="#overview">2.1 Overview</a></p>
 <p><a href="#main">2.2 ctrlX CORE Main License</a></p>
 <p><a href="#emergency">2.3 ctrlX CORE Temporary Usage Rights (Emergency Mode)</a></p>
@@ -2471,18 +2536,15 @@
 <p><a href="#virtual">2.5 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup></a></p>
 <p><a href="#test">2.6 Additional License Mode: ctrX CORE 3 Month Test License</a></p>
 <p><a href="#spoofing">2.7 Spoofing detection by optionally signing / verifying license requests</a></p>
-</blockquote>
 <p><a href="#enforcement">3 License Enforcement</a></p>
-<blockquote>
 <p><a href="#plug">3.1 Add Content Plug to snapcraft.yaml</a></p>
 <p><a href="#manifest">3.2 Adapt package-manifest.json</a></p>
 <p><a href="#rest">3.3 Use API to Enforce Licenses</a></p>
 <p><a href="#comm">3.4 Communicate with License Manager API</a></p>
 <p><a href="#plc">3.5 Access License Manager in PLC Application</a></p>
 <p><a href="#windows">3.6 License Management in Windows Applications</a></p>
-</blockquote>
 <h1 id="1-introduction">1 Introduction <a name="introduction"></a><a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h1>
-<p>Bosch Rexroth provides a Licensing Center portal at <a href="https://licensing.boschrexroth.com">https://licensing.boschrexroth.com</a> for managing device licenses. Through this portal, users can assign licenses to their devices and download a capability response. This response includes all licenses assigned to a specific device. After downloading, users can deploy this capability response to the corresponding device. This platform facilitates the easy management of device licenses, ensuring that devices have the required capabilities. </p>
+<p>Bosch Rexroth provides a Licensing Center portal at <a href="https://licensing.boschrexroth.com">https://licensing.boschrexroth.com</a> for managing device licenses. Through this portal, users can assign licenses to their devices and download a capability response. This response includes all licenses assigned to a specific device. After downloading, users can deploy this capability response to the corresponding device. This platform facilitates the easy management of device licenses, ensuring that devices have the required capabilities.</p>
 <p>The ctrlX CORE User Interfaces therefore provides a license page which allows to upload a capability response and to check the currently available licenses on the device. For developers, the ctrlX CORE offers a restful API via an internal unix domain socket which can be used by an app to request and release a specific license.</p>
 <h1 id="2-licensing-modes">2 Licensing Modes  <a name="modes"></a><a class="headerlink" href="#2-licensing-modes" title="Permanent link">&para;</a></h1>
 <h2 id="21-overview">2.1 Overview <a name="overview"></a><a class="headerlink" href="#21-overview" title="Permanent link">&para;</a></h2>
@@ -2536,9 +2598,9 @@
 <li>For storing the license ID, it's recommended to use <code>/tmp</code>. This folder is accessible from the snap by default. Users can easily write the ID to <code>/tmp/myFancyFile</code>, which remains available until the system reboots, even after the app is removed.</li>
 </ul>
 </div>
-<p><strong>ctrlX CORE<sup>virtual</sup></strong> </p>
+<h3 id="ctrlx-corevirtual">ctrlX CORE<sup>virtual</sup><a class="headerlink" href="#ctrlx-corevirtual" title="Permanent link">&para;</a></h3>
 <p>As displayed in the table, there is only the "four hour engineering demo license" available on the <strong>ctrlX CORE<sup>virtual</sup></strong>, which allows to evaluate a new app for a limited time (the ctrlX CORE<sup>virtual</sup> is terminated after four hours to prevent productive use). Use the <code>SWL_XCR_ENGINEERING_4H</code> license when the application is running in ctrlX CORE<sup>virtual</sup>.</p>
-<p><strong>All other cases</strong> </p>
+<h3 id="all-other-cases">All other cases<a class="headerlink" href="#all-other-cases" title="Permanent link">&para;</a></h3>
 <p>The different license modes and their expected behaviors for the app are described briefly below. This information is intended to help developers distinguish between different cases depending on the license mode used within their application. The descriptions aim to show developers the type of license the app is currently operating under.</p>
 <h2 id="22-ctrlx-core-main-license">2.2 ctrlX CORE Main License  <a name="main"></a><a class="headerlink" href="#22-ctrlx-core-main-license" title="Permanent link">&para;</a></h2>
 <p><strong>Purpose:</strong> Standard License</p>
@@ -2583,16 +2645,20 @@
 <li>The license will automatically expire after 10 days.</li>
 <li>Other than the temporary usage rights mode, 10 day trial licenses may be used (consecutively) in case an according contractual agreement is available for all involved parties (Bosch Rexroth, Customer, ctrlX World Partner).</li>
 </ul>
-<p><strong>Expected App Behaviour:</strong>
-- Support of this mode is <strong>optional</strong>.
-- The app is able to detect whether the system runs in this mode by evaluating the <code>isPermanent</code> flag in the response to the acquisition request (the flag is set to <code>false</code>)
- - When this mode is active, the app should work as if a standard license is available.
- - This 10 day trail license is bought for all apps and mapped to device</p>
+<p><strong>Expected App Behaviour:</strong></p>
+<ul>
+<li>Support of this mode is <strong>optional</strong>.</li>
+<li>The app is able to detect whether the system runs in this mode by evaluating the <code>isPermanent</code> flag in the response to the acquisition request (the flag is set to <code>false</code>)</li>
+<li>When this mode is active, the app should work as if a standard license is available.</li>
+<li>This 10 day trail license is bought for all apps and mapped to device</li>
+</ul>
 <h2 id="25-four-hour-engineering-demo-license-on-ctrlx-corevirtual">2.5 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup> <a name="virtual"></a><a class="headerlink" href="#25-four-hour-engineering-demo-license-on-ctrlx-corevirtual" title="Permanent link">&para;</a></h2>
 <p><strong>Purpose</strong>: Evaluation mode on a ctrlX CORE<sup>virtual</sup>
-<strong>Description</strong>:
--  An according special license key (<code>SWL_XCR_ENGINEERING_4H</code>) indicates that currently the limited evaluation mode is active
-- After 4 hours the ctrlX CORE<sup>virtual</sup> shuts down itself to prevent a productive use.</p>
+<strong>Description</strong>:</p>
+<ul>
+<li>An according special license key (<code>SWL_XCR_ENGINEERING_4H</code>) indicates that currently the limited evaluation mode is active</li>
+<li>After 4 hours the ctrlX CORE<sup>virtual</sup> shuts down itself to prevent a productive use.</li>
+</ul>
 <p><strong>Expected App Behaviour:</strong></p>
 <ul>
 <li>In order to support this non-productive mode, apps must check for the license <code>SWL_XCR_ENGINEERING_4H</code>, which guarantees that the runtime is limited to 4 hours.</li>
@@ -2607,17 +2673,19 @@
 </ul>
 <h2 id="27-spoofing-detection-by-optionally-signing-verifying-license-requests">2.7 Spoofing detection by optionally signing / verifying license requests  <a name="spoofing"></a><a class="headerlink" href="#27-spoofing-detection-by-optionally-signing-verifying-license-requests" title="Permanent link">&para;</a></h2>
 <p><strong>Purpose:</strong> This mechanism allows applications that request a licene to verify that the license indeed comes from the ctrlX OS license manager.</p>
-<p><strong>Description:</strong>
-- Although it is quite unprobable, that a malicious actor could replace ctrlX OS' license manager, a further layer of security is added
-- Applications can request licenses (see <a href="#232-license-manager-api">License Manager API</a>) and set the 'signResponse' query parameter
-- Once a license has been requested (with the corresponding query parameter set) the response's header will contain a signature
-- This signature was calculated using the device certificate (and the corresponding tpm-based key) and can be used to fully verify that the license response was indeed from a certified ctrlX OS device with no spoofed license manager</p>
-<p><strong>Usage:</strong>
-1) Any application that wants to use this mechanism will need to send a license request with the corresponding query parameter set <br>
+<p><strong>Description:</strong></p>
+<ul>
+<li>Although it is quite unprobable, that a malicious actor could replace ctrlX OS' license manager, a further layer of security is added</li>
+<li>Applications can request licenses (see <a href="https://boschrexroth.github.io/rest-api-description/ctrlx-automation/ctrlx-core/">License Manager API</a>) and set the 'signResponse' query parameter</li>
+<li>Once a license has been requested (with the corresponding query parameter set) the response's header will contain a signature</li>
+<li>This signature was calculated using the device certificate (and the corresponding tpm-based key) and can be used to fully verify that the license response was indeed from a certified ctrlX OS device with no spoofed license manager</li>
+</ul>
+<p><strong>Usage:</strong></p>
+<p>1) Any application that wants to use this mechanism will need to send a license request with the corresponding query parameter set <br>
     1.1) The response header contains a hex-encoded signature ("Payload-Signature") <br>
     2.2) The signature is created using ECDSA-SHA256 on the standardized curve 'SECP-256' <br>
 2) Once the response (and the signature in 'Payload-Signature') the application needs to verify that the signature is indeed valid and was produced by the device <br>
-2.1) The license manager's device certificate chain (and the public key herein) can be used for this - see (see <a href="#232-license-manager-api">License Manager API</a>) <br>
+2.1) The license manager's device certificate chain (and the public key herein) can be used for this - see (see <a href="https://boschrexroth.github.io/rest-api-description/ctrlx-automation/ctrlx-core/">License Manager API</a>) <br>
 2.2) Use the public key inside the end-entity (device) certificate to verify the signature <br>
 3) Once signature verification is successful, we can assume that the chain sent by the device and the key used for signing correspond, however additional steps are required to ensure that the device is indeed a ctrlX OS device (and the license manager is unspoofed) <br>
 3.1) The device-certificate chain as retrieved in step 2.1 can now be used to check whether the device is a ctrlX OS device by verifying the certificate chain <br>
@@ -2665,11 +2733,13 @@ The "required" flag indicates whether a license is mandatory to use the applicat
 <h3 id="332-license-manager-api">3.3.2 License Manager API<a class="headerlink" href="#332-license-manager-api" title="Permanent link">&para;</a></h3>
 <p>The licensing API is available on GitHub: <a href="https://boschrexroth.github.io/rest-api-description">https://boschrexroth.github.io/rest-api-description</a></p>
 <p>The ctrlX License Manager API streamlines license management for the ctrlX OS. This API documentation is also available in the API Reference Section of ctrlX OS. It provides clear guidance on acquiring, releasing, querying, and managing licenses for different applications or functions. The REST API functionality allows users to test their license features and confirm their operability. <strong>The use of unix sockets for license integration is recommended. Refer to section 3.4 for details.</strong></p>
-<p>Implementing this API, an app is able to
-- Get a list of all available license capabilities.
-- Acquire a license.
-- Release a license.
-- Update the licenses in a ctrlX CORE by uploading a license file.</p>
+<p>Implementing this API, an app is able to</p>
+<ul>
+<li>Get a list of all available license capabilities.</li>
+<li>Acquire a license.</li>
+<li>Release a license.</li>
+<li>Update the licenses in a ctrlX CORE by uploading a license file.</li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -2730,10 +2800,10 @@ The "required" flag indicates whether a license is mandatory to use the applicat
   {
     "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",
     "version": "1.0"
-  }</code>
-Upon a successful request, the following response will be returned.</p>
+  }</code></p>
+<p>Upon a successful request, the following response will be returned.</p>
 <blockquote>
-<p><img alt="" src="images/licensing2.png" /></p>
+<p><img alt="request example" src="images/licensing2.png" /></p>
 </blockquote>
 <p>The application should release the license when it is stopped or removed. It should also perform periodic checks to ensure the license's validity. The license can be released using the ID obtained from the acquire response. Storing this license ID is necessary and should be stored in a directory that is not affected when the application goes into a faulty state and needs to be restarted. The usage of <code>/tmp</code> is recommended for this purpose. This folder is accessible from the snap by default. Users can easily write the ID to <code>/tmp/myFancyFile</code>, which remains available until the system reboots, even after the app is removed.  </p>
 <h3 id="334-available-licenses-on-the-device-activated-capabilities">3.3.4 Available licenses on the device (activated capabilities)<a class="headerlink" href="#334-available-licenses-on-the-device-activated-capabilities" title="Permanent link">&para;</a></h3>
@@ -2741,38 +2811,38 @@ Upon a successful request, the following response will be returned.</p>
 Nevertheless, this is optional - it is sufficient to simply try to acquire a license and then check whether the acquisition request was successful.</p>
 <p>Sample response:</p>
 <blockquote>
-<p><img alt="" src="images/licensing1.png" /></p>
+<p><img alt="response example" src="images/licensing1.png" /></p>
 </blockquote>
 <h3 id="335-update-license-status">3.3.5 Update license status<a class="headerlink" href="#335-update-license-status" title="Permanent link">&para;</a></h3>
 <p>The API allows to upload a capability response (license file) from the license portal to update the license status on the device (e.g. add new licenses). This functionality is not required by an app itself but is rather performed by the device operator depending on which licenses will be required according to the installed apps. The REST API route to upload a license file allows passing an optional query parameter (withChangeReport). If this parameter is set, the result of the API will return all licenses that have been added / removed by the used license file.</p>
 <h2 id="34-communication-with-license-manager-api">3.4 Communication with License Manager API <a name="comm"></a><a class="headerlink" href="#34-communication-with-license-manager-api" title="Permanent link">&para;</a></h2>
 <h3 id="341-unix-socket">3.4.1 Unix socket<a class="headerlink" href="#341-unix-socket" title="Permanent link">&para;</a></h3>
 <ul>
-<li>The content interface from step 3.1 provides access through a unix-domain socket named <strong>licensing-service.sock</strong>. This socket is located at target path <code>$</code>SNAP_DATA/licensing-service/licensing-service.sock. All licensing APIs can be accessed directly using an HTTP client through this socket address. <br><strong>E.g.</strong> <em>curl --unix-socket $SNAP_DATA/licensing-service/licensing-service.sock http://localhost/license-manager/api/v1/capabilities.</em> <br> similarly HTTP client via unix socket can be used by other programming languages to access licensing API </br></li>
+<li>The content interface from step 3.1 provides access through a unix-domain socket named <strong>licensing-service.sock</strong>. This socket is located at target path <code>$</code>SNAP_DATA/licensing-service/licensing-service.sock. All licensing APIs can be accessed directly using an HTTP client through this socket address. <br><strong>E.g.</strong> <em>curl --unix-socket $SNAP_DATA/licensing-service/licensing-service.sock <a href="http://localhost/license-manager/api/v1/capabilities">http://localhost/license-manager/api/v1/capabilities</a>.</em> <br> similarly HTTP client via unix socket can be used by other programming languages to access licensing API </br></li>
 <li>Using unix sockets eliminates the need for authentication, making it a recommended option as no token for authorization is required.</li>
 </ul>
-<p>Check if the Plug is connected: 
+<p>Check if the Plug is connected:</p>
 <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SNAP_DATA</span><span class="s2">/licensing-service&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;IS THE LICENSING PLUG INSERT: true&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;IS THE LICENSING PLUG INSERT: false&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
-</code></pre></div></p>
-<p>Before executing the commands, change the current directory to $SNAP_DATA.
+</code></pre></div>
+<p>Before executing the commands, change the current directory to $SNAP_DATA.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span><span class="nv">$SNAP_DATA</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>Examples using CURL:</p>
-<p>Get capabilities:
+<p>Get capabilities:</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sS<span class="w"> </span>--no-buffer<span class="w"> </span>-XGET<span class="w"> </span>--unix-socket<span class="w"> </span>licensing-service/licensing-service.sock<span class="w"> </span>http://localhost/license-manager/api/v1/capabilities
-</code></pre></div></p>
-<p>Acquire the 4H license for ctrlX CORE Virtual. Use the license feature code from the capabilities to acquire a real license.
+</code></pre></div>
+<p>Acquire the 4H license for ctrlX CORE Virtual. Use the license feature code from the capabilities to acquire a real license.</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sS<span class="w"> </span>--no-buffer<span class="w"> </span>-XPOST<span class="w"> </span>--unix-socket<span class="w"> </span>licensing-service/licensing-service.sock<span class="w"> </span><span class="s1">&#39;http://localhost/license-manager/api/v1/license&#39;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;accept: application/json&#39;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;name\&quot;:\&quot;SWL_XCR_ENGINEERING_4H\&quot;,\&quot;version\&quot;:\&quot;1.0\&quot;}&quot;</span>
 </code></pre></div>
-Release a license:
+<p>Release a license:</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sS<span class="w"> </span>--no-buffer<span class="w"> </span>-XDELETE<span class="w"> </span>--unix-socket<span class="w"> </span>licensing-service/licensing-service.sock<span class="w"> </span><span class="s1">&#39;http://localhost/license-manager/api/v1/license/57ac4c58-4167-4afb-b4c2-e63c564c5b68&#39;</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>Store license ID:</p>
-<p>To store the license ID, it is recommended to use the <code>/tmp</code> folder. This folder is accessible from the snap by default. Users can easily write the ID to <code>/tmp/myFancyFile</code>, which remains available until the system reboots, even after the app is removed. 
+<p>To store the license ID, it is recommended to use the <code>/tmp</code> folder. This folder is accessible from the snap by default. Users can easily write the ID to <code>/tmp/myFancyFile</code>, which remains available until the system reboots, even after the app is removed.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">#Assuming that the license ID is contained in &#39;myid&#39;</span>
 <span class="nv">licensefilelocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/tmp/LICENSED
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$myid</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$licensefilelocation</span>
-</code></pre></div></p>
+</code></pre></div>
 <h2 id="35-access-license-manager-in-plc-application">3.5 Access License Manager in PLC Application <a name="plc"></a><a class="headerlink" href="#35-access-license-manager-in-plc-application" title="Permanent link">&para;</a></h2>
 <h3 id="351-ctrlx-automation-library-cxa_licensing">3.5.1 ctrlX AUTOMATION Library <em>CXA_LICENSING</em><a class="headerlink" href="#351-ctrlx-automation-library-cxa_licensing" title="Permanent link">&para;</a></h3>
 <p>In addition to the REST API, the License Manager can also be used in a PLC application.
@@ -2782,14 +2852,14 @@ To use the according functions, the library <em>CXA_LICENSING</em> can be added 
 <p>The <em>CXA_LICENSING</em> library provides POUs to acquire and release licenses and to get capabilities. In addition, the library also comes with an example how to use the licensing mechanisms in a PLC application.</p>
 <p>The online documentation of the library in ctrlX PLC Engineering provides detailed information about the POUs and the example:</p>
 <blockquote>
-<p><img alt="" src="images/licensing_plclib.png" /></p>
+<p><img alt="CXA_LICENSING" src="images/licensing_plclib.png" /></p>
 </blockquote>
 <h2 id="36-license-management-in-windows-applications">3.6 License Management in Windows Applications <a name ="windows"></a><a class="headerlink" href="#36-license-management-in-windows-applications" title="Permanent link">&para;</a></h2>
 <p>ctrlX WORKS also supports the License Manager.</p>
 <p>Please find the ctrlX WORKS Licensing API here in the ctrlX World Portal:
 <a href="https://bosch.sharepoint.com/sites/msteams_1647245/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fmsteams%5F1647245%2FShared%20Documents%2FPartner%2F01%5FctrlX%2DWorld%5Fgeneral%5Finformation%2F03%5FApp%5FDevelopment%2FWindows%5Flicensing%2Fcom%2Eboschrexroth%2Ectrlxworks%2Elicensing%2Eapi%2D1%2E0%2E0%2Ezip&amp;parent=%2Fsites%2Fmsteams%5F1647245%2FShared%20Documents%2FPartner%2F01%5FctrlX%2DWorld%5Fgeneral%5Finformation%2F03%5FApp%5FDevelopment%2FWindows%5Flicensing">ctrlX WORKS Licensing API</a></p>
 <p>This API provides licensing functions for Windows Applications, and comes with according samples for different programming languages and frameworks.</p>
-<p><strong>Copyright</strong></p>
+<h2 id="copyright">Copyright<a class="headerlink" href="#copyright" title="Permanent link">&para;</a></h2>
 <p>SPDX-FileCopyrightText: Bosch Rexroth AG</p>
 
 
@@ -2870,7 +2940,7 @@ To use the according functions, the library <em>CXA_LICENSING</em> can be added 
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

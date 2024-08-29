@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -2071,12 +2071,12 @@
 <h1 id="how-to-protect-content-interface-connections">How to protect content interface connections<a class="headerlink" href="#how-to-protect-content-interface-connections" title="Permanent link">&para;</a></h1>
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Each app can provide or consume multiple interface connections. The usage of some of these connections can destroy the integrity of the system.
- These connections are defined in the denylist which avoids an automatic connection by the Device Admin.</p>
+These connections are defined in the denylist which avoids an automatic connection by the Device Admin.</p>
 <h3 id="extend-the-denylist">Extend the denylist<a class="headerlink" href="#extend-the-denylist" title="Permanent link">&para;</a></h3>
 <p>The app developer may want to protect own content interfaces and restrict them to specific apps. An example for such a connection is an unix socket to communicate
- between two apps (server and client). The functionality of the extended denylist was created for this purpose.</p>
+between two apps (server and client). The functionality of the extended denylist was created for this purpose.</p>
 <p>The app should be able to indicate whether a particular content interface that it declares should be protected, and if so, what rules it can use.
- Therefore, the app developer can provide a denylist.json as a package asset.</p>
+Therefore, the app developer can provide a denylist.json as a package asset.</p>
 <p>In order to make this possible, a few requirements must be met.</p>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
@@ -2090,7 +2090,7 @@
 <h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
 <p>The extendable deny list is part of a customer app. Only signed customer apps can provide an own deny list, all deny lists in unsigned apps are ignored.</p>
 <p>The denylist.json file is located in the <code>package-assets</code> folder of the app, which is connected to the package-assets of the Device Admin.
- The *.package-manifest.json file is also located in this folder.</p>
+The *.package-manifest.json file is also located in this folder.</p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 <p><code>$SNAP/package-assets/$SNAP_NAME/$SNAP_NAME.package-manifest.json</code></p>
@@ -2098,7 +2098,7 @@
 <p>Only content interface (see: <code>https://snapcraft.io/docs/content-interface</code>) connections are supported! The content target has to contain the "parent" app name, e.g. the app "ctrlx-customer-app" can provide the protected content interface "ctrlx-customer-app-abc".</p>
 <h3 id="content-interfaces">Content interfaces<a class="headerlink" href="#content-interfaces" title="Permanent link">&para;</a></h3>
 <p>Then there is a differentiation between content interfaces and all other interfaces.
-  If the interface is a content interface the content property will be compared. If they where equal, the connection is allowed.</p>
+If the interface is a content interface the content property will be compared. If they where equal, the connection is allowed.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p><div class="highlight"><span class="filename">plugs</span><pre><span></span><code><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">...</span>
@@ -2223,7 +2223,7 @@
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

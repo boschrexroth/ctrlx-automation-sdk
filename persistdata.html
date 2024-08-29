@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -875,6 +875,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Problem schema definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problemyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem.yaml
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -883,6 +898,21 @@
       App-private files
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="App-private files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-manifestjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      package-manifest.json
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2409,6 +2439,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Problem schema definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problemyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem.yaml
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2417,6 +2462,21 @@
       App-private files
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="App-private files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-manifestjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      package-manifest.json
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2521,29 +2581,28 @@ Persistence handling is done by the Solutions app (app.solutions), which is an e
 <span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$SNAP_COMMON/solutions</span>
 </code></pre></div>
 <p>The <code>$SNAP_COMMON/solution</code> directory contains an <code>activeConfiguration</code> symlink. Use this symlink to get the path to the appdata directory which contains the currently active app data: <code>$SNAP_COMMON/solutions/activeConfiguration</code> → <code>$SNAP_COMMON/solutions/DefaultSolution/configurations/appdata/</code></p>
-<blockquote>
 <p><strong>Note:</strong></p>
 <p>Your app might start before the <strong>active-solution</strong> interface is connected by the system. You can handle this scenario in two ways:</p>
 <ul>
-<li>
-<p>Use an entry-point script and check status of the <strong>active-solution</strong> interface using snapctl is-connected active-solution; e.g. create a script which has the following content and is defined in your snapcraft.yaml as the command to execute:</p>
-<p>#!/bin/bash</p>
-<p>while ! snapctl is-connected active-solution
-   do
-       sleep 5
-   done</p>
-<p>$SNAP/bin/<your executable></p>
-</li>
-<li>
-<p>Check existence of the folder <code>$SNAP_COMMON/solutions/activeConfiguration</code> in your application logic</p>
-</li>
+<li>Use an entry-point script and check status of the <strong>active-solution</strong> interface using snapctl is-connected active-solution; e.g. create a script which has the following content and is defined in your snapcraft.yaml as the command to execute:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1">#!/bin/bash</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span>!<span class="w"> </span>snapctl<span class="w"> </span>is-connected<span class="w"> </span>active-solution
+<span class="w">    </span><span class="k">do</span>
+<span class="w">        </span>sleep<span class="w"> </span><span class="m">5</span>
+<span class="w">    </span><span class="k">done</span>
+
+<span class="w">    </span><span class="nv">$SNAP</span>/bin/&lt;your<span class="w"> </span>executable&gt;
+</code></pre></div>
+<ul>
+<li>Check existence of the folder <code>$SNAP_COMMON/solutions/activeConfiguration</code> in your application logic</li>
 </ul>
 <p>In a development environment, you can check the connection of the <strong>active-solution interface</strong> by</p>
 <ul>
-<li>calling <em>snap connections</em> and checking whether there is an entry with &gt; <strong>interface content[solutions]</strong> for the <strong>plug \&lt;your app name&gt;:active-solution</strong> and <strong>slot rexroth-solutions:active-solution</strong></li>
+<li>calling <em>snap connections</em> and checking whether there is an entry with <strong>interface content[solutions]</strong> for the <strong>plug \&lt;your app name&gt;:active-solution</strong> and <strong>slot rexroth-solutions:active-solution</strong></li>
 <li>running a shell in the context of your app and checking the content of the folder <code>$SNAP_COMMON/solutions</code> which must contain a folder <strong>DefaultSolution</strong> and the two symlinks <strong>activeSolution</strong> and <strong>activeConfiguration</strong>. The shell can be started with <em>snap run --shell \&lt;your app name&gt;.\&lt;your app command&gt;</em></li>
 </ul>
-</blockquote>
 <h2 id="3-specify-your-app-directories">3 Specify your app directories<a name="specify"></a><a class="headerlink" href="#3-specify-your-app-directories" title="Permanent link">&para;</a></h2>
 <p>Within the appdata root directory, define a subdirectory with a unique name as your base directory. We recommend to use your app's name in lowercase letters to avoid conflicts with other apps and allow users to easily identify your data in the file system. The screenshot shows an example with the base directories of the Motion and PLC apps, among others.</p>
 <p><img alt="image" src="images/How-To-Persist-app-data-Fig02_configuation-screenshot.png" /></p>
@@ -2571,7 +2630,7 @@ Persistence handling is done by the Solutions app (app.solutions), which is an e
 <p><strong>icon</strong>: The app icon to display in the "Manage app data" content view (should be consistent with icon used e.g. in sidebar menu); if omitted or empty, no icon is displayed in the content view</p>
 </li>
 <li>
-<p><strong>copyOnLoad</strong> (default: <em>false</em>): Set <em>true</em> to instruct the Solutions app to copy the data from your app directory 
+<p><strong>copyOnLoad</strong> (default: <em>false</em>): Set <em>true</em> to instruct the Solutions app to copy the data from your app directory
 in the archive to the active configuration on load; omit (or set <em>false</em>) to enable custom "smart loading"; see section
 "From copying to smart loading" for details</p>
 </li>
@@ -2597,10 +2656,10 @@ against unintended changes.</p>
 <li><strong>Extendable</strong>: Device and engineering functionality will enhance from version to version. You should make sure that your file formats are extendible to cope with new use cases.</li>
 </ul>
 <p>We recommend JSON as the file format where possible, as it supports these properties. You may also consider to provide corresponding JSON-schema files to enable guidance and validation. In any case, JSON files should contain a root object (NOT an array) to enable schema references and extendibility.</p>
-<blockquote>
-<p><strong>Note:</strong>
-An app may specify "private files" inside its appdata directories in order to exclude them from save and load operations. See appendix "App-private files" for details.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An app may specify "private files" inside its appdata directories in order to exclude them from save and load operations. See appendix "App-private files" for details.</p>
+</div>
 <h2 id="4-register-for-saving-and-loading">4 Register for saving and loading<a name="register"></a><a class="headerlink" href="#4-register-for-saving-and-loading" title="Permanent link">&para;</a></h2>
 <p>In order to participate in the save and load operations triggered by the Solutions app, your app must register its own save and load commands. The following example shows how to register a save and a load command for Motion settings by adding the respective command declarations to the package manifest:</p>
 <p><strong>package-manifest.json:</strong></p>
@@ -2669,7 +2728,7 @@ ignore those save requests if they update their app data on loading.</p>
 <h3 id="request-parameters">Request parameters<a class="headerlink" href="#request-parameters" title="Permanent link">&para;</a></h3>
 <p>The following information is sent as request parameters to all participants in all save and load phases:</p>
 <ul>
-<li><strong>configurationPath</strong>: the directory of the configuration to be loaded, starting from the solutions directory, e.g. "solutions/DefaultSolution/configurations/<configuration>"; in case of a save operation, the configuration path should be ignored, as the target of saving is always the active configuration (appdata directory)</li>
+<li><strong>configurationPath</strong>: the directory of the configuration to be loaded, starting from the solutions directory, e.g. "solutions/DefaultSolution/configurations/<code>&lt;configuration&gt;</code>"; in case of a save operation, the configuration path should be ignored, as the target of saving is always the active configuration (appdata directory)</li>
 <li><strong>id</strong>: a random code which identifies the instance of save or load operation, e.g. "282xy5"; also used to find corresponding messages in the Logbook; should be included in the dynamic description of diagnostic messages and trace messages by all participants; convention: put in square brackets at the end of diagnostic messages and trace messages; see section "Diagnostic messages" for details</li>
 <li><strong>phase</strong>: specifies the current processing phase of a save or load operation; one of the phases described in section "Processing sequences"; e.g., "load"</li>
 </ul>
@@ -2786,31 +2845,28 @@ The id of a save or load operation can also be found on and copied from the "Man
 <p>A first basic implementation may be to just copy the directory contents from the "configuration to load" to the corresponding appdata subdirectory. The Solutions app provides a default implementation of this file copy functionality. To activate this functionality, use the copyOnLoad option in your app directory declarations (cf. section "Specify your app directories").</p>
 <p>The following example shows how a set of copyOnLoad declarations would be applied for a given configuration:</p>
 <p><strong>Example app directory declarations (pseudo code):</strong></p>
-<div class="codehilite"><pre><span></span><code>a/b: copyOnLoad=false
-a/b/c: copyOnLoad=true
-a/b/c/h: copyOnLoad=false
+<div class="highlight"><pre><span></span><code>    a/b: copyOnLoad=false
+    a/b/c: copyOnLoad=true
+    a/b/c/h: copyOnLoad=false
 </code></pre></div>
-
 <p><strong>Directories in the configuration to load:</strong></p>
-<div class="codehilite"><pre><span></span><code>a
-a/b
-a/b/c/d
-a/b/c/h
-a/b/e/f
-a/g
+<div class="highlight"><pre><span></span><code>    a
+    a/b
+    a/b/c/d
+    a/b/c/h
+    a/b/e/f
+    a/g
 </code></pre></div>
-
 <p><strong>Result showing which directories would be copied (and why):</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="n">a</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">(</span><span class="k">default</span><span class="o">,</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">declared</span><span class="o">)</span>
-<span class="n">b</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="o">(</span><span class="n">declared</span><span class="o">)</span>
-<span class="n">c</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">(</span><span class="n">declared</span><span class="o">)</span>
-<span class="n">d</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">(</span><span class="n">inherited</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">c</span><span class="o">)</span>
-<span class="n">h</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="o">(</span><span class="n">declared</span><span class="o">)</span>
-<span class="n">e</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="o">(</span><span class="n">inherited</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">b</span><span class="o">)</span>
-<span class="n">f</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="o">(</span><span class="n">inherited</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">e</span><span class="o">)</span>
-<span class="n">g</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">(</span><span class="n">inherited</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">a</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code>    a: true (default, as not declared)
+    b: false (declared)
+    c: true (declared)
+    d: true (inherited from c)
+    h: false (declared)
+    e: false (inherited from b)
+    f: false (inherited from e)
+    g: true (inherited from a)
 </code></pre></div>
-
 <p>However, an app might improve the load functionality by evaluating the changes to be applied during load. The app may determine that state changes (e.g., stopping the PLC for loading) are actually not required depending on the kind of data to load. Some participants may even be able to skip a load operation completely if their part of the configuration has not changed.</p>
 <p>If you want to take control and be able to evaluate differences between the configuration files and the appdata files,</p>
 <ul>
@@ -2833,7 +2889,7 @@ For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is execu
 <p><img alt="image" src="images/How-To-Persist-app-data-Fig06_Loading%28FAILED%29.png" /></p>
 <h3 id="problem-schema-definition">Problem schema definition<a class="headerlink" href="#problem-schema-definition" title="Permanent link">&para;</a></h3>
 <p>Failure responses to command requests must adhere to the following schema:</p>
-<p><strong>Problem.yaml</strong></p>
+<h4 id="problemyaml">Problem.yaml<a class="headerlink" href="#problemyaml" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nt">Problem</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
 <span class="w">  </span><span class="nt">x-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1.0.0&#39;</span>
@@ -2948,7 +3004,7 @@ For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is execu
 <p>Apps may need to store files in their appdata directories which are only needed at runtime. These files (or directories) have to be ignored on loading and when saving the appdata to an archived configuration.</p>
 <p>An app can specify such files using the "appPrivateFiles" element in the configuration section of its manifest. The element value is an array of strings where each string represents a regular expression following the RE2 syntax (<a href="https://golang.org/s/re2syntax">https://golang.org/s/re2syntax</a>). The expressions describe paths and names of files to be considered as private and are checked case-insensitively.</p>
 <p>The following example shows the declaration of "appPrivateFiles" with 3 regular expressions and the declaration of the app's root directory:</p>
-<p><strong>package-manifest.json</strong></p>
+<h4 id="package-manifestjson">package-manifest.json<a class="headerlink" href="#package-manifestjson" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;appPrivateFiles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="s2">&quot;^my-app/private/&quot;</span><span class="p">,</span>
@@ -2992,25 +3048,23 @@ For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is execu
 </table>
 <h3 id="accessing-configuration-files-per-webdav">Accessing configuration files per WebDAV<a class="headerlink" href="#accessing-configuration-files-per-webdav" title="Permanent link">&para;</a></h3>
 <p>The configuration files are available via WebDAV protocol under the ctrlx-device web address with base path of "solutions/webdav", eg. access the configuration.json file content of appdata:</p>
-<div class="codehilite"><pre><span></span><code>https://localhost:8443/solutions/webdav/appdata/configuration.json
+<div class="highlight"><pre><span></span><code>    https://localhost:8443/solutions/webdav/appdata/configuration.json
 </code></pre></div>
-
 <p>See also: <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/samples-go/webdav.client/README.md">golang WebDAV client</a>
 and <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/samples-node/solutions.webdav.interface/README.md">nodejs WebDAV client</a></p>
 <h3 id="accessing-configuration-files-with-winscp">Accessing configuration files with WinSCP<a class="headerlink" href="#accessing-configuration-files-with-winscp" title="Permanent link">&para;</a></h3>
 <p><a href="https://winscp.net/">WinSCP</a> is a windows app, which allows access to a remote file system via WebDAV.</p>
 <h4 id="connect-to-a-ctrlx-core">Connect to a ctrlX CORE<a class="headerlink" href="#connect-to-a-ctrlx-core" title="Permanent link">&para;</a></h4>
 <p>Start WinSCP, login with:</p>
-<div class="codehilite"><pre><span></span><code>File<span class="w"> </span>protocol:<span class="w">          </span>WebDAV
-Host<span class="w"> </span>name:<span class="w">              </span>IP-address<span class="w"> </span>or<span class="w"> </span>hostname<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>ctrlX<span class="w"> </span>CORE
-Port<span class="w"> </span>number:<span class="w">            </span>443<span class="w"> </span>or<span class="w"> </span>8443<span class="w"> </span>for<span class="w"> </span>a<span class="w"> </span>ctrlX<span class="w"> </span>CORE<span class="nt">&lt;sup&gt;</span>virtual<span class="nt">&lt;/sup&gt;</span>
-User<span class="w"> </span>name<span class="w"> </span>and<span class="w"> </span>Password:<span class="w"> </span>credentials<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>ctrlX<span class="w"> </span>CORE
+<div class="highlight"><pre><span></span><code>    File protocol:          WebDAV
+    Host name:              IP-address or hostname of the ctrlX CORE
+    Port number:            443 or 8443 for a ctrlX CORE^virtual^
+    User name and Password: credentials on the ctrlX CORE
 </code></pre></div>
-
-<p><img alt="" src="images/winscp-sites.png" /></p>
+<p><img alt="winscp login" src="images/winscp-sites.png" /></p>
 <p>The user needs manage configuration rights to access the files.</p>
 <p>Access the configuration files located in <strong>/solutions/webdav</strong></p>
-<p><img alt="" src="images/winscp-files.png" /></p>
+<p><img alt="winscp files" src="images/winscp-files.png" /></p>
 <p>The folder "appdata" contains the files of the active configuration. The other folders are configuration archives.</p>
 
 
@@ -3091,7 +3145,7 @@ User<span class="w"> </span>name<span class="w"> </span>and<span class="w"> </sp
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

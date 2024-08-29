@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -2002,19 +2002,23 @@
 <p>The app.deviceadmin provides a socket interface, which allows to use the TPM2. Behind the scenes, there is a "Access Broker/Ressource Manager" working, managing concurrent sessions accessing the TPM2.</p>
 <div class="admonition check">
 <p class="admonition-title"><strong>Following steps are necessary to connect to TPM2 socket:</strong></p>
-<ul>
-<li>Adapt your snapcraft.yaml</li>
-<li>Needed plugs<ul>
-<li>tpm2-socket: Provides your snap with the tpm2.sock file.</li>
-<li>(Optional) system-configuration: Provides a file with environment variables for configuring your TSS, called "envvars".</li>
-</ul>
-</li>
-<li>Provide your app with the plugs</li>
-<li>Use the TPM inside your application</li>
-<li>Compile the TSS as you need</li>
-<li>Source the envvars</li>
-<li>Use the TSS as usual ...</li>
-</ul>
+<p><ul>
+  <li>Adapt your snapcraft.yaml</li>
+    <ul>
+      <li>Needed plugs</li>
+        <ul>
+          <li>tpm2-socket: Provides your snap with the tpm2.sock file.</li>
+          <li>(Optional) system-configuration: Provides a file with environment variables for configuring your TSS, called "envvars".</li>
+        </ul>
+      <li>Provide your app with the plugs</li>
+    </ul>
+  <li>Use the TPM inside your application</li>
+    <ul>
+      <li>Compile the TSS as you need</li>
+      <li>Source the envvars</li>
+      <li>Use the TSS as usual ...</li>
+    </ul>
+</ul></p>
 </div>
 <p>More details on the Trusted Software Stack (TSS) below.</p>
 <h3 id="example-snapcraftyaml">Example snapcraft.yaml<a class="headerlink" href="#example-snapcraftyaml" title="Permanent link">&para;</a></h3>
@@ -2038,15 +2042,14 @@
 <p>If you provide the package-certificate slots, and use the appropriate directory structure, TPM2 usage perfectly integrates into Certificate Manager.</p>
 <h2 id="using-the-tpm2-inside-software">Using the TPM2 inside software<a class="headerlink" href="#using-the-tpm2-inside-software" title="Permanent link">&para;</a></h2>
 <p>After having everything in place, the usage of the TPM is straightforward. Instead of connecting to <code>/dev/tpmrm0</code>, use <code>$SNAP_DATA/tpm2-socket/tpm2.sock</code>. <code>envvars</code> provides you with everything needed, for example:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">TPM2TOOLS_TCTI</span><span class="o">=</span><span class="s2">&quot;cmd:nc -U </span><span class="nv">$SNAP_DATA</span><span class="s2">/tpm2-socket/tpm2.sock&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">TPM2TOOLS_TCTI</span><span class="o">=</span><span class="s2">&quot;cmd:nc -U </span><span class="nv">$SNAP_DATA</span><span class="s2">/tpm2-socket/tpm2.sock&quot;</span>
 </code></pre></div>
 <h3 id="storage-root-key-srk">Storage Root Key (SRK)<a class="headerlink" href="#storage-root-key-srk" title="Permanent link">&para;</a></h3>
 <p>The SRK of the TPM is permanently stored at <strong>0x81000001</strong> provided by TPM2_SRK_PARENT environment variable.</p>
-<hr />
-<p><strong>NOTE</strong></p>
-<p>Although the SRK is stored in NVRAM of TPM, it cannot be guaranteed to be always present.</p>
-<p>It must be tolerable by your application, that the SRK was replaced by another key, or even is totally absent.</p>
-<hr />
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the SRK is stored in NVRAM of TPM, it cannot be guaranteed to be always present. It must be tolerable by your application, that the SRK was replaced by another key, or even is totally absent.</p>
+</div>
 <p>Following two examples or snippets, how to generate the SRK with the correct Primary-Key-Template.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;0000000: 0001&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xxd<span class="w"> </span>-r<span class="w"> </span>-<span class="w"> </span>unique.dat
 dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">256</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>unique.dat
@@ -2085,7 +2088,7 @@ tpm2_createprimary<span class="w"> </span><span class="se">\</span>
 <ul>
 <li>tpm2-tss <a href="https://github.com/tpm2-software/tpm2-tss">https://github.com/tpm2-software/tpm2-tss</a></li>
 <li>tpm2-tools <a href="https://github.com/tpm2-software/tpm2-tools">https://github.com/tpm2-software/tpm2-tools</a></li>
-<li>tpm2-tss-engine <a href="https://github.com/tpm2-software/tpm2-tss-engine">https://github.com/tpm2-software/tpm2-tss-engine</a> </li>
+<li>tpm2-tss-engine <a href="https://github.com/tpm2-software/tpm2-tss-engine">https://github.com/tpm2-software/tpm2-tss-engine</a></li>
 <li>tpm2-openssl <a href="https://github.com/tpm2-software/tpm2-openssl">https://github.com/tpm2-software/tpm2-openssl</a></li>
 </ul>
 <p>More information and more tools:</p>
@@ -2103,16 +2106,20 @@ tpm2_createprimary<span class="w"> </span><span class="se">\</span>
 </code></pre></div>
 <h3 id="other-languages">Other languages<a class="headerlink" href="#other-languages" title="Permanent link">&para;</a></h3>
 <p>Useful projects:</p>
-<p>Golang
- - <a href="https://github.com/google/go-tpm">https://github.com/google/go-tpm</a>
- - <a href="https://github.com/google/go-tpm-tools">https://github.com/google/go-tpm-tools</a>
- - <a href="https://github.com/salrashid123/signer">https://github.com/salrashid123/signer</a></p>
+<p>Golang</p>
+<ul>
+<li><a href="https://github.com/google/go-tpm">https://github.com/google/go-tpm</a></li>
+<li><a href="https://github.com/google/go-tpm-tools">https://github.com/google/go-tpm-tools</a></li>
+<li><a href="https://github.com/salrashid123/signer">https://github.com/salrashid123/signer</a></li>
+</ul>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>If using go-tpm, you need to implement your own functions for opening, reading and writing the TPM socket, as the integrated functions close and reopen the socket with every read/write sequence. See: <a href="https://github.com/google/go-tpm/blob/master/tpmutil/run_other.go">https://github.com/google/go-tpm/blob/master/tpmutil/run_other.go</a></p>
 </div>
-<p>Python
- - <a href="https://github.com/tpm2-software/tpm2-pytss">https://github.com/tpm2-software/tpm2-pytss</a></p>
+<p>Python</p>
+<ul>
+<li><a href="https://github.com/tpm2-software/tpm2-pytss">https://github.com/tpm2-software/tpm2-pytss</a></li>
+</ul>
 
 
 
@@ -2192,7 +2199,7 @@ tpm2_createprimary<span class="w"> </span><span class="se">\</span>
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

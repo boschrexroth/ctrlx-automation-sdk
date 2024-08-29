@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -2051,23 +2051,23 @@
 </tr>
 </tbody>
 </table>
-<p>We recommend to test your application extensively in the build environment (type #2). Testing an application running in it's confined Ubuntu Core snap enviroment can be done by looking at the snap logs (type #1). Remote Debugging (type #3) while the snap is running in the confined Ubuntu Core snap environment of a ctrlX CORE should only be used as the last step, if the other two debug types don't help to debug your application. </p>
+<p>We recommend to test your application extensively in the build environment (type #2). Testing an application running in it's confined Ubuntu Core snap enviroment can be done by looking at the snap logs (type #1). Remote Debugging (type #3) while the snap is running in the confined Ubuntu Core snap environment of a ctrlX CORE should only be used as the last step, if the other two debug types don't help to debug your application.</p>
 <p>Common and important information about debugging snaps are provided by snapcraft: <a href="https://snapcraft.io/docs/debug-snaps">Debugging snaps</a></p>
-<p>In the following you can see how to set up the three different types of debugging. </p>
+<p>In the following you can see how to set up the three different types of debugging.</p>
 <h2 id="1-snap-logs">1. Snap Logs<a class="headerlink" href="#1-snap-logs" title="Permanent link">&para;</a></h2>
-<p>First build the snap using the right build-snap script and install it on a ctrlX CORE or ctrlX CORE<sup>virtual</sup>. </p>
+<p>First build the snap using the right build-snap script and install it on a ctrlX CORE or ctrlX CORE<sup>virtual</sup>.</p>
 <p>You can see the snaps logs in the Diagnostics Logbook on the webpage of the ctrlX CORE or in the console. To see them in the console you need to log in via ssh to the ctrlX CORE. To enable ssh on your ctrlX CORE you would need an system user with extended rights on the ctrlX CORE.</p>
 <div class="admonition command">
 <p class="admonition-title">Command</p>
-<p>The log output of a snap can be checked with <code>sudo snap logs -f snapname</code> in the console. </p>
+<p>The log output of a snap can be checked with <code>sudo snap logs -f snapname</code> in the console.</p>
 </div>
-<p>To see the same output of the snap logs in the Diagnostics/Logbook on the ctrlX CORE no system User is needed. Just enable to "Show System Messages" in the settings of the logbook. </p>
+<p>To see the same output of the snap logs in the Diagnostics/Logbook on the ctrlX CORE no system User is needed. Just enable to "Show System Messages" in the settings of the logbook.</p>
 <p><img alt="Output in diagnosis logbook by cpp-sample Hello World" src="images/messages.in.logbook.png" /></p>
 <h2 id="2-debugging-in-build-environment">2. Debugging in Build Environment<a class="headerlink" href="#2-debugging-in-build-environment" title="Permanent link">&para;</a></h2>
 <p><img alt="image" src="images/debug-build-env.png" /></p>
-<p>It's recommended to debug your application in your app build environment. You can run script files directly in your build environment with an interpreter (e.g. Python) or run compiled executables with an Debugger (e.g. C++). </p>
-<p>The samples in the SDK already contain a launch.json in the folder .vscode, which makes it easy for you to debug the samples using Visual Studio Code as your source code editor. </p>
-<p>For the prerequisites for every programming language please see the corresponding documentation in Samples. </p>
+<p>It's recommended to debug your application in your app build environment. You can run script files directly in your build environment with an interpreter (e.g. Python) or run compiled executables with an Debugger (e.g. C++).</p>
+<p>The samples in the SDK already contain a launch.json in the folder .vscode, which makes it easy for you to debug the samples using Visual Studio Code as your source code editor.</p>
+<p>For the prerequisites for every programming language please see the corresponding documentation in Samples.</p>
 <h2 id="3-remote-debugging">3. Remote Debugging<a class="headerlink" href="#3-remote-debugging" title="Permanent link">&para;</a></h2>
 <p>Remote Debugging should only be used as the last step, if the other two debug types don't help to debug your application. For detailed information on this debugging, please see the following descriptions:</p>
 <ul>
@@ -2157,7 +2157,7 @@
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

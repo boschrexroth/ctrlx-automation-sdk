@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -2047,7 +2047,7 @@
 <p>This folder contains bat and image files to launch an App Build Environment with ctrlX WORKS under Windows operating system.
 An App Build Environment is a Ubuntu Server guest operating running within a <a href="https://www.qemu.org/">QEMU</a> virtual machine.</p>
 <p>The installation and configuration of the Ubuntu Server guest operating system is automatically done
-on first boot by the build-in Ubuntu Cloud-Init Technology. For this purpose, a so-called user image file is specified when the App Build Environment is started. 
+on first boot by the build-in Ubuntu Cloud-Init Technology. For this purpose, a so-called user image file is specified when the App Build Environment is started.
 This file contains the compiled information of a cloud-config file which is processed by the cloud-init service.</p>
 <p>For more informations see <a href="https://cloud-init.io/">cloud-init</a></p>
 <h2 id="creating-an-app-build-environment-instance">Creating an App Build Environment Instance<a class="headerlink" href="#creating-an-app-build-environment-instance" title="Permanent link">&para;</a></h2>
@@ -2055,16 +2055,16 @@ This file contains the compiled information of a cloud-config file which is proc
 <p>ctrlX WORKS copies a set of files into the specific destination directory. Depending on the option <strong>Use HTTP and HTTPS proxy on localhost:3128</strong> a user-data-image file is used with or without proxy server information.</p>
 <h2 id="working-with-an-app-build-environment">Working with an App Build Environment<a class="headerlink" href="#working-with-an-app-build-environment" title="Permanent link">&para;</a></h2>
 <h3 id="starting-an-app-build-environment-for-the-first-time">Starting an App Build Environment for the first time<a class="headerlink" href="#starting-an-app-build-environment-for-the-first-time" title="Permanent link">&para;</a></h3>
-<p>An new created App Build Environment instance can be launched by clicking the '&gt;' icon in ctrlX WORKS. </p>
-<p>Each time ctrlX WORKS generates the batch file start.bat. 
+<p>An new created App Build Environment instance can be launched by clicking the '&gt;' icon in ctrlX WORKS.</p>
+<p>Each time ctrlX WORKS generates the batch file start.bat.
 Here the Windows environment variable PATH is extended so that the ctrlX WORKS internal QEMU installation will be used. Then launch.bat is called.</p>
 <p>launch.bat downloads the Ubuntu Server image, creates a snapshot file (.qcow2) and launches the QEMU executable. The image file remains unchanged, all changes are saved in the snapshot file.</p>
-<p>During startup the App Build Environment will be configured by the Ubuntu Cloud-Init Technology. Therefor the cloud-config file contained in the user-data-image file is used. </p>
+<p>During startup the App Build Environment will be configured by the Ubuntu Cloud-Init Technology. Therefor the cloud-config file contained in the user-data-image file is used.</p>
 <p>In this initialization phase login is not possible.</p>
 <p>When this phase is finished, the guest operating system will automatically shut down and has to be restarted.</p>
 <h3 id="restarting-an-app-build-environment">Restarting an App Build Environment<a class="headerlink" href="#restarting-an-app-build-environment" title="Permanent link">&para;</a></h3>
-<p>The restart is initiated by clicking the '&gt;' icon on the ctrlX WORKS UI. </p>
-<p>start.bat is called and the App Build Environment will start directly into the run phase. </p>
+<p>The restart is initiated by clicking the '&gt;' icon on the ctrlX WORKS UI.</p>
+<p>start.bat is called and the App Build Environment will start directly into the run phase.</p>
 <p>Logging in - directly or via SSH - is enabled.</p>
 <h3 id="logging-in">Logging in<a class="headerlink" href="#logging-in" title="Permanent link">&para;</a></h3>
 <p>We recommend to login in via SSH - using a RSA public / private key pair.</p>
@@ -2189,7 +2189,7 @@ SPDX-License-Identifier: MIT</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

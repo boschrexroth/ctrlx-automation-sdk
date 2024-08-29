@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -837,6 +837,42 @@
   <a href="#221-key-naming-convention" class="md-nav__link">
     <span class="md-ellipsis">
       2.2.1 Key naming convention
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-localization-file-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 Localization file formats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flat-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flat format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#namespaced-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Namespaced format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    <span class="md-ellipsis">
+      Note
     </span>
   </a>
   
@@ -2103,6 +2139,42 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#222-localization-file-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 Localization file formats
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flat-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flat format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#namespaced-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Namespaced format
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    <span class="md-ellipsis">
+      Note
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2186,33 +2258,31 @@
 <p>Please refer to the App Development Guide for further information.</p>
 <h3 id="table-of-contents"><strong>Table of Contents</strong><a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h3>
 <p><a href="#introduction">1 Introduction</a></p>
-<p><a href="#files"> 2 Localization Files</a></p>
-<p><a href="#practice"> 3 Best practice: How to make an app localizable</a></p>
+<p><a href="#files">2 Localization Files</a></p>
+<p><a href="#practice">3 Best practice: How to make an app localizable</a></p>
 <h1 id="1-introduction">1 Introduction <a name="introduction"></a><a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h1>
 <p>ctrlX OS uses the NGX-Translate library to localize Apps</p>
-<p>Details of this library can be found here:</p>
-<blockquote>
-<p>http://www.ngx-translate.com/</p>
-</blockquote>
-<p>The basic concept of localization is to
-- extract localizable texts from HTML and Typescript
-- and put them into language specific localization files.</p>
+<p>Details of this library can be found here:
+<a href="http://www.ngx-translate.com/">http://www.ngx-translate.com/</a></p>
+<p>The basic concept of localization is to</p>
+<ul>
+<li>extract localizable texts from HTML and Typescript</li>
+<li>and put them into language specific localization files.</li>
+</ul>
 <p>At runtime, localized texts are loaded from localization files depending on the currently selected language and displayed in the UI.</p>
 <h1 id="2-localization-files">2 Localization Files <a name="files"></a><a class="headerlink" href="#2-localization-files" title="Permanent link">&para;</a></h1>
 <h2 id="21-conventions">2.1 Conventions<a class="headerlink" href="#21-conventions" title="Permanent link">&para;</a></h2>
 <p>The texts to be translated are stored in json localization files.
-Localization files are loaded at runtime from
+Localization files are loaded at runtime from</p>
 <div class="highlight"><pre><span></span><code>https://{ip-address}/assets/i18n/
-</code></pre></div></p>
-<p>To ensure that several localization files can be located in the assets directory in parallel, they have to comply to the following naming convention:
+</code></pre></div>
+<p>To ensure that several localization files can be located in the assets directory in parallel, they have to comply to the following naming convention:</p>
 <div class="highlight"><pre><span></span><code>{App-Name}.{lang-ISO_639-1-code}.json
 </code></pre></div>
-Localization files contain localizable texts for exactly one language and for exactly one app
+<p>Localization files contain localizable texts for exactly one language and for exactly one app
 That means: Every app contains separate localization files per language.</p>
-<p>For ISO codes refer to</p>
-<blockquote>
-<p>https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes</p>
-</blockquote>
+<p>For ISO codes refer to
+<a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes</a></p>
 <p>Examples:</p>
 <ul>
 <li>ctrlx-app.en.json</li>
@@ -2220,81 +2290,73 @@ That means: Every app contains separate localization files per language.</p>
 </ul>
 <h2 id="22-content-and-structure">2.2 Content and structure<a class="headerlink" href="#22-content-and-structure" title="Permanent link">&para;</a></h2>
 <p>Localization files are basically key/values lists. Each key/value pair represents one localizable string.</p>
-<p>The basic format of a key/value entry is:
+<p>The basic format of a key/value entry is:</p>
 <div class="highlight"><pre><span></span><code>&quot;&lt;key&gt;&quot;:  &quot;&lt;translated text&gt;&quot;
-</code></pre></div></p>
+</code></pre></div>
 <h3 id="221-key-naming-convention">2.2.1 Key naming convention<a class="headerlink" href="#221-key-naming-convention" title="Permanent link">&para;</a></h3>
-<p>Keys have to follow the following convention to avoid conflicts when several localization files are loaded simultaneously at runtime:
+<p>Keys have to follow the following convention to avoid conflicts when several localization files are loaded simultaneously at runtime:</p>
 <div class="highlight"><pre><span></span><code>&lt;app id&gt;.&lt;component&gt;.&lt;element&gt;[.type]
-````
-* **app id**: unique app id (as defined during the app onboarding process, see App Development Guide for details) 
-* **component**: denotes the building block (angular component, service etc.) within an app where the translatable text is located
-* **element**: denotes the ui-element within a component on which the text is placed
-* **type** (optional): denotes the type of the ui-element. This can give  translators additional information,  that may be relevant for translation. 
-For example, types in ctrlX OS are:
-    * title  (page / dialog titles)
-    * header (column headers etc.)
-    * tab (tab page titles)
-    * menu (sidebar menus and other menus)
-    * sub menu (sidebar menus and other menus)
-    * button (button text)
-    * tooltip (tooltip text)
-
-
-
-### 2.2.2 Localization file formats
-Two formats of localization files are supported:
-- the flat format
-- the namespaced format
-
-Each of them has its pros and cons.
-
-**Flat format**
-
-In flat format each key/value pair corresponds to one line within the json file.
-
-The flat format is the straight forward approach that can be used especially in small webapps/weblibs that do not have much translatable text.
-This is quite simple. However, with increasing file length it becomes difficult to keep the overview about the file content.
-
-Localization file in flat format:
-```json
-{
-  &quot;myapp.startPage.element1&quot;: &quot;Localized Text 1&quot;,
-  &quot;myapp.startPage.element2&quot;: &quot;Localized Text 2&quot;,
-  &quot;myapp.startPage.element3&quot;: &quot;Localized Text 3&quot;
-}
-````
-**Namespaced format**
-
-To add structure to extensive localization files the namespaced format can be used.
-
-In this format the effective key (e.g. *&quot;myapp.startPage.element1&quot;*) will be composed of the namespace (e.g. *&quot;myapp.startPage&quot;*) and the key within the namespace (e.g. *&quot;element1&quot;*).
-This means that both formats are equivalent and represent the same localization information.
-
-Localization file in namespaced format:
-```json
-{
-  &quot;myapp.startPage&quot;: {
-    &quot;element1&quot;: &quot;Localized Text 1&quot;,
-    &quot;element2&quot;: &quot;Localized Text 2&quot;,
-    &quot;element3&quot;: &quot;Localized Text 3&quot;
-  }
-}
-</code></pre></div></p>
-<p><strong>Note:</strong>
-Comments and remarks are not supported in localization files</p>
+</code></pre></div>
+<ul>
+<li><strong>app id</strong>: unique app id (as defined during the app onboarding process, see App Development Guide for details)</li>
+<li><strong>component</strong>: denotes the building block (angular component, service etc.) within an app where the translatable text is located</li>
+<li><strong>element</strong>: denotes the ui-element within a component on which the text is placed</li>
+<li><strong>type</strong> (optional): denotes the type of the ui-element. This can give  translators additional information,  that may be relevant for translation.</li>
+</ul>
+<p>For example, types in ctrlX OS are:</p>
+<ul>
+<li>title  (page / dialog titles)</li>
+<li>header (column headers etc.)</li>
+<li>tab (tab page titles)</li>
+<li>menu (sidebar menus and other menus)</li>
+<li>sub menu (sidebar menus and other menus)</li>
+<li>button (button text)</li>
+<li>tooltip (tooltip text)</li>
+</ul>
+<h3 id="222-localization-file-formats">2.2.2 Localization file formats<a class="headerlink" href="#222-localization-file-formats" title="Permanent link">&para;</a></h3>
+<p>Two formats of localization files are supported:</p>
+<ul>
+<li>the flat format</li>
+<li>the namespaced format</li>
+</ul>
+<p>Each of them has its pros and cons.</p>
+<h3 id="flat-format">Flat format<a class="headerlink" href="#flat-format" title="Permanent link">&para;</a></h3>
+<p>In flat format each key/value pair corresponds to one line within the json file.</p>
+<p>The flat format is the straight forward approach that can be used especially in small webapps/weblibs that do not have much translatable text.
+This is quite simple. However, with increasing file length it becomes difficult to keep the overview about the file content.</p>
+<p>Localization file in flat format:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;myapp.startPage.element1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Localized Text 1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;myapp.startPage.element2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Localized Text 2&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;myapp.startPage.element3&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Localized Text 3&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="namespaced-format">Namespaced format<a class="headerlink" href="#namespaced-format" title="Permanent link">&para;</a></h3>
+<p>To add structure to extensive localization files the namespaced format can be used.</p>
+<p>In this format the effective key (e.g. <em>"myapp.startPage.element1"</em>) will be composed of the namespace (e.g. <em>"myapp.startPage"</em>) and the key within the namespace (e.g. <em>"element1"</em>).
+This means that both formats are equivalent and represent the same localization information.</p>
+<p>Localization file in namespaced format:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;myapp.startPage&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;element1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Localized Text 1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;element2&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Localized Text 2&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;element3&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Localized Text 3&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="note">Note<a class="headerlink" href="#note" title="Permanent link">&para;</a></h3>
+<p>Comments and remarks are not supported in localization files</p>
 <h1 id="3-best-practice-how-to-make-an-app-localizable">3 Best practice: How to make an app localizable <a name="practice"></a><a class="headerlink" href="#3-best-practice-how-to-make-an-app-localizable" title="Permanent link">&para;</a></h1>
 <p><strong>Note</strong>:</p>
 <p>This chapter describes a ctrlX OS best practice to add localization to an app.
 Bosch Rexroth does not guarantee that this practice will work for Partner Apps.</p>
-<p>Please see http://www.ngx-translate.com/ for additional information.
+<p>Please see <a href="http://www.ngx-translate.com/">http://www.ngx-translate.com/</a> for additional information.
 This site also provides example for different options on how to add ngx translate to a web application.</p>
 <h2 id="31-install-ngx-translate-and-ngx-translate-multi-http-loader">3.1 Install ngx-translate and ngx-translate-multi-http-loader<a class="headerlink" href="#31-install-ngx-translate-and-ngx-translate-multi-http-loader" title="Permanent link">&para;</a></h2>
 <p>Use the following commands to install ngx-translate and ngx-translate-multi-http-loader:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">npm</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="err">@</span><span class="n">ngx</span><span class="o">-</span><span class="n">translate</span><span class="o">/</span><span class="n">core</span><span class="w"> </span><span class="err">@</span><span class="n">ngx</span><span class="o">-</span><span class="n">translate</span><span class="o">/</span><span class="n">http</span><span class="o">-</span><span class="n">loader</span><span class="w"> </span><span class="n">rxjs</span><span class="w"> </span><span class="o">--</span><span class="n">save</span>
-<span class="n">npm</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">ngx</span><span class="o">-</span><span class="n">translate</span><span class="o">-</span><span class="n">multi</span><span class="o">-</span><span class="n">http</span><span class="o">-</span><span class="n">loader</span><span class="w"> </span><span class="o">--</span><span class="n">save</span>
+<div class="highlight"><pre><span></span><code><span class="w">    </span>npm<span class="w"> </span>install<span class="w"> </span>@ngx-translate/core<span class="w"> </span>@ngx-translate/http-loader<span class="w"> </span>rxjs<span class="w"> </span>--save
+<span class="w">    </span>npm<span class="w"> </span>install<span class="w"> </span>ngx-translate-multi-http-loader<span class="w"> </span>--save
 </code></pre></div>
-
 <h2 id="32-add-an-assetsi18n-folder-to-your-app-project">3.2 Add an assets/i18n folder to your app project<a class="headerlink" href="#32-add-an-assetsi18n-folder-to-your-app-project" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>&lt;root&gt;
   |- projects
@@ -2316,7 +2378,7 @@ export function createMultiTranslateHttpLoader(http: HttpClient): TranslateLoade
   return new MultiTranslateHttpLoader(http, [
 
     //If the app uses lazy loaded modules:
-    { prefix: &#39;./&lt;app-name&gt;/assets/i18n/&lt;app-name&gt;.&#39;, suffix: &#39;.json&#39; },   
+    { prefix: &#39;./&lt;app-name&gt;/assets/i18n/&lt;app-name&gt;.&#39;, suffix: &#39;.json&#39; },
 
     //If the app does NOT use lazy loaded modules
     { prefix: &#39;./assets/i18n/&lt;app-name&gt;.&#39;, suffix: &#39;.json&#39; },
@@ -2344,10 +2406,10 @@ export function createMultiTranslateHttpLoader(http: HttpClient): TranslateLoade
 <p>Note that TranslateModule.forRoot() must be called.</p>
 <p>For ctrlX OS, English (en) is defined as defaultLanguage. That means English is the fallback language if a translation is not available in the currently selected language.</p>
 <h2 id="34-localize-the-ui-related-parts-of-your-app">3.4 Localize the UI related parts of your app<a class="headerlink" href="#34-localize-the-ui-related-parts-of-your-app" title="Permanent link">&para;</a></h2>
-<p>Please see details here: https://github.com/ngx-translate/core</p>
+<p>Please see details here: <a href="https://github.com/ngx-translate/core">https://github.com/ngx-translate/core</a></p>
 <hr />
 <p><strong>Copyright</strong>
-© Bosch Rexroth AG 2022-2023 </p>
+© Bosch Rexroth AG 2022-2024</p>
 <p>This document, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch</p>
 
 
@@ -2428,7 +2490,7 @@ export function createMultiTranslateHttpLoader(http: HttpClient): TranslateLoade
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

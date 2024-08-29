@@ -22,7 +22,7 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
@@ -752,6 +752,30 @@
       Failure behavior
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Failure behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-response-body-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem response body (example)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem schema
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2095,6 +2119,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Failure behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-response-body-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem response body (example)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem schema
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -2227,7 +2275,7 @@ created with a password.</li>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>The Setup app calls the URLs with GET or PUT to read or update the settings when a backup is created or restored. </p>
+<p>The Setup app calls the URLs with GET or PUT to read or update the settings when a backup is created or restored.</p>
 <p>Creating a backup with the above setting declarations might, e.g., result in the following <code>ctrlx-backup.json</code> output. The
 respective files (<code>baz.bin</code>, <code>secret.bin.aes</code>) would be included in the enclosing <code>ctrlx-backup.zip</code> archive.</p>
 <p><strong>ctrlx-backup.json:</strong></p>
@@ -2314,24 +2362,24 @@ response body if the request has succeeded.</li>
 <ul>
 <li>Apps must respond with an error status code (4xx or 5xx) if a GET or PUT request has failed.</li>
 <li>The response body must contain a JSON object describing the problem by providing an appropriate status code and title
-(cf. example and schema below). </li>
+(cf. example and schema below).</li>
 <li>The Setup app reports the problem response of a failed request as an error in the Logbook and via Web UI. Processing
 is continued with the next setting.</li>
 </ul>
-<p><strong>Problem response body (example)</strong></p>
+<h5 id="problem-response-body-example">Problem response body (example)<a class="headerlink" href="#problem-response-body-example" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cannot parse value.&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><strong>Problem schema</strong></p>
+<h5 id="problem-schema">Problem schema<a class="headerlink" href="#problem-schema" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="nt">Problem</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
 <span class="w">  </span><span class="nt">x-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1.0.0&#39;</span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">    </span><span class="no">This document defines a &quot;problem detail&quot; as a way </span>
-<span class="w">    </span><span class="no">to carry machine-readable details of errors in a </span>
-<span class="w">    </span><span class="no">HTTP response to avoid the need to define new error </span>
+<span class="w">    </span><span class="no">This document defines a &quot;problem detail&quot; as a way</span>
+<span class="w">    </span><span class="no">to carry machine-readable details of errors in a</span>
+<span class="w">    </span><span class="no">HTTP response to avoid the need to define new error</span>
 <span class="w">    </span><span class="no">response formats for HTTP APIs.</span>
 <span class="w">  </span><span class="nt">required</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type</span>
@@ -2341,28 +2389,28 @@ is continued with the next setting.</li>
 <span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">      </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uri</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">A URI reference [RFC3986] that identifies the problem type. </span>
-<span class="w">        </span><span class="no">This specification encourages that, when de-referenced, </span>
-<span class="w">        </span><span class="no">it provide human-readable documentation for the problem type </span>
-<span class="w">        </span><span class="no">(e.g., using HTML [W3C.REC-html5-20141028]). When this member </span>
+<span class="w">        </span><span class="no">A URI reference [RFC3986] that identifies the problem type.</span>
+<span class="w">        </span><span class="no">This specification encourages that, when de-referenced,</span>
+<span class="w">        </span><span class="no">it provide human-readable documentation for the problem type</span>
+<span class="w">        </span><span class="no">(e.g., using HTML [W3C.REC-html5-20141028]). When this member</span>
 <span class="w">        </span><span class="no">is not present, its value is assumed to be &quot;about:blank&quot;.</span>
 <span class="w">      </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;about:blank&#39;</span>
 <span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://example.com/probs/out-of-credit&#39;</span>
 <span class="w">    </span><span class="nt">title</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">A short, human-readable summary of the problem type. </span>
-<span class="w">        </span><span class="no">It SHOULD NOT change from occurrence to occurrence of the problem, </span>
-<span class="w">        </span><span class="no">except for purposes of localization (e.g., using proactive content </span>
+<span class="w">        </span><span class="no">A short, human-readable summary of the problem type.</span>
+<span class="w">        </span><span class="no">It SHOULD NOT change from occurrence to occurrence of the problem,</span>
+<span class="w">        </span><span class="no">except for purposes of localization (e.g., using proactive content</span>
 <span class="w">        </span><span class="no">negotiation; see [RFC7231], Section 3.4).</span>
-<span class="w">        </span><span class="no">If the response is a diagnostics message, it contains </span>
+<span class="w">        </span><span class="no">If the response is a diagnostics message, it contains</span>
 <span class="w">        </span><span class="no">the text associated with the mainDiagnosisCode.</span>
 <span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">You do not have enough credit.</span>
 <span class="w">    </span><span class="nt">status</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
 <span class="w">      </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int32</span>
 <span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">        </span><span class="no">The HTTP status code ([RFC7231], Section 6) generated by the </span>
+<span class="w">        </span><span class="no">The HTTP status code ([RFC7231], Section 6) generated by the</span>
 <span class="w">        </span><span class="no">origin server for this occurrence of the problem.</span>
 <span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">403</span>
 <span class="w">    </span><span class="nt">detail</span><span class="p">:</span>
@@ -2452,10 +2500,10 @@ is continued with the next setting.</li>
 <span class="w">        </span><span class="nt">$ref</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#/Problem&quot;</span>
 </code></pre></div>
 <h2 id="using-ubuntus-snapshot-mechanism">Using Ubuntu’s snapshot mechanism<a name="snapshot"></a><a class="headerlink" href="#using-ubuntus-snapshot-mechanism" title="Permanent link">&para;</a></h2>
-<p>An app may use Ubuntu’s snapshot mechanism to save and restore its settings, cf. https://snapcraft.io/docs/snapshots.
+<p>An app may use Ubuntu’s snapshot mechanism to save and restore its settings, cf. <a href="https://snapcraft.io/docs/snapshots">https://snapcraft.io/docs/snapshots</a>.
 While this minimizes the implementation effort, the following issues should be considered:</p>
 <ul>
-<li>A snapshot typically contains much more files than should be part of the apps settings, e.g. log files, cached files, etc.  In order to keep backup file sizes manageable, apps should exclude irrelevant content from their snapshots if possible (cf. https://forum.snapcraft.io/t/excluding-data-from-snapshots/33643).</li>
+<li>A snapshot typically contains much more files than should be part of the apps settings, e.g. log files, cached files, etc.  In order to keep backup file sizes manageable, apps should exclude irrelevant content from their snapshots if possible (cf. <a href="https://forum.snapcraft.io/t/excluding-data-from-snapshots/33643">https://forum.snapcraft.io/t/excluding-data-from-snapshots/33643</a>).</li>
 <li>Secrets are saved unencrypted in the snapshot and the backup file, respectively.</li>
 <li>Taking a snapshot fails if a file is locked or modified while taking the snapshot. Therefore, the Setup app disables apps before taking a snapshot, which requires that the system is in SERVICE state. Apps must be prepared to consistently save their state on "disable" events. When the snapshot has been taken, the Setup app enables the app again.</li>
 <li>Before restoring a snapshot, the Setup app disables the app. After the snapshot has been restored, the Setup app enables the app so that the app can initialize itself with the restored data. As the Setup app cannot find out if a snapshot contains changed settings, snapshots are always completely restored.</li>
@@ -2567,7 +2615,7 @@ respective snapshot file (<code>app.snapshot</code>) would be included in the en
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>

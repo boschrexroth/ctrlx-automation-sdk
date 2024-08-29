@@ -18,11 +18,11 @@
       
       
       <link rel="icon" href="assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
     
     
       
-        <title>1. Document Overview - Software Development Kit</title>
+        <title>Appdevguide basechecks - Software Development Kit</title>
       
     
     
@@ -117,7 +117,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-document-overview" class="md-skip">
+        <a href="#1-snapcraftyaml" class="md-skip">
           Skip to content
         </a>
       
@@ -151,7 +151,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. Document Overview
+              Appdevguide basechecks
             
           </span>
         </div>
@@ -1871,6 +1871,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-checked-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Checked content
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-additional-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Additional notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1887,13 +1913,12 @@
   
 
 
-<h1 id="1-document-overview">1. Document Overview<a class="headerlink" href="#1-document-overview" title="Permanent link">&para;</a></h1>
 <p>This document is part of the Bosch Rexroth ctrlX CORE App Development Guideline, and describes which basic aspects are checked in the Validation Process.</p>
 <p>Please refer to the App Development Guide for further information.</p>
 <p>The content of this document may be subject of change in further versions of the Validation Process.</p>
 <hr />
-<h1 id="2-snapcraftyaml">2. snapcraft.yaml<a class="headerlink" href="#2-snapcraftyaml" title="Permanent link">&para;</a></h1>
-<h2 id="21-checked-content">2.1 Checked content<a class="headerlink" href="#21-checked-content" title="Permanent link">&para;</a></h2>
+<h1 id="1-snapcraftyaml">1. snapcraft.yaml<a class="headerlink" href="#1-snapcraftyaml" title="Permanent link">&para;</a></h1>
+<h2 id="11-checked-content">1.1 Checked content<a class="headerlink" href="#11-checked-content" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1948,15 +1973,15 @@
 </tr>
 </tbody>
 </table>
-<h2 id="22-additional-notes">2.2 Additional notes<a class="headerlink" href="#22-additional-notes" title="Permanent link">&para;</a></h2>
+<h2 id="12-additional-notes">1.2 Additional notes<a class="headerlink" href="#12-additional-notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Schema for snapcraft.yaml:</strong> https://github.com/snapcore/snapcraft/blob/master/schema/snapcraft.json</li>
+<li><strong>Schema for snapcraft.yaml:</strong> <a href="https://github.com/snapcore/snapcraft/blob/master/schema/snapcraft.json">https://github.com/snapcore/snapcraft/blob/master/schema/snapcraft.json</a></li>
 <li><strong>Schema for technical app  name:</strong> "ctrlx-{company name}-{app name}-{app version}_arm64/amd64.snap"</li>
-<li><strong>ctrlX Device Portal: App name in Private Repository:</strong> If the App is provided in a Private Repository for the ctrlX Device Portal, the Name in the Artifact Description in the Repository should be identical to the Name in snapcraft.yaml. Please see https://docs.automation.boschrexroth.com/doc/2056862327/ctrlx-device-portal/latest/en/ for additional information about the ctrlX Device Portal and the Private Repository.</li>
+<li><strong>ctrlX Device Portal: App name in Private Repository:</strong> If the App is provided in a Private Repository for the ctrlX Device Portal, the Name in the Artifact Description in the Repository should be identical to the Name in snapcraft.yaml. Please see <a href="https://docs.automation.boschrexroth.com/doc/2056862327/ctrlx-device-portal/latest/en/">https://docs.automation.boschrexroth.com/doc/2056862327/ctrlx-device-portal/latest/en/</a> for additional information about the ctrlX Device Portal and the Private Repository.</li>
 </ul>
 <hr />
-<h1 id="3-package-manifestjson">3. package-manifest.json<a class="headerlink" href="#3-package-manifestjson" title="Permanent link">&para;</a></h1>
-<h2 id="31-checked-content">3.1 Checked content<a class="headerlink" href="#31-checked-content" title="Permanent link">&para;</a></h2>
+<h1 id="2-package-manifestjson">2. package-manifest.json<a class="headerlink" href="#2-package-manifestjson" title="Permanent link">&para;</a></h1>
+<h2 id="21-checked-content">2.1 Checked content<a class="headerlink" href="#21-checked-content" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1985,14 +2010,14 @@
 | <strong>name</strong> | is only lowercase, contains <code>.web</code> and is unique in the list |
 | <strong>url</strong> | is only lowercase and starts with <code>/</code> |
 | <strong>binding</strong> | is valid / not empty |</p>
-<h2 id="33-additional-notes">3.3 Additional notes<a class="headerlink" href="#33-additional-notes" title="Permanent link">&para;</a></h2>
+<h2 id="23-additional-notes">2.3 Additional notes<a class="headerlink" href="#23-additional-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>the <em>package-manifest.json</em> file must provide service entries for all services which are used in in the <em>portlist-description.json</em> file (proxy.service-name, see 3.)</li>
 <li>the <em>package-manifest.json</em> file must provide service entries for all services which are used in in the <em>unixsocket-description.json</em> file (socket name and accessibility, see 4.)</li>
 </ul>
 <hr />
-<h1 id="4-portlist-descriptionjson">4. portlist-description.json<a class="headerlink" href="#4-portlist-descriptionjson" title="Permanent link">&para;</a></h1>
-<h2 id="43-checked-content">4.3 Checked content<a class="headerlink" href="#43-checked-content" title="Permanent link">&para;</a></h2>
+<h1 id="3-portlist-descriptionjson">3. portlist-description.json<a class="headerlink" href="#3-portlist-descriptionjson" title="Permanent link">&para;</a></h1>
+<h2 id="33-checked-content">3.3 Checked content<a class="headerlink" href="#33-checked-content" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2017,57 +2042,53 @@
 | <strong>routing</strong> |is either internal or external|
 | <strong>service-name</strong> |starts with <code>ctrlx-</code> or <code>bosch-</code>, is lowercase and exists only once in the list|
 | <strong>default-state</strong>| is either <code>open</code> or <code>closed</code>|</p>
-<h2 id="44-additional-notes">4.4 Additional Notes<a class="headerlink" href="#44-additional-notes" title="Permanent link">&para;</a></h2>
+<h2 id="34-additional-notes">3.4 Additional Notes<a class="headerlink" href="#34-additional-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Number of open ports</strong>: For security reasons, the number of open ports should be limited to 3</li>
+<li><strong>Unwanted direct external access</strong>: The following configuration should be avoided:</li>
 <li>
-<p><strong>Unwanted direct external access</strong>: The following configuration should be avoided:</p>
-<ul>
-<li><code>"protocol = HTTP or HTTPS"</code>, <code>"binding = IP"</code> and <code>"routing = external"</code></li>
-</ul>
+<p><code>"protocol = HTTP or HTTPS"</code>, <code>"binding = IP"</code> and <code>"routing = external"</code></p>
 </li>
 <li>
 <p><strong>Wrong configuration</strong>: these configurations are considered as mismatch:</p>
-<ul>
+</li>
 <li><code>"protocol not HTTP or HTTPS"</code>, <code>"binding = IP"</code> and <code>"routing = internal"</code></li>
-<li><code>"protocol not HTTP or HTTPS"</code>, <code>"binding = localhost"</code> and <code>"routing = external"</code></li>
-</ul>
+<li>
+<p><code>"protocol not HTTP or HTTPS"</code>, <code>"binding = localhost"</code> and <code>"routing = external"</code></p>
 </li>
 <li>
 <p><strong>Port conflicts with reserved ports</strong>:</p>
-<ul>
+</li>
 <li>Ports that are listed in the <a href="appdevguide_reserved-interfaces.html">Reserved interfaces and ports</a> will generate a vakidation error</li>
 </ul>
-</li>
-</ul>
 <hr />
-<h1 id="5-unix-socket-descriptionjson">5. unix-socket-description.json<a class="headerlink" href="#5-unix-socket-descriptionjson" title="Permanent link">&para;</a></h1>
-<h2 id="51-checked-content">5.1 Checked content<a class="headerlink" href="#51-checked-content" title="Permanent link">&para;</a></h2>
+<h1 id="4-unix-socket-descriptionjson">4. unix-socket-description.json<a class="headerlink" href="#4-unix-socket-descriptionjson" title="Permanent link">&para;</a></h1>
+<h2 id="41-checked-content">4.1 Checked content<a class="headerlink" href="#41-checked-content" title="Permanent link">&para;</a></h2>
 <p>For each given socket <code>(sockets[i])</code>
 | <strong>Item</strong> | <strong>Criteria</strong> |
 | --- | --- |
 | <strong>name</strong> |is only lowercase, end with <code>.sock</code> or <code>.socket</code> and exists only once in the list|
 | <strong>purpose</strong>| is at least 16 characters long|
 | <strong>accessibility</strong> |is either <code>internal</code> or <code>external</code>|</p>
-<h2 id="52-additional-notes">5.2 Additional notes<a class="headerlink" href="#52-additional-notes" title="Permanent link">&para;</a></h2>
+<h2 id="42-additional-notes">4.2 Additional notes<a class="headerlink" href="#42-additional-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>only web sockets (name contains <code>.web</code>) can be used for external accessibility</li>
 </ul>
 <hr />
-<h1 id="6-slotplug-descriptionjson">6. slotplug-description.json<a class="headerlink" href="#6-slotplug-descriptionjson" title="Permanent link">&para;</a></h1>
-<h2 id="61-checked-content">6.1 Checked content<a class="headerlink" href="#61-checked-content" title="Permanent link">&para;</a></h2>
+<h1 id="5-slotplug-descriptionjson">5. slotplug-description.json<a class="headerlink" href="#5-slotplug-descriptionjson" title="Permanent link">&para;</a></h1>
+<h2 id="51-checked-content">5.1 Checked content<a class="headerlink" href="#51-checked-content" title="Permanent link">&para;</a></h2>
 <p>For each given slot <code>(slots[i])</code> and plug <code>(plugs[i])</code>
 | <strong>Item</strong> | <strong>Criteria</strong> |
 | --- | --- |
 | <strong>name</strong> |is only lowercase|
 | <strong>purpose</strong> |is at least 16 characters long|</p>
-<h2 id="62-additional-notes">6.2 Additional notes<a class="headerlink" href="#62-additional-notes" title="Permanent link">&para;</a></h2>
+<h2 id="52-additional-notes">5.2 Additional notes<a class="headerlink" href="#52-additional-notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>both for slots an plugs, the max number of entries should be 8</li>
 <li>All slots and plugs in the <em>slotplug-description.json</em> must be available in the <em>snapcraft.yaml</em> file also, and vice versa</li>
 </ul>
-<h1 id="7-scopes-snapnamescopesjson">7. Scopes (${snapname}.scopes.json)<a class="headerlink" href="#7-scopes-snapnamescopesjson" title="Permanent link">&para;</a></h1>
-<h2 id="71-checked-content">7.1 Checked content<a class="headerlink" href="#71-checked-content" title="Permanent link">&para;</a></h2>
+<h1 id="6-scopes-snapnamescopesjson">6. Scopes (${snapname}.scopes.json)<a class="headerlink" href="#6-scopes-snapnamescopesjson" title="Permanent link">&para;</a></h1>
+<h2 id="61-checked-content">6.1 Checked content<a class="headerlink" href="#61-checked-content" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2088,7 +2109,7 @@
 </table>
 <hr />
 <p><strong>Copyright</strong>
-© Bosch Rexroth AG 2023 - 
+© Bosch Rexroth AG 2024 -
 This document, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch</p>
 
 
@@ -2169,7 +2190,7 @@ This document, as well as the data, specifications and other information set for
     <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="assets/javascripts/bundle.af256bd8.min.js"></script>
       
     
   </body>
