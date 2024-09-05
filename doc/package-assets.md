@@ -66,7 +66,7 @@ An app can be integrated into the ctrlX CORE navigation by defining menu entries
 
 ### Declare menu items in the package-manifest
 
-Add a "menus" element to the package manifest of your snap. The "menus" element is defined as an object that comprises three elements:
+Add a "menus" element to the package manifest of your snap. The "menus" element is defined as an object that comprises four elements:
 
 - sidebar: An array of items to be integrated into the main menu
 - settings: An array of items to be integrated into the settings menu
