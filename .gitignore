@@ -3,6 +3,8 @@
 
 *.snap
 build
+venv/
+site/
 
 .snapcraft
 
