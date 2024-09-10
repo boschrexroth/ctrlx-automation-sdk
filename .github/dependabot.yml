@@ -2,21 +2,21 @@
 version: 2
 updates:
   - package-ecosystem: gomod
-    directory: '/samples-go/**'
+    directory: '/'
     schedule:
       interval: 'weekly'
   - package-ecosystem: npm
-    directory: '/samples-node/**'
+    directory: '/'
     allow:
       - dependency-type: 'production'
     schedule:
       interval: 'weekly'
   - package-ecosystem: nuget
-    directory: '/samples-net/**'
+    directory: '/'
     schedule:
       interval: 'weekly'
   - package-ecosystem: pip
-    directory: '/samples-python/**'
+    directory: '/'
     allow:
       - dependency-type: 'production'
     schedule:
