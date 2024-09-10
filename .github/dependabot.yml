@@ -7,17 +7,20 @@ updates:
     schedule:
       interval: 'weekly'
   - package-ecosystem: npm
-    directory: '/samples-node'
+    directories:
+      - '/samples-nodes/*'
     allow:
       - dependency-type: 'production'
     schedule:
       interval: 'weekly'
   - package-ecosystem: nuget
-    directory: '/samples-net'
+    directories:
+      - '/samples-net/*'
     schedule:
       interval: 'weekly'
   - package-ecosystem: pip
-    directory: '/samples-python'
+    directories:
+      - '/samples-python/*'
     allow:
       - dependency-type: 'production'
     schedule:
