@@ -4,7 +4,7 @@ go 1.22
 
 require (
 	github.com/google/go-tpm v0.9.0
-	github.com/google/go-tpm-tools v0.4.3
+	github.com/google/go-tpm-tools v0.4.4
 )
 
 require (
