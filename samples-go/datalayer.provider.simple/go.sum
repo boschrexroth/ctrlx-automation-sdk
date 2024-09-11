@@ -1,5 +1,5 @@
-github.com/boschrexroth/ctrlx-datalayer-golang/v2 v2.3.1 h1:Z2HW8/UFpUgIIf17PKdxSLA2dsFNyxWuZ2snpiJSW/8=
-github.com/boschrexroth/ctrlx-datalayer-golang/v2 v2.3.1/go.mod h1:KPv6r/fJw1ucKT4JRLjmwr283v+uDvn4eXPCn7dXjGI=
+github.com/boschrexroth/ctrlx-datalayer-golang/v2 v2.4.0 h1:MJEaYIZq6iSDuUwIcOFJT6L4MTUPyoy89bow1OTuE/0=
+github.com/boschrexroth/ctrlx-datalayer-golang/v2 v2.4.0/go.mod h1:lSLhBuuvRQZrRNWPJhc3n7pwZHgHKgVuetevojX8mco=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/flatbuffers v24.3.25+incompatible h1:CX395cjN9Kke9mmalRoL3d81AtFUxJM+yDthflgJGkI=
