@@ -9,7 +9,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/datalayer.samples.sln",
+                "${workspaceFolder}/samples.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -21,7 +21,7 @@
             "type": "process",
             "args": [
                 "clean",
-                "${workspaceFolder}/datalayer.samples.sln",
+                "${workspaceFolder}/samples.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
