@@ -43,6 +43,7 @@ The content of this document may be subject of change in further versions of the
 | **menus** | optional: entries for sidebar integration (if use, the entries must be unique) |
 
 For each given Proxy Mapping `services.proxyMapping[i]`:
+
 | **Item** | **Criteria** |
 | --- | --- |
 | **name** | is only lowercase, contains `.web` and is unique in the list |
@@ -65,6 +66,7 @@ For each given Proxy Mapping `services.proxyMapping[i]`:
 | **id** | is available and matches to the technical app name (see also **name** entry in *snapcraft.yaml*) |
 
 For each given port in the description (`ports[i]`):
+
 | **Item** | **Criteria** |
 | --- | --- |
 | **number**|  has 3 to 5 digits and exists only once in the list|
@@ -95,6 +97,7 @@ For each given port in the description (`ports[i]`):
 ## 4.1 Checked content
 
 For each given socket `(sockets[i])`
+
 | **Item** | **Criteria** |
 | --- | --- |
 | **name** |is only lowercase, end with `.sock` or `.socket` and exists only once in the list|
@@ -112,6 +115,7 @@ For each given socket `(sockets[i])`
 ## 5.1 Checked content
 
 For each given slot `(slots[i])` and plug `(plugs[i])`
+
 | **Item** | **Criteria** |
 | --- | --- |
 | **name** |is only lowercase|
