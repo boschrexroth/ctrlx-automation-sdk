@@ -27,7 +27,7 @@ The content of this document may be subject of change in further versions of the
 ## 1.2 Additional notes
 
 - **Schema for snapcraft.yaml:** <https://github.com/snapcore/snapcraft/blob/master/schema/snapcraft.json>
-- **Schema for technical app  name:** "ctrlx-{company name}-{app name}-{app version}_arm64/amd64.snap"
+- **Schema for technical app name:** "ctrlx-{company name}-{app name}-{app version}_arm64/arm64.snap"
 - **ctrlX Device Portal: App name in Private Repository:** If the App is provided in a Private Repository for the ctrlX Device Portal, the Name in the Artifact Description in the Repository should be identical to the Name in snapcraft.yaml. Please see <https://docs.automation.boschrexroth.com/doc/2056862327/ctrlx-device-portal/latest/en/> for additional information about the ctrlX Device Portal and the Private Repository.
 
 ****
@@ -43,6 +43,7 @@ The content of this document may be subject of change in further versions of the
 | **menus** | optional: entries for sidebar integration (if use, the entries must be unique) |
 
 For each given Proxy Mapping `services.proxyMapping[i]`:
+
 | **Item** | **Criteria** |
 | --- | --- |
 | **name** | is only lowercase, contains `.web` and is unique in the list |
@@ -65,6 +66,7 @@ For each given Proxy Mapping `services.proxyMapping[i]`:
 | **id** | is available and matches to the technical app name (see also **name** entry in *snapcraft.yaml*) |
 
 For each given port in the description (`ports[i]`):
+
 | **Item** | **Criteria** |
 | --- | --- |
 | **number**|  has 3 to 5 digits and exists only once in the list|
@@ -95,6 +97,7 @@ For each given port in the description (`ports[i]`):
 ## 4.1 Checked content
 
 For each given socket `(sockets[i])`
+
 | **Item** | **Criteria** |
 | --- | --- |
 | **name** |is only lowercase, end with `.sock` or `.socket` and exists only once in the list|
@@ -112,6 +115,7 @@ For each given socket `(sockets[i])`
 ## 5.1 Checked content
 
 For each given slot `(slots[i])` and plug `(plugs[i])`
+
 | **Item** | **Criteria** |
 | --- | --- |
 | **name** |is only lowercase|
