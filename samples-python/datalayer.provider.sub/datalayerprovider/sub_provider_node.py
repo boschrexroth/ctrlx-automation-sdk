@@ -34,7 +34,7 @@ class ClientPublisher:
         return sub.get_id()
 
 
-    def __init__(self, sub: ctrlxdatalayer.provider_node.ProviderSubscription):
+    def __init__(self, sub: ctrlxdatalayer.provider_node.ProviderSubscription, lock: threading.Lock):
         """__init__
 
         Args:
@@ -43,18 +43,30 @@ class ClientPublisher:
         self.__timer = None
         self.__sub = sub
         self.__counter = 0
+        self.__lock = lock
 
 
     def __publish(self):
         """__publish
         """
         while not self.__timer.finished.wait(self.__timer.interval):
-            with NotifyItemPublish(self.__sub.get_notes()[0]) as ni:
-                #ni.get_notify_info().set_timestamp(sub.get_datetime()).set_notify_type(....)
+            list_ni = []
+            successfully_acquired = self.__lock.acquire(False)
+            if not successfully_acquired:
+                return
+            for addr in self.__sub.get_notes():
+                ni = NotifyItemPublish(addr)
+                    #ni.get_notify_info().set_timestamp(sub.get_datetime()).set_notify_type(....)
                 self.__counter = self.__counter + 1
                 print(f"publish '{self.get_id()}': {self.__counter}")
                 ni.get_data().set_int32(self.__counter)
-                self.__sub.publish(Result.OK, [ ni ])
+                list_ni.append(ni)
+
+            self.__lock.release()
+            if len(list_ni) != 0:
+                self.__sub.publish(Result.OK, list_ni)
+            for ni in list_ni:
+                ni.close()
 
     def get_id(self) -> str:
         """get_id
@@ -81,11 +93,10 @@ class ClientPublisher:
             return
         self.__timer.cancel()
 
+class SubProviderFolderNode():
+    """SubProviderFolderNode"""
 
-class SubProviderNode():
-    """SubProviderNode"""
-
-    def __init__(self, provider: Provider, node_address: str, type_address: str,
+    def __init__(self, provider: Provider, node_address: str,
                  value: Variant):
         """__init__"""
         self._cbs = ProviderNodeCallbacks(
@@ -102,7 +113,6 @@ class SubProviderNode():
         self._provider_node = ProviderNode(self._cbs)
         self._provider = provider
         self._node_address = node_address
-        self._type_address = type_address
         self._data = value
         self._metadata = self.create_metadata()
         self.__subs = dict([])
@@ -117,9 +127,9 @@ class SubProviderNode():
         builder = MetadataBuilder(allowed=AllowedOperation.READ
                                   | AllowedOperation.WRITE)
         builder = builder.set_display_name(self._node_address)
-        builder = builder.set_node_class(NodeClass.NodeClass.Variable)
-        builder.add_reference(ReferenceType.read(), self._type_address)
-        builder.add_reference(ReferenceType.write(), self._type_address)
+        builder = builder.set_node_class(NodeClass.NodeClass.Folder)
+        #builder.add_reference(ReferenceType.read(), self._type_address)
+        #builder.add_reference(ReferenceType.write(), self._type_address)
         return builder.build()
 
     def register_node(self):
@@ -272,11 +282,14 @@ class SubProviderNode():
         for i, n in enumerate(notes):
             print(f"""          {i}: {n}""", flush=True)
 
-        cp = ClientPublisher(sub)
         self.__lock.acquire()
-        self.__subs[cp.get_id()] = cp
+        if not sub.get_id() in self.__subs:
+            cp = ClientPublisher(sub, self.__lock)
+            self.__subs[cp.get_id()] = cp
+            self.__lock.release()
+            cp.start()
+            return
         self.__lock.release()
-        cp.start()
 
 
     def __on_unsubscribe(self,
@@ -290,9 +303,12 @@ class SubProviderNode():
             sub (ctrlxdatalayer.provider_node.ProviderSubscription):
             address (str):
         """
+        if len(sub.get_notes()) != 0:
+            return
         self.__lock.acquire()
-        cp = self.__subs.pop(ClientPublisher.get_sub_id(sub))
-        cp.stop()
+        if sub.get_id() in self.__subs:
+            cp = self.__subs.pop(sub.get_id())
+            cp.stop()
         self.__lock.release()
 
-        print(f"on_unsubscribe: sub_id={ClientPublisher.get_sub_id(sub)} len={len(self.__subs)}", address, flush=True)
+        print(f"on_unsubscribe: sub_id={sub.get_id()} len={len(self.__subs)}", address, flush=True)

@@ -13,7 +13,7 @@ from ctrlxdatalayer.variant import Variant
 
 from datalayerclient.app import (  # helper enviroment for debug.
     local_client_start, local_client_stop)
-from datalayerprovider.sub_provider_node import SubProviderNode
+from datalayerprovider.sub_provider_node import SubProviderFolderNode
 from helper.ctrlx_datalayer_helper import get_provider, is_local_connection
 
 # Binary sampleSchema file
@@ -55,7 +55,7 @@ def main():
             # Path to compiled files
 
             provider_node = provide_int(provider,
-                                               "sdk/py/provider_sub/int",
+                                               "sdk/py/provider_sub/**",
                                                "types/datalayer/int")
 
             if is_local_connection(connection_str):
@@ -116,7 +116,7 @@ def provide_node(provider: ctrlxdatalayer.provider, node_address: str,
     Returns:
         SubProviderNode: node
     """
-    node = SubProviderNode(provider, node_address, type_address, value)
+    node = SubProviderFolderNode(provider, node_address, value)
     result = node.register_node()
     if result != ctrlxdatalayer.variant.Result.OK:
         print(

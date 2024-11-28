@@ -15,7 +15,7 @@ Please refer to the App Development Guide for further information.
 ctrlX OS uses the NGX-Translate library to localize Apps
 
 Details of this library can be found here:
-<http://www.ngx-translate.com/>
+<https://ngx-translate.org/>
 
 The basic concept of localization is to
 
@@ -141,7 +141,7 @@ Comments and remarks are not supported in localization files
 This chapter describes a ctrlX OS best practice to add localization to an app.
 Bosch Rexroth does not guarantee that this practice will work for Partner Apps.
 
-Please see <http://www.ngx-translate.com/> for additional information.
+Please see <https://ngx-translate.org/> for additional information.
 This site also provides example for different options on how to add ngx translate to a web application.
 
 ## 3.1 Install ngx-translate and ngx-translate-multi-http-loader

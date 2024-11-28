@@ -89,6 +89,7 @@ class ProviderNodeAllData:
             return
 
         print("__on_write", address, data.get_type(), flush=True)
+        self.data.close()
         _, self.data = data.clone()
         cb(Result.OK, data)
 

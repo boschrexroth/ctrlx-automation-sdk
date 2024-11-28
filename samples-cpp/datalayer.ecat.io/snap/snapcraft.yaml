@@ -51,3 +51,9 @@ plugs:
     interface: system-files
     write:
       - /dev/shm
+
+lint:
+  ignore:
+    - library:
+      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.* 

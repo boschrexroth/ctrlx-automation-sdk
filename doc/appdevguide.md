@@ -302,9 +302,9 @@ The app validation framework tries to establish relevant states that have to be 
 
 ctrlX currently supports the amd64 and the arm64 processor architecture. The corresponding target snaps for the app are provided here
 
-- **"ctrlx-{company name}-{app name}-{version}_arm64.snap" (<span style="color:red;">**MANDATORY**</span>)** - Snap that runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX CORE hardware.
+- **"ctrlx-{company name}-{app name}_{version}_arm64.snap" (<span style="color:red;">**MANDATORY**</span>)** - Snap that runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX CORE hardware.
 
-- **"ctrlx-{company name}-{app name}-{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE^virtual^. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
+- **"ctrlx-{company name}-{app name}_{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE^virtual^. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
 
 ### 4.2 App Documentation (<span style="color:red;">**MANDATORY**</span>)
 

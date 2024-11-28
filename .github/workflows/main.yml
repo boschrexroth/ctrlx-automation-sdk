@@ -2,37 +2,44 @@
 
 name: Mkdocs
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the develop branch
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+    branches: [main]
+    tags:
+      - '*'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   createdocu:
+    if: startsWith(github.ref, 'refs/tags/') #runs only tagged version
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      -
-        uses: actions/setup-python@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      -
-        run: pip install mkdocs-material
-      -
+
+      - name: Install Python packages
+        run: pip install mkdocs-material mike
+
+      - name: Update gh-pages
         run: |
           ls -alh
           find samples-*/ -name "*.md" | cpio -pd doc/
           find samples-*/ -name "*.png" | cpio -pd doc/
           find scripts/ -name "*.md" | cpio -pd doc/
           find scripts/ -name "*.png" | cpio -pd doc/
-          mkdocs gh-deploy --force
+
+          if [ -f "scripts/doc/update_doc.sh" ]; then
+            scripts/doc/update_doc.sh ${{ github.ref_name }}
+          fi
+          
+          mike deploy --push --update-aliases ${{ github.ref_name }} latest

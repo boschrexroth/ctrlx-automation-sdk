@@ -1,4 +1,4 @@
-::Author: marcmaro (DC-IA/ESW1)
+::Author: marcmaro (DC-IA/PAX)
 @echo off
 
 cd /D "%~dp0"

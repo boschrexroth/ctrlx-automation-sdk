@@ -28,6 +28,8 @@ int main(void)
 
   // Prepare signal structure to interrupt the endless loop with Ctrl+C (SIGINT)
   std::signal(SIGINT, signalHandler);
+  std::signal(SIGTERM, signalHandler);
+  std::signal(SIGABRT, signalHandler);
 
   comm::datalayer::DatalayerSystem datalayerSystem;
   datalayerSystem.start(false);
@@ -42,6 +44,13 @@ int main(void)
 
     if (provider == nullptr) {
       // Wait before (re)connecting to the ctrlX Data Layer.
+      if (g_endProcess)
+      {
+        std::cout << "INFO Terminating process due to user input of Ctrl+C (signal SIGINT)" << std::endl;
+        datalayerSystem.stop();
+        return 0;
+      }
+
       std::cout << "INFO Wait before (re)connecting to the ctrlX Data Layer " << std::endl;
       std::this_thread::sleep_for(std::chrono::seconds(10));
       continue;
