@@ -1,0 +1,69 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: sdk-cpp-provider-sub
+title: SDK C++ Provider Subscription
+version: 1.0.0
+grade: stable
+summary: Sample app in cpp to register a ctrlX Data Layer branch with several nodes
+description: |
+  This app will create a ctrlX Data Layer branch 'sdk/cpp/datalayer/provider/sub/' with nodes of int64 type.
+base: core22
+confinement: strict
+
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
+# define how apps & services are exposed to host system
+apps:
+  provider:
+    command: bin/provider
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+
+  client:
+    command: bin/client
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    after:
+      - provider    
+    restart-condition: always
+    passthrough:
+      restart-delay: 20s
+
+parts:
+  app:
+    plugin: dump
+    source: ./generated/build
+    stage-packages:
+      - ctrlx-datalayer
+    organize:
+      'provider': bin/provider
+      'client': bin/client
+
+# describes which interface slots are required by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer
+
+lint:
+  ignore:
+    - library:
+      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

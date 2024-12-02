@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: MIT
 
 import faulthandler
+import os
 import signal
 import sys
 import time
@@ -67,8 +68,10 @@ def main():
         with (
             datalayer_client
         ):  # datalayer_client is closed automatically when leaving with block
+            
+            # subscription id must be unique
             subscription_properties = ctrlxdatalayer.subscription.create_properties(
-                "python-datalayer-client-sub", publish_interval=1000
+                "python-datalayer-client-sub+" + str(os.getpid()), publish_interval=1000
             )
 
             if subscription_properties is None:

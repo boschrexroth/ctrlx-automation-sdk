@@ -43,17 +43,17 @@ if (!client.IsConnected)
     return;
 }
 
-// We're using the async read method just for demonstration here.
-// Hint: If you're not using any async calls, you can remove async keyword from the Main() method signature.
-var memUsed = "framework/metrics/system/memused-percent";
-var task = client.ReadAsync(address: memUsed);
-var taskResult = await task;
-
-if (taskResult.Result.IsGood())
+// Single read an address value.
+var address = "framework/metrics/system/cpu-utilisation-percent";
+var (result, value) = client.Read(address);
+if (result.IsBad())
 {
-    Console.WriteLine($"{DateTime.UtcNow}, {memUsed}: {taskResult.Value.ToFloat()} (single read)");
+    Console.WriteLine($"{result}");
+    return;
 }
+Console.WriteLine($"{DateTime.UtcNow}, {address}: {value.ToFloat()} (Read)");
 
+// Subscribe a value.
 // Define the subscription properties by using helper class SubscriptionPropertiesBuilder.
 var propertiesFlatbuffers = new SubscriptionPropertiesBuilder("mySubscription")
     .SetKeepAliveIntervalMillis(10000)
@@ -81,15 +81,30 @@ if (createResult.IsBad())
 }
 
 // Add DataChanged Event Handler
-subscription.DataChanged += (_, eventArgs) =>
+subscription.DataChanged += async (_, eventArgs) =>
 {
     var notifyInfo = NotifyInfo.GetRootAsNotifyInfo(eventArgs.Item.Info.ToFlatbuffers());
     var timestampUtc = DateTime.FromFileTimeUtc(Convert.ToInt64(notifyInfo.Timestamp));
-    Console.WriteLine($"{timestampUtc}, {notifyInfo.Node}: {eventArgs.Item.Value.ToFloat()} (subscription)");
+    Console.WriteLine($"{timestampUtc}, {notifyInfo.Node}: {eventArgs.Item.Value.ToFloat()} (Subscribe)");
+
+    // Calling synchronous Datalayer API methods in a subscription callback context is not allowed.
+    // Instead we have to use an async event handler signature in combination of Async methods to call.
+    if (timestampUtc.Second % 5 == 0)
+    {
+        var readResult = await client.ReadAsync(address);
+        if (readResult.Result.IsBad())
+        {
+            Console.WriteLine($"{readResult.Result}");
+        }
+        else
+        {
+            Console.WriteLine($"{DateTime.UtcNow}, {address}: {readResult.Value.ToFloat()} (ReadAsync)");
+        }
+    }
 };
 
-// Subscribe the Node with address 'framework/metrics/system/cpu-utilisation-percent'
-var subscribeResult = subscription.Subscribe(address: "framework/metrics/system/cpu-utilisation-percent");
+// Subscribe to the value of an address.
+var subscribeResult = subscription.Subscribe(address);
 if (subscribeResult.IsBad())
 {
     Console.WriteLine($"Failed to subscribe: {subscribeResult}");

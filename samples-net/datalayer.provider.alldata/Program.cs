@@ -131,7 +131,7 @@ Console.WriteLine($"Provider started: {startResult}");
 // Check if provider is connected
 if (!provider.IsConnected)
 {
-   // Initially exit and retry after app restart-delay (see snapcraft.yaml)
+    // Initially exit and retry after app restart-delay (see snapcraft.yaml)
     Console.WriteLine($"Provider is not connected -> exit");
     return;
 }

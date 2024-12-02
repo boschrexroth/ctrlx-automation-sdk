@@ -1,5 +1,5 @@
 **Copyright**
-© Bosch Rexroth AG 2023
+© Bosch Rexroth AG 2024
 This document, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch Rexroth AG. It may not be reproduced or given to third parties without our consent.
 
 **Liability** The information in this document is intended for product description purposes only and shall not be deemed to be a guaranteed characteristic, unless expressly stipulated by contract. All rights are reserved with respect to the content of this documentation and the availability of the product.
@@ -241,16 +241,35 @@ The request parameters are provided in the request body as a JSON object with th
 
 Participants must consider the following conditions and constraints in their command implementations.
 
+> **Asynchronous command implementations (since XCR-V-0304)**
+> 
+> Long-running operations (more than one minute) have to be implemented as asynchronous commands.
+>
+> Asynchronous command implementations must respond with a status code 201 and a Location header containing a resource path. The Solutions app then uses the resource path to poll the state of the command execution. The response body is expected to be a JSON object with the following content:
+> ```json
+> {
+>   "state": "running", // one of "pending", "running", "done", or "failed"
+>   "result": {} // optional; must contain problem object if state "failed"
+>}
+>```
+
+
 #### Success behavior
 
-- The save or load command must respond with a success status code (2xx or 3xx, typically with 204 and an empty body).
+- Synchronous implementations of save or load commands must respond with a success status code (2xx or 3xx), typically with 204 and an empty body.
+
+- Asynchronous implementations of save or load commands must respond as specified above with the state "done" after completion.
+
 - If there is no data to load, the command must reset its app to its initial state (no axes defined, no PLC program available, etc.). Related app data must completely be removed from the active configuration.
+
 - If a phase is not relevant or unknown to the command, the command must respond with the status code 204 (and an empty body).
 
 #### Failure behavior
 
-- The save or load command must respond with an error status code (4xx or 5xx).
-- The response body must contain a JSON object describing the occurred problem (see "Problem Schema Definition" in the Appendix for the required format).
+- Synchronous implementations of save or load commands must respond with an error status code (4xx or 5xx). The response body must contain a JSON object describing the occurred problem (see "Problem Schema Definition" in the Appendix for the required format).
+
+- Asynchronous implementations of save or load commands must respond as specified above with the state "failed" and a result describing the occurred problem (see "Problem Schema Definition" in the Appendix for the required format).
+
 - The Solutions frontend reports the following fields of the problem response for every failed save or load command:
   - mainDiagnosisCode and title
   - detailedDiagnosisCode and detail

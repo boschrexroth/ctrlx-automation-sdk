@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.8",
-    "@angular/cli": "^17.3.8",
+    "@angular-devkit/build-angular": "^17.3.11",
+    "@angular/cli": "^17.3.11",
     "@angular/compiler-cli": "^17.3.12",
-    "@types/node": "^20.14.14",
+    "@types/node": "^20.17.8",
     "ngx-translate-extract": "^1.0.0",
     "typescript": "^5.4.5"
   },
@@ -24,7 +24,7 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "ngx-translate-multi-http-loader": "^17.0.0",
     "snap": "^1.1.0",
-    "tslib": "^2.6.3",
+    "tslib": "^2.8.1",
     "zone.js": "^0.14.10"
   },
   "scripts": {

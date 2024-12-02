@@ -14,9 +14,11 @@ using System.Linq;
 namespace Samples.Datalayer.Provider.Virtual
 {
     /// <summary>
-    /// 
+    /// The VirtualNodeHandler handles the virtual node instances.
     /// </summary>
-    internal class VirtualNodeHandler : IProviderNodeHandler
+    /// <param name="rootAddress"></param>
+    /// <param name="name"></param>
+    internal class VirtualNodeHandler(IProvider provider, string rootAddress) : IProviderNodeHandler
     {
         // If we know how many items we want to insert into the ConcurrentDictionary,
         // set the initial capacity to some prime number above that, to ensure that
@@ -32,67 +34,55 @@ namespace Samples.Datalayer.Provider.Virtual
         //Fields
 
         /// <summary>
-        /// Represents virtual light-weight Node
+        /// Represents virtual light-weight Node.
         /// </summary>
         private record VirtualNode(string Address, IVariant Value, NodeClass Category, bool IsBrowsable, bool IsReadable, bool IsWritable, bool IsCreatable, bool IsDeletable);
 
         /// <summary>
-        /// The map we're holding our nodes by address
+        /// The map we're holding our nodes by address.
         /// </summary>
         private readonly ConcurrentDictionary<string, VirtualNode> _nodes = new(ConcurrencyLevel, InitialCapacity);
 
         /// <summary>
-        /// Random is used to create demo nodes
+        /// Random is used to create demo nodes.
         /// </summary>
         private readonly Random _random = new();
 
         #region Properties
 
         /// <summary>
-        /// Gets the ctrlX Data Layer provider
+        /// Gets the ctrlX Data Layer provider.
         /// </summary>
-        public IProvider Provider { get; private set; }
-
+        public IProvider Provider { get; private set; } = provider;
 
         /// <summary>
-        /// Gets the full address with is BaseAddress/Name
+        /// Gets the root address.
         /// </summary>
-        public string Address { get; }
+        public string RootAddress { get; } = rootAddress;
 
         #endregion
-
-        /// <summary>
-        /// Creates a handler
-        /// </summary>
-        /// <param name="baseAddress"></param>
-        /// <param name="name"></param>
-        public VirtualNodeHandler(IProvider provider, string address)
-        {
-            Provider = provider;
-            Address = address;
-        }
 
         #region Public
 
         /// <summary>
-        /// Starts the handler
+        /// Starts the handler.
         /// </summary>
         /// <returns></returns>
         public DLR_RESULT Start()
         {
-            //We just listen to our base address using a wildcard on '{FullAddress}/**'
-            var (result, _) = Provider.CreateNode(Address, "**", this);
+            // We just listen to our root address using a wildcard on '{RootAddress}/**'.
+            var (result, _) = Provider.CreateNode(RootAddress, "**", this);
             if (result.IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
             }
-            var folderNode = new VirtualNode(Address, Variant.Null, NodeClass.Folder, true, false, false, false, false);
-            _nodes.AddOrUpdate(folderNode.Address, folderNode, (k, v) => folderNode);
+            var rootNode = new VirtualNode(RootAddress, Variant.Null, NodeClass.Folder, true, false, false, true, false);
+            _nodes.AddOrUpdate(rootNode.Address, rootNode, (k, v) => rootNode);
 
-            //Create some virtual nodes here just for demonstration
-            Console.WriteLine($"Creating virtual nodes on address: {Address}");
+            // Create some virtual nodes here just for demonstration.
+            Console.WriteLine($"Creating virtual nodes on root address: {RootAddress}");
             int currentLevel = 0;
-            if (CreateDummyNodes(Address, 3, ref currentLevel, 5).IsBad())
+            if (CreateDummyNodes(RootAddress, 3, ref currentLevel, 5).IsBad())
             {
                 return DLR_RESULT.DL_FAILED;
             }
@@ -108,17 +98,16 @@ namespace Samples.Datalayer.Provider.Virtual
         }
 
         /// <summary>
-        /// Stops the handler
+        /// Stops the handler.
         /// </summary>
         /// <returns></returns>
         public DLR_RESULT Stop()
         {
-            // Stop ctrlX Data Layer provider
+            // Stop ctrlX Data Layer provider.
             var result = Provider.Stop();
             Console.Write(value: $"Provider stopped: {result}");
 
-
-            // Clear our nodes
+            // Clear our nodes.
             _nodes.Clear();
 
             return DLR_RESULT.DL_OK;
@@ -126,20 +115,10 @@ namespace Samples.Datalayer.Provider.Virtual
 
         #endregion
 
-        #region Public Static
-
-        /// <summary>
-        /// Indicates whether the application is snapped or not (running inside linux snappy environment)
-        /// </summary>
-        /// <returns></returns>
-        public static bool IsSnapped => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP"));
-
-        #endregion
-
         #region Event Handler
 
         /// <summary>
-        /// OnCreate handler
+        /// OnCreate handler.
         /// </summary>
         /// <param name="address"></param>
         /// <param name="args"></param>
@@ -152,7 +131,7 @@ namespace Samples.Datalayer.Provider.Virtual
         }
 
         /// <summary>
-        /// OnRemove handler
+        /// OnRemove handler.
         /// </summary>
         /// <param name="address"></param>
         /// <param name="result"></param>
@@ -163,7 +142,7 @@ namespace Samples.Datalayer.Provider.Virtual
         }
 
         /// <summary>
-        /// OnBrowse handler
+        /// OnBrowse handler.
         /// </summary>
         /// <param name="address"></param>
         /// <param name="result"></param>
@@ -171,15 +150,15 @@ namespace Samples.Datalayer.Provider.Virtual
         {
             Console.WriteLine($"OnBrowse {address}");
 
-            //We return the list of level names of the current branch, not leaf nodes which hold a value itself.
+            // We return the list of level names of the current branch, not leaf nodes which hold a value itself.
 
-            //Split given address into parts
+            // Split given address into parts.
             var addressParts = address.Split('/');
 
             var branchLevelNames = _nodes
-                //Exclude leaf nodes and filter for current level nodes
+                // Exclude leaf nodes and filter for current level nodes.
                 .Where(pair => pair.Key.Length > address.Length && pair.Key.StartsWith(address + '/'))
-                //Extract current branch level name
+                // Extract current branch level name.
                 .Select(n =>
                 {
                     var parts = n.Key.Split('/');
@@ -191,7 +170,7 @@ namespace Samples.Datalayer.Provider.Virtual
         }
 
         /// <summary>
-        /// OnRead handler
+        /// OnRead handler.
         /// </summary>
         /// <param name="address"></param>
         /// <param name="args"></param>
@@ -200,18 +179,18 @@ namespace Samples.Datalayer.Provider.Virtual
         {
             Console.WriteLine($"OnRead {address}: {args}");
 
-            //Fetch the node by address
-            if (!_nodes.TryGetValue(address, out var virtualNode))
+            // Fetch the node by address.
+            if (!_nodes.TryGetValue(address, out var node))
             {
                 result.SetResult(DLR_RESULT.DL_FAILED);
                 return;
             }
 
-            result.SetResult(DLR_RESULT.DL_OK, virtualNode.Value);
+            result.SetResult(DLR_RESULT.DL_OK, node.Value);
         }
 
         /// <summary>
-        /// OnWrite handler
+        /// OnWrite handler.
         /// </summary>
         /// <param name="address"></param>
         /// <param name="writeValue"></param>
@@ -219,11 +198,22 @@ namespace Samples.Datalayer.Provider.Virtual
         public void OnWrite(string address, IVariant writeValue, IProviderNodeResult result)
         {
             Console.WriteLine($"OnWrite {address}: {writeValue}");
-            result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
+
+            // Fetch the node by address.
+            if (!_nodes.TryGetValue(address, out var node))
+            {
+                result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
+                return;
+            }
+
+            // Because records are immutable, we have to replace the node.
+            var newNode = new VirtualNode(node.Address, writeValue, node.Category, node.IsBrowsable, node.IsReadable, node.IsWritable, node.IsCreatable, node.IsDeletable);
+            _nodes.AddOrUpdate(address, node, (k, v) => newNode);
+            result.SetResult(DLR_RESULT.DL_OK, newNode.Value);
         }
 
         /// <summary>
-        /// OnMetadata handler
+        /// OnMetadata handler.
         /// </summary>
         /// <param name="address"></param>
         /// <param name="result"></param>
@@ -231,14 +221,14 @@ namespace Samples.Datalayer.Provider.Virtual
         {
             Console.WriteLine($"OnMetadata {address}");
 
-            //Fetch the node by address
-            if (!_nodes.TryGetValue(address, out var virtualNode))
+            // Fetch the node by address.
+            if (!_nodes.TryGetValue(address, out var node))
             {
                 result.SetResult(DLR_RESULT.DL_UNSUPPORTED);
                 return;
             }
 
-            CreateMetadata(virtualNode, result);
+            CreateMetadata(node, result);
         }
 
         #endregion
@@ -246,7 +236,7 @@ namespace Samples.Datalayer.Provider.Virtual
         #region Private
 
         /// <summary>
-        /// Creates some virtual dummy nodes
+        /// Creates some virtual dummy nodes.
         /// </summary>
         /// <param name="currentPath"></param>
         /// <param name="nodesPerLevel"></param>
@@ -256,16 +246,14 @@ namespace Samples.Datalayer.Provider.Virtual
         private DLR_RESULT CreateDummyNodes(string currentPath, int nodesPerLevel, ref int currentLevel, int maxDepth)
         {
             const int NameLength = 5;
-
             currentLevel++;
 
+            // We add some nodes (int32) to our map by address.
             for (int i = 0; i < nodesPerLevel; i++)
             {
                 var address = $"{currentPath}/{RandomString(NameLength)}";
-
-                //Add the nodes to our map by address
-                var virtualNode = new VirtualNode(address, new Variant(_random.Next()), NodeClass.Variable, true, true, false, false, false);
-                _nodes.AddOrUpdate(address, virtualNode, (k, v) => virtualNode);
+                var node = new VirtualNode(address, new Variant(_random.Next()), NodeClass.Variable, true, true, true, false, false);
+                _nodes.AddOrUpdate(address, node, (k, v) => node);
 
                 if (currentLevel < maxDepth)
                 {
@@ -278,7 +266,7 @@ namespace Samples.Datalayer.Provider.Virtual
         }
 
         /// <summary>
-        /// Returns a random string
+        /// Returns a random string.
         /// </summary>
         /// <param name="length"></param>
         /// <returns></returns>
@@ -289,30 +277,36 @@ namespace Samples.Datalayer.Provider.Virtual
         }
 
         /// <summary>
-        /// Creates meta informations for a variable
+        /// Creates meta informations for a variable.
         /// </summary>
         /// <param name="node"></param>
         /// <param name="result"></param>
-        private static void CreateMetadata(VirtualNode node, IProviderNodeResult result)
+        private void CreateMetadata(VirtualNode node, IProviderNodeResult result)
         {
-            //Create MetaData
-            var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize);
+            // Metadata for the root node (here: folder).
+            if (node.Address == RootAddress)
+            {
+                var rootMdb = new MetadataBuilder(
+                    AllowedOperationFlags.Read |
+                    AllowedOperationFlags.Browse,
+                    node.Address);
 
-            var operations = AllowedOperations.CreateAllowedOperations(builder,
-                read: node.IsReadable,
-                write: node.IsWritable,
-                browse: node.IsBrowsable,
-                create: node.IsCreatable,
-                delete: node.IsDeletable);
+                rootMdb.SetNodeClass(NodeClass.Folder);
+                result.SetResult(DLR_RESULT.DL_OK, rootMdb.Build());
+                return;
+            }
 
-            var metaData = Metadata.CreateMetadata(builder,
-                nodeClass: node.Category,
-                operationsOffset: operations,
-                descriptionOffset: builder.CreateString(node.Address),
-                descriptionUrlOffset: builder.CreateString(node.Address));
+            // Metadata for child nodes (int32 variables).
+            var mdb = new MetadataBuilder(
+                AllowedOperationFlags.Read |
+                AllowedOperationFlags.Write |
+                AllowedOperationFlags.Browse,
+                node.Address);
 
-            builder.Finish(metaData.Value);
-            result.SetResult(DLR_RESULT.DL_OK, new Variant(builder));
+            mdb.SetNodeClass(NodeClass.Variable);
+            mdb.AddReference(ReferenceType.ReadType, "types/datalayer/int32");
+            mdb.AddReference(ReferenceType.WriteInType, "types/datalayer/int32");
+            result.SetResult(DLR_RESULT.DL_OK, mdb.Build());
         }
 
         #endregion

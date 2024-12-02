@@ -23,6 +23,8 @@ from sample.schema.InertialValue import (
     InertialValueStart,
 )
 
+ROOT_PATH = "sdk/py/provider/simple/"
+
 # Binary sampleSchema file
 bfbs_file = "sampleSchema.bfbs"
 
@@ -67,7 +69,7 @@ def main():
                 bfbs_path = os.path.join(snap_path, bfbs_file)
 
             # Register Flatbuffer type
-            type_sampleSchema_inertialValue = "types/sdk/py/provider/inertial-value"
+            type_sampleSchema_inertialValue = "types/" + ROOT_PATH + "inertial-value"
             result = provider.register_type(type_sampleSchema_inertialValue,
                                             bfbs_path)
             if result != Result.OK:
@@ -81,11 +83,11 @@ def main():
 
             # Create nodes
             provider_node_fbs = provide_fbs(provider,
-                                            "sdk/py/provider/inertial-value",
+                                            ROOT_PATH + "inertial-value",
                                             type_sampleSchema_inertialValue)
 
             provider_node_str = provide_string(provider,
-                                               "sdk/py/provider/string-value",
+                                               ROOT_PATH + "string-value",
                                                "types/datalayer/string")
 
             print("INFO Running endless loop...", flush=True)

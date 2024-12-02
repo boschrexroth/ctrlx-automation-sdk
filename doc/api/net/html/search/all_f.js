@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['setchangeevents_0',['SetChangeEvents',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a89d3c0e840c74d2087f93efccbe04377',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['setcounting_1',['SetCounting',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a90528eca4c144dfddb28e33c6ec0228b',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['setdatachangefilter_2',['SetDataChangeFilter',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#aa0650d1e40db0e3f96b4d720e477ba49',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['setdisplayformat_3',['SetDisplayFormat',['../classDatalayer_1_1MetadataBuilder.html#a3dfefc3cc9924bb05fa8a03cbad35697',1,'Datalayer::MetadataBuilder']]],
+  ['setdisplayname_4',['SetDisplayName',['../classDatalayer_1_1MetadataBuilder.html#a28a911c6965e8bc86f1d52ca42d89227',1,'Datalayer::MetadataBuilder']]],
+  ['seterrorintervalmillis_5',['SetErrorIntervalMillis',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a75fa75449ff562e2aeff419e8d7c2029',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['setkeepaliveintervalmillis_6',['SetKeepAliveIntervalMillis',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#ae6575bceae5ae51a1f37b2b78b2d4ddf',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['setnodeclass_7',['SetNodeClass',['../classDatalayer_1_1MetadataBuilder.html#a2953c4356b024469b0516fe6769a363d',1,'Datalayer::MetadataBuilder']]],
+  ['setpublishintervalmillis_8',['SetPublishIntervalMillis',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a6c43b0e1274859ec6b100bb4e625fea5',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['setqueueing_9',['SetQueueing',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a258b8d4f7378c3fdfe9b29b46867b5e4',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['setresult_10',['SetResult',['../interfaceDatalayer_1_1IProviderNodeResult.html#af0f8b79edf6dcdee540fbabeacf2bacc',1,'Datalayer.IProviderNodeResult.SetResult(DLR_RESULT result)'],['../interfaceDatalayer_1_1IProviderNodeResult.html#a9f54339c2713119dd2e6121e73617abc',1,'Datalayer.IProviderNodeResult.SetResult(DLR_RESULT result, IVariant value)']]],
+  ['setsamplingintervalmicros_11',['SetSamplingIntervalMicros',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a2340a59e378666287264c1214482f177',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['setsamplingintervalmillis_12',['SetSamplingIntervalMillis',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a4e7e7c4968b1f86652ca01eebdb21d38',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['settimeout_13',['SetTimeout',['../interfaceDatalayer_1_1IProviderNode.html#a617e11e2e4aad762e04b6ce5b78f28cb',1,'Datalayer.IProviderNode.SetTimeout()'],['../interfaceDatalayer_1_1IClient.html#ae73e0f8bb934143fb0d5c2cc686025a8',1,'Datalayer.IClient.SetTimeout()']]],
+  ['setunit_14',['SetUnit',['../classDatalayer_1_1MetadataBuilder.html#a19302e54a182fd8dde5ef303acd182c1',1,'Datalayer::MetadataBuilder']]],
+  ['sslport_15',['SslPort',['../classDatalayer_1_1Remote.html#a67afb250f2fb0a12185f5b161deac88b',1,'Datalayer::Remote']]],
+  ['start_16',['Start',['../classDatalayer_1_1DatalayerSystem.html#aedc8062676da3b418c85610e41174812',1,'Datalayer.DatalayerSystem.Start()'],['../interfaceDatalayer_1_1IDatalayerSystem.html#ab0f613d2e1cd090448e5543881f1d70d',1,'Datalayer.IDatalayerSystem.Start()'],['../interfaceDatalayer_1_1IProvider.html#abcc6b18c9d4fb2ed70e990f00016c0fe',1,'Datalayer.IProvider.Start()']]],
+  ['stop_17',['Stop',['../classDatalayer_1_1DatalayerSystem.html#a17a237457e57625296e6b24feb19c60a',1,'Datalayer.DatalayerSystem.Stop()'],['../interfaceDatalayer_1_1IDatalayerSystem.html#a17a237457e57625296e6b24feb19c60a',1,'Datalayer.IDatalayerSystem.Stop()'],['../interfaceDatalayer_1_1IProvider.html#a8e21506e57d91e044ccd2d276039df81',1,'Datalayer.IProvider.Stop()']]],
+  ['subscribe_18',['Subscribe',['../interfaceDatalayer_1_1ISubscription.html#a7887ed3200fcf3ae4b47b6d4b4062137',1,'Datalayer::ISubscription']]],
+  ['subscribeasync_19',['SubscribeAsync',['../interfaceDatalayer_1_1ISubscription.html#ac03404d1cfab473bbe8e9f5d21b5b234',1,'Datalayer::ISubscription']]],
+  ['subscribemulti_20',['SubscribeMulti',['../interfaceDatalayer_1_1ISubscription.html#a9390b851cf2198ba4cae6154f754bfb4',1,'Datalayer::ISubscription']]],
+  ['subscribemultiasync_21',['SubscribeMultiAsync',['../interfaceDatalayer_1_1ISubscription.html#a543a14bd035a1957f8e7f9d512e627c8',1,'Datalayer::ISubscription']]],
+  ['subscription_22',['Subscription',['../interfaceDatalayer_1_1ISubscriptionAsyncResult.html#a67e453ac81a6513a6a7a4512801bee48',1,'Datalayer::ISubscriptionAsyncResult']]],
+  ['subscriptionpropertiesbuilder_23',['SubscriptionPropertiesBuilder',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html',1,'SubscriptionPropertiesBuilder'],['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a906c787c69eda2cc0aaf995638d99512',1,'Datalayer.SubscriptionPropertiesBuilder.SubscriptionPropertiesBuilder()']]],
+  ['system_24',['System',['../interfaceDatalayer_1_1IClient.html#ad21e12c22b827906a29fcdf13646e750',1,'Datalayer.IClient.System()'],['../interfaceDatalayer_1_1IProvider.html#ad21e12c22b827906a29fcdf13646e750',1,'Datalayer.IProvider.System()']]]
+];

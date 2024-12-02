@@ -38,11 +38,11 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '20.16.0'
+      - NODE_VERSION: '20.18.1'
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "20.16.0"
+    # npm-node-version: "20.18.1"
     plugin: nil
     override-build: |
 

@@ -6,8 +6,9 @@ This python app showes how to log with different log levels into the logbook of 
 
 ## Function Description
 
-The app writes log messages using the Python package [cysystemd](https://github.com/mosquito/cysystemd) version 1.5.4
-and Python version 3.10.
+The app writes log messages using the Python package [cysystemd](https://github.com/mosquito/cysystemd) version and Python version 3.10.
+
+    apt install libsystemd-dev
 
 ## Implementation Description
 

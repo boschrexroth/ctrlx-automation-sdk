@@ -42,7 +42,7 @@ theme:
 
   palette:
     # Light mode
-    - media: "(prefers-color-scheme: light)"
+    - media: '(prefers-color-scheme: light)'
       scheme: rexroth-light
       primary: indigo
       accent: indigo
@@ -56,6 +56,12 @@ extra_css:
 # Plugins
 plugins:
   - search
+  - exclude:
+      glob:
+        - samples-node/*/node_modules/*
+
+hooks:
+  - doc/material/overrides/hooks/shortcodes.py
 
 extra:
   social:
@@ -63,10 +69,15 @@ extra:
       link: https://github.com/boschrexroth
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/boschrexroth
+  version:
+    provider: mike
 
 markdown_extensions:
   - admonition
   - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - codehilite
   - meta
   - toc:
@@ -86,27 +97,27 @@ markdown_extensions:
 
 # Content
 nav:
-    - Home: index.md
-    - Getting Started: 
-      - Overview : overview.md
+  - Home: index.md
+  - Getting Started:
+      - Overview: overview.md
       - ctrlX AUTOMATION: ctrlx_automation.md
       - Guidelines:
-        - Package Assets: package-assets.md
-        - App Developer Guideline: appdevguide.md
-        - Persisting Configurations: persistdata.md
-        - Persisting Device Settings: persist-device-settings.md
-        - License Management: licensing.md
-        - Service-to-Service Authentication: s2sauth.md
-        - Using Flatbuffers in IEC 61131-3 Code: fbs2plc.md
-        - Configure maximal Number of Open File Handles: numopenfilehandles.md
-        - Using Localization: localizaction.md
-        - External Storages:
-          - Date exchange: data-exchange.md
-          - Storage extension: storage-extension.md
-        - Extendable Denylist: extenable-denylist.md
+          - Package Assets: package-assets.md
+          - App Developer Guideline: appdevguide.md
+          - Persisting Configurations: persistdata.md
+          - Persisting Device Settings: persist-device-settings.md
+          - License Management: licensing.md
+          - Service-to-Service Authentication: s2sauth.md
+          - Using Flatbuffers in IEC 61131-3 Code: fbs2plc.md
+          - Configure maximal Number of Open File Handles: numopenfilehandles.md
+          - Using Localization: localizaction.md
+          - External Storages:
+              - Date exchange: data-exchange.md
+              - Storage extension: storage-extension.md
+          - Extendable Denylist: extenable-denylist.md
       - Releases:
-        - Changelog: changelog.md
-    - Setup:
+          - Changelog: changelog.md
+  - Setup:
       - Setup Overview: setup_overview.md
       - Quick Start Guide: quick-start-guide.md
       - ctrlX WORKS App Build Environment: setup_qemu_ctrlx_works.md
@@ -116,14 +127,14 @@ nav:
       - Native Ubuntu: setup_ubuntu.md
       - Install Sources from github: install-sources-from-github.md
       - Toolchain:
-        - Px.exe as Proxy on a Windows Host: px.md
-        - Connecting QEMU VMs and ctrlX CORE: connecting_qemu_vm_ctrlx.md
-        - Working with App Build Environments (QEMU VMs): working-with-app-builder-envs.md
-        - SSH Connection: ssh_connection.md
-        - Visual Studio Code: vscode.md
-        - .NET: dotnet.md
-        - Using Snapcraft Remote Build from Canonical: remote-build.md
-    - Samples:
+          - Px.exe as Proxy on a Windows Host: px.md
+          - Connecting QEMU VMs and ctrlX CORE: connecting_qemu_vm_ctrlx.md
+          - Working with App Build Environments (QEMU VMs): working-with-app-builder-envs.md
+          - SSH Connection: ssh_connection.md
+          - Visual Studio Code: vscode.md
+          - .NET: dotnet.md
+          - Using Snapcraft Remote Build from Canonical: remote-build.md
+  - Samples:
       - Overview: samples.md
       - Samples C/C++: samples-cpp/README.md
       - Samples Go: samples-go/README.md
@@ -132,13 +143,13 @@ nav:
       - Samples Nodejs: samples-node/README.md
       - Samples Snap: samples-snap/README.md
       - Samples IEC 61131-3: samples-iec61131/README.md
-    - Debugging:
+  - Debugging:
       - Debugging Overview: debug-overview.md
       - Remote Debugging C++: remote-debug-cpp.md
       - Remote Debugging Python: remote-debug-python.md
-    - References: 
-        - Overview: references.md
-        - Api Reference:
-          - c#: https://apps.boschrexroth.com/docs/ctrlx/csharp/html/index.html
-          - python: https://apps.boschrexroth.com/docs/ctrlx/python/html/index.html
-    - About: about.md
+  - References:
+      - Overview: references.md
+      - Api Reference:
+          - c#: api/net/html/index.html
+          - python: api/python/index.html
+  - About: about.md

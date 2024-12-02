@@ -31,7 +31,9 @@ parts:
     source: .
     build-environment:
       - CRAFT_PYTHON_INTERPRETER: python3.10
-      - GITHUB_CYSYSTEMD: https://github.com/mosquito/cysystemd/releases/download/1.5.4
+      - PYTHON_VERSION_IDENTIFIER: cp310
+      - GITHUB_CYSYSTEMD_VERSION: 1.6.2
+      - GITHUB_CYSYSTEMD: https://github.com/mosquito/cysystemd/releases/download/${GITHUB_CYSYSTEMD_VERSION}
       - PLATFORM_CYSYSTEMD: manylinux_2_28_x86_64
       - TARGET_PATH: ${CRAFT_PART_INSTALL}/lib/${CRAFT_PYTHON_INTERPRETER}/site-packages 
     stage-packages:
@@ -45,7 +47,7 @@ parts:
         amd64)
           ;;
       esac
-      pip3 install --platform=${PLATFORM_CYSYSTEMD} --only-binary=:all: --target ${TARGET_PATH} $GITHUB_CYSYSTEMD/cysystemd-1.5.4-cp310-cp310-${PLATFORM_CYSYSTEMD}.whl
+      pip3 install --platform=${PLATFORM_CYSYSTEMD} --only-binary=:all: --target ${TARGET_PATH} $GITHUB_CYSYSTEMD/cysystemd-${GITHUB_CYSYSTEMD_VERSION}-${PYTHON_VERSION_IDENTIFIER}-${PYTHON_VERSION_IDENTIFIER}-${PLATFORM_CYSYSTEMD}.whl
       
 plugs:
   datalayer:

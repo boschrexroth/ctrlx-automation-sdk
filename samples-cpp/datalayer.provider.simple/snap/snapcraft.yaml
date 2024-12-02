@@ -50,3 +50,9 @@ plugs:
     interface: content
     content: datalayer
     target: $SNAP_DATA/.datalayer
+
+lint:
+  ignore:
+    - library:
+      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

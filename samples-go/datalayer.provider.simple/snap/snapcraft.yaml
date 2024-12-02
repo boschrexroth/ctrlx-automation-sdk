@@ -36,11 +36,9 @@ parts:
     build-packages:
       - on amd64:
           - libsystemd-dev
-          - libzmq3-dev
           - pkg-config
       - on arm64:
           - libsystemd-dev:arm64
-          - libzmq3-dev:arm64
         #- pkg-config:arm64
     override-build: |
       case $CRAFT_ARCH_TRIPLET in
@@ -65,3 +63,9 @@ plugs:
     interface: content
     content: datalayer
     target: $SNAP_DATA/.datalayer
+
+lint:
+  ignore:
+    - library:
+      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

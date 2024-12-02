@@ -59,6 +59,10 @@ def subscribe_single(client: Client, subscription_properties: Variant):
     address = "sdk/py/provider_sub/int"
     result = subscription.subscribe(address)
 
+    address = "sdk/py/provider_sub/int2"
+    result = subscription.subscribe(address)
+
+
     return result, subscription
 
 g_client = None

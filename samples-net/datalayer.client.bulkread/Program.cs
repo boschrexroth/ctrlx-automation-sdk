@@ -54,28 +54,15 @@ var addresses = new[]
     "framework/metrics/system/memused-percent"
 };
 
-Console.WriteLine("BulkRead");
 var (result, items) = client.BulkRead(addresses);
-if (result.IsGood())
-{
-    foreach (var item in items)
-    {
-        Console.WriteLine($"address: {item.Address}, value: {item.Value.ToFloat()}, timestamp: {item.Timestamp}, result: {item.Result}");
-    }
+if (result.IsBad()) {
+    Console.WriteLine($"{result}");
+    return;
 }
 
-//We're using the async bulk read method just for demonstration here.
-//Hint: If you're not using any async calls, you can remove async keyword from the Main() method signature.
-Console.WriteLine("BulkReadAsync");
-var task = client.BulkReadAsync(addresses);
-var taskResult = await task;
-
-if (taskResult.Result.IsGood())
+foreach (var item in items)
 {
-    foreach (var item in items)
-    {
-        Console.WriteLine($"address: {item.Address}, value: {item.Value.ToFloat()}, timestamp: {item.Timestamp}, result: {item.Result}");
-    }
+    Console.WriteLine($"address: {item.Address}, value: {item.Value.ToFloat()}, timestamp: {item.Timestamp}, result: {item.Result}");
 }
 
 // Wait for process termination
