@@ -28,7 +28,7 @@ jobs:
           python-version: 3.x
 
       - name: Install Python packages
-        run: pip install mkdocs-material mike
+        run: pip install mkdocs-material mkdocs-exclude mkdocs-exclude-search mike
 
       - name: Update gh-pages
         run: |
@@ -38,8 +38,8 @@ jobs:
           find scripts/ -name "*.md" | cpio -pd doc/
           find scripts/ -name "*.png" | cpio -pd doc/
 
-          if [ -f "scripts/doc/update_doc.sh" ]; then
-            scripts/doc/update_doc.sh ${{ github.ref_name }}
-          fi
+#          if [ -f "scripts/doc/update_doc.sh" ]; then
+#            scripts/doc/update_doc.sh ${{ github.ref_name }}
+#          fi
           
           mike deploy --push --update-aliases ${{ github.ref_name }} latest
