@@ -38,4 +38,7 @@ jobs:
           find scripts/ -name "*.md" | cpio -pd doc/
           find scripts/ -name "*.png" | cpio -pd doc/
           
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
           mike deploy --push --update-aliases ${{ github.ref_name }} latest
