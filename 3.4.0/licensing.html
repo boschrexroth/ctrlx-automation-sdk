@@ -1,0 +1,2951 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ctrlX AUTOMATION Software Development Kit">
+      
+      
+        <meta name="author" content="Bosch Rexroth AG">
+      
+      
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/3.4.0/licensing.html">
+      
+      
+        <link rel="prev" href="persist-device-settings.html">
+      
+      
+        <link rel="next" href="s2sauth.html">
+      
+      
+      <link rel="icon" href="assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.47">
+    
+    
+      
+        <title>License Management - Software Development Kit</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775m1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25m13.274 9.537zl-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074M4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5M4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75"/></svg>');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13M6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75M8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.5 4.5 0 0 1-.563-1.191 3.84 3.84 0 0 1-.05-2.063 4.65 4.65 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .75.75 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4 2.4 0 0 1-.507-.441 3.1 3.1 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19.01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.7 3.7 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.75.75 0 0 1 .018-1.042.75.75 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13M6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.76 2.76 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6 6 0 0 0-.26.16 1 1 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1 1 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.61.61 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1 1 0 0 0-.34.398M9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0M9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343za8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746m1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275M6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.75.75 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.75.75 0 0 1 .215-.734L6.94 8 4.97 6.03a.75.75 0 0 1 .018-1.042.75.75 0 0 1 1.042-.018"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.25 1.25 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005 0-.009.004"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.5 3.5 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327q0 .15-.025.292c.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5q-.002.615-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A5 5 0 0 1 8 16a5 5 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5 5 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.7 1.7 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06m.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.17.17 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.75.75 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5m4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5m0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5M2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/sdk.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#table-of-contents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Software Development Kit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              License Management
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    boschrexroth/ctrlx-automation-sdk
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="overview.html" class="md-tabs__link">
+          
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="setup_overview.html" class="md-tabs__link">
+          
+  
+  Setup
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="samples.html" class="md-tabs__link">
+          
+  
+  Samples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="debug-overview.html" class="md-tabs__link">
+          
+  
+  Debugging
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="references.html" class="md-tabs__link">
+          
+  
+  References
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="about.html" class="md-tabs__link">
+        
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Software Development Kit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    boschrexroth/ctrlx-automation-sdk
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ctrlx_automation.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ctrlX AUTOMATION
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Guidelines
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Guidelines
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="package-assets.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Package Assets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appdevguide.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    App Developer Guideline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="persistdata.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Persisting Configurations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="persist-device-settings.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Persisting Device Settings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    License Management
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="licensing.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    License Management
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-licensing-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Licensing Modes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Licensing Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ctrlx-corevirtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      ctrlX COREvirtual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-other-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      All other cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-ctrlx-core-main-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 ctrlX CORE Main License
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ctrlx-core-temporary-usage-rights-emergency-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 ctrlX CORE Temporary Usage Rights (Emergency Mode)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-ctrx-core-10-day-trial-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 ctrX CORE 10 Day Trial License
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-four-hour-engineering-demo-license-on-ctrlx-corevirtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Four Hour Engineering Demo License on ctrlX COREvirtual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-additional-license-mode-ctrx-core-3-month-test-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6 Additional License Mode: ctrX CORE 3 Month Test License
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-spoofing-detection-by-optionally-signing-verifying-license-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7 Spoofing detection by optionally signing / verifying license requests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-license-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 License Enforcement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 License Enforcement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-add-content-plug-to-snapcraftyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Add Content Plug to snapcraft.yaml ()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-adapt-package-manifestjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Adapt package-manifest.json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-use-api-to-enforce-licenses" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Use API to enforce licenses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Use API to enforce licenses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-license-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.1 License Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-license-manager-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.2 License Manager API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-acquiring-releasing-a-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.3 Acquiring &amp; releasing a license
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-available-licenses-on-the-device-activated-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.4 Available licenses on the device (activated capabilities)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#335-update-license-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.5 Update license status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-communication-with-license-manager-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Communication with License Manager API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 Communication with License Manager API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341-unix-socket" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.1 Unix socket
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-access-license-manager-in-plc-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Access License Manager in PLC Application
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 Access License Manager in PLC Application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-ctrlx-automation-library-cxa_licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5.1 ctrlX AUTOMATION Library CXA_LICENSING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352-supported-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5.2 Supported functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-license-management-in-windows-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 License Management in Windows Applications
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copyright" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copyright
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="s2sauth.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Service-to-Service Authentication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fbs2plc.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Flatbuffers in IEC 61131-3 Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="numopenfilehandles.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configure maximal Number of Open File Handles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="localizaction.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Localization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    External Storages
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            External Storages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-exchange.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Date exchange
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="storage-extension.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Storage extension
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="extenable-denylist.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extendable Denylist
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Releases
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Releases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Setup
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_overview.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quick-start-guide.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Start Guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_qemu_ctrlx_works.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ctrlX WORKS App Build Environment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install-scripts.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Important Installation Scripts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_qemu_ubuntu.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QEMU Virtual Machine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VirtualBox Virtual Machine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_ubuntu.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Native Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install-sources-from-github.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Install Sources from github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Toolchain
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            Toolchain
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="px.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Px.exe as Proxy on a Windows Host
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="connecting_qemu_vm_ctrlx.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Connecting QEMU VMs and ctrlX CORE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="working-with-app-builder-envs.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Working with App Build Environments (QEMU VMs)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ssh_connection.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSH Connection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vscode.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Visual Studio Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dotnet.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    .NET
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="remote-build.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Snapcraft Remote Build from Canonical
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Samples
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Samples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Samples C/C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-go/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Samples Go
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Samples Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Samples .NET
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-node/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Samples Nodejs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-snap/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Samples Snap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-iec61131/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Samples IEC 61131-3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Debugging
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Debugging
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="debug-overview.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Debugging Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="remote-debug-cpp.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Remote Debugging C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="remote-debug-python.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Remote Debugging Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            References
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="references.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Api Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Api Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/net/html/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    c#
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/python/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="about.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-licensing-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Licensing Modes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Licensing Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ctrlx-corevirtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      ctrlX COREvirtual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-other-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      All other cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-ctrlx-core-main-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 ctrlX CORE Main License
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ctrlx-core-temporary-usage-rights-emergency-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 ctrlX CORE Temporary Usage Rights (Emergency Mode)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-ctrx-core-10-day-trial-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 ctrX CORE 10 Day Trial License
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-four-hour-engineering-demo-license-on-ctrlx-corevirtual" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Four Hour Engineering Demo License on ctrlX COREvirtual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-additional-license-mode-ctrx-core-3-month-test-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6 Additional License Mode: ctrX CORE 3 Month Test License
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-spoofing-detection-by-optionally-signing-verifying-license-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7 Spoofing detection by optionally signing / verifying license requests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-license-enforcement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 License Enforcement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 License Enforcement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-add-content-plug-to-snapcraftyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Add Content Plug to snapcraft.yaml ()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-adapt-package-manifestjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Adapt package-manifest.json
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-use-api-to-enforce-licenses" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Use API to enforce licenses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Use API to enforce licenses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-license-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.1 License Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-license-manager-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.2 License Manager API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-acquiring-releasing-a-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.3 Acquiring &amp; releasing a license
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-available-licenses-on-the-device-activated-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.4 Available licenses on the device (activated capabilities)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#335-update-license-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.5 Update license status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-communication-with-license-manager-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Communication with License Manager API
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 Communication with License Manager API">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341-unix-socket" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.1 Unix socket
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-access-license-manager-in-plc-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Access License Manager in PLC Application
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 Access License Manager in PLC Application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-ctrlx-automation-library-cxa_licensing" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5.1 ctrlX AUTOMATION Library CXA_LICENSING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352-supported-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5.2 Supported functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-license-management-in-windows-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 License Management in Windows Applications
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copyright" class="md-nav__link">
+    <span class="md-ellipsis">
+      Copyright
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<p>This document is part of the Bosch Rexroth ctrlX CORE App Development Guideline, and describes how to adapt to the the license management of the device.</p>
+<p>Please refer to the App Development Guide for further information.</p>
+<h3 id="table-of-contents"><strong>Table of Contents</strong><a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h3>
+<p><a href="#introduction">1 Introduction</a></p>
+<p><a href="#modes">2 Licensing Modes</a></p>
+<p><a href="#overview">2.1 Overview</a></p>
+<p><a href="#main">2.2 ctrlX CORE Main License</a></p>
+<p><a href="#emergency">2.3 ctrlX CORE Temporary Usage Rights (Emergency Mode)</a></p>
+<p><a href="#trial">2.4 ctrlX CORE 10 Day Trial License</a></p>
+<p><a href="#virtual">2.5 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup></a></p>
+<p><a href="#test">2.6 Additional License Mode: ctrX CORE 3 Month Test License</a></p>
+<p><a href="#spoofing">2.7 Spoofing detection by optionally signing / verifying license requests</a></p>
+<p><a href="#enforcement">3 License Enforcement</a></p>
+<p><a href="#plug">3.1 Add Content Plug to snapcraft.yaml</a></p>
+<p><a href="#manifest">3.2 Adapt package-manifest.json</a></p>
+<p><a href="#rest">3.3 Use API to Enforce Licenses</a></p>
+<p><a href="#comm">3.4 Communicate with License Manager API</a></p>
+<p><a href="#plc">3.5 Access License Manager in PLC Application</a></p>
+<p><a href="#windows">3.6 License Management in Windows Applications</a></p>
+<h1 id="1-introduction">1 Introduction <a name="introduction"></a><a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h1>
+<p>Bosch Rexroth provides a Licensing Center portal at <a href="https://licensing.boschrexroth.com">https://licensing.boschrexroth.com</a> for managing device licenses. Through this portal, users can assign licenses to their devices and download a capability response. This response includes all licenses assigned to a specific device. After downloading, users can deploy this capability response to the corresponding device. This platform facilitates the easy management of device licenses, ensuring that devices have the required capabilities.</p>
+<p>The ctrlX CORE User Interfaces therefore provides a license page which allows to upload a capability response and to check the currently available licenses on the device. For developers, the ctrlX CORE offers a restful API via an internal unix domain socket which can be used by an app to request and release a specific license.</p>
+<h1 id="2-licensing-modes">2 Licensing Modes  <a name="modes"></a><a class="headerlink" href="#2-licensing-modes" title="Permanent link">&para;</a></h1>
+<h2 id="21-overview">2.1 Overview <a name="overview"></a><a class="headerlink" href="#21-overview" title="Permanent link">&para;</a></h2>
+<p>The license management on the <strong>ctrlX CORE</strong> supports several different licensing modes. The following table gives an overview about the license modes.</p>
+<table>
+<thead>
+<tr>
+<th>License Mode</th>
+<th>Target</th>
+<th>Key</th>
+<th>Usage</th>
+<th>Additional information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Main License</td>
+<td>ctrlX CORE</td>
+<td><code>SWL_XCR_{YOUR_APP_LICENSE_CODE}</code></td>
+<td>mandatory</td>
+<td><strong>check note</strong></td>
+</tr>
+<tr>
+<td>Temporary Usage Rights (Emergency Mode)</td>
+<td>ctrlX CORE</td>
+<td><code>SWL_XCR_{YOUR_APP_LICENSE_CODE}</code></td>
+<td>mandatory</td>
+<td><code>tampered</code> flag is <code>true</code></td>
+</tr>
+<tr>
+<td>10 Day Trial License</td>
+<td>ctrlX CORE</td>
+<td><code>SWL_XCR_{YOUR_APP_LICENSE_CODE}</code></td>
+<td>optional</td>
+<td><code>isPermanent</code> flag is <code>false</code></td>
+</tr>
+<tr>
+<td>Four Hour Engineering Demo License</td>
+<td>ctrlX CORE<sup>virtual</sup></td>
+<td><code>SWL_XCR_ENGINEERING_4H</code></td>
+<td>suggested</td>
+<td><strong>check note</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>The app will start normally in the first three cases irrespective of the modes. Information about temporary/trial is not important and developer can avoid checking the different flags.</li>
+<li>To ensure a seamless trial experience, we recommend enabling your application to launch with both the standard license and the <code>SWL_XCR_ENGINEERING_4H</code> license. More information is provided below.</li>
+<li>For storing the license ID, it's recommended to use <code>/tmp</code>. This folder is accessible from the snap by default. Users can easily write the ID to <code>/tmp/myFancyFile</code>, which remains available until the system reboots, even after the app is removed.</li>
+</ul>
+</div>
+<h3 id="ctrlx-corevirtual">ctrlX CORE<sup>virtual</sup><a class="headerlink" href="#ctrlx-corevirtual" title="Permanent link">&para;</a></h3>
+<p>As displayed in the table, there is only the "four hour engineering demo license" available on the <strong>ctrlX CORE<sup>virtual</sup></strong>, which allows to evaluate a new app for a limited time (the ctrlX CORE<sup>virtual</sup> is terminated after four hours to prevent productive use). Use the <code>SWL_XCR_ENGINEERING_4H</code> license when the application is running in ctrlX CORE<sup>virtual</sup>.</p>
+<h3 id="all-other-cases">All other cases<a class="headerlink" href="#all-other-cases" title="Permanent link">&para;</a></h3>
+<p>The different license modes and their expected behaviors for the app are described briefly below. This information is intended to help developers distinguish between different cases depending on the license mode used within their application. The descriptions aim to show developers the type of license the app is currently operating under.</p>
+<h2 id="22-ctrlx-core-main-license">2.2 ctrlX CORE Main License  <a name="main"></a><a class="headerlink" href="#22-ctrlx-core-main-license" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Standard License</p>
+<p><strong>Description:</strong></p>
+<ul>
+<li>This is the standard license that a user obtains when buying an app. Therefore, the support of this license mode is <strong>mandatory</strong>.</li>
+<li>The license is obtained (bought) in the Bosch Rexroth Licensing Center and then assigned to a specific device by the user.</li>
+<li>The standard license can be either permanent (unlimited) or time based (expires)</li>
+</ul>
+<p><strong>Expected App Behaviour</strong>:</p>
+<ul>
+<li>The app shall start and run as intended, when the standard license is available.</li>
+<li>App should <strong>periodically</strong> check for validity of license(s)</li>
+<li>If acquiring a license is not possible (no license is available), the app shall inform the user that a license needs to be obtained.</li>
+<li>In case of time based licenses, the app should inform the user on time before the license expires. As a best practice, a user should be informed four weeks prior to expiration.</li>
+<li>When no standard app specific license is available on the device, an app shall only run if one of the other licenses is active.</li>
+</ul>
+<h2 id="23-ctrlx-core-temporary-usage-rights-emergency-mode">2.3 ctrlX CORE Temporary Usage Rights (Emergency Mode)  <a name="emergency"></a><a class="headerlink" href="#23-ctrlx-core-temporary-usage-rights-emergency-mode" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Avoid machine downtime</p>
+<p><strong>Description:</strong></p>
+<ul>
+<li>On a ctrlX CORE, the user  has the possibility to activate a special mode that is called "Temporary usage rights". The mode can be activated using the License Manager UI.</li>
+<li>Enabling this mode allows users to operate the ctrlX CORE in a productive environment for ten consecutive days. The single purpose of this mode is to prevent a downtime when a defect device is replaced and no licenses have been assigned, yet. <mark><strong>This mode can only be activated once on a device</strong></mark></li>
+<li>Within these ten days, the user has to either add licenses to the new device or move the licenses from the broken device to the replacement device.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>After ten days, the mode will expire and cannot be reactivated.</p>
+</div>
+<p><strong>Expected App Behaviour:</strong></p>
+<ul>
+<li>Support of this license is <strong>mandatory</strong>.</li>
+<li>The app is able to detect whether the system runs in this mode by evaluating the <code>tampered</code> flag in the response to the acquisition request (the flag is set to <code>true</code>)</li>
+<li>When this mode is active, the app should work as if a standard license is available.</li>
+</ul>
+<h2 id="24-ctrx-core-10-day-trial-license">2.4 ctrX CORE 10 Day Trial License  <a name="trial"></a><a class="headerlink" href="#24-ctrx-core-10-day-trial-license" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Test Mode on ctrlX CORE Hardware</p>
+<p><strong>Description:</strong></p>
+<ul>
+<li>The 10 day trial license allows to use all apps - which support this license mode - for a restricted time for testing purposes.</li>
+<li>The license is intended for test and evaluation only and not for use in a production environment</li>
+<li>The license will automatically expire after 10 days.</li>
+<li>Other than the temporary usage rights mode, 10 day trial licenses may be used (consecutively) in case an according contractual agreement is available for all involved parties (Bosch Rexroth, Customer, ctrlX World Partner).</li>
+</ul>
+<p><strong>Expected App Behaviour:</strong></p>
+<ul>
+<li>Support of this mode is <strong>optional</strong>.</li>
+<li>The app is able to detect whether the system runs in this mode by evaluating the <code>isPermanent</code> flag in the response to the acquisition request (the flag is set to <code>false</code>)</li>
+<li>When this mode is active, the app should work as if a standard license is available.</li>
+<li>This 10 day trail license is bought for all apps and mapped to device</li>
+</ul>
+<h2 id="25-four-hour-engineering-demo-license-on-ctrlx-corevirtual">2.5 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup> <a name="virtual"></a><a class="headerlink" href="#25-four-hour-engineering-demo-license-on-ctrlx-corevirtual" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose</strong>: Evaluation mode on a ctrlX CORE<sup>virtual</sup>
+<strong>Description</strong>:</p>
+<ul>
+<li>An according special license key (<code>SWL_XCR_ENGINEERING_4H</code>) indicates that currently the limited evaluation mode is active</li>
+<li>After 4 hours the ctrlX CORE<sup>virtual</sup> shuts down itself to prevent a productive use.</li>
+</ul>
+<p><strong>Expected App Behaviour:</strong></p>
+<ul>
+<li>In order to support this non-productive mode, apps must check for the license <code>SWL_XCR_ENGINEERING_4H</code>, which guarantees that the runtime is limited to 4 hours.</li>
+<li>Support for this mode is <strong>optional</strong> yet <em>highly</em> <strong>recommended</strong>, offering users a great opportunity to fully experience the application's capabilities and functionalities.</li>
+</ul>
+<h2 id="26-additional-license-mode-ctrx-core-3-month-test-license">2.6 Additional License Mode: ctrX CORE 3 Month Test License  <a name="test"></a><a class="headerlink" href="#26-additional-license-mode-ctrx-core-3-month-test-license" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> Time limited test and evaluation of apps which are in beta/prototype phase (B-Sample phase)</p>
+<p><strong>Description:</strong></p>
+<ul>
+<li>This mode is not intended / available for partner apps by default.</li>
+<li>Please get in touch with Bosch Rexroth directly, if this mode might be of interest for you.</li>
+</ul>
+<h2 id="27-spoofing-detection-by-optionally-signing-verifying-license-requests">2.7 Spoofing detection by optionally signing / verifying license requests  <a name="spoofing"></a><a class="headerlink" href="#27-spoofing-detection-by-optionally-signing-verifying-license-requests" title="Permanent link">&para;</a></h2>
+<p><strong>Purpose:</strong> This mechanism allows applications that request a licene to verify that the license indeed comes from the ctrlX OS license manager.</p>
+<p><strong>Description:</strong></p>
+<ul>
+<li>Although it is quite unprobable, that a malicious actor could replace ctrlX OS' license manager, a further layer of security is added</li>
+<li>Applications can request licenses (see <a href="https://boschrexroth.github.io/rest-api-description/ctrlx-automation/ctrlx-core/">License Manager API</a>) and set the 'signResponse' query parameter</li>
+<li>Once a license has been requested (with the corresponding query parameter set) the response's header will contain a signature</li>
+<li>This signature was calculated using the device certificate (and the corresponding tpm-based key) and can be used to fully verify that the license response was indeed from a certified ctrlX OS device with no spoofed license manager</li>
+</ul>
+<p><strong>Usage:</strong></p>
+<p>1) Any application that wants to use this mechanism will need to send a license request with the corresponding query parameter set <br>
+    1.1) The response header contains a hex-encoded signature ("Payload-Signature") <br>
+    2.2) The signature is created using ECDSA-SHA256 on the standardized curve 'SECP-256' <br>
+2) Once the response (and the signature in 'Payload-Signature') the application needs to verify that the signature is indeed valid and was produced by the device <br>
+2.1) The license manager's device certificate chain (and the public key herein) can be used for this - see (see <a href="https://boschrexroth.github.io/rest-api-description/ctrlx-automation/ctrlx-core/">License Manager API</a>) <br>
+2.2) Use the public key inside the end-entity (device) certificate to verify the signature <br>
+3) Once signature verification is successful, we can assume that the chain sent by the device and the key used for signing correspond, however additional steps are required to ensure that the device is indeed a ctrlX OS device (and the license manager is unspoofed) <br>
+3.1) The device-certificate chain as retrieved in step 2.1 can now be used to check whether the device is a ctrlX OS device by verifying the certificate chain <br>
+3.2) The application now needs to verify that the certificate was indeed signed by an authorized ctrlX OS party (and its root CA certificate) <br>
+3.3) For this purpose it needs to know the corresponding ctrlX root CA certificate (com.ctrlx-automation.os.crt) - recommendation is to have it inside the app's binaries as this will ensure that no malicious entity would be able to change it. <br>
+3.4) Verify the certificate chain from the device up to the mentioned root certificate <br></p>
+<p><strong>Note:</strong>
+As there are multiple steps involved here (where some of them might be time consuming due to cryptographic complexity) it is the app's responsibility whether it wants to check this once during startup, according to a defined interval, etc. Please note the genereal perception is that - if this feature is required - checking it during startup suffices to verify the integrity of the license manager.</p>
+<p><strong>ctrlX OS root CA certificate:</strong>
+As stated in in step 3.2, the application needs to know the ctrlX OS root CA certificate (com.ctrlx-automation.os.crt). If this feature is required, the corresponding certificate needs to be embedded inside the application. The ctrlX OS root CA certificate can be retrieved via the following link: <br></p>
+<p><a href="certificates/com.ctrlx-automation.os.crt">Download ctrlX OS root CA certificate (com.ctrlx-automation.os.crt)</a></p>
+<h1 id="3-license-enforcement">3 License Enforcement <a name="enforcement"></a><a class="headerlink" href="#3-license-enforcement" title="Permanent link">&para;</a></h1>
+<p>To integrate an app into the license management, please follow the instructions below.</p>
+<h2 id="31-add-content-plug-to-snapcraftyaml">3.1 Add Content Plug to snapcraft.yaml (<a name="plug"></a>)<a class="headerlink" href="#31-add-content-plug-to-snapcraftyaml" title="Permanent link">&para;</a></h2>
+<p>To get access to the unix domain socket that provides the restful API, add the following content plug definition to the snapcraft.yaml:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">plugs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">licensing-service</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content</span>
+<span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">licensing-service</span>
+<span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$SNAP_DATA/licensing-service</span>
+</code></pre></div>
+<p>This will create a folder "license-service" during installation of the app on the ctrlX CORE and provide access to the unix domain socket "licensing-service.sock" which will be located in the folder.</p>
+<h2 id="32-adapt-package-manifestjson">3.2 Adapt package-manifest.json <a name="manifest"></a><a class="headerlink" href="#32-adapt-package-manifestjson" title="Permanent link">&para;</a></h2>
+<p>The app shall provide information in the package-manifest about each license that is supported. Description and title shall be human readable.
+The "required" flag indicates whether a license is mandatory to use the application. Set the flag to true when the license is required and to false, when the license is optional. Multiple licenses can have the "required" flag set to true simultaneously. In this case, the app must ensure that it works if any of the 'required' licenses is available.</p>
+<p><code>json
+   "licenses": [
+      {
+        "name": "SWL-XC*-RUN-DLACCESSNRT**-NNNN",
+        "title": "ctrlX OS License - Customer App",
+        "description": "Integration of customer apps into ctrlX OS with access to the ctrlX Data Layer",
+        "required": true
+      }     
+    ],</code></p>
+<h2 id="33-use-api-to-enforce-licenses">3.3 Use API to enforce licenses <a name="rest"></a><a class="headerlink" href="#33-use-api-to-enforce-licenses" title="Permanent link">&para;</a></h2>
+<h3 id="331-license-integration">3.3.1 License Integration<a class="headerlink" href="#331-license-integration" title="Permanent link">&para;</a></h3>
+<p>How an app reacts when no license is present or the license is removed during runtime, can be freely chosen by the app. Nevertheless, to provide a unique user experience across multiple apps, the following best practices are recommended.</p>
+<p>The app should acquire the license when started or each time a function requiring a license is called. Furthermore, it should <strong>periodically</strong> verify the presence of the license on the device by releasing and re-acquiring the license, ensuring it hasn't expired or been removed. This applies to both mandatory and optional types of licenses.</p>
+<p>If a license is no longer required, such as when the app is stopped or uninstalled, the license should be released. This action returns the license to the license pool, allowing it to be acquired by another app. Otherwise, the license will only become available again after a reboot of the device.</p>
+<p>If a license is missing, the application should display a warning or an error message and/or log the event. The user should be informed about which licenses are required to enable the specific functionality of the app.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>On the ctrlX CORE, when enforcing licenses the use of the license management is mandatory. Individual implementations are not permitted.</p>
+</div>
+<h3 id="332-license-manager-api">3.3.2 License Manager API<a class="headerlink" href="#332-license-manager-api" title="Permanent link">&para;</a></h3>
+<p>The licensing API is available on GitHub: <a href="https://boschrexroth.github.io/rest-api-description">https://boschrexroth.github.io/rest-api-description</a></p>
+<p>The ctrlX License Manager API streamlines license management for the ctrlX OS. This API documentation is also available in the API Reference Section of ctrlX OS. It provides clear guidance on acquiring, releasing, querying, and managing licenses for different applications or functions. The REST API functionality allows users to test their license features and confirm their operability. <strong>The use of unix sockets for license integration is recommended. Refer to section 3.4 for details.</strong></p>
+<p>Implementing this API, an app is able to</p>
+<ul>
+<li>Get a list of all available license capabilities.</li>
+<li>Acquire a license.</li>
+<li>Release a license.</li>
+<li>Update the licenses in a ctrlX CORE by uploading a license file.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>HTTP Method</th>
+<th>URI</th>
+<th>Payload</th>
+<th>Parameters</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Get list of all activated capabilities</td>
+<td>GET</td>
+<td>/capabilities</td>
+<td>none</td>
+<td>none</td>
+<td>200,<br>[<br>{<br>"isPermanent": true,<br>    "finalExpirationDate": "2030-01-01T12:00:27.87+00:20",<br>    "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",<br>    "count": 1,<br>    "version": "1.0",<br>    "startDate": "2030-01-01T12:00:27.87+00:20"<br>  }<br>]<br></td>
+</tr>
+<tr>
+<td>Aquire license</td>
+<td>POST</td>
+<td>/license</td>
+<td>{<br>"name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",<br>  "version": "1.0" <br>}</td>
+<td>signResponse</td>
+<td>200<br>{<br>  "isPermanent": true,<br>  "endDate": "2030-01-01T12:00:27.<br>7+00:20",<br>  "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",<br>  "id": <br>0083d875-30e8-4ff6-9f92-46096ef2d123",<br>  "version": "1.0",<br>  "startDate":"2030-01-01T12:00:27.87+00:20"<br>}</td>
+</tr>
+<tr>
+<td>Release license</td>
+<td>DELETE</td>
+<td>/license/{id}</td>
+<td>none</td>
+<td>none</td>
+<td>204</td>
+</tr>
+<tr>
+<td>Update the capability state in the device</td>
+<td>PUT</td>
+<td>/capabilities</td>
+<td>file<br>string($binary)</td>
+<td>withChangeReport</td>
+<td>200</td>
+</tr>
+<tr>
+<td>Get the device certificate chain</td>
+<td>GET</td>
+<td>/device-certificate-chain</td>
+<td>none</td>
+<td>none</td>
+<td>200,<br> -----BEGIN CERTIFICATE----- MIIDOTCCA+gAwIBAgIURF1DTLBM3YljOsMxXMtHvtEVzE4wCgYIKoZIzj0EAwIwgbgxCzAJBgNVBAYTAkRFMRAwDgYDVQQIDAdCYXZhcmlhMRUwEwYDVQQHDAxMb2hy...<br>FgYDVR0lAQHBAwwCgYIKwYBBQUHAwIwCgYIKoZIzj0EAwIDSAAwRQIgH9Ksvn024lHfDhL4w4YyBLAf6JzxjBix8L6Ka1m3NUgCIQCx3sd85Ag0m/XuF+GViRiL3obO2Kr7reeXVEAg1gRgqw== <br> -----END CERTIFICATE----- <br> -----BEGIN CERTIFICATE----- MIIDOjCCAt+gAwIBAgIUUdrEfPLcIibj5PCsmD1K6nYK0wCgYIKoZIzj0EAwIw...kRi49k6qak0EzsDVCWPxXeTLEa9OwinaCm1AiEAia+Kfhmg3cFI6KKHCA12ceic 0QRmvnOTubiVvXuTy88=QUHAwIwCgYIKoZIzj0EAwIDSAAwRQIgH9Ksvn024lHfDhL4w4YyBLAf6JzxjBix8L6IDSAAwRQIgH9Ksvn024lHfDhL4w4YyBLAf6JzxjBix8L6<br>-----END CERTIFICATE----- <br></td>
+</tr>
+</tbody>
+</table>
+<h3 id="333-acquiring-releasing-a-license">3.3.3 Acquiring &amp; releasing a license<a class="headerlink" href="#333-acquiring-releasing-a-license" title="Permanent link">&para;</a></h3>
+<p>When starting an application or service that requires a license, it must acquire the necessary license to operate. Acquiring a license generates a unique ID specific to that license. The POST API call /license will acquire the license when passed with paramater as shown below.</p>
+<p><code>json
+  {
+    "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",
+    "version": "1.0"
+  }</code></p>
+<p>Upon a successful request, the following response will be returned.</p>
+<blockquote>
+<p><img alt="request example" src="images/licensing2.png" /></p>
+</blockquote>
+<p>The application should release the license when it is stopped or removed. It should also perform periodic checks to ensure the license's validity. The license can be released using the ID obtained from the acquire response. Storing this license ID is necessary and should be stored in a directory that is not affected when the application goes into a faulty state and needs to be restarted. The usage of <code>/tmp</code> is recommended for this purpose. This folder is accessible from the snap by default. Users can easily write the ID to <code>/tmp/myFancyFile</code>, which remains available until the system reboots, even after the app is removed.  </p>
+<h3 id="334-available-licenses-on-the-device-activated-capabilities">3.3.4 Available licenses on the device (activated capabilities)<a class="headerlink" href="#334-available-licenses-on-the-device-activated-capabilities" title="Permanent link">&para;</a></h3>
+<p>Upon request, an app may retrieve the list of available licenses on the device including all details (e.g. expiration, counter, etc.). This is recommended to check whether a specific license is available (and not in use) before trying to acquire it.
+Nevertheless, this is optional - it is sufficient to simply try to acquire a license and then check whether the acquisition request was successful.</p>
+<p>Sample response:</p>
+<blockquote>
+<p><img alt="response example" src="images/licensing1.png" /></p>
+</blockquote>
+<h3 id="335-update-license-status">3.3.5 Update license status<a class="headerlink" href="#335-update-license-status" title="Permanent link">&para;</a></h3>
+<p>The API allows to upload a capability response (license file) from the license portal to update the license status on the device (e.g. add new licenses). This functionality is not required by an app itself but is rather performed by the device operator depending on which licenses will be required according to the installed apps. The REST API route to upload a license file allows passing an optional query parameter (withChangeReport). If this parameter is set, the result of the API will return all licenses that have been added / removed by the used license file.</p>
+<h2 id="34-communication-with-license-manager-api">3.4 Communication with License Manager API <a name="comm"></a><a class="headerlink" href="#34-communication-with-license-manager-api" title="Permanent link">&para;</a></h2>
+<h3 id="341-unix-socket">3.4.1 Unix socket<a class="headerlink" href="#341-unix-socket" title="Permanent link">&para;</a></h3>
+<ul>
+<li>The content interface from step 3.1 provides access through a unix-domain socket named <strong>licensing-service.sock</strong>. This socket is located at target path <code>$</code>SNAP_DATA/licensing-service/licensing-service.sock. All licensing APIs can be accessed directly using an HTTP client through this socket address. <br><strong>E.g.</strong> <em>curl --unix-socket $SNAP_DATA/licensing-service/licensing-service.sock <a href="http://localhost/license-manager/api/v1/capabilities">http://localhost/license-manager/api/v1/capabilities</a>.</em> <br> similarly HTTP client via unix socket can be used by other programming languages to access licensing API </br></li>
+<li>Using unix sockets eliminates the need for authentication, making it a recommended option as no token for authorization is required.</li>
+</ul>
+<p>Check if the Plug is connected:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SNAP_DATA</span><span class="s2">/licensing-service&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;IS THE LICENSING PLUG INSERT: true&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;IS THE LICENSING PLUG INSERT: false&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+</code></pre></div>
+<p>Before executing the commands, change the current directory to $SNAP_DATA.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span><span class="nv">$SNAP_DATA</span>
+</code></pre></div>
+<p>Examples using CURL:</p>
+<p>Get capabilities:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sS<span class="w"> </span>--no-buffer<span class="w"> </span>-XGET<span class="w"> </span>--unix-socket<span class="w"> </span>licensing-service/licensing-service.sock<span class="w"> </span>http://localhost/license-manager/api/v1/capabilities
+</code></pre></div>
+<p>Acquire the 4H license for ctrlX CORE Virtual. Use the license feature code from the capabilities to acquire a real license.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sS<span class="w"> </span>--no-buffer<span class="w"> </span>-XPOST<span class="w"> </span>--unix-socket<span class="w"> </span>licensing-service/licensing-service.sock<span class="w"> </span><span class="s1">&#39;http://localhost/license-manager/api/v1/license&#39;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;accept: application/json&#39;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;name\&quot;:\&quot;SWL_XCR_ENGINEERING_4H\&quot;,\&quot;version\&quot;:\&quot;1.0\&quot;}&quot;</span>
+</code></pre></div>
+<p>Release a license:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sS<span class="w"> </span>--no-buffer<span class="w"> </span>-XDELETE<span class="w"> </span>--unix-socket<span class="w"> </span>licensing-service/licensing-service.sock<span class="w"> </span><span class="s1">&#39;http://localhost/license-manager/api/v1/license/57ac4c58-4167-4afb-b4c2-e63c564c5b68&#39;</span>
+</code></pre></div>
+<p>Store license ID:</p>
+<p>To store the license ID, it is recommended to use the <code>/tmp</code> folder. This folder is accessible from the snap by default. Users can easily write the ID to <code>/tmp/myFancyFile</code>, which remains available until the system reboots, even after the app is removed.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#Assuming that the license ID is contained in &#39;myid&#39;</span>
+<span class="nv">licensefilelocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/tmp/LICENSED
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$myid</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$licensefilelocation</span>
+</code></pre></div>
+<h2 id="35-access-license-manager-in-plc-application">3.5 Access License Manager in PLC Application <a name="plc"></a><a class="headerlink" href="#35-access-license-manager-in-plc-application" title="Permanent link">&para;</a></h2>
+<h3 id="351-ctrlx-automation-library-cxa_licensing">3.5.1 ctrlX AUTOMATION Library <em>CXA_LICENSING</em><a class="headerlink" href="#351-ctrlx-automation-library-cxa_licensing" title="Permanent link">&para;</a></h3>
+<p>In addition to the REST API, the License Manager can also be used in a PLC application.
+To use the according functions, the library <em>CXA_LICENSING</em> can be added to a PLC application in the Library Manager.</p>
+<p>Please refer to the ctrlX PLC Engineering documentation for information about the Library Manager.</p>
+<h3 id="352-supported-functions">3.5.2 Supported functions<a class="headerlink" href="#352-supported-functions" title="Permanent link">&para;</a></h3>
+<p>The <em>CXA_LICENSING</em> library provides POUs to acquire and release licenses and to get capabilities. In addition, the library also comes with an example how to use the licensing mechanisms in a PLC application.</p>
+<p>The online documentation of the library in ctrlX PLC Engineering provides detailed information about the POUs and the example:</p>
+<blockquote>
+<p><img alt="CXA_LICENSING" src="images/licensing_plclib.png" /></p>
+</blockquote>
+<h2 id="36-license-management-in-windows-applications">3.6 License Management in Windows Applications <a name ="windows"></a><a class="headerlink" href="#36-license-management-in-windows-applications" title="Permanent link">&para;</a></h2>
+<p>ctrlX WORKS also supports the License Manager.</p>
+<p>Please find the ctrlX WORKS Licensing API here in the ctrlX World Portal:
+<a href="https://bosch.sharepoint.com/sites/msteams_1647245/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fmsteams%5F1647245%2FShared%20Documents%2FPartner%2F01%5FctrlX%2DWorld%5Fgeneral%5Finformation%2F03%5FApp%5FDevelopment%2FWindows%5Flicensing%2Fcom%2Eboschrexroth%2Ectrlxworks%2Elicensing%2Eapi%2D1%2E0%2E0%2Ezip&amp;parent=%2Fsites%2Fmsteams%5F1647245%2FShared%20Documents%2FPartner%2F01%5FctrlX%2DWorld%5Fgeneral%5Finformation%2F03%5FApp%5FDevelopment%2FWindows%5Flicensing">ctrlX WORKS Licensing API</a></p>
+<p>This API provides licensing functions for Windows Applications, and comes with according samples for different programming languages and frameworks.</p>
+<h2 id="copyright">Copyright<a class="headerlink" href="#copyright" title="Permanent link">&para;</a></h2>
+<p>SPDX-FileCopyrightText: Bosch Rexroth AG</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020-2023 Bosch Rexroth AG
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/boschrexroth" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/boschrexroth" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
