@@ -105,7 +105,7 @@ The different license modes and their expected behaviors for the app are describ
 - The app is able to detect whether the system runs in this mode by evaluating the `tampered` flag in the response to the acquisition request (the flag is set to `true`)
 - When this mode is active, the app should work as if a standard license is available.
 
-## 2.4 ctrX CORE 10 Day Trial License  <a name="trial"></a>
+## 2.4 ctrlX CORE 10 Day Trial License  <a name="trial"></a>
 
 **Purpose:** Test Mode on ctrlX CORE Hardware
 
@@ -136,7 +136,7 @@ The different license modes and their expected behaviors for the app are describ
 - In order to support this non-productive mode, apps must check for the license `SWL_XCR_ENGINEERING_4H`, which guarantees that the runtime is limited to 4 hours.
 - Support for this mode is **optional** yet *highly* **recommended**, offering users a great opportunity to fully experience the application's capabilities and functionalities.
 
-## 2.6 Additional License Mode: ctrX CORE 3 Month Test License  <a name="test"></a>
+## 2.6 Additional License Mode: ctrlX CORE 3 Month Test License  <a name="test"></a>
 
 **Purpose:** Time limited test and evaluation of apps which are in beta/prototype phase (B-Sample phase)
 
