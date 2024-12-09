@@ -4,5 +4,5 @@ go 1.22
 
 require (
 	github.com/dustin/go-humanize v1.0.1
-	github.com/emersion/go-webdav v0.5.0
+	github.com/emersion/go-webdav v0.6.0
 )
