@@ -1,1 +1,1 @@
-cysystemd==1.6.2
+cysystemd==2.0.1
