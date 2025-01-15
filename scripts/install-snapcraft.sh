@@ -33,6 +33,8 @@ else
         echo Uninstalling inappropriate snapcraft version...
         sudo snap remove snapcraft 2>/dev/null
         install_snapcraft
+    else
+        echo "Snapcraft version 7.x already installed. Noting to do."
     fi
 fi
 
