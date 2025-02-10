@@ -25,7 +25,7 @@
     "ngx-translate-multi-http-loader": "^17.0.0",
     "snap": "^1.1.0",
     "tslib": "^2.8.1",
-    "zone.js": "^0.14.10"
+    "zone.js": "^0.15.0"
   },
   "scripts": {
     "ng": "ng",
