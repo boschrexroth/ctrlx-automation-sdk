@@ -11,6 +11,8 @@ updates:
       - '/samples-node/*'
     allow:
       - dependency-type: 'production'
+    ignore:
+      - dependency-name: 'angular.multi-language'
     schedule:
       interval: 'weekly'
   - package-ecosystem: nuget
