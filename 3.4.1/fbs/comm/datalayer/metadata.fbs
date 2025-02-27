@@ -1,0 +1,57 @@
+include "allowed_operations.fbs";
+
+namespace comm.datalayer;
+
+enum NodeClass : byte {
+  Node,
+  Method,
+  Type,
+  Variable,
+  Collection,
+  Resource,
+  Program,
+  Folder,
+}
+enum DisplayFormat : byte {Auto, Bin, Oct, Dec, Hex}
+
+table Extension {
+  key: string (key);
+  value: string (required);
+}
+
+table LocaleText {
+  /// iso 639.1
+  id: string (key); 
+  text: string (required);
+}
+
+table Reference
+{
+  /// nodeid of type  "readType", "writeType", "createType", ...
+  type: string (key);
+
+  /// full qualified address of target
+  targetAddress: string (required);
+}
+
+table Metadata {
+
+  nodeClass: NodeClass = Node;
+
+  operations : AllowedOperations (required);
+
+  /// markdown text only
+  description: string (required);
+
+  /// URL to description
+  descriptionUrl: string (required); 
+  displayName: string;
+  displayFormat: DisplayFormat = Auto;
+  unit: string;
+  extensions : [Extension];
+  references : [Reference];
+  descriptions: [LocaleText];
+  displayNames: [LocaleText];
+}
+
+root_type Metadata;
