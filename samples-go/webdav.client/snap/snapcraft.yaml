@@ -1,8 +1,8 @@
 name: sdk-go-client-webdav
 title: SDK Go Client WebDAV
 version: 1.0.0
-summary: ctrlX WebDAV protocol sample written in Go for ctrlX CORE.
-description: The sample demonstrates how to access to configuration files of a ctrlX CORE remotely using the WebDAV protocol.
+summary: ctrlX WebDAV protocol sample written in Go for ctrlX OS.
+description: The sample demonstrates how to access to configuration files of a ctrlX OS remotely using the WebDAV protocol.
 confinement: strict # use 'strict' once you have the right plugs and slot
 grade: stable
 base: core22

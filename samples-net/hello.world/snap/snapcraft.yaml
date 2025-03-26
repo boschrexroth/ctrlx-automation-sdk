@@ -9,7 +9,7 @@ title: SDK .NET Hello World
 base: core22
 version: 1.0.0
 #icon: assets/icons/ICONHERE.png
-summary: Hello World sample written in .NET for ctrlX CORE.
+summary: Hello World sample written in .NET for ctrlX OS.
 description: |
   Program is prompting "Hello World" to standard output. Enter 'sudo snap logs sdk-net-hello-world.app -f | more' to see the output.
 grade: stable # must be 'stable' to release into candidate/stable channels

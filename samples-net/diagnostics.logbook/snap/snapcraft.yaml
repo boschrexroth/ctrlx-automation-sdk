@@ -9,9 +9,9 @@ title: SDK .NET Logbook
 base: core22
 version: 1.0.0
 #icon: assets/icons/ICONHERE.png
-summary: Logbook sample written in .NET for ctrlX CORE.
+summary: Logbook sample written in .NET for ctrlX OS.
 description: |
-  Program is logging messages to the logbook of the ctrlX CORE.
+  Program is logging messages to the logbook of the ctrlX OS.
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 

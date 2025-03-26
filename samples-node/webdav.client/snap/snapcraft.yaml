@@ -5,7 +5,7 @@
 name: sdk-webdav-client
 title: SDK Node.js WebDAV Client
 version: 1.0.0
-summary: ctrlX Data Layer WebDAV sample written in Node.js for ctrlX CORE.
+summary: ctrlX Data Layer WebDAV sample written in Node.js for ctrlX OS.
 description: |
   The sample app shows how to use a WebDAV client for app data access.
 confinement: strict
@@ -37,11 +37,11 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '20.18.1'
+      - NODE_VERSION: '22.14.0'
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "20.18.1"
+    # npm-node-version: "22.14.0"
     plugin: nil
     override-build: |
 

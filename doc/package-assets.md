@@ -499,7 +499,7 @@ The definition of the object entries
 |**id**             | string starting with the snap name, used as a unique item identifier to order items |
 |**title**          | string, the text representation of the entry point|
 |**description**    | string, the description of the entry point|
-|**icon**           | string, an icon, which represents the entry point|
+|**icon**           | string, an icon, which represents the entry point. Use the <a href="./material/templates/icons.html" target="_blank">icon library</a> as a reference.|
 |**category**       | string, the category the entry point belongs to|
 |**permissions**    | array of string, an optional list of permissions to enable the entry point|
 |**i18n**           | string, i18n tag, see [language files](#language files) and [translation](#translation)|
@@ -643,7 +643,7 @@ The definiton of appDirectory
 |-|-|
 |**name**|string, path of the app directory in the configuration and should start with the snap name|
 |**description**|string, Short description of the content of the directory. Will be displayed as part of a configuration.|
-|**icon**|string, an icon which represents the app.|
+|**icon**|string, an icon which represents the app. Use the <a href="./material/templates/icons.html" target="_blank">icon library</a> as a reference.|
 |**copyOnLoad**|string, copy on load|
 |**writeProtected**|boolean, write-protection of app directories|
 |**scopes**|array of object scope, see [Scopes and Permissions](#scopes and permissions)|
@@ -702,6 +702,23 @@ The following predefined folder structure applies to every certificate store:
             /certs
     ./application2
         /ca
+    ```
+
+It is also necessary to define the base path to the certificate storage in the snapcraft.yaml:
+
+!!! Example
+
+    ```yaml title="snapcraft.yaml"
+    name: rexroth-myapp
+    [...]
+    slots:
+      package-certificates:
+        interface: content
+        content: package-certificates
+        source:
+          write:
+          - $SNAP_COMMON/package-certificates/${SNAPCRAFT_PROJECT_NAME}
+    [...]
     ```
 
 !!! hint
@@ -891,7 +908,7 @@ The definition of dashboardWidgetExtension object
 |**src**        |string,the url of the web component's implementation file|
 |**tag**        |string,the tag name that creates a new instance of the web component|
 |**title**      |string,the widget's description as shown in the widget catalog|
-|**icon**       |string,the icon to be displayed in the widget catalog|
+|**icon**       |string,the icon to be displayed in the widget catalog. <a href="./material/templates/icons.html" target="_blank">icon library</a> as a reference.|
 |**image**      |string,the path to the image to be displayed in the widget catalog|
 |**initialSize**|reference to dashboardWidgetSize object|
 |**minSize**    |object, which references to dashboardWidgetSize object|

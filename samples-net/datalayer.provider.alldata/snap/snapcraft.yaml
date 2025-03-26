@@ -9,7 +9,7 @@ title: SDK .NET Provider All Data
 base: core22
 version: 1.0.0
 #icon: assets/icons/ICONHERE.png
-summary: ctrlX Data Layer provider all data sample written in .NET for ctrlX CORE.
+summary: ctrlX Data Layer provider all data sample written in .NET for ctrlX OS.
 description: |
   The sample demonstrates how to provide all available data types to the ctrlX Data Layer.
   The demo creates a 'static' and a 'dynamic' folder under the root node 'samples'.

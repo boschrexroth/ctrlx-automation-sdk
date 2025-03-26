@@ -5,7 +5,7 @@
 name: sdk-node-provider-simple
 title: SDK Node.js Provider Simple
 version: 1.0.0
-summary: ctrlX Data Layer simple provider sample written in Node.js for ctrlX CORE.
+summary: ctrlX Data Layer simple provider sample written in Node.js for ctrlX OS.
 description: |
   The sample demonstrates how to provide nodes to the ctrlX Data Layer tree. 
   The provider creates nodes with types of int/double/string. 
@@ -38,11 +38,11 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '20.18.1'
+      - NODE_VERSION: '22.14.0'
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "20.18.1"
+    # npm-node-version: "22.14.0"
     plugin: nil
     override-build: |
 

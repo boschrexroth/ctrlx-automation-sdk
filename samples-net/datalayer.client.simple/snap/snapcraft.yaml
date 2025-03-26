@@ -9,7 +9,7 @@ title: SDK .NET Client Simple
 base: core22
 version: 1.0.0
 #icon: assets/icons/ICONHERE.png
-summary: ctrlX Data Layer client sample written in .NET for ctrlX CORE.
+summary: ctrlX Data Layer client sample written in .NET for ctrlX OS.
 description: |
   The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console. 
   A subscription is used to get values by data change event in a deterministic publish interval. 

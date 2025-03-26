@@ -8,7 +8,7 @@ setup(name = 'sdk-py-appdata',
       description = 'This sample demonstrates how to persist your application data in ctrlX CORE',
       author = 'SDK Team',
       packages = ['appdata','web'],
-      install_requires=['PyJWT', 'ctrlx-datalayer', 'ctrlx-fbs'], 
+      install_requires=['PyJWT', 'ctrlx-datalayer<=3.5', 'ctrlx-fbs'], 
       scripts = ['main.py'],
       license = 'MIT License'
 )

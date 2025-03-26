@@ -4,6 +4,8 @@ Please refer to the App Development Guide for further information about general 
 
 The content of this document may be subject of change in future.
 
+**<span style="color: red;">Currently, the ctrlX App Store does not support Docker-based applications.</span>**
+
 # 1. Artifacts / Files
 
 In addition to a native Ubuntu Core App, a Docker App shall provide the files in this list

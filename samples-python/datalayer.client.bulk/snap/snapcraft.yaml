@@ -1,7 +1,7 @@
 name: sdk-py-client-bulk
 title: SDK Python Client Bulk
 version: 1.0.0
-summary: ctrlX Data Layer client sample written in Python for ctrlX CORE.
+summary: ctrlX Data Layer client sample written in Python for ctrlX OS.
 description: |
   The sample demonstrates ctrlX Data Layer bulk operations.
 base: core22

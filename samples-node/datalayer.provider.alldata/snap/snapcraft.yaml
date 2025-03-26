@@ -5,7 +5,7 @@
 name: sdk-node-provider-alldata
 title: SDK Node.js Provider All Data
 version: 1.0.0
-summary: ctrlX Data Layer provider all data sample written in Node.js for ctrlX CORE.
+summary: ctrlX Data Layer provider all data sample written in Node.js for ctrlX OS.
 description: |
   The sample demonstrates how to provide all available data types to the ctrlX Data Layer.
   The demo creates a 'static' and a 'dynamic' folder under the root node 'samples'.
@@ -39,11 +39,11 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '20.18.1'
+      - NODE_VERSION: '22.14.0'
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "20.18.1"
+    # npm-node-version: "22.14.0"
     plugin: nil
     override-build: |
 

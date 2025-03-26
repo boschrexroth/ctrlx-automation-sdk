@@ -11,7 +11,7 @@
         "dist"
     ],
     "devDependencies": {
-        "@types/node": "^20.17.8",
+        "@types/node": "^22.10.5",
         "@typescript-eslint/eslint-plugin": "^7.18.0",
         "@typescript-eslint/parser": "^7.18.0",
         "eslint": "^8.57.1",
@@ -19,7 +19,7 @@
         "typescript": "^5.7.2"
     },
     "dependencies": {
-        "ctrlx-datalayer": "^2.4.1"
+        "ctrlx-datalayer": "^2.5.0"
     },
     "scripts": {
         "getName": "echo $npm_package_name",

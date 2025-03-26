@@ -31,7 +31,7 @@
   </td>  
   <td id="projectalign" style="padding-left: 5em" width="80%">
     <div id="projectname">ctrlX Data Layer .NET API
-      &#160;<span id="projectnumber">4.2.0</span>
+      &#160;<span id="projectnumber">4.3.0</span>
     </div>
     <div id="projectbrief"></div>
   </td>
@@ -1824,7 +1824,7 @@ $(document).ready(function(){initNavTree('Variant_8cs_source.html',''); initResi
 <div class="line"><a id="l02422" name="l02422"></a><span class="lineno"> 2422</span>            <span class="comment">//    }</span></div>
 <div class="line"><a id="l02423" name="l02423"></a><span class="lineno"> 2423</span>            <span class="comment">//}</span></div>
 <div class="line"><a id="l02424" name="l02424"></a><span class="lineno"> 2424</span> </div>
-<div class="line"><a id="l02425" name="l02425"></a><span class="lineno"> 2425</span>            <span class="comment">//OPTION B: FASTER: Use ClockCopy to convert byte[] to sbyte[]</span></div>
+<div class="line"><a id="l02425" name="l02425"></a><span class="lineno"> 2425</span>            <span class="comment">//OPTION B: FASTER: Use BlockCopy to convert byte[] to sbyte[]</span></div>
 <div class="line"><a id="l02426" name="l02426"></a><span class="lineno"> 2426</span>            <span class="comment">//var buffer = value.ToSizedArray();</span></div>
 <div class="line"><a id="l02427" name="l02427"></a><span class="lineno"> 2427</span>            <span class="comment">//sbyte[] sbyteArray = new sbyte[buffer.Length];</span></div>
 <div class="line"><a id="l02428" name="l02428"></a><span class="lineno"> 2428</span>            <span class="comment">//Buffer.BlockCopy(buffer, 0, sbyteArray, 0, buffer.Length);</span></div>
@@ -1836,7 +1836,7 @@ $(document).ready(function(){initNavTree('Variant_8cs_source.html',''); initResi
 <div class="line"><a id="l02434" name="l02434"></a><span class="lineno"> 2434</span>            <span class="comment">//    }</span></div>
 <div class="line"><a id="l02435" name="l02435"></a><span class="lineno"> 2435</span>            <span class="comment">//}</span></div>
 <div class="line"><a id="l02436" name="l02436"></a><span class="lineno"> 2436</span> </div>
-<div class="line"><a id="l02437" name="l02437"></a><span class="lineno"> 2437</span>            <span class="comment">//OPTION C: FASTEST: Convert byte* to sbyte*, pointing to original memory(no copy)</span></div>
+<div class="line"><a id="l02437" name="l02437"></a><span class="lineno"> 2437</span>            <span class="comment">//OPTION C: FASTEST: Convert byte* to sbyte*, pointing to original memory (no copy)</span></div>
 <div class="line"><a id="l02438" name="l02438"></a><span class="lineno"> 2438</span>            var byteArray = value.ToSizedArray();</div>
 <div class="line"><a id="l02439" name="l02439"></a><span class="lineno"> 2439</span>            unsafe</div>
 <div class="line"><a id="l02440" name="l02440"></a><span class="lineno"> 2440</span>            {</div>
@@ -1985,8 +1985,8 @@ $(document).ready(function(){initNavTree('Variant_8cs_source.html',''); initResi
 <div class="ttc" id="aclassDatalayer_1_1Variant_html_aff7faba54d898225f00e994582057136"><div class="ttname"><a href="classDatalayer_1_1Variant.html#aff7faba54d898225f00e994582057136">Datalayer.Variant.ToBoolArray</a></div><div class="ttdeci">bool[] ToBoolArray()</div><div class="ttdoc">Gets the value as bool array.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cs_source.html#l01111">Variant.cs:1111</a></div></div>
 <div class="ttc" id="ainterfaceDatalayer_1_1IVariant_html"><div class="ttname"><a href="interfaceDatalayer_1_1IVariant.html">Datalayer.IVariant</a></div><div class="ttdoc">The IVariant interface.</div><div class="ttdef"><b>Definition:</b> <a href="IVariant_8cs_source.html#l00009">IVariant.cs:10</a></div></div>
 <div class="ttc" id="anamespaceDatalayer_html"><div class="ttname"><a href="namespaceDatalayer.html">Datalayer</a></div><div class="ttdef"><b>Definition:</b> <a href="DatalayerSystem_8cs_source.html#l00005">DatalayerSystem.cs:6</a></div></div>
-<div class="ttc" id="anamespaceDatalayer_html_a0d46a3e31a1859c7602d7d671bf75fc8"><div class="ttname"><a href="namespaceDatalayer.html#a0d46a3e31a1859c7602d7d671bf75fc8">Datalayer.DLR_RESULT</a></div><div class="ttdeci">DLR_RESULT</div><div class="ttdoc">The result.</div><div class="ttdef"><b>Definition:</b> <a href="Enums_8cs_source.html#l00140">Enums.cs:141</a></div></div>
-<div class="ttc" id="anamespaceDatalayer_html_ae56d178451c114ac0dde4ecc2269bad9"><div class="ttname"><a href="namespaceDatalayer.html#ae56d178451c114ac0dde4ecc2269bad9">Datalayer.DLR_VARIANT_TYPE</a></div><div class="ttdeci">DLR_VARIANT_TYPE</div><div class="ttdoc">DLR_VARIANT_TYPE.</div><div class="ttdef"><b>Definition:</b> <a href="Enums_8cs_source.html#l00396">Enums.cs:397</a></div></div>
+<div class="ttc" id="anamespaceDatalayer_html_a0d46a3e31a1859c7602d7d671bf75fc8"><div class="ttname"><a href="namespaceDatalayer.html#a0d46a3e31a1859c7602d7d671bf75fc8">Datalayer.DLR_RESULT</a></div><div class="ttdeci">DLR_RESULT</div><div class="ttdoc">The result.</div><div class="ttdef"><b>Definition:</b> <a href="Enums_8cs_source.html#l00152">Enums.cs:153</a></div></div>
+<div class="ttc" id="anamespaceDatalayer_html_ae56d178451c114ac0dde4ecc2269bad9"><div class="ttname"><a href="namespaceDatalayer.html#ae56d178451c114ac0dde4ecc2269bad9">Datalayer.DLR_VARIANT_TYPE</a></div><div class="ttdeci">DLR_VARIANT_TYPE</div><div class="ttdoc">DLR_VARIANT_TYPE.</div><div class="ttdef"><b>Definition:</b> <a href="Enums_8cs_source.html#l00408">Enums.cs:409</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

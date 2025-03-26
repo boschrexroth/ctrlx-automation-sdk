@@ -1,0 +1,24 @@
+{
+  "components": [
+    {
+      "name": "ubuntu.packages",
+      "path": "ubuntu.packages/_",
+      "version": "*"
+    },
+    {
+      "name": "ubuntu.packages",
+      "path": "ubuntu.packages/3.0.14",
+      "version": "3.0.14"
+    },
+    {
+      "name": "ubuntu.packages",
+      "path": "ubuntu.packages/4.0.1",
+      "version": "4.0.1"
+    },
+    {
+      "name": "zmq",
+      "path": "zmq/4.3.5",
+      "version": "4.3.5"
+    }
+  ]
+}

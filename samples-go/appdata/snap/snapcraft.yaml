@@ -6,8 +6,8 @@
 name: sdk-go-appdata
 title: SDK Go App Data
 version: 1.0.0
-summary: Application data sample written in Go for ctrlX CORE.
-description: This sample demonstrates how to persist your application data in ctrlX CORE
+summary: Application data sample written in Go for ctrlX OS.
+description: This sample demonstrates how to persist your application data in ctrlX OS
 confinement: strict # use 'strict' once you have the right plugs and slot
 grade: stable
 base: core22

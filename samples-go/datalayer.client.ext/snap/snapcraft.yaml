@@ -1,7 +1,7 @@
 name: sdk-go-client-ext
 title: SDK Go Client Subscription
 version: 1.0.0
-summary: ctrlX Data Layer client sample written in Go for ctrlX CORE.
+summary: ctrlX Data Layer client sample written in Go for ctrlX OS.
 description: This sample shows how to uses the subscription and bulk from the ctrlX Data Layer.
 confinement: strict # use 'strict' once you have the right plugs and slot
 grade: stable

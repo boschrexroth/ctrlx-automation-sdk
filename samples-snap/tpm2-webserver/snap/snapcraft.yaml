@@ -2,7 +2,7 @@ name: sdk-tpm2-webserver
 title: SDK TPM2 Webserver
 base: core22
 version: 1.0.0
-summary: A snap containing a tpm2 based openssl server for ctrlX CORE.
+summary: A snap containing a tpm2 based openssl server for ctrlX OS.
 description: |
   This app demonstrates how you can access the TPM2.
 

@@ -5,7 +5,7 @@
 version: 1.0.0
 name: sdk-monitor-health
 title: SDK Monitor Health
-summary: App health monitoring demo app for ctrlX CORE.
+summary: App health monitoring demo app for ctrlX OS.
 description: |
   This app demonstrates how you can add health monitoring capability to your app.
 confinement: strict 

@@ -5,7 +5,7 @@
 version: 1.0.0
 name: sdk-node-hello-world
 title: SDK Node.js Hello World
-summary: Hello World sample written in Node.js for ctrlX CORE.
+summary: Hello World sample written in Node.js for ctrlX OS.
 description: |
   Programm is prompting "Hello World" to standard output. Enter 'sudo snap logs sdk-node-hello-world.app -f | more' to see the output.
 confinement: strict
@@ -37,11 +37,11 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '20.18.1'
+      - NODE_VERSION: '22.14.0'
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "20.18.1"
+    # npm-node-version: "22.14.0"
     plugin: nil
     override-build: |
 

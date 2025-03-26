@@ -1,0 +1,147 @@
+{
+  "bomFormat": "CycloneDX",
+  "components": [
+    {
+      "name": "Doxygen Awesome",
+      "type": "library",
+      "version": "2.2.0"
+    },
+    {
+      "name": "JSON",
+      "type": "library",
+      "version": "3.7.3"
+    },
+    {
+      "name": "boost",
+      "type": "library",
+      "version": "1.81.0"
+    },
+    {
+      "name": "boost",
+      "type": "library",
+      "version": "1.87.0"
+    },
+    {
+      "name": "ctrlx-datalayer-flatbuffers",
+      "purl": "pkg:npm/ctrlx-datalayer-flatbuffers@3.2.0",
+      "type": "library",
+      "version": "3.2.0"
+    },
+    {
+      "name": "flatbuffers",
+      "type": "library",
+      "version": "1.12.0"
+    },
+    {
+      "name": "flatbuffers",
+      "type": "library",
+      "version": "23.1.4"
+    },
+    {
+      "name": "flatbuffers",
+      "purl": "pkg:npm/flatbuffers@24.3.25",
+      "type": "library",
+      "version": "24.3.25"
+    },
+    {
+      "name": "flatbuffers",
+      "purl": "pkg:npm/flatbuffers@25.2.10",
+      "type": "library",
+      "version": "25.2.10"
+    },
+    {
+      "name": "github.com/davecgh/go-spew",
+      "purl": "pkg:golang/github.com/davecgh/go-spew@v1.1.0",
+      "type": "library",
+      "version": "1.1.0"
+    },
+    {
+      "name": "github.com/pmezard/go-difflib",
+      "purl": "pkg:golang/github.com/pmezard/go-difflib@v1.0.0",
+      "type": "library",
+      "version": "1.0.0"
+    },
+    {
+      "name": "github.com/stretchr/testify",
+      "purl": "pkg:golang/github.com/stretchr/testify@v1.7.2",
+      "type": "library",
+      "version": "1.7.2"
+    },
+    {
+      "name": "gopkg.in/yaml.v3",
+      "purl": "pkg:golang/gopkg.in/yaml.v3@v3.0.1",
+      "type": "library",
+      "version": "3.0.1"
+    },
+    {
+      "name": "httplib",
+      "type": "library",
+      "version": "0.5.7"
+    },
+    {
+      "name": "miniz",
+      "type": "library",
+      "version": "3.0.2"
+    },
+    {
+      "name": "node-addon-api",
+      "purl": "pkg:npm/node-addon-api@8.2.2",
+      "type": "library",
+      "version": "8.2.2"
+    },
+    {
+      "name": "node-gyp-build",
+      "purl": "pkg:npm/node-gyp-build@4.8.2",
+      "type": "library",
+      "version": "4.8.2"
+    },
+    {
+      "name": "rapidcsv",
+      "type": "library",
+      "version": "8.51"
+    },
+    {
+      "name": "sole",
+      "type": "library",
+      "version": "unknown"
+    },
+    {
+      "name": "ubuntu.packages",
+      "type": "library",
+      "version": "*"
+    },
+    {
+      "name": "ubuntu.packages",
+      "type": "library",
+      "version": "3.0.14"
+    },
+    {
+      "name": "ubuntu.packages",
+      "type": "library",
+      "version": "4.0.1"
+    },
+    {
+      "name": "zmq",
+      "type": "library",
+      "version": "4.3.5"
+    }
+  ],
+  "metadata": {
+    "component": {
+      "cpe": "cpe:2.3:a:bosch:rexroth.ctrlx.sdk.control:3.6.0",
+      "name": "sdk.control",
+      "type": "library",
+      "version": "3.6.0"
+    },
+    "timestamp": "2025-03-26T09:56:13Z",
+    "tools": [
+      {
+        "name": "FossLicenses.core",
+        "vendor": "Bosch Rexroth AG",
+        "version": "3.2.2.22"
+      }
+    ]
+  },
+  "specVersion": "1.5",
+  "version": 1
+}

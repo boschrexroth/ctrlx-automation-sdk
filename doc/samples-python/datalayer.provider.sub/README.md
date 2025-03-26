@@ -1,4 +1,4 @@
-# ctrlX Data Layer Provider
+# ctrlX Data Layer Provider Subscription
 
 The app demonstrates shows how a provider supports "ctrlX Data Layer" subscription interface.
 

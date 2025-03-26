@@ -2,6 +2,6 @@
 
 while true
 do 
-    echo "Hello changing world"
+    echo "Hello sdk-generate-manifest"
     sleep 10
 done

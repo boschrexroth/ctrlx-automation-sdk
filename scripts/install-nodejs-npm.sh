@@ -6,7 +6,7 @@ echo Installing node.js and npm
 echo "============================================"
 echo " "
 
-sudo snap install node --classic --channel=20/stable
+sudo snap install node --classic --channel=22/stable
 npm config set prefix ${HOME}/npm
 
 if [[ ! -z "$HTTP_PROXY" ]]; then

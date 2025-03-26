@@ -28,12 +28,12 @@ To access the storage from your app (e.g. storage-test), use the **removable-med
 
 !!! example
     ```yaml title="snapcraft.yaml"
-    name: storage—test # you probably want to 'snapcraft register name'
+    name: storage-test # you probably want to 'snapcraft register name'
     base: core20 # the base snap is the execution environment for this snap
     version: '0.1' # just for humans, typically 'i.2+git' or '1.3.2'
-    summary: Single—line elevator pitch for your amazing snap # 79 char long summary
+    summary: Single-line elevator pitch for your amazing snap # 79 char long summary
     description: |
-        This is my—snap's description.
+        This is my-snap's description.
         You have a paragraph or two to tell the most important story about your snap.
         Keep it under 100 words though,
         we live in tweet space and your description wants to look good in the snap store.
@@ -51,7 +51,7 @@ To access the storage from your app (e.g. storage-test), use the **removable-med
 		    command: bin/storage
 		    daemon: simple
 		    plugs:
-			    - removable—media
+			    - removable-media
     ```
 
 ## Usage

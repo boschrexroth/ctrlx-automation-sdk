@@ -8,7 +8,7 @@ setup(name = 'sdk-py-provider-alldata',
       description = 'From setup.py: ctrlX Data Layer provider in Python publishing nodes of all data types',
       author = 'SDK Team',
       packages = ['alldataprovider', 'helper'],
-      install_requires = ['ctrlx-datalayer', 'ctrlx-fbs'],
+      install_requires = ['ctrlx-datalayer<=3.5', 'ctrlx-fbs'],
       scripts = ['main.py'],
       license = 'MIT License'
 )

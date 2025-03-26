@@ -1,0 +1,78 @@
+name: sdk-go-provider-sub
+title: SDK Go Provider Subscription
+version: 1.0.0
+summary: ctrlX Data Layer provider sample written in Go for ctrlX OS.
+description: |
+  This sample shows how a provider supports ctrlX Data Layer subscription interface
+confinement: strict # use 'strict' once you have the right plugs and slot
+grade: stable
+base: core22
+type: app
+
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
+apps:
+  provider:
+    command: bin/provider
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+
+  client:
+    command: bin/client
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    after:
+      - provider    
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+
+parts:
+  all:
+    plugin: go
+    source: .
+    build-snaps: ['go/1.22/stable']
+    stage-packages:
+      - ctrlx-datalayer
+    build-packages:
+      - on amd64:
+          - libsystemd-dev
+          - pkg-config
+      - on arm64:
+          - libsystemd-dev:arm64
+    override-build: |
+      case $CRAFT_ARCH_TRIPLET in
+        aarch64-linux-gnu)
+          export GOARCH=arm64
+          export GOARM=7
+          export CGO_ENABLED=1
+          export CC=aarch64-linux-gnu-gcc
+          ;;
+        amd64)
+          export GOARCH=amd64
+          ;;
+      esac
+      go build -buildvcs=false -o ../install/bin/ ./...
+
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer
+
+lint:
+  ignore:
+    - library:
+      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

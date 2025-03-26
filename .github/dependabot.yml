@@ -5,23 +5,24 @@ updates:
     directories:
       - '/samples-go/*'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
   - package-ecosystem: npm
     directories:
       - '/samples-node/*'
+      - '!/samples-node/angular.multi-language'
     allow:
       - dependency-type: 'production'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
   - package-ecosystem: nuget
     directories:
       - '/samples-net/*'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
   - package-ecosystem: pip
     directories:
       - '/samples-python/*'
     allow:
       - dependency-type: 'production'
     schedule:
-      interval: 'weekly'
+      interval: 'monthly'
