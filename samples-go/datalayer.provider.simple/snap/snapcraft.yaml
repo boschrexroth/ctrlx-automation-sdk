@@ -1,7 +1,7 @@
 name: sdk-go-provider
 title: SDK Go Provider
 version: 1.0.0
-summary: ctrlX Data Layer provider sample written in Go for ctrlX CORE.
+summary: ctrlX Data Layer provider sample written in Go for ctrlX OS.
 description: |
   This sample shows how to provide data to the ctrlX Data Layer.
 confinement: strict # use 'strict' once you have the right plugs and slot

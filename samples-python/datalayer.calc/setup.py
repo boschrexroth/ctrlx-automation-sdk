@@ -10,7 +10,7 @@ setup(name = 'sdk-py-calc',
       description = calculations.__description__,
       author = calculations.__author__,
       packages = ['calculations', 'helper'],
-      install_requires=['ctrlx-datalayer', 'ctrlx-fbs'], 
+      install_requires=['ctrlx-datalayer<=3.5', 'ctrlx-fbs'],
       scripts = ['main.py'],
       license = calculations.__copyright__ + \
                 ', Licensed under ' + calculations.__licence__

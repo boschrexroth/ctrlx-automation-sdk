@@ -24,6 +24,7 @@ Visual Studio Code extensions (Install in SSH):
 * [Hello World](./hello.world/README.md) recommendation -> start with this example
 * [Hello PLC](./hello.plc/README.md)
 * [ctrlX Data Layer Provider Simple](./datalayer.provider.simple/README.md)
+* [ctrlX Data Layer Provider Subscription](./datalayer.provider.sub/README.md)
 * [ctrlX Data Layer Client Simple](./datalayer.client.simple/README.md)
 * [ctrlX Data Layer Client Subscription](./datalayer.client.sub/README.md)
 * [Diagnostics Logbook](./diagnostics.logbook/README.md)

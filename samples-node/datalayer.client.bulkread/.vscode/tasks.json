@@ -28,9 +28,7 @@
       "options": {
         "cwd": "${workspaceFolder}"
       },
-      "dependsOn": [
-        "npm clean"
-      ]
+      "dependsOn": []
     },
     {
       "label": "Build snap amd64",

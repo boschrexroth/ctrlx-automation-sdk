@@ -7,7 +7,7 @@ name: sdk-go-webserver
 title: SDK Go Web Server
 version: 1.0.0
 icon: assets/icons/icon.png
-summary: Simple Webserver written in Go for ctrlX CORE.
+summary: Simple Webserver written in Go for ctrlX OS.
 description: This sample app shows how to create a webserver app.
 grade: stable
 confinement: strict # use 'strict' once you have the right plugs and slot

@@ -7,7 +7,7 @@ setup(name = 'sdk-py-client-simple',
       version='1.0.0',
       description = 'Simple ctrlX Data Layer client',
       author = 'SDK Team',
-      install_requires = ['ctrlx-datalayer', 'ctrlx-fbs'],
+      install_requires = ['ctrlx-datalayer<=3.5', 'ctrlx-fbs'],
       packages = ['helper'],
       scripts = ['main.py'],
       license = 'MIT License'

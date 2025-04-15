@@ -5,7 +5,7 @@
 name: sdk-angular-multi-language
 title: SDK Node.js Angular Multi-Language
 version: 1.0.0
-summary: Angular multi-language sample written in Node.js for ctrlX CORE.
+summary: Angular multi-language sample written in Node.js for ctrlX OS.
 description: |
   This sample shows how to set different languages in Angular apps.
 confinement: strict
@@ -32,13 +32,13 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '20.18.1'
+      - NODE_VERSION: '22.13.0'
     organize:
       '${CRAFT_PART_BUILD}/dist/app': package-www/${CRAFT_PROJECT_NAME}/
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "20.18.1"
+    # npm-node-version: "22.13.0"
     plugin: nil
     override-build: |
 

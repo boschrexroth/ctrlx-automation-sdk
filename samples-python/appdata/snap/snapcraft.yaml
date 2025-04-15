@@ -3,7 +3,7 @@ title: SDK Python App Data
 version: 1.0.0
 summary: Application data sample written in Python for ctrlX
 description: |
-  This sample demonstrates how to persist your application data in ctrlX CORE
+  This sample demonstrates how to persist your application data in ctrlX OS
 
 base: core22
 confinement: strict

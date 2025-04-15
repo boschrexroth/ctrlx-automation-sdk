@@ -1,5 +1,5 @@
 PyJWT
 autopep8
-ctrlx-datalayer
+ctrlx-datalayer<=3.5
 ctrlx-fbs
 cysystemd

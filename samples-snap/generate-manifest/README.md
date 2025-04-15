@@ -22,7 +22,7 @@ Choose an empty folder and initialize the snap enviroment by using snapcraft
 snapcraft init
 ```
 
-Create the folders as in the following image:
+Create the folders as in the following example:
 
 ```ls
 dump/
@@ -39,16 +39,23 @@ The folder "dump" contains files that will be copied into our snap. This include
 After that open the snapcraft.yaml file and edit it as following
 
 ```yaml
-name: changing-world
-base: core20
-version: '1.0.0'
-summary: Simple snap with random menu entry
+name: sdk-generate-manifest
+title: SDK Generate Manifest
+base: core22
+version: 1.0.0
+summary: Simple snap with random menu entry.
 description: |
-  This is a sample snap that generates a random menu entry when getting installed or updated
- 
+  This is a sample snap that generates a random menu entry when getting installed or updated.
+
 grade: stable
 confinement: strict
- 
+
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
 parts:
   dump:
     plugin: dump
@@ -60,14 +67,14 @@ apps:
   my-service:
     command: bin/service.sh
     daemon: simple
- 
+
 slots:
   package-assets:
     interface: content
     content: package-assets
     source:
       read:
-      - $SNAP_DATA/package-assets/$SNAPCRAFT_PROJECT_NAME
+      - $SNAP_DATA/package-assets/$CRAFT_PROJECT_NAME
 ```
 
 The dump part is used to copy the files from the dump folder into the snap and to install two packages used to generate the package-manifest. The "wamerican" package is a dictionary of american english words, the jq package provides the jq tool to manipulate json files using shell.
@@ -81,7 +88,7 @@ We added here a my-service app, this is just a simple daemon which logs a string
  
 while true
 do
-    echo "Hello changing world"
+    echo "Hello sdk-generate-manifest"
     sleep 10
 done
 ```
@@ -105,7 +112,7 @@ Here you will find the content
 NAME=$(shuf -n2  $SNAP/usr/share/dict/words | tr '\n' ' ')
 mkdir -p $SNAP_DATA/package-assets/$SNAP_NAME
 $SNAP/usr/bin/jq ".menus.sidebar[].title = \"$NAME\"" \
-    $SNAP/package-assets/changing-world.package-manifest.json.template > $SNAP_DATA/package-assets/changing-world/changing-world.package-manifest.json
+    $SNAP/package-assets/sdk-generate-manifest.package-manifest.json.template > $SNAP_DATA/package-assets/sdk-generate-manifest/sdk-generate-manifest.package-manifest.json
 ```
 
 In line 4 we use shuf to select two random words from the dictionary and tr to bring them into one line and store it in "NAME".
@@ -116,17 +123,17 @@ In line 6-7 we use jq to change the existing menus.sidebar.title of the template
 
 To make this work we need to create the script template in the "dump/package-assets" folder:
 
-[changing-world.package-manifest.json.template](dump/package-assets/changing-world.package-manifest.json.template)
+[sdk-generate-manifest.package-manifest.json.template](dump/package-assets/sdk-generate-manifest.package-manifest.json.template)
 
 ```json
 {
-  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.3.schema.json",
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.4.schema.json",
   "version": "1.0.0",
-  "id": "changing-world",
+  "id": "sdk-generate-manifest",
   "menus": {
     "sidebar": [
       {
-        "id": "changing-world",
+        "id": "sdk-generate-manifest",
         "title": "",
         "icon": "bosch-ic-automation",
         "link": "0"

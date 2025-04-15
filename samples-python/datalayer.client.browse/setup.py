@@ -7,7 +7,7 @@ setup(name = 'sdk-py-browse',
       version='2.4.0',
       description = 'This sample demonstrates how to browse a ctrlX Data Layer tree',
       author = 'SDK Team',
-      install_requires = ['ctrlx-datalayer', 'ctrlx-fbs'],
+      install_requires = ['ctrlx-datalayer<=3.5', 'ctrlx-fbs'],
       packages = ['helper'],
       scripts = ['main.py'],
       license = 'MIT License'

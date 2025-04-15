@@ -7,7 +7,7 @@ setup(name='sdk-py-webserver',
       version='2.3.0',
       description='Webserver Sample written in Python for ctrlX',
       author='SDK Team',
-      install_requires=['cysystemd','PyJWT', 'ctrlx-datalayer', 'ctrlx-fbs'],
+      install_requires=['cysystemd','PyJWT', 'ctrlx-datalayer<=3.5', 'ctrlx-fbs'],
       scripts=['main.py'],
       packages=['app', 'web'],
       license='MIT License'

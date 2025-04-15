@@ -1,7 +1,7 @@
 name: sdk-py-client-simple
 title: SDK Python Client Simple
 version: 1.0.0
-summary: ctrlX Data Layer client sample written in Python for ctrlX CORE.
+summary: ctrlX Data Layer client sample written in Python for ctrlX OS.
 description: |
   The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console.
 base: core22

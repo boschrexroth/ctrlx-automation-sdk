@@ -1,0 +1,1 @@
+../../scripts/build-snap-arm64.sh

@@ -9,7 +9,7 @@ setup(name = 'sdk-py-client',
       description = 'ctrlX Data Layer client sample written in Python for ctrlX',
       author = 'SDK Team',
       packages = ['app', 'helper'],
-      install_requires=['ctrlx-datalayer', 'ctrlx-fbs'], 
+      install_requires=['ctrlx-datalayer<=3.5', 'ctrlx-fbs'], 
       scripts = ['main.py'],
       license = 'MIT License'
 )

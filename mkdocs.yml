@@ -110,7 +110,7 @@ nav:
           - Service-to-Service Authentication: s2sauth.md
           - Using Flatbuffers in IEC 61131-3 Code: fbs2plc.md
           - Configure maximal Number of Open File Handles: numopenfilehandles.md
-          - Using Localization: localizaction.md
+          - Using Localization: localization.md
           - External Storages:
               - Date exchange: data-exchange.md
               - Storage extension: storage-extension.md

@@ -9,7 +9,7 @@ title: SDK .NET Client Bulk Read
 base: core22
 version: 1.0.0
 #icon: assets/icons/ICONHERE.png
-summary: ctrlX Data Layer client bulk read sample written in .NET for ctrlX CORE.
+summary: ctrlX Data Layer client bulk read sample written in .NET for ctrlX OS.
 description: |
   The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console. 
   The bulk read is performed synchron and asynchron every 10 seconds in an endless loop.

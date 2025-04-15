@@ -9,7 +9,7 @@ title: SDK .NET Provider Virtual
 base: core22
 version: 1.0.0
 #icon: assets/icons/ICONHERE.png
-summary: ctrlX Data Layer provider virtual sample written in .NET for ctrlX CORE.
+summary: ctrlX Data Layer provider virtual sample written in .NET for ctrlX OS.
 description: |
   This .NET sample demonstrates how to write a light-weight provider, listing to a wildcard address and managing virtual nodes.
 grade: stable # must be 'stable' to release into candidate/stable channels

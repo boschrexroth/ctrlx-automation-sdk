@@ -9,7 +9,7 @@ title: SDK .NET Client Browse
 base: core22
 version: 1.0.0
 #icon: assets/icons/ICONHERE.png
-summary: ctrlX Data Layer browse sample written in .NET for ctrlX CORE.
+summary: ctrlX Data Layer browse sample written in .NET for ctrlX OS.
 description: |
   The sample app shows how to browse the ctrlX Data Layer tree.
 grade: stable # must be 'stable' to release into candidate/stable channels

@@ -2,7 +2,7 @@ name: sdk-ulimit-n-16384
 title: SDK Ulimit
 base: core22
 version: 1.0.0
-summary: Ulimit demo snap for ctrlX CORE.
+summary: Ulimit demo snap for ctrlX OS.
 description: |
   This app demonstrates how you can increase the maximum number of open files with the command 'ulimit -n 16384' called by a command-chain wrapper.
 

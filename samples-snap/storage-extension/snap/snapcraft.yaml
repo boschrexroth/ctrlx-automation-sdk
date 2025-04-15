@@ -2,7 +2,7 @@ name: sdk-storage-extension-sample
 title: SDK Storage extension sample
 base: core22
 version: 1.0.0
-summary: Storage extension sample for ctrlX CORE.
+summary: Storage extension sample for ctrlX OS.
 description: |
   This app demonstrates how you can use the storage extension.
 grade: stable # must be 'stable' to release into candidate/stable channels
