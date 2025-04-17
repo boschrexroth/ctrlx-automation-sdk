@@ -1,0 +1,3325 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ctrlX AUTOMATION Software Development Kit">
+      
+      
+        <meta name="author" content="Bosch Rexroth AG">
+      
+      
+        <link rel="canonical" href="https://boschrexroth.github.io/ctrlx-automation-sdk/3.6.1/persistdata.html">
+      
+      
+        <link rel="prev" href="appdevguide.html">
+      
+      
+        <link rel="next" href="persist-device-settings.html">
+      
+      
+      <link rel="icon" href="assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+    
+    
+      
+        <title>Persisting Configurations - Software Development Kit</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/sdk.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#table-of-content" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="Software Development Kit" class="md-header__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Software Development Kit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Persisting Configurations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="rexroth-light" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    boschrexroth/ctrlx-automation-sdk
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="overview.html" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="setup_overview.html" class="md-tabs__link">
+          
+  
+  
+  Setup
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="samples.html" class="md-tabs__link">
+          
+  
+  
+  Samples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="debug-overview.html" class="md-tabs__link">
+          
+  
+  
+  Debugging
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="references.html" class="md-tabs__link">
+          
+  
+  
+  References
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="about.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Software Development Kit" class="md-nav__button md-logo" aria-label="Software Development Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Software Development Kit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/boschrexroth/ctrlx-automation-sdk" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    boschrexroth/ctrlx-automation-sdk
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ctrlx_automation.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ctrlX AUTOMATION
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Guidelines
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Guidelines
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="package-assets.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Package Assets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="appdevguide.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    App Developer Guideline
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Persisting Configurations
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="persistdata.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Persisting Configurations
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of content
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-get-access-to-the-solutions-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Get access to the Solutions storage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-specify-your-app-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Specify your app directories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-register-for-saving-and-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 Register for saving and loading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-implement-saving-and-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 Implement saving and loading
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Implement saving and loading">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#processing-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing sequences
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expected behavior
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expected behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#success-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failure behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnostic-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnostic messages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#robustness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Robustness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invariants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invariants
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-copying-to-smart-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      From copying to smart loading
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#annotated-load-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Annotated load process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-loading-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example loading sequences
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example loading sequences">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cancelled" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancelled
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#succeeded" class="md-nav__link">
+    <span class="md-ellipsis">
+      Succeeded
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-schema-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem schema definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem schema definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problemyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem.yaml
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#app-private-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      App-private files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="App-private files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-manifestjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      package-manifest.json
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-configuration-files-per-webdav" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing configuration files per WebDAV
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-configuration-files-with-winscp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing configuration files with WinSCP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Accessing configuration files with WinSCP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-a-ctrlx-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect to a ctrlX CORE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="persist-device-settings.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Persisting Device Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="licensing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    License Management
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="s2sauth.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Service-to-Service Authentication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fbs2plc.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using Flatbuffers in IEC 61131-3 Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="numopenfilehandles.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configure maximal Number of Open File Handles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="localization.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using Localization
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_10" id="__nav_2_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    External Storages
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            External Storages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="data-exchange.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Date exchange
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="storage-extension.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Storage extension
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="extenable-denylist.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extendable Denylist
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            Releases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changelog.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Setup
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Setup
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Setup Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quick-start-guide.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick Start Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_qemu_ctrlx_works.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ctrlX WORKS App Build Environment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install-scripts.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Important Installation Scripts
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_qemu_ubuntu.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QEMU Virtual Machine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_windows_virtualbox_ubuntu.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VirtualBox Virtual Machine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="setup_ubuntu.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Native Ubuntu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="install-sources-from-github.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install Sources from github
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Toolchain
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            Toolchain
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="px.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Px.exe as Proxy on a Windows Host
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="connecting_qemu_vm_ctrlx.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Connecting QEMU VMs and ctrlX CORE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="working-with-app-builder-envs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Working with App Build Environments (QEMU VMs)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ssh_connection.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SSH Connection
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="vscode.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Visual Studio Code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dotnet.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    .NET
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="remote-build.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using Snapcraft Remote Build from Canonical
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Samples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Samples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-cpp/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Samples C/C++
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-go/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Samples Go
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-python/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Samples Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-net/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Samples .NET
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-node/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Samples Nodejs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-snap/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Samples Snap
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="samples-iec61131/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Samples IEC 61131-3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Debugging
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Debugging
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="debug-overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Debugging Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="remote-debug-cpp.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Remote Debugging C++
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="remote-debug-python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Remote Debugging Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    References
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            References
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="references.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Api Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Api Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/net/html/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    c#
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/python/index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="about.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of content
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-get-access-to-the-solutions-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Get access to the Solutions storage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-specify-your-app-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Specify your app directories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-register-for-saving-and-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 Register for saving and loading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-implement-saving-and-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 Implement saving and loading
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Implement saving and loading">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#processing-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing sequences
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expected behavior
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expected behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#success-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failure-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failure behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#diagnostic-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnostic messages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#robustness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Robustness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invariants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invariants
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-copying-to-smart-loading" class="md-nav__link">
+    <span class="md-ellipsis">
+      From copying to smart loading
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Appendix
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#annotated-load-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Annotated load process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-loading-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example loading sequences
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example loading sequences">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cancelled" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cancelled
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#succeeded" class="md-nav__link">
+    <span class="md-ellipsis">
+      Succeeded
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Failed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-schema-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem schema definition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problem schema definition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problemyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problem.yaml
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#app-private-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      App-private files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="App-private files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#package-manifestjson" class="md-nav__link">
+    <span class="md-ellipsis">
+      package-manifest.json
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-configuration-files-per-webdav" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing configuration files per WebDAV
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-configuration-files-with-winscp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessing configuration files with WinSCP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Accessing configuration files with WinSCP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connect-to-a-ctrlx-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect to a ctrlX CORE
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Persisting Configurations</h1>
+
+<p><strong>Copyright</strong>
+© Bosch Rexroth AG 2024
+This document, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch Rexroth AG. It may not be reproduced or given to third parties without our consent.</p>
+<p><strong>Liability</strong> The information in this document is intended for product description purposes only and shall not be deemed to be a guaranteed characteristic, unless expressly stipulated by contract. All rights are reserved with respect to the content of this documentation and the availability of the product.</p>
+<h3 id="table-of-content"><strong>Table of content</strong><a class="headerlink" href="#table-of-content" title="Permanent link">&para;</a></h3>
+<p><a href="#introduction">1 Introduction</a></p>
+<p><a href="#access">2 Get access to the Solutions storage</a></p>
+<p><a href="#specify">3 Specify your app directories</a></p>
+<p><a href="#register">4 Register for saving and loading</a></p>
+<p><a href="#implement">5 Implement saving and loading</a></p>
+<p><a href="#appendix">Appendix</a></p>
+<h2 id="1-introduction">1 Introduction<a name="introduction"></a><a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<p>This document shows how to integrate an app into the common ctrlX persistence and storage mechanisms.
+Persistence handling is done by the Solutions app (app.solutions), which is an essential part of any ctrlX CORE device. It provides a central storage for other apps that need to persist their app data. App data is saved to the storage or loaded from the storage on demand (via app editors, the "Manage app data" UI, or the Solutions REST API).</p>
+<p><img alt="image" src="images/How-To-Persist-app-data-Fig01_Overview.png" /></p>
+<p>The diagram shows that the storage provided by the Solutions app is structured into two conceptual locations:</p>
+<ul>
+<li>The appdata location contains the files representing the current state of the apps and is owned by the apps.</li>
+<li>The archive contains saved configurations and is managed by the Solutions app.</li>
+</ul>
+<p>The responsibilities of the Solutions app and Apps that persist their data in the Solutions storage are allocated as follows:</p>
+<p><strong>Solutions (app.solutions):</strong></p>
+<ul>
+<li>Provide file storage and make appdata directory available via the activeConfiguration symlink</li>
+<li>Trigger and coordinate "save" and "load" operations and collect results</li>
+<li>Manage the archived configurations (Web UI, REST API)</li>
+</ul>
+<p><strong>Apps:</strong></p>
+<ul>
+<li>Participate in loading and saving</li>
+<li>Use and update the files in their appdata directories</li>
+<li>Must not change the contents of archived configurations</li>
+</ul>
+<h2 id="2-get-access-to-the-solutions-storage">2 Get access to the Solutions storage<a name="access"></a><a class="headerlink" href="#2-get-access-to-the-solutions-storage" title="Permanent link">&para;</a></h2>
+<p>The Solutions app exports the base directory of the storage location as a slot using a content interface. Your app must provide a plug that connects to the slot so that the $SNAP_COMMON/solutions directory becomes visible in your file system:</p>
+<p><strong>snapcraft.yaml:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">plugs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">active-solution</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">interface</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content</span>
+<span class="w">    </span><span class="nt">content</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">solutions</span>
+<span class="w">    </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$SNAP_COMMON/solutions</span>
+</code></pre></div>
+<p>The <code>$SNAP_COMMON/solution</code> directory contains an <code>activeConfiguration</code> symlink. Use this symlink to get the path to the appdata directory which contains the currently active app data: <code>$SNAP_COMMON/solutions/activeConfiguration</code> → <code>$SNAP_COMMON/solutions/DefaultSolution/configurations/appdata/</code></p>
+<p><strong>Note:</strong></p>
+<p>Your app might start before the <strong>active-solution</strong> interface is connected by the system. You can handle this scenario in two ways:</p>
+<ul>
+<li>Use an entry-point script and check status of the <strong>active-solution</strong> interface using snapctl is-connected active-solution; e.g. create a script which has the following content and is defined in your snapcraft.yaml as the command to execute:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1">#!/bin/bash</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span>!<span class="w"> </span>snapctl<span class="w"> </span>is-connected<span class="w"> </span>active-solution
+<span class="w">    </span><span class="k">do</span>
+<span class="w">        </span>sleep<span class="w"> </span><span class="m">5</span>
+<span class="w">    </span><span class="k">done</span>
+
+<span class="w">    </span><span class="nv">$SNAP</span>/bin/&lt;your<span class="w"> </span>executable&gt;
+</code></pre></div>
+<ul>
+<li>Check existence of the folder <code>$SNAP_COMMON/solutions/activeConfiguration</code> in your application logic</li>
+</ul>
+<p>In a development environment, you can check the connection of the <strong>active-solution interface</strong> by</p>
+<ul>
+<li>calling <em>snap connections</em> and checking whether there is an entry with <strong>interface content[solutions]</strong> for the <strong>plug \&lt;your app name&gt;:active-solution</strong> and <strong>slot rexroth-solutions:active-solution</strong></li>
+<li>running a shell in the context of your app and checking the content of the folder <code>$SNAP_COMMON/solutions</code> which must contain a folder <strong>DefaultSolution</strong> and the two symlinks <strong>activeSolution</strong> and <strong>activeConfiguration</strong>. The shell can be started with <em>snap run --shell \&lt;your app name&gt;.\&lt;your app command&gt;</em></li>
+</ul>
+<h2 id="3-specify-your-app-directories">3 Specify your app directories<a name="specify"></a><a class="headerlink" href="#3-specify-your-app-directories" title="Permanent link">&para;</a></h2>
+<p>Within the appdata root directory, define a subdirectory with a unique name as your base directory. We recommend to use your app's name in lowercase letters to avoid conflicts with other apps and allow users to easily identify your data in the file system. The screenshot shows an example with the base directories of the Motion and PLC apps, among others.</p>
+<p><img alt="image" src="images/How-To-Persist-app-data-Fig02_configuation-screenshot.png" /></p>
+<p>You should also explicitly declare ownership of your app directories in your package manifest. The following example shows the declaration of the PLC base directory.</p>
+<p><strong>package-manifest.json:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;appDirectories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plc&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PLC&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bosch-ic-components&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;copyOnLoad&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong>name</strong> (required): The name or path of the app directory</p>
+</li>
+<li>
+<p><strong>description</strong>: The title to display in the "Manage app data" content view (should be consistent with title used e.g. in sidebar menu); if omitted or empty, the app directory does not appear in the content view</p>
+</li>
+<li>
+<p><strong>icon</strong>: The app icon to display in the "Manage app data" content view (should be consistent with icon used e.g. in sidebar menu); if omitted or empty, no icon is displayed in the content view</p>
+</li>
+<li>
+<p><strong>copyOnLoad</strong> (default: <em>false</em>): Set <em>true</em> to instruct the Solutions app to copy the data from your app directory
+in the archive to the active configuration on load; omit (or set <em>false</em>) to enable custom "smart loading"; see section
+"From copying to smart loading" for details</p>
+</li>
+</ul>
+<blockquote>
+<p>Since XCR-V-0120, app directories with active copyOnLoad are only copied if the corresponding app is installed
+and enabled on loading.</p>
+</blockquote>
+<ul>
+<li><strong>writeProtected</strong> (default: <em>true</em>): App directories and their contents in the active configuration are protected
+against changes through the WebDAV interface and the Solutions UI by default. Set <em>false</em> to allow changes for a
+directory and its subdirectories, which requires that your app can detect and handle potential changes appropriately.
+Since XCR-V-0112.</li>
+</ul>
+<blockquote>
+<p>Since XCR-V-0120, the default value of the writeProtected attribute is <em>true</em> in order to protect app directories
+against unintended changes.</p>
+</blockquote>
+<p>Configuration contents should generally have the following properties:</p>
+<ul>
+<li><strong>Compatible</strong>: Changes to content formats should not break existing applications (new format definitions accept old contents).</li>
+<li><strong>Human-readable</strong>: Formats should be human-readable and therefore be text-based (which also allows comparisons between different versions). Names and values should be descriptive and understandable, e.g. by using well-known domain vocabulary.</li>
+<li><strong>Extendable</strong>: Device and engineering functionality will enhance from version to version. You should make sure that your file formats are extendible to cope with new use cases.</li>
+</ul>
+<p>We recommend JSON as the file format where possible, as it supports these properties. You may also consider to provide corresponding JSON-schema files to enable guidance and validation. In any case, JSON files should contain a root object (NOT an array) to enable schema references and extendibility.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>An app may specify "private files" inside its appdata directories in order to exclude them from save and load operations. See appendix "App-private files" for details.</p>
+</div>
+<h2 id="4-register-for-saving-and-loading">4 Register for saving and loading<a name="register"></a><a class="headerlink" href="#4-register-for-saving-and-loading" title="Permanent link">&para;</a></h2>
+<p>In order to participate in the save and load operations triggered by the Solutions app, your app must register its own save and load commands. The following example shows how to register a save and a load command for Motion settings by adding the respective command declarations to the package manifest:</p>
+<p><strong>package-manifest.json:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;activeConfiguration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;save&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motion&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;subject&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motion settings&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/automation/api/v1/motion/admin/cfg/save&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;load&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motion&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;subject&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;motion settings&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/automation/api/v1/motion/admin/cfg/load&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>For each command, the following elements must be specified:</p>
+<ul>
+<li><strong>id</strong> (required): a string serving as the identifier of the save or load command; must be unique within the “commands/activeConfiguration/save” and “commands/activeConfiguration/load” paths, respectively</li>
+<li><strong>subject</strong> (required): a string denoting what will be saved or loaded; used to inform users, e.g. in messages like “Loading <em>motion settings</em>” or “Failed to load <em>motion settings</em>”</li>
+<li><strong>url</strong> (required): a string representing the request URL; URLs starting with a slash are interpreted to be relative to <code>https://localhost</code>. The URL is used for HTTP POST requests which include command parameters in the request body (see section "Request parameters" for details)</li>
+</ul>
+<p>By default there is no defined order of command execution. Starting with version XCR-V-0112, a command may declare that it needs to be executed <strong>after</strong> other commands. If this is required (which should be the exception), add an after element to your command declaration with an array containing the IDs of the predecessor commands.</p>
+<blockquote>
+<p><strong>Hint for developers providing ctrlX Data Layer endpoints for loading and saving</strong></p>
+<p>In order to make the ctrlX Data Layer endpoints for saving and loading a configuration consistent, the respective URLs should adhere to the following pattern:</p>
+<p>\&lt;datalayer-basepath&gt;/\&lt;<strong>technology</strong>&gt;/admin/cfg/\&lt;operation&gt;</p>
+<p>Examples:</p>
+<ul>
+<li>/automation/api/v1/<strong>scheduler</strong>/admin/cfg/save(or load)</li>
+<li>/automation/api/v1/<strong>fieldbuses/ethercat/master</strong>/admin/cfg/save (or load)</li>
+<li>/automation/api/v1/<strong>motion</strong>/admin/cfg/save (or load)</li>
+</ul>
+</blockquote>
+<h2 id="5-implement-saving-and-loading">5 Implement saving and loading<a name="implement"></a><a class="headerlink" href="#5-implement-saving-and-loading" title="Permanent link">&para;</a></h2>
+<p>With the term "participants" we refer to apps that have registered save and load commands in order to participate in save and load operations as described in the previous section.</p>
+<h3 id="processing-sequences">Processing sequences<a class="headerlink" href="#processing-sequences" title="Permanent link">&para;</a></h3>
+<p>Save and load operations triggered by the Solutions app are processed in phases. In each phase, the Solutions app sends requests to all registered participants sequentially in undefined order; that is, participants must not depend on each other.</p>
+<p>A <strong>save operation</strong> is processed in one phase:</p>
+<ol>
+<li><strong>save</strong>: Save current app state into active configuration (appdata directory)</li>
+</ol>
+<p>A <strong>load operation</strong> is processed in five phases:</p>
+<ol>
+<li><strong>query</strong>: Check if loading is possible in the current system state</li>
+<li><strong>prepare</strong>: Perform any required preparatory steps</li>
+<li><strong>load</strong>: Load archived configuration into the apps, and persist resulting app state to the active configuration (appdata directory)</li>
+<li><strong>validate</strong>: Perform any required post-processing steps</li>
+<li><strong>activate</strong> (if phases 1-4 have been finished without problems): Establish desired run state of the device; <strong>abort</strong> (otherwise): Do not change run state of the device</li>
+</ol>
+<p>If the query phase (1) has been completed without any error or problem response, the processing continues with the following phases (2-5) in the specified order. Otherwise, the load operation is canceled and the errors and problems are reported to the user.</p>
+<p>Any errors or problems that occur during phases 2-5 are collected and reported to the user when the whole operation is completed.</p>
+<p>A more detailed description of the load phases and example sequences can be found in the Appendix.</p>
+<blockquote>
+<p><strong>Note:</strong> Starting with XCR-V-0120, a save operation is triggered when a load operation is completed. This ensures that
+the content of the active configuration (appdata directory) is consistent with the data that is active in the apps.</p>
+<p>The save requests of this special save operation have the same id as the preceding load requests. Participants may
+ignore those save requests if they update their app data on loading.</p>
+</blockquote>
+<h3 id="request-parameters">Request parameters<a class="headerlink" href="#request-parameters" title="Permanent link">&para;</a></h3>
+<p>The following information is sent as request parameters to all participants in all save and load phases:</p>
+<ul>
+<li><strong>configurationPath</strong>: the directory of the configuration to be loaded, starting from the solutions directory, e.g. "solutions/DefaultSolution/configurations/<code>&lt;configuration&gt;</code>"; in case of a save operation, the configuration path should be ignored, as the target of saving is always the active configuration (appdata directory)</li>
+<li><strong>id</strong>: a random code which identifies the instance of save or load operation, e.g. "282xy5"; also used to find corresponding messages in the Logbook; should be included in the dynamic description of diagnostic messages and trace messages by all participants; convention: put in square brackets at the end of diagnostic messages and trace messages; see section "Diagnostic messages" for details</li>
+<li><strong>phase</strong>: specifies the current processing phase of a save or load operation; one of the phases described in section "Processing sequences"; e.g., "load"</li>
+</ul>
+<p>The request parameters are provided in the request body as a JSON object with the following structure (using the sample values from above):</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;configurationPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;solutions/DefaultSolution/configurations/&lt;configuration&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;282xy5&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;phase&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;load&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="expected-behavior">Expected behavior<a class="headerlink" href="#expected-behavior" title="Permanent link">&para;</a></h3>
+<p>Participants must consider the following conditions and constraints in their command implementations.</p>
+<blockquote>
+<p><strong>Asynchronous command implementations (since XCR-V-0304)</strong></p>
+<p>Long-running operations (more than one minute) have to be implemented as asynchronous commands.</p>
+<p>Asynchronous command implementations must respond with a status code 201 and a Location header containing a resource path. The Solutions app then uses the resource path to poll the state of the command execution. The response body is expected to be a JSON object with the following content:
+<code>json
+{
+  "state": "running", // one of "pending", "running", "done", or "failed"
+  "result": {} // optional; must contain problem object if state "failed"
+}</code></p>
+</blockquote>
+<h4 id="success-behavior">Success behavior<a class="headerlink" href="#success-behavior" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Synchronous implementations of save or load commands must respond with a success status code (2xx or 3xx), typically with 204 and an empty body.</p>
+</li>
+<li>
+<p>Asynchronous implementations of save or load commands must respond as specified above with the state "done" after completion.</p>
+</li>
+<li>
+<p>If there is no data to load, the command must reset its app to its initial state (no axes defined, no PLC program available, etc.). Related app data must completely be removed from the active configuration.</p>
+</li>
+<li>
+<p>If a phase is not relevant or unknown to the command, the command must respond with the status code 204 (and an empty body).</p>
+</li>
+</ul>
+<h4 id="failure-behavior">Failure behavior<a class="headerlink" href="#failure-behavior" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Synchronous implementations of save or load commands must respond with an error status code (4xx or 5xx). The response body must contain a JSON object describing the occurred problem (see "Problem Schema Definition" in the Appendix for the required format).</p>
+</li>
+<li>
+<p>Asynchronous implementations of save or load commands must respond as specified above with the state "failed" and a result describing the occurred problem (see "Problem Schema Definition" in the Appendix for the required format).</p>
+</li>
+<li>
+<p>The Solutions frontend reports the following fields of the problem response for every failed save or load command:</p>
+</li>
+<li>mainDiagnosisCode and title</li>
+<li>detailedDiagnosisCode and detail</li>
+<li>dynamicDescription incl. the id of the save or load operation (see example below)</li>
+</ul>
+<p>The dynamicDescription field can provide specific information for the user, like the cause of the failure and hints how to resolve it (if cause and hint are not already provided through the main and detailed diagnosis).
+The field may contain “\n“ to separate cause and hint in the result output of the UI, e.g. “Format error in X.json.\nAdapt file or use motion editor to fix/recreate axis. [282xy5]”</p>
+<blockquote>
+<p><strong>Common response if apps require Setup state for loading (since XCR-V-0116)</strong></p>
+<p>If participants require Setup state for loading, they should in the query phase</p>
+<ul>
+<li>Respond with status code 409 (Conflict)</li>
+<li>Return a Problem object with the common mainDiagnosisCode <strong>080F0E00</strong> ("Loading configuration not possible in current state")</li>
+<li>Not write diagnoses to the Logbook</li>
+</ul>
+</blockquote>
+<h4 id="diagnostic-messages">Diagnostic messages<a class="headerlink" href="#diagnostic-messages" title="Permanent link">&para;</a></h4>
+<p>The Solutions app only logs a general diagnostic message on start and finish of a save and load operation. Each participant should additionally log its own activities and occurred problems into the device’s Logbook. Any diagnostic message or trace message related to saving or loading should include the current id at the end of the dynamic description in square brackets.</p>
+<p>Example of diagnostic entries as they would appear in the Logbook:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Date</th>
+<th>Unit</th>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Info</td>
+<td>06/04/2020, 10:33:11.964</td>
+<td>web.solutions</td>
+<td>080A0401</td>
+<td>Loading configuration successfully finished [282xy5]</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>\&lt;main diag code&gt;<br>\&lt;detailed diag code&gt;</td>
+<td>\&lt;main diag text&gt;<br>\&lt;detailed diag text&gt;<br>\&lt;dynamic description text&gt; [282xy5]<br>\&lt;entity text&gt;</td>
+</tr>
+<tr>
+<td>Info</td>
+<td>06/04/2020, 10:31:20.733</td>
+<td>web.automation</td>
+<td>\&lt;main diag code&gt;</td>
+<td>Trace message\&lt;component name&gt;<br>Scheduler successfully prepared for loading [282xy5]</td>
+</tr>
+<tr>
+<td>Info</td>
+<td>06/04/2020, 10:31:19.820</td>
+<td>web.solutions</td>
+<td>080A0400</td>
+<td>Loading configuration started [282xy5]</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong>
+The id of a save or load operation can also be found on and copied from the "Manage app data" page (Save or Load report) in order to search for corresponding messages in the Logbook. The diagnostic numbers may be used to find the beginning and end of the respective operation in the Logbook, e.g. "080A0400" denoting "Loading configuration started".</p>
+</blockquote>
+<h4 id="robustness">Robustness<a class="headerlink" href="#robustness" title="Permanent link">&para;</a></h4>
+<p>Command implementations must be robust with respect to the following conditions:</p>
+<ul>
+<li>The order in which requests are sent to the participants within a phase is undefined.</li>
+<li>Any command that is executed before or after a specific other command may fail.</li>
+<li>Invalid data or problems in general must not break the application, but should result in a user-friendly problem response or diagnostic message.</li>
+<li>The set of save and load phases may be extended. Participants must therefore respond to unknown phases with status code 204.</li>
+<li>New parameters may be added to the command request body to enable advanced use cases.</li>
+</ul>
+<h4 id="invariants">Invariants<a class="headerlink" href="#invariants" title="Permanent link">&para;</a></h4>
+<p>The coordinator (Solutions app) ensures the following properties:</p>
+<ul>
+<li>The activeConfiguration symlink is available and points to the directory containing the currently active appdata.</li>
+<li>Only a single save or load operation is processed at a time.</li>
+<li>The sequence of calls which are made to perform a save or load operation adheres to the specification (cf. Appendix).</li>
+<li>When a participant does not respond to a request, the request is canceled and reported as problem. Processing continues.</li>
+<li>Problems are collected and reported to the user, start and end messages for save and load operations are written to the Logbook.</li>
+</ul>
+<h3 id="from-copying-to-smart-loading">From copying to smart loading<a class="headerlink" href="#from-copying-to-smart-loading" title="Permanent link">&para;</a></h3>
+<p>Apps must update their appdata subdirectory contents during the load operation to reflect the data which has been loaded and is now active in the apps.</p>
+<p>A first basic implementation may be to just copy the directory contents from the "configuration to load" to the corresponding appdata subdirectory. The Solutions app provides a default implementation of this file copy functionality. To activate this functionality, use the copyOnLoad option in your app directory declarations (cf. section "Specify your app directories").</p>
+<p>The following example shows how a set of copyOnLoad declarations would be applied for a given configuration:</p>
+<p><strong>Example app directory declarations (pseudo code):</strong></p>
+<div class="highlight"><pre><span></span><code>    a/b: copyOnLoad=false
+    a/b/c: copyOnLoad=true
+    a/b/c/h: copyOnLoad=false
+</code></pre></div>
+<p><strong>Directories in the configuration to load:</strong></p>
+<div class="highlight"><pre><span></span><code>    a
+    a/b
+    a/b/c/d
+    a/b/c/h
+    a/b/e/f
+    a/g
+</code></pre></div>
+<p><strong>Result showing which directories would be copied (and why):</strong></p>
+<div class="highlight"><pre><span></span><code>    a: true (default, as not declared)
+    b: false (declared)
+    c: true (declared)
+    d: true (inherited from c)
+    h: false (declared)
+    e: false (inherited from b)
+    f: false (inherited from e)
+    g: true (inherited from a)
+</code></pre></div>
+<p>However, an app might improve the load functionality by evaluating the changes to be applied during load. The app may determine that state changes (e.g., stopping the PLC for loading) are actually not required depending on the kind of data to load. Some participants may even be able to skip a load operation completely if their part of the configuration has not changed.</p>
+<p>If you want to take control and be able to evaluate differences between the configuration files and the appdata files,</p>
+<ul>
+<li>declare your base directory or specific subdirectories you would like to handle yourself in the package manifest</li>
+<li>omit the copyOnLoad option (or set copyOnLoad to <em>false</em>)</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong>
+For compatibility reasons with previous ctrlX CORE releases, copyOnLoad is executed before the "prepare" phase. If you do not use copyOnLoad, you should persist your app data in the "load" phase as specified; see the "Annotated load process" in the Appendix for details</p>
+</blockquote>
+<h2 id="appendix">Appendix<a name="appendix"></a><a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
+<h3 id="annotated-load-process">Annotated load process<a class="headerlink" href="#annotated-load-process" title="Permanent link">&para;</a></h3>
+<p><img alt="image" src="images/How-To-Persist-app-data-Fig03_Annotated-Load-Process.png" /></p>
+<h3 id="example-loading-sequences">Example loading sequences<a class="headerlink" href="#example-loading-sequences" title="Permanent link">&para;</a></h3>
+<h4 id="cancelled">Cancelled<a class="headerlink" href="#cancelled" title="Permanent link">&para;</a></h4>
+<p><img alt="image" src="images/How-To-Persist-app-data-Fig04_Loading%28CANCELED%29.png" /></p>
+<h4 id="succeeded">Succeeded<a class="headerlink" href="#succeeded" title="Permanent link">&para;</a></h4>
+<p><img alt="image" src="images/How-To-Persist-app-data-Fig05_Loading%28SUCCEEDED%29.png" /></p>
+<h4 id="failed">Failed<a class="headerlink" href="#failed" title="Permanent link">&para;</a></h4>
+<p><img alt="image" src="images/How-To-Persist-app-data-Fig06_Loading%28FAILED%29.png" /></p>
+<h3 id="problem-schema-definition">Problem schema definition<a class="headerlink" href="#problem-schema-definition" title="Permanent link">&para;</a></h3>
+<p>Failure responses to command requests must adhere to the following schema:</p>
+<h4 id="problemyaml">Problem.yaml<a class="headerlink" href="#problemyaml" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">Problem</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">  </span><span class="nt">x-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1.0.0&#39;</span>
+<span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;</span>
+<span class="w">    </span><span class="no">This document defines a &quot;problem detail&quot; as a way</span>
+<span class="w">    </span><span class="no">to carry machine-readable details of errors in a</span>
+<span class="w">    </span><span class="no">HTTP response to avoid the need to define new error</span>
+<span class="w">    </span><span class="no">response formats for HTTP APIs.</span>
+<span class="w">  </span><span class="nt">required</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">title</span>
+<span class="w">  </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">      </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uri</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">A URI reference [RFC3986] that identifies the problem type.</span>
+<span class="w">        </span><span class="no">This specification encourages that, when dereferenced,</span>
+<span class="w">        </span><span class="no">it provide human-readable documentation for the problem type</span>
+<span class="w">        </span><span class="no">(e.g., using HTML [W3C.REC-html5-20141028]). When this member</span>
+<span class="w">        </span><span class="no">is not present, its value is assumed to be &quot;about:blank&quot;.</span>
+<span class="w">      </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;about:blank&#39;</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://example.com/probs/out-of-credit&#39;</span>
+<span class="w">    </span><span class="nt">title</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">A short, human-readable summary of the problem type.</span>
+<span class="w">        </span><span class="no">It SHOULD NOT change from occurrence to occurrence of the problem,</span>
+<span class="w">        </span><span class="no">except for purposes of localization (e.g., using proactive content</span>
+<span class="w">        </span><span class="no">negotiation; see [RFC7231], Section 3.4).</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">You do not have enough credit.</span>
+<span class="w">    </span><span class="nt">status</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="w">      </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">int32</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">The HTTP status code ([RFC7231], Section 6) generated by the</span>
+<span class="w">        </span><span class="no">origin server for this occurrence of the problem.</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">403</span>
+<span class="w">    </span><span class="nt">detail</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">A human-readable explanation specific to this occurrence of the problem.</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Your current balance is 30, but that costs 50.</span>
+<span class="w">    </span><span class="nt">instance</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">A URI reference that identifies the specific occurrence of the problem.</span>
+<span class="w">        </span><span class="no">It may or may not yield further information if dereferenced.</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/account/12345/msgs/abc</span>
+<span class="w">    </span><span class="nt">code</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">      </span><span class="nt">deprecated</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">An error code issued by the system that caused the original problem.</span>
+<span class="w">        </span><span class="no">This code can be used to track down the root cause of the error.</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">F360001</span>
+<span class="w">    </span><span class="nt">mainDiagnosisCode</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">The main diagnosis code is issued by the system that caused the problem.</span>
+<span class="w">        </span><span class="no">This code can be used to track down the root cause and source of the error.</span>
+<span class="w">        </span><span class="no">It can be used to search in the documentation for a solution.</span>
+<span class="w">        </span><span class="no">It SHOULD NOT change from occurrence to occurrence of the same problem.</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">080F0100</span>
+<span class="w">    </span><span class="nt">detailedDiagnosisCode</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">The detailed diagnosis code issued by the system that caused the problem.</span>
+<span class="w">        </span><span class="no">This code can be used to track down the detailed cause and source of the error.</span>
+<span class="w">        </span><span class="no">It can be used to search in the documentation for a solution.</span>
+<span class="w">        </span><span class="no">The detailed diagnosis code gives additional information about the cause of the error.</span>
+<span class="w">        </span><span class="no">It SHOULD NOT change from occurrence to occurrence of the same problem.</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;00666001&#39;</span>
+<span class="w">    </span><span class="nt">dynamicDescription</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">A dynamic description gives detailed information about the occurrence of a problem.</span>
+<span class="w">        </span><span class="no">It can change between different occurrences of the same error.</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value = -4.5</span>
+<span class="w">    </span><span class="nt">severity</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;</span>
+<span class="w">        </span><span class="s">Severity</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">problem</span><span class="nv"> </span><span class="s">as</span><span class="nv"> </span><span class="s">defined</span><span class="nv"> </span><span class="s">RFC5424</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">Syslog</span><span class="nv"> </span><span class="s">standard,</span><span class="nv"> </span><span class="s">see</span><span class="nv"> </span><span class="s">https://tools.ietf.org/html/rfc5424&#39;</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Error</span>
+<span class="w">      </span><span class="nt">enum</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Emergency</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Alert</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Critical</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Error</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Warning</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Notice</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Informational</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Debug</span>
+<span class="w">    </span><span class="nt">links</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">array</span>
+<span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no">Collection of links to fix the problem. E.g. links to online user manual,</span>
+<span class="w">        </span><span class="no">to an online community (using tags) or a developer chat (e.g. Slack).</span>
+<span class="w">      </span><span class="nt">items</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">        </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uri</span>
+<span class="w">        </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://stackoverflow.com/questions/tagged/boschrexroth+controlx+f360001</span>
+<span class="w">    </span><span class="nt">moreInfo</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">      </span><span class="nt">additionalProperties</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="nt">example</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">trace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExampleClass.cpp#452 Null pointer exception</span>
+<span class="w">        </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ExampleClass</span>
+</code></pre></div>
+<h3 id="app-private-files">App-private files<a class="headerlink" href="#app-private-files" title="Permanent link">&para;</a></h3>
+<p>(Supported from XCR-V-0112)</p>
+<p>Apps may need to store files in their appdata directories which are only needed at runtime. These files (or directories) have to be ignored on loading and when saving the appdata to an archived configuration.</p>
+<p>An app can specify such files using the "appPrivateFiles" element in the configuration section of its manifest. The element value is an array of strings where each string represents a regular expression following the RE2 syntax (<a href="https://golang.org/s/re2syntax">https://golang.org/s/re2syntax</a>). The expressions describe paths and names of files to be considered as private and are checked case-insensitively.</p>
+<p>The following example shows the declaration of "appPrivateFiles" with 3 regular expressions and the declaration of the app's root directory:</p>
+<h4 id="package-manifestjson">package-manifest.json<a class="headerlink" href="#package-manifestjson" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;configuration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;appPrivateFiles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;^my-app/private/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;^my-app/mixed/[^/]+\\.bak&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;^my-app/mixed/$&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;appDirectories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my-app&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My app&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bosch-ic-components&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;copyOnLoad&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Apps should only specify private files in their own app directories. Therefore, it is a good practice to start each regular expression with "^my-app/" where my-app is a root app directory of the app.</p>
+<p>Hints for the regular expressions: The characters "[]().\^\$|?*+{}" have special meanings and must be escaped with "\" to be used uninterpreted. "^" matches the start of the string, "$" matches the end of the string. To provide "\\" in the manifest file which is in JSON format, you have to double it because the backslash is an escape character in JSON too.</p>
+<p>Examples for regular expressions (with an app root directory of "my-app")</p>
+<table>
+<thead>
+<tr>
+<th>Regular expression</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"^my-app/private/"</td>
+<td>defines the my-app/private directory and its content as private</td>
+</tr>
+<tr>
+<td>"<sup>my-app/mixed/[</sup>/]+..bak"</td>
+<td>defines all files with extension .bak within the my-app/mixed directory as private</td>
+</tr>
+<tr>
+<td>"^my-app/mixed/$"</td>
+<td>defines the my-app/mixed directory itself as private so that it is not removed if empty</td>
+</tr>
+</tbody>
+</table>
+<h3 id="accessing-configuration-files-per-webdav">Accessing configuration files per WebDAV<a class="headerlink" href="#accessing-configuration-files-per-webdav" title="Permanent link">&para;</a></h3>
+<p>The configuration files are available via WebDAV protocol under the ctrlx-device web address with base path of "solutions/webdav", eg. access the configuration.json file content of appdata:</p>
+<div class="highlight"><pre><span></span><code>    https://localhost:8443/solutions/webdav/appdata/configuration.json
+</code></pre></div>
+<p>See also: <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/samples-go/webdav.client/README.md">golang WebDAV client</a>
+and <a href="https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/samples-node/solutions.webdav.interface/README.md">nodejs WebDAV client</a></p>
+<h3 id="accessing-configuration-files-with-winscp">Accessing configuration files with WinSCP<a class="headerlink" href="#accessing-configuration-files-with-winscp" title="Permanent link">&para;</a></h3>
+<p><a href="https://winscp.net/">WinSCP</a> is a windows app, which allows access to a remote file system via WebDAV.</p>
+<h4 id="connect-to-a-ctrlx-core">Connect to a ctrlX CORE<a class="headerlink" href="#connect-to-a-ctrlx-core" title="Permanent link">&para;</a></h4>
+<p>Start WinSCP, login with:</p>
+<div class="highlight"><pre><span></span><code>    File protocol:          WebDAV
+    Host name:              IP-address or hostname of the ctrlX CORE
+    Port number:            443 or 8443 for a ctrlX CORE^virtual^
+    User name and Password: credentials on the ctrlX CORE
+</code></pre></div>
+<p><img alt="winscp login" src="images/winscp-sites.png" /></p>
+<p>The user needs manage configuration rights to access the files.</p>
+<p>Access the configuration files located in <strong>/solutions/webdav</strong></p>
+<p><img alt="winscp files" src="images/winscp-files.png" /></p>
+<p>The folder "appdata" contains the files of the active configuration. The other folders are configuration archives.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020-2023 Bosch Rexroth AG
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/boschrexroth" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/boschrexroth" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "content.code.copy"], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
