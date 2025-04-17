@@ -5,15 +5,16 @@ var hierarchy =
     [ "IClientAsyncResult", "interfaceDatalayer_1_1IClientAsyncResult.html", [
       [ "ISubscriptionAsyncResult", "interfaceDatalayer_1_1ISubscriptionAsyncResult.html", null ]
     ] ],
-    [ "IConverter", "interfaceDatalayer_1_1IConverter.html", null ],
     [ "IDataChangedEventArgs", "interfaceDatalayer_1_1IDataChangedEventArgs.html", null ],
     [ "IDisposable", null, [
       [ "INativeDisposable", "interfaceDatalayer_1_1INativeDisposable.html", [
         [ "IBulk", "interfaceDatalayer_1_1IBulk.html", null ],
         [ "IClient", "interfaceDatalayer_1_1IClient.html", null ],
+        [ "IConverter", "interfaceDatalayer_1_1IConverter.html", null ],
         [ "IDatalayerSystem", "interfaceDatalayer_1_1IDatalayerSystem.html", [
           [ "DatalayerSystem", "classDatalayer_1_1DatalayerSystem.html", null ]
         ] ],
+        [ "IFactory", "interfaceDatalayer_1_1IFactory.html", null ],
         [ "IProvider", "interfaceDatalayer_1_1IProvider.html", null ],
         [ "IProviderNode", "interfaceDatalayer_1_1IProviderNode.html", null ],
         [ "ISubscription", "interfaceDatalayer_1_1ISubscription.html", null ],
@@ -22,7 +23,6 @@ var hierarchy =
         ] ]
       ] ]
     ] ],
-    [ "IFactory", "interfaceDatalayer_1_1IFactory.html", null ],
     [ "INative", null, [
       [ "DatalayerSystem", "classDatalayer_1_1DatalayerSystem.html", null ],
       [ "Variant", "classDatalayer_1_1Variant.html", null ]

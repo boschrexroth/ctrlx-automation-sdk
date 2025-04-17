@@ -31,7 +31,7 @@
   </td>  
   <td id="projectalign" style="padding-left: 5em" width="80%">
     <div id="projectname">ctrlX Data Layer .NET API
-      &#160;<span id="projectnumber">4.2.0</span>
+      &#160;<span id="projectnumber">4.3.0</span>
     </div>
     <div id="projectbrief"></div>
   </td>
@@ -288,9 +288,14 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:af8b08dacadd30029d0855605d1a439f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The schema.  <a href="namespaceDatalayer.html#af8b08dacadd30029d0855605d1a439f5">More...</a><br /></td></tr>
 <tr class="separator:af8b08dacadd30029d0855605d1a439f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8dd9973943421f0505eb79d1b7007de"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDatalayer.html#ab8dd9973943421f0505eb79d1b7007de">DLR_TIMEOUT_SETTING</a> { <a class="el" href="namespaceDatalayer.html#ab8dd9973943421f0505eb79d1b7007deae599161956d626eda4cb0a5ffb85271c">Idle</a>
+<tr class="memitem:ab8dd9973943421f0505eb79d1b7007de"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDatalayer.html#ab8dd9973943421f0505eb79d1b7007de">DLR_TIMEOUT_SETTING</a> { <br />
+&#160;&#160;<a class="el" href="namespaceDatalayer.html#ab8dd9973943421f0505eb79d1b7007deae599161956d626eda4cb0a5ffb85271c">Idle</a>
 , <a class="el" href="namespaceDatalayer.html#ab8dd9973943421f0505eb79d1b7007deab85815d04cec053ce6deb8021f2df1b8">Ping</a>
 , <a class="el" href="namespaceDatalayer.html#ab8dd9973943421f0505eb79d1b7007dea880b8461cba2e295e1828be8d6eedb0a">Reconnect</a>
+, <a class="el" href="namespaceDatalayer.html#ab8dd9973943421f0505eb79d1b7007dea9263dc9f3d3ef2b1ab243ecbc26cef60">ZmqHWMSnd</a>
+, <br />
+&#160;&#160;<a class="el" href="namespaceDatalayer.html#ab8dd9973943421f0505eb79d1b7007dea283403f45508d8766ca32b2355e9be07">ZmqHWMRcv</a>
+<br />
  }</td></tr>
 <tr class="memdesc:ab8dd9973943421f0505eb79d1b7007de"><td class="mdescLeft">&#160;</td><td class="mdescRight">The timeout setting.  <a href="namespaceDatalayer.html#ab8dd9973943421f0505eb79d1b7007de">More...</a><br /></td></tr>
 <tr class="separator:ab8dd9973943421f0505eb79d1b7007de"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -522,7 +527,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="Enums_8cs_source.html#l00140">140</a> of file <a class="el" href="Enums_8cs_source.html">Enums.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Enums_8cs_source.html#l00152">152</a> of file <a class="el" href="Enums_8cs_source.html">Enums.cs</a>.</p>
 
 </div>
 </div>
@@ -579,6 +584,10 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="ab8dd9973943421f0505eb79d1b7007deab85815d04cec053ce6deb8021f2df1b8" name="ab8dd9973943421f0505eb79d1b7007deab85815d04cec053ce6deb8021f2df1b8"></a>Ping&#160;</td><td class="fielddoc"><p>Timeout to wait for a response of a request. If timeout is exceeded, the request will be aborted with DL_TIMEOUT. Default: 3000 ms. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="ab8dd9973943421f0505eb79d1b7007dea880b8461cba2e295e1828be8d6eedb0a" name="ab8dd9973943421f0505eb79d1b7007dea880b8461cba2e295e1828be8d6eedb0a"></a>Reconnect&#160;</td><td class="fielddoc"><p>Timeout a reconnect attempt will be done if client looses connection to broker. Default: 1000 ms. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab8dd9973943421f0505eb79d1b7007dea9263dc9f3d3ef2b1ab243ecbc26cef60" name="ab8dd9973943421f0505eb79d1b7007dea9263dc9f3d3ef2b1ab243ecbc26cef60"></a>ZmqHWMSnd&#160;</td><td class="fielddoc"><p>High water mark of ZMQ (Send). Default: 1000. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab8dd9973943421f0505eb79d1b7007dea283403f45508d8766ca32b2355e9be07" name="ab8dd9973943421f0505eb79d1b7007dea283403f45508d8766ca32b2355e9be07"></a>ZmqHWMRcv&#160;</td><td class="fielddoc"><p>High water mark of ZMQ (Receive). Default: 1000. </p>
 </td></tr>
 </table>
 
@@ -660,7 +669,7 @@ Enumerations</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="Enums_8cs_source.html#l00396">396</a> of file <a class="el" href="Enums_8cs_source.html">Enums.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Enums_8cs_source.html#l00408">408</a> of file <a class="el" href="Enums_8cs_source.html">Enums.cs</a>.</p>
 
 </div>
 </div>
