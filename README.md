@@ -31,6 +31,26 @@ If your ctrlX App Build Environment is running, you can log in and install the c
 
 __These installation steps are required on both an App Build Environment and an Ubuntu Server or Desktop System.__
 
+### Prerequisite for the following Scripts
+
+The following packages must be installed so that the following scripts can be executed. When using the __App Build Environment__, packages are installed when setting up an instance.
+
+```bash
+	sudo apt-get update
+	sudo apt-get install -y \
+	     zip \
+  	     unzip \
+  	     p7zip-full \
+         git \
+         apt-transport-https \
+  	     whois \
+         net-tools \
+         pkg-config \
+         jq \
+         sshpass \
+         dpkg-dev
+```
+
 ### Clone and Install the ctrlX AUTOMATION SDK
 
 Start a console session, change to your destination directory and enter:
