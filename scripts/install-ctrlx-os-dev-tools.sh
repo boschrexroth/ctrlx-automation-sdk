@@ -28,5 +28,6 @@ sudo apt-get install -y ncurses-dev
 sudo apt-get install -y flex
 sudo apt-get install -y bison
 sudo apt-get install -y qemu-utils
+sudo apt-get install -y cabextract
 
 
