@@ -35,7 +35,7 @@ and the denylist has to be empty.
     sudo -s
     mkdir -p /etc/writable/integrity
     echo [] >/etc/writable/integrity/denylist.json
-    snap restart rexroth-deviceadminw.web
+    snap restart rexroth-deviceadmin.web
 ```
 
 After clearing the denylist it's possible to test storage extension without signed apps.
