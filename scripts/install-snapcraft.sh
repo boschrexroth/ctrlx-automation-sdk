@@ -9,6 +9,11 @@ if [[ ${etc_environment} != *"SNAPCRAFT_ENABLE_EXPERIMENTAL_TARGET_ARCH=1"* ]];t
     sudo echo "SNAPCRAFT_ENABLE_EXPERIMENTAL_TARGET_ARCH=1" | sudo tee -a /etc/environment
 fi
 
+## SNAP Build info inside artifact
+if [[ ${etc_environment} != *"SNAPCRAFT_BUILD_INFO=1"* ]];then
+    sudo echo "SNAPCRAFT_BUILD_INFO=1" | sudo tee -a /etc/environment
+fi
+
 function  install_snapcraft() {
     echo ""
     echo "-------------------------------------------------------"
