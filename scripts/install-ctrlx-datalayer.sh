@@ -5,6 +5,7 @@ set -e
 
 DIR=$1
 if [ ! -z "$DIR" ]; then
+    mkdir -p "$DIR"
     cd $DIR
 fi
 
