@@ -152,6 +152,25 @@ Scopes provided by the package
             "name": "View hello world",
             "description": "View (but not modify) hello world",
             "i18n": "scopes.view"
+          },
+          {
+            "identifier": "ctrlx-helloworld.web.all.x",
+            "name": "Operate hello world",
+            "description": "Execute hello world",
+            "i18n": "scopes.operate",
+            "requiredScopes": [
+              {
+                "identifier": "ctrlx-tools.all.rwx",
+                "purpose": "This scope is essential for executing hello world, as it provides access to the necessary tools."
+              }
+            ]
+          },
+          {
+            "identifier": "ctrlx-helloworld.web.rwx",
+            "name": "Legacy Hello World Permissions",
+            "description": "Full access to hello world.",
+            "i18n": "scopes.rwx",
+            "deprecated": true
           }
         ]
       }
@@ -173,12 +192,21 @@ The Definiton of the scopes-declaration object:
 
 Defition of the scope object:
 
-| Field         | Descriptions                        | 
-| -------       | ------------------------------------|  
-|**identifier** | string, the identifier of the scope |
-|**name**       | string, the name of the scope       |
-|**description**| string, description of the scope    |
-|**i18n**       | string, i18n tag, see [language files](#language files) and [translation](#translation)|
+| Field            | Descriptions                        | 
+| -------          | ------------------------------------|  
+|**identifier**    | string, the identifier of the scope |
+|**name**          | string, the name of the scope       |
+|**description**   | string, description of the scope    |
+|**i18n**          | string, i18n tag, see [language files](#language files) and [translation](#translation)|
+|**requiredScopes**| array, array of requiredScope objects referencing other scopes that are required for this scope to function |
+|**deprecated**    | boolean, indicates if the scope is deprecated. |
+
+Defition of the requiredScope object:
+
+| Field            | Descriptions                        | 
+| -------          | ------------------------------------|  
+|**identifier**    | string, the identifier of the referenced required scope |
+|**purpose**       | string, a detailed explanation of why this scope is required. |
 
 If access is restricted to specific resources, define scopes. When using the Identity Management, an administrator can configure the users and groups allowed to access specific resources. The following example shows two simple scopes (read/write, all settings, read-only settings). In every routine, the web server has to check whether the provided token includes the scope.
 
@@ -264,6 +292,60 @@ The following snippet shows the definition of the admin scope. You can see (and 
           ]
       }
     ```
+#### Required Scopes
+
+Multiple scopes may be required to perform a particular action. To streamline the scope assignment process for the administrator, it is important to provide clear details of the required scopes. This information specifies the additional permissions required for certain functionalities and ensures that users and groups have the appropriate access rights to perform actions effectively.
+
+!!! Example
+
+    ```json
+      {
+        "identifier": "ctrlx-helloworld.web",
+        "name": "Helloworld Scopes",
+        "description": "Scopes for the Hello World App",
+        "scopes": [
+          {
+            "identifier": "ctrlx-helloworld.web.all.x",
+            "name": "Operate hello world",
+            "description": "Execute hello world",
+            "i18n": "scopes.operate",
+            "requiredScopes": [
+              {
+                "identifier": "ctrlx-tools.all.rwx",
+                "purpose": "This scope is essential for executing hello world, as it provides access to the necessary tools."
+              }
+            ]
+          }
+        ]
+      }
+    ```
+#### Deprecated Scope
+
+A deprecated scope is a permission that was once available for an application but is no longer utilized in its current and future versions. 
+
+!!! Remark
+    - **When a scope is labelled as "deprecated", this permission may not be assigned to any users or groups.**
+    - **The existing assignments of deprecated scopes can be removed from users and groups by administrator.**
+
+!!! Example
+
+    ```json
+      {
+        "identifier": "ctrlx-helloworld.web",
+        "name": "Helloworld Scopes",
+        "description": "Scopes for the Hello World App",
+        "scopes": [
+          {
+            "identifier": "ctrlx-helloworld.web.rwx",
+            "name": "Legacy Hello World Permissions",
+            "description": "Full access to hello world.",
+            "i18n": "scopes.rwx",
+            "deprecated": true
+          }
+        ]
+      }
+    ```
+
 ### Services
 
 <!-- md:version 1.0 -->
@@ -676,7 +758,7 @@ The definition of certificatestores object
 
 |Field          |Description                                                                                             |
 |---------------|--------------------------------------------------------------------------------------------------------|
-|**id**         |string,Use a unique ID, as it is used to identify the store via the REST interface. Example: <br> - opcua <br> - vpnmanager|
+|**id**         |string (max. 128 characters), Use a unique ID, as it is used to identify the store via the REST interface. Example: <br> - opcua <br> - vpnmanager|
 |**title**      |string, name used in the front end. Example: <br> - OPCUA <br> - VPN Manager|
 |**description**|string, displayed in the front end. To describe the application and provide further information|
 |**scopesR**    |array of strings, a list of scopes that allow the user to have read access to this certificate store, Example: <br> - rexroth-solutions.web.all.r <br> - example.permission.r|

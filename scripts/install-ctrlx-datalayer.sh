@@ -5,7 +5,7 @@ set -e
 
 DIR=$1
 if [ ! -z "$DIR" ]; then
-    cd $DIR
+    cd "$DIR"
 fi
 
 sudo apt-get install -y dpkg-dev

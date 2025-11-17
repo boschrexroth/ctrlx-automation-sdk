@@ -93,6 +93,11 @@ echo $SEPARATION_LINE_1
 echo "Unzipping ${ZIP_ARCHIVE} ..."
 echo $SEPARATION_LINE_2
 unzip -xKq "${ZIP_ARCHIVE}" -d "$ZIP_DIR"
+exit_status=$?
+if [ ${exit_status} -ne 0 ]; then
+	echo "Error: unzip (Error code ${exit_status})"
+	exit ${exit_status}
+fi
 
 echo ""
 echo $SEPARATION_LINE_1

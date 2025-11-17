@@ -115,6 +115,7 @@ nav:
               - Date exchange: data-exchange.md
               - Storage extension: storage-extension.md
           - Extendable Denylist: extenable-denylist.md
+          - UEFI firmware updates on ctrlX OS Standard: uefi-firmware-updates.md
       - Releases:
           - Changelog: changelog.md
   - Setup:
