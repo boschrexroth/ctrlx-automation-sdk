@@ -99,6 +99,52 @@ For nodejs samples:
 
 Overview of all scripts: [Description of the scripts](scripts/README.md)
 
+## Building a snap using Docker
+
+Building a snap using Docker allows you to:
+
+- build on Windows, macOS, or a non-Ubuntu Linux distribution
+- cross-compile to arm64 from a different architecture
+- avoid needing to install anything snap-related on your machine (depending on your distro, this isn't even possible or is hacky at best)
+
+For simple snaps, this can be done in one command using Canonical's official images. 
+
+You should remove anything related to cross-compilation within your `snapcraft.yaml` as Docker will be handling the emulation by passing the `--platform` flag.
+
+For example, to build a snap on a ctrlX Core X3 on Ubuntu Core 22, `cd` into your project directory containing your `snap/snapcraft.yaml` and run:
+
+```bash
+sudo docker run -it --rm --platform=linux/arm64 -v `pwd`:/project ghcr.io/canonical/snapcraft:8_core22 pack \; -v
+```
+
+This will create your `.snap` file within the current directory which you can install using the ctrlX web interface.
+
+In case your snap needs some extra dependencies to build, for example `curl`, you can create a `Dockerfile` such as this based on that image and install what you need:
+
+```docker
+FROM ghcr.io/canonical/snapcraft:8_core22
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends curl
+```
+
+Build the image and give it a name that makes sense to you, such as `my-ctrlx-image`. Make sure to include the correct `--platform` for your target device architecture.
+
+```bash
+sudo docker build . -t my-ctrlx-image --platform=linux/arm64
+```
+
+Then run the same command using your new image instead
+
+```bash
+sudo docker run -it --rm --platform=linux/arm64 -v `pwd`:/project my-ctrlx-image pack \; -v
+```
+
+There is a working example in [samples-node/datalayer.client.browse](./samples-node/datalayer.client.browse/)
+
+Relevant links:
+
+- [snapcraft docs: build on docker](https://snapcraft.io/docs/build-on-docker)
+- [Canonical's offical OCI-compliant images](https://github.com/canonical/snapcraft-rocks/pkgs/container/snapcraft)
+
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG

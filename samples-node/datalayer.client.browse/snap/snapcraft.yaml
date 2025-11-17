@@ -15,11 +15,12 @@ grade: stable # must be 'stable' to release into candidate/stable channels
 base: core22
 type: app
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
-    build-for: [arm64]
+# removed because Docker will be handling the qemu emulation for cross-compilation
+# architectures:
+#   - build-on: [amd64, arm64]
+#     build-for: [amd64]
+#   - build-on: [amd64, arm64]
+#     build-for: [arm64]
 
 apps:
   app:
