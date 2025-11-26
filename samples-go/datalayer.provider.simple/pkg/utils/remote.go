@@ -48,7 +48,7 @@ import (
 * IMPORTANT:
 * You need not change the parameter settings before building a snap and installing the snap on a ctrlX CORE.
 * The Remote util detects the snap environment and uses automatically inter process communication.
-* Therefor the connection string to the ctrlX Datalayer is: "ipc://"
+* Therefore the connection string to the ctrlX Datalayer is: "ipc://"
 * If you don't wan't to communicate to localhost (e.g. C2C), please build up the remote string manually in the following form (sslport is optional):
 *
 *  remote := "tcp://{User}:{Password}@{Ip}?sslport={SslPort}";

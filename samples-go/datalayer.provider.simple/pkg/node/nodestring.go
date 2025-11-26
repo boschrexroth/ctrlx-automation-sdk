@@ -26,6 +26,10 @@ func NewNodeDataString(n string) *NodeDataString {
 
 // OnMetadata descript 'string' MetaData of the provider node
 func (n *NodeDataString) OnMetadata() (datalayer.Result, *datalayer.Variant) {
+
+    // Please see here for recommended allowed operations by node type: 
+    // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+    
 	m := datalayer.NewMetaDataBuilder(datalayer.AllowedOperationRead|datalayer.AllowedOperationWrite, "String variable", "String_variable_url")
 	m.Unit("-").DisplayName("string-value").NodeClass(fbs.NodeClassVariable)
 	m.AddReference(datalayer.ReferenceTypeRead, typeaddressstring)

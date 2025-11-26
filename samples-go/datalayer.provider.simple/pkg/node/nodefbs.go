@@ -60,6 +60,10 @@ func (nd *NodeDataFbs) registerBfbs(p *datalayer.Provider) {
 
 // OnMetadata descript 'flatbuffers' MetaData of the provider node
 func (n *NodeDataFbs) OnMetadata() (datalayer.Result, *datalayer.Variant) {
+
+    // Please see here for recommended allowed operations by node type: 
+    // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+
 	m := datalayer.NewMetaDataBuilder(datalayer.AllowedOperationRead|datalayer.AllowedOperationWrite, "Simple flatbuffers variable", "<url>")
 	m.DisplayName("inertial-value").NodeClass(fbs.NodeClassVariable)
 	m.AddReference(datalayer.ReferenceTypeRead, typeaddressfbs)

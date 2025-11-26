@@ -32,6 +32,10 @@ func NewNodeDataArrayTimestamp(n string) *NodeDataArrayTimestamp {
 
 // OnMetadata descript 'array of timestamp' MetaData of the provider node
 func (n *NodeDataArrayTimestamp) OnMetadata() (datalayer.Result, *datalayer.Variant) {
+
+    // Please see here for recommended allowed operations by node type: 
+    // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+
 	m := datalayer.NewMetaDataBuilder(datalayer.AllowedOperationRead, "array-of-timestamp variable", "array-of-timestamp_variable_url")
 	m.Unit("ns").DisplayName("array-of-timestamp").NodeClass(fbs.NodeClassVariable)
 	m.AddReference(datalayer.ReferenceTypeRead, typeaddressarraytimestamp)

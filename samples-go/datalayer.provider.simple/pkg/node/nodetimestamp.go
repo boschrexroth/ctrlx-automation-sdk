@@ -28,6 +28,10 @@ func NewNodeDataTimestamp(n string) *NodeDataTimestamp {
 
 // OnMetadata descript 'timestamp' MetaData of the provider node
 func (n *NodeDataTimestamp) OnMetadata() (datalayer.Result, *datalayer.Variant) {
+
+    // Please see here for recommended allowed operations by node type: 
+    // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+    
 	m := datalayer.NewMetaDataBuilder(datalayer.AllowedOperationRead, "timestamp variable", "timestamp_variable_url")
 	m.Unit("ns").DisplayName("timestamp").NodeClass(fbs.NodeClassVariable)
 	m.AddReference(datalayer.ReferenceTypeRead, typeaddresstimestamp)

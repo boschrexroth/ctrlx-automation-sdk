@@ -18,7 +18,7 @@ Launch the app with the debugger attached by pressing __F5__.
 ## Build a Snap
 
 Select main menu item Termninal - Run Build Task select the architecture of your ctrlX CORE:
-    amd64 for ctrlX CORE^virtual^
+    amd64 for ctrlX CORE<sup>virtual</sup>
     arm64 for ctrlX CORE
 
 A snap file will be build.

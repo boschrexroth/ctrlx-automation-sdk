@@ -1,3 +1,3 @@
 module samples-go/webserver
 
-go 1.22
+go 1.24

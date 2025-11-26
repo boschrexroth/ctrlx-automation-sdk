@@ -11,12 +11,12 @@ summary: Simple Webserver written in Go for ctrlX OS.
 description: This sample app shows how to create a webserver app.
 grade: stable
 confinement: strict # use 'strict' once you have the right plugs and slot
-base: core22
+base: core24
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 apps:
@@ -40,7 +40,7 @@ parts:
     source: .
     plugin: go
     override-build: |
-      case $CRAFT_ARCH_TRIPLET in
+      case $CRAFT_ARCH_TRIPLET_BUILD_FOR in
         aarch64-linux-gnu)
           export GOARCH=arm64
           export GOARM=7
@@ -57,13 +57,13 @@ parts:
     source: ./configs
     plugin: dump
     organize:
-      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
+      "package-assets/*": package-assets/${CRAFT_PROJECT_NAME}/
 
   my-server:
     plugin: dump
     source: ./www
     organize:
-      '*': www/
+      "*": www/
 
 slots:
   # This slot is for sidebar integration
