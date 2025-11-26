@@ -1,6 +1,6 @@
 name: sdk-generate-manifest
 title: SDK Generate Manifest
-base: core22
+base: core24
 version: 1.0.0
 summary: Simple snap with random menu entry.
 description: |
@@ -9,10 +9,10 @@ description: |
 grade: stable
 confinement: strict
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 parts:
@@ -33,4 +33,4 @@ slots:
     content: package-assets
     source:
       read:
-      - $SNAP_DATA/package-assets/$CRAFT_PROJECT_NAME
+        - $SNAP_DATA/package-assets/$CRAFT_PROJECT_NAME

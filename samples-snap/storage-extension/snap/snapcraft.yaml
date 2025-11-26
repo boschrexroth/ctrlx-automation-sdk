@@ -1,6 +1,6 @@
 name: sdk-storage-extension-sample
 title: SDK Storage extension sample
-base: core22
+base: core24
 version: 1.0.0
 summary: Storage extension sample for ctrlX OS.
 description: |
@@ -8,23 +8,17 @@ description: |
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 parts:
   sources:
     plugin: dump
     source: wrapper
-  backup:
-    plugin: nil
-    source: backup
-    override-build: |
-      craftctl default
-      mkdir -p $CRAFT_PART_INSTALL/meta
-      cp $CRAFT_PART_SRC/snapshots.yaml $CRAFT_PART_INSTALL/meta
+
 plugs:
   storage-extension-mnt:
     interface: mount-control
