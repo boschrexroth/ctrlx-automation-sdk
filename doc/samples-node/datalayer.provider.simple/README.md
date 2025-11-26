@@ -62,7 +62,7 @@ Do following steps
 1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
 3. Choose __Open Folder in QEMU VM__.
-4. Open the directory __datalayer.provider__.
+4. Open the directory __datalayer.provider.simple__.
 5. Build and install snap as described [here](./../README.md).
 6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer)
 7. Check the output using __Diagnostics__:

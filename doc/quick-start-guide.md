@@ -27,7 +27,7 @@ See the installation instructions on: [Installation of the ctrlX AUTOMATION SDK]
 
 * __Build one or both snaps__
 
-To build a snap for a ctrlX CORE^virtual^ enter:
+To build a snap for a ctrlX CORE<sup>virtual</sup> enter:
 
     ./build-snap-amd64.sh
 

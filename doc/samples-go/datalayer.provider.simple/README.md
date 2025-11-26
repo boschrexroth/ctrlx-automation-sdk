@@ -42,7 +42,7 @@ Dependency updates with `go mod tidy`
 
 Build the executable with `go build ./cmd/...`
 
-Build the snap with `snapcraft --destructive-mode`
+Build the snap with `snapcraft`
 
 ## License
 

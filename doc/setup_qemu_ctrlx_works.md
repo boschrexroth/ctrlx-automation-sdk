@@ -29,16 +29,16 @@ Select 'App Build Environments' on the side bar of ctrlX WORKS. The list of inst
 * The dialog 'Add ctrlX CORE App Build Environment' will appear.  Now the new instance can be configured.
 * Name: Enter a unique name.
 * Storage location: Enter/select a destination directory where the files are stored.
-* Port forwarding: Here port forwardings from the Windows host to the VM guest are defined. Per default for SSH the port 10022 of the Windows host is forwarded to port 22 of the guest VM. Do NOT change 22! You can change 10022 if you want to run several environments concurrently.
+* Port forwarding: Here, port forwardings from the Windows host to the VM guest are defined. Per default for SSH the port 10022 of the Windows host is forwarded to port 22 of the guest VM. Do NOT change 22! You can change 10022 if you want to run several environments concurrently.
 * Select 'Use HTTP and HTTPS proxy on localhost:3128' if your host uses a proxy. In this case install and run [px.exe](px.md)
-* Create a new Add Build Environment with OK or abort with Cancel
+* Create a new App Build Environment with OK or abort with Cancel
 
 !!! important
     The new environment has a default user acount __boschrexroth:boschrexroth__
 
 ### Start an App Build Environment
 
-* Start a App Build Environment with the play `>` icon.
+* Start an App Build Environment with the play `>` icon.
 * On first start the Ubuntu image will be downloaded and the environment will be installed. This will take some time. In this phase no login will be possible. When the initialization phase is finished the VM will shutdown automatically.
 * Click the play icon again to restart the App Build Environment.
 * When the environment is up ctrlX WORKS will show 'Online' in column State.

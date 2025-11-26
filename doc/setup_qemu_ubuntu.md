@@ -55,7 +55,7 @@ See [Use PX.exe as Local Proxy on a Windows Host](./px.md).
 ## Installation on Linux Host
 
 You have to install both QEMU and KVM on your host system.
-Therefor you can run this script:
+Therefore you can run this script:
 
     ~/ctrlx-automation-sdk/scripts/environment/install-qemu.sh
 

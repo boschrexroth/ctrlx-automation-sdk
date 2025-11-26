@@ -2,15 +2,9 @@
 
 This .NET sample prints out "Hello World" to the console.
 
-## Introduction
-
-The app is prompting "Hello World" to standard output.
-
 ## Description
 
-The implementation include the following steps:
-
-+ Write 'Hello World' to console in an endless loop every second.
+The app is prompting "Hello World" to standard output.
 
 ## Prerequisites
 
@@ -25,7 +19,7 @@ Launch the app with the debugger attached by pressing __F5__.
 1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
 3. Choose __Open Folder__.
-4. Open the directory __datalayer.browse__.
+4. Open the directory __hello.world__.
 5. Build and install snap as described [here](./../README.md).
 6. Check the output using __Diagnostics__:
 

@@ -1,5 +1,5 @@
 **Copyright**
-© Bosch Rexroth AG 2024
+© Bosch Rexroth AG 2025
 This document, as well as the data, specifications and other information set forth in it, are the exclusive property of Bosch Rexroth AG. It may not be reproduced or given to third parties without our consent.
 
 **Liability** The information in this document is intended for product description purposes only and shall not be deemed to be a guaranteed characteristic, unless expressly stipulated by contract. All rights are reserved with respect to the content of this documentation and the availability of the product.
@@ -245,12 +245,17 @@ Participants must consider the following conditions and constraints in their com
 > 
 > Long-running operations (more than one minute) have to be implemented as asynchronous commands.
 >
-> Asynchronous command implementations must respond with a status code 201 and a Location header containing a resource path. The Solutions app then uses the resource path to poll the state of the command execution. The response body is expected to be a JSON object with the following content:
+> Asynchronous command implementations must respond with a status code 201 and a 
+> Location header containing a resource path. The resource path can be a relative 
+> path to the current resource (e.g. "tasks/1234") or an absolute url path 
+> (e.g. "/\<app\>/api/v1/tasks/1234"). The absolute url path is preferred due to its clarity. 
+> The Solutions app then uses the resource path to poll the state of the command execution.
+> The response body is expected to be a JSON object with the following content:
 > ```json
 > {
 >   "state": "running", // one of "pending", "running", "done", or "failed"
 >   "result": {} // optional; must contain problem object if state "failed"
->}
+> }
 >```
 
 
@@ -312,6 +317,12 @@ Command implementations must be robust with respect to the following conditions:
 - Invalid data or problems in general must not break the application, but should result in a user-friendly problem response or diagnostic message.
 - The set of save and load phases may be extended. Participants must therefore respond to unknown phases with status code 204.
 - New parameters may be added to the command request body to enable advanced use cases.
+
+#### Security
+
+Apps must secure their save and load endpoints by checking the scopes of the provided Bearer token
+for the required app-specific permissions.
+The Solutions app ensures that the required permissions are provided on saving and loading.
 
 #### Invariants
 
@@ -578,7 +589,7 @@ Start WinSCP, login with:
 ```code
     File protocol:          WebDAV
     Host name:              IP-address or hostname of the ctrlX CORE
-    Port number:            443 or 8443 for a ctrlX CORE^virtual^
+    Port number:            443 or 8443 for a ctrlX CORE<sup>virtual</sup>
     User name and Password: credentials on the ctrlX CORE
 ```
 

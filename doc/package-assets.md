@@ -2,7 +2,7 @@
 
 Beside the metadata published using the [snapcraft.yaml](https://snapcraft.io/docs/snapcraft-yaml-reference) the package-assets interface provides a way to provide additional information of your app to the ctrlX CORE system. Currently the following information can be provided by the package-assets folder:
 
-- **A package manifest** containing a declarative description of the app, including permissions, menus and reverse proxy configurations etc. 
+- **A package manifest** containing a declarative description of the app, including permissions, menus and reverse proxy configurations etc.
 - **Translation files** for different parts of the app
 - **Open Source Software (OSS) information** of used Software in the app
 
@@ -46,33 +46,33 @@ The following example shows the procedure step-by-step.
 
 An app can provide own menu entries, use the reverse proxy infrastructure including permissions and the storage solution. This document describes the different integration points and how they work.
 
-The package manifest is essential for the integration points. Beside the snapcraft.yaml, it is strongly recommended that the app has to provide the package manifest to be integrated into the ctrlX CORE system. 
+The package manifest is essential for the integration points. Beside the snapcraft.yaml, it is strongly recommended that the app has to provide the package manifest to be integrated into the ctrlX CORE system.
 
 The package manifest file should follow the naming convention `<app name>.<package-manifest>.json` where `<app name>` and the `id` property in the package manifest are both set to the `name (technical app name)` as mentioned in the [snapcraft](appdevguide_basechecks.md) documentation.
 
-### Schema File 
+### Schema File
 
 <!-- md:version 1.1 -->
 
-The schema for the package manifest JSON file is provided. By explicit assigning this schema file, the configured content will be validated in editors such as Visual Studio Code. 
+The schema for the package manifest JSON file is provided. By explicit assigning this schema file, the configured content will be validated in editors such as Visual Studio Code.
 
 !!! example
     ``` json
       "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.4.schema.json"
     ```
-| Field     | Descriptions                         | 
-| --------- | ---------------------------------    |      
-|**$schema**| string, valid link to the schema file.<br>**default**: `https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.schema.json`,which references the latest 1er version.|   
+| Field     | Descriptions                         |
+| --------- | ---------------------------------    |
+|**$schema**| string, valid link to the schema file.<br>**default**: `https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.schema.json`,which references the latest 1er version.|
 
-The available versions of the schema file are: 
+The available versions of the schema file are:
 
 | Version | Available in ctrlX Core | Link                                                                                                                   |
-| --------| ------------------------| -----------------------------------------------------------------------------------------------------------------------| 
-| 1.0     | >=V1.18                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.0.schema.json | 
-| 1.1     | >=V1.18                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.1.schema.json | 
-| 1.2     | >=V1.18                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.2.schema.json | 
-| 1.3     | >=V1.20                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.3.schema.json | 
-| 1.4     | >=V1.20                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.4.schema.json | 
+| --------| ------------------------| -----------------------------------------------------------------------------------------------------------------------|
+| 1.0     | >=V1.18                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.0.schema.json |
+| 1.1     | >=V1.18                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.1.schema.json |
+| 1.2     | >=V1.18                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.2.schema.json |
+| 1.3     | >=V1.20                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.3.schema.json |
+| 1.4     | >=V1.20                 | https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-os/apps/package-manifest/package-manifest.v1.4.schema.json |
 
 
 ### Version
@@ -87,9 +87,9 @@ The version of the package manifest file
       "version": "1.0.0"
     ```
 
-| Field     | Descriptions        | 
+| Field     | Descriptions        |
 | --------- | ------------------- |
-|**version**| string, the version |  
+|**version**| string, the version |
 
 
 ### Identifier
@@ -104,9 +104,9 @@ Unique identifier of the package
       "id": "sdk-go-webserver"
     ```
 
-| Field| Descriptions                                 | 
-| -----| -------------------------------------------- |  
-|**id**| string, the unique identifier of the package |  
+| Field| Descriptions                                 |
+| -----| -------------------------------------------- |
+|**id**| string, the unique identifier of the package |
 
 
 ### Required App
@@ -121,9 +121,9 @@ In specific scenarios (e.g. Brandlabeling (Theming App) or as ctrlX OS Partner) 
       "required": true
     ```
 
-| Field      | Descriptions                                | 
-| ---------- | ----------------------------------------    |  
-|**required**| boolean, indicates if the app is required app |  
+| Field      | Descriptions                                |
+| ---------- | ----------------------------------------    |
+|**required**| boolean, indicates if the app is required app |
 
 
 ### Scopes and Permissions <a name="scopes and permissions"></a>
@@ -177,14 +177,14 @@ Scopes provided by the package
     ]
     ```
 
-| Field             | Descriptions                                                                               | 
-| -------           | ------------------------------------------------------------------------------------------ |  
+| Field             | Descriptions                                                                               |
+| -------           | ------------------------------------------------------------------------------------------ |
 | scopes-declaration| An array, which contains the definitions of the scopes and permissions, see following table|
 
 The Definiton of the scopes-declaration object:
 
-| Field         | Descriptions                             | 
-| ----------    | ---------------------------------------- |  
+| Field         | Descriptions                             |
+| ----------    | ---------------------------------------- |
 |**identifier** | string, the identifier of the scope set and should start with the snap name |
 |**name**       | string, the name of the scope set        |
 |**description**| string, the description of the scope set |
@@ -192,8 +192,8 @@ The Definiton of the scopes-declaration object:
 
 Defition of the scope object:
 
-| Field            | Descriptions                        | 
-| -------          | ------------------------------------|  
+| Field            | Descriptions                        |
+| -------          | ------------------------------------|
 |**identifier**    | string, the identifier of the scope |
 |**name**          | string, the name of the scope       |
 |**description**   | string, description of the scope    |
@@ -203,8 +203,8 @@ Defition of the scope object:
 
 Defition of the requiredScope object:
 
-| Field            | Descriptions                        | 
-| -------          | ------------------------------------|  
+| Field            | Descriptions                        |
+| -------          | ------------------------------------|
 |**identifier**    | string, the identifier of the referenced required scope |
 |**purpose**       | string, a detailed explanation of why this scope is required. |
 
@@ -217,9 +217,9 @@ Use the following schema for the main identifier of the scope:
 
 `<id>.<service>`
 
-- **id**: Package identifier. Has to correspond to the snap name. 
+- **id**: Package identifier. Has to correspond to the snap name.
     - **example**: rexroth-solutions, rexroth-vpnmanager
-- **service**: Service identifier. 
+- **service**: Service identifier.
     - **example**: web
 
 Some examples:
@@ -321,7 +321,7 @@ Multiple scopes may be required to perform a particular action. To streamline th
     ```
 #### Deprecated Scope
 
-A deprecated scope is a permission that was once available for an application but is no longer utilized in its current and future versions. 
+A deprecated scope is a permission that was once available for an application but is no longer utilized in its current and future versions.
 
 !!! Remark
     - **When a scope is labelled as "deprecated", this permission may not be assigned to any users or groups.**
@@ -396,12 +396,12 @@ The proxy mapping provides the configuration required by the reverse proxy to re
 
 Providing a proxy configuration is optional in some cases (e.g. if your snap does not provide a web service). If a proxy configuration is provided, the following parameters are valid:
 
-| Field  | Descriptions                        | 
+| Field  | Descriptions                        |
 | -------| ------------------------------------|
 |**name**|Name of the web service.  The format is: `<id>.<service>`The name has to be unique and should start with the snap name. Examples: <br> - rexroth-solutions.web <br> - rexroth-hmi.web |
 |**url** |URL provided by the reverse proxy. When a client tries to access this URL, the reverse proxy transparently redirects the request to the web server. Thus, your web server has to be configured to listen to e.g. "/cool-app" and not "/". Must not conflict with other web service URLs, so it should start with the snap name, syntax: "/{$SNAP_NAME}". Examples: <br> - /rexroth-solutions <br> - /rexroth-hmi|
 |**binding**|Resource identifier to which the reverse proxy redirects the requests. The resource can either be a port or a Unix socket. Using a Unix socket is highly recommended. Examples: <br> - :5000 <br> - 192.168.1.17:5000 <br> - "unix://{$SNAP_DATA}/package-run/rexroth-solutions/rexroth-solutions.web.sock"|
-|**restricted**|Restricted URL. Only authenticated clients can access the URLs defined here. One important example is the API URL(s) - those URLs should be restricted in most use cases. Examples: <br> - /rexroth-solutions/api/v1.0|  
+|**restricted**|Restricted URL. Only authenticated clients can access the URLs defined here. One important example is the API URL(s) - those URLs should be restricted in most use cases. Examples: <br> - /rexroth-solutions/api/v1.0|
 
 !!! info
     **Remark**: If a snap provides multiple web servers, multiple ProxyMapping entries are allowed.
@@ -427,7 +427,10 @@ In the example mentioned above, your "unix socket file" should be created under 
 Now, publish the information on the socket file using the package-manifest via the ProxyMapping described above. The relevant part is the "binding" section below. Replace
 
 !!! warning
-    The path length of a Unix socket is limited to 108 characters. Thus, ensure that the resolved path, e.g /var/snap/third-party-snap/current/==package-run/third-party-snap/third-party-snap.web.sock== does not exceed that limit and that the highlighted part does not exceed 50 characters. If required, shorten the path by replacing "package-run" with "run" and change the file name from "third-party-snap.web.sock" to "web.sock". 
+    The path length of a Unix socket is limited to 108 characters. Thus, ensure that the resolved path, e.g /var/snap/third-party-snap/current/==package-run/third-party-snap/third-party-snap.web.sock== does not exceed that limit and that the highlighted part does not exceed 50 characters. If required, shorten the path by replacing "package-run" with "run" and change the file name from "third-party-snap.web.sock" to "web.sock".
+
+!!! warning
+    The path to the unix socket containing environment variables doesn't follow the default linux syntax. Each environment variable is referenced by **\{$** not **$\{**.
 
 !!! Example
 
@@ -564,8 +567,8 @@ If you want to open your application in your own tab, you can define the target 
       }
     ```
 
-| Field      | Descriptions                                                          | 
-| -------    | ----------------------------------------------------------------------|  
+| Field      | Descriptions                                                          |
+| -------    | ----------------------------------------------------------------------|
 |**sidebar** | array of entries, which contains the definitions to the sidebar menus |
 |**settings**| array of entries, which contains the definitions to the settings menus|
 |**overview**| array of entries, which contains the definitions to the overview menus|
@@ -573,8 +576,8 @@ If you want to open your application in your own tab, you can define the target 
 
 The definition of the object entries
 
-| Field             | Descriptions                                                                               | 
-|--------           | ------------------------------------------------------------------------------------------ |  
+| Field             | Descriptions                                                                               |
+|--------           | ------------------------------------------------------------------------------------------ |
 |**items**          | array of entries, which contains the definitions to the sublinks                        |
 |**link**           | string, link to the ressource                                                              |
 |**target**         | string, which specifies where the link is shown. Use "_blank" or a specific name to open the link in a new tab (recommended for 3rd-party apps) |
@@ -590,7 +593,7 @@ The definition of the object entries
 
 <!-- md:version 1.0 -->
 
-!!! example 
+!!! example
 
     ```json
       "commands": {
@@ -616,33 +619,33 @@ The definition of the object entries
 The definition of commands object
 
 | Field      | Description              |
-| -------    | ------------------------ |  
+| -------    | ------------------------ |
 |**commands**| object, which references commandScope, which references command, which referneces to commandRequest|
 
 The definition of commandRequest
 
 |Field        | Description |
-|------------ | ------------|  
+|------------ | ------------|
 |**id**       | string, the identifier of this command |
 |**subject**  | string, denotes what will be saved or loaded |
 |**after**    | array of string, a list of command identifiers whose commands if present will always be executed before this command |
 |**url**      | string, The request URL|
-|**execution**| object, The execution object is deprecated. Use url object instead | 
+|**execution**| object, The execution object is deprecated. Use url object instead |
 
-The definition of the execution object 
+The definition of the execution object
 
 | Field    | Description                                                              |
-| -------  | ------------------------------------------------------------------------ |  
+| -------  | ------------------------------------------------------------------------ |
 |**method**| string, enum put post, the HTTP method called for executing this command |
-|**url**   | string, the URL used for executing this command                          | 
+|**url**   | string, the URL used for executing this command                          |
 
-### Documentation 
+### Documentation
 
 <!-- md:version 1.1 -->
 
 Contains documents like API references
 
-The API of the app can optionally be integrated in the API reference section of the help menu. Therefor you have to do following steps:
+The API of the app can optionally be integrated in the API reference section of the help menu. Therefore you have to do following steps:
 
 **Step 1:**
 
@@ -712,7 +715,7 @@ The definition of document
 
 <!-- md:version 1.1 -->
 
-The definition of configuration 
+The definition of configuration
 
 |Field              |Description                 |
 |-------------------|----------------------------|
@@ -754,7 +757,7 @@ The certificate store block defines whether a snap service has to handle cryptog
     ]
     ```
 
-The definition of certificatestores object 
+The definition of certificatestores object
 
 |Field          |Description                                                                                             |
 |---------------|--------------------------------------------------------------------------------------------------------|
@@ -812,7 +815,7 @@ It is also necessary to define the base path to the certificate storage in the s
 
 Contains configurations for specific rexroth apps
 
-!!! Exmaple 
+!!! Exmaple
     ```json
       "apps": {
         "rexroth-remoteagent": {
@@ -820,7 +823,7 @@ Contains configurations for specific rexroth apps
             "BACKUP",
             "RESTORE",
             "REBOOT"
-          ]  
+          ]
         }
       }
     ```
@@ -838,13 +841,13 @@ The definition of rexroth-remoteagent object
 |------------|-----------|
 |**commands**|array of string, remote device administration commands are used to execute commands on the device from the Nexeed Device Portal, example: <br> -  ["BACKUP","RESTORE","REBOOT"]|
 
-The definition of rexroth-setup 
+The definition of rexroth-setup
 
 |Field       |Description                 |
 |------------|----------------------------|
 |**settings**|array of object setupSetting|
 
-The definition of setupSetting object 
+The definition of setupSetting object
 
 |Field   |Description|
 |--------|-----------|
@@ -859,7 +862,7 @@ The definition of setupSetting object
 
 Dependencies required by the app providing the package manifest
 
-!!! Example 
+!!! Example
     ```json
     "dependencies": {
        "dependsOn": {
@@ -915,7 +918,7 @@ The "required" flag indicates whether a license is mandatory to use the applicat
     ],
     ```
 
-The definition of licenses: 
+The definition of licenses:
 
 |Field          |Description                                                                                                 |
 |---------------|------------------------------------------------------------------------------------------------------------|
@@ -923,13 +926,13 @@ The definition of licenses:
 |**title**      |string, human readable title of the license                                                                 |
 |**description**|string, description of the license                                                                          |
 |**required**   |boolean, indicates if an licenses is required to operate the application or unlocks optional functionalities|
-|**i18n**       |string, i18n tag, see [language files](#language files) and [translation](#translation)                     | 
+|**i18n**       |string, i18n tag, see [language files](#language files) and [translation](#translation)                     |
 
 ### UI Extensions
 
 <!-- md:version 1.4 -->
 
-Contains ui extensions for the home screen. 
+Contains ui extensions for the home screen.
 
 You can provide own widgets to be shown in the Home screen. These widgets need to be implemented as [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
 
@@ -1277,3 +1280,54 @@ In case of an app "my-app" that provides german translations, this would be `my-
     ```
 
 Basically you can translate every aspect of the package-manifest this way.
+
+### Open Source Software (OSS) <a name="OSS"></a>
+
+To comply with open source license obligations, every app must provide detailed information about all included open source software (OSS) components.
+
+#### fossinfo.json
+
+- **Purpose:**  
+  The `fossinfo.json` file lists all open source software components, their versions, licenses, copyright holders, and source locations.
+- **Format:**  
+  The file follows the [Software Bill of Materials (BOM)](https://en.wikipedia.org/wiki/Software_bill_of_materials) concept, typically using the JSON format.  
+  Example:
+
+  ```json
+  {
+    "project": {
+        "name": "YourProjectName",
+        "version": "1.0.0",
+        "description": "A brief description of your project.",
+        "homepage": "https://yourprojecthomepage.example.com"
+    },
+    "foss_components": [
+        {
+            "name": "ComponentName",
+            "version": "ComponentVersion",
+            "license": "LicenseType",
+            "license_url": "https://opensource.org/licenses/LicenseType",
+            "source_url": "https://repository.url/ComponentName",
+            "copyright": "Copyright (c) Year Author/Organization",
+            "notice": "Any additional notices or attributions required by the license."
+        },
+        {
+            "name": "AnotherComponent",
+            "version": "2.3.4",
+            "license": "MIT",
+            "license_url": "https://opensource.org/licenses/MIT",
+            "source_url": "https://github.com/example/AnotherComponent",
+            "copyright": "Copyright (c) 2022 Example",
+            "notice": ""
+        }
+        // Add more components as needed
+    ],
+    "generated_at": "2024-06-13T12:00:00Z"
+  }
+  ```
+- **Location:**  
+  Place the file in your snap at:  
+  ```
+  snap/package-assets/{{appName}}.fossinfo.json
+  ```
+  Replace `{{appName}}` with your actual app name.
