@@ -221,6 +221,9 @@ namespace Samples.Datalayer.Provider.Alldata
             var address = $"{Root}/{Static}/{dataType.Name}";
             var description = $"{Static} data with type {dataType.Name}";
 
+            // Please see here for recommended allowed operations by node type: 
+            // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+
             var metaData = new MetadataBuilder(AllowedOperationFlags.Read | AllowedOperationFlags.Write, description)
                 .SetNodeClass(NodeClass.Variable)
                 .AddReference(ReferenceType.ReadType, dataType.Address)
@@ -239,6 +242,9 @@ namespace Samples.Datalayer.Provider.Alldata
         {
             var address = $"{Root}/{Dynamic}/{dataType.Name}";
             var description = $"{Dynamic} data with type {dataType.Name}";
+
+            // Please see here for recommended allowed operations by node type: 
+            // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
 
             var metaData = new MetadataBuilder(AllowedOperationFlags.Read, description)
                   .SetNodeClass(NodeClass.Variable)

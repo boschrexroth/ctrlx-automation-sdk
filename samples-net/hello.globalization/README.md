@@ -1,10 +1,10 @@
-# README .NET hello.world
+# README .NET hello.globalization
 
-This .NET sample prints out "Hello World" to the console.
+This sample is not running in (performance optimized) globalization-invariant mode, to have full access to culture-specific data and behavior and globalization features. 
 
 ## Description
 
-The app is prompting "Hello World" to standard output.
+The app is prompting culture-specific formatted text to standard output.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ Launch the app with the debugger attached by pressing __F5__.
 1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
 3. Choose __Open Folder__.
-4. Open the directory __hello.world__.
+4. Open the directory __hello.globalization__.
 5. Build and install snap as described [here](./../README.md).
 6. Check the output using __Diagnostics__:
 
@@ -27,14 +27,14 @@ Launch the app with the debugger attached by pressing __F5__.
    + Navigate to __Diagnostics -> Logbook__
    + Click __Settings__ on the right top corner
    + Enable __Show system messages__
-   + Navigate to __Filter -> Units__ and check your __snap.sdk-net-hello-world.app.service__
+   + Navigate to __Filter -> Units__ and check your __snap.sdk-net-hello-globalization.app.service__
    + Now you should the see the app output diagnostics.
    + Press __Refresh__ to update.
 
 7. If you have root permissions, you can also watch the output on any ssh console with the command:
 
     ```bash
-    sudo snap logs sdk-net-hello-world.app -f | more
+    sudo snap logs sdk-net-hello-globalization.app -f | more
     ```
 
 ## Console Output

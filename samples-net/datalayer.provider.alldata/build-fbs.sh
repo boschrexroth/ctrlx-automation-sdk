@@ -1,6 +1,6 @@
 #!/bin/bash
 
-flatc_linux=$(dirname $0)/../../bin/oss.flatbuffers/ubuntu22-gcc-x64/release/flatc
+flatc_linux=$(dirname $0)/../../bin/oss.flatbuffers/ubuntu24-gcc-x64/release/flatc
 flatc_windows=$(dirname $0)/../../bin/oss.flatbuffers/win-msvc-x64/release/flatc
 
 case "$OSTYPE" in

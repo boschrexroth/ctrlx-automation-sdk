@@ -1,0 +1,42 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: sdk-net-hello-globalization
+title: SDK .NET Hello Globalization
+base: core24
+version: 1.0.0
+#icon: assets/icons/ICONHERE.png
+summary: Hello Globalization sample written in .NET for ctrlX OS.
+description: |
+    This sample is not running in (performance optimized) globalization-invariant mode, to have full access to culture-specific data and behavior and globalization features. Enter 'sudo snap logs sdk-net-hello-globalization.app -f | more' to see the output.
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+platforms:
+    amd64:
+    arm64:
+        build-on: [amd64, arm64]
+        build-for: [arm64]
+
+apps:
+    app:
+        command: hello.globalization
+        daemon: simple
+        restart-condition: always
+        passthrough:
+            restart-delay: 10s
+
+        environment:
+            DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "false"
+parts:
+    app:
+        plugin: dump
+        source: ./publish
+        stage-packages:
+            - to amd64:
+                  - libicu74
+            - to arm64:
+                  - libicu74:arm64

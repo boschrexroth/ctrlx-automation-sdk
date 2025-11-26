@@ -6,7 +6,7 @@
 
 name: sdk-net-logbook
 title: SDK .NET Logbook
-base: core22
+base: core24
 version: 1.0.0
 #icon: assets/icons/ICONHERE.png
 summary: Logbook sample written in .NET for ctrlX OS.
@@ -15,10 +15,10 @@ description: |
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 apps:
@@ -30,7 +30,7 @@ apps:
       restart-delay: 10s
 
     environment:
-      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: 'true'
+      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "true"
 
 parts:
   app:
