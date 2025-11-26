@@ -1,9 +1,12 @@
-This license applies only to the code in this repository. 
+This license applies only to the software code in this repository. 
 Images, fonts and other assets are explicitly excluded.
+
+The binary files "datalayer.dll" and "comm.datalayer.so*" are licensed under the "Terms and Conditions for the Provision of
+Products of Bosch Rexroth AG Free of Charge" supplemented by the right to redistribution, any other software code in this repository is licensed under the: 
 
 MIT License
 
-Copyright (c) 2024 Bosch Rexroth AG
+Copyright (c) 2024-2025 Bosch Rexroth AG
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

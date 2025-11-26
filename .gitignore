@@ -5,6 +5,9 @@
 build
 venv/
 site/
+parts/
+prime/
+stage/
 
 .snapcraft
 
@@ -13,14 +16,16 @@ samples-go/*/generated
 samples-go/*/deps
 samples-go/*/datalayer
 samples-go/*/*.bfb
+samples-go/*/vendor/
+
 samples-python/*/*/__pycache__
 samples-python/*/parts
 samples-python/*/prime
 samples-python/*/stage
 
+samples-java/**/*.zip
+
 samples-net/*/*.DotSettings.user
-
-
 
 /CMakeFiles
 /ALL_BUILD.vcxproj

@@ -15,20 +15,21 @@ Here an overview of the sample project types and their subfolders.
 
 | Sample Project Type | Link to Projects                                        | Install Script                         |
 | :------------------ | :------------------------------------------------------ | :------------------------------------- |
-| __C/C++__           | [samples-cpp/README.md](samples-cpp/README.md)          | ~/scripts/install-cpp-aarch64-libs.sh  |
-| __Go__              | [samples-go/README.md](samples-go/README.md)            | ~/scripts/install-go.sh                |
+| __C/C++__           | [samples-cpp/README.md](samples-cpp/README.md)          | scripts/install-cpp-aarch64-libs.sh    |
+| __Go__              | [samples-go/README.md](samples-go/README.md)            | scripts/install-go.sh                  |
 | __Python__          | [samples-python/README.md](samples-python/README.md)    |                                        |
-| __.NET__            | [samples-net/README.md](samples-net/README.md)          | ~/scripts/install-dotnet-sdk.sh        |
-| __Node.js__         | [samples-node/README.md](samples-node/README.md)        | ~/scripts/install-nodejs-npm.sh        |
+| __.NET__            | [samples-net/README.md](samples-net/README.md)          | scripts/install-dotnet-sdk.sh          |
+| __Node.js__         | [samples-node/README.md](samples-node/README.md)        | scripts/install-nodejs-npm.sh          |
 | __Snap__            | [samples-snap/README.md](samples-snap/README.md)        |                                        |
 | __IEC 61131-3__     | [samples-iec61131/README.md](samples-iec61131/README.md)|                                        |
+| __java__            | [samples-java/README.md](samples-java/README.md)        | scripts/install-java-gradle.sh         |
 
 ## Building Snaps
 
 !!! important
     All project folders are containing these scripts to build snaps:
 
-* __build-snap-amd64.sh__: Build an amd64 snap for a ctrlX CORE^virtual^.
+* __build-snap-amd64.sh__: Build an amd64 snap for a ctrlX CORE<sup>virtual</sup>.
 * __build-snap-arm64.sh__: Build an arm64 (aarch64) snap for a ctrlX CORE.
 
 You can call these scripts from the command line:
