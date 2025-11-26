@@ -5,14 +5,14 @@ summary: Application data sample written in Python for ctrlX
 description: |
   This sample demonstrates how to persist your application data in ctrlX OS
 
-base: core22
+base: core24
 confinement: strict
 grade: stable
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 apps:
@@ -35,7 +35,7 @@ parts:
     source: ./configs
     plugin: dump
     organize:
-      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
+      "package-assets/*": package-assets/${CRAFT_PROJECT_NAME}/
 
 slots:
   package-assets:

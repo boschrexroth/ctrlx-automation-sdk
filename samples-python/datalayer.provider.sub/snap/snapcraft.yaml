@@ -4,14 +4,14 @@ version: 1.0.0
 summary: ctrlX Data Layer provider sample written in Python for ctrlX
 description: |
   This sample shows how a provider supports ctrlX Data Layer subscription interface
-base: core22
+base: core24
 confinement: strict
 grade: stable
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 apps:
@@ -53,5 +53,5 @@ plugs:
 lint:
   ignore:
     - library:
-      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
-      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

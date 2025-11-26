@@ -4,7 +4,7 @@ This sample shows how remote debugging can be done with Python.
 
 ## Prerequisites
 
-If you use a ctrlX CORE^virtual^ enable port forwarding of your remote debug port e.g. for port 15678
+If you use a ctrlX CORE<sup>virtual</sup> enable port forwarding of your remote debug port e.g. for port 15678
 
     8022:22,8443:443,8740:11740,4840:4840,2069:2069,2070:2070__,15678:15678__
 
@@ -23,7 +23,7 @@ Installed on a ctrlX CORE the service stops executing and waits until a remote d
 
 ## Build snap and install and start it
 
-For this job we recommend to use our shell script, here for a ctrlX ctrlX CORE^virtual^ with port forwarding
+For this job we recommend to use our shell script, here for a ctrlX ctrlX CORE<sup>virtual</sup> with port forwarding
 
     ../../scripts/build-upload-log-snap.sh -PF
 
@@ -46,7 +46,7 @@ When build and installation succeeded the snap is started as a service waiting f
 
 The file .vscode/launch.json contains launch configurations for remote debugging.
 
-We assume to debug the snap on a ctrlX ctrlX CORE^virtual^ with port forwarding click the launch icon on the side bar and select configuration 'Remote ctrlX COREvirtual - Port forwarding'.
+We assume to debug the snap on a ctrlX ctrlX CORE<sup>virtual</sup> with port forwarding click the launch icon on the side bar and select configuration 'Remote ctrlX COREvirtual - Port forwarding'.
 
 The debugging client of Visual Studio Code will connect to the waiting server and debugging will start.
 

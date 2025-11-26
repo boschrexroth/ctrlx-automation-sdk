@@ -4,14 +4,14 @@ version: 1.0.0
 summary: Web server Sample written in Python for ctrlX
 description: |
   This sample shows how to create a web server app in ctrlX
-base: core22
+base: core24
 confinement: strict
 grade: stable
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 apps:
@@ -38,13 +38,13 @@ parts:
     plugin: dump
     source: ./configs
     organize:
-      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
+      "package-assets/*": package-assets/${CRAFT_PROJECT_NAME}/
 
   www:
     plugin: dump
     source: ./www
     organize:
-      '*': www/
+      "*": www/
 
 slots:
   package-assets:
@@ -73,5 +73,5 @@ plugs:
 lint:
   ignore:
     - library:
-      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
-      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

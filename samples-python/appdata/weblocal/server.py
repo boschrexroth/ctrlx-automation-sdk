@@ -8,10 +8,9 @@ from socketserver import UnixStreamServer
 from urllib.parse import unquote
 from json import loads
 
-from  appdata.app_data_control import AppDataControl
+from appdata.app_data_control import AppDataControl
 
-from web.token import TokenValidation
-
+from weblocal.token import TokenValidation
 
 
 # Simple Webserver to get rest requests
