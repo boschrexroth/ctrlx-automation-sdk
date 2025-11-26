@@ -10,13 +10,13 @@ grade: stable
 summary: Sample app for datalayer client
 description: |
   This app shows access to Data Layer nodes provided by sdk-cpp-provider-alldata
-base: core22
+base: core24
 confinement: strict
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 # define how apps & services are exposed to host system

@@ -10,13 +10,13 @@ grade: stable
 summary: Sample app in cpp to register a ctrlX Data Layer branch with several nodes
 description: |
   This app will create a ctrlX Data Layer branch 'sdk/cpp/datalayer/provider/sub/' with nodes of int64 type.
-base: core22
+base: core24
 confinement: strict
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 # define how apps & services are exposed to host system
@@ -40,7 +40,7 @@ apps:
       - datalayer
     daemon: simple
     after:
-      - provider    
+      - provider
     restart-condition: always
     passthrough:
       restart-delay: 20s
@@ -52,8 +52,8 @@ parts:
     stage-packages:
       - ctrlx-datalayer
     organize:
-      'provider': bin/provider
-      'client': bin/client
+      "provider": bin/provider
+      "client": bin/client
 
 # describes which interface slots are required by defining the plugs
 plugs:
@@ -65,5 +65,5 @@ plugs:
 lint:
   ignore:
     - library:
-      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
-      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

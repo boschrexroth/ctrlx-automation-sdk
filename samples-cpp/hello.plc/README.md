@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This sample project shows the ctrlX Data Layer access to ctrlX PLC variables of a ctrlX CORE or ctrlX CORE^virtual^.
+This sample project shows the ctrlX Data Layer access to ctrlX PLC variables of a ctrlX CORE or ctrlX CORE<sup>virtual</sup>.
 
 ## Prerequisites
 
@@ -50,7 +50,7 @@ All DL variables will be listet but not overwritten.
 * Start your PLC application (F5) - be sure your ctrlX is in Operting
 * Install this sample project as snap or start it in the App Build Environment
 
-All DL variables will be listet, INT, REAL (Float) and STRING values are overwritten.
+All DL variables will be listed, INT, REAL (Float) and STRING values are overwritten.
 
 ___
 

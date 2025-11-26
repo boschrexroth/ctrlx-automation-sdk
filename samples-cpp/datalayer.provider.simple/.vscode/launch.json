@@ -8,7 +8,7 @@
             "name": "local - x64 Build Environment",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/generated/ubuntu22-gcc-x64/Debug/datalayerProviderSimple",
+            "program": "${workspaceFolder}/generated/ubuntu24-gcc-x64/Debug/datalayerProviderSimple",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
