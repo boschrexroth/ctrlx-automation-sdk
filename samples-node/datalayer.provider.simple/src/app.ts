@@ -10,8 +10,8 @@
 import DatalayerSystem from 'ctrlx-datalayer/dist/datalayersystem';
 import Result from 'ctrlx-datalayer/dist/result';
 import ProviderNodeCallbacks from 'ctrlx-datalayer/dist/providernodecallbacks';
-import IProviderNodeResult from "ctrlx-datalayer/dist/providernoderesult";
-import IVariant from "ctrlx-datalayer/dist/variant";
+import IProviderNodeResult from 'ctrlx-datalayer/dist/providernoderesult';
+import IVariant from 'ctrlx-datalayer/dist/variant';
 
 // Flatbuffers
 import * as flatbuffers from 'flatbuffers';
@@ -21,7 +21,7 @@ import { InertialValueT } from './sampleSchema_generated';
 import * as MetadataUtils from 'ctrlx-datalayer/dist/metadata-utils';
 import { Remote } from 'ctrlx-datalayer/dist/remote';
 
-// The main function
+
 async function main() {
 
     const rootNode = 'sdk/node/provider/simple';
@@ -34,7 +34,7 @@ async function main() {
     await system.start(false);
 
     // Create a remote address with the parameters according to your environment
-    const remote = Remote.build({ ip: "10.0.2.2", sslPort: 8443 });
+    const remote = Remote.build({ ip: '10.0.2.2', sslPort: 8443 });
     console.log('connection string:', remote);
 
     // Create a Datalayer Provider instance and connect. Automatically reconnects if the connection is interrupted.
@@ -55,14 +55,18 @@ async function main() {
     });
 
     // Create DTO with address, value and metadata
+
+    // Please see here for recommended allowed operations by node type: 
+    // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/ 
+    
     const myInt = {
         address: `${rootNode}/myInt`,
         value: 123,
-        metadata: new MetadataUtils.MetadataBuilder(MetadataUtils.AllowedOperationFlags.Read, "myInt Description", "http://myInt/description/url")
-            .setDisplayName("myInt DisplayName")
-            .setUnit("myInt Unit")
+        metadata: new MetadataUtils.MetadataBuilder(MetadataUtils.AllowedOperationFlags.Read, 'myInt Description', 'http://myInt/description/url')
+            .setDisplayName('myInt DisplayName')
+            .setUnit('myInt Unit')
             .setNodeClass(MetadataUtils.NodeClass.Variable)
-            .addReference(MetadataUtils.ReferenceType.ReadType, "types/datalayer/int32")
+            .addReference(MetadataUtils.ReferenceType.ReadType, 'types/datalayer/int32')
             .build()
     };
 
@@ -70,11 +74,11 @@ async function main() {
     const myDouble = {
         address: `${rootNode}/myDouble`,
         value: Math.PI,
-        metadata: new MetadataUtils.MetadataBuilder(MetadataUtils.AllowedOperationFlags.Read, "myDouble Description", "http://myDouble/description/url")
-            .setDisplayName("myDouble DisplayName")
-            .setUnit("myDouble Unit")
+        metadata: new MetadataUtils.MetadataBuilder(MetadataUtils.AllowedOperationFlags.Read, 'myDouble Description', 'http://myDouble/description/url')
+            .setDisplayName('myDouble DisplayName')
+            .setUnit('myDouble Unit')
             .setNodeClass(MetadataUtils.NodeClass.Variable)
-            .addReference(MetadataUtils.ReferenceType.ReadType, "types/datalayer/float64")
+            .addReference(MetadataUtils.ReferenceType.ReadType, 'types/datalayer/float64')
             .build()
     };
 
@@ -82,12 +86,12 @@ async function main() {
     const myString = {
         address: `${rootNode}/myString`,
         value: `Hello World! ${new Date().toISOString()}`,
-        metadata: new MetadataUtils.MetadataBuilder(MetadataUtils.AllowedOperationFlags.Read | MetadataUtils.AllowedOperationFlags.Write, "myString Description", "http://myString/description/url")
-            .setDisplayName("myString DisplayName")
-            .setUnit("myString Unit")
+        metadata: new MetadataUtils.MetadataBuilder(MetadataUtils.AllowedOperationFlags.Read | MetadataUtils.AllowedOperationFlags.Write, 'myString Description', 'http://myString/description/url')
+            .setDisplayName('myString DisplayName')
+            .setUnit('myString Unit')
             .setNodeClass(MetadataUtils.NodeClass.Variable)
-            .addReference(MetadataUtils.ReferenceType.ReadType, "types/datalayer/string")
-            .addReference(MetadataUtils.ReferenceType.WriteType, "types/datalayer/string")
+            .addReference(MetadataUtils.ReferenceType.ReadType, 'types/datalayer/string')
+            .addReference(MetadataUtils.ReferenceType.WriteType, 'types/datalayer/string')
             .build()
     };
 
@@ -101,9 +105,9 @@ async function main() {
             builder.finish(offset);
             return builder.asUint8Array();
         })(),
-        metadata: new MetadataUtils.MetadataBuilder(MetadataUtils.AllowedOperationFlags.Read, "My Inertial Value Description", "http://myInertialValue/description/url")
-            .setDisplayName("My Inertial Value DisplayName")
-            .setUnit("My Inertial Value Unit")
+        metadata: new MetadataUtils.MetadataBuilder(MetadataUtils.AllowedOperationFlags.Read, 'My Inertial Value Description', 'http://myInertialValue/description/url')
+            .setDisplayName('My Inertial Value DisplayName')
+            .setUnit('My Inertial Value Unit')
             .setNodeClass(MetadataUtils.NodeClass.Variable)
             .addReference(MetadataUtils.ReferenceType.ReadType, typeAddressInertialValue)
             .build()
@@ -200,5 +204,4 @@ async function main() {
     });
 }
 
-// Call main function
 main();

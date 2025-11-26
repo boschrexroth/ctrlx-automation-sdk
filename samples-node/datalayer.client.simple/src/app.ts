@@ -14,7 +14,7 @@ import IResult from 'ctrlx-datalayer/dist/result';
 import * as SubscriptionUtils from 'ctrlx-datalayer/dist/subscription-utils';
 import { Remote } from 'ctrlx-datalayer/dist/remote';
 
-// The main function
+
 async function main() {
 
     // Create a new ctrlX Data Layer system
@@ -93,5 +93,4 @@ async function main() {
     });
 }
 
-// Call main function
 main();

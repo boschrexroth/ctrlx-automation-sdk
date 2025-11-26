@@ -26,7 +26,7 @@ import Node from './node';
 // Utils
 import { Remote } from 'ctrlx-datalayer/dist/remote';
 
-// The main function
+
 async function main() {
 
     // Create a new ctrlX Data Layer system
@@ -36,7 +36,7 @@ async function main() {
     await system.start(false);
 
     // Create a remote address with the parameters according to your environment
-    const remote = Remote.build({ ip: "10.0.2.2", sslPort: 8443 });
+    const remote = Remote.build({ ip: '10.0.2.2', sslPort: 8443 });
     console.log('connection string:', remote);
 
     // Create a Datalayer Provider instance and connect. Automatically reconnects if the connection is interrupted.
@@ -212,5 +212,4 @@ async function main() {
     });
 }
 
-// Call main function
 main();

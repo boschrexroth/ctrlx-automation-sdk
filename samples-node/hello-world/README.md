@@ -24,7 +24,7 @@ Please read the common node docs [here](./../README.md), first.
 1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
 3. Choose __Open Folder__.
-4. Open the directory __datalayer.browse__.
+4. Open the directory __hello-world__.
 5. Build and install snap as described [here](./../README.md).
 6. Check the output using __Diagnostics__:
 

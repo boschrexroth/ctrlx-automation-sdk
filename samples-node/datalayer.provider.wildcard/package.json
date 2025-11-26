@@ -1,7 +1,7 @@
 {
-    "name": "hello-world",
+    "name": "datalayer-provider-wildcard",
     "version": "1.0.0",
-    "description": "Hello World sample for ctrlX CORE.",
+    "description": "ctrlX Data Layer wildcard provider sample for ctrlX CORE.",
     "bin": {
         "app": "dist/app.js"
     },
@@ -17,6 +17,9 @@
         "eslint": "^9.39.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "ctrlx-datalayer": "^3.0.0"
     },
     "scripts": {
         "getName": "echo $npm_package_name",

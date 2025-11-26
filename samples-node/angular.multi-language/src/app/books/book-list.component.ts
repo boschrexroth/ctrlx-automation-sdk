@@ -11,6 +11,7 @@ import { IBook } from './book';
     selector: 'app-books',
     templateUrl: './book-list.component.html',
     styleUrls: ['./book-list.component.scss'],
+    standalone: false
 })
 export class ProductListComponent implements AfterViewInit {
     language = 'en';

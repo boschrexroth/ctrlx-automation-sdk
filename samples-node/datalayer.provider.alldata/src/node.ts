@@ -78,6 +78,10 @@ class Node implements INode {
         const address = this.rootNode + "/static/" + dataType.getName();
         const allowedOperationFlags = MetadataUtils.AllowedOperationFlags.Read | MetadataUtils.AllowedOperationFlags.Write;
         const description = `Static data with type ${dataType.getName()}`;
+
+        // Please see here for recommended allowed operations by node type: 
+        // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/ 
+
         const metadata = new MetadataUtils.MetadataBuilder(allowedOperationFlags, description)
             .setDisplayName(dataType.getName())
             .setNodeClass(MetadataUtils.NodeClass.Variable)
@@ -102,6 +106,10 @@ class Node implements INode {
         const address = this.rootNode + "/dynamic/" + dataType.getName();
         const allowedOperationFlags = MetadataUtils.AllowedOperationFlags.Read;
         const description = `Dynamic data with type ${dataType.getName()}`;
+
+        // Please see here for recommended allowed operations by node type: 
+        // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/ 
+        
         const metadata = new MetadataUtils.MetadataBuilder(allowedOperationFlags, description)
             .setDisplayName(dataType.getName())
             .setNodeClass(MetadataUtils.NodeClass.Variable)
