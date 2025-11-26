@@ -13,19 +13,19 @@ echo "registered in /etc/wgetrc and /etc/environment"
 echo "answer y and enter the URLs."
 echo "If you restart this script this step must be skipped, enter N."
 echo ""
-read -p "Add HTTP/HTTPS proxy server URLs (y/N) " PROXY
+read -r -p "Add HTTP/HTTPS proxy server URLs (y/N) " PROXY
 
-if grep -q "y" <<<${PROXY}
+if grep -q "y" <<<"${PROXY}"
 then
 
   HTTP_PROXY_URL=http://10.0.2.2:3128
-  read -p "Enter the HTTP proxy server URL (${HTTP_PROXY_URL}) " HTTP_PROXY_URL
+  read -r -p "Enter the HTTP proxy server URL (${HTTP_PROXY_URL}) " HTTP_PROXY_URL
   if [ "$HTTP_PROXY_URL" == "" ];then
     HTTP_PROXY_URL=http://10.0.2.2:3128
   fi
 
   HTTPS_PROXY_URL=http://10.0.2.2:3128
-  read -p "Enter the HTTPS proxy server URL (${HTTPS_PROXY_URL}) " HTTPS_PROXY_URL
+  read -r -p "Enter the HTTPS proxy server URL (${HTTPS_PROXY_URL}) " HTTPS_PROXY_URL
   if [ "$HTTPS_PROXY_URL" == "" ];then
     HTTPS_PROXY_URL=http://10.0.2.2:3128
   fi
@@ -35,25 +35,26 @@ then
   echo "HTTP proxy server ${HTTP_PROXY_URL}"
   echo "HTTPS proxy server ${HTTPS_PROXY_URL}"
   echo " "
-  read -t 10 -p "OK? "
+  read -r -t 10 -p "OK? "
 
   sudo chmod 777 /etc
 
   sudo chmod 777 /etc/wgetrc
-  sudo echo "http_proxy = ${HTTP_PROXY_URL}" >> /etc/wgetrc
-  sudo echo "https_proxy = ${HTTPS_PROXY_URL}" >> /etc/wgetrc
-  sudo echo "use_proxy = on" >> /etc/wgetrc
+  echo "http_proxy = ${HTTP_PROXY_URL}" | sudo tee -a /etc/wgetrc
+  echo "https_proxy = ${HTTPS_PROXY_URL}" | sudo tee -a /etc/wgetrc
+  echo "use_proxy = on" | sudo tee -a /etc/wgetrc
 
   #   # Proxy settings for environment
   if [ -f /etc/environment ]
   then
     sudo chmod 777 /etc/environment
-  fi        
-  sudo echo "http_proxy=\"${HTTP_PROXY_URL}\"" >> /etc/environment
-  sudo echo "https_proxy=\"${HTTPS_PROXY_URL}\"" >> /etc/environment
-  sudo echo "HTTP_PROXY=\"${HTTP_PROXY_URL}\"" >> /etc/environment
-  sudo echo "HTTPS_PROXY=\"${HTTPS_PROXY_URL}\"" >> /etc/environment
-  sudo echo "no_proxy=localhost,127.0.0.1,10.0.2.2,.local" >> /etc/environment
+  fi   
+
+  echo "http_proxy=\"${HTTP_PROXY_URL}\"" | sudo tee -a /etc/environment
+  echo "https_proxy=\"${HTTPS_PROXY_URL}\"" | sudo tee -a /etc/environment
+  echo "HTTP_PROXY=\"${HTTP_PROXY_URL}\"" | sudo tee -a /etc/environment
+  echo "HTTPS_PROXY=\"${HTTPS_PROXY_URL}\"" | sudo tee -a /etc/environment
+  echo "no_proxy=localhost,127.0.0.1,10.0.2.2,.local" | sudo tee -a /etc/environment
 
 fi	
 
@@ -81,7 +82,6 @@ sudo apt install -y \
    jq \
    sshpass \
    libsystemd-dev \
-   libzmq3-dev \
    libssl-dev \
    libzip-dev \
    uuid-dev \
@@ -95,8 +95,8 @@ sudo dpkg --add-architecture arm64
 sudo chmod 777 /etc/apt/sources.list.d/
 sudo chmod 777 /etc/apt/sources.list.d/*
 
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy main restricted universe" > /etc/apt/sources.list.d/multiarch-libs.list
-sudo echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-updates main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy main restricted universe" | sudo tee /etc/apt/sources.list.d/multiarch-libs.list
+echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-updates main restricted universe" | sudo tee -a /etc/apt/sources.list.d/multiarch-libs.list
 
   # Qualify architecture
 sudo sed -i 's/deb http:/deb [arch=amd64] http:/g' /etc/apt/sources.list

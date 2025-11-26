@@ -1,4 +1,4 @@
-# ctrlX App Build Environment Ubuntu 22.04
+# ctrlX App Build Environment Ubuntu 24.04
 
 ## Introduction
 
@@ -28,7 +28,7 @@ Here the Windows environment variable PATH is extended so that the ctrlX WORKS i
 
 launch.bat downloads the Ubuntu Server image, creates a snapshot file (.qcow2) and launches the QEMU executable. The image file remains unchanged, all changes are saved in the snapshot file.
 
-During startup the App Build Environment will be configured by the Ubuntu Cloud-Init Technology. Therefor the cloud-config file contained in the user-data-image file is used.
+During startup the App Build Environment will be configured by the Ubuntu Cloud-Init Technology. Therefore the cloud-config file contained in the user-data-image file is used.
 
 In this initialization phase login is not possible.
 
@@ -60,9 +60,9 @@ Stop the App Build Enviroment and click the waste bin icon in ctrlX WORKS.
 
 An App Build Enviroment always works with a base file and a snapshot file. The base file is never changed, all changes are stored into the snapshot file.
 
-When a new App Build Enviroment was created the ubuntu server image file (e.g. ubuntu-22.04-server-cloudimg-amd64.img) is the base file.
+When a new App Build Enviroment was created the ubuntu server image file (e.g. ubuntu-24.04-server-cloudimg-amd64.img) is the base file.
 
-`ubuntu-22.04-server-cloudimg-amd64.qcow2` is always the snap shot file.
+`ubuntu-24.04-server-cloudimg-amd64.qcow2` is always the snap shot file.
 
 #### Creating a new Snapshot
 
@@ -72,7 +72,7 @@ To do this just call:
 
     snapshot.bat
 
-The bat file converts the actual snapshot file into a base file `ubuntu-22.04-server-cloudimg-amd64-0.qcow2` and creates a new snapshot file `ubuntu-22.04-server-cloudimg-amd64.qcow2` will be created.
+The bat file converts the actual snapshot file into a base file `ubuntu-24.04-server-cloudimg-amd64-0.qcow2` and creates a new snapshot file `ubuntu-24.04-server-cloudimg-amd64.qcow2` will be created.
 
 This can be done several times, for each repetition the number in the base file name will be increased: 0, 1, 2, etc.
 
@@ -80,15 +80,15 @@ This can be done several times, for each repetition the number in the base file 
 
 You can restore an older snapshot manually:
 
-* Delete the actual snapshot file (or move to another direcory): `ubuntu-22.04-server-cloudimg-amd64.qcow2`
-* Rename the base file you want to use into `ubuntu-22.04-server-cloudimg-amd64.qcow2`
+* Delete the actual snapshot file (or move to another direcory): `ubuntu-24.04-server-cloudimg-amd64.qcow2`
+* Rename the base file you want to use into `ubuntu-24.04-server-cloudimg-amd64.qcow2`
 
 #### Increase the Virtual Size of the Snapshot File
 
 Per default a snapshot file has the virtual size of 32GB.
 In case you want to increase this just call:
 
-	increase-virtual-size.bat
+    increase-virtual-size.bat
 
 The virtual size is increased by 10GB.
 

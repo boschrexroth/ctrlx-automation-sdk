@@ -4,7 +4,7 @@
 set -e
 
 DIR=$1
-if [ ! -z "$DIR" ]; then
+if [ -n "$DIR" ]; then
     cd "$DIR"
 fi
 

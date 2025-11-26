@@ -5,12 +5,12 @@ REM and creates a new overlay file.
 
 setlocal
 SET PATH=c:\Program Files\Rexroth\ctrlX WORKS\qemu;%PATH%
-SET QCOW2=ubuntu-22.04-server-cloudimg-amd64.qcow2
+SET QCOW2=ubuntu-24.04-server-cloudimg-amd64.qcow2
 
 REM Find filename for the new snapshot file
 for /l %%x in (1, 1, 100) do (
-	if not exist ubuntu-22.04-server-cloudimg-amd64-%%x.qcow2 (
-	SET SNAPSHOT=ubuntu-22.04-server-cloudimg-amd64-%%x.qcow2
+	if not exist ubuntu-24.04-server-cloudimg-amd64-%%x.qcow2 (
+	SET SNAPSHOT=ubuntu-24.04-server-cloudimg-amd64-%%x.qcow2
 	goto SNAPSHOT_CREATE)
 )
 

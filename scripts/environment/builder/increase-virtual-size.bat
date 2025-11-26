@@ -2,7 +2,7 @@
 
 setlocal
 SET PATH=c:\Program Files\Rexroth\ctrlX WORKS\qemu;%PATH%
-SET QCOW2=ubuntu-22.04-server-cloudimg-amd64.qcow2
+SET QCOW2=ubuntu-24.04-server-cloudimg-amd64.qcow2
 
 CALL :SUB_INFO
 

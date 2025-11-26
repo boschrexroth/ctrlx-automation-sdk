@@ -22,7 +22,7 @@ set NAME=%~4
 If not defined NAME (set NAME=App-Build-Environment)
 
 set ACCEL=%~5
-If not defined ACCEL (set ACCEL=whpx:hax:tcg)
+If not defined ACCEL (set ACCEL=whpx:tcg)
 
 set ACTIVITY="Initializing, please wait - restart if finshed"
 if exist *.qcow2 (set ACTIVITY= )
@@ -30,7 +30,7 @@ if exist *.qcow2 (set ACTIVITY= )
 TITLE %NAME% %ACTIVITY% %CD% %ARCH% %PFW%
 
 REM Desired Ubuntu version
-set VERSION=22.04
+set VERSION=24.04
 
 set OS=ubuntu-%VERSION%-server
 

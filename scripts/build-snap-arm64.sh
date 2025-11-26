@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -e
-sudo snapcraft clean
-sudo snapcraft --build-for=arm64 --verbosity=verbose
+snapcraft clean
+snapcraft pack --build-for=arm64 --verbosity=verbose

@@ -5,7 +5,7 @@
 # installes the required files from ctrlx-automation-sdk-*.zip.
 #
 
-if [[ "--help" = $1 ]]; then
+if [[ "--help" = "${1}" ]]; then
 	echo ""
 	echo "This script creates a local copy of the ctrlX AUTOMATION SDK github repository"
 	echo "and installs the required files from the ctrlX AUTOMATION SDK zip archive."
@@ -20,7 +20,7 @@ SDK_DIR=${WORKING_DIR}/ctrlx-automation-sdk
 SEPARATION_LINE_1="===================================================================================================="
 SEPARATION_LINE_2="----------------------------------------------------------------------------------------------------"
 
-if [ -d ${SDK_DIR} ]; then
+if [ -d "${SDK_DIR}" ]; then
 	echo ""
 	read -rp "Delete existing directory ${SDK_DIR} Y/n? " ANS
 	if [[ "$ANS" == *"n"* ]]; then
@@ -61,7 +61,7 @@ echo ""
 echo $SEPARATION_LINE_1
 echo "Checking out tag ${TAG} ..."
 echo $SEPARATION_LINE_2
-git checkout tags/${TAG}
+git checkout tags/"${TAG}"
 
 cd "$WORKING_DIR" || exit
 
@@ -120,12 +120,12 @@ echo $SEPARATION_LINE_2
 find . \( -type d -exec chmod 775 {} \; \) -o \( -type f -exec chmod 664 {} \; \)
 
 # Add x permission (path independ solution)
-find $SDK_DIR/bin -name mddb_compiler -exec chmod +x {} \;
-find $SDK_DIR/bin -name dl_compliance -exec chmod +x {} \;
-find $SDK_DIR/bin -name flatc -exec chmod +x {} \;
+find "$SDK_DIR"/bin -name mddb_compiler -exec chmod +x {} \;
+find "$SDK_DIR"/bin -name dl_compliance -exec chmod +x {} \;
+find "$SDK_DIR"/bin -name flatc -exec chmod +x {} \;
 # All scripts
 find . -name '*.sh' -exec chmod +x {} \;
 # Former versions are containing  rexroth-automation-frame
-find $SDK_DIR/bin -name rexroth-automation-frame -exec chmod +x {} \;
+find "$SDK_DIR"/bin -name rexroth-automation-frame -exec chmod +x {} \;
 
 

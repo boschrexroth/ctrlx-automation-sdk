@@ -1,12 +1,13 @@
 #!/bin/bash
 
+# shellcheck disable=SC2044
+# shellcheck disable=SC2069
+
 ARCH=arm64
 
 ADDR=192.168.1.1
 SSL_PORT=443
 SSH_PORT=22
-
-ASK=y
 
 SECONDS_TO_WAIT_AFTER_SHOW_ARGUMENTS=5
 SECONDS_TO_WAIT_AFTER_UPLOAD=30
@@ -31,7 +32,7 @@ LOGS=y
 # Function(s) ------------------------------------------------------------------------------
 function WaitForTaskFinished() {
 
-    local task_id=$1
+    local task_id=${1}
 
     # Wait some seconds for first try
     sleep 10
@@ -39,7 +40,8 @@ function WaitForTaskFinished() {
     local timeout=60
     local counter=0
     while true; do
-        local response=$(curl -X GET https://${ADDR}:${SSL_PORT}/package-manager/api/v1/tasks/$task_id \
+        local response
+		response=$(curl -X GET "https://${ADDR}:${SSL_PORT}/package-manager/api/v1/tasks/$task_id" \
             -H "accept: application/json" \
             -H "Authorization: Bearer ${TOKEN}" \
             --insecure --silent)
@@ -49,15 +51,19 @@ function WaitForTaskFinished() {
         # echo $response
         # echo "----- DEBUG -----"
 
-        local snap=$(echo $response | jq -r .parameters.id)
-        local action=$(echo $response | jq -r .action)
-        local state=$(echo $response | jq -r .state)
+        local snap 
+		snap=$(echo "$response" | jq -r .parameters.id)
+        local action
+		action=$(echo "$response" | jq -r .action)
+        local state
+		state=$(echo "$response" | jq -r .state)
         if [[ "$state" == "pending" ]]; then
             echo "INFO action '$action' of '$snap' is pending"
         fi
 
         if [[ "$state" == "running" ]]; then
-            local progress=$(echo $response | jq .progress)
+            local progress
+			progress=$(echo "$response" | jq .progress)
             echo "INFO action '$action' of '$snap' is running, progress=$progress%"
         fi
 
@@ -69,7 +75,7 @@ function WaitForTaskFinished() {
         fi
 
         local counter=$((counter + 1))
-        if [[ $counter == $timeout ]]; then
+        if [[ $counter == "$timeout" ]]; then
             echo "ERROR action '$action' of '$snap' is timed out!"
             RESULT="ERROR"
             break
@@ -88,12 +94,12 @@ for arg in "$@"; do
 	i=$((i+1))
 	argNext=$((i+1))
 
-	if grep -q "NA" <<<${arg}
+	if grep -q "NA" <<<"${arg}"
 	then
 		ARCH=amd64
 	fi
 
-	if grep -q "PF" <<<${arg}
+	if grep -q "PF" <<<"${arg}"
 	then
 		ADDR=10.0.2.2
 		SSL_PORT=8443
@@ -101,18 +107,18 @@ for arg in "$@"; do
 		SSH_PORT=8022
 	fi
 
-	if grep -q "build" <<<${arg}
+	if grep -q "build" <<<"${arg}"
 	then
 		BUILD=${!argNext}
 	fi
 
-	if grep -q "upload" <<<${arg}
+	if grep -q "upload" <<<"${arg}"
 	then
 		UPLOAD=${!argNext}
 	fi
 
 
-	if grep -q "uninst" <<<${arg}
+	if grep -q "uninst" <<<"${arg}"
 	then
 		UNINSTALL=${!argNext}
 	fi
@@ -121,70 +127,70 @@ for arg in "$@"; do
 	then
 		echo *********************************
 		BUNDLE=${!argNext}
-		echo BUNDLE $BUNDLE
+		echo "BUNDLE $BUNDLE"
 	fi
 
-	if grep -q "ip" <<<${arg}
+	if grep -q "ip" <<<"${arg}"
 	then
 		ADDR=${!argNext}
 	fi
 
-	if grep -q "addr" <<<${arg}
+	if grep -q "addr" <<<"${arg}"
 	then
 		ADDR=${!argNext}
 	fi
 
-	if grep -q "ssl-port" <<<${arg}
+	if grep -q "ssl-port" <<<"${arg}"
 	then
 		SSL_PORT=${!argNext}
 	fi
 
-	if grep -q "ssl-usr" <<<${arg}
+	if grep -q "ssl-usr" <<<"${arg}"
 	then
 		SSL_USR=${!argNext}
 	fi
 
-	if grep -q "ssl-pwd" <<<${arg}
+	if grep -q "ssl-pwd" <<<"${arg}"
 	then
 		SSL_PWD=${!argNext}
 	fi
 
-	if grep -q "serv" <<<${arg}
+	if grep -q "serv" <<<"${arg}"
 	then
 		SERVICE=${!argNext}
 	fi
 
-	if grep -q "oper" <<<${arg}
+	if grep -q "oper" <<<"${arg}"
 	then
 		OPERATING=${!argNext}
 	fi
 
-	if grep -q "arch" <<<${arg}
+	if grep -q "arch" <<<"${arg}"
 	then
 		ARCH=${!argNext}
 	fi
 
-	if grep -q "log" <<<${arg}
+	if grep -q "log" <<<"${arg}"
 	then
 		LOGS=${!argNext}
 	fi
 
-	if grep -q "ssh-port" <<<${arg}
+	if grep -q "ssh-port" <<<"${arg}"
 	then
 		SSH_PORT=${!argNext}
 	fi
 
-	if grep -q "ssh-usr" <<<${arg}
+	if grep -q "ssh-usr" <<<"${arg}"
 	then
 		SSH_USR=${!argNext}
 	fi
 
-	if grep -q "ssh-pwd" <<<${arg}
+	if grep -q "ssh-pwd" <<<"${arg}"
 	then
 		SSH_PWD=${!argNext}
 	fi
 
-	if grep -q "help" <<<${arg}
+	if grep -q "help" <<<"${arg}"
 	then
 		echo " "
 		echo "-----------------------------------------------------"
@@ -260,34 +266,35 @@ for arg in "$@"; do
 	fi
 done
 
-echo -arch ${ARCH}
-echo -addr ${ADDR}
-echo -ssl-port ${SSL_PORT}
-echo -ssl-usr ${SSL_USR} 
-echo -ssl-pwd ${SSL_PWD}
-echo -ssh-port ${SSH_PORT}
+echo "-arch ${ARCH}"
+echo "-addr ${ADDR}"
+echo "-ssl-port ${SSL_PORT}"
+echo "-ssl-usr ${SSL_USR}" 
+echo "-ssl-pwd ${SSL_PWD}"
+echo "-ssh-port ${SSH_PORT}"
 echo " "
-echo -build ${BUILD}
-echo -upload ${UPLOAD}
-echo -bundle ${BUNDLE}
-echo -uninstall ${UNINSTALL}
+echo "-build ${BUILD}"
+echo "-upload ${UPLOAD}"
+echo "-bundle ${BUNDLE}"
+echo "-uninstall ${UNINSTALL}"
 echo " "
-echo -service ${SERVICE}
-echo -operating ${OPERATING}
+echo "-service ${SERVICE}"
+echo "-operating ${OPERATING}"
 echo " "
-echo -logs ${LOGS}
+echo "-logs ${LOGS}"
 echo " "
 echo " "
-echo "Settings OK? Waiting" ${SECONDS_TO_WAIT_AFTER_SHOW_ARGUMENTS} "s ..."
-read -t ${SECONDS_TO_WAIT_AFTER_SHOW_ARGUMENTS} -p "Press ENTER to continue"
+echo "Settings OK? Waiting ${SECONDS_TO_WAIT_AFTER_SHOW_ARGUMENTS}s ..."
+read -r -t ${SECONDS_TO_WAIT_AFTER_SHOW_ARGUMENTS} -p "Press ENTER to continue"
 
-if grep -q "y" <<<${BUILD}
+if grep -q "y" <<<"${BUILD}"
 then
 	echo " "
 	echo -----------------------------------------------------------------
 	echo Building snap
 	echo " "
-	source build-snap-${ARCH}.sh
+	# shellcheck source=/dev/null
+	source build-snap-"${ARCH}".sh
 fi
 
 echo " "
@@ -295,15 +302,15 @@ echo -----------------------------------------------------------------
 echo Requesting new Bearer Token
 echo " "
 
-res=$(curl --insecure --no-progress-meter --request POST https://${ADDR}:${SSL_PORT}/identity-manager/api/v1/auth/token --header 'Content-Type: application/json' --data-raw '{"name":"'${SSL_USR}'","password":"'${SSL_PWD}'"}')
+res=$(curl --insecure --no-progress-meter --request POST "https://${ADDR}:${SSL_PORT}/identity-manager/api/v1/auth/token" --header 'Content-Type: application/json' --data-raw '{"name":"'${SSL_USR}'","password":"'${SSL_PWD}'"}')
 # https://stackoverflow.com/questions/9733338/shell-script-remove-first-and-last-quote-from-a-variable
 # Remove first and last quote (") from a variable
-TOKEN=$(echo ${res} | jq .access_token | xargs)
+TOKEN=$(echo "${res}" | jq .access_token | xargs)
 
-echo Bearer ${TOKEN}
+echo "Bearer ${TOKEN}"
 echo " "
 
-if grep -q "y" <<<${SERVICE}
+if grep -q "y" <<<"${SERVICE}"
 then
 	echo " "
 	echo -----------------------------------------------------------------
@@ -311,34 +318,34 @@ then
 	echo " "
 
 	RESPONSE=$(curl -X 'PUT' \
-	  https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json \
+	  "https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json" \
 	  -H 'accept: application/json' \
 	  -H "Authorization: Bearer ${TOKEN}" \
 	  -H 'Content-Type: application/json' \
 	  -d '{"state":"SERVICE"}' \
       --insecure --no-progress-meter --silent --show-error)
 
-	if grep -q "SERVICE" <<<${RESPONSE}
+	if grep -q "SERVICE" <<<"${RESPONSE}"
 	then			 
 		echo OK
 	else 
 		echo WARNING Switching Scheduler to state SERVICE failed
-		read -t ${SECONDS_TO_WAIT_AFTER_UPLOAD} -p "Wait or press ENTER to continue"
+		read -r -t ${SECONDS_TO_WAIT_AFTER_UPLOAD} -p "Wait or press ENTER to continue"
 	fi
 
 	echo " "
 fi
 
-if grep -q "y" <<<${UNINSTALL}
+if grep -q "y" <<<"${UNINSTALL}"
 then
 
 	echo " "
 	echo -----------------------------------------------------------------
-	echo Uninstalling ${ARCH} snaps
+	echo "Uninstalling ${ARCH} snaps"
 
 	# Read list of installed snaps
 	ALL_INSTALLED_SNAPS=$(curl -X 'GET' \
-		  https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages \
+		  "https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages" \
 		  -H 'accept: application/json' \
 		  -H "Authorization: Bearer ${TOKEN}" \
 		  -H 'Content-Type: application/json' \
@@ -349,45 +356,45 @@ then
 	do 
 
 		# Get snap name without arch and version info
-		SNAP=$(basename $f)
+		SNAP=$(basename "$f")
 		SNAP=${SNAP%_*}
 		SNAP=${SNAP%_*}
 
-		if grep -q $SNAP <<<${ALL_INSTALLED_SNAPS}
+		if grep -q "$SNAP" <<<"${ALL_INSTALLED_SNAPS}"
 		then
 
 			echo " "  
-			echo Uninstalling $SNAP  --------------------------
+			echo "Uninstalling $SNAP  --------------------------"
 			echo " " 
 
 			curl -X POST \
-			https://${ADDR}:${SSL_PORT}/package-manager/api/v1/tasks \
+			"https://${ADDR}:${SSL_PORT}/package-manager/api/v1/tasks" \
 			-H 'accept: */*' \
 			-H "Authorization: Bearer ${TOKEN}" \
 			-H 'Content-Type: application/json' \
-			-d '{ "action": "uninstall", "parameters": { "id": "'${SNAP}'" } }' \
+			-d '{ "action": "uninstall", "parameters": { "id": "'"${SNAP}"'" } }' \
 			--insecure --no-progress-meter --silent --show-error
 
 			echo "Waiting ${SECONDS_TO_WAIT_AFTER_UNINSTALL}s after uninstallation ..."
-			read -t ${SECONDS_TO_WAIT_AFTER_UNINSTALL} -p "Wait or press ENTER to continue"
+			read -r-t ${SECONDS_TO_WAIT_AFTER_UNINSTALL} -p "Wait or press ENTER to continue"
 			echo " "  
 
 		else
-			echo NOT installed: $SNAP
+			echo "NOT installed: $SNAP"
 		fi
 	done;
 fi
 
-if grep -q "y" <<<${UPLOAD}
+if grep -q "y" <<<"${UPLOAD}"
 then
 
 	echo " "
-	echo -----------------------------------------------------------------
+	echo "-----------------------------------------------------------------"
 	echo Allow installation from unknown source
 	echo " "
 
 	curl -X PUT \
-	  https://${ADDR}:${SSL_PORT}/package-manager/api/v1/settings \
+	  "https://${ADDR}:${SSL_PORT}/package-manager/api/v1/settings" \
 	  -H 'accept: */*' \
 	  -H "Authorization: Bearer ${TOKEN}" \
 	  -H 'Content-Type: application/json' \
@@ -395,21 +402,21 @@ then
 	  --insecure --no-progress-meter --silent --show-error
 
 	echo " "
-	echo -----------------------------------------------------------------
-	echo Uploading and installing ${ARCH} snaps
+	echo "-----------------------------------------------------------------"
+	echo "Uploading and installing ${ARCH} snaps"
 
 	for f in $(find . -name "*_${ARCH}.snap"); 
 	do 
-		SNAP=$(basename $f)
+		SNAP=$(basename "$f")
 		SNAP=${SNAP%_*}
 		SNAP=${SNAP%_*}
 
 		echo " "  
-		echo Uploading ...
-		echo "     file" $f
-		echo "     snap" ${SNAP}
+		echo "Uploading ..."
+		echo "     file $f"
+		echo "     snap ${SNAP}"
 		echo " "  
-		LOCATION=$(curl -X POST https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages \
+		LOCATION=$(curl -X POST "https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages" \
 		-H "accept: */*" \
 		-H "Authorization: Bearer ${TOKEN}" \
 		-H "Content-Type: multipart/form-data" \
@@ -417,18 +424,18 @@ then
 		-F update=true \
         --insecure --silent --include | tr -d '\r' | sed -En 's/^location: (.*)/\1/p')
 
-    	TASK_ID=$(echo $LOCATION | cut -d'/' -f 3)
+    	TASK_ID=$(echo "$LOCATION" | cut -d'/' -f 3)
 
- 		WaitForTaskFinished $TASK_ID
+ 		WaitForTaskFinished "$TASK_ID"
 	done;
 
 	echo " "
-	echo -----------------------------------------------------------------
-	echo Checking if ${ARCH} snaps are installed
+	echo "-----------------------------------------------------------------"
+	echo "Checking if ${ARCH} snaps are installed"
 
 	# Read list of installed snaps
 	ALL_INSTALLED_SNAPS=$(curl -X 'GET' \
-		https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages \
+		"https://${ADDR}:${SSL_PORT}/package-manager/api/v1/packages" \
 		-H 'accept: application/json' \
 		-H "Authorization: Bearer ${TOKEN}" \
 		-H 'Content-Type: application/json' \
@@ -436,34 +443,34 @@ then
 
 	for f in $(find . -name "*_${ARCH}.snap"); 
 	do 
-		SNAP=$(basename $f)
+		SNAP=$(basename "$f")
 		SNAP=${SNAP%_*}
 		SNAP=${SNAP%_*}
 
-		if grep -q ${SNAP} <<<${ALL_INSTALLED_SNAPS}
+		if grep -q "${SNAP}" <<<"${ALL_INSTALLED_SNAPS}"
 		then
-			echo INFO Is installed ${SNAP}
+			echo "INFO Is installed ${SNAP}"
 		else
-			echo ERROR Is NOT installed ${SNAP}
+			echo "ERROR Is NOT installed ${SNAP}"
 		fi
 	done;
 fi
 
-if grep -q "y" <<<${OPERATING}
+if grep -q "y" <<<"${OPERATING}"
 then
 
 	for i in $(seq 1 5);
 	do
 
 		echo " "
-		echo -----------------------------------------------------------------
+		echo "-----------------------------------------------------------------"
 		echo Switching Scheduler to state OPERATING
 		echo " "
 
 		# Two steps are needed
 		# 1. Start rexroth-automationcore.control (scheduler)
 		NOT_USED_RESPONSE=$(curl -X 'PUT' \
-		  https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json \
+		  "https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json" \
 		  -H 'accept: application/json' \
 		  -H "Authorization: Bearer ${TOKEN}" \
 		  -H 'Content-Type: application/json' \
@@ -472,19 +479,19 @@ then
 
 		# 2. Switch scheduler to OPERATING
 		RESPONSE=$(curl -X 'PUT' \
-		  https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json \
+		  "https://${ADDR}:${SSL_PORT}/automation/api/v1/scheduler/admin/state?format=json" \
 		  -H 'accept: application/json' \
 		  -H "Authorization: Bearer ${TOKEN}" \
 		  -H 'Content-Type: application/json' \
 		  -d '{"state":"OPERATING"}' \
 		  --insecure --no-progress-meter --silent --show-error)
 		
-		if grep -q "Error" <<<${RESPONSE}
+		if grep -q "Error" <<<"${RESPONSE}"
 		then			 
 			echo " "
 			echo WARNING Switching Scheduler to state OPERATING failed
 			echo "We are repeating in ${SECONDS_TO_WAIT_AFTER_UPLOAD}s ..."
-			read -t ${SECONDS_TO_WAIT_AFTER_UPLOAD} -p "Wait or press ENTER to continue"
+			read -r -t ${SECONDS_TO_WAIT_AFTER_UPLOAD} -p "Wait or press ENTER to continue"
 			echo " "
 		else 
 			echo OK
@@ -502,36 +509,36 @@ then
 	LOGS=n
 	
 		echo " "
-		echo -----------------------------------------------------------------
-		echo Checking bundle $BUNDLE ...
+		echo "-----------------------------------------------------------------"
+		echo "Checking bundle $BUNDLE ..."
 		echo " "
 		BUNDLES=$(curl -X 'GET' \
-			https://${ADDR}:${SSL_PORT}/automation/api/v2/nodes/framework/bundles?type=browse \
+			"https://${ADDR}:${SSL_PORT}/automation/api/v2/nodes/framework/bundles?type=browse" \
 			-H 'accept: application/json' \
 			-H "Authorization: Bearer ${TOKEN}" \
 			--insecure --no-progress-meter)
 
 		echo " "
-		echo $BUNDLES
+		echo "$BUNDLES"
 		echo " "
 
-		if grep -q $BUNDLE <<<"$BUNDLES"; then
+		if grep -q "$BUNDLE" <<<"$BUNDLES"; then
 			echo "INFO Is registered: $BUNDLE"
 			
 			STATE=$(curl -X 'GET' \
-				https://${ADDR}:${SSL_PORT}/automation/api/v2/nodes/framework/bundles/$BUNDLE \
+				"https://${ADDR}:${SSL_PORT}/automation/api/v2/nodes/framework/bundles/$BUNDLE" \
 				-H 'accept: application/json' \
 				-H "Authorization: Bearer ${TOKEN}" \
 				--insecure --no-progress-meter)
 
-			echo $STATE
+			echo "$STATE"
 			echo " "
-			echo "	name" $(echo $STATE | jq .value.name)
-			echo "	version" $(echo $STATE | jq .value.version)
-			echo "	components" $(echo $STATE | jq .value.components)
-			echo "	state" $(echo $STATE | jq .value.state)
-			echo "	active" $(echo $STATE | jq .value.active)
-			echo "	installed" $(echo $STATE | jq .value.installed)
+			echo "	name $(echo "$STATE" | jq .value.name)"
+			echo "	version $(echo "$STATE" | jq .value.version)"
+			echo "	components $(echo "$STATE" | jq .value.components)"
+			echo "	state $(echo "$STATE" | jq .value.state)"
+			echo "	active $(echo "$STATE" | jq .value.active)"
+			echo "	installed $(echo "$STATE" | jq .value.installed)"
 			
 		else
 			echo "ERROR Is NOT registered: $BUNDLE"
@@ -544,10 +551,10 @@ echo Deleting Bearer Token
 echo " "
 curl \
   --insecure --no-progress-meter \
-  --request DELETE https://${ADDR}:${SSL_PORT}/identity-manager/api/v1/auth/token \
+  --request DELETE "https://${ADDR}:${SSL_PORT}/identity-manager/api/v1/auth/token" \
   -H 'accept: */*' -H "Authorization: Bearer ${TOKEN}"
 
-if grep -q "y" <<<${LOGS}
+if grep -q "y" <<<"${LOGS}"
 then
 	echo " "
 	echo -----------------------------------------------------------------
@@ -555,7 +562,7 @@ then
 	echo " "
 
 	curl -X 'PUT' \
-			https://${ADDR}:${SSL_PORT}/ssh/api/v1/status \
+			"https://${ADDR}:${SSL_PORT}/ssh/api/v1/status" \
 			-H 'accept: application/json' \
 			-H "Authorization: Bearer ${TOKEN}" \
 			-H 'Content-Type: application/json' \
@@ -571,5 +578,5 @@ then
 	echo Viewing logs 
 	echo " "
 
-	sshpass -p ${SSH_PWD} ssh -o StrictHostKeyChecking=no -p ${SSH_PORT} ${SSH_USR}@${ADDR} sudo snap logs -f ${SNAP}
+	sshpass -p "${SSH_PWD}" ssh -o StrictHostKeyChecking=no -p "${SSH_PORT}" "${SSH_USR}@${ADDR}" sudo snap logs -f "${SNAP}"
 fi
