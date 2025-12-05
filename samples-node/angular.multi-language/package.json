@@ -22,7 +22,7 @@
         "@angular/platform-browser-dynamic": "^19.2.15",
         "@ngx-translate/core": "^16.0.4",
         "@ngx-translate/http-loader": "^7.0.0",
-        "ngx-translate-multi-http-loader": "^19.0.3",
+        "ngx-translate-multi-http-loader": "^20.0.0",
         "snap": "^1.1.0",
         "tslib": "^2.3.1",
         "zone.js": "^0.15.1"
