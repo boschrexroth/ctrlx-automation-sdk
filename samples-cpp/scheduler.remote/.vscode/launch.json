@@ -1,0 +1,196 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "1.0.0",
+  "configurations": [
+    {
+      "name": "remote amd64: debug executable",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/generated/ubuntu24-gcc-x64/scheduler.remote",
+      "cwd": "${workspaceFolder}",
+      "miDebuggerPath": "/usr/bin/gdb",
+      "miDebuggerServerAddress": "${input:IPAddressPF}:12345",
+      "stopAtEntry": true,
+      "targetArchitecture": "amd64",
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Disable stopping and printing when Signal SIGSTOP occured",
+          "text": "handle SIGSTOP nostop noprint"
+        },
+        {
+          "description": "Disable stopping when SIG39 occured",
+          "text": "handle SIG39 nostop"
+        }
+      ]
+    },
+    {
+      "name": "remote arm64 (aarch64): debug executable",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/generated/ubuntu24-gcc-x64/scheduler.remote",
+      "cwd": "${workspaceFolder}",
+      "miDebuggerPath": "/usr/bin/gdb-multiarch",
+      "miDebuggerServerAddress": "${input:IPAddress}:12345",
+      "stopAtEntry": true,
+      "targetArchitecture": "arm64",
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Disable stopping and printing when Signal SIGSTOP occured",
+          "text": "handle SIGSTOP nostop noprint"
+        },
+        {
+          "description": "Disable stopping when SIG39 occured",
+          "text": "handle SIG39 nostop"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "id": "Build",
+      "type": "pickString",
+      "description": "Build snap?",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "Upload",
+      "type": "pickString",
+      "description": "Upload snap?",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "RemoteDebug",
+      "type": "pickString",
+      "description": "Start remote debugger?",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "IPAddressPF",
+      "type": "promptString",
+      "description": "IP address of a ctrlX virtual with port forwarding",
+      "default": "10.0.2.2"
+    },
+    {
+      "id": "IPAddress",
+      "type": "promptString",
+      "description": "IP address",
+      "default": "192.168.1.1"
+    },
+    {
+      "id": "SSLPort",
+      "type": "promptString",
+      "description": "SSL (HTTPS) port number, 8443 for ctrlX virtual",
+      "default": "443"
+    },
+    {
+      "id": "Service",
+      "type": "pickString",
+      "description": "Switch to state SERVICE before installing the snap: y/n",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "Operation",
+      "type": "pickString",
+      "description": "Switch to state OPERATION after installing the snap: y/n",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "Automatic",
+      "type": "pickString",
+      "description": "Switch scheduler to Automatic mode after installing the snap: y/n",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "SSLUser",
+      "type": "promptString",
+      "description": "SSL (HTTPS) user name",
+      "default": "boschrexroth"
+    },
+    {
+      "id": "SSLPwd",
+      "type": "promptString",
+      "password": true,
+      "description": "SSL (HTTPS) password",
+      "default": "boschrexroth"
+    },
+    {
+      "id": "Arch",
+      "type": "pickString",
+      "description": "CPU architecture?",
+      "options": [
+        "arm64",
+        "amd64"
+      ],
+      "default": "arm64"
+    },
+    {
+      "id": "Logs",
+      "type": "pickString",
+      "description": "Show logs - SSH must be enabled on ctrlX: y/n",
+      "options": [
+        "y",
+        "n"
+      ],
+      "default": "y"
+    },
+    {
+      "id": "SSHPort",
+      "type": "promptString",
+      "description": "SSH port number, 8022 for ctrlX virtual",
+      "default": "22"
+    },
+    {
+      "id": "SSHUser",
+      "type": "promptString",
+      "description": "SSH user name",
+      "default": "rexroot"
+    },
+    {
+      "id": "SSHPwd",
+      "type": "promptString",
+      "password": true,
+      "description": "SSH password",
+      "default": "rexroot"
+    }
+  ]
+}

@@ -10,13 +10,13 @@ grade: stable
 summary: Sample app for datalayer client
 description: |
   This app will read ctrlX Data Layer nodes and print out their value.
-base: core22
+base: core24
 confinement: strict
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 # define how apps & services are exposed to host system
@@ -49,5 +49,5 @@ plugs:
 lint:
   ignore:
     - library:
-      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
-      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.* 
+        - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

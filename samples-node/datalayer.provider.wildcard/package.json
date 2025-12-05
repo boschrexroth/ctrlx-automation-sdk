@@ -1,0 +1,29 @@
+{
+    "name": "datalayer-provider-wildcard",
+    "version": "1.0.0",
+    "description": "ctrlX Data Layer wildcard provider sample for ctrlX CORE.",
+    "bin": {
+        "app": "dist/app.js"
+    },
+    "author": "",
+    "license": "MIT",
+    "files": [
+        "dist"
+    ],
+    "devDependencies": {
+        "@types/node": "^24.10.1",
+        "@typescript-eslint/eslint-plugin": "^8.47.0",
+        "@typescript-eslint/parser": "^8.47.0",
+        "eslint": "^9.39.1",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "ctrlx-datalayer": "^3.0.0"
+    },
+    "scripts": {
+        "getName": "echo $npm_package_name",
+        "prepare": "npm run tsc",
+        "tsc": "tsc"
+    }
+}

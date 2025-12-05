@@ -20,10 +20,10 @@ AppDomain.CurrentDomain.ProcessExit += (_, _) =>
     tcs.SetResult();
 };
 
-//Create the application
+// Create the application
 var myApplication = new MyApplication();
 
-//Start the application
+// Start the application
 if (!myApplication.Start())
 {
     // Initially exit and retry after app restart-delay (see snapcraft.yaml)
@@ -36,6 +36,6 @@ Console.WriteLine("Waiting for process exit event 'SIGTERM' ...");
 await tcs.Task;
 Console.WriteLine("Gracefully shutdown app");
 
-//Stop the application
+// Stop the application
 myApplication.Stop();
 Console.WriteLine("App exiting");

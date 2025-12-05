@@ -304,6 +304,7 @@ While this minimizes the implementation effort, the following issues should be c
 - Secrets are saved unencrypted in the snapshot and the backup file, respectively.
 - Taking a snapshot fails if a file is locked or modified while taking the snapshot. Therefore, the Setup app disables apps before taking a snapshot, which requires that the system is in SERVICE state. Apps must be prepared to consistently save their state on "disable" events. When the snapshot has been taken, the Setup app enables the app again.
 - Before restoring a snapshot, the Setup app disables the app. After the snapshot has been restored, the Setup app enables the app so that the app can initialize itself with the restored data. As the Setup app cannot find out if a snapshot contains changed settings, snapshots are always completely restored.
+- The snapshot mechanism can not be used together with [storage extension](storage-extension.md).
 
 The following entry in an app’s package manifest enables the use of Ubuntu’s snapshot mechanism for saving and restoring
 its settings:

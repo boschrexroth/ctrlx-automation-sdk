@@ -12,13 +12,13 @@ description: |
   This sample demonstrates how to use ctrlX Data Layer subscriptions on Datalayer.
   It subscribes the nodes: framework/metrics/system/cpu-utilisation-percent and .../memavailable-mb.
   If a value of a node has changed it writes the new value to the console.
-base: core22
+base: core24
 confinement: strict
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 # define how apps & services are exposed to the target operating system
@@ -51,5 +51,5 @@ plugs:
 lint:
   ignore:
     - library:
-      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
-      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

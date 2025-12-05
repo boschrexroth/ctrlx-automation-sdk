@@ -7,83 +7,83 @@ title: SDK Node.js Angular Multi-Language
 version: 1.0.0
 summary: Angular multi-language sample written in Node.js for ctrlX OS.
 description: |
-  This sample shows how to set different languages in Angular apps.
+    This sample shows how to set different languages in Angular apps.
 confinement: strict
 #confinement: devmode
 #icon: assets/icons/ICONHERE.png
 grade: stable # must be 'stable' to release into candidate/stable channels
-base: core22
+base: core24
 type: app
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
-    build-for: [arm64]
+platforms:
+    amd64:
+    arm64:
+        build-on: [amd64, arm64]
+        build-for: [arm64]
 
 parts:
-  configs:
-    source: ./configs
-    plugin: dump
-    organize:
-      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
+    configs:
+        source: ./configs
+        plugin: dump
+        organize:
+            "package-assets/*": package-assets/${CRAFT_PROJECT_NAME}/
 
-  www:
-    source: .
-    build-environment:
-      # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '22.13.0'
-    organize:
-      '${CRAFT_PART_BUILD}/dist/app': package-www/${CRAFT_PROJECT_NAME}/
+    www:
+        source: .
+        build-environment:
+            # Set the node version here. We recommend to use the latest LTS version.
+            - NODE_VERSION: "22.21.1"
+        organize:
+            "${CRAFT_PART_BUILD}/dist/app": package-www/${CRAFT_PROJECT_NAME}/
 
-    # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
-    # plugin: npm
-    # npm-node-version: "22.13.0"
-    plugin: nil
-    override-build: |
+        # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
+        # plugin: npm
+        # npm-node-version: "22.21.1"
+        plugin: nil
+        override-build: |
 
-      # detect build arch
-      CRAFT_BUILD_ARCH=$(dpkg --print-architecture)
-      if [ $CRAFT_BUILD_ARCH == "arm64" ]; then
-          build_arch="arm64"
-      else 
-          build_arch="x64"
-      fi
+            # detect build arch
+            CRAFT_BUILD_ARCH=$(dpkg --print-architecture)
+            if [ $CRAFT_BUILD_ARCH == "arm64" ]; then
+                build_arch="arm64"
+            else 
+                build_arch="x64"
+            fi
 
-      # fetch node used for build
-      if [ ! -f "${CRAFT_PART_INSTALL}/bin/node" ]; then
-          node_path=$CRAFT_PART_BUILD/bin
-          node_uri="https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${build_arch}.tar.gz"
-          echo fetching node for build: $node_uri
-          curl $node_uri | tar xzf - -C $CRAFT_PART_BUILD --no-same-owner --strip-components=1
-      fi  
+            # fetch node used for build
+            if [ ! -f "${CRAFT_PART_INSTALL}/bin/node" ]; then
+                node_path=$CRAFT_PART_BUILD/bin
+                node_uri="https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${build_arch}.tar.gz"
+                echo fetching node for build: $node_uri
+                curl $node_uri | tar xzf - -C $CRAFT_PART_BUILD --no-same-owner --strip-components=1
+            fi  
 
-      # set the path to build target node to be used for build
-      echo node path: $node_path
-      export PATH=$node_path:$PATH
-      node --version
-      npm --version
+            # set the path to build target node to be used for build
+            echo node path: $node_path
+            export PATH=$node_path:$PATH
+            node --version
+            npm --version
 
-      # install and compile (-> ./dist)
-      npm install --ignore-scripts --no-fund --unsafe-perm
+            # install and compile (-> ./dist)
+            npm install --ignore-scripts --no-fund --unsafe-perm
 
-      # run angular build script
-      npm run build
+            # run angular build script
+            npm run build
 
-      # remove node
-      rm -rf ${CRAFT_PART_INSTALL}
+            # remove node
+            rm -rf ${CRAFT_PART_INSTALL}
 
 slots:
-  package-assets:
-    interface: content
-    content: package-assets
-    source:
-      read:
-      - $SNAP/package-assets/${CRAFT_PROJECT_NAME}
+    package-assets:
+        interface: content
+        content: package-assets
+        source:
+            read:
+                - $SNAP/package-assets/${CRAFT_PROJECT_NAME}
 
-  package-www:
-    interface: content
-    content: package-www
-    source:
-      read:
-      - $SNAP/package-www/${CRAFT_PROJECT_NAME}
+    package-www:
+        interface: content
+        content: package-www
+        source:
+            read:
+                - $SNAP/package-www/${CRAFT_PROJECT_NAME}

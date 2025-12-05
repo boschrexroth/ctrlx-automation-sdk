@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC1091
 source ./build-9-user-data-img.sh amd64 proxy
 source ./build-9-user-data-img.sh amd64 noproxy
 mv user-data-amd64-* builder/

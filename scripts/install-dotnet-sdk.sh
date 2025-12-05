@@ -2,18 +2,36 @@
 
 echo " "
 echo "============================================"
-echo Installing dotnet-sdk
+echo Installing latest LTS dotnet-sdk 
 echo "============================================"
 echo " "
 
-# Install Microsoft Package source
-sudo wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-sudo rm packages-microsoft-prod.deb
+# Scripted installation based on
+# https://learn.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install
+# https://learn.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#set-environment-variables-system-wide
+# https://learn.microsoft.com/de-de/dotnet/core/tools/dotnet-install-script
 
-# Install Debian Package
-sudo GNUTLS_CPUID_OVERRIDE=0x1 apt update
-sudo GNUTLS_CPUID_OVERRIDE=0x1 apt install -y dotnet-sdk-8.0 
+# Install Latest .NET SDK (LTS)
+wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+sudo chmod +x ./dotnet-install.sh
+./dotnet-install.sh --version latest
 
-# Test installation
-dotnet --version
+# Add Environment variables to user profile
+profile=$(cat ~/.profile)
+if [[ "$profile" != *"DOTNET_ROOT"* ]];then
+  sudo echo 'export DOTNET_ROOT=$HOME/.dotnet' | sudo tee -a ~/.profile
+  sudo echo 'export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools' | sudo tee -a ~/.profile
+fi
+
+# Dump version and sdk
+dotnet --list-sdks
+
+# break the info output
+if [ "$1" == "quiet" ]; then
+  exit 0
+fi
+
+echo
+echo "Now, finish the installation by reloading your profile in linux terminal with command '. ~/.profile'"
+echo
+read -r -p "Press enter to continue"

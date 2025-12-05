@@ -124,6 +124,10 @@ class SubProviderFolderNode():
         Returns:
             Variant: metadata
         """
+
+        """Please see here for recommended allowed operations by node type: 
+           https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+        """
         builder = MetadataBuilder(allowed=AllowedOperation.READ
                                   | AllowedOperation.WRITE)
         builder = builder.set_display_name(self._node_address)

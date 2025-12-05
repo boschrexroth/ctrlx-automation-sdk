@@ -282,6 +282,10 @@ class BasicArithmeticOperations:
         self, typeAddress: str, name: str, unit: str, description: str, allowWrite: bool
     ):
         """create_metadata"""
+
+        """Please see here for recommended allowed operations by node type: 
+           https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+        """
         return ctrlxdatalayer.metadata_utils.MetadataBuilder.create_metadata(
             name,
             description,

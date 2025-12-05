@@ -2,8 +2,32 @@
 <html lang="en">
     <head>
         <title>sdk-go-webserver</title>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const token = sessionStorage.getItem('idm_token');
+                fetch('/identity-manager/api/v2/auth/token/validity', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const linkContainer = document.getElementById('link-container');
+                    if (data.valid) {
+                        linkContainer.innerHTML = '<a href="https://apps.boschrexroth.com/microsites/ctrlx-automation/en/"><img style="width: 100%; height: auto;" src="DC-AE_ctrlX-LOGO.jpg"/></a>';
+                    } else {
+                        linkContainer.innerHTML = '<p>ERROR 401 Unauthorized</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('link-container').innerHTML = '<p>Error checking validation</p>';
+                });
+            });
+        </script>
     </head>
     <body>
-        <a href="https://apps.boschrexroth.com/microsites/ctrlx-automation/en/"><img style="width: 100%; height: auto;" src="DC-AE_ctrlX-LOGO.jpg"/></a>
-    </body>
+        <div id="link-container"></div>
+     </body>
 </html>

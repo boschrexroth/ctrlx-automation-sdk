@@ -8,39 +8,39 @@ title: SDK Monitor Health
 summary: App health monitoring demo app for ctrlX OS.
 description: |
   This app demonstrates how you can add health monitoring capability to your app.
-confinement: strict 
-#confinement: devmode 
+confinement: strict
+#confinement: devmode
 #icon: assets/icons/ICONHERE.png
-grade: stable  # must be 'stable' to release into candidate/stable channels
-base: core22
+grade: stable # must be 'stable' to release into candidate/stable channels
+base: core24
 type: app
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 apps:
   check-health:
-    command: check-health  
+    command: check-health
     daemon: simple
     restart-condition: on-failure
-    passthrough:   
+    passthrough:
       restart-delay: 10s
 
   app:
     command: dummy-app
     daemon: simple
     restart-condition: always
-    passthrough:   
+    passthrough:
       restart-delay: 10s
- 
+
 parts:
   check-health:
     plugin: dump
     source: ./health
-    
+
   app:
     plugin: dump
     source: ./app

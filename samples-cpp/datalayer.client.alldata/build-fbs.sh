@@ -5,7 +5,7 @@ echo "-- Generating flatbuffers files --"
 
 PROJECT_DIR=$(realpath "$(dirname "$0")")
 SDK_ROOT_DIR=$(realpath "$PROJECT_DIR/../..")
-FLATC=$SDK_ROOT_DIR/bin/oss.flatbuffers/ubuntu22-gcc-x64/flatc
+FLATC=$SDK_ROOT_DIR/bin/oss.flatbuffers/ubuntu24-gcc-x64/flatc
 
 echo "Set executable permission for flatc"
 chmod +x "$FLATC"

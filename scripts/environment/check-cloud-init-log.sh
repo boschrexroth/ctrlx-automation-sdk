@@ -22,7 +22,7 @@ echo "Searching for errors and warnings reported during initialization phase."
 echo "======================================================================="
 echo " "
 
-read -t 5 -p "Hit ENTER to continue - cancel with Ctrl-C "
+read -r -t 5 -p "Hit ENTER to continue - cancel with Ctrl-C "
 
 # Search patterns
 for PATTERN in "${PATTERNS[@]}"; do
@@ -39,9 +39,9 @@ if (( ERRORS_WARNINGS_LEN == 0)); then
 	echo "--------------------------------------------------------------------------- "
 	echo " "
 
-	read -t 5 -p "Remove this check script from ~/.bashrc? Y/n" INPUT
+	read -r -t 5 -p "Remove this check script from ~/.bashrc? Y/n" INPUT
 
-	if grep -q "n" <<<${INPUT}
+	if grep -q "n" <<<"${INPUT}"
 	then
 		return 0
 	fi	

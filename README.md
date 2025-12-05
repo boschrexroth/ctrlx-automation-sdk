@@ -36,14 +36,14 @@ __These installation steps are required on both an App Build Environment and an 
 The following packages must be installed so that the following scripts can be executed. When using the __App Build Environment__, packages are installed when setting up an instance.
 
 ```bash
-	sudo apt-get update
-	sudo apt-get install -y \
-	     zip \
-  	     unzip \
-  	     p7zip-full \
+    sudo apt-get update
+    sudo apt-get install -y \
+         zip \
+         unzip \
+         p7zip-full \
          git \
          apt-transport-https \
-  	     whois \
+         whois \
          net-tools \
          pkg-config \
          jq \
@@ -55,7 +55,9 @@ The following packages must be installed so that the following scripts can be ex
 
 Start a console session, change to your destination directory and enter:
 
-	wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh && chmod a+x *.sh && ./clone-install-sdk.sh
+```bash
+    wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh && chmod a+x *.sh && ./clone-install-sdk.sh
+```
 
 As a result, your local copy of the github repo is stored within the directory __ctrlx-automation-sdk/__
 
@@ -63,19 +65,27 @@ As a result, your local copy of the github repo is stored within the directory _
 
 Stay in the directory and enter:
 
-	ctrlx-automation-sdk/scripts/install-required-packages.sh
+```bash
+    ctrlx-automation-sdk/scripts/install-required-packages.sh
+```
 
 ### Install snapcraft
 
 Stay in the directory and enter:
 
-	ctrlx-automation-sdk/scripts/install-snapcraft.sh
+```bash
+    ctrlx-automation-sdk/scripts/install-snapcraft.sh
+```
 
 ### Install ctrlx-datalayer Debian package
 
 Stay in the directory and enter:
 
-	ctrlx-automation-sdk/scripts/install-ctrlx-datalayer.sh ctrlx-automation-sdk/deb
+```bash
+    ctrlx-automation-sdk/scripts/install-ctrlx-datalayer.sh ctrlx-automation-sdk/deb
+```
+
+If you are missing the `ctrlx-datalayer-xxx.deb` package, you can download it [Link here](https://github.com/boschrexroth/ctrlx-automation-sdk/releases)
 
 ### Building Sample Projects
 
@@ -87,30 +97,49 @@ Change to the directory `ctrlx-automation-sdk/scripts` and start the according i
 
 For go samples:
 
-	install-go.sh
+```bash
+    install-go.sh
+```
 
 For .NET samples:
 
-	install-dotnet-sdk.sh
+```bash
+    install-dotnet-sdk.sh
+```
 
 For nodejs samples:
 
-	install-nodejs-npm.sh
+```bash
+    install-nodejs-npm.sh
+```
+
+For java samples:
+
+```bash
+    install-java-gradle.sh
+```
 
 Overview of all scripts: [Description of the scripts](scripts/README.md)
 
 ## License
 
-SPDX-FileCopyrightText: Bosch Rexroth AG
+This license applies only to the software code in this repository.
+Images, fonts and other assets are explicitly excluded.
+
+The binary files "datalayer.dll" and "comm.datalayer.so*" are licensed under the "Terms and Conditions for the Provision of
+Products of Bosch Rexroth AG Free of Charge" supplemented by the right to redistribution, any other software code in this repository is licensed under the:
+
 SPDX-License-Identifier: MIT
+
+SPDX-FileCopyrightText: Bosch Rexroth AG
 
 ## About
 
-Please note that any trademarks, logos and pictures contained or linked to in this Software are owned by or copyright © Bosch Rexroth AG 2021-2024 and not licensed under the Software's license terms.
+Please note that any trademarks, logos and pictures contained or linked to in this Software are owned by or copyright © Bosch Rexroth AG 2021-2025 and not licensed under the Software's license terms.
 
 <https://www.boschrexroth.com>
 
-Bosch Rexroth AG  
-Bgm.-Dr.-Nebel-Str. 2  
-97816 Lohr am Main  
+Bosch Rexroth AG
+Bgm.-Dr.-Nebel-Str. 2
+97816 Lohr am Main
 GERMANY

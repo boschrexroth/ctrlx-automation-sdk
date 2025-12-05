@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+rm -rf bfbs/
+rm -rf generated/
+rm -rf build/
+mkdir build/
+
+pushd build
+cmake -DBUILD_KIT='GCC aarch64-linux-gnu' -DBUILD_SNAP=ON ..
+make install
+make clean
+popd
+
+#!/usr/bin/env bash
+snapcraft clean
+snapcraft pack --build-for=arm64 --verbosity=verbose

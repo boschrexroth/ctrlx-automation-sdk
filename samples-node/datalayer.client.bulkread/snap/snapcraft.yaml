@@ -13,13 +13,13 @@ confinement: strict
 #confinement: devmode
 #icon: assets/icons/ICONHERE.png
 grade: stable # must be 'stable' to release into candidate/stable channels
-base: core22
+base: core24
 type: app
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 apps:
@@ -37,16 +37,16 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: '22.14.0'
+      - NODE_VERSION: "22.21.1"
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "22.14.0"
+    # npm-node-version: "22.21.1"
     plugin: nil
     override-build: |
 
       # detect target arch
-      if [ $CRAFT_TARGET_ARCH == "arm64" ]; then
+      if [ $CRAFT_ARCH_BUILD_FOR == "arm64" ]; then
           target_arch="arm64"
       else 
           target_arch="x64"

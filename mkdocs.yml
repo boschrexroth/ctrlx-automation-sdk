@@ -104,7 +104,7 @@ nav:
       - Guidelines:
           - Package Assets: package-assets.md
           - App Developer Guideline: appdevguide.md
-          - Persisting Configurations: persistdata.md
+          - Persisting App Data: persistdata.md
           - Persisting Device Settings: persist-device-settings.md
           - License Management: licensing.md
           - Service-to-Service Authentication: s2sauth.md
@@ -112,10 +112,11 @@ nav:
           - Configure maximal Number of Open File Handles: numopenfilehandles.md
           - Using Localization: localization.md
           - External Storages:
-              - Date exchange: data-exchange.md
+              - Data exchange: data-exchange.md
               - Storage extension: storage-extension.md
+          - Shared Fileserver: shared-fileserver.md
           - Extendable Denylist: extenable-denylist.md
-          - UEFI firmware updates on ctrlX OS Standard: uefi-firmware-updates.md
+          - FOSS: foss.md
       - Releases:
           - Changelog: changelog.md
   - Setup:
@@ -153,4 +154,5 @@ nav:
       - Api Reference:
           - c#: api/net/html/index.html
           - python: api/python/index.html
+          - java: api/java/index.html
   - About: about.md

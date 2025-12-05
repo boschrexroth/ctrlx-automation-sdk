@@ -4,14 +4,14 @@ version: 1.0.0
 summary: Logbook sample written in Python for ctrlX
 description: |
   This sample shows how to log with different log levels
-base: core22
+base: core24
 confinement: strict
 grade: stable
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 apps:
@@ -30,17 +30,17 @@ parts:
     plugin: python
     source: .
     build-environment:
-      - CRAFT_PYTHON_INTERPRETER: python3.10
-      - PYTHON_VERSION_IDENTIFIER: cp310
+      - CRAFT_PYTHON_INTERPRETER: python3.12
+      - PYTHON_VERSION_IDENTIFIER: cp312
       - GITHUB_CYSYSTEMD_VERSION: 1.6.2
       - GITHUB_CYSYSTEMD: https://github.com/mosquito/cysystemd/releases/download/${GITHUB_CYSYSTEMD_VERSION}
       - PLATFORM_CYSYSTEMD: manylinux_2_28_x86_64
-      - TARGET_PATH: ${CRAFT_PART_INSTALL}/lib/${CRAFT_PYTHON_INTERPRETER}/site-packages 
+      - TARGET_PATH: ${CRAFT_PART_INSTALL}/lib/${CRAFT_PYTHON_INTERPRETER}/site-packages
     stage-packages:
       - libsystemd-dev
     override-build: |
       craftctl default
-      case $CRAFT_ARCH_TRIPLET in
+      case $CRAFT_ARCH_TRIPLET_BUILD_FOR in
         aarch64-linux-gnu)
           export PLATFORM_CYSYSTEMD=manylinux_2_28_aarch64
           ;;
@@ -48,7 +48,7 @@ parts:
           ;;
       esac
       pip3 install --platform=${PLATFORM_CYSYSTEMD} --only-binary=:all: --target ${TARGET_PATH} $GITHUB_CYSYSTEMD/cysystemd-${GITHUB_CYSYSTEMD_VERSION}-${PYTHON_VERSION_IDENTIFIER}-${PYTHON_VERSION_IDENTIFIER}-${PLATFORM_CYSYSTEMD}.whl
-      
+
 plugs:
   datalayer:
     interface: content

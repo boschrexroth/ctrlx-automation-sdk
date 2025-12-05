@@ -42,6 +42,10 @@ class ProviderNodeAllData:
         )
         self.providerNode = ctrlxdatalayer.provider_node.ProviderNode(self.cbs)
 
+        """Please see here for recommended allowed operations by node type: 
+           https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+        """
+        
         self.metadata = MetadataBuilder.create_metadata(
             name, description, unit, description + "-url", NodeClass.NodeClass.Variable,
             read_allowed=True, write_allowed=dynamic, create_allowed=dynamic, delete_allowed=dynamic, browse_allowed=True,

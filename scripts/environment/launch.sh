@@ -10,18 +10,18 @@ PROXY=proxy
 # Scan parameter list
 for PARAM in "$@"
 do
-  if grep -q "ar" <<<${PARAM}; then
+  if grep -q "ar" <<<"${PARAM}" ; then
     ARCH=aarch64
   fi
 
-  if grep -q "no" <<<${PARAM}; then
+  if grep -q "no" <<<"${PARAM}" ; then
     PROXY=noproxy
   fi
 
 done
 
 # Operating system ------------------------------------------------------------
-VERSION=22.04
+VERSION=24.04
 
 OS=ubuntu-${VERSION}-server
 
@@ -30,7 +30,7 @@ U=${OS}-cloudimg
 UA=${U}-${ARCH}
 
 # Name of the Ubuntu cloud image file to be downloaded
-if grep -q "ar" <<<${ARCH}
+if grep -q "ar" <<<"${ARCH}"
 then
   IMG=${U}-arm64.img
 else
@@ -44,7 +44,7 @@ QCOW2=${UA}-${PROXY}.qcow2
 UDIMG=user-data-${ARCH}-${PROXY}.img
 
 # aarch64 only: Download QEMU_EFI.fd ##########################################
-if grep -q "ar" <<<${ARCH}
+if grep -q "ar" <<<"${ARCH}"
 then
   if [ ! -f QEMU_EFI.fd ]; then
     wget --no-check-certificate -q --show-progress https://releases.linaro.org/components/kernel/uefi-linaro/16.02/release/qemu64/QEMU_EFI.fd

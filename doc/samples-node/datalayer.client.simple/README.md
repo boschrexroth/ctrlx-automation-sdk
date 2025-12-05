@@ -30,7 +30,7 @@ Please read the common Node.js docs [here](./../README.md), first.
 1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
 3. Choose __Open Folder in QEMU VM__.
-4. Open the directory __datalayer.client__.
+4. Open the directory __datalayer.client.simple__.
 5. Build and install snap as described [here](./../README.md).
 6. Check the output using __Diagnostics__:
 

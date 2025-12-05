@@ -6,7 +6,7 @@ Also see [TPM2](../../tpm2.md).
 
 ## Introduction
 
-It demonstrates how you can use the TPM2.0 of the ctrlX CORE or the emulated TPM2.0 on the ctrlX CORE^virtual^.
+It demonstrates how you can use the TPM2.0 of the ctrlX CORE or the emulated TPM2.0 on the ctrlX CORE<sup>virtual</sup>.
 
 * Build the TPM2 Trusted Software Stack (TSS) including OpenSSL engine.
 * Integrate your application into key and certificate management of the ctrlX CORE.
@@ -17,7 +17,7 @@ It demonstrates how you can use the TPM2.0 of the ctrlX CORE or the emulated TPM
 
 * Recommended: ctrlX WORKS App Build Environment (QEMU Virtual Machine) - see Setup
 * ctrlX AUTOMATION SDK Version 1.
-* ctrlX CORE^virtual^ or ctrlX CORE
+* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ openssl x509 -req -days 360 -in webserver_csr.pem -CA ca/ca.crt -CAkey ca/ca.key
 ```
 
 8. Upload the certificate webserver.crt the TPM2 Webserver application
-9. Open webserver on Port 44330 of the ctrlX CORE or ctrlX CORE^virtual^ (adapt port settings accordingly).
+9. Open webserver on Port 44330 of the ctrlX CORE or ctrlX CORE<sup>virtual</sup> (adapt port settings accordingly).
 
 ## Support
 

@@ -26,7 +26,7 @@ If a larger number of opened file handles is required this can be done with the 
 
 Your app should run this command in the startup phase of your app.
 
-Therefor we recommend to:
+Therefore we recommend to:
 
 - Create a script in a sub folder e.g. ulimit-snap/ of your project.
 - And to add into your snapcraft.yaml file a daemon entry to call this script at startup.

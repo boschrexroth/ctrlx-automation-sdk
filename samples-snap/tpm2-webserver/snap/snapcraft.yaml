@@ -1,6 +1,6 @@
 name: sdk-tpm2-webserver
 title: SDK TPM2 Webserver
-base: core22
+base: core24
 version: 1.0.0
 summary: A snap containing a tpm2 based openssl server for ctrlX OS.
 description: |
@@ -9,10 +9,10 @@ description: |
 grade: devel
 confinement: strict
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 plugs:
@@ -30,20 +30,20 @@ slots:
     content: package-certificates
     source:
       write:
-      - $SNAP_COMMON/package-certificates/${CRAFT_PROJECT_NAME}
+        - $SNAP_COMMON/package-certificates/${CRAFT_PROJECT_NAME}
   package-assets:
     interface: content
     content: package-assets
     source:
       read:
-      - $SNAP/package-assets/${CRAFT_PROJECT_NAME}
+        - $SNAP/package-assets/${CRAFT_PROJECT_NAME}
 
 parts:
   configs:
     plugin: dump
     source: ./configs
     organize:
-      'package-assets/*': package-assets/${CRAFT_PROJECT_NAME}/
+      "package-assets/*": package-assets/${CRAFT_PROJECT_NAME}/
   tpm2-tools:
     plugin: autotools
     build-environment:
@@ -52,34 +52,34 @@ parts:
     source-type: git
     source-tag: "5.2"
     build-packages:
-    - pandoc
-    - pkg-config
-    - autoconf-archive
-    - autoconf
-    - to amd64:
-      - libcmocka-dev
-      - libcurl4-openssl-dev
-      - libssl-dev
-      - libtool
-      - uuid-dev
-    - to arm64:
-      - libcmocka-dev:arm64
-      - libcurl4-openssl-dev:arm64
-      - libssl-dev:arm64
-      - libtool:arm64
-      - uuid-dev:arm64
+      - pandoc
+      - pkg-config
+      - autoconf-archive
+      - autoconf
+      - to amd64:
+          - libcmocka-dev
+          - libcurl4-openssl-dev
+          - libssl-dev
+          - libtool
+          - uuid-dev
+      - to arm64:
+          - libcmocka-dev:arm64
+          - libcurl4-openssl-dev:arm64
+          - libssl-dev:arm64
+          - libtool:arm64
+          - uuid-dev:arm64
     stage-packages:
-    - to amd64:
-      - libcurl4
-    - to arm64:
-      - libcurl4:arm64
+      - to amd64:
+          - libcurl4
+      - to arm64:
+          - libcurl4:arm64
     prime:
       - -include
     after:
       - tpm2-tss
     override-build: |
       ACLOCAL_PATH="/usr/share/gnulib/m4" ./bootstrap
-      ./configure --prefix=$CRAFT_PART_INSTALL/usr/ --host=$CRAFT_ARCH_TRIPLET
+      ./configure --prefix=$CRAFT_PART_INSTALL/usr/ --host=$CRAFT_ARCH_TRIPLET_BUILD_FOR
       #craftctl default
       # Run all tests shipped by default
       make check -j$(nproc)
@@ -91,33 +91,33 @@ parts:
     source-type: git
     source-tag: 3.2.0
     build-packages:
-    - gcc
-    - g++
-    - doxygen
-    - pkg-config
-    - autoconf
-    - autoconf-archive
-    - to amd64:
-      - libtool
-      - libltdl-dev
-      - libjson-c-dev
-      - libgcrypt20-dev
-      - liburiparser-dev
-      - libcurl4-openssl-dev
-      - libssl-dev
-    - to arm64:
-      - libtool:arm64
-      - libltdl-dev:arm64
-      - libjson-c-dev:arm64
-      - libgcrypt20-dev:arm64
-      - liburiparser-dev:arm64
-      - libcurl4-openssl-dev:arm64
-      - libssl-dev:arm64
+      - gcc
+      - g++
+      - doxygen
+      - pkg-config
+      - autoconf
+      - autoconf-archive
+      - to amd64:
+          - libtool
+          - libltdl-dev
+          - libjson-c-dev
+          - libgcrypt20-dev
+          - liburiparser-dev
+          - libcurl4-openssl-dev
+          - libssl-dev
+      - to arm64:
+          - libtool:arm64
+          - libltdl-dev:arm64
+          - libjson-c-dev:arm64
+          - libgcrypt20-dev:arm64
+          - liburiparser-dev:arm64
+          - libcurl4-openssl-dev:arm64
+          - libssl-dev:arm64
     prime:
       - -include
     override-build: |
       ACLOCAL_PATH="/usr/share/gnulib/m4" ./bootstrap #https://github.com/tpm2-software/tpm2-tss/commit/d1106347ef2f8e7296f1bd6af7aa6e046f6a5a38
-      ./configure --prefix=$CRAFT_PART_INSTALL/usr/ --host=$CRAFT_ARCH_TRIPLET
+      ./configure --prefix=$CRAFT_PART_INSTALL/usr/ --host=$CRAFT_ARCH_TRIPLET_BUILD_FOR
       make check -j$(nproc) || cat ./test-suite.log
       make install
       #chmod g-s $CRAFT_PART_INSTALL/usr/var/run/tpm2-tss/eventlog
@@ -127,7 +127,7 @@ parts:
     plugin: autotools
     autotools-configure-parameters:
       - --prefix=/usr
-      - --host=$CRAFT_ARCH_TRIPLET
+      - --host=$CRAFT_ARCH_TRIPLET_BUILD_FOR
     build-environment:
       - LDFLAGS: "$LDFLAGS -Wl,-rpath-link,$CRAFT_STAGE/lib"
     source: https://github.com/tpm2-software/tpm2-tss-engine
@@ -140,11 +140,11 @@ parts:
       - autoconf-archive
       - autoconf
       - to amd64:
-        - libtool
-        - libssl-dev
+          - libtool
+          - libssl-dev
       - to arm64:
-        - libtool:arm64
-        - libssl-dev:arm64
+          - libtool:arm64
+          - libssl-dev:arm64
     after:
       - tpm2-tss
 

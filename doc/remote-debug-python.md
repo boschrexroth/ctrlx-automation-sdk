@@ -14,12 +14,12 @@ Then each following chapter describes for one programming language the  language
 
 From the build environment ctrlX CORE devices are connected via TCP/IP. Assuming we are using a (QEMU) virtual machine as build environment the different kind of ctrlX CORE devices are reachable over these IP addresses:
 
-1. ctrlX CORE^virtual^ with port forwarding: 10.0.2.2
-2. ctrlX CORE^virtual^ with network adapter: 192.168.1.1
+1. ctrlX CORE<sup>virtual</sup> with port forwarding: 10.0.2.2
+2. ctrlX CORE<sup>virtual</sup> with network adapter: 192.168.1.1
 3. ctrlX CORE: real IP address
 
 To point 1.:
-From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE^virtual^ has no own IP address. The connections to the control are realized via port forwarding.
+From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE<sup>virtual</sup> has no own IP address. The connections to the control are realized via port forwarding.
 
 ### Set up SSH Public Key Authentication
 
@@ -102,8 +102,8 @@ snapcraft will pack debugpy into the snap because it is listed in the parameter 
 Start a terminal and enter
 
 ```code
-    snapcraft clean --destructive-mode
-    snapcraft --destructive-mode
+    # snapcraft clean
+    snapcraft
 ```
 
 !!! important

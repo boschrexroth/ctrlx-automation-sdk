@@ -10,5 +10,5 @@ make install
 make clean
 popd
 
-sudo snapcraft clean
-sudo snapcraft --build-for=amd64 --verbosity=verbose
+# snapcraft clean
+snapcraft pack --build-for=amd64 --verbosity=verbose

@@ -48,12 +48,12 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 # set libraries dirs and includes
 #
 IF( ${BUILD_KIT} MATCHES "aarch64")
-  SET(PLATFORM_NAME "ubuntu22-gcc-aarch64")
+  SET(PLATFORM_NAME "ubuntu24-gcc-aarch64")
   SET(SNAP_ARCH "arm64")
   SET(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
   SET(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
 ELSE()
-  SET(PLATFORM_NAME "ubuntu22-gcc-x64")
+  SET(PLATFORM_NAME "ubuntu24-gcc-x64")
   SET(SNAP_ARCH "amd64")
   SET(CMAKE_C_COMPILER gcc)
   SET(CMAKE_CXX_COMPILER g++)
@@ -113,7 +113,6 @@ target_link_libraries(${TARGET_PROJECT_NAME}
   libcomm_datalayer.so
   pthread
   systemd
-  zmq
   ssl
   crypto
 )
@@ -151,8 +150,8 @@ COMMAND make install
 if (BUILD_SNAP)
   add_custom_command( TARGET ${TARGET_PROJECT_NAME}
     POST_BUILD
-    COMMAND sudo snapcraft clean
-    COMMAND sudo snapcraft --build-for=${SNAP_ARCH} --verbosity=verbose
+    # COMMAND snapcraft clean
+    COMMAND snapcraft pack --build-for=${SNAP_ARCH} --verbosity=verbose
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
   )
 endif(BUILD_SNAP)

@@ -4,7 +4,7 @@
 
 This sample project shows how shared memory is used for data exchange between two applications.
 
-Therefor the features of the ctrlX Data Layer are used.
+Therefore the features of the ctrlX Data Layer are used.
 
 Normally realtime applications (Celix bundles) are using sharded memory for data exchange, but non realtime apps are also able to use it - like our two executables.
 
@@ -65,7 +65,7 @@ To use shared memory in the restricted snap environment of the ctrlX CORE our sn
 
 Unfortunately for unsigned snaps this is not done automatically during the ctrlX snap installation.
 
-As a workaround this has to be done manually. Therefor open a ssh connection to the ctrlX and enter:
+As a workaround this has to be done manually. Therefore open a ssh connection to the ctrlX and enter:
 
     sudo snap connect sdk-cpp-sharedmemory:datalayer-shm rexroth-automationcore:datalayer-shm
 

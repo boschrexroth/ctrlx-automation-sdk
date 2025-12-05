@@ -41,7 +41,6 @@ packages:
   - jq
   - sshpass
   - libsystemd-dev
-  - libzmq3-dev   
   - libssl-dev
   - libzip-dev
   - uuid-dev
@@ -49,6 +48,7 @@ packages:
   - libcurl4-openssl-dev
   - libjansson-dev
   - libffi-dev
+  - dpkg-dev
 
 # Run commands on first boot  
 runcmd:
@@ -63,14 +63,14 @@ runcmd:
   - echo "HTTP_PROXY=\"http://10.0.2.2:3128\"" >> /etc/environment     #proxy-ONLY
   - echo "HTTPS_PROXY=\"http://10.0.2.2:3128\"" >> /etc/environment    #proxy-ONLY
   - echo "no_proxy=localhost,127.0.0.1,10.0.2.2,.local" >> /etc/environment #proxy-ONLY
+  - echo "GNUTLS_CPUID_OVERRIDE=0x1" >> /etc/environment
+  - echo "DEBIAN_FRONTEND=noninteractive" >> /etc/environment
 
-  # https://wiki.ubuntu.com/MultiarchSpec                                                                                                  #amd64-ONLY
-  - dpkg --add-architecture arm64                                                                                                          #amd64-ONLY
-  - echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list         #amd64-ONLY
-  - echo "deb [arch=arm64] http://ports.ubuntu.com/ jammy-updates main restricted universe" >> /etc/apt/sources.list.d/multiarch-libs.list #amd64-ONLY
-
-  # Qualify architecture                                                                                                                   #amd64-ONLY
-  - sed -i 's/deb http:/deb [arch=amd64] http:/g' /etc/apt/sources.list                                                                    #amd64-ONLY
+  # Qualify architecture                                                                                                                 
+  ## '_boschrexroth_tmp' is a helper for ':' replacement
+  ## Direct sed input of ': ' causes trouble with clout-config execution
+  - sed -i 's/URIs:/Architectures_boschrexroth_tmp amd64\nURIs:/g' /etc/apt/sources.list.d/ubuntu.sources
+  - sed -i 's/_boschrexroth_tmp/:/g' /etc/apt/sources.list.d/ubuntu.sources 
 
   # We create the user boschrexroth here in the very latest step of the initialization phase
   # to avoid a too early login.
@@ -86,7 +86,11 @@ runcmd:
   - chmod 664 /home/boschrexroth/cloud-init/*.log
   - chown -R boschrexroth:boschrexroth /home/boschrexroth/*
   - echo "source ~/check-cloud-init-log.sh" >>/home/boschrexroth/.bashrc
- 
+
+  # fix kernel panic ubuntu 24.04
+  - systemctl disable fwupd fwupd-refresh.timer
+  - systemctl stop fwupd fwupd-refresh.timer
+
 power_state:
   mode: poweroff
   message: ======================== Installation Finished ========================

@@ -23,7 +23,7 @@ ARCH_REMOVE=aarch64
 # Remove these lines
 grep -v "#${ARCH_REMOVE}-ONLY" cloud-config >cloud-config-${ARCH}-generated
 # Insert base64 encoded content
-python3 replace-text.py cloud-config-${ARCH}-generated $SEARCH_ZIP $REPLACE_ZIP
+python3 replace-text.py cloud-config-${ARCH}-generated "$SEARCH_ZIP" "$REPLACE_ZIP"
 # Remove flags
 python3 replace-text.py cloud-config-${ARCH}-generated "#${ARCH}-ONLY" " "
 
@@ -33,7 +33,7 @@ ARCH_REMOVE=amd64
 # Remove these lines
 grep -v "#${ARCH_REMOVE}-ONLY" cloud-config >cloud-config-${ARCH}-generated
 # Insert base64 encoded content
-python3 replace-text.py cloud-config-${ARCH}-generated $SEARCH_ZIP $REPLACE_ZIP
+python3 replace-text.py cloud-config-${ARCH}-generated "$SEARCH_ZIP" "$REPLACE_ZIP"
 
 # Remove flags
 python3 replace-text.py cloud-config-${ARCH}-generated "#${ARCH}-ONLY" " "

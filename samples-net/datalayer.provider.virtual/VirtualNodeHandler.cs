@@ -164,7 +164,7 @@ namespace Samples.Datalayer.Provider.Virtual
                     var parts = n.Key.Split('/');
                     return parts.Length > addressParts.Length ? parts[addressParts.Length] : parts[^1];
 
-                }).ToArray();
+                }).Distinct().ToArray();
 
             result.SetResult(DLR_RESULT.DL_OK, new Variant(branchLevelNames));
         }
@@ -283,11 +283,15 @@ namespace Samples.Datalayer.Provider.Virtual
         /// <param name="result"></param>
         private void CreateMetadata(VirtualNode node, IProviderNodeResult result)
         {
-            // Metadata for the root node (here: folder).
+            // Metadata for the root node (here: Folder).
+
+            // Please see here for recommended allowed operations by node type: 
+            // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/ 
+
+            // Metadata for root node (Folder).
             if (node.Address == RootAddress)
             {
                 var rootMdb = new MetadataBuilder(
-                    AllowedOperationFlags.Read |
                     AllowedOperationFlags.Browse,
                     node.Address);
 
@@ -296,7 +300,7 @@ namespace Samples.Datalayer.Provider.Virtual
                 return;
             }
 
-            // Metadata for child nodes (int32 variables).
+            // Metadata for child nodes: Variable (int32)
             var mdb = new MetadataBuilder(
                 AllowedOperationFlags.Read |
                 AllowedOperationFlags.Write |
@@ -305,7 +309,7 @@ namespace Samples.Datalayer.Provider.Virtual
 
             mdb.SetNodeClass(NodeClass.Variable);
             mdb.AddReference(ReferenceType.ReadType, "types/datalayer/int32");
-            mdb.AddReference(ReferenceType.WriteInType, "types/datalayer/int32");
+            mdb.AddReference(ReferenceType.WriteType, "types/datalayer/int32");
             result.SetResult(DLR_RESULT.DL_OK, mdb.Build());
         }
 

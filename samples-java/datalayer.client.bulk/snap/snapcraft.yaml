@@ -1,0 +1,58 @@
+name: sdk-java-client-bulk
+title: SDK Java Client bulk
+version: 1.0.0
+summary: ctrlX Data Layer client sample written in Java for ctrlX OS.
+description: The sample demonstrates ctrlX Data Layer bulk operations.
+confinement: strict # use 'strict' once you have the right plugs and slot
+grade: stable
+base: core24
+type: app
+
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
+    build-for: [arm64]
+
+apps:
+  client:
+    command: bin/run
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+
+parts:
+  client:
+    plugin: gradle
+    source: .
+    build-environment:
+      - SNAP_BUILD_JAVA_VERSION: "21"
+    build-packages:
+      - openjdk-21-jdk-headless
+    stage-packages:
+      - to amd64:
+        - openjdk-21-jre-headless
+      - to arm64:
+        - openjdk-21-jre-headless:arm64
+
+  wrapper-scripts:
+    plugin: dump
+    source: wrapper/
+    organize:
+      ./run.sh : bin/run      
+
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer
+
+lint:
+  ignore:
+    - library:
+        - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

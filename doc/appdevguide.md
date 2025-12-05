@@ -145,7 +145,7 @@ They can also be sure that the app contributes to the basic ctrlX CORE security 
 
 Basic app information:
 
-- App artifacts (“Executables” for ctrlX CORE and ctrlX CORE^virtual^ and basic technical information)
+- App artifacts (“Executables” for ctrlX CORE and ctrlX CORE<sup>virtual</sup> and basic technical information)
 
 - App documentation / user manual and release notes
 
@@ -257,9 +257,14 @@ The artifacts are organized in five sub folders:
 
 The FOSS source files and license text files are stored in the disclosure folder
 
-- **"fossinfo.json" (<span style="color:red;">**MANDATORY**</span>)** - license texts for all an app’s used open source software. For more information about format and content, refer to the json example and the corresponding json schema in the standard "artifacts.zip" file.
+- If the app contains FOSS components, a file containing the license texts must be provided (<span style="color:red;">**MANDATORY**</span>). The file can be in one of the following formats:
+
+  - **"fossinfo.json"** - License texts for all an app’s used open source software. For more information about format and content, refer to the json example and the corresponding json schema in the standard "artifacts.zip" file.
+
+  - **"cyclonedx.json"** - CycloneDX BOM file with license texts inside.
 
 - **"foss-sources.zip" (<span style="color:blue;">**CONDITIONAL**</span>)** - In the foss-sources.zip file, the sources of all used open source libraries / packages are zipped without a password.
+
 - **"foss-offer.x" (<span style="color:blue;">**CONDITIONAL**</span>)** - If the foss-sources.zip file is not provided, a human-readable file with the name "offer.x" is needed. It explains how the user can get the sources.
 
 **Either FOSS sources or FOSS offer is required**.
@@ -304,7 +309,7 @@ ctrlX currently supports the amd64 and the arm64 processor architecture. The cor
 
 - **"ctrlx-{company name}-{app name}_{version}_arm64.snap" (<span style="color:red;">**MANDATORY**</span>)** - Snap that runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX CORE hardware.
 
-- **"ctrlx-{company name}-{app name}_{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE^virtual^. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
+- **"ctrlx-{company name}-{app name}_{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE<sup>virtual</sup>. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
 
 ### 4.2 App Documentation (<span style="color:red;">**MANDATORY**</span>)
 
@@ -341,30 +346,16 @@ The following properties must be defined within the **"snapcraft.yaml"** file (s
 
 - **Grade** - Defines the quality grade of the app. During development, you may choose to use **"devel"**. When releasing the application, the grade must be set to **"stable"**.
 
-### 4.4 FOSS Info Provisioning (<span style="color:red;">**MANDATORY**</span>)
-
-If the app uses Free and Open Source Software (FOSS), certain license information must be delivered together  with the app.
-
-With **"fossinfo.xml"** the open source license text must be disclosed for copyright reasons. Bosch Rexroth offers the possibility to display the license texts for the used open source software in the ctrlX web interface. For more information about "fossinfo.xml" please refer to the guideline in the SDK. If FOSS license texts are displayed within the app, at least a reference to the license display in the app must be provided in the "fossinfo.xml".
-
-Since users must be able to view the license texts before the open source software is installed, the "fossinfo.xml" must also be stored outside the app in the "disclosure" directory (see section 3.1.2). In addition, the license texts must be listed within the user documentation or at least a reference must be inserted where the FOSS license texts are located.
-
 ## 5 Further App Information (<span style="color:blue;">**CONDITIONAL**</span>)<a name="further"></a>
 
-### 5.1 FOSS Sources (<span style="color:blue;">**CONDITIONAL**</span>)
-
-Bosch Rexroth recommends putting all FOSS sources in a zip file with the file name **"foss-sources.zip"** and storing it in the **"disclosure"** directory, where the **"fossinfo.xml"** is provided.
-
-In the event that the FOSS sources are not provided directly, a written offer is mandatory for open source software with copyleft clause (e.g. GPLv2 or GPLv3) . This means, a human-readable file with the name "foss-offer.x" needs to be provided, which explains how the user can get the app’s FOSS sources.
-
-### 5.2 Semantic Versioning Scheme (<span style="color:green;">**OPTIONAL**</span>)
+### 5.1 Semantic Versioning Scheme (<span style="color:green;">**OPTIONAL**</span>)
 
 It is recommended that a versioning scheme is used based on <https://semver.org/> for the app’s versioning. This setting is also relevant in the **snapcraft.yaml** file while creating the snap.
 
 !!! note
     Increasing version numbers are mandatory, regardless of the versioning scheme used
 
-### 5.3 Restart Delay (<span style="color:green;">**OPTIONAL**</span>)
+### 5.2 Restart Delay (<span style="color:green;">**OPTIONAL**</span>)
 
 The restart delay of the app daemon should be set to "5s" or similar in the **snapcraft.yaml** to prevent the 10s lock-out
 
@@ -437,7 +428,9 @@ If an app exceeds these values by a long way, then please contact your app partn
 
 #### 6.2.2 Integrated Storage/Flash Lifetime
 
-The app must not write diagnostics or similar data cyclically to the internal solid-state memory, as this will damage the flash cells. Instead, cyclical writing can be only be done to a network storage or any other external storage, as these allow easy and regular replacement for this use-case.
+The app must not write diagnostics or similar data cyclically to the internal solid-state memory when running on ctrlX CORE hardware (X3, X5, X7, etc.), as this will damage the flash cells. Instead, cyclical writing can only be done to network storage or other external storage, which allows easy and regular replacement for this use case.
+
+When running on ctrlX OS on other hardware, this check is optional and may be adapted depending on the hardware capabilities.
 
 The integrated storage medium and file system in the ctrlX CORE hardware is based on a solid state flash memory, which inherently has a limited lifetime based on the number of erase cycles for its memory cells. To increase the device’s overall lifetime it is necessary to reduce the number of write/erase cycles on the flash cells.
 

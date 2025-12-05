@@ -52,6 +52,10 @@ namespace Samples.Datalayer.Provider
         /// <returns>The <see cref="Node"/>.</returns>
         public static Node CreateReadOnlyNode(string address, string targetAddress, string description, IVariant value)
         {
+
+            // Please see here for recommended allowed operations by node type: 
+            // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+
             var metaData = new MetadataBuilder(AllowedOperationFlags.Read, description)
                 .SetNodeClass(NodeClass.Variable)
                 .AddReference(ReferenceType.ReadType, targetAddress)
@@ -70,6 +74,9 @@ namespace Samples.Datalayer.Provider
         /// <returns>The <see cref="Node"/>.</returns>
         public static Node CreateReadWriteNode(string address, string targetAddress, string description, IVariant value)
         {
+            // Please see here for recommended allowed operations by node type: 
+            // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/ 
+
             var metaData = new MetadataBuilder(AllowedOperationFlags.Read | AllowedOperationFlags.Write, description)
                 .SetNodeClass(NodeClass.Variable)
                 .AddReference(ReferenceType.ReadType, targetAddress)

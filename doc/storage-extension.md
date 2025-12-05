@@ -57,19 +57,15 @@ base: core20
 version: 0.0.1
 summary: Storage extension sample
 description: |
-    Storage extension sample
+  <!--
+  author: Bosch Rexroth AG
+  url: https://www.boschrexroth.com
+  -->
 grade: stable
 confinement: strict
 
 parts:
     <...>
-    backup:
-        plugin: nil
-        source: backup
-        overrride-build: |
-        snapcraftctl build
-        mkdir -p $SNAPCRAFT_PART_INSTALL/meta
-        cp $SNAPCRAFT_PART_SRC/snapshots.yaml $SNAPCRAFT_PART_INSTALL/meta
 
 plugs:
     storage-extension-mnt:
@@ -136,20 +132,6 @@ snapctl mount -o rw,bind /writable/system-data/var/run/mnt/storage-extension/$SN
 $SNAP/your-app.sh
 ```
 
-# Exclude from backup support
-
-All your data from the storage extension are added to the backup by default. You typically use the storage extension when you have increased memory requirements in your app. Therefore it is necessary to exclude the storage extension from the backup.
-
-This will be done by adding a "part" in your snapcraft.yaml and add a snapshots.yaml to the project.
-
-## Example
-
-```yaml title="snapshots.yaml"
-exclude:
-    # Exclude storage-extension partition from backup
-    - $SNAP_COMMON/storage-extension/*
-```
-
 # Sample app
 
 This sample app ( [storage-extension-sample](./samples-snap/storage-extension/README.md) ) is the minimum set to use storage extension.
@@ -173,5 +155,5 @@ Each app has its own area, the path is `$SNAP_COMMON/storage-extension/<app-name
     - !!! warning
         Be careful: You cannot reuse the partition without formatting and encrypting it again. So all data will be lost!
     - **Only one** partition can be used as storage-extension at one time
-    - Data on storage-extension is **not** part of backup/restore
+    - storage-extension can not be used together with [Ubuntu Snapshot mechanism](persist-device-settings.md)
     - If necessary, you have to switch to service state to mount or unmount storage-extension partitions

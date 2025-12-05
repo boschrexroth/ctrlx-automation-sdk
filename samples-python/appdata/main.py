@@ -9,8 +9,7 @@ import time
 
 from http.server import HTTPServer
 
-from web.server import Server, UnixSocketHttpServer
-
+from weblocal.server import Server, UnixSocketHttpServer
 
 def main():
     """main

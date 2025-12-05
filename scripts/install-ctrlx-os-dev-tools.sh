@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo " "
 echo "============================================"
 echo Adding required apt sources

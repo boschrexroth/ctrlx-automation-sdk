@@ -8,7 +8,7 @@ This directory contains IEC 61131-3 code samples running in the PLC runtime envi
 
 * ctrlX AUTOMATION SDK build environment
 * ctrlX AUTOMATION SDK version
-* ctrlX CORE^virtual^ or ctrlX CORE
+* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
 * ctrlX WORKS with ctrlX PLC Engineering installed
 
 ## Find out the supported samples

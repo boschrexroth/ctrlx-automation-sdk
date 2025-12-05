@@ -24,19 +24,19 @@ INFO=""
 # if grep -q "xxx" <<<${PARAM} --> IF ${PARAM}.contains("xxx")
 for PARAM in "$@"
 do
-  if grep -q "ar" <<<${PARAM}; then
+  if grep -q "ar" <<<"${PARAM}" ; then
     ARCH=aarch64
   fi
 
-  if grep -q "no" <<<${PARAM}; then
+  if grep -q "no" <<<"${PARAM}" ; then
     PROXY=noproxy
   fi
 
-  if grep -q "in" <<<${PARAM}; then
+  if grep -q "in" <<<"${PARAM}" ; then
     INFO=info
   fi
 
-  if grep -q "help" <<<${PARAM}; then
+  if grep -q "help" <<<"${PARAM}" ; then
     echo Downloads/builds all files needed to lauch a QEMU VM
     echo "Parameters:"
     echo "   CPU Architecture:  amd64 (default) | aarch64"
@@ -50,7 +50,7 @@ do
 done
 
 # Operating system ------------------------------------------------------------
-OS=ubuntu-22.04-server
+OS=ubuntu-24.04-server
 
 # Ubuntu cloud image name -----------------------------------------------------
 # The Ubunt version name
@@ -99,18 +99,18 @@ info()
   fi
   echo "----------------------------------------------------------"
 
-  read -p "Waiting 5s ..." -t 5
+  read -r -p "Waiting 5s ..." -t 5
 }
 
 install_pkg()
 {
-  if ! dpkg -s $1 >/dev/null 2>&1; then
-    sudo apt-get -y install $1
+  if ! dpkg -s "${1}" >/dev/null 2>&1; then
+    sudo apt-get -y install "${1}"
   fi
 }
 
 # Info ########################################################################
-if [ ! -z $INFO ]; then
+if [ -n "$INFO" ]; then
   info
 fi
 
@@ -118,7 +118,7 @@ fi
 # Create user data image file #################################################
 install_pkg cloud-image-utils
 
-if grep -q "no" <<<${PROXY}
+if grep -q "no" <<<"${PROXY}"
 then
   # Remove these lines
   grep -v "#proxy-ONLY" $CC >$CCG 

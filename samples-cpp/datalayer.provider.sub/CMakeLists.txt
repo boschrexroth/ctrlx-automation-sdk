@@ -41,10 +41,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 # set libraries dirs and includes
 #
 IF( ${BUILD_KIT} MATCHES "aarch64")
-  SET(PLATFORM_NAME "ubuntu22-gcc-aarch64")
+  SET(PLATFORM_NAME "ubuntu24-gcc-aarch64")
   SET(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
 ELSE()
-  SET(PLATFORM_NAME "ubuntu22-gcc-x64")
+  SET(PLATFORM_NAME "ubuntu24-gcc-x64")
   SET(CMAKE_CXX_COMPILER g++)
 ENDIF()
 

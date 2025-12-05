@@ -16,6 +16,7 @@
 * [ctrlX Data Layer Client: Bulk Read](./datalayer.client.bulkread/README.md)
 * [ctrlX Data Layer Client: Browser](./datalayer.client.browse/README.md)
 * [ctrlX Data Layer Provider: All Data Types](./datalayer.provider.alldata/README.md)
+* [ctrlX Data Layer Provider: Wildcard - Self managed light-weight nodes](./datalayer.provider.wildcard/README.md)
 
 ### Angular Samples
 

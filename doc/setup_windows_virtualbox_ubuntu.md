@@ -91,7 +91,7 @@ Here you have to install them manually:
 
 The according commands are also available in [cloud-config](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/scripts/environment/cloud-config).
 
-Therefor copy the commands under section runcmd: subtitle '# <https://wiki.ubuntu.com/MultiarchSpec>' and '# Qualify architecture'
+Therefore copy the commands under section runcmd: subtitle '# <https://wiki.ubuntu.com/MultiarchSpec>' and '# Qualify architecture'
 
     sudo dpkg --add-architecture arm64
     ...
@@ -107,8 +107,6 @@ Furthermore run:
     sudo apt-get -y install libsystemd-dev:amd64
     sudo apt-get -y install libssl-dev:amd64
     sudo apt-get -y install libssl-dev:arm64
-    sudo apt-get -y install libzmq3-dev:amd64
-    sudo apt-get -y install libzmq3-dev:arm64
 
 ### Important Install Scripts
 

@@ -16,7 +16,7 @@ Please refer to the App Development Guide for further information.
 
 [2.4 ctrlX CORE 10 Day Trial License](#trial)
 
-[2.5 Four Hour Engineering Demo License on  ctrlX CORE^virtual^](#virtual)
+[2.5 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup>](#virtual)
 
 [2.6 Additional License Mode: ctrX CORE 3 Month Test License](#test)
 
@@ -55,16 +55,16 @@ The license management on the **ctrlX CORE** supports several different licensin
 | Main License | ctrlX CORE |`SWL_XCR_{YOUR_APP_LICENSE_CODE}` | mandatory | **check note** |
 | Temporary Usage Rights (Emergency Mode) | ctrlX CORE |`SWL_XCR_{YOUR_APP_LICENSE_CODE}` | mandatory |`tampered` flag is `true` |
 | 10 Day Trial License |ctrlX CORE |`SWL_XCR_{YOUR_APP_LICENSE_CODE}` | optional |`isPermanent` flag is `false` |
-|Four Hour Engineering Demo License |ctrlX CORE^virtual^|`SWL_XCR_ENGINEERING_4H`|suggested|**check note** |
+|Four Hour Engineering Demo License |ctrlX CORE<sup>virtual</sup>|`SWL_XCR_ENGINEERING_4H`|suggested|**check note** |
 
 !!! important
     - The app will start normally in the first three cases irrespective of the modes. Information about temporary/trial is not important and developer can avoid checking the different flags.
     - To ensure a seamless trial experience, we recommend enabling your application to launch with both the standard license and the `SWL_XCR_ENGINEERING_4H` license. More information is provided below.
     - For storing the license ID, it's recommended to use `/tmp`. This folder is accessible from the snap by default. Users can easily write the ID to `/tmp/myFancyFile`, which remains available until the system reboots, even after the app is removed.
 
-### ctrlX CORE^virtual^
+### ctrlX CORE<sup>virtual</sup>
 
-As displayed in the table, there is only the "four hour engineering demo license" available on the **ctrlX CORE^virtual^**, which allows to evaluate a new app for a limited time (the ctrlX CORE^virtual^ is terminated after four hours to prevent productive use). Use the `SWL_XCR_ENGINEERING_4H` license when the application is running in ctrlX CORE^virtual^.
+As displayed in the table, there is only the "four hour engineering demo license" available on the **ctrlX CORE<sup>virtual</sup>**, which allows to evaluate a new app for a limited time (the ctrlX CORE<sup>virtual</sup> is terminated after four hours to prevent productive use). Use the `SWL_XCR_ENGINEERING_4H` license when the application is running in ctrlX CORE<sup>virtual</sup>.
 
 ### All other cases
 
@@ -127,13 +127,13 @@ to expire (1 month before expiration, 7 days before expiration and 1 day before 
 - When this mode is active, the app should work as if a standard license is available.
 - This 10 day trail license is bought for all apps and mapped to device
 
-## 2.5 Four Hour Engineering Demo License on  ctrlX CORE^virtual^ <a name="virtual"></a>
+## 2.5 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup> <a name="virtual"></a>
 
-**Purpose**: Evaluation mode on a ctrlX CORE^virtual^
+**Purpose**: Evaluation mode on a ctrlX CORE<sup>virtual</sup>
 **Description**:
 
 - A special license (`SWL_XCR_ENGINEERING_4H`) indicates that currently the limited evaluation mode is active.
-- After 4 hours the ctrlX CORE^virtual^ is automatically shut down to prevent a productive use.
+- After 4 hours the ctrlX CORE<sup>virtual</sup> is automatically shut down to prevent a productive use.
 
 **Expected App Behaviour:**
 

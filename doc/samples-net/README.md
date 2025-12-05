@@ -7,6 +7,7 @@
 ### Basic Samples
 
 * [Hello World](./hello.world/README.md)
+* [Hello Globalization](./hello.globalization/README.md)
 * [ctrlX Data Layer Client](./datalayer.client.simple/README.md)
 * [ctrlX Data Layer Provider](./datalayer.provider.simple/README.md)
 * [Diagnostics Logbook](./diagnostics.logbook/README.md)

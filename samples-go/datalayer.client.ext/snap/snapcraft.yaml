@@ -5,13 +5,13 @@ summary: ctrlX Data Layer client sample written in Go for ctrlX OS.
 description: This sample shows how to uses the subscription and bulk from the ctrlX Data Layer.
 confinement: strict # use 'strict' once you have the right plugs and slot
 grade: stable
-base: core22
+base: core24
 type: app
 
-architectures:
-  - build-on: [amd64, arm64]
-    build-for: [amd64]
-  - build-on: [amd64, arm64]
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
     build-for: [arm64]
 
 apps:
@@ -29,7 +29,7 @@ parts:
   client:
     plugin: go
     source: .
-    build-snaps: ['go/1.22/stable']
+    build-snaps: ["go/1.24/stable"]
     stage-packages:
       - ctrlx-datalayer
     build-packages:
@@ -40,7 +40,7 @@ parts:
           - libsystemd-dev:arm64
         #- pkg-config:arm64
     override-build: |
-      case $CRAFT_ARCH_TRIPLET in
+      case $CRAFT_ARCH_TRIPLET_BUILD_FOR in
         aarch64-linux-gnu)
           export GOARCH=arm64
           export GOARM=7
@@ -62,5 +62,5 @@ plugs:
 lint:
   ignore:
     - library:
-      - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
-      - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

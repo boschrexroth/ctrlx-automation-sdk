@@ -15,7 +15,7 @@ The described workflow and the tools are currently running __only under Windows 
 Install ctrlX WORKS >= 1.20 with the function 'ctrlX PLC Engineering' and 'App Build Environment'.
 
 We recommend to use __"C:\Program Files\Rexroth\ctrlX WORKS"__ as installation path.
-In this case the path to ctrlX PLC Engineering is __"C:\Program Files\Rexroth\ctrlX WORKS\Studio\Common\ctrlX-PLC-Engineering.exe"__ 
+In this case the path to ctrlX PLC Engineering is __"C:\Program Files\Rexroth\ctrlX WORKS\Studio\Common\ctrlX-PLC-Engineering.exe"__
 
 #### ctrlX CORE
 
@@ -58,21 +58,24 @@ The basic steps are:
 1. Create a PLC library which contains the IEC61131 ST code to handle a Flatbuffers variable
 2. Create a new PLC project
 3. Import the created PLC library and provided sample code into your project
-4. Compile the project and log into your ctrl CORE<sup>virtual</sup> 
+4. Compile the project and log into your ctrl CORE<sup>virtual</sup>
 
 ### Create a PLC library
 
 Start cmd.exe and enter these commands:
 
     c:
-    cd \ctrlx-automation-sdk\samples-fbs2plc\sampleSchema
+    cd \ctrlx-automation-sdk\samples-iec61131\fbs2plc
     start.bat
 
 Result:
-* The file c:\ctrlx-automation-sdk\samples-cpp\datalayer.provider.all-data\sampleSchema.fbs was compiled into IEC61131 code. 
-* A new PLC library __fbs-sampleSchema__ was created, using c:\ctrlx-automation-sdk\plc\CXA_fbs_Template.library as template.
+* The file ctrlx-automation-sdk\samples-cpp\datalayer.provider.alldata\sampleSchema.fbs was compiled into IEC61131 code.
+* A new PLC library __fbs-sampleSchema__ was created, using ctrlx-automation-sdk\plc\CXA_fbs_Template.library as template.
 * All required standard libraries were imported.
 * ctrlX PLC Engineering now has the new library opened.
+
+**Note**
+Paths are examples and must be adapted locally.
 
 Store the new library so that you can use it in your PLC project:
 
@@ -85,11 +88,11 @@ Store the new library so that you can use it in your PLC project:
 * In ctrlX PLC Engineering create a new PLC project use 'ctrlX CORE x64 Project' as template.
 * Select the node Application and delete it.
 * Select the node PLC Logic
-* Select menu item Project - PLCopenXML import..., select c:\ctrlx-automation-sdk\samples-fbs2plc\sampleSchema\fbs-read-write.xml 
+* Select menu item Project - PLCopenXML import..., select ctrlx-automation-sdk\samples-iec61131\fbs2plc\fbs-read-write.xml
 * Double click the node library manager
 * Add the library CXA_DATALAYER to your project.
-* Connect the device of ypur PLC project with the ctrlX CORE<sup>virtual</sup> 
-* Login into your ctrlX CORE<sup>virtual</sup> 
+* Connect the device of ypur PLC project with the ctrlX CORE<sup>virtual</sup>
+* Login into your ctrlX CORE<sup>virtual</sup>
 
 ### Check the Flatbuffer Access
 

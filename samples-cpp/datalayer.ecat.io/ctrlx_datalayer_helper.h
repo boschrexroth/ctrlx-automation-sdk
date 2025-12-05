@@ -41,7 +41,7 @@
   * IMPORTANT:
   * You need not change the parameter settings before building a snap and installing the snap on a ctrlX CORE.
   * The method get_connection_string detects the snap environment and uses automatically inter process communication.
-  * Therefor the connection string to the ctrlX Datalayer is:
+  * Therefore the connection string to the ctrlX Datalayer is:
   *
   *     "ipc://"
   *

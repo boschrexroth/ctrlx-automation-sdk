@@ -14,12 +14,12 @@ Then each following chapter describes for one programming language the  language
 
 From the build environment ctrlX CORE devices are connected via TCP/IP. Assuming we are using a (QEMU) virtual machine as build environment the different kind of ctrlX CORE devices are reachable over these IP addresses:
 
-1. ctrlX CORE^virtual^ with port forwarding: 10.0.2.2
-2. ctrlX CORE^virtual^ with network adapter: 192.168.1.1
+1. ctrlX CORE<sup>virtual</sup> with port forwarding: 10.0.2.2
+2. ctrlX CORE<sup>virtual</sup> with network adapter: 192.168.1.1
 3. ctrlX CORE: real IP address
 
 To point 1.:
-From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE^virtual^ has no own IP address. The connections to the control are realized via port forwarding.
+From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE<sup>virtual</sup> has no own IP address. The connections to the control are realized via port forwarding.
 
 ### Set up SSH Public Key Authentication
 
@@ -138,14 +138,14 @@ For this the file __tasks.json__ contains the task `Launch Remote GDB Server`
 
 The tag 'command' starts the application under the gdb server via ssh.
 
-As second action we want to start the gdb debugger in remote mode so that he connects to the remote gdb server. Therefor in __launch.json__ the configuration set `aarch64 ctrlX (remote)` is stored.
+As second action we want to start the gdb debugger in remote mode so that he connects to the remote gdb server. Therefore in __launch.json__ the configuration set `aarch64 ctrlX (remote)` is stored.
 
 ```code
     {
         "name": "aarch64 ctrlX (remote)",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/generated/ubuntu22-gcc-aarch64/Debug/registerNode",
+        "program": "${workspaceFolder}/generated/ubuntu24-gcc-aarch64/Debug/registerNode",
         "cwd": "${workspaceFolder}",
         "miDebuggerPath": "/usr/bin/gdb-multiarch",
         "miDebuggerServerAddress": "192.168.1.1:12345",

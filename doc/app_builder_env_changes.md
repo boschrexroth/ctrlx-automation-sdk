@@ -2,7 +2,6 @@
 
 ### Version 1.16.0 <small> July 15, 2022</small>
 
-
 !!! important
     The newest App Build Environment is always provided with ctrlX WORKS.
 
@@ -37,5 +36,3 @@ Only the AMD64 version is supported because for every programming language suppo
 #### Additionally installed packages
 
 * __pkg-config__: New
-* __libzmq3-dev:amd64__: New
-* __libzmq3-dev:arm64__: New

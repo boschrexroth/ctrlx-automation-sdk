@@ -8,31 +8,31 @@ echo " "
 
 function WGetFile ()
 {
-    SUB_DIR=$1
-    FILE=$2
-    rm ~/scripts/$FILE* 2>/dev/null
-    wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/$SUB_DIR/$FILE -P ~/scripts
-    chmod 777 ~/scripts/$FILE
+    SUB_DIR=${1}
+    FILE=${2}
+    rm ~/scripts/"$FILE*" 2>/dev/null
+    wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/"$SUB_DIR"/"$FILE" -P ~/scripts
+    chmod 777 ~/scripts/"$FILE"
 }
 
 function WGetMdAndShFiles ()
 {
     SUB_DIR=$1
     # Get JSON object with list of files (items)
-    TREE=$(curl https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/$SUB_DIR | jq .payload.tree)
+    TREE=$(curl https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/"$SUB_DIR" | jq .payload.tree)
     
     # Debug
     # echo $TREE | jq -r '.items[]'
 
     # https://stackoverflow.com/questions/68121082/how-to-iterate-over-json-array-with-jq
     # Iterate through list and download each file
-    echo $TREE | jq -r '.items[].name' | while read name ; do
+    echo "$TREE" | jq -r '.items[].name' | while read -r name ; do
         case $name in 
             *.md) 
-                WGetFile $SUB_DIR $name
+                WGetFile "$SUB_DIR" "$name"
                 ;; 
             *.sh) 
-                WGetFile $SUB_DIR $name
+                WGetFile "$SUB_DIR" "$name"
                 ;; 
         esac
     done
@@ -41,6 +41,7 @@ function WGetMdAndShFiles ()
 WGetMdAndShFiles scripts/environment/scripts
 WGetMdAndShFiles scripts
 
+# shellcheck disable=SC1090
 source ~/scripts/install-sdk.sh
 
 

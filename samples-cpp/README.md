@@ -7,7 +7,7 @@
 * ctrlX WORKS
 * ctrlX AUTOMATION App Build Environment
 * ctrlX AUTOMATION SDK installed in the App Build Environment
-* ctrlX CORE^virtual^ or ctrlX CORE
+* ctrlX CORE<sup>virtual</sup> or ctrlX CORE
 
 * Visual Studio Code installed on your host computer
 
@@ -67,7 +67,7 @@ Then make these settings in the status bar (blue area) :
 
 Click Build and observe the progress in the output window - the build process should finish without errors (exit code 0).
 
-Now the executable for debugging is available in the subdirectory: generated/__ubuntu22-gcc-x64/Debug/__
+Now the executable for debugging is available in the subdirectory: generated/__ubuntu24-gcc-x64/Debug/__
 
 To start debugging select 'Run and Debug' in the side bar, select 'x64...' as launch configuration an press F5 (or green start button).
 

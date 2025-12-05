@@ -18,7 +18,7 @@ In the following you can see how to set up the three different types of debuggin
 
 ## 1. Snap Logs
 
-First build the snap using the right build-snap script and install it on a ctrlX CORE or ctrlX CORE^virtual^.
+First build the snap using the right build-snap script and install it on a ctrlX CORE or ctrlX CORE<sup>virtual</sup>.
 
 You can see the snaps logs in the Diagnostics Logbook on the webpage of the ctrlX CORE or in the console. To see them in the console you need to log in via ssh to the ctrlX CORE. To enable ssh on your ctrlX CORE you would need an system user with extended rights on the ctrlX CORE.
 

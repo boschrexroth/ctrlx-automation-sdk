@@ -123,6 +123,10 @@ func StartNodeFolderHandler(d *NodeFolder) {
 
 			func(e datalayer.ProviderNodeEvent) {
 				fmt.Println("event: OnMetadata: ", d.Name())
+
+				// Please see here for recommended allowed operations by node type:
+				// https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
+                
 				m := datalayer.NewMetaDataBuilder(datalayer.AllowedOperationRead|datalayer.AllowedOperationWrite, "folder", "folder_url")
 				m.NodeClass(fbs.NodeClassFolder)
 				v := m.Build()
