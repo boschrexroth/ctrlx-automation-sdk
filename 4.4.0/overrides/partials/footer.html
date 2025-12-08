@@ -1,0 +1,18 @@
+{% extends footer.html %}
+<div class="md-footer__main">
+    <!-- Copyright and theme information -->
+    <div class="md-footer-copyright">
+        {% if config.copyright %}
+        <div class="md-footer-copyright__highlight">
+            {{ config.copyright }}
+        </div>
+        {% endif %}
+
+        {{ extracopyright }}
+    </div>
+    
+    <div class="link__microsite-wrapper">
+        <a href="https://apps.boschrexroth.com/microsites/ctrlx-automation/en/ " class="link__microsite" >CtrlX Automation</a>
+    </div>
+</div>
+{% endblock %}
