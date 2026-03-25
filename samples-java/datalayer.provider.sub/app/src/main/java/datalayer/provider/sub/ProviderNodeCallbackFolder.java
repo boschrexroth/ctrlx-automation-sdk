@@ -27,7 +27,7 @@ public class ProviderNodeCallbackFolder implements ProviderNodeSubCallback {
     public static final String addressfolderRoot = "sdk/java/provider/sub/";
     public static final String addressfolder = addressfolderRoot + "**";
 
-    private ReentrantLock mutex = new ReentrantLock();
+    private final ReentrantLock mutex = new ReentrantLock();
 
     private final java.util.concurrent.ConcurrentHashMap<Long, ClientPublisher> gSubscriptions = new java.util.concurrent.ConcurrentHashMap<>();
 

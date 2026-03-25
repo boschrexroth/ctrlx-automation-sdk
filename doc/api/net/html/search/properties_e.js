@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['writeintype_0',['WriteInType',['../classDatalayer_1_1ReferenceType.html#a5d0ea2c95572ed7fa06d23320a74926c',1,'Datalayer::ReferenceType']]],
-  ['writeouttype_1',['WriteOutType',['../classDatalayer_1_1ReferenceType.html#a66042c1bc246be7a064aa33c7edc8c6b',1,'Datalayer::ReferenceType']]],
-  ['writetype_2',['WriteType',['../classDatalayer_1_1ReferenceType.html#a9fb27ed32816ad9c8dfde0eaaf2c4787',1,'Datalayer::ReferenceType']]]
+  ['value_0',['Value',['../interfaceDatalayer_1_1IBulkItem.html#a9503c94b75a670263019963baa18c20d',1,'Datalayer.IBulkItem.Value()'],['../interfaceDatalayer_1_1IClientAsyncResult.html#a9503c94b75a670263019963baa18c20d',1,'Datalayer.IClientAsyncResult.Value()'],['../interfaceDatalayer_1_1INotifyItem.html#a9503c94b75a670263019963baa18c20d',1,'Datalayer.INotifyItem.Value()'],['../interfaceDatalayer_1_1IVariant.html#a2d7e8cd2081ad3db5aa8e597557123e9',1,'Datalayer.IVariant.Value()'],['../classDatalayer_1_1NotifyItem.html#a9503c94b75a670263019963baa18c20d',1,'Datalayer.NotifyItem.Value()'],['../classDatalayer_1_1ReferenceType.html#af7b88db799d8f791f785e437bc6099d2',1,'Datalayer.ReferenceType.Value()'],['../classDatalayer_1_1Variant.html#a2d7e8cd2081ad3db5aa8e597557123e9',1,'Datalayer.Variant.Value()']]]
 ];

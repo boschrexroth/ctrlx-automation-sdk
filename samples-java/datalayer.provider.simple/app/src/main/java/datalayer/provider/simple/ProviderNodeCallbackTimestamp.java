@@ -5,6 +5,7 @@
  */
 package datalayer.provider.simple;
 
+import java.lang.System.Logger.Level;
 import java.time.Instant;
 
 import com.boschrexroth.api.AllowedOperation;
@@ -20,20 +21,22 @@ import comm.datalayer.NodeClass;
 
 public class ProviderNodeCallbackTimestamp implements ProviderNodeCallback {
 
+    private static final java.lang.System.Logger LOG = java.lang.System.getLogger(ProviderNodeCallbackTimestamp.class.getName());
+
     @Override
     public void onBrowse(ProviderNodeEvent ev) {
-        System.out.println("onBrowse:");
+        LOG.log(Level.INFO, "onBrowse:");
         ev.callback(Result.OK, null);
     }
 
     @Override
     public void onCreate(ProviderNodeEventData ev) {
-        System.out.println("onCreate:");
+        LOG.log(Level.INFO, "onCreate:");
     }
 
     @Override
     public void onMetadata(ProviderNodeEvent ev) {
-        System.out.println("onMetadata: '" + ev.getAddress() + "'");
+        LOG.log(Level.INFO, "onMetadata: '" + ev.getAddress() + "'");
         int mask = AllowedOperation.createMask(AllowedOperation.READ);
         MetadataBuilder meta = MetadataBuilder.create(mask, "Timestamp Variable", "");
         meta.setNodeClass(NodeClass.Variable);
@@ -44,7 +47,7 @@ public class ProviderNodeCallbackTimestamp implements ProviderNodeCallback {
 
     @Override
     public void onRead(ProviderNodeEventData ev) {
-        System.out.println("onRead: '" + ev.getAddress());
+        LOG.log(Level.INFO, "onRead: '" + ev.getAddress());
         Instant time = Instant.now();
         Variant val = Variant.create();
         val.setInstant(time);
@@ -53,7 +56,7 @@ public class ProviderNodeCallbackTimestamp implements ProviderNodeCallback {
 
     @Override
     public void onRemove(ProviderNodeEvent ev) {
-        System.out.println("onRemove:");
+        LOG.log(Level.INFO, "onRemove:");
         ev.callback(Result.OK, null);
     }
 

@@ -2,13 +2,13 @@
 
 ## Introduction
 
-The app demonstrates how a ctrlX Data Layer connecion is established and a string and flatbuffers node are provided.
+The app demonstrates how a __ctrlX Data Layer__ connecion is established and a string and flatbuffers node are provided.
 
 ## Function Description
 
-The app connects to the ctrlX Data Layer and provides a string and flatbuffers node .
+The app connects to the __ctrlX Data Layer__ and provides a string and flatbuffers node .
 
-If the ctrlX Data Layer connection breaks the app will exit. After 10s it will be automatically restarted by snapd.
+If the __ctrlX Data Layer__ connection breaks the app will exit. After 10s it will be automatically restarted by snapd.
 
 ## Prerequisites
 
@@ -47,4 +47,5 @@ Build the snap with `snapcraft`
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

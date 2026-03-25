@@ -13,21 +13,16 @@ namespace Samples.Datalayer.Provider
     /// <summary>
     /// ReadWriteNodeHandler provides handler with read-write support.
     /// </summary>
-    internal class ReadWriteNodeHandler : IProviderNodeHandler
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="ReadWriteNodeHandler"/> class.
+    /// </remarks>
+    /// <param name="node">The node<see cref="Node"/>.</param>
+    internal class ReadWriteNodeHandler(Node node) : IProviderNodeHandler
     {
         /// <summary>
         /// Gets the Node.
         /// </summary>
-        public Node Node { get; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ReadWriteNodeHandler"/> class.
-        /// </summary>
-        /// <param name="node">The node<see cref="Node"/>.</param>
-        public ReadWriteNodeHandler(Node node)
-        {
-            Node = node;
-        }
+        public Node Node { get; } = node;
 
         /// <summary>
         /// The OnCreate callback handler.

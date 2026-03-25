@@ -15,7 +15,7 @@ The content of this document may be subject of change in further versions of the
 | **title** | is unique and length is between 3 and 40  characters |
 | **name**  | matches with the snap name (technical app name) |
 | **version** | follows semantic versioning (`MAJOR.MINOR.PATCH`) and does not exceed 32 characters |
-| **description** | provides a short description of the App and is at least 16 characters long |
+| **description** | includes an HTML comment with `author` and `url` fields and provides a short description of the App with at least 16 characters |
 | **degree of isolation** | is set to `confinement = "strict"` |
 | **grade** | is set to `grade = "stable"` |
 | **restart delay** | ist set to `5` or higher |

@@ -283,34 +283,76 @@ namespace Samples.Datalayer.Provider.Virtual
         /// <param name="result"></param>
         private void CreateMetadata(VirtualNode node, IProviderNodeResult result)
         {
-            // Metadata for the root node (here: Folder).
-
             // Please see here for recommended allowed operations by node type: 
             // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/ 
 
-            // Metadata for root node (Folder).
+            // Metadata for the root node (here: Folder).
             if (node.Address == RootAddress)
             {
-                var rootMdb = new MetadataBuilder(
-                    AllowedOperationFlags.Browse,
-                    node.Address);
+                // Build Metadata using generated MetadataT type.
+                var rootOperations = new AllowedOperationsT
+                {
+                    Browse = true // Default: true
+                };
 
-                rootMdb.SetNodeClass(NodeClass.Folder);
-                result.SetResult(DLR_RESULT.DL_OK, rootMdb.Build());
+                var rootMd = new MetadataT
+                {
+                    Operations = rootOperations,    // Mandatory
+                    Description = node.Address,     // Mandatory (but can be left empty)
+                    DescriptionUrl = "",            // Mandatory (but can be left empty)
+                    NodeClass = NodeClass.Folder,
+                };
+                var rootMetaData = new Variant(rootMd);
+
+                // Alternatively we can use the MetadataBuilder.
+
+                // var rootMetaData = new MetadataBuilder(AllowedOperationFlags.Browse, node.Address)
+                //     .SetNodeClass(NodeClass.Folder).Build();
+
+                result.SetResult(DLR_RESULT.DL_OK, rootMetaData);
                 return;
             }
 
-            // Metadata for child nodes: Variable (int32)
-            var mdb = new MetadataBuilder(
-                AllowedOperationFlags.Read |
-                AllowedOperationFlags.Write |
-                AllowedOperationFlags.Browse,
-                node.Address);
+            // Build Metadata for child nodes: Variable (here: types/datalayer/int32)
 
-            mdb.SetNodeClass(NodeClass.Variable);
-            mdb.AddReference(ReferenceType.ReadType, "types/datalayer/int32");
-            mdb.AddReference(ReferenceType.WriteType, "types/datalayer/int32");
-            result.SetResult(DLR_RESULT.DL_OK, mdb.Build());
+            // Build Metadata using generated MetadataT type.
+            var operations = new AllowedOperationsT
+            {
+                Read = true,
+                Write = true,
+                Browse = true // Default: true
+            };
+
+            var readReference = new ReferenceT
+            {
+                Type = ReferenceType.ReadType.ToString(),
+                TargetAddress = "types/datalayer/int32"
+            };
+
+            var writeReference = new ReferenceT
+            {
+                Type = ReferenceType.WriteType.ToString(),
+                TargetAddress = "types/datalayer/int32"
+            };
+
+            var md = new MetadataT
+            {
+                Operations = operations,        // Mandatory
+                Description = node.Address,     // Mandatory (but can be left empty)
+                DescriptionUrl = "",            // Mandatory (but can be left empty)
+                NodeClass = NodeClass.Variable,
+                References = [readReference, writeReference],
+            };
+            var metaData = new Variant(md);
+
+            // Alternatively we can use the MetadataBuilder.
+
+            // var metaData = new MetadataBuilder(AllowedOperationFlags.Read | AllowedOperationFlags.Write | AllowedOperationFlags.Browse, node.Address)
+            //     .SetNodeClass(NodeClass.Variable)
+            //     .AddReference(ReferenceType.ReadType, "types/datalayer/int32")
+            //     .AddReference(ReferenceType.WriteType, "types/datalayer/int32").Build();
+
+            result.SetResult(DLR_RESULT.DL_OK, metaData);
         }
 
         #endregion

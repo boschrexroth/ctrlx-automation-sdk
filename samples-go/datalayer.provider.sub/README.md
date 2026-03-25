@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The app demonstrates shows how a provider supports "ctrlX Data Layer" subscription interface.
+The app demonstrates shows how a provider supports "__ctrlX Data Layer__" subscription interface.
 
 ## Function Description
 
@@ -27,4 +27,5 @@ Build the executable with `./build.sh`
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

@@ -1,10 +1,10 @@
 # README .NET datalayer.client.bulkread
 
-This .NET sample reads values in bulk mode from ctrlX Data Layer.
+This .NET sample reads values in bulk mode from __ctrlX Data Layer__.
 
 ## Introduction
 
-The sample demonstrates how to bulk read values from ctrlX Data Layer and write out the values to console.
+The sample demonstrates how to bulk read values from __ctrlX Data Layer__ and write out the values to console.
 The bulk read is performed every 10 seconds in an endless loop.
 
 ## Description
@@ -94,4 +94,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

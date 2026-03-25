@@ -5,8 +5,16 @@ version: 1.0.0
 summary: Storage extension sample for ctrlX OS.
 description: |
   This app demonstrates how you can use the storage extension.
-grade: stable # must be 'stable' to release into candidate/stable channels
-confinement: strict # use 'strict' once you have the right plugs and slots
+grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
+confinement: strict
 
 platforms:
   amd64:

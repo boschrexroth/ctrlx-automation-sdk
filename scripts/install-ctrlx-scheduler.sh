@@ -4,7 +4,7 @@ echo "============================================"
 echo "Installing ctrlx-datalayer"
 echo "============================================"
 # --- Install ctrlx-datalayer ---
-bash ./install-ctrlx-datalayer.sh
+bash ./install-ctrlx-datalayer.sh ../deb
 
 if [ $? -eq 0 ]; then
     echo "============================================"

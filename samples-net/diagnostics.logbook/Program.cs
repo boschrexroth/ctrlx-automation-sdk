@@ -8,33 +8,33 @@ using Samples.Diagnostics.Logbook;
 using System;
 using System.Threading.Tasks;
 
-// Create TaskCompletionSource to wait for process termination  
+// Create TaskCompletionSource to wait for process termination.
 var tcs = new TaskCompletionSource();
 
-// Handle process exit event (SIGTERM)
+// Handle process exit event (SIGTERM).
 AppDomain.CurrentDomain.ProcessExit += (_, _) =>
 {
     Console.WriteLine("Process exit event SIGTERM received.");
 
-    // Run task for graceful shutdown
+    // Run task for graceful shutdown.
     tcs.SetResult();
 };
 
-// Write message via Console.WriteLine (standard output)
+// Write message via Console.WriteLine (standard output).
 Console.WriteLine("Console.WriteLine");
 
-// Write message via Console.Error.WriteLine (standard error)
+// Write message via Console.Error.WriteLine (standard error).
 Console.Error.WriteLine("Console.Error.WriteLine");
 
-// Write log messages via KernelLogger
+// Write log messages via KernelLogger.
 var kernelLoggerSample = new KernelLoggerSample();
 kernelLoggerSample.Log();
 
-// Write log message via logger of "Microsoft.Extensions.Logging" package
+// Write log message via logger of "Microsoft.Extensions.Logging" package.
 var microsoftLoggerSample = new MicrosoftLoggerSample();
 microsoftLoggerSample.Log();
 
-// Wait for process termination
+// Wait for process termination.
 Console.WriteLine("Waiting for process exit event 'SIGTERM'...");
 await tcs.Task;
-Console.WriteLine("Graceful shutdown app");
+Console.WriteLine("Graceful shutdown.");

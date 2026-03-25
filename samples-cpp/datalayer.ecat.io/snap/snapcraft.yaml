@@ -7,6 +7,14 @@ name: sdk-cpp-ecat-io
 title: SDK C++ EtherCAT I/O
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: Sample app for copying EtherCAT I/Os.
 description: |
   This app will copy EtherCAT digital inputs to outputs.

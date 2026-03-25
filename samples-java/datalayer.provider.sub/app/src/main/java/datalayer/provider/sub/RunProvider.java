@@ -19,7 +19,7 @@ public class RunProvider {
     public static void run(Provider p) {
         LOG.log(Level.INFO, "Run begin");
 
-        if (!RunUtils.running.get()) {
+        if (!RunUtils.getRunningFlag().get()) {
             return;
         }
         ProviderNodeCallbackFolder callbackFolder = new ProviderNodeCallbackFolder();

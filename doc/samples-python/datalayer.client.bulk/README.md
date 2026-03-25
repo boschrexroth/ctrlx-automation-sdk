@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The sample demonstrates how to use bulk operations to handle values of the ctrlX Data Layer.
+The sample demonstrates how to use bulk operations to handle values of the __ctrlX Data Layer__.
 
 ## Function Description
 
@@ -11,10 +11,11 @@ The code is compact and the performance is much better than single operations.
 
 ## Implementation Description
 
-The module __main.py__ connects to the ctrlX Data Layer and handles the ctrlX Data Layer access.
+The module __main.py__ connects to the __ctrlX Data Layer__ and handles the __ctrlX Data Layer__ access.
 ___
 
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

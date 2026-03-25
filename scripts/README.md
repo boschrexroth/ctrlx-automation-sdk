@@ -29,4 +29,5 @@ This folder contains several helper scripts to install the ctrlX AUTOMATION SDK,
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
-SPDX-License-Identifier: MITREADME.md
+
+SPDX-License-Identifier: MIT

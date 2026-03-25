@@ -132,7 +132,7 @@ Now you're ready to code .NET on ctrlX!
 
 ### Provider Concepts
 
-There different concepts to write a ctrlX Data Layer provider:
+There different concepts to write a __ctrlX Data Layer__ provider:
 
 #### Create and register nodes with individual node handlers
 
@@ -149,7 +149,7 @@ __Recommendation:__
 
 __Pros:__
 
-+ The ctrlX Data Layer is managaging your node hierarchy: No implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
++ The __ctrlX Data Layer__ is managaging your node hierarchy: No implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
 
 __Contras:__
 
@@ -174,7 +174,7 @@ __Recommendation:__
 
 __Pros:__
 
-+ The ctrlX Data Layer is managaging your node hierarchy: No Implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
++ The __ctrlX Data Layer__ is managaging your node hierarchy: No Implementation of _OnBrowse()_ required (return DL_UNSUPPORTED or DL_OK with an empty list).
 
 __Contras:__
 
@@ -187,7 +187,7 @@ __Samples:__
 #### Virtual provider (lightweight): Register on wildcard and manage virtual nodes
 
 Create just _one_ node with a single node handler, registered to a _wildcard_ address  (e.g. myroot/**) and managing the nodes for your own. This _lightweight_ handler returns _virtual_ nodes in _OnBrowse()_ method.
-See ctrlX Data Layer documentation for details.
+See __ctrlX Data Layer__ documentation for details.
 
             1 x CreateNode
             1 x Register
@@ -204,7 +204,7 @@ __Pros:__
 
 __Contras:__
 
-+ The ctrlX Data Layer is _not_ managaging your node hierarchy: You have to return the valid data in _OnBrowse()_.
++ The __ctrlX Data Layer__ is _not_ managaging your node hierarchy: You have to return the valid data in _OnBrowse()_.
 
 __Samples:__
 

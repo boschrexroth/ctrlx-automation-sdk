@@ -3,8 +3,16 @@ title: SDK Go Client WebDAV
 version: 1.0.0
 summary: ctrlX WebDAV protocol sample written in Go for ctrlX OS.
 description: The sample demonstrates how to access to configuration files of a ctrlX OS remotely using the WebDAV protocol.
-confinement: strict # use 'strict' once you have the right plugs and slot
+confinement: strict
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 base: core24
 type: app
 
@@ -29,7 +37,7 @@ parts:
   client:
     plugin: go
     source: .
-    build-snaps: ["go/1.24/stable"]
+    build-snaps: ["go/1.25/stable"]
     stage-packages:
       - ctrlx-datalayer
     build-packages:

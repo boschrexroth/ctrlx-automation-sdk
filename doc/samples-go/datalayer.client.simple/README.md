@@ -2,15 +2,15 @@
 
 ## Introduction
 
-The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console.
+The sample demonstrates how to read values from __ctrlX Data Layer__ and write out the values to console.
 
 ## Function Description
 
-The app connects to the ctrlX Data Layer using either port 8443 or 443.
+The app connects to the __ctrlX Data Layer__ using either port 8443 or 443.
 A subscription is used to get values by data change event in a deterministic publish interval.
 The single read is performed every 10 seconds in an endless loop.
 
-If the ctrlX Data Layer connection breaks the app will exit. After 10s it will be automatically restarted by snapd.
+If the __ctrlX Data Layer__ connection breaks the app will exit. After 10s it will be automatically restarted by snapd.
 
 ## Prerequisites
 
@@ -37,4 +37,5 @@ This application needs "sdk-cpp-alldata" as provider.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

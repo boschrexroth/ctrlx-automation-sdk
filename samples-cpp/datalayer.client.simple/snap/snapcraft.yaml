@@ -7,6 +7,14 @@ name: sdk-cpp-client-simple
 title: SDK C++ Client Simple
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: Sample app for datalayer client
 description: |
   This app will read ctrlX Data Layer nodes and print out their value.

@@ -23,11 +23,11 @@ How to setup a Linux Ubuntu app build environment using a virtual or a bare-meta
 
 ### References
 
-* [References](references.md): An overview of useful links and some references
+* [References](references.md): An overview of useful links and some references.
 
 ### Changes
 
-* [Changelog](changelog.md): Changes since last release
+* [Changelog](https://github.com/boschrexroth/ctrlx-automation-sdk/blob/main/CHANGELOG.md): Changes since last release.
 
 ## Additional Information
 

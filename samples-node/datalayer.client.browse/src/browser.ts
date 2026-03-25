@@ -14,7 +14,7 @@ class Browser {
     }
 
     /**
-     * Traverses the ctrlX Data Layer tree and write node with value to console.
+     * Traverses the ctrlX Data Layer and write node with value to console.
      * @param address 
      * @param leaf 
      * @param indent 

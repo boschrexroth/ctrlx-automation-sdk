@@ -1,6 +1,6 @@
 # README .NET datalayer.provider.alldata
 
-This .NET sample provides all types of data to the ctrlX Data Layer tree.
+This .NET sample provides all types of data to __ctrlX Data Layer__.
 
 __IMPORTANT__:
 
@@ -10,7 +10,7 @@ Please read the _Best Practise_ section in common .NET documentation for more de
 
 ## Introduction
 
-The sample demonstrates how to provide all available data types to ctrlX Data Layer tree. The demo creates a 'static' and a 'dynamic' folder under the root node 'samples'. The 'static' folder provides nodes with constant values. In the 'dynamic' folder the same nodes are provided as in 'static' folder but with changing value every second.
+The sample demonstrates how to provide all available data types to __ctrlX Data Layer__. The demo creates a 'static' and a 'dynamic' folder under the root node 'samples'. The 'static' folder provides nodes with constant values. In the 'dynamic' folder the same nodes are provided as in 'static' folder but with changing value every second.
 
 ## Description
 
@@ -43,7 +43,7 @@ Launch the app with the debugger attached by pressing __F5__.
 3. Choose __Open Folder__.
 4. Open the directory __datalayer.provider.alldata__.
 5. Build and install snap as described [here](./../README.md).
-6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer)
+6. Checkout __ctrlX Data Layer__ web frontend (Settings | Data Layer)
 7. Check the output using __Diagnostics__:
 
    + Login into your ctrlX
@@ -62,7 +62,7 @@ Launch the app with the debugger attached by pressing __F5__.
 
 ## Screenshot
 
-![crtrX ctrlX Data Layer tree](./docs/images/datalayer.provider.alldata/datalayer.provider.alldata.png)
+![ctrlX Data Layer](./docs/images/datalayer.provider.alldata/datalayer.provider.alldata.png)
 
 ## Install the App
 
@@ -87,4 +87,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

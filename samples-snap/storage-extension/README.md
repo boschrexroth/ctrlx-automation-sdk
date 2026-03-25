@@ -10,4 +10,5 @@ This storage is encrypted and bond to one ctrlX CORE, so it cannot be used to tr
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

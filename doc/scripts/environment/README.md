@@ -105,4 +105,5 @@ If your host uses a proxy, enter:
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

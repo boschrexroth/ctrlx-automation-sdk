@@ -8,6 +8,13 @@ base: core24
 confinement: strict
 grade: stable
 
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 platforms:
   amd64:
   arm64:
@@ -16,17 +23,17 @@ platforms:
 
 apps:
   provider:
-    command: bin/provider.py
+    command: bin/run-provider.sh
     plugs:
       - network
       - datalayer
     daemon: simple
     restart-condition: always
     passthrough:
-      restart-delay: 30s
+      restart-delay: 15s
 
   client:
-    command: bin/client.py
+    command: bin/run-client.sh
     plugs:
       - network
       - datalayer
@@ -43,6 +50,13 @@ parts:
     source: .
     stage-packages:
       - ctrlx-datalayer
+
+  wrapper-scripts:
+    plugin: dump
+    source: wrapper/
+    organize:
+      ./run-client.sh : bin/run-client.sh
+      ./run-provider.sh : bin/run-provider.sh
 
 plugs:
   datalayer:

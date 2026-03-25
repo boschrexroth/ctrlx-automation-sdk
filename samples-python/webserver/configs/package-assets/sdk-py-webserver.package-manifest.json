@@ -35,10 +35,24 @@
     "sidebar": [
       {
         "id": "sdk-py-webserver",
-        "target": "_blank",
         "title": "Python-Webserver",
         "icon": "bosch-ic-worldwideweb",
-        "link": "/python-webserver?token=${bearertoken}"
+        "items": [
+          {
+            "id": "sdk-py-webserver-blank",
+            "title": "Python-Webserver (New Tab)",
+            "target": "_blank",
+            "link": "/python-webserver?token=${bearertoken}",
+            "items": []
+          },
+          {
+            "id": "sdk-py-webserver-embedded",
+            "title": "Python-Webserver (Embedded)",
+            "target": "embedded",
+            "link": "/python-webserver?token=${bearertoken}",
+            "items": []
+          }
+        ]
       }
     ],
     "settings": [],

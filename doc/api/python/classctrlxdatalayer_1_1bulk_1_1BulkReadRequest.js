@@ -1,6 +1,4 @@
 var classctrlxdatalayer_1_1bulk_1_1BulkReadRequest =
 [
-    [ "__init__", "classctrlxdatalayer_1_1bulk_1_1BulkReadRequest.html#a01278ebd1178bd7ee028e30ebf19f7f6", null ],
-    [ "address", "classctrlxdatalayer_1_1bulk_1_1BulkReadRequest.html#ade5a18d52133ef21f211020ceb464c07", null ],
-    [ "data", "classctrlxdatalayer_1_1bulk_1_1BulkReadRequest.html#a511ae0b1c13f95e5f08f1a0dd3da3d93", null ]
+    [ "__init__", "classctrlxdatalayer_1_1bulk_1_1BulkReadRequest.html#a08072b8f48041546dfb8ff6645e2c9ee", null ]
 ];

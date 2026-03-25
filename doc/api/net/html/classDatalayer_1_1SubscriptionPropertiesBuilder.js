@@ -2,7 +2,7 @@ var classDatalayer_1_1SubscriptionPropertiesBuilder =
 [
     [ "SubscriptionPropertiesBuilder", "classDatalayer_1_1SubscriptionPropertiesBuilder.html#a906c787c69eda2cc0aaf995638d99512", null ],
     [ "Build", "classDatalayer_1_1SubscriptionPropertiesBuilder.html#a93ff61a70da95f2c796a056dd85a9b2c", null ],
-    [ "SetChangeEvents", "classDatalayer_1_1SubscriptionPropertiesBuilder.html#a89d3c0e840c74d2087f93efccbe04377", null ],
+    [ "SetChangeEvents", "classDatalayer_1_1SubscriptionPropertiesBuilder.html#a3d01cf269d7994a923f642bf16bd1fc7", null ],
     [ "SetCounting", "classDatalayer_1_1SubscriptionPropertiesBuilder.html#a90528eca4c144dfddb28e33c6ec0228b", null ],
     [ "SetDataChangeFilter", "classDatalayer_1_1SubscriptionPropertiesBuilder.html#aa0650d1e40db0e3f96b4d720e477ba49", null ],
     [ "SetErrorIntervalMillis", "classDatalayer_1_1SubscriptionPropertiesBuilder.html#a75fa75449ff562e2aeff419e8d7c2029", null ],

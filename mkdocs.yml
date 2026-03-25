@@ -116,9 +116,8 @@ nav:
               - Storage extension: storage-extension.md
           - Shared Fileserver: shared-fileserver.md
           - Extendable Denylist: extenable-denylist.md
+          - App signing for OEMs: appsigning-oem.md
           - FOSS: foss.md
-      - Releases:
-          - Changelog: changelog.md
   - Setup:
       - Setup Overview: setup_overview.md
       - Quick Start Guide: quick-start-guide.md

@@ -26,7 +26,7 @@ Launch the app with the debugger attached by pressing __F5__.
 3. Choose __Open Folder__.
 4. Open the directory __appdata__.
 5. Build and install snap as described [here](../README.md).
-6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer)
+6. Checkout __ctrlX Data Layer__ web frontend (Settings | Data Layer)
 7. Check the output using __Diagnostics__:
 
    - Login into your ctrlX
@@ -66,4 +66,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

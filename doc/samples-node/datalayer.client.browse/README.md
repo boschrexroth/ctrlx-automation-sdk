@@ -1,10 +1,10 @@
 # README Node.js datalayer.client.browse
 
-This Node.js sample writes out all node values from ctrlX Data Layer to console.
+This Node.js sample writes out all node values from __ctrlX Data Layer__ to console.
 
 ## Introduction
 
-The sample demonstrates how to traverse the whole ctrlX Data Layer tree. The values of the nodes if readable are printed out to console as human readable strings. Also complex values with structure (encoded by [FlatBuffers](https://google.github.io/flatbuffers/)) are written as JSON string to console.
+The sample demonstrates how to traverse the whole __ctrlX Data Layer__. The values of the nodes if readable are printed out to console as human readable strings. Also complex values with structure (encoded by [FlatBuffers](https://flatbuffers.dev/)) are written as JSON string to console.
 
 ## Description
 
@@ -71,7 +71,7 @@ Client connected: True
   | |   \-[used] 32
   | \-[subscriptions]
   ...
-  Elapsed time for browsing ctrlX Data Layer tree: 9351 milliseconds
+  Elapsed time for browsing __ctrlX Data Layer__: 9351 milliseconds
 ```
 
 ## Install the App
@@ -97,4 +97,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

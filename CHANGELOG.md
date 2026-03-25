@@ -2,6 +2,16 @@
 
 ## CHANGELOG
 
+### 4.6.0
+
+#### FIXED
+
++ n/a
+
+#### CHANGED
+
++ [Changes](https://github.com/boschrexroth/ctrlx-automation-sdk/compare/3.6.0...4.6.0)
+
 ### 4.4.0
 
 #### FIXED

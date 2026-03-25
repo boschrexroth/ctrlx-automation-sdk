@@ -1,10 +1,10 @@
 # README .NET datalayer.client.simple
 
-This .NET sample reads values from ctrlX Data Layer.
+This .NET sample reads values from __ctrlX Data Layer__.
 
 ## Introduction
 
-The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console. A subscription is used to get values by data change event in a deterministic publish interval. The single read is performed every 10 seconds in an endless loop.
+The sample demonstrates how to read values from __ctrlX Data Layer__ and write out the values to console. A subscription is used to get values by data change event in a deterministic publish interval. The single read is performed every 10 seconds in an endless loop.
 
 ## Description
 
@@ -103,4 +103,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

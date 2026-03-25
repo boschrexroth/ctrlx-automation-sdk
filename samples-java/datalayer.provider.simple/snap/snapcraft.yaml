@@ -3,8 +3,16 @@ title: SDK Java Provider Simple
 version: 1.0.0
 summary: ctrlX Data Layer provider sample written in Java for ctrlX OS.
 description: This sample shows how to read/write data to the ctrlX Data Layer.
-confinement: strict # use 'strict' once you have the right plugs and slot
+confinement: strict
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 base: core24
 type: app
 

@@ -1,20 +1,20 @@
 # README Node.js datalayer.client
 
-This Node.js sample reads values from ctrlX Data Layer.
+This Node.js sample reads values from __ctrlX Data Layer__.
 
 ## Introduction
 
-The sample demonstrates how to read values from ctrlX Data Layer tree and write out the values to console.
+The sample demonstrates how to read values from __ctrlX Data Layer__ and write out the values to console.
 
 ## Description
 
 The sample __datalayer.client__ demonstrates
 
-+ How easy to create a client for ctrlX Data Layer
++ How easy to create a client for __ctrlX Data Layer__
 
-+ How to read values from ctrlX Data Layer nodes
++ How to read values from __ctrlX Data Layer__ nodes
 
-+ How to create a subscription to a ctrlX Data Layer node
++ How to create a subscription to a __ctrlX Data Layer__ node
 
 ## Prerequisites
 
@@ -86,4 +86,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

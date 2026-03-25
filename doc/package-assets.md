@@ -567,6 +567,36 @@ If you want to open your application in your own tab, you can define the target 
       }
     ```
 
+If you want the menu entry to open the app embedded inside the ctrlX UI (instead of opening a separate browser tab), use the value `"embedded"` for the `target` field. Embedded views are suitable when the target page is designed to run inside the ctrlX interface.
+
+!!! Example
+
+    ```json
+      {
+        "menus": {
+          "sidebar": [
+            {
+              "id": "app-name",
+              "title": "My App Name",
+              "icon": "myApp-Icon",
+              "permissions": [],
+              "items": [
+                {
+                  "id": "myApp-Id",
+                  "title": "MySideBarTitle",
+                  "link": "/app-name",
+                  "target": "embedded",
+                  "permissions": [],
+                  "items": []
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ```
+
+
 | Field      | Descriptions                                                          |
 | -------    | ----------------------------------------------------------------------|
 |**sidebar** | array of entries, which contains the definitions to the sidebar menus |
@@ -580,7 +610,7 @@ The definition of the object entries
 |--------           | ------------------------------------------------------------------------------------------ |
 |**items**          | array of entries, which contains the definitions to the sublinks                        |
 |**link**           | string, link to the ressource                                                              |
-|**target**         | string, which specifies where the link is shown. Use "_blank" or a specific name to open the link in a new tab (recommended for 3rd-party apps) |
+|**target**         | string, which specifies where the link is shown. Works like a regular HTML link target (for example, "_blank" opens a new tab). In addition to standard values you can use a specific window name. A special value `embedded` opens the link inside the ctrlX user interface (embedded view) instead of a separate browser tab — use `embedded` only when the target content is designed to be shown inside the ctrlX UI. For 3rd-party apps, using "_blank" (open in a new browser tab) is recommended unless you explicitly support embedded views. |
 |**id**             | string starting with the snap name, used as a unique item identifier to order items |
 |**title**          | string, the text representation of the entry point|
 |**description**    | string, the description of the entry point|

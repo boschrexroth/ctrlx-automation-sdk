@@ -7,6 +7,14 @@ name: sdk-cpp-diagnosis
 title: SDK C++ Diagnosis
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: Sample app for processing diagnosis data via ctrlX Data Layer
 description: |
   This app will call diagnosis functions via ctrlX Data Layer

@@ -1,6 +1,6 @@
 # README Node.js datalayer.provider
 
-This Node.js sample provides some registered nodes to the ctrlX Data Layer tree.
+This Node.js sample provides some registered nodes to __ctrlX Data Layer__.
 
 __IMPORTANT__:
 
@@ -10,9 +10,9 @@ Please read the _Best Practise_ section in common Node.js documentation for more
 
 ## Introduction
 
-The sample demonstrates how to provide nodes to ctrlX Data Layer tree.
+The sample demonstrates how to provide nodes to __ctrlX Data Layer__.
 The provider creates nodes with types of int/double/string.
-Also a complex type encoded by [FlatBuffers](https://google.github.io/flatbuffers/) is provided.
+Also a complex type encoded by [FlatBuffers](https://flatbuffers.dev/) is provided.
 
 ## Description
 
@@ -64,7 +64,7 @@ Do following steps
 3. Choose __Open Folder in QEMU VM__.
 4. Open the directory __datalayer.provider.simple__.
 5. Build and install snap as described [here](./../README.md).
-6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer)
+6. Checkout __ctrlX Data Layer__ web frontend (Settings | Data Layer)
 7. Check the output using __Diagnostics__:
 
    + Login into your ctrlX
@@ -83,7 +83,7 @@ Do following steps
 
 ## Screenshot
 
-![crtrX ctrlX Data Layer tree](./docs/images/datalayer.provider/datalayer.provider.png)
+![ctrlX Data Layer](./docs/images/datalayer.provider/datalayer.provider.png)
 
 ## Install the App
 
@@ -108,4 +108,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

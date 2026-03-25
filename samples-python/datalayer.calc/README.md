@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This app is a ctrlX Data Layer Provider and Client written in Python.
+This app is a __ctrlX Data Layer__ Provider and Client written in Python.
 
 ## Function Description
 
-The app reads two ctrlX Data Layer values and calculates the output value 'out'. All values are float64 value types.
+The app reads two __ctrlX Data Layer__ values and calculates the output value 'out'. All values are float64 value types.
 
-The ctrlX Data Layer addresses of the input values are configured by the string input values 'in1' and 'in2'.
+The __ctrlX Data Layer__ addresses of the input values are configured by the string input values 'in1' and 'in2'.
 
 How the out value is calculated can be configured as string value with the node 'mode'.
 
@@ -30,7 +30,7 @@ There are two Python scripts:
 
 ### main.py
 
-This function manages the ctrlX Data Layer Provider and Client connection.
+This function manages the __ctrlX Data Layer__ Provider and Client connection.
 
 Furthermore it creates one instance of the BasicArithmeticOperations class and starts it.
 
@@ -40,7 +40,7 @@ If the client connection is lost the main function exits with an error code. If 
 
 This class BasicArithmeticOperations has several functions.
 
-It is a ctrlX Data Layer Provider for four nodes:
+It is a __ctrlX Data Layer__ Provider for four nodes:
 
 1. in1: string, specifies the DL address of the first operand
 2. in2: string, specifies the DL address of the second operand
@@ -57,4 +57,5 @@ ___
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

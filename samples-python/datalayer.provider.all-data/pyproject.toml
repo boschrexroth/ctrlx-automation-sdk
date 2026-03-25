@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sdk-py-provider-alldata"
+version = "0.0.1" 
+description = "ctrlX Data Layer provider in Python publishing nodes of all data types"
+authors = [
+    { name = "Bosch Rexroth AG", email = "github@boschrexroth.com" },
+]
+license = "MIT"
+requires-python = ">=3.7"
+dependencies = [
+    "ctrlx-datalayer<=3.6",
+    "ctrlx-fbs"
+]
+
+[project.scripts]
+app-main = "app.main:main"
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[tool.setuptools]
+packages = ["app", "app.helper", "app.alldataprovider"]
+
+
+

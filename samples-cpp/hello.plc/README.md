@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This sample project shows the ctrlX Data Layer access to ctrlX PLC variables of a ctrlX CORE or ctrlX CORE<sup>virtual</sup>.
+This sample project shows the __ctrlX Data Layer__ access to ctrlX PLC variables of a ctrlX CORE or ctrlX CORE<sup>virtual</sup>.
 
 ## Prerequisites
 
@@ -12,7 +12,7 @@ This sample project shows the ctrlX Data Layer access to ctrlX PLC variables of 
 
 ## Function Description
 
-The app browses all PLC variables mapped to the ctrlX Data Layer.
+The app browses all PLC variables mapped to the __ctrlX Data Layer__.
 
 If the attached app 'hello_plc_application' has been installed, its variables will be overwritten:
 
@@ -57,4 +57,5 @@ ___
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

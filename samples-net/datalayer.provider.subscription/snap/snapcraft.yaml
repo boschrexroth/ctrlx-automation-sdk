@@ -1,0 +1,57 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+name: sdk-net-provider-subscription
+title: SDK .NET Subscription Provider
+base: core24
+version: 1.0.0
+#icon: assets/icons/ICONHERE.png
+summary: ctrlX Data Layer provider sample written in .NET for ctrlX OS.
+description: |
+  The sample demonstrates, how to publish changes on demand to ctrlX Data Layer. 
+grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
+confinement: strict
+
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
+    build-for: [arm64]
+
+apps:
+  app:
+    command: datalayer.provider.subscription
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP
+      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "true"
+
+parts:
+  app:
+    plugin: dump
+    source: ./publish
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer

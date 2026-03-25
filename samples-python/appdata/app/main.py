@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+
+# SPDX-FileCopyrightText: Bosch Rexroth AG
+#
+# SPDX-License-Identifier: MIT
+
+import os
+import time
+
+from http.server import HTTPServer
+
+from app.weblocal.server import Server, UnixSocketHttpServer
+
+def main():
+    """main
+    """
+    # Start webserver to get load/save rest requests
+    # Use unix sockets if app is running as snap
+    if 'SNAP' in os.environ:
+        webserver = create_webserver_unixsock()
+    else:
+        webserver = create_webserver_tcp()
+
+    webserver.serve_forever()
+
+    print("Server DOWN", flush=True)
+
+
+def create_webserver_tcp():
+    """create_webserver_tcp
+    """
+    server_port = 1234
+    hostname = 'localhost'
+
+    webserver = HTTPServer(('', server_port), Server)
+    print("Server started, listening on TCP SOCKET", hostname, ':', server_port, flush=True)
+    return webserver
+
+
+def create_webserver_unixsock():
+    """create_webserver_unixsock
+    """
+    sock_dir = os.getenv('SNAP_DATA') + '/package-run/sdk-py-appdata/'
+    sock_file = sock_dir + 'web.sock'
+    if not os.path.exists(sock_dir):
+        os.makedirs(sock_dir)
+    try:
+        os.unlink(sock_file)
+    except OSError:
+        pass
+
+    webserver = UnixSocketHttpServer(sock_file, Server)
+    print('Server started, listening on UNIX SOCKET', sock_file, flush=True)
+    return webserver
+
+
+if __name__ == '__main__':
+    while True:
+        main()
+        time.sleep(10.0)

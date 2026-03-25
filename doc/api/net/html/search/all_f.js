@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['setchangeevents_0',['SetChangeEvents',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a89d3c0e840c74d2087f93efccbe04377',1,'Datalayer::SubscriptionPropertiesBuilder']]],
+  ['setchangeevents_0',['SetChangeEvents',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a3d01cf269d7994a923f642bf16bd1fc7',1,'Datalayer::SubscriptionPropertiesBuilder']]],
   ['setcounting_1',['SetCounting',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#a90528eca4c144dfddb28e33c6ec0228b',1,'Datalayer::SubscriptionPropertiesBuilder']]],
   ['setdatachangefilter_2',['SetDataChangeFilter',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html#aa0650d1e40db0e3f96b4d720e477ba49',1,'Datalayer::SubscriptionPropertiesBuilder']]],
   ['setdisplayformat_3',['SetDisplayFormat',['../classDatalayer_1_1MetadataBuilder.html#a3dfefc3cc9924bb05fa8a03cbad35697',1,'Datalayer::MetadataBuilder']]],

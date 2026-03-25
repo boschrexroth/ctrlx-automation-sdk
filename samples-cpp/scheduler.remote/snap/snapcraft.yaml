@@ -7,6 +7,14 @@ name: sdk-cpp-remote-scheduler
 title: SDK C++ Remote Scheduler
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: Implements an external trigger for the Scheduler
 description: |
   This is a simple sample that shows how an external trigger can be used for the Scheduler service.
@@ -36,6 +44,9 @@ apps:
     passthrough:
       restart-condition: always
       restart-delay: 10s    
+    environment:
+      TRACE_ENABLE_STDOUT: "true"
+      TRACE_ENABLE_UNITS: "sdk.common.remote-scheduler"
 
 parts:
   bundle:

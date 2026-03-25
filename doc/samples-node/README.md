@@ -18,10 +18,6 @@
 * [ctrlX Data Layer Provider: All Data Types](./datalayer.provider.alldata/README.md)
 * [ctrlX Data Layer Provider: Wildcard - Self managed light-weight nodes](./datalayer.provider.wildcard/README.md)
 
-### Angular Samples
-
-* [Angular Multi-language](./angular.multi-language/README.md)
-
 ## Build a Snap
 
 See [Samples Overview](../samples.md)

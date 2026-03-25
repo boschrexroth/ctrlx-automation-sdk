@@ -58,9 +58,10 @@ version: 0.0.1
 summary: Storage extension sample
 description: |
   <!--
-  author: Bosch Rexroth AG
-  url: https://www.boschrexroth.com
+  author: Company Name
+  url: Company URL
   -->
+  Short description of the app.
 grade: stable
 confinement: strict
 

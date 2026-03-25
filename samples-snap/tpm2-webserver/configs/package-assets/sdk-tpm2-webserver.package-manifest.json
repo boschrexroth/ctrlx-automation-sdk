@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.4.schema.json",
+  "version": "1.0.0",
+  "id": "tpm2-webserver",
+  "certificatestores": [
+    {
+      "id": "tpm2-webserver",
+      "title": "TPM2 Webserver",
+      "description": "Testing some TPM functions by a webserver"
+    }
+  ]
+}

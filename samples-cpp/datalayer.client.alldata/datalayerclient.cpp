@@ -72,7 +72,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant* data)
       return result;
     }
 
-    // https://google.github.io/flatbuffers/md__cpp_usage.html
+    // https://flatbuffers.dev/md__cpp_usage.html
     auto buffer = data->getData();
     auto inertialValue = sample::schema::GetInertialValue(buffer);
 

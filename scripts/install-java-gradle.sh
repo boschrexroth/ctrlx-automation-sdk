@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GRADLE_VERSION="9.1.0"
+GRADLE_VERSION="9.2.1"
 
 GRADLE_DIR="oss.gradle"
 GRADLE_INSTALL_DIR="../${GRADLE_DIR}"

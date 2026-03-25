@@ -16,7 +16,10 @@ var hierarchy =
         ] ],
         [ "IFactory", "interfaceDatalayer_1_1IFactory.html", null ],
         [ "IProvider", "interfaceDatalayer_1_1IProvider.html", null ],
-        [ "IProviderNode", "interfaceDatalayer_1_1IProviderNode.html", null ],
+        [ "IProviderNode", "interfaceDatalayer_1_1IProviderNode.html", [
+          [ "ISubscriptionProviderNode", "interfaceDatalayer_1_1ISubscriptionProviderNode.html", null ]
+        ] ],
+        [ "IProviderSubscription", "interfaceDatalayer_1_1IProviderSubscription.html", null ],
         [ "ISubscription", "interfaceDatalayer_1_1ISubscription.html", null ],
         [ "IVariant", "interfaceDatalayer_1_1IVariant.html", [
           [ "Variant", "classDatalayer_1_1Variant.html", null ]
@@ -27,8 +30,12 @@ var hierarchy =
       [ "DatalayerSystem", "classDatalayer_1_1DatalayerSystem.html", null ],
       [ "Variant", "classDatalayer_1_1Variant.html", null ]
     ] ],
-    [ "INotifyItem", "interfaceDatalayer_1_1INotifyItem.html", null ],
-    [ "IProviderNodeHandler", "interfaceDatalayer_1_1IProviderNodeHandler.html", null ],
+    [ "INotifyItem", "interfaceDatalayer_1_1INotifyItem.html", [
+      [ "NotifyItem", "classDatalayer_1_1NotifyItem.html", null ]
+    ] ],
+    [ "IProviderNodeHandler", "interfaceDatalayer_1_1IProviderNodeHandler.html", [
+      [ "ISubscriptionProviderNodeHandler", "interfaceDatalayer_1_1ISubscriptionProviderNodeHandler.html", null ]
+    ] ],
     [ "IProviderNodeResult", "interfaceDatalayer_1_1IProviderNodeResult.html", null ],
     [ "MetadataBuilder", "classDatalayer_1_1MetadataBuilder.html", null ],
     [ "ReferenceType", "classDatalayer_1_1ReferenceType.html", null ],

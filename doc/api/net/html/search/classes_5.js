@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['variant_0',['Variant',['../classDatalayer_1_1Variant.html',1,'Datalayer']]]
+  ['subscriptionpropertiesbuilder_0',['SubscriptionPropertiesBuilder',['../classDatalayer_1_1SubscriptionPropertiesBuilder.html',1,'Datalayer']]]
 ];

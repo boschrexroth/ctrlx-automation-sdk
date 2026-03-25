@@ -45,6 +45,10 @@ base: core22
 version: 1.0.0
 summary: Simple snap with random menu entry.
 description: |
+  <!--
+  author: Company Name
+  url: Company URL
+  -->
   This is a sample snap that generates a random menu entry when getting installed or updated.
 
 grade: stable

@@ -7,6 +7,14 @@ name: sdk-cpp-client-sub
 title: SDK C++ Client Subscription
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: SDK sample app in cpp - subscribes ctrlX Data Layer nodes
 description: |
   This sample demonstrates how to use ctrlX Data Layer subscriptions on Datalayer.

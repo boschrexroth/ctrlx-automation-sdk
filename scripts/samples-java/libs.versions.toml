@@ -6,7 +6,7 @@ commons-math3 = "3.6.1"
 guava = "33.4.5-jre"
 junit-jupiter = "5.12.1"
 flatbuffers-java = "25.2.10"
-ctrlx-datalayer = "1.0.1"
+ctrlx-datalayer = "1.4.2"
 
 [libraries]
 commons-math3 = { module = "org.apache.commons:commons-math3", version.ref = "commons-math3" }

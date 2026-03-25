@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This sample app performs ctrlX Data Layer operations in cpp.
+This sample app performs __ctrlX Data Layer__ operations in cpp.
 
 ## Prerequisites
 
@@ -10,22 +10,22 @@ The sample requires that the app datalayer.provider.alldata is running in the SD
 
 ## Function Description
 
-The app demonstrates how values of existing nodes of the ctrlX Data Layer can be accessed.
+The app demonstrates how values of existing nodes of the __ctrlX Data Layer__ can be accessed.
 
 ## Implementation Description
 
 ctrlx_datalayer_helper.h Cpontains helper methods for creating ctrlX Datalayer Client and/or Provider instances.
 
-datalayerclient.cpp und datalayerclient.h are defining a class which manages the ctrlX Data Layer client access:
+datalayerclient.cpp und datalayerclient.h are defining a class which manages the __ctrlX Data Layer__ client access:
 
-* Starting/stopping the ctrlX Data Layer access
-* Access of ctrlX Data Layer nodes of different data type
-* Callback methods for ctrlX Data Layer access
+* Starting/stopping the __ctrlX Data Layer__ access
+* Access of __ctrlX Data Layer__ nodes of different data type
+* Callback methods for __ctrlX Data Layer__ access
 
 In main.cpp an endless loop is running:
 
 * An instance of the class DataLayerClient is created
-* The instance is called to do ctrlX Data Layer access
+* The instance is called to do __ctrlX Data Layer__ access
 * The instance is deleted
 * Sleep some time
 
@@ -48,4 +48,5 @@ ___
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

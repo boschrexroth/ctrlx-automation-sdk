@@ -19,17 +19,17 @@ var annotated_dup =
       [ "client", null, [
         [ "_CallbackPtr", "classctrlxdatalayer_1_1client_1_1__CallbackPtr.html", "classctrlxdatalayer_1_1client_1_1__CallbackPtr" ],
         [ "Client", "classctrlxdatalayer_1_1client_1_1Client.html", "classctrlxdatalayer_1_1client_1_1Client" ],
-        [ "TimeoutSetting", "classctrlxdatalayer_1_1client_1_1TimeoutSetting.html", "classctrlxdatalayer_1_1client_1_1TimeoutSetting" ]
+        [ "TimeoutSetting", "classctrlxdatalayer_1_1client_1_1TimeoutSetting.html", null ]
       ] ],
       [ "converter", null, [
-        [ "C_DLR_SCHEMA", "classctrlxdatalayer_1_1converter_1_1C__DLR__SCHEMA.html", "classctrlxdatalayer_1_1converter_1_1C__DLR__SCHEMA" ],
+        [ "C_DLR_SCHEMA", "classctrlxdatalayer_1_1converter_1_1C__DLR__SCHEMA.html", null ],
         [ "Converter", "classctrlxdatalayer_1_1converter_1_1Converter.html", "classctrlxdatalayer_1_1converter_1_1Converter" ]
       ] ],
       [ "factory", null, [
         [ "Factory", "classctrlxdatalayer_1_1factory_1_1Factory.html", "classctrlxdatalayer_1_1factory_1_1Factory" ]
       ] ],
       [ "metadata_utils", null, [
-        [ "AllowedOperation", "classctrlxdatalayer_1_1metadata__utils_1_1AllowedOperation.html", "classctrlxdatalayer_1_1metadata__utils_1_1AllowedOperation" ],
+        [ "AllowedOperation", "classctrlxdatalayer_1_1metadata__utils_1_1AllowedOperation.html", null ],
         [ "MetadataBuilder", "classctrlxdatalayer_1_1metadata__utils_1_1MetadataBuilder.html", "classctrlxdatalayer_1_1metadata__utils_1_1MetadataBuilder" ],
         [ "ReferenceType", "classctrlxdatalayer_1_1metadata__utils_1_1ReferenceType.html", "classctrlxdatalayer_1_1metadata__utils_1_1ReferenceType" ]
       ] ],
@@ -44,12 +44,12 @@ var annotated_dup =
       [ "provider_subscription", null, [
         [ "NotifyInfoPublish", "classctrlxdatalayer_1_1provider__subscription_1_1NotifyInfoPublish.html", "classctrlxdatalayer_1_1provider__subscription_1_1NotifyInfoPublish" ],
         [ "NotifyItemPublish", "classctrlxdatalayer_1_1provider__subscription_1_1NotifyItemPublish.html", "classctrlxdatalayer_1_1provider__subscription_1_1NotifyItemPublish" ],
-        [ "NotifyTypePublish", "classctrlxdatalayer_1_1provider__subscription_1_1NotifyTypePublish.html", "classctrlxdatalayer_1_1provider__subscription_1_1NotifyTypePublish" ],
+        [ "NotifyTypePublish", "classctrlxdatalayer_1_1provider__subscription_1_1NotifyTypePublish.html", null ],
         [ "ProviderSubscription", "classctrlxdatalayer_1_1provider__subscription_1_1ProviderSubscription.html", "classctrlxdatalayer_1_1provider__subscription_1_1ProviderSubscription" ]
       ] ],
       [ "subscription", null, [
         [ "NotifyItem", "classctrlxdatalayer_1_1subscription_1_1NotifyItem.html", "classctrlxdatalayer_1_1subscription_1_1NotifyItem" ],
-        [ "NotifyType", "classctrlxdatalayer_1_1subscription_1_1NotifyType.html", "classctrlxdatalayer_1_1subscription_1_1NotifyType" ],
+        [ "NotifyType", "classctrlxdatalayer_1_1subscription_1_1NotifyType.html", null ],
         [ "Subscription", "classctrlxdatalayer_1_1subscription_1_1Subscription.html", "classctrlxdatalayer_1_1subscription_1_1Subscription" ]
       ] ],
       [ "subscription_async", null, [
@@ -68,7 +68,7 @@ var annotated_dup =
         [ "Result", "classctrlxdatalayer_1_1variant_1_1Result.html", "classctrlxdatalayer_1_1variant_1_1Result" ],
         [ "Variant", "classctrlxdatalayer_1_1variant_1_1Variant.html", "classctrlxdatalayer_1_1variant_1_1Variant" ],
         [ "VariantRef", "classctrlxdatalayer_1_1variant_1_1VariantRef.html", "classctrlxdatalayer_1_1variant_1_1VariantRef" ],
-        [ "VariantType", "classctrlxdatalayer_1_1variant_1_1VariantType.html", "classctrlxdatalayer_1_1variant_1_1VariantType" ]
+        [ "VariantType", "classctrlxdatalayer_1_1variant_1_1VariantType.html", null ]
       ] ]
     ] ]
 ];

@@ -25,11 +25,11 @@ namespace Samples.Datalayer.Provider.Alldata
     /// <param name="metadata">The metadata<see cref="IVariant"/>.</param>
     internal class Node(string address, IVariant value, IVariant metadata)
     {
-
         // Please define node folder names in ctrlX Data Layer
         private const string Root = "sdk/net/provider/all-data";
         private const string Static = "static";
         private const string Dynamic = "dynamic";
+
         /// <summary>
         /// Gets the Address.
         /// </summary>
@@ -179,7 +179,7 @@ namespace Samples.Datalayer.Provider.Alldata
         }
 
         /// <summary>
-        /// Increments a string
+        /// Increments a string.
         /// </summary>
         /// <param name="text">The text<see cref="string"/>.</param>
         /// <param name="separator">The separator<see cref="string"/>.</param>
@@ -224,11 +224,43 @@ namespace Samples.Datalayer.Provider.Alldata
             // Please see here for recommended allowed operations by node type: 
             // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
 
-            var metaData = new MetadataBuilder(AllowedOperationFlags.Read | AllowedOperationFlags.Write, description)
-                .SetNodeClass(NodeClass.Variable)
-                .AddReference(ReferenceType.ReadType, dataType.Address)
-                .AddReference(ReferenceType.WriteType, dataType.Address)
-                .Build();
+            // Build Metadata using generated MetadataT type.
+            var operations = new AllowedOperationsT
+            {
+                Read = true,
+                Write = true,
+                Browse = false // Default: true
+            };
+
+            var readReference = new ReferenceT
+            {
+                Type = ReferenceType.ReadType.ToString(),
+                TargetAddress = dataType.Address
+            };
+
+            var writeReference = new ReferenceT
+            {
+                Type = ReferenceType.WriteType.ToString(),
+                TargetAddress = dataType.Address
+            };
+
+            var md = new MetadataT
+            {
+                Operations = operations,        // Mandatory
+                Description = description,      // Mandatory (but can be left empty)
+                DescriptionUrl = "",            // Mandatory (but can be left empty)
+                NodeClass = NodeClass.Variable,
+                References = [readReference, writeReference],
+            };
+            var metaData = new Variant(md);
+
+            // Alternatively we can use the MetadataBuilder.
+
+            // var metaData = new MetadataBuilder(AllowedOperationFlags.Read | AllowedOperationFlags.Write, description)
+            //     .SetNodeClass(NodeClass.Variable)
+            //     .AddReference(ReferenceType.ReadType, dataType.Address)
+            //     .AddReference(ReferenceType.WriteType, dataType.Address)
+            //     .Build();
 
             return new Node(address, value, metaData);
         }
@@ -246,10 +278,35 @@ namespace Samples.Datalayer.Provider.Alldata
             // Please see here for recommended allowed operations by node type: 
             // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/
 
-            var metaData = new MetadataBuilder(AllowedOperationFlags.Read, description)
-                  .SetNodeClass(NodeClass.Variable)
-                  .AddReference(ReferenceType.ReadType, dataType.Address)
-                  .Build();
+            // Build Metadata using generated MetadataT type.
+            var operations = new AllowedOperationsT
+            {
+                Read = true,
+                Browse = false // Default: true
+            };
+
+            var readReference = new ReferenceT
+            {
+                Type = ReferenceType.ReadType.ToString(),
+                TargetAddress = dataType.Address
+            };
+
+            var md = new MetadataT
+            {
+                Operations = operations,        // Mandatory
+                Description = description,      // Mandatory (but can be left empty)
+                DescriptionUrl = "",            // Mandatory (but can be left empty)
+                NodeClass = NodeClass.Variable,
+                References = [readReference],
+            };
+            var metaData = new Variant(md);
+
+            // Alternatively we can use the MetadataBuilder.
+
+            // var metaData = new MetadataBuilder(AllowedOperationFlags.Read, description)
+            //       .SetNodeClass(NodeClass.Variable)
+            //       .AddReference(ReferenceType.ReadType, dataType.Address)
+            //       .Build();
 
             return new Node(address, value, metaData);
         }

@@ -7,6 +7,13 @@ base: core24
 confinement: strict
 grade: stable
 
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 platforms:
   amd64:
   arm64:
@@ -15,11 +22,14 @@ platforms:
 
 apps:
   client:
-    command: bin/main.py
+    command: bin/run.sh
     plugs:
       - network
       - datalayer
     daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 15s    
 
 parts:
   client:
@@ -27,6 +37,12 @@ parts:
     source: .
     stage-packages:
       - ctrlx-datalayer
+
+  wrapper-scripts:
+    plugin: dump
+    source: wrapper/
+    organize:
+      ./run.sh : bin/run.sh  
 
 # describes which interface slots are supported by defining the plugs
 plugs:
