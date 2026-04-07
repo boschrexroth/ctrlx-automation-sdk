@@ -108,4 +108,5 @@ For the full set of files to run App Build Enviroments see the SDK folder [scrip
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

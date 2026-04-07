@@ -1,7 +1,7 @@
 var searchData=
 [
   ['id_0',['Id',['../interfaceDatalayer_1_1ISubscription.html#a186291c875988107b7ace745ea84d4ec',1,'Datalayer::ISubscription']]],
-  ['info_1',['Info',['../interfaceDatalayer_1_1INotifyItem.html#aaca500fdbf156620e95d3fbf608a1e9b',1,'Datalayer::INotifyItem']]],
+  ['info_1',['Info',['../interfaceDatalayer_1_1INotifyItem.html#aaca500fdbf156620e95d3fbf608a1e9b',1,'Datalayer.INotifyItem.Info()'],['../classDatalayer_1_1NotifyItem.html#aaca500fdbf156620e95d3fbf608a1e9b',1,'Datalayer.NotifyItem.Info()']]],
   ['ip_2',['Ip',['../classDatalayer_1_1Remote.html#acfd2507889dd4ca10984553f890de256',1,'Datalayer::Remote']]],
   ['ipcpath_3',['IpcPath',['../classDatalayer_1_1DatalayerSystem.html#a07d6bca7b87c1e03c76407fdf8fe7006',1,'Datalayer.DatalayerSystem.IpcPath()'],['../interfaceDatalayer_1_1IDatalayerSystem.html#a07d6bca7b87c1e03c76407fdf8fe7006',1,'Datalayer.IDatalayerSystem.IpcPath()']]],
   ['isarray_4',['IsArray',['../interfaceDatalayer_1_1IVariant.html#afad44b5f3d66d321f75026142b350094',1,'Datalayer.IVariant.IsArray()'],['../classDatalayer_1_1Variant.html#afad44b5f3d66d321f75026142b350094',1,'Datalayer.Variant.IsArray()']]],

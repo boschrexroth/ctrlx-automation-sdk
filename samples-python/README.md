@@ -41,7 +41,7 @@ See [Samples Overview](../samples.md)
 
 * From the main menu click File --> Open Folder and select the folder of your desired Python project.
 * Start a bash terminal within the main menu item - Terminal - New Terminal.
-* Install or upgrade the ctrlX Data Layer build and runtime environment.
+* Install or upgrade the __ctrlX Data Layer__ build and runtime environment.
 
 ```bash
 ctrlx-automation-sdk/scripts/install-ctrlx-datalayer.sh

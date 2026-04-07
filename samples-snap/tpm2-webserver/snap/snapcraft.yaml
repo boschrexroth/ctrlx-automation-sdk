@@ -7,6 +7,14 @@ description: |
   This app demonstrates how you can access the TPM2.
 
 grade: devel
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 confinement: strict
 
 platforms:
@@ -44,113 +52,18 @@ parts:
     source: ./configs
     organize:
       "package-assets/*": package-assets/${CRAFT_PROJECT_NAME}/
-  tpm2-tools:
-    plugin: autotools
-    build-environment:
-      - LDFLAGS: "$LDFLAGS -Wl,-rpath-link,$CRAFT_STAGE/lib"
-    source: https://github.com/tpm2-software/tpm2-tools
-    source-type: git
-    source-tag: "5.2"
-    build-packages:
-      - pandoc
-      - pkg-config
-      - autoconf-archive
-      - autoconf
-      - to amd64:
-          - libcmocka-dev
-          - libcurl4-openssl-dev
-          - libssl-dev
-          - libtool
-          - uuid-dev
-      - to arm64:
-          - libcmocka-dev:arm64
-          - libcurl4-openssl-dev:arm64
-          - libssl-dev:arm64
-          - libtool:arm64
-          - uuid-dev:arm64
-    stage-packages:
-      - to amd64:
-          - libcurl4
-      - to arm64:
-          - libcurl4:arm64
-    prime:
-      - -include
-    after:
-      - tpm2-tss
-    override-build: |
-      ACLOCAL_PATH="/usr/share/gnulib/m4" ./bootstrap
-      ./configure --prefix=$CRAFT_PART_INSTALL/usr/ --host=$CRAFT_ARCH_TRIPLET_BUILD_FOR
-      #craftctl default
-      # Run all tests shipped by default
-      make check -j$(nproc)
-      make install
-
-  tpm2-tss:
-    plugin: make
-    source: https://github.com/tpm2-software/tpm2-tss
-    source-type: git
-    source-tag: 3.2.0
-    build-packages:
-      - gcc
-      - g++
-      - doxygen
-      - pkg-config
-      - autoconf
-      - autoconf-archive
-      - to amd64:
-          - libtool
-          - libltdl-dev
-          - libjson-c-dev
-          - libgcrypt20-dev
-          - liburiparser-dev
-          - libcurl4-openssl-dev
-          - libssl-dev
-      - to arm64:
-          - libtool:arm64
-          - libltdl-dev:arm64
-          - libjson-c-dev:arm64
-          - libgcrypt20-dev:arm64
-          - liburiparser-dev:arm64
-          - libcurl4-openssl-dev:arm64
-          - libssl-dev:arm64
-    prime:
-      - -include
-    override-build: |
-      ACLOCAL_PATH="/usr/share/gnulib/m4" ./bootstrap #https://github.com/tpm2-software/tpm2-tss/commit/d1106347ef2f8e7296f1bd6af7aa6e046f6a5a38
-      ./configure --prefix=$CRAFT_PART_INSTALL/usr/ --host=$CRAFT_ARCH_TRIPLET_BUILD_FOR
-      make check -j$(nproc) || cat ./test-suite.log
-      make install
-      #chmod g-s $CRAFT_PART_INSTALL/usr/var/run/tpm2-tss/eventlog
-      #chmod g-s $CRAFT_PART_INSTALL/usr/var/lib/tpm2-tss/system/keystore #https://github.com/tpm2-software/tpm2-tss/commit/811e451c9
-
-  tpm2-tss-engine:
-    plugin: autotools
-    autotools-configure-parameters:
-      - --prefix=/usr
-      - --host=$CRAFT_ARCH_TRIPLET_BUILD_FOR
-    build-environment:
-      - LDFLAGS: "$LDFLAGS -Wl,-rpath-link,$CRAFT_STAGE/lib"
-    source: https://github.com/tpm2-software/tpm2-tss-engine
-    source-type: git
-    source-tag: v1.1.0
-    build-packages:
-      - pandoc
-      - pkg-config
-      - gcc
-      - autoconf-archive
-      - autoconf
-      - to amd64:
-          - libtool
-          - libssl-dev
-      - to arm64:
-          - libtool:arm64
-          - libssl-dev:arm64
-    after:
-      - tpm2-tss
-
   webserver:
     plugin: dump
     source: webserver
+    stage-packages:
+      - to amd64:
+        - libcurl4
+        - tpm2-tools
+        - tpm2-openssl
+      - to arm64:
+        - libcurl4:arm64
+        - tpm2-tools:arm64
+        - tpm2-openssl:arm64
     organize:
       tpm2-webserver.sh: usr/bin/tpm2-webserver.sh
 

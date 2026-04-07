@@ -1,0 +1,41 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+version: 1.0.0
+name: sdk-self-health
+title: SDK Self Health
+summary: App self health demo app for ctrlX OS.
+description: |
+  This sample app demonstrates a best-practise, how you can set the app health status pro-actively.
+confinement: strict
+#confinement: devmode
+#icon: assets/icons/ICONHERE.png
+grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
+base: core24
+type: app
+
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
+    build-for: [arm64]
+apps:
+  app:
+    command: wrapper.sh
+    daemon: simple
+    restart-condition: always
+    restart-delay: 10s
+
+parts:
+  app:
+    plugin: dump
+    source: ./bin

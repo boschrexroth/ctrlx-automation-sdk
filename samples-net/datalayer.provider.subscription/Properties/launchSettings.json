@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "datalayer.provider.subscription": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

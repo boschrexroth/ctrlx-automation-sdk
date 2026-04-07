@@ -13,21 +13,16 @@ namespace Samples.Datalayer.Provider
     /// <summary>
     /// ReadOnlyNodeHandler provides handler with read-only support.
     /// </summary>
-    internal class ReadOnlyNodeHandler : IProviderNodeHandler
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="ReadOnlyNodeHandler"/> class.
+    /// </remarks>
+    /// <param name="node">The node<see cref="Node"/>.</param>
+    internal class ReadOnlyNodeHandler(Node node) : IProviderNodeHandler
     {
         /// <summary>
         /// Gets the Node.
         /// </summary>
-        public Node Node { get; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ReadOnlyNodeHandler"/> class.
-        /// </summary>
-        /// <param name="node">The node<see cref="Node"/>.</param>
-        public ReadOnlyNodeHandler(Node node)
-        {
-            Node = node;
-        }
+        public Node Node { get; } = node;
 
         /// <summary>
         /// The OnCreate callback handler.

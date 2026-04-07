@@ -16,7 +16,11 @@ public class RunUtils {
     private static final java.lang.System.Logger LOG = java.lang.System
             .getLogger(RunUtils.class.getName());
 
-    public static AtomicBoolean running = new AtomicBoolean(true);
+    private static AtomicBoolean running = new AtomicBoolean(true);
+
+    public static AtomicBoolean getRunningFlag() {
+        return running;
+    }
 
     public static void waitHandler(Provider p) {
         try {

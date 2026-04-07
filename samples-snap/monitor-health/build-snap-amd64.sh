@@ -1,1 +1,0 @@
-../../scripts/build-snap-amd64.sh

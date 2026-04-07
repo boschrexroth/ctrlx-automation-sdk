@@ -10,7 +10,15 @@ icon: assets/icons/icon.png
 summary: Simple Webserver written in Go for ctrlX OS.
 description: This sample app shows how to create a webserver app.
 grade: stable
-confinement: strict # use 'strict' once you have the right plugs and slot
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
+confinement: strict
 base: core24
 
 platforms:

@@ -20,7 +20,7 @@ To format or mount a storage, use the according buttons in the details window of
 
 After the storage is mounted, the path is displayed on the details page of the storage:
 
-Alternatively, the mount point is determinable in the ctrlX Data Layer (in Settings menu) under **system/resources/storage**
+Alternatively, the mount point is determinable in the __ctrlX Data Layer__ (in Settings menu) under **system/resources/storage**
 
 ## Configuration steps
 
@@ -33,10 +33,11 @@ To access the storage from your app (e.g. storage-test), use the **removable-med
     version: '0.1' # just for humans, typically 'i.2+git' or '1.3.2'
     summary: Single-line elevator pitch for your amazing snap # 79 char long summary
     description: |
-        This is my-snap's description.
-        You have a paragraph or two to tell the most important story about your snap.
-        Keep it under 100 words though,
-        we live in tweet space and your description wants to look good in the snap store.
+        <!--
+        author: Company Name
+        url: Company URL
+        -->
+        Short description of the app.
 
     grade: devel # must be 'stable' to release into candidate/stable channeis
     confinement: strict # use 'strict' once you have the right plugs and slots

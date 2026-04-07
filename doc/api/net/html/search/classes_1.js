@@ -15,7 +15,10 @@ var searchData=
   ['iprovidernode_12',['IProviderNode',['../interfaceDatalayer_1_1IProviderNode.html',1,'Datalayer']]],
   ['iprovidernodehandler_13',['IProviderNodeHandler',['../interfaceDatalayer_1_1IProviderNodeHandler.html',1,'Datalayer']]],
   ['iprovidernoderesult_14',['IProviderNodeResult',['../interfaceDatalayer_1_1IProviderNodeResult.html',1,'Datalayer']]],
-  ['isubscription_15',['ISubscription',['../interfaceDatalayer_1_1ISubscription.html',1,'Datalayer']]],
-  ['isubscriptionasyncresult_16',['ISubscriptionAsyncResult',['../interfaceDatalayer_1_1ISubscriptionAsyncResult.html',1,'Datalayer']]],
-  ['ivariant_17',['IVariant',['../interfaceDatalayer_1_1IVariant.html',1,'Datalayer']]]
+  ['iprovidersubscription_15',['IProviderSubscription',['../interfaceDatalayer_1_1IProviderSubscription.html',1,'Datalayer']]],
+  ['isubscription_16',['ISubscription',['../interfaceDatalayer_1_1ISubscription.html',1,'Datalayer']]],
+  ['isubscriptionasyncresult_17',['ISubscriptionAsyncResult',['../interfaceDatalayer_1_1ISubscriptionAsyncResult.html',1,'Datalayer']]],
+  ['isubscriptionprovidernode_18',['ISubscriptionProviderNode',['../interfaceDatalayer_1_1ISubscriptionProviderNode.html',1,'Datalayer']]],
+  ['isubscriptionprovidernodehandler_19',['ISubscriptionProviderNodeHandler',['../interfaceDatalayer_1_1ISubscriptionProviderNodeHandler.html',1,'Datalayer']]],
+  ['ivariant_20',['IVariant',['../interfaceDatalayer_1_1IVariant.html',1,'Datalayer']]]
 ];

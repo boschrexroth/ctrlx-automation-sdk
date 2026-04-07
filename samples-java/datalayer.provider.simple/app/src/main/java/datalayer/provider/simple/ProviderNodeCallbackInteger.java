@@ -5,6 +5,8 @@
  */
 package datalayer.provider.simple;
 
+import java.lang.System.Logger.Level;
+
 import com.boschrexroth.api.AllowedOperation;
 import com.boschrexroth.api.MetadataBuilder;
 import com.boschrexroth.api.ProviderNodeCallback;
@@ -18,22 +20,24 @@ import comm.datalayer.NodeClass;
 
 public class ProviderNodeCallbackInteger implements ProviderNodeCallback {
 
+    private static final java.lang.System.Logger LOG = java.lang.System.getLogger(ProviderNodeCallbackInteger.class.getName());
+
     int _index = 0;
 
     @Override
     public void onBrowse(ProviderNodeEvent ev) {
-        System.out.println("onBrowse:");
+        LOG.log(Level.INFO, "onBrowse:");
         ev.callback(Result.OK, null);
     }
 
     @Override
     public void onCreate(ProviderNodeEventData ev) {
-        System.out.println("onCreate:");
+        LOG.log(Level.INFO, "onCreate:");
     }
 
     @Override
     public void onMetadata(ProviderNodeEvent ev) {
-        System.out.println("onMetadata: '" + ev.getAddress() + "'");
+        LOG.log(Level.INFO, "onMetadata: '" + ev.getAddress() + "'");
         int mask = AllowedOperation.createMask(AllowedOperation.READ, AllowedOperation.WRITE);
         MetadataBuilder meta = MetadataBuilder.create(mask, "Integer Variable", "");
         meta.setNodeClass(NodeClass.Variable);
@@ -45,7 +49,7 @@ public class ProviderNodeCallbackInteger implements ProviderNodeCallback {
 
     @Override
     public void onRead(ProviderNodeEventData ev) {
-        System.out.println("onRead: '" + ev.getAddress() + "': " + _index);
+        LOG.log(Level.INFO, "onRead: '" + ev.getAddress() + "': " + _index);
         Variant val = Variant.create();
         val.setInt32(_index);
         ev.callback(Result.OK, val);
@@ -53,13 +57,13 @@ public class ProviderNodeCallbackInteger implements ProviderNodeCallback {
 
     @Override
     public void onRemove(ProviderNodeEvent ev) {
-        System.out.println("onRemove:");
+        LOG.log(Level.INFO, "onRemove:");
         ev.callback(Result.OK, null);
     }
 
     @Override
     public void onWrite(ProviderNodeEventData ev) {
-        System.out.println("onWrite: '" + ev.getAddress() + "': " + _index);
+        LOG.log(Level.INFO, "onWrite: '" + ev.getAddress() + "': " + _index);
         _index = ev.getData().getInt32();
         ev.callback(Result.OK, ev.getData());
     }

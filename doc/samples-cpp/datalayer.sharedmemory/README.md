@@ -4,7 +4,7 @@
 
 This sample project shows how shared memory is used for data exchange between two applications.
 
-Therefore the features of the ctrlX Data Layer are used.
+Therefore the features of the __ctrlX Data Layer__ are used.
 
 Normally realtime applications (Celix bundles) are using sharded memory for data exchange, but non realtime apps are also able to use it - like our two executables.
 
@@ -31,20 +31,20 @@ __main_owner.cpp__ implements the owner app and __main_user.cpp__ the user app.
 
 ### main_owner.cpp
 
-If the  executable is running in the App Builder Environment it has to start the ctrlX Data Layer system with the parameter `boStartBroker=true`.
-In this case the ctrlX Data Layer broker which handles the shared memory features is started also within the App Builder Environment.
+If the  executable is running in the App Builder Environment it has to start the __ctrlX Data Layer__ system with the parameter `boStartBroker=true`.
+In this case the __ctrlX Data Layer__ broker which handles the shared memory features is started also within the App Builder Environment.
 
-Running on the ctrlX CORE the owner has to start the ctrlX Data Layer system with the parameter `boStartBroker=false` because the ctrlX Data Layer broker has already been started by the rexroth-automationcore snap.
+Running on the ctrlX CORE the owner has to start the __ctrlX Data Layer__ system with the parameter `boStartBroker=false` because the __ctrlX Data Layer__ broker has already been started by the rexroth-automationcore snap.
 
-Because shared memory is used, the ctrlX Data Layer (and it's broker) must run on the same environment. Accordingly, the provider connection string must always be __DL_IPC__ (ipc://).
+Because shared memory is used, the __ctrlX Data Layer__ (and it's broker) must run on the same environment. Accordingly, the provider connection string must always be __DL_IPC__ (ipc://).
 
-After connecting to the ctrlX Data Layer shared memories for input and output are created and both fitted with the same memory map. The memory map is internally a Flatbuffers describing the data structure of the shared memory.
+After connecting to the __ctrlX Data Layer__ shared memories for input and output are created and both fitted with the same memory map. The memory map is internally a Flatbuffers describing the data structure of the shared memory.
 
 After the values of the shared memory are set to 0 the owner apps waits in an endless loop for our user app to read and change the values.
 
 ### main_user.cpp
 
-* The user app starts the ctrlX Data Layer system always with `boStartBroker=false`. For the access of shared memory provided by an other process the user app does not require a ctrlX Data Layer client connection.
+* The user app starts the __ctrlX Data Layer__ system always with `boStartBroker=false`. For the access of shared memory provided by an other process the user app does not require a __ctrlX Data Layer__ client connection.
 
 * The user tries to read the memory map of the input area. This is done in a loop until it succeeds.
 
@@ -72,7 +72,7 @@ As a workaround this has to be done manually. Therefore open a ssh connection to
 ## Test the Snap
 
 * Open the web interface of your ctrlX CORE
-* Select Settings --> ctrlX Data Layer
+* Select Settings --> __ctrlX Data Layer__
 * Select the node sdk/cpp/datalayer/sharedmemory/input
 * __The values in the byte array should be changed - AND NEVER be 0. This can be used by a test criterion.__
 
@@ -83,4 +83,5 @@ ___
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

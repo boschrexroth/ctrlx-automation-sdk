@@ -8,13 +8,14 @@
             "name": "Local main.py",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/main.py",
             "args": [
                 "--debug-port=15678"
             ],
+            "program": "${workspaceFolder}/app/main.py",
             "console": "integratedTerminal",
-            "justMyCode": false
-        },
+            "justMyCode": false,
+            "env": {"PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}" },
+            "cwd": "${workspaceFolder}"        },
         {
             "name": "Remote ctrlX COREvirtual - Port forwarding",
             "type": "debugpy",

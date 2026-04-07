@@ -8,17 +8,21 @@
             "name": "Provider",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/provider.py",
+            "program": "${workspaceFolder}/app/provider.py",
             "console": "integratedTerminal",
-            "justMyCode": false
+            "justMyCode": false,
+            "env": {"PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}" },
+            "cwd": "${workspaceFolder}"
         },
         {
             "name": "Client",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/client.py",
+            "program": "${workspaceFolder}/app/client.py",
             "console": "integratedTerminal",
-            "justMyCode": false
+            "justMyCode": false,
+            "env": {"PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}" },
+            "cwd": "${workspaceFolder}"
         }        
     ]
 }

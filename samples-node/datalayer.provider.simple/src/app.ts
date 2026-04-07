@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// !!! DO NOT REMOVE THE SHEBANG ON TOP OF THE FILE, WHICH SPECIFIES THIS APP TO BE EXECUTED BY NODE.JS !!!
+// THIS SHEBANG ON TOP OF THE FILE INDICATES THE APP TO BE EXECUTED BY NODE.JS. PLEASE DO NOT REMOVE. 
 
 /*
  * SPDX-FileCopyrightText: Bosch Rexroth AG
@@ -58,7 +58,7 @@ async function main() {
 
     // Please see here for recommended allowed operations by node type: 
     // https://docs.automation.boschrexroth.com/doc/1925281162/metadata/latest/en/ 
-    
+
     const myInt = {
         address: `${rootNode}/myInt`,
         value: 123,

@@ -32,6 +32,13 @@ if [ "$1" == "quiet" ]; then
 fi
 
 echo
-echo "Now, finish the installation by reloading your profile in linux terminal with command '. ~/.profile'"
+echo "dotnet-sdk installation completed."
+echo
+echo "============================================"
+echo "NOW, PLEASE DO EITHER OF THE FOLLOWING:"
+echo " - Reload your profile by executing command '. ~/.profile' in terminal."
+echo " or"
+echo " - Restart your App Builder Environment."
+echo "============================================"
 echo
 read -r -p "Press enter to continue"

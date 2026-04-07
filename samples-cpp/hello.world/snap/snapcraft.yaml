@@ -7,6 +7,14 @@ name: sdk-cpp-hello-world
 title: SDK C++ Hello World
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: Print 'Hello World' to console output
 description: |
   This App is a simple example to show how to make an App.

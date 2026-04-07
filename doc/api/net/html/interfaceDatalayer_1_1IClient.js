@@ -10,6 +10,7 @@ var interfaceDatalayer_1_1IClient =
     [ "BulkWriteAsync", "interfaceDatalayer_1_1IClient.html#a39d4baf4c8cfd7d268f23a9146d77de7", null ],
     [ "CreateAsync", "interfaceDatalayer_1_1IClient.html#a05de64147a8ba02516d888a7c2aa38e6", null ],
     [ "CreateSubscriptionAsync", "interfaceDatalayer_1_1IClient.html#a5486fb6764aaa88fb8d6ed2deb919afb", null ],
+    [ "CreateSubscriptionAsync", "interfaceDatalayer_1_1IClient.html#aec6d31ce3816dccad757bfa4fab025c6", null ],
     [ "Ping", "interfaceDatalayer_1_1IClient.html#a3565328c511f7a9e4375ce5181ceb963", null ],
     [ "PingAsync", "interfaceDatalayer_1_1IClient.html#a2bb4b58b112157d60f75c50855ff0665", null ],
     [ "ReadAsync", "interfaceDatalayer_1_1IClient.html#af55a294497d5e92c38bb1f0762f4a2d3", null ],

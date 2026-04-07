@@ -8,9 +8,10 @@
             "name": "main.py",
             "type": "debugpy",
             "request": "launch",
-            "program": "main.py",
+            "program": "${workspaceFolder}/app/main.py",
             "console": "integratedTerminal",
-            "justMyCode": false
+            "justMyCode": false,
+            "env": {"PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}" }
         }
     ]
 }

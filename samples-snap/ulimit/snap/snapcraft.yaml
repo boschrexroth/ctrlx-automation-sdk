@@ -7,6 +7,14 @@ description: |
   This app demonstrates how you can increase the maximum number of open files with the command 'ulimit -n 16384' called by a command-chain wrapper.
 
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 confinement: strict
 
 platforms:

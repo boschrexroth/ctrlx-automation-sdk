@@ -4,12 +4,17 @@
  * SPDX-License-Identifier: MIT
  */
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 namespace Hello.Web.Asp.services
 {
     using Datalayer;
     using System;
     using System.Text.Json;
+
+    // JsonSerializerContext to serialize/deserialize NodeValue JSON
+    [JsonSerializable(typeof(NodeValue))]
+    internal partial class NodeValueSerializerContext : JsonSerializerContext { }
 
     /// <summary>
     /// Defines the <see cref="DataLayerService" />.
@@ -35,7 +40,7 @@ namespace Hello.Web.Asp.services
         }
 
         /// <summary>
-        /// The CreateClient.
+        /// Gets the Client instance. If the client is not connected, it tries to create a new client.
         /// </summary>
         /// <returns>The <see cref="IClient"/>.</returns>
         private static void CreateClient()
@@ -121,12 +126,13 @@ namespace Hello.Web.Asp.services
         public string Result { get; set; }
 
         /// <summary>
-        /// The ToString.
+        /// Returns the JSON string representation of the current object.
         /// </summary>
         /// <returns>The <see cref="string"/>.</returns>
         public override string ToString()
         {
-            return JsonSerializer.Serialize(this);
+            //Serialize the NodeValue object to JSON using the source-generated JsonSerializerContext
+            return JsonSerializer.Serialize(this, NodeValueSerializerContext.Default.NodeValue);
         }
     }
 }

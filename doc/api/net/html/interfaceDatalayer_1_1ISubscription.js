@@ -1,6 +1,8 @@
 var interfaceDatalayer_1_1ISubscription =
 [
     [ "DataChangedEventHandler", "interfaceDatalayer_1_1ISubscription.html#a3f303edaf0ba64fbe02563bed284381d", null ],
+    [ "Modify", "interfaceDatalayer_1_1ISubscription.html#a372b231a31016fe8e64e4b98e64050c2", null ],
+    [ "ModifyAsync", "interfaceDatalayer_1_1ISubscription.html#a738e52764ca1b68a2a5f122ea9ee12c4", null ],
     [ "Subscribe", "interfaceDatalayer_1_1ISubscription.html#a7887ed3200fcf3ae4b47b6d4b4062137", null ],
     [ "SubscribeAsync", "interfaceDatalayer_1_1ISubscription.html#ac03404d1cfab473bbe8e9f5d21b5b234", null ],
     [ "SubscribeMulti", "interfaceDatalayer_1_1ISubscription.html#a9390b851cf2198ba4cae6154f754bfb4", null ],

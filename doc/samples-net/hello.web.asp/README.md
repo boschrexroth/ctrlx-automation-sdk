@@ -47,6 +47,10 @@ Launch the app with the debugger attached by pressing __F5__.
 
 Login into ctrlX and install the App (Apps).
 
+## Open the App
+
+Click on the Menu-item "Hello Web ASP.NET" to open the web app.
+
 ## Gratulations - We're finished - Let's start coding
 
 ## Support
@@ -66,4 +70,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

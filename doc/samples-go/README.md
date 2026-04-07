@@ -22,7 +22,7 @@
 
 See [Samples Overview](../samples.md)
 
-### Install ctrlX Data Layer build and runtime environment
+### Install __ctrlX Data Layer__ build and runtime environment
 
 ```bash
 ctrlx-automation-sdk/scripts/install-ctrlx-datalayer.sh

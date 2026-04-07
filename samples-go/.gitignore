@@ -6,3 +6,5 @@ _*.sh
 */snap/.snapcraft
 */squashfs-root/
 */stage/
+
+/webserver

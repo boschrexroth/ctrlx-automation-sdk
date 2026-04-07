@@ -217,7 +217,7 @@ Finally, an app can integrate in the Automation framework and extend the ctrlX r
 
 #### **3.3.1 Description**
 
-The app exposes information in the ctrlX Data Layer for all other apps. It also can extend the real time functions of ctrlX CORE if connected to the real-time task scheduler
+The app exposes information in the __ctrlX Data Layer__ for all other apps. It also can extend the real time functions of ctrlX CORE if connected to the real-time task scheduler
 
 #### **3.3.2 Customer User Experience**
 
@@ -341,6 +341,8 @@ The following properties must be defined within the **"snapcraft.yaml"** file (s
 - **Title** - The general name of the app that will be shown on all sales channels and customer touch points, e.g. app overview or ctrlX App Store. This is defined together with the partner manager, as part of the business model definitions. Example: "My App"
 
 - **Name** - The technical name of the snap. The name has to be unique in the snap universe and across all snap developer and device vendors. The snap name has to **start with "ctrlx-"** and must be **lowercase** and a **maximum length of 32 characters**. ctrlX World Partners add their company name to the snap name. Example: "ctrlx-partnername-myapp"
+
+- **Description** - The description must include an HTML comment containing the `author` and `url` fields, followed by a short explanation of the app functionality with a **minimum length of 16 characters**. For signed apps this information will be displayed in the app settings section. Example: [storage-extension example](storage-extension.md#example)
 
 - **Confinement** - Must be set to **"strict"** for releases. See also <https://snapcraft.io/docs/snap-confinement>
 
@@ -470,53 +472,7 @@ For information how to adapt an app to the licensing service please have look on
 To ensure the authenticity and integrity of an app, these apps have to be signed by an authorized body. During the signing process, the app binaries are checked and combined with a signature. Third-Party Apps must successfully pass the validation process to be signed by Bosch Rexroth AG and to be generally available for ctrlX OS users.
 
 For apps generally available for all ctrlX OS users only Bosch Rexroth AG is an authorized body to sign an app.
-For apps that are developed and used by OEMs in their appliances, the OEM can be enabled to sign these apps.
-
-#### 7.2.1 OEM App Signing
-As an OEM intending to sell machines or appliances running ctrlX OS, you will likely have custom-developed apps for these specific use cases. In these cases, instead of relying on Bosch Rexroth AG to sign your apps, OEM App Signing enables you to sign your own apps using your own private key and signed OEM certificate issued by Bosch Rexroth AG.
-
-!!! hint
-    **Receiving OEM certificates is not possible yet. The SDK will be updated once the issuance process is defined. Until then only Bosch Rexroth can sign ctrlX apps.**
-
-Bosch Rexroth AG provides you with tools to sign your own apps after receiving your own OEM certificate from Bosch Rexroth AG. The following tools support you to integrate the signing process into your CI pipeline, feel free to adapt the scripts to your needs.
-
-To sign apps, use the [`app-signing-tool.sh`](https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/scripts/app-signing-tool.sh) script. It accepts the following parameters:
-- **Parameter 1:** OEM certificate (issued by Bosch Rexroth)
-- **Parameter 2:** Signing Key (private key of the OEM)
-- **Parameter 3:** Directory where the snaps to sign are located
-- **Parameter 4:** Output directory for the signed apps (optional, defaults to Parameter 3)
-
-The script packages all snap files, with the same name and version (different architectures), into the same .app file and signs them by creating a signature file for each architecture. The signature file is packaged into the .app and contains the signature, as well as some metadata derived from the provided OEM-Certificate.
-
-The script expects the snaps to follow the naming scheme output by snapcraft when building a snap: `<APPNAME>_<VERSION>_<ARCHITECTURE>.snap`
-
-Example: **"myapp_1.4.3_arm64.snap"**
-
-The resulting .app will be stuctured like this:
-
-
-```
-myapp_1.4.3.app
-└──public
-   └──snaps
-      ├──arm64
-      │  └──release
-      │     │ myapp_1.4.3.signature
-      │     │ myapp_1.4.3.snap
-      │
-      └──amd64
-         └──release
-            │ myapp_1.4.3.signature
-            │ myapp_1.4.3.snap
-```
-
-The [`verify-apps.sh`](https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/scripts/verify-apps.sh) script can then be used to verify the signatures of the resulting apps. It accepts the following parameters:
-
-- **Parameter 1:** OEM Certificate
-- **Parameter 2:** Directory where the apps to be validated are located
-
-!!! hint
-    **Ensure that your OEM certificate is uploaded into the trusted category of the device's certificate store "App signature validation certificates" (id: appvalidationcerts) before installing an OEM-signed app, or the installation will fail. This should be done during the provisioning process of the device.  To upload the OEM certificate, you can either use the "Certificates & Keys" settings in the Web UI or the [certificates REST API](https://boschrexroth.github.io/rest-api-description/ctrlx-automation/ctrlx-core/).**
+For apps that are developed and used by OEMs in their appliances, the OEM can be enabled to sign these apps, see [OEM App signing](appsigning-oem.md).
 
 ## 8 ctrlX Security System (<span style="color:green;">**OPTIONAL**</span>)<a name="security"></a>
 

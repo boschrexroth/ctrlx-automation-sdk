@@ -8,27 +8,27 @@ using Datalayer;
 using System;
 using System.Threading.Tasks;
 
-// Create TaskCompletionSource to wait for process termination  
+// Create TaskCompletionSource to wait for process termination.
 var tcs = new TaskCompletionSource();
 
-// Handle process exit event (SIGTERM)
+// Handle process exit event (SIGTERM).
 AppDomain.CurrentDomain.ProcessExit += (_, _) =>
 {
     Console.WriteLine("Received 'SIGTERM' event.");
 
-    // Run task for graceful shutdown
+    // Run task for graceful shutdown.
     tcs.SetResult();
 };
 
-// Create a new ctrlX Data Layer system
+// Create a new ctrlX Data Layer system.
 using var system = new DatalayerSystem();
 
-// Starts the ctrlX Data Layer system without a new broker (startBroker = false) because one broker is already running on ctrlX CORE
+// Starts the ctrlX Data Layer system without a new broker (startBroker = false) because one broker is already running on ctrlX CORE.
 system.Start(startBroker: false);
 
 Console.WriteLine("ctrlX Data Layer system started.");
 
-// Create a remote address with the parameters according to your environment
+// Create a remote address with the parameters according to your environment.
 var remote = new Remote(ip: "192.168.1.1", sslPort: 443).ToString();
 
 // Create a Datalayer Client instance and connect. Automatically reconnects if the connection is interrupted.
@@ -38,7 +38,7 @@ Console.WriteLine("ctrlX Data Layer client created.");
 // Check if client is connected
 if (!client.IsConnected)
 {
-    // Initially exit and retry after app restart-delay (see snapcraft.yaml)
+    // Initially exit and retry after app restart-delay (see snapcraft.yaml).
     Console.WriteLine($"Client is not connected -> exit");
     return;
 }
@@ -65,11 +65,11 @@ foreach (var item in items)
     Console.WriteLine($"address: {item.Address}, value: {item.Value.ToFloat()}, timestamp: {item.Timestamp}, result: {item.Result}");
 }
 
-// Wait for process termination
+// Wait for process termination.
 Console.WriteLine("Waiting for process exit event 'SIGTERM'...");
 await tcs.Task;
-Console.WriteLine("Graceful shutdown app");
+Console.WriteLine("Graceful shutdown.");
 
-// Stop the ctrlX Data Layer system
+// Stop the ctrlX Data Layer system.
 system.Stop();
 Console.WriteLine("ctrlX Data Layer system stopped.");

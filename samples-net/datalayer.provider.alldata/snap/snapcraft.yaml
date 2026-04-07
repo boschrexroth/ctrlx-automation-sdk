@@ -15,8 +15,16 @@ description: |
   The demo creates a 'static' and a 'dynamic' folder under the root node 'samples'.
   The 'static' folder provides nodes with constant values.
   In the 'dynamic' folder the same nodes are provided as in 'static' folder but with changing value every second.
-grade: stable # must be 'stable' to release into candidate/stable channels
-confinement: strict # use 'strict' once you have the right plugs and slots
+grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
+confinement: strict
 
 platforms:
   amd64:

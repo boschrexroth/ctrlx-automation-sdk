@@ -7,6 +7,14 @@ name: sdk-cpp-provider-simple
 title: SDK C++ Provider Simple
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: Sample app in cpp to register a ctrlX Data Layer branch with several nodes
 description: |
   This app will create a ctrlX Data Layer branch 'sdk/cpp/datalayer/provider/simple/' with nodes of different data types.

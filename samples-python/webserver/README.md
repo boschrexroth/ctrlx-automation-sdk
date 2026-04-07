@@ -2,17 +2,17 @@
 
 ## Introduction
 
-This python app deploys a simple webserver including ctrlX Data Layer connection and user permissions with web interface accessible from ctrlX webpage.
+This python app deploys a simple webserver including __ctrlX Data Layer__ connection and user permissions with web interface accessible from ctrlX webpage.
 
 ## Function Description
 
-The app runs a simple webserver with reverse proxy and ctrlX Data Layer access, setup user permissions through package-manifest and token authentification.
+The app runs a simple webserver with reverse proxy and __ctrlX Data Layer__ access, setup user permissions through package-manifest and token authentification.
 
 Once the installation of the snap was finished, you can access to the provided webpage through the sidebar or overview menu of the ctrlX CORE webpage.
 
 ![ctrlX Integration](docs/images/ctrlx_integration.png)
 
-The Python-Webpage allows you to read and write at the ctrlX Data Layer (depends on permissions of the current user) and shows permissions of the current user.
+The Python-Webpage allows you to read and write at the __ctrlX Data Layer__ (depends on permissions of the current user) and shows permissions of the current user.
 
 ![Python Webserver](docs/images/python_webserver.png)
 
@@ -26,11 +26,11 @@ The integration of the app inside ctrlX Core webpage (sidebar and overview integ
 
 The app has these modules:
 
-* __main.py__ connects to the ctrlX Data Layer and starts the web server. In snap environment an Unix socket connection is established otherwise a TCP/IP connection.
+* __main.py__ connects to the __ctrlX Data Layer__ and starts the web server. In snap environment an Unix socket connection is established otherwise a TCP/IP connection.
 
 * __app/__
-* __datalayer.py__ handles the ctrlX Data Layer node data access.
-* __ctrlx_datalayer_helper.py__ handles the ctrlX Data Layer client connection.
+* __datalayer.py__ handles the __ctrlX Data Layer__ node data access.
+* __ctrlx_datalayer_helper.py__ handles the __ctrlX Data Layer__ client connection.
 
 * __web/__
 * __unix_socket_server.py *)__ Web server class (wrapper) to use unix sockets instead of TCP/IP
@@ -47,4 +47,5 @@ ___
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

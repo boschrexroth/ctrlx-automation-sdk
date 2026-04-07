@@ -25,7 +25,7 @@ namespace Hello.Web.Asp.services
         }
 
         /// <summary>
-        /// The Say.
+        /// Returns the greeting message.
         /// </summary>
         /// <returns>The <see cref="string"/>.</returns>
         public string Say()

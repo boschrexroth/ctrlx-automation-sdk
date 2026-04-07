@@ -44,6 +44,16 @@ for snap_file in "$DIR_SNAPS_INPUT"/*.snap; do
   SIG=$(openssl dgst -sha384 -sign "$SIGNING_KEY" "$SIGNING_DIR"/public/snaps/"$arch"/release/"$snapfilebase".signature | openssl base64)
   echo -e "\n$SIG" >> "$SIGNING_DIR"/public/snaps/"$arch"/release/"$snapfilebase".signature
 
+  # check for privileges file and append if exists
+  privileges_file="$DIR_SNAPS_INPUT/${app_name}.privileges"
+  if [ -f "$privileges_file" ]; then
+    echo "" >> "$SIGNING_DIR/public/snaps/$arch/release/$snapfilebase.signature"
+    cat "$privileges_file" >> "$SIGNING_DIR/public/snaps/$arch/release/$snapfilebase.signature"
+    echo "| privileges:  used from $(basename "$privileges_file")"
+  fi
+
+  echo ""
+
   # repack
   cp "$snap_file" "$SIGNING_DIR"/public/snaps/"$arch"/release/"$snapfilebase".snap
   tar --append --file="$DIR_SNAPS_INPUT"/signing_temp/"$appFileName" --directory="$SIGNING_DIR" public/
@@ -52,4 +62,4 @@ done
 for appfile in "$DIR_SNAPS_INPUT"/signing_temp/*.app; do
   mv "$appfile" "$DIR_APPS_OUTPUT" && echo -e "-> Signed app: $DIR_APPS_OUTPUT/$(basename "$appfile")"
 done
-  rm -r "$DIR_SNAPS_INPUT"/signing_temp
+rm -r "$DIR_SNAPS_INPUT"/signing_temp

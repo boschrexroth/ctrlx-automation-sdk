@@ -11,15 +11,20 @@
         "dist"
     ],
     "devDependencies": {
-        "@types/node": "^24.10.1",
-        "@typescript-eslint/eslint-plugin": "^8.47.0",
-        "@typescript-eslint/parser": "^8.47.0",
-        "eslint": "^9.39.1",
+        "@types/node": "^24.12.0",
+        "@typescript-eslint/eslint-plugin": "^8.57.0",
+        "@typescript-eslint/parser": "^8.57.0",
+        "eslint": "^9.39.4",
         "ts-node": "^10.9.2",
         "typescript": "^5.9.3"
     },
+    "dependencies_": {
+        "ctrlx-datalayer": "file:/home/boschrexroth/sdk.control/public/nodejs/ctrlx-datalayer-3.1.1.tgz",
+        "ctrlx-datalayer-flatbuffers": "file:/home/boschrexroth/sdk.control/public/nodejs/ctrlx-datalayer-flatbuffers-4.6.0.tgz"
+    },
     "dependencies": {
-        "ctrlx-datalayer": "^3.0.0"
+        "ctrlx-datalayer": "file:../../nodejs/ctrlx-datalayer-3.1.1.tgz",
+        "ctrlx-datalayer-flatbuffers": "file:../../nodejs/ctrlx-datalayer-flatbuffers-4.6.0.tgz"
     },
     "scripts": {
         "getName": "echo $npm_package_name",

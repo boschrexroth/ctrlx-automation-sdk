@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// !!! DO NOT REMOVE THE SHEBANG ON TOP OF THE FILE, WHICH SPECIFIES THIS APP TO BE EXECUTED BY NODE.JS !!!
+// THIS SHEBANG ON TOP OF THE FILE INDICATES THE APP TO BE EXECUTED BY NODE.JS. PLEASE DO NOT REMOVE. 
 
 /*
  * SPDX-FileCopyrightText: Bosch Rexroth AG
@@ -24,14 +24,15 @@ async function main() {
     await system.start(false);
 
     // Create a remote address with the parameters according to your environment
-    const remote = Remote.build({ ip: "10.0.2.2", sslPort: 8443 });
+    //const remote = Remote.build({ ip: "10.52.2.2", sslPort: 8443 });
+    const remote = Remote.build({ ip: "10.52.128.83", sslPort: 443 });
     console.log('connection string:', remote);
 
     // Create a Datalayer Client instance and connect. Automatically reconnects if the connection is interrupted.
     const client = await system.createClient(remote);
 
     // Create a data changed event callback function
-    const dataChanged = (result: IResult, item: INotifyItem) => {
+    const dataChanged = async (result: IResult, item: INotifyItem) => {
 
         //If the client connection is interrupted (isConnected=false), the notification value changes to a flatbuffers of type 'Diagnosis'. 
         //So always check the result, before accessing the value in a subscription callback. 
@@ -53,6 +54,10 @@ async function main() {
 
         // Write to console. 
         console.log(timestamp, result.text, info.notifyType(), info.node(), item.value, item.type);
+
+        // Read
+        const readResult = await client.read('framework/metrics/system/memused-percent');
+        console.log("read:", readResult);
     };
 
     // Build the subscription properties.

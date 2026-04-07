@@ -7,9 +7,6 @@
 package datalayer.provider.sub;
 
 import java.lang.System.Logger.Level;
-import java.util.Enumeration;
-import java.util.Map;
-import java.util.Properties;
 import com.boschrexroth.api.Client;
 import com.boschrexroth.api.DlSystem;
 import com.boschrexroth.api.Provider;
@@ -21,6 +18,9 @@ public class App {
 
     public static void main(String[] args) {
 
+        if (args == null) {
+            return;
+        }
         for (String arg : args) {
             LOG.log(Level.INFO, "main({0})", arg);
         }
@@ -35,7 +35,7 @@ public class App {
 
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 LOG.log(Level.INFO, "\nShutdown hook activated! Start cleanup...");
-                RunUtils.running.set(false);
+                RunUtils.getRunningFlag().set(false);
             }));
 
             if (args == null || args[0].equals("provider")) {
@@ -64,6 +64,7 @@ public class App {
         }
     }
 
+    /*
     private static void getEnv() {
         LOG.log(Level.INFO, "All Enviroments ");
         Map<String, String> env = System.getenv();
@@ -79,4 +80,5 @@ public class App {
             LOG.log(Level.INFO, "{0}: {1}", key, props.getProperty(key));
         }
     }
+    */
 }

@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['value_0',['Value',['../interfaceDatalayer_1_1IBulkItem.html#a9503c94b75a670263019963baa18c20d',1,'Datalayer.IBulkItem.Value()'],['../interfaceDatalayer_1_1IClientAsyncResult.html#a9503c94b75a670263019963baa18c20d',1,'Datalayer.IClientAsyncResult.Value()'],['../interfaceDatalayer_1_1INotifyItem.html#a9503c94b75a670263019963baa18c20d',1,'Datalayer.INotifyItem.Value()'],['../interfaceDatalayer_1_1IVariant.html#a2d7e8cd2081ad3db5aa8e597557123e9',1,'Datalayer.IVariant.Value()'],['../classDatalayer_1_1ReferenceType.html#af7b88db799d8f791f785e437bc6099d2',1,'Datalayer.ReferenceType.Value()'],['../classDatalayer_1_1Variant.html#a2d7e8cd2081ad3db5aa8e597557123e9',1,'Datalayer.Variant.Value()']]]
+  ['user_0',['User',['../classDatalayer_1_1Remote.html#a9f8df451a16165b0cf243e37bf9c6b62',1,'Datalayer::Remote']]],
+  ['userdata_1',['UserData',['../interfaceDatalayer_1_1IDataChangedEventArgs.html#aeeccb94edafa8ab78eb999c2b2f97572',1,'Datalayer.IDataChangedEventArgs.UserData()'],['../interfaceDatalayer_1_1ISubscription.html#aeeccb94edafa8ab78eb999c2b2f97572',1,'Datalayer.ISubscription.UserData()']]],
+  ['uses_2',['Uses',['../classDatalayer_1_1ReferenceType.html#a590d5833dd7739782502752d0004befd',1,'Datalayer::ReferenceType']]]
 ];

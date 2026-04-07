@@ -40,7 +40,7 @@ The following interface must still be set manually after the installation.
 The trace output can be viewed using:
 
 ```bash
-    sudo snap logs -f sdk-cpp-remote-scheduler`
+    sudo snap logs -f sdk-cpp-remote-scheduler
 ```
 
 **NOTE:** The usage of traces in the execute method of `factory.h` is only a placeholder for demonstration and should be removed for real-time workloads.
@@ -76,4 +76,5 @@ ___
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

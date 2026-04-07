@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# SPDX-FileCopyrightText: Bosch Rexroth AG
+#
+# SPDX-License-Identifier: MIT
+
+set -e
+
+echo "Dummy App [waiting]: starting ... "
+snapctl set-health waiting "starting"
+sleep 5s
+
+echo "Dummy App [okay]: ready"
+snapctl set-health okay
+
+sleep 5s
+echo "Dummy App [error]: uuups, something went wrong: error"
+# when status is not "okay", message is required
+# code must start with lowercase ASCII letters, and contain only ASCII letters and numbers, optionally separated by single dashes
+snapctl set-health error --code="code-17" "error message"
+
+sleep 5s    
+echo "Dummy App [okay]: ready again"
+snapctl set-health okay
+
+sleep 10s
+# Randomly exit with either 0 or 1
+if [ $((RANDOM % 2)) -eq 0 ]; then
+    echo "Dummy App [waiting]: exiting with success (0)"
+    exit 0
+else
+    echo "Seg fault"
+    exit 1
+fi

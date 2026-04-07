@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The sample app reads the values of some ctrlX Data Layer nodes of a ctrlX CORE.
+The sample app reads the values of some __ctrlX Data Layer__ nodes of a ctrlX CORE.
 
 ## Prerequisite
 
@@ -10,18 +10,18 @@ A running ctrlX WORKS App Build Environment like described [here](https://boschr
 
 ## Function Description
 
-The app demonstrates how values of the ctrlX Data Layer nodes can be read.
+The app demonstrates how values of the __ctrlX Data Layer__ nodes can be read.
 
 ## Implementation Description
 
-In main.cpp the ctrlX Data Layer system is started and a client connection is established.
+In main.cpp the __ctrlX Data Layer__ system is started and a client connection is established.
 
 Then an endless loop is running:
 
-* Some ctrlX Data Layer values are read and their values are printed.
+* Some __ctrlX Data Layer__ values are read and their values are printed.
 * After a sleep of the loop is repeated.
 
-The loop ends and the main method exits when the ctrlX Data Layer client connection was broken.
+The loop ends and the main method exits when the __ctrlX Data Layer__ client connection was broken.
 
 With the help of the entry 'restart-condition: always' in snapcraft.yaml the snap is automatically restarted.
 
@@ -49,4 +49,5 @@ ___
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

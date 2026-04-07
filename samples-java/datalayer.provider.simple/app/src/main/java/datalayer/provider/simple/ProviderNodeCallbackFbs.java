@@ -5,6 +5,8 @@
  */
 package datalayer.provider.simple;
 
+import java.lang.System.Logger.Level;
+
 import com.boschrexroth.api.AllowedOperation;
 import com.boschrexroth.api.MetadataBuilder;
 import com.boschrexroth.api.ProviderNodeCallback;
@@ -19,6 +21,8 @@ import pkg.sample.schema.InertialValueT;
 
 public class ProviderNodeCallbackFbs implements ProviderNodeCallback {
 
+    private static final java.lang.System.Logger LOG = java.lang.System.getLogger(ProviderNodeCallbackFbs.class.getName());
+
     String typeaddressfbs;
     public ProviderNodeCallbackFbs(String addressfbs) {
         typeaddressfbs = addressfbs;
@@ -26,18 +30,18 @@ public class ProviderNodeCallbackFbs implements ProviderNodeCallback {
 
     @Override
     public void onBrowse(ProviderNodeEvent ev) {
-        System.out.println("onBrowse:");
+        LOG.log(Level.INFO, "onBrowse:");
         ev.callback(Result.OK, null);
     }
 
     @Override
     public void onCreate(ProviderNodeEventData ev) {
-        System.out.println("onCreate:");
+        LOG.log(Level.INFO, "onCreate:");
     }
 
     @Override
     public void onMetadata(ProviderNodeEvent ev) {
-        System.out.println("onMetadata: '" + ev.getAddress() + "'");
+        LOG.log(Level.INFO, "onMetadata: '" + ev.getAddress() + "'");
         MetadataBuilder meta = MetadataBuilder.create(AllowedOperation.READ.getValue(), "fbs Variable", "");
         meta.setNodeClass(NodeClass.Variable);
         meta.addReference(ReferenceType.READ, typeaddressfbs);
@@ -47,7 +51,7 @@ public class ProviderNodeCallbackFbs implements ProviderNodeCallback {
 
     @Override
     public void onRead(ProviderNodeEventData ev) {
-        System.out.println("onRead: '" + ev.getAddress());
+        LOG.log(Level.INFO, "onRead: '" + ev.getAddress());
 
         pkg.sample.schema.InertialValueT inertialValue = new InertialValueT();
         inertialValue.setX((short)1);
@@ -62,13 +66,13 @@ public class ProviderNodeCallbackFbs implements ProviderNodeCallback {
 
     @Override
     public void onRemove(ProviderNodeEvent ev) {
-        System.out.println("onRemove:");
+        LOG.log(Level.INFO, "onRemove:");
         ev.callback(Result.OK, null);
     }
 
     @Override
     public void onWrite(ProviderNodeEventData ev) {
-        System.out.println("onWrite:");
+        LOG.log(Level.INFO, "onWrite:");
         ev.callback(Result.OK, null);
     }
 

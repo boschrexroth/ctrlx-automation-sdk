@@ -7,6 +7,14 @@ name: sdk-cpp-sharedmemory
 title: SDK C++ Shared Memory
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: Example app for using ctrlX Data Layer shared memory
 description: |
   The example project shows the access to the ctrlX Data Layer shared memory:

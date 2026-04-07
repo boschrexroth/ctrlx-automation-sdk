@@ -1,6 +1,6 @@
 # ctrlX Data Layer Diagnosis
 
-This sample app uses some ctrlX Data Layer addresses to handle with diagnostics.
+This sample app uses some __ctrlX Data Layer__ addresses to handle with diagnostics.
 
 ## Introduction
 
@@ -39,4 +39,5 @@ ___
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

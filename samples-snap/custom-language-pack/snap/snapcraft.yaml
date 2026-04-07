@@ -1,0 +1,30 @@
+name: klingon-language-pack # ToDo: Change name
+title: Custom Language Pack Klingon # ToDo: Change title
+version: 1.0.0
+summary: My custom language pack for constructed Klingon language # ToDo: Change summary
+description: | # ToDo: Change description
+  This is an example for a custom language pack for Klingon and can be used as a blueprint for other languages.
+grade: stable
+base: bare
+build-base: core24
+confinement: strict
+
+platforms:
+  all:
+    build-on: [amd64]
+
+parts:
+  package-assets:
+    plugin: dump
+    source: "./language-files/klingon" # ToDo: Adapt path. The relative path to the translated language files
+    source-type: local
+    organize: 
+      "*": "package-assets/${SNAPCRAFT_PROJECT_NAME}/i18n/"
+
+slots: 
+  package-assets:
+    interface: content
+    content: package-assets
+    source:
+      read:
+      - $SNAP/package-assets/${SNAPCRAFT_PROJECT_NAME}

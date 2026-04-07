@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// !!! DO NOT REMOVE THE SHEBANG ON TOP OF THE FILE, WHICH SPECIFIES THIS APP TO BE EXECUTED BY NODE.JS !!!
+// THIS SHEBANG ON TOP OF THE FILE INDICATES THE APP TO BE EXECUTED BY NODE.JS. PLEASE DO NOT REMOVE. 
 
 /*
  * SPDX-FileCopyrightText: Bosch Rexroth AG
@@ -30,7 +30,7 @@ async function main() {
     // Create a ctrlX Data Layer browser.
     const browser = new Browser(client);
 
-    // Traverse the complete ctrlX Data Layer tree.
+    // Traverse the complete ctrlX Data Layer.
     browser.traverse();
 
     //Keep the process alive until disconnected

@@ -2,11 +2,11 @@
 
 ## Introduction
 
-The app demonstrates shows how a provider supports "ctrlX Data Layer" subscription interface.
+The app demonstrates shows how a provider supports "__ctrlX Data Layer__" subscription interface.
 
 ## Function Description
 
-The app connects to the ctrlX Data Layer using either port 8443 or 443.
+The app connects to the __ctrlX Data Layer__ using either port 8443 or 443.
 Provider supported the subscription interface.
 
 ## Prerequisites
@@ -29,4 +29,5 @@ To use Java within Visual Studio Code, we recommend using the [Java in Visual St
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

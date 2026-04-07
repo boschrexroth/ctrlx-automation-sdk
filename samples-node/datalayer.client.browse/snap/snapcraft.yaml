@@ -7,11 +7,19 @@ title: SDK Node.js Client Browse
 version: 1.0.0
 summary: ctrlX Data Layer browse sample written in Node.js for ctrlX OS.
 description: |
-  The sample app shows how to browse the ctrlX Data Layer tree.
+  The sample app shows how to browse the ctrlX Data Layer.
 confinement: strict
 #confinement: devmode
 #icon: assets/icons/ICONHERE.png
-grade: stable # must be 'stable' to release into candidate/stable channels
+grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 base: core24
 type: app
 
@@ -38,75 +46,16 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: "22.21.1"
+      - NODE_VERSION: "24.14.0"
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "22.21.1"
+    # npm-node-version: "24.14.0"
     plugin: nil
     override-build: |
-
-      # detect target arch
-      if [ $CRAFT_ARCH_BUILD_FOR == "arm64" ]; then
-          target_arch="arm64"
-      else 
-          target_arch="x64"
-      fi
-
-      # detect build arch
-      CRAFT_BUILD_ARCH=$(dpkg --print-architecture)
-      if [ $CRAFT_BUILD_ARCH == "arm64" ]; then
-          build_arch="arm64"
-      else 
-          build_arch="x64"
-      fi
-
-      # fetch node for target arch to be packed
-      if [ ! -f "${CRAFT_PART_INSTALL}/bin/node" ]; then
-          node_path="${CRAFT_PART_INSTALL}/bin"
-          node_uri="https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${target_arch}.tar.gz"
-          echo fetching node for install: $node_uri
-          curl $node_uri | tar xzf - -C $CRAFT_PART_INSTALL --no-same-owner --strip-components=1
-      fi
-
-      # fetch node used for build (if not equal to target arch for cross build)
-      if [ $build_arch != $target_arch ]; then
-        node_path=$CRAFT_PART_BUILD/bin
-        if [ ! -f "${CRAFT_PART_BUILD}/bin/node" ]; then
-          node_uri="https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${build_arch}.tar.gz"
-          echo fetching node for build: $node_uri
-          curl $node_uri | tar xzf - -C $CRAFT_PART_BUILD --no-same-owner --strip-components=1
-        fi
-      fi
-
-      # set the path to build target node to be used for build
-      echo node path: $node_path
-      export PATH=$node_path:$PATH
-      node --version
-      npm --version
-
-      # install and compile (tsc -> ./dist)
-      npm install --ignore-scripts --no-fund --unsafe-perm
-      npm run tsc
-
-      # pack and install the app (only production)
-      npm install -g --prefix $CRAFT_PART_INSTALL $(npm pack . | tail -1) --ignore-scripts --omit=dev --no-fund --unsafe-perm
-
-      # remove ctrlx-datalayer prebuilds of unused archs to reduce snap size
-      package_name=$(npm run getName -s)
-      prebuilds_location="${CRAFT_PART_INSTALL}/lib/node_modules/${package_name}/node_modules/ctrlx-datalayer/prebuilds"
-      if [ -d "$prebuilds_location" ]; then
-        find $prebuilds_location -type f -not -ipath "*/linux-${target_arch}*" -delete
-      fi
-
-      # remove unused binaries
-      rm -rf ${CRAFT_PART_INSTALL}/bin/npm
-      rm -rf ${CRAFT_PART_INSTALL}/bin/npx
-      rm -rf ${CRAFT_PART_INSTALL}/bin/corepack
-
-      # remove unused node modules
-      rm -rf ${CRAFT_PART_INSTALL}/lib/node_modules/npm
-      rm -rf ${CRAFT_PART_INSTALL}/lib/node_modules/corepack
+    
+      $SNAPCRAFT_PROJECT_DIR/../build-node-app.sh
+      craftctl default
 
 # describes which interface slots are supported by defining the plugs
 plugs:
@@ -114,3 +63,9 @@ plugs:
     interface: content
     content: datalayer
     target: $SNAP_DATA/.datalayer
+    
+lint:
+  ignore:
+    - library:
+      - bin/node
+      - lib/node_modules/$CRAFT_PROJECT_NAME/node_modules/ctrlx-datalayer/prebuilds/linux-$CRAFT_ARCH_BUILD_FOR/ctrlx-datalayer.node

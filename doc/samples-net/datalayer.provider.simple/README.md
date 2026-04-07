@@ -1,6 +1,6 @@
 # README .NET datalayer.provider.simple
 
-This .NET sample provides some registered nodes to the ctrlX Data Layer tree.
+This .NET sample provides some registered nodes to __ctrlX Data Layer__.
 
 __IMPORTANT__:
 
@@ -10,9 +10,9 @@ Please read the _Best Practise_ section in common .NET documentation for more de
 
 ## Introduction
 
-The sample demonstrates how to provide nodes to ctrlX Data Layer tree.
-The provider creates nodes with types of int/double/string.
-Also a complex type encoded by [FlatBuffers](https://google.github.io/flatbuffers/) is provided.
+The sample demonstrates how to provide nodes to __ctrlX Data Layer__.
+The provider registers some nodes.
+Also a complex type encoded by [FlatBuffers](https://flatbuffers.dev) is provided.
 
 ## Description
 
@@ -39,27 +39,27 @@ Launch the app with the debugger attached by pressing __F5__.
 1. Launch Visual Studio Code
 2. Click on the __Remote Explorer__ from the menu.
 3. Choose __Open Folder__.
-4. Open the directory __datalayer.provider__.
+4. Open the directory __datalayer.provider.simple__.
 5. Build and install snap as described [here](./../README.md).
-6. Checkout ctrlX Data Layer web frontend (Settings | Data Layer)
+6. Checkout __ctrlX Data Layer__ web frontend (Settings | Data Layer)
 7. Check the output using __Diagnostics__:
 
    + Login into your ctrlX
    + Navigate to __Diagnostics -> Logbook__
    + Click __Settings__ on the right top corner
    + Enable __Show system messages__
-   + Navigate to __Filter -> Units__ and check your __snap.sdk-net-provider.app.service__
+   + Navigate to __Filter -> Units__ and check your __snap.sdk-net-provider-simple.app.service__
    + Now you should the see the app output diagnostics.
    + Press __Refresh__ to update.
 
 8. If you have root permissions, you can also watch the output on any ssh console with the command:
 
    ```bash
-   sudo snap logs sdk-net-provider.app -f | more
+   sudo snap logs sdk-net-provider-simple.app -f | more
 
 ## Screenshot
 
-![crtrX ctrlX Data Layer tree](./docs/images/datalayer.provider/datalayer.provider.png)
+![ctrlX Data Layer](./docs/images/datalayer.provider/datalayer.provider.png)
 
 ## Install the App
 
@@ -84,4 +84,5 @@ If you've found an error in these sample, please [file an issue](https://github.
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

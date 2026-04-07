@@ -8,6 +8,13 @@ base: core24
 confinement: strict
 grade: stable
 
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 platforms:
   amd64:
   arm64:
@@ -16,8 +23,7 @@ platforms:
 
 apps:
   logbook:
-    command: bin/main.py
-    plugs:
+    command: bin/run.sh
       - network
       - datalayer
     daemon: simple
@@ -48,6 +54,12 @@ parts:
           ;;
       esac
       pip3 install --platform=${PLATFORM_CYSYSTEMD} --only-binary=:all: --target ${TARGET_PATH} $GITHUB_CYSYSTEMD/cysystemd-${GITHUB_CYSYSTEMD_VERSION}-${PYTHON_VERSION_IDENTIFIER}-${PYTHON_VERSION_IDENTIFIER}-${PLATFORM_CYSYSTEMD}.whl
+
+  wrapper-scripts:
+    plugin: dump
+    source: wrapper/
+    organize:
+      ./run.sh : bin/run.sh
 
 plugs:
   datalayer:

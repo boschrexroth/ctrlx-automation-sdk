@@ -10,6 +10,7 @@
 * [Hello Globalization](./hello.globalization/README.md)
 * [ctrlX Data Layer Client](./datalayer.client.simple/README.md)
 * [ctrlX Data Layer Provider](./datalayer.provider.simple/README.md)
+* [ctrlX Data Layer Subscription Provider](./datalayer.provider.subscription/README.md)
 * [Diagnostics Logbook](./diagnostics.logbook/README.md)
 
 ### Advanced Samples

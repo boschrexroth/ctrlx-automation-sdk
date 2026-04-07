@@ -10,7 +10,7 @@
 * [Typetree](#typetree)
 * [Usage of client](#client)
 
-## Node names
+## Node names <a name="namingConventions"></a>
 
 Each value is addressed by a path. A path creates of a set of nodes. When nodes are
 named, an API is intuitive and easy to use. If done poorly, that same API can
@@ -67,7 +67,7 @@ Example:
 * provider6: test/\**
 * provider7: test/bar/**
 
-## Routing of requests <a name="Routing"></a>
+## Routing of requests <a name="Routing"></a><a name="routing"></a>
 
 All requests except browse requests are routed to the provider the address matches best to the registered path.
 So on each level a registration with a specific path matches before a registration with a wildcard.

@@ -15,11 +15,25 @@
   "menus": {
     "sidebar": [
       {
-        "id": "sdk-go-webserver",
-        "target": "_blank",
-        "title": "SDK go webserver",
+        "id": "sdk-webserver",
+        "title": "SDK webserver",
         "icon": "bosch-ic-worldwideweb",
-        "link": "/sdk-go-webserver/"
+        "items": [
+          {
+            "id": "sdk-go-webserver-blank",
+            "title": "SDK go webserver (New Tab)",
+            "target": "_blank",
+            "link": "/sdk-go-webserver/",
+            "items": []
+          },
+          {
+            "id": "sdk-go-webserver-embedded",
+            "title": "SDK go webserver (Embedded)",
+            "target": "embedded",
+            "link": "/sdk-go-webserver/",
+            "items": []
+          }
+        ]
       }
     ],
     "settings": [],

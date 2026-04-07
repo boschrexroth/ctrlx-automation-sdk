@@ -23,4 +23,5 @@ Build the executable with `go build ./cmd/...`
 ## License
 
 SPDX-FileCopyrightText: Bosch Rexroth AG
+
 SPDX-License-Identifier: MIT

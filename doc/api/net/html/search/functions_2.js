@@ -5,5 +5,5 @@ var searchData=
   ['createasync_2',['CreateAsync',['../interfaceDatalayer_1_1IClient.html#a05de64147a8ba02516d888a7c2aa38e6',1,'Datalayer::IClient']]],
   ['createclient_3',['CreateClient',['../interfaceDatalayer_1_1IFactory.html#abe392c5fbd1a189e5e27c55182d7669d',1,'Datalayer::IFactory']]],
   ['createprovider_4',['CreateProvider',['../interfaceDatalayer_1_1IFactory.html#ac67764fa327276d3d06ac257dfd044e5',1,'Datalayer::IFactory']]],
-  ['createsubscriptionasync_5',['CreateSubscriptionAsync',['../interfaceDatalayer_1_1IClient.html#a5486fb6764aaa88fb8d6ed2deb919afb',1,'Datalayer::IClient']]]
+  ['createsubscriptionasync_5',['CreateSubscriptionAsync',['../interfaceDatalayer_1_1IClient.html#aec6d31ce3816dccad757bfa4fab025c6',1,'Datalayer.IClient.CreateSubscriptionAsync(SubscriptionPropertiesT subscriptionProperties, object userData)'],['../interfaceDatalayer_1_1IClient.html#a5486fb6764aaa88fb8d6ed2deb919afb',1,'Datalayer.IClient.CreateSubscriptionAsync(IVariant subscriptionPropertiesFlatbuffers, object userData)']]]
 ];

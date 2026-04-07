@@ -7,6 +7,14 @@ name: sdk-cpp-diagnostics-logbook
 title: SDK C++ Diagnostics Logbook
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: Writes messages to journald and the ctrlX logbook
 description: |
   This is a simple App to show how messages with different log levels are written to journald and the ctrlX logbook.

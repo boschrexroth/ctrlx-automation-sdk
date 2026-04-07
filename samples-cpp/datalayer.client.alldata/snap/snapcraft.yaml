@@ -7,6 +7,14 @@ name: sdk-cpp-client-alldata
 title: SDK C++ Client All Data
 version: 1.0.0
 grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
 summary: Sample app for datalayer client
 description: |
   This app shows access to Data Layer nodes provided by sdk-cpp-provider-alldata

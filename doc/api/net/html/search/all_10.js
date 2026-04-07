@@ -1,7 +1,7 @@
 var searchData=
 [
   ['tcp_0',['TCP',['../namespaceDatalayer.html#ad60e871193d3e9855e82f9ba97df3888ab136ef5f6a01d816991fe3cf7a6ac763',1,'Datalayer']]],
-  ['timestamp_1',['Timestamp',['../interfaceDatalayer_1_1IBulkItem.html#ad61a3202df3c958377a1f7d95cfebb46',1,'Datalayer::IBulkItem']]],
+  ['timestamp_1',['Timestamp',['../interfaceDatalayer_1_1IBulkItem.html#ad61a3202df3c958377a1f7d95cfebb46',1,'Datalayer.IBulkItem.Timestamp()'],['../interfaceDatalayer_1_1IProviderSubscription.html#ad61a3202df3c958377a1f7d95cfebb46',1,'Datalayer.IProviderSubscription.Timestamp()']]],
   ['tobool_2',['ToBool',['../interfaceDatalayer_1_1IVariant.html#a836015d7bac1c5bdbf87c6aff416def0',1,'Datalayer.IVariant.ToBool()'],['../classDatalayer_1_1Variant.html#a836015d7bac1c5bdbf87c6aff416def0',1,'Datalayer.Variant.ToBool()']]],
   ['toboolarray_3',['ToBoolArray',['../interfaceDatalayer_1_1IVariant.html#aff7faba54d898225f00e994582057136',1,'Datalayer.IVariant.ToBoolArray()'],['../classDatalayer_1_1Variant.html#aff7faba54d898225f00e994582057136',1,'Datalayer.Variant.ToBoolArray()']]],
   ['tobyte_4',['ToByte',['../interfaceDatalayer_1_1IVariant.html#a59e3e205bb96ab4244682480106341de',1,'Datalayer.IVariant.ToByte()'],['../classDatalayer_1_1Variant.html#a59e3e205bb96ab4244682480106341de',1,'Datalayer.Variant.ToByte()']]],

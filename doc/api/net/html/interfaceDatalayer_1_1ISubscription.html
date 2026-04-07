@@ -31,7 +31,7 @@
   </td>  
   <td id="projectalign" style="padding-left: 5em" width="80%">
     <div id="projectname">ctrlX Data Layer .NET API
-      &#160;<span id="projectnumber">5.0.0</span>
+      &#160;<span id="projectnumber">6.0.1</span>
     </div>
     <div id="projectbrief"></div>
   </td>
@@ -124,6 +124,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3f303edaf0ba64fbe02563bed284381d"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceDatalayer_1_1ISubscription.html#a3f303edaf0ba64fbe02563bed284381d">DataChangedEventHandler</a> (<a class="el" href="interfaceDatalayer_1_1ISubscription.html">ISubscription</a> subscription, <a class="el" href="interfaceDatalayer_1_1IDataChangedEventArgs.html">IDataChangedEventArgs</a> args)</td></tr>
 <tr class="memdesc:a3f303edaf0ba64fbe02563bed284381d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The DataChanged event delegate.  <br /></td></tr>
 <tr class="separator:a3f303edaf0ba64fbe02563bed284381d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a372b231a31016fe8e64e4b98e64050c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceDatalayer.html#a0d46a3e31a1859c7602d7d671bf75fc8">DLR_RESULT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceDatalayer_1_1ISubscription.html#a372b231a31016fe8e64e4b98e64050c2">Modify</a> (string[] addresses)</td></tr>
+<tr class="memdesc:a372b231a31016fe8e64e4b98e64050c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces the current subscribed list of nodes.  <br /></td></tr>
+<tr class="separator:a372b231a31016fe8e64e4b98e64050c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a738e52764ca1b68a2a5f122ea9ee12c4"><td class="memItemLeft" align="right" valign="top">Task&lt; <a class="el" href="interfaceDatalayer_1_1ISubscriptionAsyncResult.html">ISubscriptionAsyncResult</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceDatalayer_1_1ISubscription.html#a738e52764ca1b68a2a5f122ea9ee12c4">ModifyAsync</a> (string[] addresses)</td></tr>
+<tr class="memdesc:a738e52764ca1b68a2a5f122ea9ee12c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces the current subscribed list of nodes.  <br /></td></tr>
+<tr class="separator:a738e52764ca1b68a2a5f122ea9ee12c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7887ed3200fcf3ae4b47b6d4b4062137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceDatalayer.html#a0d46a3e31a1859c7602d7d671bf75fc8">DLR_RESULT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceDatalayer_1_1ISubscription.html#a7887ed3200fcf3ae4b47b6d4b4062137">Subscribe</a> (string address)</td></tr>
 <tr class="memdesc:a7887ed3200fcf3ae4b47b6d4b4062137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subscribes to a node.  <br /></td></tr>
 <tr class="separator:a7887ed3200fcf3ae4b47b6d4b4062137"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,6 +240,74 @@ Events</h2></td></tr>
 
 </div>
 </div>
+<a id="a372b231a31016fe8e64e4b98e64050c2" name="a372b231a31016fe8e64e4b98e64050c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a372b231a31016fe8e64e4b98e64050c2">&#9670;&#160;</a></span>Modify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceDatalayer.html#a0d46a3e31a1859c7602d7d671bf75fc8">DLR_RESULT</a> Modify </td>
+          <td>(</td>
+          <td class="paramtype">string[]&#160;</td>
+          <td class="paramname"><em>addresses</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Replaces the current subscribed list of nodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addresses</td><td>The array of addresses.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The result.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
+    <tr><td class="paramname">ArgumentNullException</td><td>Argument cannot be null.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a738e52764ca1b68a2a5f122ea9ee12c4" name="a738e52764ca1b68a2a5f122ea9ee12c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a738e52764ca1b68a2a5f122ea9ee12c4">&#9670;&#160;</a></span>ModifyAsync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Task&lt; <a class="el" href="interfaceDatalayer_1_1ISubscriptionAsyncResult.html">ISubscriptionAsyncResult</a> &gt; ModifyAsync </td>
+          <td>(</td>
+          <td class="paramtype">string[]&#160;</td>
+          <td class="paramname"><em>addresses</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Replaces the current subscribed list of nodes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addresses</td><td>The array of addresses.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The result.</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
+    <tr><td class="paramname">ArgumentNullException</td><td>Argument cannot be null.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7887ed3200fcf3ae4b47b6d4b4062137" name="a7887ed3200fcf3ae4b47b6d4b4062137"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7887ed3200fcf3ae4b47b6d4b4062137">&#9670;&#160;</a></span>Subscribe()</h2>
 
@@ -257,7 +331,7 @@ Events</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Result of the method call.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The result.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -280,8 +354,8 @@ Events</h2></td></tr>
 <div class="line"> </div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">string</span> cpuLoad = <span class="stringliteral">&quot;framework/metrics/system/cpu-utilisation-percent&quot;</span>;</div>
 <div class="line">var subscribeResult = subscription.Subscribe(address: cpuLoad);</div>
-<div class="ttc" id="aclassDatalayer_1_1Variant_html"><div class="ttname"><a href="classDatalayer_1_1Variant.html">Datalayer.Variant</a></div><div class="ttdoc">Provides the implementation for IVariant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cs_source.html#l00017">Variant.cs:18</a></div></div>
-<div class="ttc" id="aclassDatalayer_1_1Variant_html_a8e25ed1230b25e5377832b5f7e9a4d09"><div class="ttname"><a href="classDatalayer_1_1Variant.html#a8e25ed1230b25e5377832b5f7e9a4d09">Datalayer.Variant.DefaultFlatbuffersInitialSize</a></div><div class="ttdeci">static readonly int DefaultFlatbuffersInitialSize</div><div class="ttdoc">Gets the default Flatbuffers initial size in bytes.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cs_source.html#l00730">Variant.cs:730</a></div></div>
+<div class="ttc" id="aclassDatalayer_1_1Variant_html"><div class="ttname"><a href="classDatalayer_1_1Variant.html">Datalayer.Variant</a></div><div class="ttdoc">Provides the implementation for IVariant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cs_source.html#l00018">Variant.cs:19</a></div></div>
+<div class="ttc" id="aclassDatalayer_1_1Variant_html_a8e25ed1230b25e5377832b5f7e9a4d09"><div class="ttname"><a href="classDatalayer_1_1Variant.html#a8e25ed1230b25e5377832b5f7e9a4d09">Datalayer.Variant.DefaultFlatbuffersInitialSize</a></div><div class="ttdeci">static readonly int DefaultFlatbuffersInitialSize</div><div class="ttdoc">Gets the default Flatbuffers initial size in bytes.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cs_source.html#l00748">Variant.cs:748</a></div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -308,7 +382,7 @@ Events</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Task.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The task.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -338,11 +412,11 @@ Events</h2></td></tr>
 <p>Subscribes to a list of nodes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">addresses</td><td>An array of the addresses.</td></tr>
+    <tr><td class="paramname">addresses</td><td>The array of addresses.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Result of the method call.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The result.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -372,11 +446,11 @@ Events</h2></td></tr>
 <p>Subscribes to a list of nodes asynchronously. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">addresses</td><td>An array of the addresses.</td></tr>
+    <tr><td class="paramname">addresses</td><td>The array of addresses.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Task.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The task.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -410,7 +484,7 @@ Events</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Result of the method call.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The result.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -437,7 +511,7 @@ Events</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Unsubscribes all subscribed nodes. </p>
-<dl class="section return"><dt>Returns</dt><dd>Result of the method call.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The result.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -463,7 +537,7 @@ Events</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Unsubscribes all subscribed nodes asynchronously. </p>
-<dl class="section return"><dt>Returns</dt><dd>Task.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The task.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -496,7 +570,7 @@ Events</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Result of the method call.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The result.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -526,11 +600,11 @@ Events</h2></td></tr>
 <p>Unsubscribes to a list of nodes. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">addresses</td><td>An array of the addresses.</td></tr>
+    <tr><td class="paramname">addresses</td><td>The array of addresses.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Result of the method call.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The result.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -560,11 +634,11 @@ Events</h2></td></tr>
 <p>Unsubscribes a list of nodes asynchronously. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">addresses</td><td>An array of the addresses.</td></tr>
+    <tr><td class="paramname">addresses</td><td>The array of addresses.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Task.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The task.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>

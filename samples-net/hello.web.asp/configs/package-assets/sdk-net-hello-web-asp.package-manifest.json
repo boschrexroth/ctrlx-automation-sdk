@@ -16,9 +16,23 @@
       {
         "icon": "bosch-ic-grid-view",
         "id": "sdk-net-hello-web-asp",
-        "link": "/hello-web-asp",
         "title": "Hello Web ASP.NET",
-        "target": "_blank"
+        "items": [
+          {
+            "id": "sdk-net-hello-web-asp-blank",
+            "title": "Hello Web ASP.NET (New Tab)",
+            "target": "_blank",
+            "link": "/hello-web-asp",
+            "items": []
+          },
+          {
+            "id": "sdk-net-hello-web-asp-embedded",
+            "title": "Hello Web ASP.NET (Embedded)",
+            "target": "embedded",
+            "link": "/hello-web-asp",
+            "items": []
+          }
+        ]
       }
     ]
   }
