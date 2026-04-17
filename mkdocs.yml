@@ -42,7 +42,7 @@ theme:
 
   palette:
     # Light mode
-    - media: '(prefers-color-scheme: light)'
+    - media: "(prefers-color-scheme: light)"
       scheme: rexroth-light
       primary: indigo
       accent: indigo
@@ -133,8 +133,9 @@ nav:
           - Working with App Build Environments (QEMU VMs): working-with-app-builder-envs.md
           - SSH Connection: ssh_connection.md
           - Visual Studio Code: vscode.md
-          - .NET: dotnet.md
+          - .NET Apps: dotnet.md
           - Using Snapcraft Remote Build from Canonical: remote-build.md
+      - Apps for Windows: windows.md
   - Samples:
       - Overview: samples.md
       - Samples C/C++: samples-cpp/README.md
@@ -144,6 +145,7 @@ nav:
       - Samples Nodejs: samples-node/README.md
       - Samples Snap: samples-snap/README.md
       - Samples IEC 61131-3: samples-iec61131/README.md
+      - Samples Java: samples-java/README.md
   - Debugging:
       - Debugging Overview: debug-overview.md
       - Remote Debugging C++: remote-debug-cpp.md
@@ -151,7 +153,7 @@ nav:
   - References:
       - Overview: references.md
       - Api Reference:
-          - c#: api/net/html/index.html
-          - python: api/python/index.html
-          - java: api/java/index.html
+          - .NET: api/net/html/index.html
+          - Python: api/python/index.html
+          - Java: api/java/index.html
   - About: about.md
