@@ -1,7 +1,7 @@
 # Apps for Windows
 
 ctrlX OS apps are built using the _App Builder Environment_ (QEMU VM), which is the standard.
-Nevertheless, if you want to create apps for Windows, the following Data Layer APIs are supported on Windows:
+Nevertheless, if you want to create apps for Windows, the following Data Layer API's are supported on Windows:
 
 Data Layer API | Windows Support
 :----          | :----:
