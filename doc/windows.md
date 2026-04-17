@@ -5,13 +5,13 @@ Nevertheless, if you want to create apps for Windows, the following Data Layer A
 
 Data Layer API | Windows Support
 :----          | :----:
-C++            | X
-.NET           | X
-Node.js        | X
-Go             |
-Python         |
-Java           |
-Rust           |
+C++            | YES
+.NET           | YES
+Node.js        | YES
+Go             | NO
+Python         | NO
+Java           | NO
+Rust           | NO
 
 ## Prerequisites
 Please ensure that the latest available versions of the following are installed on the target machine.
