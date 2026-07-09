@@ -56,7 +56,7 @@ The following packages must be installed so that the following scripts can be ex
 Start a console session, change to your destination directory and enter:
 
 ```bash
-    wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh && chmod a+x *.sh && ./clone-install-sdk.sh
+    curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh | bash
 ```
 
 As a result, your local copy of the github repo is stored within the directory __ctrlx-automation-sdk/__
@@ -76,6 +76,12 @@ Stay in the directory and enter:
 ```bash
     ctrlx-automation-sdk/scripts/install-snapcraft.sh
 ```
+
+> **Note:** A system reboot is required after running `install-snapcraft.sh` before continuing with the next steps.
+>
+> ```bash
+>     sudo reboot
+> ```
 
 ### Install ctrlx-datalayer Debian package
 
@@ -98,25 +104,37 @@ Change to the directory `ctrlx-automation-sdk/scripts` and start the according i
 For go samples:
 
 ```bash
-    install-go.sh
+    ./install-go.sh
 ```
 
 For .NET samples:
 
 ```bash
-    install-dotnet-sdk.sh
+    source ./install-dotnet-sdk.sh
 ```
 
 For nodejs samples:
 
 ```bash
-    install-nodejs-npm.sh
+    ./install-nodejs-npm.sh
 ```
 
 For java samples:
 
 ```bash
-    install-java-gradle.sh
+    ./install-java-gradle.sh
+```
+
+For rust samples:
+
+```bash
+    ./install-rust.sh
+```
+
+For python samples:
+
+```bash
+    ./install-python.sh
 ```
 
 Overview of all scripts: [Description of the scripts](scripts/README.md)
