@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["async_bulk","creator_bulk","sync_bulk"],"struct":["BulkCreateArg","BulkReadArg","BulkResponse","BulkWriteArg"],"trait":["ResponseCallback"],"type":["ResponseCallbackBox"]};

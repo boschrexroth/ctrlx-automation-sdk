@@ -11,7 +11,7 @@ Apart from ctrlX WORKS and px.exe, no other software tools are required.
 
 If your host uses a proxy server install and run [px.exe](px.md).
 
-You can test whether your internet connection is working by clicking this link [Ubuntu 22.04 LTS](https://cloud-images.ubuntu.com/releases/jammy/release). A site with Ubuntu server cloud images should appear.
+You can test whether your internet connection is working by clicking this link [Ubuntu LTS](https://cloud-images.ubuntu.com/releases/). A site with Ubuntu server cloud images should appear.
 
 ## Installation of the App Build Environment Function in ctrlX WORKS
 
@@ -34,7 +34,7 @@ Select 'App Build Environments' on the side bar of ctrlX WORKS. The list of inst
 * Create a new App Build Environment with OK or abort with Cancel
 
 !!! important
-    The new environment has a default user acount __boschrexroth:boschrexroth__
+    The new environment has a default user acount: __USER: boschrexroth__, __PASSWORD: boschrexroth__
 
 ### Start an App Build Environment
 
@@ -55,7 +55,7 @@ Delete entry regarding 127.0.0.1 in the file know_hosts:
 
 	ssh-keygen.exe -R [127.0.0.1]:10022
 
-Create the directory /home/boschrexroth/.ssh - on password prompt enter always enter boschrexroth:
+Create the directory /home/boschrexroth/.ssh - on password prompt enter always enter __boschrexroth__:
 
 	ssh.exe -p 10022 boschrexroth@127.0.0.1 "mkdir -p ~/.ssh"
 

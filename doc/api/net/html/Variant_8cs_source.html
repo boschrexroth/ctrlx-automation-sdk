@@ -31,7 +31,7 @@
   </td>  
   <td id="projectalign" style="padding-left: 5em" width="80%">
     <div id="projectname">ctrlX Data Layer .NET API
-      &#160;<span id="projectnumber">6.0.1</span>
+      &#160;<span id="projectnumber">6.1.0</span>
     </div>
     <div id="projectbrief"></div>
   </td>
@@ -1589,7 +1589,7 @@ $(document).ready(function(){initNavTree('Variant_8cs_source.html',''); initResi
 <div class="line"><a id="l02112" name="l02112"></a><span class="lineno"> 2112</span>            {</div>
 <div class="line"><a id="l02113" name="l02113"></a><span class="lineno"> 2113</span>                <span class="keywordflow">try</span></div>
 <div class="line"><a id="l02114" name="l02114"></a><span class="lineno"> 2114</span>                {</div>
-<div class="line"><a id="l02115" name="l02115"></a><span class="lineno"> 2115</span>                    <span class="comment">//DateTime -&gt; FileTimeUtc -&gt; ulong -&gt; uint64 (FILETIME) 64 bit 100ns since 1.1.1601 (UTC)</span></div>
+<div class="line"><a id="l02115" name="l02115"></a><span class="lineno"> 2115</span>                    <span class="comment">// DateTime -&gt; FileTimeUtc -&gt; ulong -&gt; uint64 (FILETIME) 64 bit 100ns since 1.1.1601 (UTC)</span></div>
 <div class="line"><a id="l02116" name="l02116"></a><span class="lineno"> 2116</span>                    <span class="keywordflow">return</span> NativeMethods.Datalayer.DLR_variantSetTimestamp(_nativePtr, Convert.ToUInt64(value.ToFileTimeUtc()));</div>
 <div class="line"><a id="l02117" name="l02117"></a><span class="lineno"> 2117</span>                }</div>
 <div class="line"><a id="l02118" name="l02118"></a><span class="lineno"> 2118</span>                <span class="keywordflow">catch</span> (ArgumentOutOfRangeException)</div>
@@ -1787,7 +1787,7 @@ $(document).ready(function(){initNavTree('Variant_8cs_source.html',''); initResi
 <div class="line"><a id="l02382" name="l02382"></a><span class="lineno"> 2382</span>            {</div>
 <div class="line"><a id="l02383" name="l02383"></a><span class="lineno"> 2383</span>                <span class="keywordflow">try</span></div>
 <div class="line"><a id="l02384" name="l02384"></a><span class="lineno"> 2384</span>                {</div>
-<div class="line"><a id="l02385" name="l02385"></a><span class="lineno"> 2385</span>                    <span class="comment">//DateTime -&gt; FileTimeUtc -&gt; ulong -&gt; uint64 (FILETIME) 64 bit 100ns since 1.1.1601 (UTC)</span></div>
+<div class="line"><a id="l02385" name="l02385"></a><span class="lineno"> 2385</span>                    <span class="comment">// DateTime -&gt; FileTimeUtc -&gt; ulong -&gt; uint64 (FILETIME) 64 bit 100ns since 1.1.1601 (UTC)</span></div>
 <div class="line"><a id="l02386" name="l02386"></a><span class="lineno"> 2386</span>                    var timeStamps = value.Select(v =&gt; Convert.ToUInt64(v.ToFileTimeUtc())).ToArray();</div>
 <div class="line"><a id="l02387" name="l02387"></a><span class="lineno"> 2387</span> </div>
 <div class="line"><a id="l02388" name="l02388"></a><span class="lineno"> 2388</span>                    fixed (ulong* p = timeStamps)</div>

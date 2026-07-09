@@ -11,9 +11,9 @@ FOSS license information can be provided in one of the following formats:
 
 ### fossinfo format
 
-For more information about "fossinfo.xml" please refer to the guideline in the SDK <span style="color:red;">**TODO: Where?**</span>.
+For more information about "fossinfo.json" please refer to the guideline in the SDK <span style="color:red;">**TODO: Where?**</span>.
 
-If FOSS license texts are displayed within the app, at least a reference to the license display in the app must be provided in the "fossinfo.xml".
+If FOSS license texts are displayed within the app, at least a reference to the license display in the app must be provided in the "fossinfo.json".
 
 ### CycloneDX format
 
@@ -91,8 +91,6 @@ The component property `manufacturer` is supported since CycloneDX BOM v1.6. If 
 
 ## Provisioning
 
-Bosch Rexroth recommends putting all FOSS sources in a zip file with the file name **"foss-sources.zip"** and storing it in the **"disclosure"** directory where the **"fossinfo.xml"** or **"cyclonedx.json"** file is provided.
+The **"fossinfo.json"** file must be packaged inside the snap and stored at snap/package-assets/{{appName}}.fossinfo.json. The file must contain the OSS license information and corresponding license texts for all included open source software components.
 
-In the event that the FOSS sources are not provided directly, a written offer is mandatory for open source software with copyleft clause (e.g. GPLv2 or GPLv3). This means, a human-readable file with the name **"foss-offer.x"** needs to be provided, which explains how the user can get the app’s FOSS sources.
-
-Since users must be able to view the license texts before the open source software is installed, the "fossinfo.xml" or "cyclonedx.json" file must also be stored outside the app in the "disclosure" directory (see section 4.1.2, [App Developer Guideline](appdevguide.md)). In addition, the license texts must be listed within the user documentation or at least a reference must be inserted where the FOSS license texts are located.
+For more details, refer to the [Open Source Software (OSS)](package-assets.md#open-source-software-oss) section in the package-assets documentation. In addition, the license texts must be listed within the user documentation or at least a reference must be inserted where the FOSS license texts are located.

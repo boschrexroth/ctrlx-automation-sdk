@@ -1073,37 +1073,26 @@ The definition of dashboardWidgetSize object
         "services": {
           "proxyMapping": [
             {
-              "name": "ctrlx-helloworld.web",
-              "url": "/ctrlx-helloworld",
-              "binding": "unix://{$SNAP_DATA}/package-run/ctrlx-helloworld/ctrlx-helloworld.web.sock",
+              "name": "ctrlx-helloworld.simple",
+              "url": "/ctrlx-helloworld/simple",
+              "binding": "unix://{$SNAP_DATA}/package-run/ctrlx-helloworld/ctrlx-helloworld.simple.sock",
+              "restricted": {
+                "path": "/ctrlx-helloworld/simple/api"
+              }
+            },
+            {
+              "name": "ctrlx-helloworld.caddyfile",
+              "url": "/ctrlx-helloworld/caddyfile",
               "caddyfile": "./caddyfile",
-              "options": [
-                {
-                  "option": "websockets",
-                  "value": ""
-                },
-                {
-                  "option": "max_conns",
-                  "value": "2"
-                }
-              ],
               "restricted": [
-                "/ctrlx-helloworld/api/v1",
                 {
-                  "path": "/my-app/api/v1.0",
+                  "path": "/ctrlx-helloworld/caddyfile/api",
                   "except": [
-                    "/my-app/api/v1.0/except-path-1",
-                    "/my-app/api/v1.0/except-path-2"
+                    "/ctrlx-helloworld/caddyfile/api/except-path-1",
+                    "/ctrlx-helloworld/caddyfile/api/except-path-2"
                   ],
                   "headersForwarding": [
-                    "X-Auth-Name",
-                    "X-Auth-ID",
-                    "X-Auth-Scopes",
-                    "X-Auth-Expires",
-                    "X-Auth-Issued",
-                    "X-Auth-PlcHandle",
-                    "X-Auth-RemoteAuth",
-                    "X-Auth-Nonce"
+                    "X-Auth-Name"
                   ]
                 }
               ]

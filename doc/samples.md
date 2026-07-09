@@ -3,7 +3,7 @@
 
 ## Sample Projects
 
-Applications (snaps) for ctrlX CORE targets can be written in several programming language or even as shell scripts.
+Applications (snaps) for ctrlX OS targets can be written in several programming language or even as shell scripts.
 
 For creating your own applications, the ctrlX AUTOMATION SDK offers sample projects that can be used as source of code snippets as templates. The sample projects are saved in sub folders according to their programming language or their type.
 
@@ -17,12 +17,15 @@ Here an overview of the sample project types and their subfolders.
 | :------------------ | :------------------------------------------------------ | :------------------------------------- |
 | __C/C++__           | [samples-cpp/README.md](samples-cpp/README.md)          | scripts/install-cpp-aarch64-libs.sh    |
 | __Go__              | [samples-go/README.md](samples-go/README.md)            | scripts/install-go.sh                  |
-| __Python__          | [samples-python/README.md](samples-python/README.md)    |                                        |
+| __Python__          | [samples-python/README.md](samples-python/README.md)    | scripts/install-python.sh              |
 | __.NET__            | [samples-net/README.md](samples-net/README.md)          | scripts/install-dotnet-sdk.sh          |
 | __Node.js__         | [samples-node/README.md](samples-node/README.md)        | scripts/install-nodejs-npm.sh          |
 | __Snap__            | [samples-snap/README.md](samples-snap/README.md)        |                                        |
 | __IEC 61131-3__     | [samples-iec61131/README.md](samples-iec61131/README.md)|                                        |
 | __java__            | [samples-java/README.md](samples-java/README.md)        | scripts/install-java-gradle.sh         |
+| __Kotlin__          | [samples-kotlin/README.md](samples-kotlin/README.md)    | scripts/install-java-gradle.sh         |
+| __Rust__            | [samples-rust/README.md](samples-rust/README.md)        | scripts/install-rust.sh                |
+
 
 ## Building Snaps
 

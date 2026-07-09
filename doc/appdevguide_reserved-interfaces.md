@@ -78,7 +78,7 @@ The following operating system interfaces are denied or restricted for usage. Se
 |process-control|Plug|null|null|Prevent tampering with running processes|
 |scsi-generic|Plug|null|null|Allows read and write access to SCSI Generic driver (sg) devices|
 |sd-control|Plug|null|null|Allows for the management and control of SD cards on certain devices using the DualSD driver|
-|shared-memory|Plug|null|"shared-memory=^(datalayer-shm)$"|Allows two snaps to communicate with each other using a specific predefined shared-memory path or directory in /dev/sh|
+|shared-memory|Plug|private: true|"shared-memory=^(datalayer-shm)$" or "private: true"|Restricted. Two modes: **private** (`private: true`) gives the snap its own isolated `/dev/shm` without a store declaration; **snap-to-snap** requires a named slot and a Canonical store declaration. See [section 1.1](#11-shared-memory-interface-guidance) below|
 |snap-refresh-control|Plug|null, "Exceptions":null |Super privileged interface to allow extended control, via snapctl, of refreshes targeting the snap|
 |ssh-keys|Plug|null|null|Allows a user’s SSH (Secure Socket Shell) configuration to be read, along with both their public and private keys|
 |storage-framework-service|Plug|null|null|Allows operating as, or interacting with, the Storage Framework - storage is part of the DeviceAdmin|
@@ -88,6 +88,83 @@ The following operating system interfaces are denied or restricted for usage. Se
 |tpm|Plug|null|null|tpm allows access to the Trusted Platform Module (tpm) device, /dev/tpm0, and to the in-kernel resource manager, /dev/tpmrm0, on recent kernels (at least v4.12)|
 |uhid|Plug|null|null|Enables the creation of kernel USB Human Interface Devices (HID) from user-space, via /dev/uhid , giving privileged access to HID transport drivers|
 |uinput|Plug|null|null|Super privileged interface to allows write access to /dev/uinput on the host system for emulating input devices from userspace that can send input events|
+
+## 1.1 Shared Memory Interface Guidance
+
+The `shared-memory` interface operates in two distinct modes. Choosing the correct mode avoids unnecessary effort during the Canonical store declaration process.
+
+### Which mode do I need?
+
+- **Your app only needs `/dev/shm` for its own internal use** (POSIX semaphores, `shm_open`, internal IPC between processes within the same snap, Chromium/Electron runtimes): use **private mode**.
+- **Your app needs to exchange shared memory segments with a different snap** (e.g. communicating with `rexroth-automationcore` via the ctrlX Data Layer): use **snap-to-snap mode**.
+
+### Private mode (`private: true`) -- recommended for most apps
+
+When `private: true` is set on the plug, snapd connects it to an **implicit system slot** and bind-mounts a private directory over `/dev/shm` for the snap. This gives the snap full, unrestricted access to its own `/dev/shm`.
+
+**Advantages:**
+
+- No slot declaration from Canonical required
+- No dependency on another snap providing a slot
+- Connects automatically on install
+
+**snapcraft.yaml example:**
+
+```yaml
+apps:
+  my-app:
+    command: bin/my-app
+    plugs:
+      - network
+      - shared-memory
+    daemon: simple
+
+plugs:
+  shared-memory:
+    private: true
+```
+
+**Constraints:**
+
+- When `private: true` is set, the snap **must not** declare any other `shared-memory` plugs or slots.
+- Processes inside the snap **cannot** share memory segments with processes outside the snap.
+
+### Snap-to-snap mode (named shared-memory)
+
+When the plug specifies a named `shared-memory:` attribute instead of `private: true`, it must connect to a matching slot declared by another application snap. The slot side requires a **store declaration from Canonical**.
+
+Use this mode only when two snaps genuinely need to exchange data via shared memory.
+
+**snapcraft.yaml example** (plug side, connecting to the `datalayer-shm` slot provided by `rexroth-automationcore`):
+
+```yaml
+apps:
+  my-app:
+    command: bin/my-app
+    plugs:
+      - network
+      - datalayer
+      - datalayer-shm
+    daemon: simple
+
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer
+
+  datalayer-shm:
+    interface: shared-memory
+    shared-memory: datalayer-shm
+```
+
+### Do not use `system-files` for `/dev/shm` access
+
+Using the `system-files` interface with `write: [/dev/shm]` to gain shared memory access is **not recommended**. The `shared-memory` interface with `private: true` is the correct and more secure approach, because `system-files` grants access to the host's global `/dev/shm` which is shared across all processes on the system.
+
+### Reference
+
+For more details on the `shared-memory` interface, see the Canonical documentation: <https://snapcraft.io/docs/shared-memory-interface>
 
 # 2. Blocked ports
 

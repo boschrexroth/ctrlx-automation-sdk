@@ -16,6 +16,7 @@ The content of this document may be subject of change in further versions of the
 | **name**  | matches with the snap name (technical app name) |
 | **version** | follows semantic versioning (`MAJOR.MINOR.PATCH`) and does not exceed 32 characters |
 | **description** | includes an HTML comment with `author` and `url` fields and provides a short description of the App with at least 16 characters |
+| **base** | baseline system that the snap is built in |
 | **degree of isolation** | is set to `confinement = "strict"` |
 | **grade** | is set to `grade = "stable"` |
 | **restart delay** | ist set to `5` or higher |
