@@ -22,7 +22,7 @@ SEPARATION_LINE_2="-------------------------------------------------------------
 
 if [ -d "${SDK_DIR}" ]; then
 	echo ""
-	read -rp "Delete existing directory ${SDK_DIR} Y/n? " ANS
+	read -rp "Delete existing directory ${SDK_DIR} Y/n? " ANS </dev/tty
 	if [[ "$ANS" == *"n"* ]]; then
 		echo "Change your working directory or delete the directory yourself ctrlx-automation-sdk/"
 		exit 1
@@ -45,7 +45,7 @@ echo "Enter the desired tag to be checked out from this list:"
 git tag
 echo $SEPARATION_LINE_2
 TAG_LATEST=$(git describe --tags --abbrev=0)
-read -rp "Version ($TAG_LATEST)? " TAG
+read -rp "Version ($TAG_LATEST)? " TAG </dev/tty
 if [ -z "$TAG" ]; then
 	TAG=$TAG_LATEST
 fi
@@ -55,7 +55,7 @@ echo $SEPARATION_LINE_1
 echo "Local SDK github repo: ${SDK_DIR}"
 echo "Version (release):     ${TAG}"
 echo $SEPARATION_LINE_2
-read -rt 20 -p "OK? "
+read -rt 20 -p "OK? " </dev/tty
 
 echo ""
 echo $SEPARATION_LINE_1

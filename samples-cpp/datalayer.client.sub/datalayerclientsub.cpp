@@ -13,7 +13,7 @@
 #include "datalayerclientsub.h"
 DataLayerClientSub::DataLayerClientSub(const comm::datalayer::DatalayerSystem& datalayerSystem)
   : m_datalayerSystem(datalayerSystem)
-  , m_datalayerClient(nullptr)
+  , m_datalayerClient()
 {}
 
 DataLayerClientSub::~DataLayerClientSub()
@@ -24,7 +24,7 @@ DataLayerClientSub::~DataLayerClientSub()
 comm::datalayer::DlResult DataLayerClientSub::connect(const std::string& clientConnection)
 {
   std::cout << "_datalayerSystem.factory()->createClient3: " << clientConnection << std::endl;
-  m_datalayerClient = m_datalayerSystem.factory()->createClient3(clientConnection);
+  m_datalayerClient.reset(m_datalayerSystem.factory()->createClient3(clientConnection));
   if (m_datalayerClient == nullptr)
   {
     std::cout << "ERROR: Could not create datalayer client instance" << std::endl;
@@ -167,6 +167,5 @@ comm::datalayer::DlResult DataLayerClientSub::unsubscribeSync(const std::string&
 
 void DataLayerClientSub::disconnect()
 {
-  delete m_datalayerClient;
-  m_datalayerClient = nullptr;
+  m_datalayerClient.reset();
 }

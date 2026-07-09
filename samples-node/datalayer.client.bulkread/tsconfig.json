@@ -1,19 +1,21 @@
 {
     "compilerOptions": {
-        "target": "es2021",
+        "target": "es2025",
         "module": "commonjs",
         "outDir": "./dist",
         "rootDir": "./src",
         "strict": true,
-        "moduleResolution": "node",
         "noImplicitAny": false,
         "esModuleInterop": true,
         "sourceMap": false,
+        "types": [
+            "node",
+        ],
     },
     "include": [
         "./src/**/*"
     ],
     "lib": [
-        "ES2021"
+        "ES2025"
     ],
 }

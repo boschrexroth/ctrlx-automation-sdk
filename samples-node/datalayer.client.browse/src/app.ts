@@ -31,11 +31,11 @@ async function main() {
     const browser = new Browser(client);
 
     // Traverse the complete ctrlX Data Layer.
-    browser.traverse();
+    await browser.traverse();
 
     //Keep the process alive until disconnected
     const intervalHandle = setInterval(() => {
-        if (system.isStarted() === false || client.isConnected() === false) {
+        if (!system.isStarted() || !client.isConnected()) {
             clearInterval(intervalHandle);
         }
     }, 10_000);

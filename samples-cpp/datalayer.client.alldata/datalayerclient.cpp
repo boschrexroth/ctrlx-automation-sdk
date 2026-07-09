@@ -5,13 +5,14 @@
  */
 
 #include <functional>
+#include <future>
 #include <thread>
 #include <limits>
 
 #include "ctrlx_datalayer_helper.h"
 #include "datalayerclient.h"
 
- // Function to print out array of all nodes from VariantType on ctrlX Data Layer
+// Prints all strings of an ARRAY_OF_STRING variant to stdout, space-separated.
 static void printStringList(comm::datalayer::Variant& data)
 {
   if (data.getType() == comm::datalayer::VariantType::ARRAY_OF_STRING)
@@ -26,6 +27,8 @@ static void printStringList(comm::datalayer::Variant& data)
   }
 }
 
+// Prints the metadata of a Data Layer node (display name, format, description,
+// allowed operations and references) to stdout.
 static void printMetadata(comm::datalayer::Variant& data)
 {
   if (STATUS_FAILED(data.verifyFlatbuffers(comm::datalayer::VerifyMetadataBuffer)))
@@ -35,7 +38,10 @@ static void printMetadata(comm::datalayer::Variant& data)
   }
 
   auto metadata = comm::datalayer::GetMetadata(data.getData());
-  std::cout << metadata->displayName()->c_str() << std::endl;
+  if (metadata->displayName() != nullptr)
+  {
+    std::cout << metadata->displayName()->c_str() << std::endl;
+  }
   std::cout << metadata->displayFormat() << std::endl;
   std::cout << metadata->description()->c_str() << std::endl;
   std::cout << metadata->descriptionUrl()->c_str() << std::endl;
@@ -51,14 +57,17 @@ static void printMetadata(comm::datalayer::Variant& data)
   }
 }
 
+// Constructor: stores connection parameters; the actual client is created in start().
 DataLayerClient::DataLayerClient(const std::string& ip, const std::string& user, const std::string& password, int sslPort)
   : m_ip(ip)
   , m_user(user)
   , m_password(password)
   , m_sslPort(sslPort)
-  , m_client(nullptr)
+  , m_client()
 {}
 
+// Prints the value held in 'data' to stdout depending on its VariantType.
+// Returns DL_OK on success or DL_UNSUPPORTED if the type is not handled.
 comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant* data)
 {
   auto variantType = data->getType();
@@ -323,6 +332,7 @@ comm::datalayer::DlResult DataLayerClient::print(comm::datalayer::Variant* data)
   return comm::datalayer::DlResult::DL_UNSUPPORTED;
 }
 
+// Prints a label, the result code and the data value on a single line to stdout.
 void DataLayerClient::println(const std::string& text, comm::datalayer::DlResult result, comm::datalayer::Variant* data)
 {
   std::cout << text;
@@ -333,12 +343,14 @@ void DataLayerClient::println(const std::string& text, comm::datalayer::DlResult
   std::cout << " " << result.toString() << std::endl;
 }
 
+// Starts the ctrlX Data Layer system and creates a client connection.
+// Returns true if the client was created and is connected, false otherwise.
 bool DataLayerClient::start()
 {
   std::cout << "m_datalayer.start(..)" << std::endl;
   m_datalayerSystem.start(false);
 
-  m_client = getClient(m_datalayerSystem, m_ip, m_user, m_password, m_sslPort);
+  m_client.reset(getClient(m_datalayerSystem, m_ip, m_user, m_password, m_sslPort));
 
   return m_client != nullptr && m_client->isConnected();
 }
@@ -347,7 +359,7 @@ bool DataLayerClient::start()
 // See:
 // https://en.cppreference.com/w/cpp/language/lambda
 // https://de.cppreference.com/w/cpp/language/lambda
-comm::datalayer::IClient::ResponseCallback DataLayerClient::responseCallback()
+comm::datalayer::IClient::ResponseCallback DataLayerClient::responseCallback(std::promise<void>& promise)
 {
   // [&]    All needed symbols are provided per reference
   // (...)  Parameter provided by the calling site
@@ -366,42 +378,36 @@ comm::datalayer::IClient::ResponseCallback DataLayerClient::responseCallback()
       }
 
       std::cout << "ResponseCallback: " << std::string(result.toString()) << std::endl;
+      promise.set_value();
     };
 }
 
-bool DataLayerClient::waitForResponseCallback(int counter)
+// Blocks until the async response callback signals the promise or 'counter' seconds elapse.
+// Returns true if the response arrived in time, false on timeout.
+bool DataLayerClient::waitForResponseCallback(int counter, std::promise<void>& promise)
 {
-  for (;;)
+  auto future = promise.get_future();
+  if (future.wait_for(std::chrono::seconds(counter)) == std::future_status::timeout)
   {
-    if (counter > 0)
-    {
-      counter--;
-      if (counter <= 0)
-      {
-        return false;
-      }
-    }
-
-    sleep(1);
-
-    if (m_resultAsync != -1)
-    {
-      std::cout << "ResponseCallback finished: " << m_resultAsync.toString() << std::endl;
-      return true;
-    }
+    std::cout << "INFO readBulkAsync timeout: no response within " << counter << " seconds" << std::endl;
+    return false;
   }
+  return true;
 }
 
+// Sends a synchronous ping and then an asynchronous ping to verify the connection.
 void DataLayerClient::ping()
 {
   m_result = m_client->pingSync();
   std::cout << "m_client->pingSync() " << m_result.toString() << std::endl;
 
   m_resultAsync = -1;
-  m_result = m_client->pingAsync(responseCallback());
-  waitForResponseCallback(10);
+  std::promise<void> promise;
+  m_result = m_client->pingAsync(responseCallback(promise));
+  waitForResponseCallback(10, promise);
 }
 
+// Synchronously reads the node at the static base address and prints the result.
 void DataLayerClient::readSync(const std::string& node)
 {
   std::string address = m_dataLayerAddressStatic + node;
@@ -409,12 +415,15 @@ void DataLayerClient::readSync(const std::string& node)
   println("readSync() " + address, m_result, &m_data);
 }
 
+// Reads all supported data types from the static Data Layer address, both
+// asynchronously (first call) and synchronously for every individual node.
 void DataLayerClient::read()
 {
 
   std::cout << "readAsync()" << m_result.toString() << std::endl;
-  m_result = m_client->readAsync(m_dataLayerAddressStatic + "bool8", m_data, responseCallback());
-  waitForResponseCallback(10);
+  std::promise<void> promise;
+  m_result = m_client->readAsync(m_dataLayerAddressStatic + "bool8", m_data, responseCallback(promise));
+  waitForResponseCallback(10, promise);
 
   readSync("bool8");
 
@@ -467,6 +476,8 @@ void DataLayerClient::read()
   readSync("array-of-uint64");
 }
 
+// Removes any existing node at the dynamic base address and (re-)creates it
+// with the current value stored in m_data.
 void DataLayerClient::createSync(const std::string& node)
 {
   std::string address = m_dataLayerAddressDynamic + node;
@@ -474,6 +485,7 @@ void DataLayerClient::createSync(const std::string& node)
   m_result = m_client->createSync(address, &m_data);
 }
 
+// Creates nodes for all supported data types under the dynamic Data Layer address.
 void DataLayerClient::create()
 {
   m_data.setValue(false);
@@ -500,7 +512,7 @@ void DataLayerClient::create()
   m_data.setValue("Changed by cpp ctrlX Data Layer Client");
   createSync("string");
 
-  // Flatbuffers
+  // --- Array types ---
 
   bool arrBool[] = {false, true, false};
   m_data.setValue(arrBool);
@@ -552,6 +564,8 @@ void DataLayerClient::create()
   createSync("array-of-string");
 }
 
+// Demonstrates node removal: creates a temporary node, removes it synchronously,
+// then re-creates it and removes it asynchronously.
 void DataLayerClient::remove()
 {
   m_data.setValue("Will be removed");
@@ -561,10 +575,12 @@ void DataLayerClient::remove()
   m_result = m_client->removeSync(address);
 
   createSync("xxx");
-  m_result = m_client->removeAsync(address, responseCallback());
-  waitForResponseCallback(10);
+  std::promise<void> promise;
+  m_result = m_client->removeAsync(address, responseCallback(promise));
+  waitForResponseCallback(10, promise);
 }
 
+// Lists all top-level nodes of the Data Layer, synchronously and asynchronously.
 void DataLayerClient::browse()
 {
   m_data.setValue("");
@@ -574,10 +590,13 @@ void DataLayerClient::browse()
     printStringList(m_data);
   }
 
-  m_result = m_client->browseAsync("", responseCallback());
-  waitForResponseCallback(10);
+  std::promise<void> promise;
+  m_result = m_client->browseAsync("", responseCallback(promise));
+  waitForResponseCallback(10, promise);
 }
 
+// Synchronously writes the current value of m_data to the node at the dynamic
+// base address and prints the result.
 void DataLayerClient::writeSync(const std::string& node)
 {
   auto address = m_dataLayerAddressDynamic + node;
@@ -585,6 +604,8 @@ void DataLayerClient::writeSync(const std::string& node)
   println("writeSync() " + address, m_result, &m_data);
 }
 
+// Writes new values to all scalar nodes that were previously created under
+// the dynamic Data Layer address.
 void DataLayerClient::write()
 {
   m_data.setValue(false);
@@ -612,6 +633,7 @@ void DataLayerClient::write()
   writeSync("string");
 }
 
+// Reads and prints the metadata of a well-known Data Layer node (scheduler/admin/state).
 void DataLayerClient::metadata()
 {
   std::string address = "scheduler/admin/state";
@@ -620,12 +642,14 @@ void DataLayerClient::metadata()
   printMetadata(m_data);
 }
 
+// Releases the client connection and resets the shared pointer.
 void DataLayerClient::stop()
 {
-  delete m_client;
-  m_client = nullptr;
+  m_client.reset();
 }
 
+// Main execution sequence: starts the client, exercises all Data Layer operations
+// (ping, read, create, remove, browse, write, metadata) and stops the client.
 void DataLayerClient::run()
 {
   std::cout << "Simple Snap for ctrlX Datalayer Client in cpp" << std::endl;

@@ -42,7 +42,7 @@ async function main() {
     await provider.start();
 
     // Initially exit and retry after app restart-delay (see snapcraft.yaml)
-    if (provider.isConnected() === false) {
+    if (!provider.isConnected()) {
         console.log('provider is not connected -> exit.');
         return;
     }
@@ -176,7 +176,7 @@ async function main() {
         .setOnRead(onRead)
         .setOnWrite(onWrite);
 
-    // Register the nodes we wan't to provide
+    // Register the nodes we want to provide
     await provider.registerNode(myInt.address, providerNodeCallbacks).then((result) => console.log('registered node', myInt.address, 'with result:', result));
     await provider.registerNode(myDouble.address, providerNodeCallbacks).then((result) => console.log('registered node', myDouble.address, 'with result:', result));
     await provider.registerNode(myString.address, providerNodeCallbacks).then((result) => console.log('registered node', myString.address, 'with result:', result));
@@ -186,7 +186,7 @@ async function main() {
     const intervalHandle = setInterval(() => {
         myString.value = `Hello World! ${new Date().toISOString()}`;
 
-        if (system.isStarted() === false || provider.isConnected() === false) {
+        if (!system.isStarted() || !provider.isConnected()) {
             clearInterval(intervalHandle);
         }
     }, 1_000);

@@ -17,6 +17,9 @@ This folder contains several helper scripts to install the ctrlX AUTOMATION SDK,
 * __install-go.sh__ downloads and installs required packages to develop snaps with go
 * __install-dotnet-sdk.sh__ downloads and installs required packages to develop snaps with dotnet
 * __install-nodejs-npm.sh__ downloads and installs required packages to develop snaps with Node.js
+* __install-java-gradle.sh__ downloads and installs required packages to develop snaps with java
+* __install-rust.sh__ downloads and installs required packages to develop snaps with rust
+* __install-python.sh__ downloads and installs required packages to develop snaps with python
 
 ## ctrlX OS Development Tools
 
@@ -25,6 +28,13 @@ This folder contains several helper scripts to install the ctrlX AUTOMATION SDK,
 ## Building a Sample Project and uploading the Snap
 
 * __build-upload-log-snap.sh__ Build a sample project, upload the snap and redirect log printout of the snap
+
+## Other
+
+* __install-ctrlx-scheduler.sh__ downloads and installs required packages to develop snaps with cpp/scheduler
+* __install-vcode-extensions-java.sh__ Java extensions for Visual Studio Code
+* __install-vcode-extensions-rust.sh__ Rust extensions for Visual Studio Code
+* __import_java_entire_chain.sh__ see *samples-java/README.md*
 
 ## License
 

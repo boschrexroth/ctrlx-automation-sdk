@@ -3,10 +3,16 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
-DIR=$1
-if [ -n "$DIR" ]; then
-    cd "$DIR"
+if [ -n "$1" ]; then
+    DIR=$1
+else
+    DIR="../deb"
+    if [ ! -d "$DIR" ]; then
+        echo "Error: Directory '$DIR' does not exist." >&2
+        exit 1
+    fi
 fi
+cd "$DIR"
 
 sudo apt-get install -y dpkg-dev
 

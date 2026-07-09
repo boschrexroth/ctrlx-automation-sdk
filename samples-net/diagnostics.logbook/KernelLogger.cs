@@ -31,7 +31,7 @@ namespace Samples.Diagnostics.Logbook
             {
                 var levelAsInt = (int)level;
                 var arguments = $"-p {levelAsInt} {message}";
-                Process.Start("logger", arguments);
+                Process.Start("logger", arguments)?.Dispose();
             }
             else
             {

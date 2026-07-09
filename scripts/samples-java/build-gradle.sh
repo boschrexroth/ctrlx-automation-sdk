@@ -8,7 +8,8 @@ create_java_dir() {
     JAVA_DIR=${TWO_LEVELS_UP}/java
     ln -s "${JAVA_DIR}" "${CURRENT_DIR}"
 
-    cp ../../oss.gradle/*.zip gradle/wrapper/      
+    cp ../../oss.gradle/*.zip gradle/wrapper/
+    chmod +x ./gradlew
 }
 
 if [ ! -d "java" ]; then
