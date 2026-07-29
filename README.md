@@ -69,6 +69,14 @@ Stay in the directory and enter:
     ctrlx-automation-sdk/scripts/install-required-packages.sh
 ```
 
+This script installs all required packages and additionally prepares the system for cross-compilation by adding the foreign architecture (`arm64` on `amd64` systems and vice versa) and installing the corresponding cross-build packages (e.g. `crossbuild-essential-arm64`, `libxml2-dev:arm64`).
+
+To skip cross-build preparation and only install the native packages, pass the `--no-cross-build` flag:
+
+```bash
+    ctrlx-automation-sdk/scripts/install-required-packages.sh --no-cross-build
+```
+
 ### Install snapcraft
 
 Stay in the directory and enter:
