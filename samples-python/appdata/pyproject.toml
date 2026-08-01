@@ -12,7 +12,7 @@ authors = [
 license = "MIT"
 requires-python = ">=3.7"
 dependencies = [
-    "ctrlx-datalayer<=3.6",
+    "ctrlx-datalayer<=3.7.0",
     "ctrlx-fbs",
     "PyJWT"
 ]
