@@ -19,7 +19,7 @@
         "typescript": "^5.9.3"
     },
     "dependencies": {
-        "webdav": "^5.9.0"
+        "webdav": "^5.10.0"
     },
     "scripts": {
         "getName": "echo $npm_package_name",
