@@ -1,0 +1,16 @@
+[package]
+name = "datalayer_client_bulk"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.95"
+homepage = "https://github.com/boschrexroth"
+repository = "https://github.com/boschrexroth"
+authors = ["boschrexroth"]
+license = "MIT"
+
+[dependencies]
+ctrlx-datalayer = { version = "1.1.0", path = "crate/crates/ctrlx-datalayer" }
+ctrlx-fbs = { version = "1.1.0", path = "crate/crates/ctrlx-fbs", features = ["comm"] }
+env_logger = "0.11.10"
+log = "0.4.29"
+signal-hook = "0.3"

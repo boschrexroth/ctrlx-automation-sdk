@@ -1,0 +1,2 @@
+createSrcSidebar('[["ctrlx_datalayer",["",[["client",[["bulk",[],["async_bulk.rs","creator_bulk.rs","sync_bulk.rs"]]],["async.rs","bulk.rs","subscription.rs","sync.rs"]],["provider",[],["node.rs","subscription.rs"]],["variant",[],["dl_variant.rs","value.rs","variant_type.rs"]]],["client.rs","connection_builder.rs","converter.rs","factory.rs","lib.rs","metadata_builder.rs","provider.rs","result.rs","schema.rs","subscription_properties_builder.rs","system.rs","timeout_settings.rs","variant.rs"]]]]');
+//{"start":19,"fragment_lengths":[480]}

@@ -8,6 +8,7 @@
 #define PROVIDER_NODE_ALL_DATA_H
 
 #include <iostream>
+#include <memory>
 #include <vector>
 #include <cfloat>
 
@@ -36,10 +37,10 @@ class ProviderNodeAllData: public comm::datalayer::IProviderNode
 
 protected:
   // List of DataContainer instances ('virtual nodes')
-  std::vector<DataContainer*> m_dataContainers;
+  std::vector<std::unique_ptr<DataContainer>> m_dataContainers;
 
   // The ctrlX Data Layer Provider instance
-  comm::datalayer::IProvider3* m_provider;
+  std::shared_ptr<comm::datalayer::IProvider3> m_provider;
 
   // ctrlX Data Layer root path
   std::string m_addressRoot;
@@ -70,9 +71,9 @@ protected:
 
 public:
   // Constructor
-  ProviderNodeAllData(comm::datalayer::IProvider3* provider, const std::string& addressRoot, bool dynamic);
+  ProviderNodeAllData(std::shared_ptr<comm::datalayer::IProvider3> provider, const std::string& addressRoot, bool dynamic);
 
-  virtual ~ProviderNodeAllData() = default;
+  virtual ~ProviderNodeAllData();
   // Create virtual nodes and register them in the ctrlX Data Layer
   void registerNodes();
 

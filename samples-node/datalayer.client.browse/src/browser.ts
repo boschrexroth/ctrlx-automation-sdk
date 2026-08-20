@@ -8,9 +8,7 @@ import IClient from 'ctrlx-datalayer/dist/client';
 
 class Browser {
 
-    private client: IClient;
-    constructor(client: IClient) {
-        this.client = client;
+    constructor(private client: IClient) {
     }
 
     /**
@@ -25,14 +23,14 @@ class Browser {
         const prefix = last ? '\\-' : '|-';
         const json = await this.readJson(address);
         console.log(`${indent}${prefix}[${leaf}] ${json}`);
-        indent = last ? indent += '  ' : indent += '| ';
+        indent += last ? '  ' : '| ';
 
         try {
             const variant = await this.client.browse(address);
             const children = variant.value as Array<string>;
-            for (let i = 0; i < children.length; i++) {
-                const childAddress = address === '' ? children[i] : `${address}/${children[i]}`;
-                await this.traverse(childAddress, children[i], indent, i === children.length - 1);
+            for (const [i, child] of children.entries()) {
+                const childAddress = address === '' ? child : `${address}/${child}`;
+                await this.traverse(childAddress, child, indent, i === children.length - 1);
             }
         } catch (error) {
             // do nothing in case of error
@@ -53,11 +51,10 @@ class Browser {
         try {
             const variant = await this.client.readJson(address, -1);
             if (variant != null) {
-                const json = variant.value;
-                return this.truncate(json, 100);
+                return this.truncate(variant.value, 100);
             }
         } catch (error) {
-            return '';
+            // ignore
         }
 
         return '';

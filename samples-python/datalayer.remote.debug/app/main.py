@@ -15,8 +15,9 @@ import ctrlxdatalayer
 from ctrlxdatalayer.variant import Result, Variant
 from comm.datalayer import SubscriptionProperties
 
+import debugpy
 
-import app.debug as debug
+#import app.debug as debug
 
 from app.helper.ctrlx_datalayer_helper import get_client
 
@@ -46,8 +47,8 @@ def remote_debugging_wait_for_client(port: int):
 
 
 
-def main():
-    """main
+def main_app():
+    """main_app
     """
 
     print()
@@ -137,11 +138,15 @@ def cb_subscription_sync(result: Result, items: List[ctrlxdatalayer.subscription
     print("INFO Subscription notification: %s, %s: %f" %
           (dt_str, address, val), flush=True)
 
+def main():
+    """main
+    """
+    remote_debugging_wait_for_client(port=15678)
+
+    main_app()
 
 if __name__ == '__main__':
     # Wait for remote debug client
-    debug.remote_debugging_wait_for_client(port=15678)
-
     # Run function
     main()
 

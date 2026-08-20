@@ -12,4 +12,4 @@ We recommend to use App Build Environments (QEMU VMs) as follows:
 
 __Working in such a manner ensures that you are always working with the latest software components and avoids problems with the file size of your App Build Environment. Furthermore creating backups is superfluous.__
 
-For more information about file handling regarding the App Build Environment see [ctrlX App Build Environment Ubuntu 22.04](scripts/environment/builder/README.md).
+For more information about file handling regarding the App Build Environment see [ctrlX App Build Environment Ubuntu](scripts/environment/builder/README.md).

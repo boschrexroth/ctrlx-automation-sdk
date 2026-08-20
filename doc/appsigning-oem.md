@@ -14,7 +14,7 @@ OEM App signing is a feature that you need to request and sign a contract for.
 
 Procedure:
 1. Sign OEM App signing contract
-2. Generate your private signing key
+2. Generate your private signing key (256-bit ECC)
 3. Create a Certificate Signing Request (CSR) for this key. The CSR needs to contain at least the "Organization" field for the subject.
 4. Send this CSR to Bosch Rexroth AG
 5. Bosch Rexroth AG signs the CSR, and sends the OEM App signing ceritifcate back to you

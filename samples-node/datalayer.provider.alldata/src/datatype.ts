@@ -36,32 +36,16 @@ interface IDataType {
  */
 class DataType implements IDataType {
 
-
     static rootType = 'types/sdk/node/provider/all-data';
-
-    /**
-     * The name of the data type.
-     */
-    private name: string;
-
-    /**
-     * The variant type.
-     */
-    private variantType: string;
-
-    /**
-     * The target address.
-     */
-    private targetAddress: string;
 
     /** 
      * Creates a new instance of the DataType class
      */
-    constructor(name: string, variantType: string, targetAddress: string) {
-        this.name = name;
-        this.variantType = variantType;
-        this.targetAddress = targetAddress;
-    }
+    constructor(
+        private name: string,
+        private variantType: string,
+        private targetAddress: string
+    ) { }
 
     /**
      * Factory to create a new instance of the DataType class.

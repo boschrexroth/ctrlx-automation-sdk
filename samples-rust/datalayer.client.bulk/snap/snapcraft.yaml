@@ -1,0 +1,99 @@
+name: sdk-rust-client-bulk
+title: SDK Rust Client Bulk
+version: '1.0.0'
+summary: ctrlX Data Layer Client Bulk (Rust)
+description: |
+  A ctrlX Data Layer bulk client sample application written in Rust.
+  Connects to the ctrlX Data Layer and performs bulk read and write operations.
+
+base: core24
+grade: stable
+confinement: strict
+type: app
+
+platforms:
+  amd64:
+    build-on: [amd64]
+    build-for: [amd64]
+  arm64:
+    build-on: [amd64]
+    build-for: [arm64]
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
+parts:
+  datalayer-client-bulk:
+    plugin: nil
+    source: .
+    build-packages:
+      - clang
+      #- libclang-dev
+      - curl
+      #- gcc
+      - ctrlx-datalayer
+    stage-packages:
+      - ctrlx-datalayer
+    build-environment:
+      - RUST_CHANNEL: "1.95.0"
+    override-build: |
+      set -e
+
+      # --- Install Rust toolchain ---
+      if ! command -v rustup &> /dev/null; then
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+          | sh -s -- -y --default-toolchain "${RUST_CHANNEL}"
+        source "$HOME/.cargo/env"
+      fi
+
+      # --- Resolve crate symlink ---
+      if [ -L "crate" ] && [ ! -e "crate" ]; then
+        rm -f crate
+      fi
+      if [ ! -d "crate" ]; then
+        SAMPLES_RUST="$(dirname "$(dirname "${CRAFT_PART_SRC}")")"
+        if [ -d "${SAMPLES_RUST}/rust/crate" ]; then
+          ln -sf "${SAMPLES_RUST}/rust/crate" crate
+        fi
+      fi
+
+      # --- Build ---
+      if [ "${CRAFT_ARCH_BUILD_FOR}" = "arm64" ]; then
+        rustup target add aarch64-unknown-linux-gnu
+
+        export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc
+        export PKG_CONFIG_SYSROOT_DIR=/usr/aarch64-linux-gnu
+        export PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig
+
+        cargo build --release --target aarch64-unknown-linux-gnu
+        install -Dm755 target/aarch64-unknown-linux-gnu/release/datalayer_client_bulk \
+          "${CRAFT_PART_INSTALL}/bin/datalayer_client_bulk"
+      else
+        cargo build --release
+        install -Dm755 target/release/datalayer_client_bulk \
+          "${CRAFT_PART_INSTALL}/bin/datalayer_client_bulk"
+      fi
+
+apps:
+  datalayer-client-bulk:
+    command: bin/datalayer_client_bulk
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+    environment:
+      #RUST_LOG: "error"
+      RUST_LOG: "info"
+
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer

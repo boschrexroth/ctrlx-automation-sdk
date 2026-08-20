@@ -27,6 +27,7 @@ Visual Studio Code extensions (Install in SSH):
 * [ctrlX Data Layer Provider Subscription](./datalayer.provider.sub/README.md)
 * [ctrlX Data Layer Client Simple](./datalayer.client.simple/README.md)
 * [ctrlX Data Layer Client Subscription](./datalayer.client.sub/README.md)
+* [ctrlX Data Layer Client Bulk](./datalayer.client.bulk/README.md)
 * [Diagnostics Logbook](./diagnostics.logbook/README.md)
 * [ctrlX Data Layer Diagnosis](./datalayer.diagnosis/README.md)
 

@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
+#include <algorithm>
 #include <string>
 
 #include "providerNodeAllData.h"
@@ -12,11 +13,11 @@
 
 DataContainer* ProviderNodeAllData::getDataContainer(const std::string& address)
 {
-  for (auto dataContainer : m_dataContainers)
+  for (auto& dataContainer : m_dataContainers)
   {
     if (dataContainer->m_address == address)
     {
-      return dataContainer;
+      return dataContainer.get();
     }
   }
   return NULL;
@@ -33,9 +34,9 @@ comm::datalayer::DlResult ProviderNodeAllData::createDataContainer(
   }
 
   auto metadata = createMetadata(data, address);
-  auto dataContainer = new DataContainer(address, data, metadata);
+  auto dataContainer = std::make_unique<DataContainer>(address, data, metadata);
 
-  m_dataContainers.emplace_back(dataContainer);
+  m_dataContainers.emplace_back(std::move(dataContainer));
 
   // We register the address of our datacontainer now so that the ctrlX Data Layer will show it as "virtual node".
   // The "virtual node" has as provider this instance.
@@ -120,13 +121,23 @@ comm::datalayer::Variant ProviderNodeAllData::createMetadata(const comm::datalay
   return variant;
 }
 
-ProviderNodeAllData::ProviderNodeAllData(comm::datalayer::IProvider3* provider, const std::string& addressRoot, bool dynamic)
+ProviderNodeAllData::ProviderNodeAllData(std::shared_ptr<comm::datalayer::IProvider3> provider, const std::string& addressRoot, bool dynamic)
   : m_provider(provider)
   , m_addressRoot(addressRoot)
   , m_dynamic(dynamic)
   , m_addressBase(dynamic ? m_addressRoot + "dynamic/" : m_addressRoot + "static/")
 {
   m_metadata = createMetadata(comm::datalayer::Variant(), m_addressBase);
+}
+
+ProviderNodeAllData::~ProviderNodeAllData()
+{
+  m_provider->unregisterNode(m_addressBase + "**");
+  for (auto& dc : m_dataContainers)
+  {
+    m_provider->unregisterNode(dc->m_address);
+  }
+  m_dataContainers.clear();
 }
 
 void ProviderNodeAllData::registerNodes()
@@ -368,8 +379,10 @@ void ProviderNodeAllData::onRemove(
   if (nullptr != dataContainer)
   {
     m_provider->unregisterNode(dataContainer->m_address);
-    std::remove(m_dataContainers.begin(), m_dataContainers.end(), dataContainer);
-    delete dataContainer;
+    m_dataContainers.erase(
+      std::remove_if(m_dataContainers.begin(), m_dataContainers.end(),
+        [dataContainer](const std::unique_ptr<DataContainer>& dc) { return dc.get() == dataContainer; }),
+      m_dataContainers.end());
   }
 
   result = comm::datalayer::DlResult::DL_OK;

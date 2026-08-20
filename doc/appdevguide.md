@@ -188,8 +188,6 @@ The app contributes to the ctrlX user interface and system behavior. It integrat
 
 Further app information:
 
-- FOSS sources
-
 - Semantic versioning scheme
 
 Integration into ctrlX CORE security system:
@@ -251,33 +249,13 @@ This will create the required folder structure for the mandatory artifacts out-o
 
 ![image](images/artifacts.png)
 
-The artifacts are organized in five sub folders:
+The artifacts are organized in four sub folders:
 
-#### 4.1.2 "Disclosure" folder (<span style="color:red;">**MANDATORY**</span>)
-
-The FOSS source files and license text files are stored in the disclosure folder
-
-- If the app contains FOSS components, a file containing the license texts must be provided (<span style="color:red;">**MANDATORY**</span>). The file can be in one of the following formats:
-
-  - **"fossinfo.json"** - License texts for all an app’s used open source software. For more information about format and content, refer to the json example and the corresponding json schema in the standard "artifacts.zip" file.
-
-  - **"cyclonedx.json"** - CycloneDX BOM file with license texts inside.
-
-- **"foss-sources.zip" (<span style="color:blue;">**CONDITIONAL**</span>)** - In the foss-sources.zip file, the sources of all used open source libraries / packages are zipped without a password.
-
-- **"foss-offer.x" (<span style="color:blue;">**CONDITIONAL**</span>)** - If the foss-sources.zip file is not provided, a human-readable file with the name "offer.x" is needed. It explains how the user can get the sources.
-
-**Either FOSS sources or FOSS offer is required**.
-
-#### 4.1.3 "Build Info" folder (<span style="color:red;">**MANDATORY**</span>)
+#### 4.1.2 "Build Info" folder (<span style="color:red;">**MANDATORY**</span>)
 
 The build info folder stores all build relevant information.
 
 Note: For the `{xxx}-description` files, a default file (with explanation) and the corresponding schema is provided in the standard `artifacts.zip` example.
-
-- **"snapcraft.yaml" (<span style="color:red;">**MANDATORY**</span>)** - The snapcraft.yaml file is the main entry point to create a snap through Snapcraft. It contains all the details the snapcraft command needs to build a snap. See also <https://snapcraft.io/docs/snapcraft-yaml-reference>
-
-- **"package-manifest.json" (<span style="color:red;">**MANDATORY**</span>)** - The package-manifest.json covers essential settings, like the proxy URL
 
 - **"portlist-description.json" (<span style="color:red;">**MANDATORY**</span>)** - All used ports are described in the port list
 
@@ -287,7 +265,7 @@ Note: For the `{xxx}-description` files, a default file (with explanation) and t
 
 **The [Base checklist](appdevguide_basechecks.md) contains the criteria which are checked in these files.**
 
-#### 4.1.4 "Documentation" folder (<span style="color:red;">**MANDATORY**</span>)
+#### 4.1.3 "Documentation" folder (<span style="color:red;">**MANDATORY**</span>)
 
  All documentation relevant to the app is provided here
 
@@ -295,7 +273,7 @@ Note: For the `{xxx}-description` files, a default file (with explanation) and t
 - **"test-setup-description.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The app setup describes how to configure the app on a ctrlX CORE for a typical usage and test scenario
 - **"release-notes.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The latest changes, workarounds and defects are mentioned in the release notes
 
-#### 4.1.5 "App States" folder (<span style="color:red;">**MANDATORY**</span>)
+#### 4.1.4 "App States" folder (<span style="color:red;">**MANDATORY**</span>)
 
 The app validation framework tries to establish relevant states that have to be tested. Therefore, a sequence of API calls has to be provided to bring the app to the test state
 
@@ -303,7 +281,7 @@ The app validation framework tries to establish relevant states that have to be 
 
   - **"standard-scenario{2 to n}.json" (optional)** - One or more scenarios, if appropriate
 
-#### 4.1.6 "Snaps" folder (<span style="color:red;">**MANDATORY**</span>)
+#### 4.1.5 "Snaps" folder (<span style="color:red;">**MANDATORY**</span>)
 
 ctrlX currently supports the amd64 and the arm64 processor architecture. The corresponding target snaps for the app are provided here
 
@@ -386,6 +364,8 @@ The following operating system interfaces which are listed here are denied or re
 [Reserved interfaces](appdevguide_reserved-interfaces.md), (1. Reserved slots and plugs)
 
  This list is subject to change and might be extended. If unsure, please provide the slot/plug you want to use inside your application together with justification to check whether or not this specific slot/plug is allowed and find potential alternatives.
+
+- **Shared memory (`/dev/shm`)**. If your app requires access to `/dev/shm` (e.g. for POSIX semaphores or shared memory objects), use the `shared-memory` interface with `private: true`. This gives your snap its own private `/dev/shm` without requiring a Canonical store declaration. See the [Shared Memory Interface Guidance](appdevguide_reserved-interfaces.md#11-shared-memory-interface-guidance) for details.
 
 #### 6.1.2 Network Security and Ports (<span style="color:blue;">**CONDITIONAL**</span>)
 

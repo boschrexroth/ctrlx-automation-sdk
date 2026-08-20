@@ -44,7 +44,7 @@ async function main() {
     await provider.start();
 
     // Initially exit and retry after app restart-delay (see snapcraft.yaml)
-    if (provider.isConnected() === false) {
+    if (!provider.isConnected()) {
         console.log('provider is not connected -> exit.');
         return;
     }
@@ -127,7 +127,7 @@ async function main() {
     ];
 
     // Create map with key address and value node for the callback functions.
-    let addressToNode = new Map<string, Node>();
+    const addressToNode = new Map<string, Node>();
 
     // Add all static nodes to the map.
     staticNodes.forEach(node => {
@@ -193,11 +193,11 @@ async function main() {
 
     // Keep the process alive until disconnected
     const intervalHandle = setInterval(() => {
-        dynamicNodes.forEach(async node => {
+        dynamicNodes.forEach(node => {
             node.incrementValue(new Date());
         });
 
-        if (system.isStarted() === false || provider.isConnected() === false) {
+        if (!system.isStarted() || !provider.isConnected()) {
             clearInterval(intervalHandle);
         }
     }, 1_000);

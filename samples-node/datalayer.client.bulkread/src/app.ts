@@ -23,7 +23,7 @@ async function main() {
     const remote = Remote.build({ ip: "10.0.2.2", sslPort: 8443 });
     console.log('connection string:', remote);
 
-    // Create a Datalayer Client instance and connects. Automatically reconnects if the connection is interrupted.s
+    // Create a Datalayer Client instance and connects. Automatically reconnects if the connection is interrupted.
     const client = await system.createClient(remote);
 
     // Define node addresses for bulk read
@@ -47,7 +47,7 @@ async function main() {
 
     //Keep the process alive until disconnected
     const intervalHandle = setInterval(() => {
-        if (system.isStarted() === false || client.isConnected() === false) {
+        if (!system.isStarted() || !client.isConnected()) {
             clearInterval(intervalHandle);
         }
     }, 10_000);

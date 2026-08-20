@@ -1,0 +1,1 @@
+../../scripts/sample-rust/build-cargo.sh

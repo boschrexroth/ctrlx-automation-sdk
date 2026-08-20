@@ -198,7 +198,7 @@ static int scanFolder(std::string address)
     return 1;
   }
 
-  if (children.size() <= 0)
+  if (children.empty())
   {
     std::cout << "ERROR '" << address << "' has no sub elements" << std::endl;
     return 2;
@@ -247,7 +247,7 @@ static int scanPlcApp()
     return 2;
   }
 
-  if (apps.size() <= 0)
+  if (apps.empty())
   {
     std::cout << "ERROR '" << address << "' has no sub elements" << std::endl;
     return 3;
@@ -257,10 +257,10 @@ static int scanPlcApp()
   for (int i = 0; i < apps.size(); i++)
   {
     std::string symAddress = address + "/" + apps[i] + "/sym";
-    auto result = scanFolder(symAddress);
-    if (result > 0)
+    auto res = scanFolder(symAddress);
+    if (res > 0)
     {
-      return result;
+      return res;
     }
   }
 
@@ -282,7 +282,7 @@ int main()
       // Try ctrlX COREvirtual with port forwarding
       g_client = getClient(datalayer, "10.0.2.2", "boschrexroth", "boschrexroth", 8443);
     }
-    
+
     if (g_client == nullptr)
     {
       std::cout << "ERROR Creating client connection failed." << std::endl;
@@ -299,7 +299,7 @@ int main()
     // ERROR --> retry
     delete g_client;
     datalayer.stop();
-    
+
     std::this_thread::sleep_for(std::chrono::seconds(30));
   }
 

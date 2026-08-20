@@ -37,10 +37,14 @@ parts:
   provider:
     plugin: gradle
     source: .
+    #gradle-parameters:
+    #  - -Djavax.net.ssl.trustStore="/etc/ssl/certs/java/cacerts"    
     build-environment:
       - SNAP_BUILD_JAVA_VERSION: "21"
     build-packages:
       - openjdk-21-jdk-headless
+    #  - http_proxy: "http://10.0.2.2:3128"
+    #  - https_proxy: "http://10.0.2.2:3128"      
     stage-packages:
       - to amd64:
         - openjdk-21-jre-headless

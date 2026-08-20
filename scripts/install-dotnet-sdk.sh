@@ -21,6 +21,8 @@ profile=$(cat ~/.profile)
 if [[ "$profile" != *"DOTNET_ROOT"* ]];then
   sudo echo 'export DOTNET_ROOT=$HOME/.dotnet' | sudo tee -a ~/.profile
   sudo echo 'export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools' | sudo tee -a ~/.profile
+  export DOTNET_ROOT=$HOME/.dotnet
+  export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 fi
 
 # Dump version and sdk

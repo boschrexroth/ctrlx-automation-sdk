@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["NodeEvent"],"fn":["on_browse","on_create","on_metadata","on_read","on_remove","on_subscribe","on_unsubscribe","on_write"],"struct":["ProviderNode"],"trait":["NodeCallback","ProviderNodeCallback"],"type":["NodeCallbackBox","ProviderNodeCallbackBox"]};

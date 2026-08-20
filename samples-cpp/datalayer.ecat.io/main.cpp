@@ -28,11 +28,11 @@ static void signalHandler(int signal) {
 }
 
 static bool getMemoryMap(comm::datalayer::DatalayerSystem &datalayerSystem,
-                  comm::datalayer::IClient *client,
+                  std::unique_ptr<comm::datalayer::IClient> &client,
                   std::shared_ptr<comm::datalayer::IMemoryUser> &memoryUser,
                   const std::string &address, uint32_t *revision,
-                  std::vector<uint32_t> *byteIndices,
-                  std::vector<uint8_t> *bitIndices) {
+                  std::vector<uint32_t> &byteIndices,
+                  std::vector<uint8_t> &bitIndices) {
 
   comm::datalayer::DlResult dlResult;
   comm::datalayer::Variant variantMap;
@@ -105,27 +105,27 @@ static bool getMemoryMap(comm::datalayer::DatalayerSystem &datalayerSystem,
       offset = variable->bitoffset();
       byteIndex = offset >> 3;
       bitIndex = offset & 7;
-      byteIndices->push_back(byteIndex);
-      bitIndices->push_back(bitIndex);
+      byteIndices.push_back(byteIndex);
+      bitIndices.push_back(bitIndex);
       std::cout << "INFO Name: " << name << " Bitoffset: " << offset
                 << " Byte index: " << byteIndex << " Bit index: " << bitIndex
                 << std::endl;
     }
   }
 
-  if (byteIndices->size() == 0) {
+  if (byteIndices.size() == 0) {
     std::cout << "ERROR No bit values (bitsize=1) found" << std::endl;
     return false;
   }
 
-  std::cout << "INFO " << byteIndices->size() << " bit values (bitsize=1) found"
+  std::cout << "INFO " << byteIndices.size() << " bit values (bitsize=1) found"
             << std::endl;
   return true;
 }
 
 static bool copyInputToOutput(
     comm::datalayer::DatalayerSystem &datalayerSystem,
-    comm::datalayer::IClient *client,
+    std::unique_ptr<comm::datalayer::IClient> &client,
     std::shared_ptr<comm::datalayer::IMemoryUser> &memoryUserInput,
     uint32_t revisionInput, std::vector<uint32_t> &byteIndicesInput,
     std::vector<uint8_t> &bitIndicesInput,
@@ -197,17 +197,13 @@ int main(void) {
   comm::datalayer::DatalayerSystem datalayerSystem;
   datalayerSystem.start(false);
 
-  comm::datalayer::IClient *client = nullptr;
+  auto client = std::unique_ptr<comm::datalayer::IClient>(nullptr);
   while (g_endProcess == false) {
 
     // Sleep after error (or at startup)
     std::this_thread::sleep_for(std::chrono::seconds(10));
 
-    if (client != nullptr) {
-      // In case of retry
-      delete client;
-    }
-    comm::datalayer::IClient *client = getClientRetry(datalayerSystem);
+    client.reset(getClientRetry(datalayerSystem));
 
     if (client == nullptr) {
       std::cout << "ERROR Client connection failed" << std::endl;
@@ -224,7 +220,7 @@ int main(void) {
 
     bool boolResult =
         getMemoryMap(datalayerSystem, client, memoryUserInput, dlAddressInput,
-                     &revisionInput, &byteIndicesInput, &bitIndicesInput);
+                     &revisionInput, byteIndicesInput, bitIndicesInput);
     if (boolResult == false) {
       continue;
     }
@@ -239,7 +235,7 @@ int main(void) {
 
     boolResult =
         getMemoryMap(datalayerSystem, client, memoryUserOutput, dlAddressOutput,
-                     &revisionOutput, &byteIndicesOutput, &bitIndicesOutput);
+                     &revisionOutput, byteIndicesOutput, bitIndicesOutput);
     if (boolResult == false) {
       continue;
     }
@@ -267,8 +263,6 @@ int main(void) {
       std::this_thread::sleep_for(std::chrono::seconds(5));
     }
   }
-
-  delete client;
 
   datalayerSystem.stop();
 

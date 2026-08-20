@@ -41,3 +41,13 @@ else
     fi
 fi
 
+echo ""
+echo "-------------------------------------------------------"
+echo "NOTE: A system reboot is required before continuing"
+echo "      with the next installation steps."
+echo ""
+echo "      Please reboot now:"
+echo "          sudo reboot"
+echo "-------------------------------------------------------"
+echo ""
+

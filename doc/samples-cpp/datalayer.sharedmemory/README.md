@@ -12,6 +12,22 @@ Normally realtime applications (Celix bundles) are using sharded memory for data
     Executables using shared memory for data exchange have to run within the same environment (ctrlX CORE or App Builder Environment).
     Shared memory over a TCP connection is NOT possible.
 
+## Choosing the Right Shared Memory Mode
+
+This sample uses the **snap-to-snap shared memory mode** because it exchanges data with the `rexroth-automationcore` snap via the `datalayer-shm` slot. This mode requires a store declaration from Canonical for the slot side.
+
+**If your app does not need to share memory with another snap**, there is a simpler approach. The `shared-memory` interface supports a **private mode** that gives your snap its own isolated `/dev/shm` without requiring any store declaration:
+
+```yaml
+plugs:
+  shared-memory:
+    private: true
+```
+
+Private mode is the recommended approach when your app only needs `/dev/shm` for its own internal purposes, such as POSIX semaphores (`sem_open`), shared memory objects (`shm_open`), or internal IPC between processes within the same snap.
+
+For the full decision guide and detailed examples of both modes, see the [Shared Memory Interface Guidance](../../appdevguide_reserved-interfaces.md#11-shared-memory-interface-guidance) in the reserved interfaces document.
+
 ## Function Description
 
   When the user has written outputs once, the owner will start copying from output to input.

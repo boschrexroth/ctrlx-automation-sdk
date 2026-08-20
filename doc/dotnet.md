@@ -1,10 +1,11 @@
 # README .NET Apps @ ctrlX
 
-![.NET](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.NET_Logo.svg/120px-.NET_Logo.svg.png)
+![.NET](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Microsoft_.NET_logo.svg/120px-Microsoft_.NET_logo.svg.png)
+
 
 ## Introduction
 
-This document describes how to setup up your development environment for building __self-contained ctrlX Apps based on Microsoft .NET runtime__.
+This document describes how to setup up your _App Builder Environment_ (QEMU VM) for building __self-contained ctrlX Apps based on Microsoft .NET runtime__.
 
 __Self-contained__ means, your App contains an already matching and optimized .NET runtime for your target architecture, so there's no need to install any additional .NET runtime.
 
@@ -12,6 +13,9 @@ All samples generate Apps (snaps) for the targets
 
 + ctrlX CORE^virtual^ (amd64)
 + ctrlX CORE (arm64)
+
+### Writing .NET Apps for Windows
+This document describes, how to create Apps via _App Builder Environment_ (QEMU VM), which is the standard. If you wan't to create Apps for Windows, please see [Apps for Windows](windows.md) for prerequisites and further informations.
 
 ## Prerequisites
 
