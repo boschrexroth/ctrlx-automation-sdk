@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <csignal>
 #include <thread>
+#include <memory>
 
 #include "comm/datalayer/datalayer.h"
 #include "comm/datalayer/datalayer_system.h"
@@ -21,9 +22,10 @@
  // Local debug: Set '#define REMOTE_DEBUG_ENABLED' under comment, rebuild and debug
  //#define REMOTE_DEBUG_ENABLED
 
- // Add some signal Handling so we are able to abort the program with sending sigint
+ // Add signal handling so the program can be terminated gracefully by sending SIGINT (Ctrl+C)
 static bool g_endProcess = false;
 
+// Signal handler: sets the termination flag when SIGINT is received
 static void sigIntHandler(int signal)
 {
   std::cout << "signal: " << signal << std::endl;
@@ -32,11 +34,12 @@ static void sigIntHandler(int signal)
 
 using comm::datalayer::IProviderNode;
 
-// Basic class Provider node interface for providing data to the system
+// MyProviderNode: A simple provider node that stores a single Variant value.
+// It implements the IProviderNode interface to expose data in the ctrlX Data Layer.
 class MyProviderNode : public IProviderNode
 {
 private:
-  comm::datalayer::Variant m_data;
+  comm::datalayer::Variant m_data; // The current value of this node
 
   /* Keep this comment section - it can be used as a sample for creating metadata programmatically.
 
@@ -153,134 +156,169 @@ int main()
   std::cout << "Debugger connected, continuing program..." << std::endl;
 #endif
 
+  // Base path for all nodes registered by this provider
   std::string dlBasePath = "sdk/cpp/datalayer/provider/simple/";
 
+  // Data Layer path for the custom FlatBuffers type
   std::string typeInertialValue = "types/sdk/cpp/provider/simple/inertialValue";
 
+  // Create the Data Layer system instance
   comm::datalayer::DatalayerSystem datalayerSystem;
-  // Starts the ctrlX Data Layer system without a new broker because one broker is already running on ctrlX CORE
+  // Start the Data Layer system without spawning a new broker,
+  // because a broker is already running on the ctrlX CORE device
   datalayerSystem.start(false);
 
   std::cout << "INFO Register '" << dlBasePath << "' with these sub nodes 'myFlatbuffer', 'myFloat', 'myString' and 'myInt64'" << std::endl;
 
-  comm::datalayer::IProvider3* provider = getProvider(datalayerSystem); // ctrlX CORE (virtual)
-  if (provider == nullptr)
   {
-    provider = getProvider(datalayerSystem, "10.0.2.2", "boschrexroth", "boschrexroth", 8443); // ctrlX COREvirtual with port forwarding
-  }
-
-  if (provider == nullptr)
-  {
-    std::cout << "ERROR Getting provider connection failed." << std::endl;
-    datalayerSystem.stop(false);
-    return 1;
-  }
-
-  // Register a node as string value
-  std::string dlPath = dlBasePath + "myString";
-  comm::datalayer::Variant myString;
-  myString.setValue("Hello ctrlX AUTOMATION sample string");
-  std::cout << "INFO Register node " << dlPath << std::endl;
-  comm::datalayer::DlResult result = provider->registerNode(dlPath, new MyProviderNode(myString));
-  if (STATUS_FAILED(result))
-  {
-    std::cout << "WARN Register node " << dlPath << " failed with: " << result.toString() << std::endl;
-  }
-
-  // Register a node as float value
-  dlPath = dlBasePath + "myFloat";
-  comm::datalayer::Variant myFloat;
-  myFloat.setValue(0.815f);
-  std::cout << "INFO Register node " << dlPath << std::endl;
-  result = provider->registerNode(dlPath, new MyProviderNode(myFloat));
-  if (STATUS_FAILED(result))
-  {
-    std::cout << "WARN Register node " << dlPath << " failed with: " << result.toString() << std::endl;
-  }
-
-  // Register a node as int64 value
-  dlPath = dlBasePath + "myInt64";
-  comm::datalayer::Variant myInt64;
-  myInt64.setValue((int64_t)-123456789);
-  std::cout << "INFO Register node " << dlPath << std::endl;
-  result = provider->registerNode(dlPath, new MyProviderNode(myInt64));
-  if (STATUS_FAILED(result))
-  {
-    std::cout << "WARN Register node " << dlPath << " failed with: " << result.toString() << std::endl;
-  }
-
-  // Register type of flatbuffer value
-  auto snapDir = snapPath();
-  std::filesystem::path dir = "compiled"; // Build environment: Compiled files are stored into that sub directory
-  if (snapDir != nullptr)
-  {
-    dir = snapDir; // Snap environment: Compiled files are stored into the $SNAP directory
-  }
-
-  std::filesystem::path fileBfbs = dir / "sampleSchema.bfbs";
-  std::cout << "INFO Register type '" << typeInertialValue << "' " << fileBfbs << std::endl;
-  result = provider->registerType(typeInertialValue, fileBfbs);
-  if (STATUS_FAILED(result))
-  {
-    std::cout << "WARN Register type '" << typeInertialValue << "' " << fileBfbs << " failed with: " << result.toString() << std::endl;
-  }
-
-  std::filesystem::path fileMddb = dir / "metadata.mddb";
-  std::cout << "INFO Register mddb file " << fileMddb << std::endl;
-  result = provider->registerType("datalayer", fileMddb);
-  if (STATUS_FAILED(result))
-  {
-    std::cout << "WARN Register " << fileBfbs << " failed with: " << result.toString() << std::endl;
-  }
-
-  // Register a node as flatbuffer value
-  flatbuffers::FlatBufferBuilder builder;
-  auto actInertialValue = sample::schema::CreateInertialValue(builder, 33, -427, 911);
-  builder.Finish(actInertialValue);
-  comm::datalayer::Variant myFlatbuffer;
-  myFlatbuffer.shareFlatbuffers(builder);
-
-  dlPath = dlBasePath + "myFlatbuffer";
-  std::cout << "INFO Register node " << dlPath << std::endl;
-  result = provider->registerNode(dlPath, new MyProviderNode(myFlatbuffer));
-  if (STATUS_FAILED(result))
-  {
-    std::cout << "WARN Register node " << dlPath << " failed with: " << result.toString() << std::endl;
-  }
-
-  // Prepare signal structure to interrupt the endless loop with ctrl + c
-  std::signal(SIGINT, sigIntHandler);
-
-  std::cout << "INFO Running endless loop - end with Ctrl+C" << std::endl;
-  while (g_endProcess == false)
-  {
-    if (provider->isConnected() == false)
+    // Try to connect to a local ctrlX CORE (or ctrlX COREvirtual via network adapter)
+    auto provider = std::unique_ptr<comm::datalayer::IProvider3>(getProvider(datalayerSystem)); // ctrlX CORE (virtual)
+    if (provider == nullptr)
     {
-      std::cout << "ERROR Datalayer connection broken!" << std::endl;
-      break;
+      // Fallback: connect to ctrlX COREvirtual using port forwarding
+      provider.reset(getProvider(datalayerSystem, "10.0.2.2", "boschrexroth", "boschrexroth", 8443)); // ctrlX COREvirtual with port forwarding
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    if (provider == nullptr)
+    {
+      std::cout << "ERROR Getting provider connection failed." << std::endl;
+      datalayerSystem.stop(false);
+      return 1;
+    }
+
+    // Register a node as string value
+    std::string dlPath = dlBasePath + "myString";
+    comm::datalayer::Variant myString;
+    myString.setValue("Hello ctrlX AUTOMATION sample string");
+    std::cout << "INFO Register node " << dlPath << std::endl;
+    auto nodeString = std::make_unique<MyProviderNode>(myString);
+    comm::datalayer::DlResult result = provider->registerNode(dlPath, nodeString.get());
+    if (STATUS_FAILED(result))
+    {
+      std::cout << "WARN Register node " << dlPath << " failed with: " << result.toString() << std::endl;
+      provider = nullptr;
+      datalayerSystem.stop(false);
+      return 1;
+    }
+
+    // Register a node as float value
+    dlPath = dlBasePath + "myFloat";
+    comm::datalayer::Variant myFloat;
+    myFloat.setValue(0.815f);
+    std::cout << "INFO Register node " << dlPath << std::endl;
+    auto nodeFloat = std::make_unique<MyProviderNode>(myFloat);
+    result = provider->registerNode(dlPath, nodeFloat.get());
+    if (STATUS_FAILED(result))
+    {
+      std::cout << "WARN Register node " << dlPath << " failed with: " << result.toString() << std::endl;
+      provider = nullptr;
+      datalayerSystem.stop(false);
+      return 1;
+    }
+
+    // Register a node as int64 value
+    dlPath = dlBasePath + "myInt64";
+    comm::datalayer::Variant myInt64;
+    myInt64.setValue((int64_t)-123456789);
+    std::cout << "INFO Register node " << dlPath << std::endl;
+    auto nodeInt64 = std::make_unique<MyProviderNode>(myInt64);
+    result = provider->registerNode(dlPath, nodeInt64.get());
+    if (STATUS_FAILED(result))
+    {
+      std::cout << "WARN Register node " << dlPath << " failed with: " << result.toString() << std::endl;
+      provider = nullptr;
+      datalayerSystem.stop(false);
+      return 1;
+    }
+
+    // Register the custom FlatBuffers type so clients can decode the flatbuffer node values
+    auto snapDir = snapPath();
+    // Determine the directory containing compiled binary schema and metadata files
+    std::filesystem::path dir = "compiled"; // Build environment: compiled files are in the 'compiled' sub-directory
+    if (snapDir != nullptr)
+    {
+      dir = snapDir; // Snap environment: compiled files are stored in the $SNAP directory
+    }
+
+    std::filesystem::path fileBfbs = dir / "sampleSchema.bfbs";
+    std::cout << "INFO Register type '" << typeInertialValue << "' " << fileBfbs << std::endl;
+    result = provider->registerType(typeInertialValue, fileBfbs);
+    if (STATUS_FAILED(result))
+    {
+      std::cout << "WARN Register type '" << typeInertialValue << "' " << fileBfbs << " failed with: " << result.toString() << std::endl;
+      provider = nullptr;
+      datalayerSystem.stop(false);
+      return 1;
+    }
+
+    // Register the metadata database file so the Data Layer can provide node metadata to clients
+    std::filesystem::path fileMddb = dir / "metadata.mddb";
+    std::cout << "INFO Register mddb file " << fileMddb << std::endl;
+    result = provider->registerType("datalayer", fileMddb);
+    if (STATUS_FAILED(result))
+    {
+      std::cout << "WARN Register " << fileBfbs << " failed with: " << result.toString() << std::endl;
+      provider = nullptr;
+      datalayerSystem.stop(false);
+      return 1;
+    }
+
+    // Build a FlatBuffers value (InertialValue with x=33, y=-427, z=911) and wrap it in a Variant
+    flatbuffers::FlatBufferBuilder builder;
+    auto actInertialValue = sample::schema::CreateInertialValue(builder, 33, -427, 911);
+    builder.Finish(actInertialValue);
+    comm::datalayer::Variant myFlatbuffer;
+    myFlatbuffer.shareFlatbuffers(builder);
+
+    dlPath = dlBasePath + "myFlatbuffer";
+    std::cout << "INFO Register node " << dlPath << std::endl;
+    auto nodeFlatbuffer = std::make_unique<MyProviderNode>(myFlatbuffer);
+    result = provider->registerNode(dlPath, nodeFlatbuffer.get());
+    if (STATUS_FAILED(result))
+    {
+      std::cout << "WARN Register node " << dlPath << " failed with: " << result.toString() << std::endl;
+      provider = nullptr;
+      datalayerSystem.stop(false);
+      return 1;
+    }
+
+    // Register the SIGINT signal handler so the loop can be interrupted with Ctrl+C
+    std::signal(SIGINT, sigIntHandler);
+
+    // Main loop: keep the provider alive and monitor the Data Layer connection
+    std::cout << "INFO Running endless loop - end with Ctrl+C" << std::endl;
+    while (g_endProcess == false)
+    {
+      // Exit the loop if the Data Layer connection is lost
+      if (provider->isConnected() == false)
+      {
+        std::cout << "ERROR Datalayer connection broken!" << std::endl;
+        break;
+      }
+
+      std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    }
+
+    std::cout << "INFO Exiting application" << std::endl;
+    if (isSnap())
+    {
+      std::cout << "INFO Restarting automatically" << std::endl;
+    }
+
+    // Unregister the custom type and all nodes before shutting down
+    provider->unregisterType(typeInertialValue);
+
+    provider->unregisterNode(dlBasePath + "myString");
+    provider->unregisterNode(dlBasePath + "myFloat");
+    provider->unregisterNode(dlBasePath + "myInt64");
+    provider->unregisterNode(dlBasePath + "myFlatbuffer");
+
+    // Clean up the provider instance so the process can terminate properly
+    provider->stop();
   }
+  // Stop the Data Layer system. Note: this call blocks if any provider or client instance is still running
+  datalayerSystem.stop(false);
 
-  std::cout << "INFO Exiting application" << std::endl;
-  if (isSnap())
-  {
-    std::cout << "INFO Restarting automatically" << std::endl;
-  }
-
-  provider->unregisterType(typeInertialValue);
-
-  provider->unregisterNode(dlBasePath + "myString");
-  provider->unregisterNode(dlBasePath + "myFloat");
-  provider->unregisterNode(dlBasePath + "myInt64");
-  provider->unregisterNode(dlBasePath + "myFlatbuffer");
-
-  // Clean up datalayer instances so that process ends properly
-  provider->stop();
-  delete provider;
-
-  datalayerSystem.stop(false); // Attention: Doesn't return if any provider or client instance is still runnning
-
+  // Return 0 on clean shutdown (SIGINT), 1 if the connection was lost unexpectedly
   return g_endProcess ? 0 : 1;
 }

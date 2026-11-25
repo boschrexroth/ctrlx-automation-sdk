@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['referencetype_0',['ReferenceType',['../classctrlxdatalayer_1_1metadata__utils_1_1ReferenceType.html',1,'ctrlxdatalayer::metadata_utils']]],
-  ['response_1',['Response',['../classctrlxdatalayer_1_1bulk_1_1Response.html',1,'ctrlxdatalayer::bulk']]],
-  ['result_2',['Result',['../classctrlxdatalayer_1_1variant_1_1Result.html',1,'ctrlxdatalayer::variant']]]
+  ['provider_0',['Provider',['../classctrlxdatalayer_1_1provider_1_1Provider.html',1,'ctrlxdatalayer::provider']]],
+  ['providernode_1',['ProviderNode',['../classctrlxdatalayer_1_1provider__node_1_1ProviderNode.html',1,'ctrlxdatalayer::provider_node']]],
+  ['providernodecallbacks_2',['ProviderNodeCallbacks',['../classctrlxdatalayer_1_1provider__node_1_1ProviderNodeCallbacks.html',1,'ctrlxdatalayer::provider_node']]],
+  ['providersubscription_3',['ProviderSubscription',['../classctrlxdatalayer_1_1provider__subscription_1_1ProviderSubscription.html',1,'ctrlxdatalayer::provider_subscription']]]
 ];

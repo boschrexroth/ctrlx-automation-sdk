@@ -1,7 +1,8 @@
 module datalayer.provider
 
-go 1.25
+go 1.26
 
-require github.com/boschrexroth/ctrlx-datalayer-golang/v2 v2.6.0
-
-require github.com/google/flatbuffers v25.12.19+incompatible
+require (
+	github.com/boschrexroth/ctrlx-datalayer-golang/v2 v2.6.0
+	github.com/google/flatbuffers v25.12.19+incompatible
+)

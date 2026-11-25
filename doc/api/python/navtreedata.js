@@ -44,7 +44,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "____init_____8py_source.html",
-"classctrlxdatalayer_1_1subscription__properties__builder_1_1SubscriptionPropertiesBuilder.html#a657902f518b8f20276be8b3cd212d7f0"
+"classctrlxdatalayer_1_1subscription_1_1Subscription.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

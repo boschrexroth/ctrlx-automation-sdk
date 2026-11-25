@@ -9,14 +9,21 @@
 
 async function helloWorld() {
     // Keep the process alive until disconnected
-    setInterval(() => {
+    const intervalHandle = setInterval(() => {
         console.log('Hello World from Node.js!', new Date().toUTCString());
     }, 5_000);
 
-    // Handle process event 'SIGTERM'
-    process.on('SIGTERM', () => {
-        console.info('SIGTERM signal received.');
-    });
+    // Common shutdown routine used by both 'SIGTERM' and 'SIGINT'
+    const shutdown = (signal: string) => {
+        console.info(`${signal} signal received.`);
+
+        // Stop keeping the process alive
+        clearInterval(intervalHandle);
+    };
+
+    // Handle process events 'SIGTERM' and 'SIGINT'
+    process.on('SIGTERM', () => shutdown('SIGTERM'));
+    process.on('SIGINT', () => shutdown('SIGINT'));
 }
 
 helloWorld();

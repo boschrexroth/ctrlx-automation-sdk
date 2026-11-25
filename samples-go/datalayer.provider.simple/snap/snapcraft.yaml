@@ -15,7 +15,6 @@ source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
 website: https://github.com/boschrexroth/ctrlx-automation-sdk
 
 base: core24
-type: app
 
 platforms:
   amd64:
@@ -38,7 +37,7 @@ parts:
   provider:
     plugin: go
     source: .
-    build-snaps: ["go/1.25/stable"]
+    build-snaps: ["go/1.26/stable"]
     stage-packages:
       - ctrlx-datalayer
     build-packages:

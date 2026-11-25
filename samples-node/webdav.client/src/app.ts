@@ -63,15 +63,19 @@ async function main() {
     //   },
     //]
 
-    // Handle process event 'SIGTERM'
-    process.on('SIGTERM', () => {
-        console.info('SIGTERM signal received.');
+    // Common shutdown routine used by both 'SIGTERM' and 'SIGINT'
+    const shutdown = async (signal: string) => {
+        console.info(`${signal} signal received.`);
 
         // Clean up
-        client.deleteFile('/webdavArchive/configuration.json');
-        client.deleteFile('/webdavArchive/configuration.json.copy');
-        client.deleteFile('webdavArchive');
-    });
+        await client.deleteFile('/webdavArchive/configuration.json');
+        await client.deleteFile('/webdavArchive/configuration.json.copy');
+        await client.deleteFile('webdavArchive');
+    };
+
+    // Handle process events 'SIGTERM' and 'SIGINT'
+    process.on('SIGTERM', () => void shutdown('SIGTERM'));
+    process.on('SIGINT', () => void shutdown('SIGINT'));
 }
 
 main();

@@ -24,6 +24,8 @@ platforms:
 apps:
   app:
     command: bin/run.sh
+    environment:
+      PYDEVD_DISABLE_FILE_VALIDATION: "1"
     plugs:
       - network
       - network-bind

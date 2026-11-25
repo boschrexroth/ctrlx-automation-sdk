@@ -9,7 +9,6 @@ summary: App self health demo app for ctrlX OS.
 description: |
   This sample app demonstrates a best-practise, how you can set the app health status pro-actively.
 confinement: strict
-#confinement: devmode
 #icon: assets/icons/ICONHERE.png
 grade: stable
 
@@ -21,7 +20,6 @@ source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
 website: https://github.com/boschrexroth/ctrlx-automation-sdk
 
 base: core24
-type: app
 
 platforms:
   amd64:

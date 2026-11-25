@@ -39,7 +39,7 @@ Console.WriteLine("ctrlX Data Layer client created.");
 if (!client.IsConnected)
 {
     // Initially exit and retry after app restart-delay (see snapcraft.yaml).
-    Console.WriteLine($"Client is not connected -> exit");
+    Console.WriteLine("Client is not connected -> exit");
     return;
 }
 
@@ -48,7 +48,7 @@ var address = "framework/metrics/system/cpu-utilisation-percent";
 var (result, value) = client.Read(address);
 if (result.IsBad())
 {
-    Console.WriteLine($"{result}");
+    Console.WriteLine(result);
     return;
 }
 Console.WriteLine($"{DateTime.UtcNow}, {address}: {value.ToFloat()} (Read)");
@@ -112,17 +112,15 @@ subscription.DataChanged += async (_, args) =>
     // Instead we have to use an async event handler signature in combination of corresponding Async* method to call.
 
     // We randomly read async here just for demonstration.
-    if (value - Convert.ToInt32(value) < 0.5)
+    if (value % 1 < 0.5)
     {
         var readResult = await client.ReadAsync(address);
         if (readResult.Result.IsBad())
         {
-            Console.WriteLine($"{readResult.Result}");
+            Console.WriteLine(readResult.Result);
+            return;
         }
-        else
-        {
-            Console.WriteLine($"{DateTime.UtcNow}, {address}: {readResult.Value.ToFloat()} (ReadAsync)");
-        }
+        Console.WriteLine($"{DateTime.UtcNow}, {address}: {readResult.Value.ToFloat()} (ReadAsync)");
     }
 };
 

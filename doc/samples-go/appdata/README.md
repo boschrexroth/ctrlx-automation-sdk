@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD033 -->
 # README Go appdata
 
 ## Introduction
@@ -6,14 +7,14 @@ This sample shows how to load and save data according to the ctrlx storage conce
 
 ## Debug and Run
 
-Launch the app with the debugger attached by pressing __F5__.
+Launch the app with the debugger attached by pressing **F5**.
 
 ## Build and Install
 
 1. Launch Visual Studio Code.
-2. Click on the __Remote Explorer__ from the menu.
+2. Click on the **Remote Explorer** from the menu.
 3. Connect via SSH to your Ubuntu development environment.
-4. In the menu item File - Open Folder select the folder samples-go/__appdata__.
+4. In the menu item File - Open Folder select the folder samples-go/**appdata**.
 
 ## Build a Snap
 
@@ -27,25 +28,25 @@ A snap file will be build.
 
 Right click the snap file in the File explorer window and select download. The file will be downloaded into a destination directory on your host computer.
 
-* Login into your ctrlX, from the home page click __Install an app__.
+* Login into your ctrlX, from the home page click **Install an app**.
 * Switch to Service Mode
-* Select __Install from file__ and select the snap file on your host computer.
+* Select **Install from file** and select the snap file on your host computer.
 * When installation is finished switch to Operation Mode.
 
 ## Test the Snap
 
-* From the ctrlX home page Cclick __Diagnostics -> Logbook__
-* Click __Settings__ on the right top corner
-* Enable __Show system messages__
-* Navigate to __Filter -> Units__ and check your __snap.sdk-go-appdata.app.service__
+* From the ctrlX home page Cclick **Diagnostics -> Logbook**
+* Click **Settings** on the right top corner
+* Enable **Show system messages**
+* Navigate to **Filter -> Units** and check your **snap.sdk-go-appdata.app.service**
 * Now you should the see the app output diagnostics.
-* Press __Refresh__ to update.
+* Press **Refresh** to update.
 
-7. If you have root permissions, you can also watch the output on any ssh console with the command:
+* If you have root permissions, you can also watch the output on any ssh console with the command:
 
-   ```bash
+```bash
    sudo snap logs -f sdk-go-appdata.app
-   ```
+```
 
 ## Provide FOSS Info
 

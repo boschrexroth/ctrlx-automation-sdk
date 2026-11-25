@@ -1,3 +1,6 @@
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD060 -->
+
 # Debugging Snaps
 
 ## Overview
@@ -6,9 +9,9 @@ In general there are three different ways to debug. Here is an overview of the d
 
 | # | Description                | Usage                                     |Disadvanges        |
 | :--| :-------------------------| :----------------------------------------------------- |:-------------|
-| __1__| __Snap Logs__  <br>output in terminal and logbook</br>  | <ul><li>easiest way of debugging</li><li>can be used in every programming language</li><li>code runs on target</li></ul>      |  <ul><li>no breakpoints</li><li>no step by step debugging</li></ul>  |
-| __2__| __Debugging in Build Environment__ <br>+ Connection to ctrlX Data Layer via TCP</br>      |<ul><li>easy way to debug</li><li>Implemented in the SDK for all samples</li></ul> | <ul><li>Code does not run on target</li><li>Connection via tcp to ctrlX Data Layer is slower then IPC</li></ul>  |
-| __3__| __Remote Debugging__  | <ul><li>Only use this if you see a different behavior on the real hardware then in your build environment</li><li>Documentation for C++, Python</li><li>code runs on target</li></ul> |  <ul><li>Very very high effort </li></ul>  |
+| **1**| **Snap Logs**  <br>output in terminal and logbook</br>  | <ul><li>easiest way of debugging</li><li>can be used in every programming language</li><li>code runs on target</li></ul>      |  <ul><li>no breakpoints</li><li>no step by step debugging</li></ul>  |
+| **2**| **Debugging in Build Environment** <br>+ Connection to ctrlX Data Layer via TCP</br>      |<ul><li>easy way to debug</li><li>Implemented in the SDK for all samples</li></ul> | <ul><li>Code does not run on target</li><li>Connection via tcp to ctrlX Data Layer is slower then IPC</li></ul>  |
+| **3**| **Remote Debugging**  | <ul><li>Only use this if you see a different behavior on the real hardware then in your build environment</li><li>Documentation for C++, Python</li><li>code runs on target</li></ul> |  <ul><li>Very very high effort </li></ul>  |
 
 We recommend to test your application extensively in the build environment (type #2). Testing an application running in it's confined Ubuntu Core snap enviroment can be done by looking at the snap logs (type #1). Remote Debugging (type #3) while the snap is running in the confined Ubuntu Core snap environment of a ctrlX CORE should only be used as the last step, if the other two debug types don't help to debug your application.
 
@@ -33,7 +36,7 @@ To see the same output of the snap logs in the Diagnostics/Logbook on the ctrlX 
 
 ![image](./images/debug-build-env.png)
 
-It's recommended to debug your application in your app build environment. You can run script files directly in your build environment with an interpreter (e.g. Python) or run compiled executables with an Debugger (e.g. C++).
+It's recommended to debug your application in your App Build Environment (QEMU VM). You can run script files directly in your build environment with an interpreter (e.g. Python) or run compiled executables with an Debugger (e.g. C++).
 
 The samples in the SDK already contain a launch.json in the folder .vscode, which makes it easy for you to debug the samples using Visual Studio Code as your source code editor.
 

@@ -1,9 +1,9 @@
-# ctrlX App Build Environment Ubuntu 24.04
+# ctrlX App Build Environment
 
 ## Introduction
 
 This folder contains bat and image files to launch an App Build Environment with ctrlX WORKS under Windows operating system.
-An App Build Environment is a Ubuntu Server guest operating running within a [QEMU](https://www.qemu.org/) virtual machine.
+An App Build Environment is a Ubuntu Server guest operating running within a [QEMU](https://www.qemu.org/) Virtual Machine.
 
 The installation and configuration of the Ubuntu Server guest operating system is automatically done
 on first boot by the build-in Ubuntu Cloud-Init Technology. For this purpose, a so-called user image file is specified when the App Build Environment is started.
@@ -15,7 +15,7 @@ For more informations see [cloud-init](https://cloud-init.io/)
 
 An instance of an App Build Environment is created by ctrlX WORKS.
 
-ctrlX WORKS copies a set of files into the specific destination directory. Depending on the option __Use HTTP and HTTPS proxy on localhost:3128__ a user-data-image file is used with or without proxy server information.
+ctrlX WORKS copies a set of files into the specific destination directory. Depending on the option **Use HTTP and HTTPS proxy on localhost:3128** a user-data-image file is used with or without proxy server information.
 
 ## Working with an App Build Environment
 
@@ -28,11 +28,11 @@ Here the Windows environment variable PATH is extended so that the ctrlX WORKS i
 
 launch.bat downloads the Ubuntu Server image, creates a snapshot file (.qcow2) and launches the QEMU executable. The image file remains unchanged, all changes are saved in the snapshot file.
 
-During startup the App Build Environment will be configured by the Ubuntu Cloud-Init Technology. Therefore the cloud-config file contained in the user-data-image file is used.
+During startup the **App Build Environment** will be configured by the Ubuntu Cloud-Init Technology. Therefore the cloud-config file contained in the user-data-image file is used.
 
 In this initialization phase login is not possible.
 
-When this phase is finished, the guest operating system will automatically shut down and has to be restarted.
+When this phase is finished, the **App Build Environment** (guest operating system) will automatically shut down and has to be restarted.
 
 ### Restarting an App Build Environment
 
@@ -64,9 +64,11 @@ When a new App Build Enviroment was created the ubuntu server image file (e.g. u
 
 `ubuntu-24.04-server-cloudimg-amd64.qcow2` is always the snap shot file.
 
+> Important: Adapt ubuntu-24.04 to match a future installed version.
+
 #### Creating a new Snapshot
 
-Creating a new snapshot file makes sense if you want to save a certain status of your App Build Environment.
+Creating a new snapshot file makes sense if you want to save a certain status of your App Build Environment (QEMU VM).
 
 To do this just call:
 

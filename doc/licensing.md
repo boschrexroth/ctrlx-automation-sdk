@@ -1,28 +1,33 @@
-This document is part of the Bosch Rexroth ctrlX CORE App Development Guideline, and describes how to adapt to the the license management of the device.
+<!-- markdownlint-disable MD025 -->
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD060 -->
+# Introduction
+
+This document is part of the Bosch Rexroth ctrlX OS App Development Guideline, and describes how to adapt to the the license management of the device.
 
 Please refer to the App Development Guide for further information.
 
-### **Table of Contents**
+## **Table of Contents**
 
 [1 Introduction](#introduction)
 
-[2 Licensing Modes](#modes)
+[1.1 Make a license available on the device](#device_provisioning)
+
+[2 License Types and Usage Scenarios](#modes)
 
 [2.1 Overview](#overview)
 
-[2.2 ctrlX CORE Main License](#main)
+[2.2 Standard App License](#main)
 
-[2.3 ctrlX CORE Temporary Usage Rights (Emergency Mode)](#emergency)
+[2.3 ctrlX OS Temporary Usage Rights (Emergency Mode)](#emergency)
 
-[2.4 ctrlX CORE 10 Day Trial License](#trial)
+[2.4 ctrlX OS 10 Day Trial License](#trial)
 
-[2.5 ctrlX CORE 10 Day Trial Mode](#trial_mode)
+[2.5 ctrlX OS 10 Day Trial Mode](#trial_mode)
 
-[2.6 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup>](#virtual)
+[2.6 Four Hour Engineering Demo License on ctrlX CORE<sup>virtual</sup>](#virtual)
 
-[2.7 Additional License Mode: ctrX CORE 3 Month Test License](#test)
-
-[2.8 Spoofing detection by optionally signing / verifying license requests](#spoofing)
+[2.7 ctrlX OS 3-Month Test License](#test)
 
 [3 License Enforcement](#enforcement)
 
@@ -32,74 +37,93 @@ Please refer to the App Development Guide for further information.
 
 [3.3 Use API to Enforce Licenses](#rest)
 
+[3.3.3 Verify license response signatures](#spoofing)
+
 [3.4 Communicate with License Manager API](#comm)
 
 [3.5 Access License Manager in PLC Application](#plc)
 
 [3.6 License Management in Windows Applications](#windows)
 
-[4.0 Floating Licenses](#floating_global)
+[4 Floating Licenses](#floating_global)
+
+[4.1 Floating License Client](#floating_license_client)
+
+[4.2 Floating License Server](#floating_server_mode)
+
+[4.3 Licensing Certficate Store](#licensing_cert_store)
 
 # 1 Introduction <a name="introduction"></a>
 
-Bosch Rexroth provides a Licensing Center portal at [https://licensing.boschrexroth.com](https://licensing.boschrexroth.com) for managing device licenses. Through this portal, users can assign licenses to their devices and download a capability response. This response includes all licenses assigned to a specific device. After downloading, users can deploy this capability response to the corresponding device. This platform facilitates the easy management of device licenses, ensuring that devices have the required capabilities.
+Bosch Rexroth provides the ctrlX Device Portal at [https://ctrlx-deviceportal.boschrexroth.com/deviceportal](https://ctrlx-deviceportal.boschrexroth.com/deviceportal) for managing device licenses and assigning them to devices. A capability response contains the licenses assigned to a specific device.
 
-The ctrlX CORE User Interfaces therefore provides a license page which allows to upload a capability response and to check the currently available licenses on the device. For developers, the ctrlX CORE offers a restful API via an internal unix domain socket which can be used by an app to request and release a specific license.
+ctrlX OS devices with a device certificate that are registered in the Device Portal can automatically connect to the portal and retrieve licenses assigned to them. This is device-level provisioning; applications continue to acquire, verify, and release licenses through the License Manager API. Applications must still handle cases where a license is not yet available when requested.
 
-# 2 Licensing Modes  <a name="modes"></a>
+The ctrlX OS user interface provides a license page to upload a capability response and check which licenses are currently available on the device. For applications, ctrlX OS provides a REST API over an internal Unix domain socket to request and release licenses.
+
+## 1.1 Make a license available on the device <a name="device_provisioning"></a>
+
+1. Assign the required license to the device in the ctrlX Device Portal.
+2. If the ctrlX OS device has a device certificate, internet access and is registered in the portal, it can retrieve assigned licenses automatically. Check the device's license page to trigger synchronization and to confirm the license is available.
+3. If automatic retrieval is not available, download the capability response from the portal and upload it using the device's license page. Then confirm the license is available on the device.
+4. Once the license is available, the application acquires it through the License Manager API. Assigning or provisioning a license does not itself acquire it for an application.
+
+# 2 License Types and Usage Scenarios  <a name="modes"></a>
 
 ## 2.1 Overview <a name="overview"></a>
 
-The license management on the **ctrlX CORE** supports several different licensing modes. The following table gives an overview about the license modes.
+License management in **ctrlX OS** covers different license types and operating scenarios. The following table provides an overview.
 
-| License Mode | Target | Key | Usage | Additional information |
-|---|---|---|---|---|
-| Main License | ctrlX CORE |`SWL_XCR_{YOUR_APP_LICENSE_CODE}` | mandatory | **check note** |
-| Temporary Usage Rights (Emergency Mode) | ctrlX CORE |`SWL_XCR_{YOUR_APP_LICENSE_CODE}` | mandatory |`tampered` flag is `true` |
-| 10 Day Trial License |ctrlX CORE |`SWL_XCR_{YOUR_APP_LICENSE_CODE}` | optional |`isPermanent` flag is `false` |
-|Four Hour Engineering Demo License |ctrlX CORE<sup>virtual</sup>|`SWL_XCR_ENGINEERING_4H`|suggested|**check note** |
+| Scenario | When it applies | App configuration or request | App behavior |
+|---|---|---|---|
+| Standard app license | A customer assigns the app's license to a ctrlX OS device. | Declare the app license in the package manifest and acquire it through the License Manager. | Run when acquisition succeeds; tell the user if the required license is unavailable and periodically verify it. |
+| Temporary usage rights | ctrlX OS is in the 10-day emergency period after device replacement. | Acquire the app's standard license through the License Manager. | Treat a successful acquisition with `tampered: true` as licensed. |
+| 10-day trial license | A device-specific trial license has been assigned to the device. | Acquire the app's standard license through the License Manager. | Treat successful acquisition as licensed. `isPermanent: false` means non-permanent and does not by itself identify a trial license. |
+| 10-day trial mode | Trial mode is enabled for an app that supports it. | Set `supportsTrial: true` for applicable licenses in the package manifest; use the License Manager API. | The response has `tampered: true`; treat a successful acquisition as licensed. This flag is also used for Temporary Usage Rights, so it does not distinguish the two scenarios by itself. |
+| Four-hour engineering demo license | An app runs on ctrlX CORE<sup>virtual</sup>. | Request `SWL_XCR_ENGINEERING_4H` as an alternative to the app-specific license. | Allow operation with this license for evaluation; ctrlX CORE<sup>virtual</sup> shuts down after four hours. |
+| Three-month test license | An app is in beta/prototype (B-Sample) phase. | Contact Bosch Rexroth; this is not generally available to partner apps. | Support it only when explicitly made available. |
 
 !!! important
-    - The app will start normally in the first three cases irrespective of the modes. Information about temporary/trial is not important and developer can avoid checking the different flags.
-    - To ensure a seamless trial experience, we recommend enabling your application to launch with both the standard license and the `SWL_XCR_ENGINEERING_4H` license. More information is provided below.
+    - For evaluation on ctrlX CORE<sup>virtual</sup>, we recommend supporting both the app's standard license and the `SWL_XCR_ENGINEERING_4H` license. More information is provided below.
     - For storing the license ID, it's recommended to use `/tmp`. This folder is accessible from the snap by default. Users can easily write the ID to `/tmp/myFancyFile`, which remains available until the system reboots, even after the app is removed.
 
 ### ctrlX CORE<sup>virtual</sup>
 
-As displayed in the table, there is only the "four hour engineering demo license" available on the **ctrlX CORE<sup>virtual</sup>**, which allows to evaluate a new app for a limited time (the ctrlX CORE<sup>virtual</sup> is terminated after four hours to prevent productive use). Use the `SWL_XCR_ENGINEERING_4H` license when the application is running in ctrlX CORE<sup>virtual</sup>.
+As shown in the table, **ctrlX CORE<sup>virtual</sup>** supports only the four-hour engineering demo license. This license lets you evaluate a new app for a limited time; after four hours, **ctrlX CORE<sup>virtual</sup>** shuts down automatically to prevent productive use.
+
+When your app runs on **ctrlX CORE<sup>virtual</sup>**, your app should query the `SWL_XCR_ENGINEERING_4H` license and, if the license is available, enable the app's functionality.
 
 ### All other cases
 
-The different license modes and their expected behaviors for the app are described briefly below. This information is intended to help developers distinguish between different cases depending on the license mode used within their application. The descriptions aim to show developers the type of license the app is currently operating under.
+The following sections describe these license types and operating scenarios, including how the app is expected to behave in each case.
 
-## 2.2 ctrlX CORE Main License  <a name="main"></a>
+## 2.2 Standard App License <a name="main"></a>
 
-**Purpose:** Standard License
+**Purpose:** The app-specific license(s) purchased by a customer for normal use.
 
 **Description:**
 
-- This is the standard license that a user obtains when buying an app. Therefore, the support of this license mode is **mandatory**.
-- The license is obtained (bought) in the Bosch Rexroth Licensing Center and then assigned to a specific device by the user.
-- The standard license can be either permanent (unlimited) or time based (expires)
+- For apps that require licensing, support for the app-specific standard license is **mandatory**. The app must acquire and release it through the License Manager; individual licensing implementations are not permitted.
+- The customer obtains the license through the Bosch Rexroth ctrlX Device Portal and assigns it to a specific device. See [Make a license available on the device](#device_provisioning) for the provisioning steps.
+- The license can be permanent (unlimited) or time-based (expires).
 
 **Expected App Behaviour**:
 
-- The app shall start and run as intended, when the standard license is available.
-- It is strongly recommended that the app **periodically** checks for validity of license(s), e.g. every hour
-- If acquiring a license is not possible (no license is available), the app shall inform the user that a license needs to be obtained.
-- When no standard app specific license is available on the device, an app shall only run if one of the other licenses is active.
+- Start the licensed functionality after successful acquisition of the standard license or another applicable license described in this section.
+- If no applicable license can be acquired, inform the user that a license is required.
+- Follow the acquisition, periodic verification, retry, and release guidance in [License Integration](#rest).
 
 Note that for time-based licenses, the license manager will automatically warn (diagnostic alarm) when the time-based license is about
-to expire (1 month before expiration, 7 days before expiration and 1 day before expiration).
+to expire (1 month before expiration, 7 days before expiration and 1 day before expiration). After a time-based license expires, subsequent acquisition requests for it will fail.
 
-## 2.3 ctrlX CORE Temporary Usage Rights (Emergency Mode)  <a name="emergency"></a>
+## 2.3 ctrlX OS Temporary Usage Rights (Emergency Mode)  <a name="emergency"></a>
 
-**Purpose:** Avoid machine downtime
+**Purpose:** Emergency Device Replacement
 
 **Description:**
 
-- On a ctrlX CORE, the user has the possibility to activate a special mode that is called "Temporary usage rights". The mode can be activated using the License Manager UI.
-- Enabling this mode allows users to operate the ctrlX CORE in a productive environment for ten consecutive days. The single purpose of this mode is to prevent a downtime when a defect device is replaced and no licenses have been assigned, yet. ==**This mode can only be activated once on a device**==
+- In ctrlX OS, the user has the possibility to activate a special mode that is called "Temporary usage rights". The mode can be activated using the License Manager UI.
+- Enabling this mode allows users to operate ctrlX OS in a productive environment for ten consecutive days. The single purpose of this mode is to prevent a downtime when a defect device is replaced and no licenses have been assigned, yet. ==**This mode can only be activated once on a device.**==
 - Within these ten days, the user has to either add licenses to the new device or move the licenses from the broken device to the replacement device.
 
 !!! warning
@@ -111,7 +135,7 @@ to expire (1 month before expiration, 7 days before expiration and 1 day before 
 - The app is able to detect whether the system runs in this mode by evaluating the `tampered` flag in the response to the acquisition request (the flag is set to `true`)
 - When this mode is active, the app should work as if a standard license is available.
 
-## 2.4 ctrlX CORE 10 Day Trial License  <a name="trial"></a>
+## 2.4 ctrlX OS 10 Day Trial License  <a name="trial"></a>
 
 **Purpose:** Trial license file specific to the device ID for testing purposes
 
@@ -126,10 +150,10 @@ to expire (1 month before expiration, 7 days before expiration and 1 day before 
 **Expected App Behaviour:**
 
 - Support of this mode is **optional**, the App may decide, whether its' licenses should be included inside the trial-license file
-- The app is able to detect whether the system runs in this mode by evaluating the `isPermanent` flag in the response to the acquisition request (the flag is set to `false`)
+- The acquisition response may have `isPermanent` set to `false`, indicating a non-permanent license. This flag does not by itself identify a 10-day trial license because standard licenses may also be time-based.
 - When this mode is active, the app should work as if a standard license is available.
 
-## 2.5 ctrlX CORE 10 Day Trial Mode  <a name="trial_mode"></a>
+## 2.5 ctrlX OS 10 Day Trial Mode <a name="trial_mode"></a>
 
 **Purpose:** Test applications without an actual license for 10 days
 
@@ -154,19 +178,24 @@ To support this feature, the application only needs to be configured in the pack
     "description": "Industrial firewall for ctrlX OS with basic features",
     "required": true,
     "supportsTrial": true,
-    "supportsFloating": true,
+    "supportsFloating": false,
     "i18n": "licenses.SWL-XCx-FRW-FIREWALLxxxxx-BANN"
   }
 ],
 ```
 
-In the example above, if the user enables trial mode for the app, both licenses (**ctrlX OS License – Advanced Firewall** and **ctrlX OS License – Basic Firewall**) become available on the system, as both have the required property set. Depending on the use case, trial support can also be enabled for only a subset of licenses.
+**Expected App Behaviour:**
+
+- When trial mode is active, the acquisition response has `tampered` set to `true`. Treat a successful acquisition as licensed.
+- Temporary Usage Rights also sets `tampered` to `true`, so this flag alone does not distinguish trial mode from emergency mode. In either case, the app should work as if a standard license is available.
+
+In the example above, if the user enables trial mode for the app, both licenses (**ctrlX OS License – Advanced Firewall** and **ctrlX OS License – Basic Firewall**) become available on the system because both have `supportsTrial` set to `true`. Depending on the use case, trial support can also be enabled for only a subset of licenses.
 
 Once activated, trial mode remains active for 10 days and cannot be reactivated afterward. It can only be enabled once per app (provided the app supports this feature). Trial mode is intended primarily for testing purposes and not for productive use.
 
-The key difference between a 10-day trial license and trial mode is as follows: A trial license (see [2.4 ctrlX CORE 10 Day Trial License](#trial)) is an actual license file generated by the License Center and tied to a specific device ID. In contrast, trial mode allows an application to be used temporarily without a license file, as long as trial support is declared in the app’s package manifest.
+The key difference between a 10-day trial license and trial mode is as follows: A trial license (see [2.4 ctrlX OS 10 Day Trial License](#trial)) is an actual license file generated by the License Center and tied to a specific device ID. In contrast, trial mode allows an application to be used temporarily without a license file, as long as trial support is declared in the app's package manifest.
 
-## 2.6 Four Hour Engineering Demo License on  ctrlX CORE<sup>virtual</sup> <a name="virtual"></a>
+## 2.6 Four Hour Engineering Demo License on ctrlX CORE<sup>virtual</sup> <a name="virtual"></a>
 
 **Purpose**: Evaluation mode on a ctrlX CORE<sup>virtual</sup>
 **Description**:
@@ -176,57 +205,24 @@ The key difference between a 10-day trial license and trial mode is as follows: 
 
 **Expected App Behaviour:**
 
-- In order to support this non-productive mode, apps must check for the license `SWL_XCR_ENGINEERING_4H`
+- In order to support this non-productive mode, apps must check for the license `SWL_XCR_ENGINEERING_4H` (in addition to the app's standard license)
 - Support for this mode is **optional** yet *highly* **recommended**, offering users a great opportunity to fully experience the application's capabilities and functionalities within
 an engineering environment, e.g. ctrlX Works
 
-## 2.7 Additional License Mode: ctrlX CORE 3 Month Test License  <a name="test"></a>
+## 2.7 ctrlX OS 3-Month Test License <a name="test"></a>
 
 **Purpose:** Time limited test and evaluation of apps which are in beta/prototype phase (B-Sample phase)
 
 **Description:**
 
-- This mode is not intended / available for partner apps by default.
-- Please get in touch with Bosch Rexroth directly, if this mode might be of interest for you.
-
-## 2.8 Spoofing detection by optionally signing / verifying license requests  <a name="spoofing"></a>
-
-**Purpose:** This mechanism allows applications that request a license to verify that the license indeed comes from the ctrlX OS license manager.
-
-**Description:**
-
-- Although it is quite improbable, that a malicious actor could replace ctrlX OS' license manager, a further layer of security is added
-- Applications can request licenses (see [License Manager API](https://boschrexroth.github.io/rest-api-description/ctrlx-automation/ctrlx-core/)) and set the 'signResponse' query parameter
-- Once a license has been requested (with the corresponding query parameter set) the response's header will contain a signature
-- This signature was calculated using the device certificate (and the corresponding tpm-based key) and can be used to fully verify that the license response was indeed from a certified ctrlX OS device with no spoofed license manager
-
-**Usage:**
-
-1) Any application that wants to use this mechanism will need to send a license request with the corresponding query parameter set <br>
-    1.1) The response header contains a hex-encoded signature ("Payload-Signature") <br>
-    2.2) The signature is created using ECDSA-SHA256 on the standardized curve 'SECP-256' <br>
-2) Once the response (and the signature in 'Payload-Signature') the application needs to verify that the signature is indeed valid and was produced by the device <br>
-2.1) The license manager's device certificate chain (and the public key herein) can be used for this - see (see [License Manager API](https://boschrexroth.github.io/rest-api-description/ctrlx-automation/ctrlx-core/)) <br>
-2.2) Use the public key inside the end-entity (device) certificate to verify the signature <br>
-3) Once signature verification is successful, we can assume that the chain sent by the device and the key used for signing correspond, however additional steps are required to ensure that the device is indeed a ctrlX OS device (and the license manager is unaltered) <br>
-3.1) The device-certificate chain as retrieved in step 2.1 can now be used to check whether the device is a ctrlX OS device by verifying the certificate chain <br>
-3.2) The application now needs to verify that the certificate was indeed signed by an authorized ctrlX OS party (and its root CA certificate) <br>
-3.3) For this purpose it needs to know the corresponding ctrlX root CA certificate (com.ctrlx-automation.os.crt) - recommendation is to have it inside the app's binaries as this will ensure that no malicious entity would be able to change it. <br>
-3.4) Verify the certificate chain from the device up to the mentioned root certificate <br>
-
-**Note:**
-As there are multiple steps involved here (where some of them might be time consuming due to cryptographic complexity) it is the app's responsibility whether it wants to check this once during startup, according to a defined interval, etc. Please note the general perception is that - if this feature is required - checking it during startup suffices to verify the integrity of the license manager.
-
-**ctrlX OS root CA certificate:**
-As stated in step 3.2, the application needs to know the ctrlX OS root CA certificate (com.ctrlx-automation.os.crt). If this feature is required, the corresponding certificate needs to be embedded inside the application. The ctrlX OS root CA certificate can be retrieved via the following link: <br>
-
-[Download ctrlX OS root CA certificate (com.ctrlx-automation.os.crt)](certificates/com.ctrlx-automation.os.crt)
+- This license is not generally available to partner apps by default.
+- Contact Bosch Rexroth if this license may be of interest.
 
 # 3 License Enforcement <a name="enforcement"></a>
 
 To integrate an app into the license management, please follow the instructions below.
 
-## 3.1 Add Content Plug to snapcraft.yaml (<a name="plug"></a>)
+## 3.1 Add Content Plug to snapcraft.yaml <a name="plug"></a>
 
 To get access to the unix domain socket that provides the restful API, add the following content plug definition to the snapcraft.yaml:
 
@@ -238,7 +234,7 @@ plugs:
     target: $SNAP_DATA/licensing-service
 ```
 
-This will create a folder "license-service" during installation of the app on the ctrlX CORE and provide access to the unix domain socket "licensing-service.sock" which will be located in the folder.
+This will create a folder "licensing-service" during installation of the app in ctrlX OS and provide access to the unix domain socket "licensing-service.sock" which will be located in the folder.
 
 ## 3.2 Adapt package-manifest.json <a name="manifest"></a>
 
@@ -262,20 +258,40 @@ The "required" flag indicates whether a license is mandatory to use the applicat
 
 How an app reacts when no license is present or the license is removed during runtime, can be freely chosen by the app. Nevertheless, to provide a unique user experience across multiple apps, the following best practices are recommended.
 
-The app should acquire the license when started or each time a function requiring a license is called. Furthermore, it should **periodically** verify the presence of the license on the device by releasing and re-acquiring the license, ensuring it hasn't expired or been removed. This applies to both mandatory and optional types of licenses.
+The License Manager records license-related diagnostics in the ctrlX Logbook. The app may also log useful app-specific context, but should not duplicate License Manager entries or write repeated messages at retry or periodic-check frequency. Rate-limit or aggregate recurring messages to avoid flooding the Logbook.
 
-If a license is no longer required, such as when the app is stopped or uninstalled, the license should be released. This action returns the license to the license pool, allowing it to be acquired by another app. Otherwise, the license will only become available again after a reboot of the device.
+#### Acquire and use
 
-If a license is missing, the application should display a warning or an error message and/or log the event. The user should be informed about which licenses are required to enable the specific functionality of the app.
+Acquire a license when the app or licensed functionality starts. Start the functionality only after acquisition succeeds, and keep the license acquired while it is in use. It is not recommended to use a capability query alone or a one-time acquire/release sequence as a preflight check before starting the licensed functionality.
+
+#### Periodically verify
+
+Periodically verify the license by releasing and reacquiring it, for example every 15 minutes. The interval is an example, not continuous validation: an expired or unavailable license may not be detected until the next check. Reacquire after each check if the licensed functionality is still needed. If any one of several licenses can authorize the same functionality, try candidates in a defined order during initial acquisition and stop at the first success. Remember that candidate and try it first during each periodic check; if it is no longer available, try the alternatives and remember the next successful candidate. Rembering the last successfull candidate and trying that first is particularly important for floating licenses where each unsuccessful local acquisition request from the app could trigger a full license request to a floating license server (if enabled).
+
+For floating licenses, the License Manager attempts to renew tracked licenses according to the configured renewal interval. An acquired license already present in local storage may not be tracked for renewal. Automatic renewal does not replace the app's periodic release/reacquire check; the app is not directly notified of a background renewal failure. Handle a failed reacquisition according to the app's chosen behavior.
+
+#### Handle unavailable licenses
+
+If license acquisition fails because no suitable license is available, inform the user which license is needed. Retry the acquisition at a defined interval, for example once per minute, while the licensed functionality is still requested. Avoid tight-loop retries or excessive request rates that could overload the License Manager. Serialize acquisition, periodic checks, retries and release for the same license so that requests do not overlap. Stop retrying when the functionality is no longer needed or the app is stopped.
+
+A request timeout or connection loss does not prove that the License Manager failed to process the request. An acquire may have succeeded without the app receiving its ID; a release may already have completed. Do not treat these outcomes as a definite rejection or blindly issue overlapping acquire requests. Handle recovery according to the application's licensing policy, adding an app log entry only if it provides context beyond the License Manager's Logbook entry.
+
+If a license becomes unavailable while the app is running, each app provider must assess the consequences of interrupting the affected licensed functionality and define the app's response accordingly. Do not assume that abruptly stopping the app or disabling the feature is safe: depending on the application, this may create a safety hazard or disrupt machine operation. If interruption could be hazardous, follow the system's designed controlled-shutdown or safe-state procedure before stopping the functionality. Inform the user. Add an app log entry only if it provides useful context beyond the License Manager's Logbook entry.
+
+#### Release when no longer needed
+
+Release the license without reacquiring it when the licensed functionality is no longer needed, or when the app is stopped or uninstalled. This releases the local license instance so it can be acquired again on the device. For floating licenses, local release does not guarantee that the server seat is returned immediately; it may remain allocated and renewed until the License Manager returns it or the borrow interval expires without renewal.
+
+A stored license ID can be reused to release a ticket after an app restart, but may no longer be known after the License Manager restarts. Releasing an unknown ID returns HTTP 404 and does not release another license. Discard the stale ID and acquire a new instance if the functionality is still needed.
 
 !!! important
-    On the ctrlX CORE, when enforcing licenses the use of the license management is mandatory. Individual implementations are not permitted.
+    On ctrlX OS devices, when enforcing licenses the use of the license management is mandatory. Individual implementations are not permitted.
 
 ### 3.3.2 License Manager API
 
 The licensing API is available on GitHub: [https://boschrexroth.github.io/rest-api-description](https://boschrexroth.github.io/rest-api-description)
 
-The ctrlX License Manager API streamlines license management for the ctrlX OS. This API documentation is also available in the API Reference Section of ctrlX OS. It provides clear guidance on acquiring, releasing, querying, and managing licenses for different applications or functions. The REST API functionality allows users to test their license features and confirm their operability. **The use of unix sockets for license integration is recommended. Refer to section 3.4 for details.**
+The ctrlX OS License Manager API streamlines license management for the ctrlX OS. This API documentation is also available in the API Reference Section of ctrlX OS. It provides clear guidance on acquiring, releasing, querying, and managing licenses for different applications or functions. The REST API functionality allows users to test their license features and confirm their operability. **The use of unix sockets for license integration is recommended. Refer to section 3.4 for details.**
 
 Implementing this API, an app is able to
 
@@ -284,91 +300,159 @@ Implementing this API, an app is able to
 - Release a license.
 - Update the licenses on a ctrlX OS device by uploading a license file.
 
-| Function | HTTP Method | URI | Payload | Parameters | Response |
-|---|---|---|---|---|---|
-|Get list of all activated capabilities	|GET|	/capabilities	|none | none |200,<br>[<br>{<br>"isPermanent": true,<br>    "finalExpirationDate": "2030-01-01T12:00:27.87+00:20",<br>    "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",<br>    "count": 1,<br>    "version": "1.0",<br>    "startDate": "2030-01-01T12:00:27.87+00:20"<br>  }<br>]<br> |
-| Acquire license	| POST |/license| {<br>"name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",<br>  "version": "1.0" <br>} |signResponse | 200<br>{<br>  "isPermanent": true,<br>  "endDate": "2030-01-01T12:00:27.<br>7+00:20",<br>  "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",<br>  "id": <br>0083d875-30e8-4ff6-9f92-46096ef2d123",<br>  "version": "1.0",<br>  "startDate":"2030-01-01T12:00:27.87+00:20"<br>} |
-|Release license|	DELETE|	/license/{id}	|none |none |	204	|
-| Update the capability state in the device| PUT| /capabilities | file<br>string($binary) | withChangeReport| 200 |
-|Get the device certificate chain |GET|	/device-certificate-chain |none | none |200,<br> -----BEGIN CERTIFICATE----- MIIDOTCCA+gAwIBAgIURF1DTLBM3YljOsMxXMtHvtEVzE4wCgYIKoZIzj0EAwIwgbgxCzAJBgNVBAYTAkRFMRAwDgYDVQQIDAdCYXZhcmlhMRUwEwYDVQQHDAxMb2hy...<br>FgYDVR0lAQHBAwwCgYIKwYBBQUHAwIwCgYIKoZIzj0EAwIDSAAwRQIgH9Ksvn024lHfDhL4w4YyBLAf6JzxjBix8L6Ka1m3NUgCIQCx3sd85Ag0m/XuF+GViRiL3obO2Kr7reeXVEAg1gRgqw== <br> -----END CERTIFICATE----- <br> -----BEGIN CERTIFICATE----- MIIDOjCCAt+gAwIBAgIUUdrEfPLcIibj5PCsmD1K6nYK0wCgYIKoZIzj0EAwIw...kRi49k6qak0EzsDVCWPxXeTLEa9OwinaCm1AiEAia+Kfhmg3cFI6KKHCA12ceic 0QRmvnOTubiVvXuTy88=QUHAwIwCgYIKoZIzj0EAwIDSAAwRQIgH9Ksvn024lHfDhL4w4YyBLAf6JzxjBix8L6IDSAAwRQIgH9Ksvn024lHfDhL4w4YyBLAf6JzxjBix8L6<br>-----END CERTIFICATE----- <br> |
+| Operation | Method | Endpoint | Notes |
+|---|---|---|---|
+| Get activated capabilities | GET | `/capabilities` | Returns licenses available on the device. |
+| Acquire a license | POST | `/license` | Send a license name and version; optionally set `signResponse`. |
+| Release a license | DELETE | `/license/{id}` | Use the ID returned by the acquire request. |
+| Update capabilities | PUT | `/capabilities` | Upload a capability response file; optionally set `withChangeReport`. |
+| Get the device certificate chain | GET | `/device-certificate-chain` | Used to verify signed responses and client certificates. |
 
-### 3.3.3 Acquiring & releasing a license <a name="acquire_release"></a>
+### 3.3.3 Verify license response signatures <a name="spoofing"></a>
+
+**Purpose:** This mechanism allows applications that request a license to verify that the license indeed comes from the ctrlX OS license manager.
+
+**Description:**
+
+- Although it is quite improbable, that a malicious actor could replace ctrlX OS license manager, a further layer of security is added
+- Applications can request licenses (see [License Manager API](https://boschrexroth.github.io/rest-api-description/ctrlx-automation/ctrlx-core/)) and set the 'signResponse' query parameter
+- Once a license has been requested (with the corresponding query parameter set) the response's header will contain a signature
+- This signature was calculated using the device certificate (and the corresponding tpm-based key) and can be used to fully verify that the license response was indeed from a certified ctrlX OS device with no spoofed license manager
+
+**Usage:**
+
+1 - Any application that wants to use this mechanism will need to send a license request with the corresponding query parameter set <br>
+
+- 1.1 - The response header contains a hex-encoded signature ("Payload-Signature") <br>
+- 1.2 - The signature is created using ECDSA-SHA256 on the standardized curve 'SECP-256' <br>
+
+2 - Once the response (and the signature in 'Payload-Signature') is received the application needs to verify that the signature is indeed valid and was produced by the device <br>
+
+- 2.1 - The license manager's device certificate chain (and the public key herein) can be used for this - see (see [License Manager API](https://boschrexroth.github.io/rest-api-description/ctrlx-automation/ctrlx-core/)) <br>
+- 2.2 - Use the public key inside the end-entity (device) certificate to verify the signature <br>
+
+3 - Once signature verification is successful, we can assume that the chain sent by the device and the key used for signing correspond, however additional steps are required to ensure that the device is indeed a ctrlX OS device (and the license manager is unaltered) <br>
+
+- 3.1 – Use the device certificate chain retrieved in step 2.1 to check whether the device is a genuine ctrlX OS device. <br>
+- 3.2 – To do this, your app needs the ctrlX OS root CA certificate (`com.ctrlx-automation.os.crt`). We recommend embedding this certificate in your app's binaries so that it cannot be replaced or spoofed by a malicious party. <br>
+- 3.3 – Verify the certificate chain from the device certificate up to the ctrlX OS root CA certificate. If verification succeeds, the device certificate was issued by an authorized ctrlX OS party and the device is a genuine ctrlX OS device. <br>
+
+
+**Note:**
+As there are multiple steps involved here (where some of them might be time consuming due to cryptographic complexity) it is the app's responsibility whether it wants to check this once during startup, according to a defined interval, etc. Please note the general perception is that - if this feature is required - checking it during startup suffices to verify the integrity of the license manager.
+
+**ctrlX OS root CA certificate:**
+As stated in step 3.2, the application needs to know the ctrlX OS root CA certificate (com.ctrlx-automation.os.crt). If this feature is required, the corresponding certificate needs to be embedded inside the application. The ctrlX OS root CA certificate can be retrieved via the following link: <br>
+
+[Download ctrlX OS root CA certificate (com.ctrlx-automation.os.crt)](certificates/com.ctrlx-automation.os.crt)
+
+### 3.3.4 Acquiring & releasing a license <a name="acquire_release"></a>
 
 When starting an application or service that requires a license, it must acquire the necessary license to operate. Acquiring a license generates a unique ID specific to that license. The POST API call /license will acquire the license when passed with parameter as shown below.
 
-  ```json
-  {
-    "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",
-    "version": "1.0"
-  }
+```json
+{
+  "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",
+  "version": "1.0"
+}
 ```
 
 Upon a successful request, the following response will be returned.
 
-> ![request example](images/licensing2.png)
+```json
+{
+  "isPermanent": false,
+  "endDate": "2030-01-01T12:00:27.7+00:20",
+  "name": "SWL-XCx-FRW-BASIC_FOOBAR-NNNN",
+  "id": "0083d875-30e8-4ff6-9f92-46096ef2d123",
+  "version": "1.0",
+  "startDate": "2030-01-01T12:00:27.87+00:20"
+}
+```
 
-**The application should release the license when it is stopped or removed.** It should also perform periodic checks to ensure the license's validity. The license can be released using the ID obtained from the acquire response. Storing this license ID is necessary and should be stored in a directory that is not affected when the application goes into a faulty state and needs to be restarted. The usage of `/tmp` is recommended for this purpose. This folder is accessible from the snap by default. Users can easily write the ID to `/tmp/myFancyFile`, which remains available until the system reboots, even after the app is removed.
+!!! warning
+    Each successful acquire request returns a license instance with its own ID. Acquiring the same license again without first releasing the existing instance can fetch another instance from the license server and consume an additional floating-license seat. During periodic checks, release the current instance by its ID before reacquiring it.
 
-### 3.3.4 Available licenses on the device (activated capabilities)
+Use the ID returned by the acquire response to release the license. Follow the [license lifecycle and periodic verification guidance](#rest) while the functionality is in use. Store the ID somewhere the app can access after an app restart, for example in `/tmp`. A stored ID may no longer be valid after a License Manager restart; see [Release when no longer needed](#rest).
 
-Upon request, an app may retrieve the list of available licenses on the device including all details (e.g. expiration, counter, etc.). This is recommended to check whether a specific license is available (and not in use) before trying to acquire it.
-Nevertheless, this is optional - it is sufficient to simply try to acquire a license and then check whether the acquisition request was successful.
+### 3.3.5 Available licenses on the device (activated capabilities)
+
+An app can retrieve the list of licenses available on the device, including metadata such as expiration dates and license counts. This lets the app check how many units of a specific license are still available (not in use) before trying to acquire one.
+
+This step is optional. For most apps, it is sufficient to request the license and check whether the request succeeded. Note that the list only covers licenses stored locally on the device. In some use cases, such as floating licenses, the license might not be on the device yet, so it won't appear in the list even though it can still be acquired.
 
 Sample response:
 
 > ![response example](images/licensing1.png)
 
-### 3.3.5 Update license status
+### 3.3.6 Update license status
 
-The API allows to upload a capability response (license file) from the license portal to update the license status on the device (e.g. add new licenses). This functionality is not required by an app itself but is rather performed by the device operator depending on which licenses will be required according to the installed apps. The REST API route to upload a license file allows passing an optional query parameter (withChangeReport). If this parameter is set, the result of the API will return all licenses that have been added / removed by the used license file.
+Device operators can use the API to upload a capability response (license file) from the license portal and update the license status on the device, for example to add new licenses. This is a manual alternative to automatic license retrieval on eligible ctrlX OS devices. It is not the app's responsibility.
+
+The REST API route for uploading a license file accepts an optional query parameter, `withChangeReport`. If this parameter is set, the response lists all licenses that the uploaded license file added or removed.
 
 ## 3.4 Communication with License Manager API <a name="comm"></a>
 
-### 3.4.1 Unix socket
+### 3.4.1 Unix domain socket
 
-- The content interface from step 3.1 provides access through a unix-domain socket named **licensing-service.sock**. This socket is located at target path `$`SNAP_DATA/licensing-service/licensing-service.sock. All licensing APIs can be accessed directly using an HTTP client through this socket address. <br>**E.g.** *curl --unix-socket $SNAP_DATA/licensing-service/licensing-service.sock <http://localhost/license-manager/api/v1/capabilities>.* <br> similarly, HTTP client via unix socket can be used by other programming languages to access licensing API </br>
-- Using unix sockets eliminates the need for authentication, making it a recommended option as no token for authorization is required.
+The content interface from step 3.1 provides access through a Unix domain socket, `licensing-service.sock`, located at `$SNAP_DATA/licensing-service/licensing-service.sock`. You can call all licensing APIs directly through this socket using any HTTP client. Most programming languages offer HTTP clients that support Unix domain sockets, so you can access the licensing API the same way from your app's code.
 
-Check if the Plug is connected:
+We recommend using the Unix domain socket because it requires no authentication, so your app doesn't need to obtain an authorization token.
 
-```sh
-if [ -d "$SNAP_DATA/licensing-service" ]; then echo "IS THE LICENSING PLUG INSERT: true"; else echo "IS THE LICENSING PLUG INSERT: false"; fi
+#### Check whether the plug is connected
+
+```bash
+if [ -d "$SNAP_DATA/licensing-service" ]; then
+  echo "Licensing plug connected: true"
+else
+  echo "Licensing plug connected: false"
+fi
 ```
 
-Before executing the commands, change the current directory to $SNAP_DATA.
+#### Examples using curl
 
-```sh
+The following examples use a relative socket path, so first change to the `$SNAP_DATA` directory:
+
+```bash
 cd $SNAP_DATA
 ```
 
-Examples using CURL:
+**Get capabilities:**
 
-Get capabilities:
-
-```sh
-curl -sS --no-buffer -XGET --unix-socket licensing-service/licensing-service.sock http://localhost/license-manager/api/v1/capabilities
+```bash
+curl -sS --no-buffer -X GET --unix-socket licensing-service/licensing-service.sock \
+  http://localhost/license-manager/api/v1/capabilities
 ```
 
-Acquire the 4H license for ctrlX CORE Virtual. Use the license feature code from the capabilities to acquire a real license.
+**Acquire a license:**
 
-```sh
-curl -sS --no-buffer -XPOST --unix-socket licensing-service/licensing-service.sock 'http://localhost/license-manager/api/v1/license' -H 'accept: application/json' -H 'Content-Type: application/json' -d "{\"name\":\"SWL_XCR_ENGINEERING_4H\",\"version\":\"1.0\"}"
+This example acquires the four-hour engineering license for ctrlX CORE<sup>virtual</sup>. To acquire a different license, replace `SWL_XCR_ENGINEERING_4H` with the license feature code returned by the capabilities request.
+
+```bash
+curl -sS --no-buffer -X POST --unix-socket licensing-service/licensing-service.sock \
+  'http://localhost/license-manager/api/v1/license' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"SWL_XCR_ENGINEERING_4H","version":"1.0"}'
 ```
 
-Release a license:
+**Release a license:**
 
-```sh
-curl -sS --no-buffer -XDELETE --unix-socket licensing-service/licensing-service.sock 'http://localhost/license-manager/api/v1/license/57ac4c58-4167-4afb-b4c2-e63c564c5b68'
+Replace the ID in the URL with the license ID returned when you acquired the license.
+
+```bash
+curl -sS --no-buffer -X DELETE --unix-socket licensing-service/licensing-service.sock \
+  'http://localhost/license-manager/api/v1/license/57ac4c58-4167-4afb-b4c2-e63c564c5b68'
 ```
 
-Store license ID:
+#### Store the license ID
 
-To store the license ID, it is recommended to use the `/tmp` folder. This folder is accessible from the snap by default. Users can easily write the ID to `/tmp/myFancyFile`, which remains available until the system reboots, even after the app is removed.
+Your app needs the license ID to release the license later, so store it after acquiring the license. We recommend storing it in the `/tmp` folder, which your snap can access by default. Files in `/tmp` remain available until the system reboots.
 
-```sh
-#Assuming that the license ID is contained in 'myid'
-licensefilelocation = /tmp/LICENSED
-echo $myid > $licensefilelocation
+```bash
+# Assumes the license ID is stored in the variable "myid"
+licensefilelocation=/tmp/LICENSED
+echo "$myid" > "$licensefilelocation"
 ```
 
 ## 3.5 Access License Manager in PLC Application <a name="plc"></a>
@@ -391,13 +475,14 @@ The online documentation of the library in ctrlX PLC Engineering provides detail
 
 ctrlX WORKS also supports the License Manager.
 
-Please find the ctrlX WORKS Licensing API here in the ctrlX World Portal:
-[ctrlX WORKS Licensing API](
-https://bosch.sharepoint.com/sites/msteams_1647245/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fmsteams%5F1647245%2FShared%20Documents%2FPartner%2F01%5FctrlX%2DWorld%5Fgeneral%5Finformation%2F03%5FApp%5FDevelopment%2FWindows%5Flicensing%2Fcom%2Eboschrexroth%2Ectrlxworks%2Elicensing%2Eapi%2D1%2E0%2E0%2Ezip&parent=%2Fsites%2Fmsteams%5F1647245%2FShared%20Documents%2FPartner%2F01%5FctrlX%2DWorld%5Fgeneral%5Finformation%2F03%5FApp%5FDevelopment%2FWindows%5Flicensing)
+Please find the ctrlX WORKS Licensing API here in the ctrlX OS Ecosystem Portal:
+[ctrlX WORKS Licensing API](https://bosch.sharepoint.com/sites/msteams_1647245/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2Fmsteams%5F1647245%2FShared%20Documents%2FPartner%2F01%5FctrlX%2DOS%2DEcosystem%5Fgeneral%5Finformation%2F03%5FApp%5FDevelopment%2FWindows%5Flicensing&viewid=8b8e06ca%2D17db%2D4be0%2D9e39%2D9075f4b21066)
+
+The access is restricted for ctrlX World Partners and ctrlX OS OEM - [registration here](https://www.ctrlx-os.com/en/ctrlx-world/ctrlx-os-ecosystem-portal/).
 
 This API provides licensing functions for Windows Applications, and comes with according samples for different programming languages and frameworks.
 
-# 4.0 Floating Licenses <a name ="floating_global"></a>
+# 4 Floating Licenses <a name ="floating_global"></a>
 
 Floating licenses are *special* licenses that are borrowed from a license server for a defined time interval. In a typical scenario the
 client (e.g. a ctrlX OS device in client mode) requests a floating license from a license server (e.g. a ctrlX OS device in license server mode).
@@ -405,7 +490,7 @@ Both modes are supported by the license manager and are explained throughout the
 
 > ![Floating License Client / Server Setup](images/client_server_setup.png)
 
-## 4.2 Floating License Client
+## 4.1 Floating License Client <a name ="floating_license_client"></a>
 
 It is assumed that the application is already integrated inside the licensing infrastructure as described within [License Enforcement](#enforcement).
 The integration and usage of a floating license in addition to an existing non-floating license includes following steps:
@@ -415,7 +500,7 @@ The integration and usage of a floating license in addition to an existing non-f
     and are usually configured once by a system administrator.
 2. Extend the application's [package-manifest.json](#floating_manifest) file by the additional property to support floating
 
-### 4.2.1 Enabling floating license functionality
+### 4.1.1 Enabling floating license functionality
 
 When an application requests a floating license from the license manager, it is first checked whether contacting a floating license server is enabled. Enablement is
 usually performed by a system administrator during device configuration and can be done via the settings of the license manager. Only if floating functionality is enabled,
@@ -423,9 +508,10 @@ the license manager (in client mode) will try to contact a configured license se
 
 > ![floating server settings](images/floating_client_settings.png)
 
-### 4.2.2 Adapt package-manifest.json <a name="floating_manifest"></a>
+### 4.1.2 Adapt package-manifest.json <a name="floating_manifest"></a>
 
 **Enable floating capability for an App**
+
 The app provider can specify whether an app’s license(s) support floating, meaning the license can be retrieved from a floating license server. To enable this functionality, the application must extend the package manifest by setting the **supportsFloating** property to *true*.
 
 When this property is enabled, the license manager attempts to obtain the license from a configured floating license server if no local license is available on the system.
@@ -456,16 +542,17 @@ The **ctrlX OS License - Basic Firewall** doesn't have the **supportsFloating** 
 ],
 ```
 
-### 4.2.3 Requesting a floating license
+### 4.1.3 Requesting a floating license
 
 The same mechanism to acquire / release a license by an application as described in [API](#rest) can be used for floating
 licenses. It is transparent for the application whether the license is retrieved from the internal on-device license storage or from a configured
-license server. The entire handling of connecting to a configured license server, generating a request and retrieving / processing the license response
-is encapsulated within the license manager.
+license server. The entire handling of connecting to a configured license server, generating a request and retrieving / processing the license response is encapsulated within the license manager.
 
-## 4.3 Floating License Server <a name="floating"></a>
+Follow the [license lifecycle and periodic verification guidance](#rest). The License Manager attempts to renew tracked floating licenses according to the configured renewal interval. A license acquired from local storage may not be tracked for renewal; if it expires, a subsequent reacquisition can trigger a request to the configured server. Releasing the local instance does not guarantee an immediate return of the floating seat to the server.
 
-### 4.3.1 Enabling the floating license server <a name="enable_license_server"></a>
+## 4.2 Floating License Server <a name="floating_server_mode"></a>
+
+### 4.2.1 Enabling the floating license server <a name="enable_license_server"></a>
 
 The floating server can be enabled via the settings page. If no *ctrlX OS - Floating License Server* license is available, the borrow interval cannot be set by the user and is fixed at 7 days, meaning that a client requesting a license will have the license for 7 days until it expires.
 
@@ -483,7 +570,7 @@ If the corresonding *ctrlX OS - Floating License Server* license is available on
   ],
 ```
 
-### 4.3.2 Floating License Server Settings <a name="floating_server_settings"></a>
+### 4.2.2 Floating License Server Settings <a name="floating_server_settings"></a>
 
 If the floating license server is enabled, the settings page will adjust to the settings that can be made to the floating
 license server. As the following image shows, these settings include following:
@@ -494,15 +581,15 @@ license server. As the following image shows, these settings include following:
 control for how long licenses borrowed from the server will be valid and the interval at which the clients should renew its' licenses.
 
 - Borrow Interval:
-  - The borrow interval (in seconds) determines the lifespan of the served licenses. After the borrow interval has passed
-  the license will be automatically returned to the floating server and removed from the floating client. In the exemplary
-  image the license would be served for 24 hours unless it is renewed.
+  - The borrow interval (in seconds) determines the lifespan of the served licenses. If a license is not renewed before
+  the interval expires, it expires on the client and the server can reclaim the seat. The server's displayed client records
+  may remain visible for some time even after expiry. In the exemplary image the license would be served for 24 hours unless it is renewed.
 - Renewal Interval:
   - The renewal interval (in seconds) is used by licensing clients to determine when to renew its' licenses / update it's
   current licenses with the license server. In the exemplary image the client would try every 3 hours to renew its license
-  that are currently in use and return the licenses that have been released. Lower renewal intervals mean faster updates with
-  the license server (thus quicker returns of licenses that have been released), however also mean higher load on the licensing
-  client and server.
+  that are currently tracked. A renewal might return previously released licenses, but local release alone does not guarantee
+  that they are excluded from subsequent renewals or returned to the server. Lower renewal intervals mean more frequent updates
+  with the license server, but also higher load on the licensing client and server.
 
 **Client Authentication**
 The administrator of the floating license server can also decide how the client needs to authenticate itself in order to
@@ -526,12 +613,12 @@ then verifies. If the checkbox is activated the selector allows two configuratio
   without manual interaction by a system administrator. However - if access shall not be granted to specific devices, these devices'
   certificates would need to be manually added to the certificate store *Licensing* under category untrusted (blacklisting).
 
-### 4.4 Licensing Certficate Store <a name="licensing_cert_store"></a>
+## 4.3 Licensing Certficate Store <a name="licensing_cert_store"></a>
 
 Depending on the authentication scheme configured on the license server ([see here](#floating_server_settings)), the client can be forced to authenticate itself (mutual TLS). Furthermore the server allows configuring CA certificates against which the client certificate is verified.
 
 These certificates (and keys) can be selected from a dedicated certificate store (*Licensing*).
 
-## Copyright
-
+***
+**Copyright**
 SPDX-FileCopyrightText: Bosch Rexroth AG

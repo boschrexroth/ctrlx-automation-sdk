@@ -14,7 +14,7 @@ OEM App signing is a feature that you need to request and sign a contract for.
 
 Procedure:
 1. Sign OEM App signing contract
-2. Generate your private signing key
+2. Generate your private signing key (256-bit ECC)
 3. Create a Certificate Signing Request (CSR) for this key. The CSR needs to contain at least the "Organization" field for the subject.
 4. Send this CSR to Bosch Rexroth AG
 5. Bosch Rexroth AG signs the CSR, and sends the OEM App signing ceritifcate back to you
@@ -59,6 +59,9 @@ myapp_1.4.3.app
             ├──myapp_1.4.3.signature
             └──myapp_1.4.3.snap
 ```
+
+!!! note 
+    Below, you find useful [tools](#tools), that take care about this folder structure inside your app.
 
 ### App signatures
 
@@ -163,8 +166,8 @@ Bosch Rexroth AG provides you with tools to sign your own apps after receiving y
 #### Signing tool
 
 To sign apps, use the [`app-signing-tool.sh`](https://github.com/boschrexroth/ctrlx-automation-sdk/tree/main/scripts/app-signing-tool.sh) script. It accepts the following parameters:
-- **Parameter 1:** OEM certificate (issued by Bosch Rexroth)
-- **Parameter 2:** Signing Key (private key of the OEM)
+- **Parameter 1:** OEM certificate (issued by Bosch Rexroth), e .g. mockcorp-my-app_rexroth.crt
+- **Parameter 2:** Signing Key (private key of the OEM), e. g. mockcorp-my-app_private-key.pem
 - **Parameter 3:** Directory where the snaps to sign are located
 - **Parameter 4:** Output directory for the signed apps (optional, defaults to Parameter 3)
 

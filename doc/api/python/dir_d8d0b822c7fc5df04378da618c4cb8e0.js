@@ -9,6 +9,7 @@ var dir_d8d0b822c7fc5df04378da618c4cb8e0 =
     [ "converter.py", "converter_8py_source.html", null ],
     [ "factory.py", "factory_8py_source.html", null ],
     [ "metadata_utils.py", "metadata__utils_8py_source.html", null ],
+    [ "owner.py", "owner_8py_source.html", null ],
     [ "provider.py", "provider_8py_source.html", null ],
     [ "provider_node.py", "provider__node_8py_source.html", null ],
     [ "provider_subscription.py", "provider__subscription_8py_source.html", null ],
@@ -17,5 +18,6 @@ var dir_d8d0b822c7fc5df04378da618c4cb8e0 =
     [ "subscription_properties_builder.py", "subscription__properties__builder_8py_source.html", null ],
     [ "subscription_sync.py", "subscription__sync_8py_source.html", null ],
     [ "system.py", "system_8py_source.html", null ],
+    [ "user.py", "user_8py_source.html", null ],
     [ "variant.py", "variant_8py_source.html", null ]
 ];

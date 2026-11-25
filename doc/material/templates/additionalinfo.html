@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ctrlX App Additional Information</title>
+  <style>
+    body{font-family:Segoe UI,Roboto,Arial;margin:24px;color:#222}
+    .box{max-width:900px;margin:0 auto}
+    h1{font-size:20px}
+    fieldset{margin:12px 0;padding:12px}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    label{display:flex;align-items:center;gap:8px}
+    textarea{width:100%;height:160px;margin-top:12px;font-family:Consolas,monospace}
+    button{margin-right:8px}
+    .small{font-size:12px;color:#555}
+    .infobtn{border:0;background:transparent;color:#007acc;cursor:pointer;margin-left:8px;font-size:14px}
+    .tooltip{position:fixed;z-index:9999;max-width:360px;background:#fff;border:1px solid #ddd;padding:10px;border-radius:6px;box-shadow:0 4px 12px rgba(0,0,0,0.08);font-size:13px;color:#222;display:none}
+    .tooltip h4{margin:0 0 6px 0;font-size:13px}
+    .tooltip ul{margin:6px 0 0 18px}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>ctrlX App Additional Information</h1>
+    <p class="small">Select one option from each category. Click <strong>Generate JSON</strong> to produce a JSON object containing only the keys and selected option keys. You can  download it as <code>additionalinfo.json</code>. Add the generated file to your documentation folder as <code>additionalinfo.json</code>.</p>
+
+    <form id="qform" onsubmit="return false;">
+      <fieldset>
+        <legend>Certificate (choose one) <button type="button" class="infobtn" data-key="certificate" aria-label="Certificate info">ℹ️</button></legend>
+        <div class="row">
+          <label><input type="radio" name="certificate" value="CERTIFICATE_NO_INTEGRATION">Not Applicable</label>
+          <label><input type="radio" name="certificate" value="CERTIFICATE_SELF_SIGNED">Not Integrated (self signed)</label>
+          <label><input type="radio" name="certificate" value="CERTIFICATE_INTEGRATED">Fully Integrated</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Identity Management (choose one) <button type="button" class="infobtn" data-key="authorization" aria-label="Identity Management info">ℹ️</button></legend>
+        <div class="row">
+          <label><input type="radio" name="authorization" value="AUTHORIZATION_NO_AUTH">Not Integrated</label>
+          <label><input type="radio" name="authorization" value="AUTHORIZATION_OWN_AUTH">Partially Integrated - own authorization</label>
+          <label><input type="radio" name="authorization" value="AUTHORIZATION_WITHOUT_SCOPE">Partially Integrated - scope is not implemented</label>
+          <label><input type="radio" name="authorization" value="AUTHORIZATION_WITH_SCOPE">Fully Integrated</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Data layer (choose one) <button type="button" class="infobtn" data-key="datalayer" aria-label="Data layer info">ℹ️</button></legend>
+        <div class="row">
+          <label><input type="radio" name="datalayer" value="DATALAYER_NA">Not Integrated</label>
+          <label><input type="radio" name="datalayer" value="DATALAYER_READ_WRITE_EXISTING_NODE">Partially Integrated</label>
+          <label><input type="radio" name="datalayer" value="DATALAYER_PROVIDER_OR_REALTIME_NODE">Fully Integrated</label>
+        </div>
+      </fieldset>
+
+      <div style="margin-top:12px">
+        <button id="download">Download Result</button>
+        <button id="reset" type="button">Reset</button>
+      </div>
+
+      <textarea id="output" readonly placeholder="Generated JSON will appear here"></textarea>
+    </form>
+    <p class="small">Note: Only the selected keys are included and each category must have exactly one selected option. Save the file as <code>additionalinfo.json</code> inside your documentation artifacts.</p>
+  </div>
+
+  <script>
+    const form = document.getElementById('qform');
+    const output = document.getElementById('output');
+
+  function getSelectedValue(name){
+      const el = form.querySelector('input[name="'+name+'"]:checked');
+      return el ? el.value : null;
+    }
+
+    function buildJson(){
+      const certificate = getSelectedValue('certificate');
+      const authorization = getSelectedValue('authorization');
+      const datalayer = getSelectedValue('datalayer');
+
+      const missing = [];
+      if(!certificate) missing.push('certificate');
+      if(!authorization) missing.push('authorization');
+      if(!datalayer) missing.push('datalayer');
+      if(missing.length){
+        alert('Please select an option for: '+missing.join(', '));
+        return null;
+      }
+
+      const obj = {
+        certificate,
+        authorization,
+        datalayer
+      };
+      return obj;
+    }
+    document.getElementById('download').addEventListener('click', (e)=>{
+      e.preventDefault();
+      // Generate JSON if not already generated
+      if(!output.value){
+        const jsonObj = buildJson();
+        if(!jsonObj) return; // buildJson shows its own error
+        output.value = JSON.stringify(jsonObj, null, 2);
+      }
+      const blob = new Blob([output.value], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'additionalinfo.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('reset').addEventListener('click', ()=>{
+      // Clear all radio buttons manually to ensure reset works
+      const radioButtons = form.querySelectorAll('input[type="radio"]');
+      radioButtons.forEach(radio => radio.checked = false);
+      output.value = '';
+    });
+
+    // Tooltip content for info buttons
+    const tooltipTexts = {
+      certificate: `Defines the Certificate integration level.\n\n• Not Applicable\n• Not Integrated (self signed)\n• Fully Integrated`,
+      authorization: `Defines the Authorization integration level.\n\n• Not Integrated\n• Partially Integrated - own authorization\n• Partially Integrated - scope is not implemented\n• Fully Integrated`,
+      datalayer: `Defines the Data layer integration level.\n\n• Not Integrated\n• Partially Integrated\n• Fully Integrated`
+    }
+
+    // Create tooltip element
+    const tooltip = document.createElement('div')
+    tooltip.className = 'tooltip'
+    tooltip.setAttribute('role','dialog')
+    tooltip.setAttribute('aria-hidden','true')
+    document.body.appendChild(tooltip)
+
+    let hideTimer = null
+
+    function showTooltip(key, x, y){
+      const txt = tooltipTexts[key]
+      if(!txt) return
+      // Format content: first line as heading if there is a blank line
+      const parts = txt.split('\n\n')
+      tooltip.innerHTML = `<h4>${key.charAt(0).toUpperCase()+key.slice(1)}</h4><div>${parts.map(p=>p.replace(/\n/g,'<br>')).join('<br><br>')}</div>`
+      tooltip.style.display = 'block'
+      tooltip.style.left = (x + 12) + 'px'
+      tooltip.style.top = (y + 12) + 'px'
+      tooltip.setAttribute('aria-hidden','false')
+    }
+
+    function hideTooltip(){
+      if(hideTimer) clearTimeout(hideTimer)
+      tooltip.style.display = 'none'
+      tooltip.setAttribute('aria-hidden','true')
+    }
+
+    // Attach handlers to info buttons
+    document.querySelectorAll('.infobtn').forEach(btn=>{
+      const key = btn.getAttribute('data-key')
+      btn.addEventListener('mouseenter', (e)=>{
+        if(hideTimer) clearTimeout(hideTimer)
+        showTooltip(key, e.clientX, e.clientY)
+      })
+      btn.addEventListener('mousemove', (e)=>{
+        // move with cursor
+        showTooltip(key, e.clientX, e.clientY)
+      })
+      btn.addEventListener('mouseleave', ()=>{
+        hideTimer = setTimeout(hideTooltip, 120)
+      })
+      // Click/touch toggles the tooltip for accessibility/touch devices
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        if(tooltip.style.display === 'block') hideTooltip(); else showTooltip(key, btn.getBoundingClientRect().right, btn.getBoundingClientRect().top)
+      })
+    })
+
+    // Hide tooltip when clicking elsewhere
+    document.addEventListener('click', (e)=>{
+      if(!e.target.closest('.infobtn') && !e.target.closest('.tooltip')) hideTooltip()
+    })
+  </script>
+</body>
+</html>

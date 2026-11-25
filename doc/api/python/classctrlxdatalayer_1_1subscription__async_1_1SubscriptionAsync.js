@@ -10,6 +10,7 @@ var classctrlxdatalayer_1_1subscription__async_1_1SubscriptionAsync =
     [ "id", "classctrlxdatalayer_1_1subscription__async_1_1SubscriptionAsync.html#a2e9c2ba39c6a3dbdcede2e442af296b4", null ],
     [ "on_close", "classctrlxdatalayer_1_1subscription__async_1_1SubscriptionAsync.html#a129abad23023f3998ee8500e2f8ec355", null ],
     [ "subscribe", "classctrlxdatalayer_1_1subscription__async_1_1SubscriptionAsync.html#a821e0f9f914647f2058a771a3e8be078", null ],
+    [ "subscribe_modify", "classctrlxdatalayer_1_1subscription__async_1_1SubscriptionAsync.html#a3af884820a110857cc5c2851b1aec434", null ],
     [ "subscribe_multi", "classctrlxdatalayer_1_1subscription__async_1_1SubscriptionAsync.html#a2f33cdc9ef14837b31d01f59c3b80886", null ],
     [ "unsubscribe", "classctrlxdatalayer_1_1subscription__async_1_1SubscriptionAsync.html#a3f04a7c817c357d161827d59e4888587", null ],
     [ "unsubscribe_all", "classctrlxdatalayer_1_1subscription__async_1_1SubscriptionAsync.html#ac7fabd459529db06a4efb77057b81785", null ],

@@ -2,40 +2,45 @@
 
 ## Overview
 
-Regardless of whether you want to connect to a VM or a real machine, "Secure Shell" (SSH) is used.
+SSH (Secure Shell) is used to connect to a computer remotely, whether it is a Virtual Machine (VM) or a physical machine.
 
-The SSH address of a virtual machine running with default port forwarding is __localhost:10022__
-Here port 10022 of the host is forwarded to port 22 of the virtual machine (guest)).
+If you are using a VM with the default port forwarding settings, the SSH address is:
+__localhost:10022__
 
-The address of real machine is __IP:22__ e.g. 192.168.1.1:22
+This means that port 10022 on your host computer is forwarded to port 22 on the VM.
 
-The most important SSH tools are available for Windows and Linux:
+For a real machine, the address is:
+__IP:22__
+Example: __192.168.1.1:22__
 
-* ssh is secure shell
-* scp is secure copy
+The most common SSH tools are available for both Windows and Linux:
+
+* ssh: connects to a remote machine securely
+* scp: copies files securely
 
 ## Public Key Authentication
 
-Instead of user/password authentication, we recommend __public key authentication__. Here you have a privat key and a public key (text) file.
-The public key file is copied to the computer you want to connect to, the private key is secret.
+Instead of using a username and password, we recommend __public key authentication__. In this method, you create two keys:
 
-SSH tools are using you private key during a SSH connection instead of user/password.
+* a private key, which stays on your computer and must be kept secret
+* a public key, which is copied to the remote computer
 
-Creating a key pair and copy it to the remote computer is described here: [What is SSH Public Key authentication?](https://www.ssh.com/academy/ssh/public-key-authentication)
+When you connect, SSH uses your private key instead of a username and password.
+
+A guide to creating a key pair and copying the public key to a remote computer is here: [What is SSH Public Key authentication?](https://www.ssh.com/academy/ssh/public-key-authentication)
 
 ## Port Specification for ssh and scp
 
-Port 22 is the default port for a SSH connection. To communicate with a VM running with port forwarding you have to specify the port number e.g.
+Port 22 is the default port for SSH connections. If you are connecting to a VM that uses port forwarding, you must also specify the forwarded port number. Examples:
 
 * scp -p 10022 ...
 * scp -__P__ 10022 ...
 * ssh-copy-id -p 10022 ...
 
-!!! important
-	scp expects it's option P in uppercase!
+> !!! important: for scp, the option is uppercase P.
 
-## Git Bash for Windows 10 Hosts
+## Git Bash for Windows Hosts
 
-Because ssh-copy-id isn't available under Windows you can install Git for Windows which provides __Git Bash__.
+On Windows, ssh-copy-id is not available by default. You can install Git for Windows, which includes __Git Bash__.
 
-From a __git bash__ session you can call ssh-copy-id as shown above.
+From a __Git Bash__ terminal, you can use ssh-copy-id in the same way as shown above.

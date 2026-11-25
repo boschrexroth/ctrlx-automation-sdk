@@ -1,0 +1,1 @@
+../../scripts/samples-java/build-gradle.sh

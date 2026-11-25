@@ -4,6 +4,7 @@ var classctrlxdatalayer_1_1provider_1_1Provider =
     [ "__enter__", "classctrlxdatalayer_1_1provider_1_1Provider.html#a8987aa5431ff32ea9a412315c2440b88", null ],
     [ "__exit__", "classctrlxdatalayer_1_1provider_1_1Provider.html#a9ea6bfea91f5b8e9919675d869ee1c66", null ],
     [ "close", "classctrlxdatalayer_1_1provider_1_1Provider.html#a8ab79e14e24aa440dcd1d9e822eb1f1c", null ],
+    [ "get_handle", "classctrlxdatalayer_1_1provider_1_1Provider.html#aa67be05534ad9eec11581a16119d6190", null ],
     [ "get_registered_node_paths", "classctrlxdatalayer_1_1provider_1_1Provider.html#a54372cdd3ee4cc6741d6370544027a0d", null ],
     [ "get_registered_type", "classctrlxdatalayer_1_1provider_1_1Provider.html#afe347840c640b5b7345e78979efaad4d", null ],
     [ "get_rejected_node_paths", "classctrlxdatalayer_1_1provider_1_1Provider.html#a585568a00d89b595fbfd79f1acdf05bc", null ],

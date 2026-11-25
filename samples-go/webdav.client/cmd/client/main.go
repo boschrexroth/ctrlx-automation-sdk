@@ -50,7 +50,7 @@ func main() {
 	printDir(client, "./appdata")
 
 	// remove archive webdav.client
-	err = client.RemoveAll(context.TODO(), "./webdav.client")
+	err = client.RemoveAll(context.TODO(), "./webdav.client", nil)
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -1,15 +1,17 @@
-This document describes how to work with App Build Environments (QEMU based VMs).
+# Introduction
 
-## Best Practice working with App Build Environments
+This document describes how to work with App Build Environments (QEMU-based VMs).
 
-We recommend to use App Build Environments (QEMU VMs) as follows:
+## Best Practices for Working with App Build Environments
 
-1. Create a new App Build Environment with ctrlX WORKS and start it (the Ubuntu Server Cloud Image is automatically downloaded).
-2. We recommend to work with the free and open source distributed version control system __git__: Create a repository for your project and clone it into your App Buiulder Environment.
-3. Create a new branch for your working package.
-4. Do your work within this branch, commit and push your changes as often as it makes sense.
-5. If your work is done and all changes are pushed remove your App Build Environment.
+We recommend using a **App Build Environment (QEMU VM)** as follows:
 
-__Working in such a manner ensures that you are always working with the latest software components and avoids problems with the file size of your App Build Environment. Furthermore creating backups is superfluous.__
+1. Create a new **App Build Environment (QEMU VM)** with ctrlX WORKS and start it (the Ubuntu Server Cloud Image is automatically downloaded).
+2. We recommend working with the free and open-source distributed version control system **git**: Create a repository for your project and clone it into your App Build Environment (QEMU VM).
+3. Create a new branch for your work package.
+4. Do your work within this branch, and commit and push your changes as often as it makes sense.
+5. When your work is done and all changes are pushed, remove your **App Build Environment (QEMU VM)**.
 
-For more information about file handling regarding the App Build Environment see [ctrlX App Build Environment Ubuntu 22.04](scripts/environment/builder/README.md).
+> Working in this manner ensures that you always work with the latest software components and avoids problems with the file size of your **App Build Environment (QEMU VM)**. Furthermore, creating backups is superfluous.
+
+For more information about file handling regarding the App Build Environment, see [ctrlX App Build Environment Ubuntu](scripts/environment/builder/README.md).

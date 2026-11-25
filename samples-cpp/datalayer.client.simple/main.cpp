@@ -60,75 +60,73 @@ int main()
   comm::datalayer::DatalayerSystem datalayerSystem;
   datalayerSystem.start(false);
 
-  // Creates a Datalayer Client instance and connects. Automatically reconnects if the connection is interrupted.
-  auto connectionString = getConnectionString(); // default: ctrlX CORE or ctrlX COREvirtual with Network Adpater
-  std::cout << "INFO Creating ctrlX Data Layer client connection to " << connectionString << " ..." << std::endl;
-  auto dataLayerClient = datalayerSystem.factory()->createClient3(connectionString);
-
-  if (dataLayerClient->isConnected() == false)
   {
-    delete dataLayerClient;
+    // Creates a Datalayer Client instance and connects. Automatically reconnects if the connection is interrupted.
+    auto connectionString = getConnectionString(); // default: ctrlX CORE or ctrlX COREvirtual with Network Adpater
+    std::cout << "INFO Creating ctrlX Data Layer client connection to " << connectionString << " ..." << std::endl;
+    auto dataLayerClient = std::unique_ptr<comm::datalayer::IClient3>(datalayerSystem.factory()->createClient3(connectionString));
 
-    auto connectionString2 = getConnectionString("10.0.2.2", "boschrexroth", "boschrexroth", 8443); // ctrlX COREvirtual with Port Forwarding
-    std::cout << "WARNING Cannot connect to " << connectionString << " trying " << connectionString2 << std::endl;
-
-    auto dataLayerClient = datalayerSystem.factory()->createClient3(connectionString2);
-  }
-
-  int counter = 1;
-  while (dataLayerClient->isConnected())
-  {
-    std::cout << "Loop #" << counter++ << std::endl;
-
-    // Synchronous read of a ctrlX Data Layer node with a simple data type -----------------------------------------------------------
-    auto cpuUtilisationPercentAddress = "framework/metrics/system/cpu-utilisation-percent";
-    comm::datalayer::Variant cpuUtilisationPercentValue;
-    std::cout << "INFO Reading " << cpuUtilisationPercentAddress << " synchronously..." << std::endl;
-    auto result = dataLayerClient->readSync(cpuUtilisationPercentAddress, &cpuUtilisationPercentValue);
-    if (result != DL_OK)
+    if (dataLayerClient->isConnected() == false)
     {
-      std::cout << "WARN Reading " << cpuUtilisationPercentAddress << " failed with: " << result.toString() << std::endl;
+      auto connectionString2 = getConnectionString("10.0.2.2", "boschrexroth", "boschrexroth", 8443); // ctrlX COREvirtual with Port Forwarding
+      std::cout << "WARNING Cannot connect to " << connectionString << " trying " << connectionString2 << std::endl;
+
+      dataLayerClient.reset(datalayerSystem.factory()->createClient3(connectionString2));
     }
-    else
+
+    int counter = 1;
+    while (dataLayerClient->isConnected())
     {
-      if (cpuUtilisationPercentValue.getType() == comm::datalayer::VariantType::FLOAT64)
+      std::cout << "Loop #" << counter++ << std::endl;
+
+      // Synchronous read of a ctrlX Data Layer node with a simple data type -----------------------------------------------------------
+      auto cpuUtilisationPercentAddress = "framework/metrics/system/cpu-utilisation-percent";
+      comm::datalayer::Variant cpuUtilisationPercentValue;
+      std::cout << "INFO Reading " << cpuUtilisationPercentAddress << " synchronously..." << std::endl;
+      auto result = dataLayerClient->readSync(cpuUtilisationPercentAddress, &cpuUtilisationPercentValue);
+      if (result != DL_OK)
       {
-        std::cout << "INFO Value of " << cpuUtilisationPercentAddress << ": " << double(cpuUtilisationPercentValue) << " %" << std::endl;
+        std::cout << "WARN Reading " << cpuUtilisationPercentAddress << " failed with: " << result.toString() << std::endl;
       }
       else
       {
-        std::cout << "WARN Value of " << cpuUtilisationPercentAddress << " has unexpected type: " << cpuUtilisationPercentValue.typeAsString() << std::endl;
+        if (cpuUtilisationPercentValue.getType() == comm::datalayer::VariantType::FLOAT64)
+        {
+          std::cout << "INFO Value of " << cpuUtilisationPercentAddress << ": " << double(cpuUtilisationPercentValue) << " %" << std::endl;
+        }
+        else
+        {
+          std::cout << "WARN Value of " << cpuUtilisationPercentAddress << " has unexpected type: " << cpuUtilisationPercentValue.typeAsString() << std::endl;
+        }
       }
+
+      // Synchronous read of a ctrlX Data Layer node with a simple flatbuffers data type -----------------------------------------------------------
+      auto stateAddress = "framework/state";
+      comm::datalayer::Variant stateValue;
+      std::cout << "INFO Reading " << stateAddress << " synchronously..." << std::endl;
+      result = dataLayerClient->readSync(stateAddress, &stateValue);
+      if (result != DL_OK)
+      {
+        std::cout << "WARN Reading " << stateAddress << " failed with: " << result.toString() << std::endl;
+      }
+      else
+      {
+        auto stateTypeAddress = "types/systemhandler/state";
+        comm::datalayer::Variant stateType;
+        result = dataLayerClient->readSync(stateTypeAddress, &stateType);
+        std::cout << "INFO " << stateAddress << " has type: " << stateValue.typeAsString() << std::endl;
+        std::string stateAsJsonString;
+        result = datalayerSystem.jsonConverter()->generateJson(stateValue, stateType, &stateAsJsonString);
+        std::cout << "INFO Value of " << stateAddress << ":" << std::endl
+                  << stateAsJsonString << std::endl;
+      }
+
+      std::cout << "INFO Sleeping..." << std::endl;
+      sleep(2);
     }
 
-    // Synchronous read of a ctrlX Data Layer node with a simple flatbuffers data type -----------------------------------------------------------
-    auto stateAddress = "framework/state";
-    comm::datalayer::Variant stateValue;
-    std::cout << "INFO Reading " << stateAddress << " synchronously..." << std::endl;
-    result = dataLayerClient->readSync(stateAddress, &stateValue);
-    if (result != DL_OK)
-    {
-      std::cout << "WARN Reading " << stateAddress << " failed with: " << result.toString() << std::endl;
-    }
-    else
-    {
-      auto stateTypeAddress = "types/systemhandler/state";
-      comm::datalayer::Variant stateType;
-      result = dataLayerClient->readSync(stateTypeAddress, &stateType);
-      std::cout << "INFO " << stateAddress << " has type: " << stateValue.typeAsString() << std::endl;
-      std::string stateAsJsonString;
-      result = datalayerSystem.jsonConverter()->generateJson(stateValue, stateType, &stateAsJsonString);
-      std::cout << "INFO Value of " << stateAddress << ":" << std::endl
-                << stateAsJsonString << std::endl;
-    }
-
-    std::cout << "INFO Sleeping..." << std::endl;
-    sleep(2);
+    std::cout << "ERROR ctrlX Data Layer connection is broken" << std::endl;
   }
-
-  std::cout << "ERROR ctrlX Data Layer connection is broken" << std::endl;
-
-  delete dataLayerClient;
   datalayerSystem.stop();
 
   return 1; // We exit because an error happend

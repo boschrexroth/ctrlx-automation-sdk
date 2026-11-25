@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ctrlX Data Layer API for Python<span id="projectnumber">&#160;3.6.0</span>
+   <div id="projectname">ctrlX Data Layer API for Python<span id="projectnumber">&#160;3.8.0</span>
    </div>
    <div id="projectbrief">The ctrlX Data Layer API allows access to the ctrlX Data Layer with Python</div>
   </td>
@@ -118,7 +118,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Converter interface. </p>
 
-<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00030">30</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00032">32</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad164e2c66ae5f15312e77d1caff9b41d" name="ad164e2c66ae5f15312e77d1caff9b41d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad164e2c66ae5f15312e77d1caff9b41d">&#9670;&#160;</a></span>__init__()</h2>
@@ -148,9 +148,9 @@ Public Member Functions</h2></td></tr>
 
 <p>generate converter </p>
 
-<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00036">36</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00039">39</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
 
-<p class="reference">References <a class="el" href="converter_8py_source.html#l00037">Converter.__converter</a>.</p>
+<p class="reference">References <a class="el" href="converter_8py_source.html#l00040">Converter.__converter</a>.</p>
 
 </div>
 </div>
@@ -182,7 +182,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">int
+    &#160;</td>
           <td class="paramname"><em>indent_step</em>&#160;</td>
         </tr>
         <tr>
@@ -197,8 +198,8 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>Variant which contains data of complex data type (flatbuffers) if data is empty (VariantType::UNKNOWN) type is converted to json schema </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>Variant which contains type of data (Variant with flatbuffers BFBS) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">indentStep</td><td>Indentation length for json string </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ty</td><td>Variant which contains type of data (Variant with flatbuffers BFBS) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">indent_step</td><td>Indentation length for json string </td></tr>
   </table>
   </dd>
 </dl>
@@ -208,9 +209,9 @@ Public Member Functions</h2></td></tr>
 <dd>
 &lt;Variant&gt;, Generated JSON as Variant (string) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00069">69</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00075">75</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
 
-<p class="reference">References <a class="el" href="converter_8py_source.html#l00037">Converter.__converter</a>.</p>
+<p class="reference">References <a class="el" href="converter_8py_source.html#l00040">Converter.__converter</a>.</p>
 
 </div>
 </div>
@@ -250,7 +251,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>Variant which contains data with simple data type </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">indentStep</td><td>Indentation length for json string </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">indent_step</td><td>Indentation length for json string </td></tr>
   </table>
   </dd>
 </dl>
@@ -260,9 +261,9 @@ Public Member Functions</h2></td></tr>
 <dd>
 &lt;Variant&gt;, Generated JSON as Variant (string) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00054">54</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00057">57</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
 
-<p class="reference">References <a class="el" href="converter_8py_source.html#l00037">Converter.__converter</a>.</p>
+<p class="reference">References <a class="el" href="converter_8py_source.html#l00040">Converter.__converter</a>.</p>
 
 </div>
 </div>
@@ -284,9 +285,9 @@ Public Member Functions</h2></td></tr>
 
 <p>handle value of Converter: </p>
 
-<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00043">43</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00046">46</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
 
-<p class="reference">References <a class="el" href="converter_8py_source.html#l00037">Converter.__converter</a>.</p>
+<p class="reference">References <a class="el" href="converter_8py_source.html#l00040">Converter.__converter</a>.</p>
 
 </div>
 </div>
@@ -329,9 +330,9 @@ Public Member Functions</h2></td></tr>
 <dd>
 &lt;Variant&gt;, Variant which contains the type (schema) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00115">115</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00140">140</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
 
-<p class="reference">References <a class="el" href="converter_8py_source.html#l00037">Converter.__converter</a>.</p>
+<p class="reference">References <a class="el" href="converter_8py_source.html#l00040">Converter.__converter</a>.</p>
 
 </div>
 </div>
@@ -371,7 +372,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">json</td><td>Data of the Variant as a json string </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>Variant which contains type of data (Variant with bfbs flatbuffer content) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ty</td><td>Variant which contains type of data (Variant with bfbs flatbuffer content) </td></tr>
   </table>
   </dd>
 </dl>
@@ -383,9 +384,9 @@ Public Member Functions</h2></td></tr>
 <dd>
 &lt;Variant&gt;, Error as Variant (string) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00100">100</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00118">118</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
 
-<p class="reference">References <a class="el" href="converter_8py_source.html#l00037">Converter.__converter</a>.</p>
+<p class="reference">References <a class="el" href="converter_8py_source.html#l00040">Converter.__converter</a>.</p>
 
 </div>
 </div>
@@ -430,9 +431,9 @@ Public Member Functions</h2></td></tr>
 <dd>
 &lt;Variant&gt;, Error as Variant (string) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00083">83</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="converter_8py_source.html#l00098">98</a> of file <a class="el" href="converter_8py_source.html">converter.py</a>.</p>
 
-<p class="reference">References <a class="el" href="converter_8py_source.html#l00037">Converter.__converter</a>.</p>
+<p class="reference">References <a class="el" href="converter_8py_source.html#l00040">Converter.__converter</a>.</p>
 
 </div>
 </div>

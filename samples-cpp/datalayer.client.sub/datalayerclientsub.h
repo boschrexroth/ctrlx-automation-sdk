@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <memory>
 
 #include "comm/datalayer/datalayer.h"
 #include "comm/datalayer/datalayer_system.h"
@@ -17,7 +18,7 @@ class DataLayerClientSub final
 private:
   comm::datalayer::DatalayerSystem m_datalayerSystem;
 
-  comm::datalayer::IClient2* m_datalayerClient;
+  std::unique_ptr<comm::datalayer::IClient2> m_datalayerClient;
 
   comm::datalayer::PublishCallback publishCallback();
 

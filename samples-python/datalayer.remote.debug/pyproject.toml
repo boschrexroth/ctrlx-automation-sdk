@@ -12,8 +12,9 @@ authors = [
 license = "MIT"
 requires-python = ">=3.7"
 dependencies = [
-    "ctrlx-datalayer<=3.6",
-    "ctrlx-fbs"
+    "ctrlx-datalayer<=3.8",
+    "ctrlx-fbs",
+    "debugpy",
 ]
 
 [project.scripts]

@@ -26,7 +26,7 @@ interface Node {
 }
 
 // The nodes.
-let nodes = {};
+const nodes: Record<string, Node> = {};
 
 async function main() {
 
@@ -52,7 +52,7 @@ async function main() {
     await provider.start();
 
     // Initially exit and retry after app restart-delay (see snapcraft.yaml).
-    if (provider.isConnected() === false) {
+    if (!provider.isConnected()) {
         console.log('provider is not connected -> exit.');
         return;
     }
@@ -64,23 +64,19 @@ async function main() {
         // We return the list of child node names of the current branch, not leaf nodes which hold a value itself.
 
         // Split given address into parts.
-        let addressParts = address.split('/');
+        const addressParts = address.split('/');
 
         // Exclude leaf nodes and filter for current level node names.
         const keys = Object.keys(nodes);
         const branches = keys.filter(value => value.length > address.length && value.startsWith(`${address}/`));
 
         // Collect child level names, preventing multiples.
-        let branchLevelNames: string[] = []
-        for (let branch of branches) {
+        const branchLevelNames: string[] = []
+        for (const branch of branches) {
             const parts = branch.split('/');
-
-            let branchLevelName: string;
-            if (parts.length > addressParts.length) {
-                branchLevelName = parts[addressParts.length];
-            } else {
-                branchLevelName = parts[parts.length - 1];
-            }
+            const branchLevelName = parts.length > addressParts.length
+                ? parts[addressParts.length]
+                : parts[parts.length - 1];
 
             if (!branchLevelNames.includes(branchLevelName)) {
                 branchLevelNames.push(branchLevelName);
@@ -143,27 +139,34 @@ async function main() {
     // Keep the process alive until disconnected.
     const intervalHandle = setInterval(() => {
 
-        if (system.isStarted() === false || provider.isConnected() === false) {
+        if (!system.isStarted() || !provider.isConnected()) {
             clearInterval(intervalHandle);
         }
     }, 1_000);
 
-    // Handle process event 'SIGTERM'.
-    process.on('SIGTERM', () => {
-        console.info('SIGTERM signal received.');
+    // Common shutdown routine used by both 'SIGTERM' and 'SIGINT'.
+    const shutdown = async (signal: string) => {
+        console.info(`${signal} signal received.`);
+
+        // Stop keeping the process alive.
+        clearInterval(intervalHandle);
 
         // Stop the provider.
-        provider.stop();
+        await provider.stop();
         console.log('Provider stopped.');
 
-        system.stop();
+        // Stop the ctrlX Data Layer system.
+        await system.stop();
         console.log('ctrlX Data Layer system stopped.');
-    });
+    };
+
+    // Handle process events 'SIGTERM' and 'SIGINT'.
+    process.on('SIGTERM', () => void shutdown('SIGTERM'));
+    process.on('SIGINT', () => void shutdown('SIGINT'));
 }
 
 // Creates and adds dummy nodes with random strings.
-let currentLevel = 0;
-function createDummyNodes(currentPath: string, nodesPerLevel: number, maxDepth: number) {
+function createDummyNodes(currentPath: string, nodesPerLevel: number, maxDepth: number, currentLevel: number = 0) {
     const nameLength = 5;
     currentLevel++;
 
@@ -187,7 +190,7 @@ function createDummyNodes(currentPath: string, nodesPerLevel: number, maxDepth: 
         };
 
         if (currentLevel < maxDepth) {
-            createDummyNodes(address, nodesPerLevel, maxDepth);
+            createDummyNodes(address, nodesPerLevel, maxDepth, currentLevel);
         }
 
         nodes[address] = node;
@@ -217,12 +220,7 @@ function createRootNode(address: string) {
 // Creates a random string with given length.
 function randomString(length: number) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        result += characters[randomIndex];
-    }
-    return result;
+    return Array.from({ length }, () => characters[Math.floor(Math.random() * characters.length)]).join('');
 }
 
 main();

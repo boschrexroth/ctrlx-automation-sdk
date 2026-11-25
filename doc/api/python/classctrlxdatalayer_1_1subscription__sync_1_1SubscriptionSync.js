@@ -9,6 +9,7 @@ var classctrlxdatalayer_1_1subscription__sync_1_1SubscriptionSync =
     [ "id", "classctrlxdatalayer_1_1subscription__sync_1_1SubscriptionSync.html#a2e9c2ba39c6a3dbdcede2e442af296b4", null ],
     [ "on_close", "classctrlxdatalayer_1_1subscription__sync_1_1SubscriptionSync.html#a129abad23023f3998ee8500e2f8ec355", null ],
     [ "subscribe", "classctrlxdatalayer_1_1subscription__sync_1_1SubscriptionSync.html#afe11d9803c614a1546aaf7181a7cfbd4", null ],
+    [ "subscribe_modify", "classctrlxdatalayer_1_1subscription__sync_1_1SubscriptionSync.html#a6053d0b46895a0bf50b6f21228687d25", null ],
     [ "subscribe_multi", "classctrlxdatalayer_1_1subscription__sync_1_1SubscriptionSync.html#a7edb60061768545658e3e9c276d1c4ee", null ],
     [ "unsubscribe", "classctrlxdatalayer_1_1subscription__sync_1_1SubscriptionSync.html#a0b34dabb343b27b4b09dd28259780294", null ],
     [ "unsubscribe_all", "classctrlxdatalayer_1_1subscription__sync_1_1SubscriptionSync.html#a252cb59cde7dd64a460f4b219d93518f", null ],

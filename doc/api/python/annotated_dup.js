@@ -33,6 +33,10 @@ var annotated_dup =
         [ "MetadataBuilder", "classctrlxdatalayer_1_1metadata__utils_1_1MetadataBuilder.html", "classctrlxdatalayer_1_1metadata__utils_1_1MetadataBuilder" ],
         [ "ReferenceType", "classctrlxdatalayer_1_1metadata__utils_1_1ReferenceType.html", "classctrlxdatalayer_1_1metadata__utils_1_1ReferenceType" ]
       ] ],
+      [ "owner", null, [
+        [ "Owner", "classctrlxdatalayer_1_1owner_1_1Owner.html", "classctrlxdatalayer_1_1owner_1_1Owner" ],
+        [ "OwnerAccessGuard", "classctrlxdatalayer_1_1owner_1_1OwnerAccessGuard.html", "classctrlxdatalayer_1_1owner_1_1OwnerAccessGuard" ]
+      ] ],
       [ "provider", null, [
         [ "Provider", "classctrlxdatalayer_1_1provider_1_1Provider.html", "classctrlxdatalayer_1_1provider_1_1Provider" ]
       ] ],
@@ -63,6 +67,10 @@ var annotated_dup =
       ] ],
       [ "system", null, [
         [ "System", "classctrlxdatalayer_1_1system_1_1System.html", "classctrlxdatalayer_1_1system_1_1System" ]
+      ] ],
+      [ "user", null, [
+        [ "User", "classctrlxdatalayer_1_1user_1_1User.html", "classctrlxdatalayer_1_1user_1_1User" ],
+        [ "UserAccessGuard", "classctrlxdatalayer_1_1user_1_1UserAccessGuard.html", "classctrlxdatalayer_1_1user_1_1UserAccessGuard" ]
       ] ],
       [ "variant", null, [
         [ "Result", "classctrlxdatalayer_1_1variant_1_1Result.html", "classctrlxdatalayer_1_1variant_1_1Result" ],

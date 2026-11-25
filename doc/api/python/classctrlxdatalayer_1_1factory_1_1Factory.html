@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ctrlX Data Layer API for Python<span id="projectnumber">&#160;3.6.0</span>
+   <div id="projectname">ctrlX Data Layer API for Python<span id="projectnumber">&#160;3.8.0</span>
    </div>
    <div id="projectbrief">The ctrlX Data Layer API allows access to the ctrlX Data Layer with Python</div>
   </td>
@@ -104,15 +104,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a31a3d5f2fb0b5c4e3c4cc197f81b4ac1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1e11e43644987a9d766014d192a3eac" id="r_ac1e11e43644987a9d766014d192a3eac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classctrlxdatalayer_1_1client_1_1Client.html">Client</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac1e11e43644987a9d766014d192a3eac">create_client</a> (self, str remote)</td></tr>
 <tr class="separator:ac1e11e43644987a9d766014d192a3eac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b118a712504922aff7768589f664454" id="r_a9b118a712504922aff7768589f664454"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a9b118a712504922aff7768589f664454">create_memory</a> (self, str address, <a class="el" href="classctrlxdatalayer_1_1provider_1_1Provider.html">Provider</a> provider, int size, MemoryType ty)</td></tr>
+<tr class="separator:a9b118a712504922aff7768589f664454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70593e62040d99948079f6f6328420f0" id="r_a70593e62040d99948079f6f6328420f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classctrlxdatalayer_1_1provider_1_1Provider.html">Provider</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a70593e62040d99948079f6f6328420f0">create_provider</a> (self, str remote)</td></tr>
 <tr class="separator:a70593e62040d99948079f6f6328420f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa67be05534ad9eec11581a16119d6190" id="r_aa67be05534ad9eec11581a16119d6190"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classctrlxdatalayer_1_1factory_1_1Factory.html#aa67be05534ad9eec11581a16119d6190">get_handle</a> (self)</td></tr>
 <tr class="separator:aa67be05534ad9eec11581a16119d6190"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac88b14a58dd136fc1aac7b8edc189b0d" id="r_ac88b14a58dd136fc1aac7b8edc189b0d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac88b14a58dd136fc1aac7b8edc189b0d">open_memory</a> (self, str address)</td></tr>
+<tr class="separator:ac88b14a58dd136fc1aac7b8edc189b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Factory class. </p>
 
-<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00011">11</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00019">19</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a31a3d5f2fb0b5c4e3c4cc197f81b4ac1" name="a31a3d5f2fb0b5c4e3c4cc197f81b4ac1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a31a3d5f2fb0b5c4e3c4cc197f81b4ac1">&#9670;&#160;</a></span>__init__()</h2>
@@ -142,9 +146,9 @@ Public Member Functions</h2></td></tr>
 
 <p>generate Factory </p>
 
-<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00018">18</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00026">26</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
 
-<p class="reference">References <a class="el" href="factory_8py_source.html#l00019">Factory.__factory</a>.</p>
+<p class="reference">References <a class="el" href="factory_8py_source.html#l00027">Factory.__factory</a>, <a class="el" href="owner_8py_source.html#l00029">Owner.__factory</a>, and <a class="el" href="user_8py_source.html#l00030">User.__factory</a>.</p>
 
 </div>
 </div>
@@ -184,9 +188,71 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>&lt;Client&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00032">32</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00040">40</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
 
-<p class="reference">References <a class="el" href="factory_8py_source.html#l00019">Factory.__factory</a>.</p>
+<p class="reference">References <a class="el" href="factory_8py_source.html#l00027">Factory.__factory</a>, <a class="el" href="owner_8py_source.html#l00029">Owner.__factory</a>, and <a class="el" href="user_8py_source.html#l00030">User.__factory</a>.</p>
+
+</div>
+</div>
+<a id="a9b118a712504922aff7768589f664454" name="a9b118a712504922aff7768589f664454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b118a712504922aff7768589f664454">&#9670;&#160;</a></span>create_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">create_memory </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classctrlxdatalayer_1_1provider_1_1Provider.html">Provider</a>&#160;</td>
+          <td class="paramname"><em>provider</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">MemoryType&#160;</td>
+          <td class="paramname"><em>ty</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a memory in the datalayer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">provider</td><td>Provider to create the memory </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">address</td><td>Address of the memory </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">size</td><td>Size of the memory </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">ty</td><td>Type of the memory </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>&lt;result, Owner&gt; Handle of the created memory </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00065">65</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
+
+<p class="reference">References <a class="el" href="factory_8py_source.html#l00027">Factory.__factory</a>, <a class="el" href="owner_8py_source.html#l00029">Owner.__factory</a>, and <a class="el" href="user_8py_source.html#l00030">User.__factory</a>.</p>
 
 </div>
 </div>
@@ -225,9 +291,9 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>&lt;Provider&gt; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00043">43</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00051">51</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
 
-<p class="reference">References <a class="el" href="factory_8py_source.html#l00019">Factory.__factory</a>.</p>
+<p class="reference">References <a class="el" href="factory_8py_source.html#l00027">Factory.__factory</a>, <a class="el" href="owner_8py_source.html#l00029">Owner.__factory</a>, and <a class="el" href="user_8py_source.html#l00030">User.__factory</a>.</p>
 
 </div>
 </div>
@@ -249,9 +315,50 @@ Public Member Functions</h2></td></tr>
 
 <p>handle value of Factory </p>
 
-<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00024">24</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00032">32</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
 
-<p class="reference">References <a class="el" href="factory_8py_source.html#l00019">Factory.__factory</a>.</p>
+<p class="reference">References <a class="el" href="factory_8py_source.html#l00027">Factory.__factory</a>, <a class="el" href="owner_8py_source.html#l00029">Owner.__factory</a>, and <a class="el" href="user_8py_source.html#l00030">User.__factory</a>.</p>
+
+</div>
+</div>
+<a id="ac88b14a58dd136fc1aac7b8edc189b0d" name="ac88b14a58dd136fc1aac7b8edc189b0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac88b14a58dd136fc1aac7b8edc189b0d">&#9670;&#160;</a></span>open_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">open_memory </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str&#160;</td>
+          <td class="paramname"><em>address</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Opens a memory in the datalayer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">address</td><td>Address of the memory </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>&lt;result, User&gt; Handle of the opened memory </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="factory_8py_source.html#l00079">79</a> of file <a class="el" href="factory_8py_source.html">factory.py</a>.</p>
+
+<p class="reference">References <a class="el" href="factory_8py_source.html#l00027">Factory.__factory</a>, <a class="el" href="owner_8py_source.html#l00029">Owner.__factory</a>, and <a class="el" href="user_8py_source.html#l00030">User.__factory</a>.</p>
 
 </div>
 </div>

@@ -20,7 +20,7 @@ To format or mount a storage, use the according buttons in the details window of
 
 After the storage is mounted, the path is displayed on the details page of the storage:
 
-Alternatively, the mount point is determinable in the __ctrlX Data Layer__ (in Settings menu) under **system/resources/storage**
+Alternatively, the mount point is determinable in the **ctrlX Data Layer** (in Settings menu) under **system/resources/storage**
 
 ## Configuration steps
 
@@ -45,14 +45,14 @@ To access the storage from your app (e.g. storage-test), use the **removable-med
         - all
     parts:
         storage:
-	        plugin: dump
-		    source: storage
+            plugin: dump
+            source: storage
     apps:
-	    storage:
-		    command: bin/storage
-		    daemon: simple
-		    plugs:
-			    - removable-media
+        storage:
+            command: bin/storage
+            daemon: simple
+            plugs:
+                - removable-media
     ```
 
 ## Usage

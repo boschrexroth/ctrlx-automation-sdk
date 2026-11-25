@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "============================================"
-echo "Installing ctrlx-datalayer"
+echo "Installing ctrlx-datalayer ..."
 echo "============================================"
 # --- Install ctrlx-datalayer ---
 bash ./install-ctrlx-datalayer.sh ../deb
@@ -16,7 +16,7 @@ else
     echo "============================================"
 fi
 echo "============================================"
-echo "Installing ctrlx-scheduler"
+echo "Installing Scheduler ..."
 echo "============================================"
 # --- Install ctrlx-scheduler ---
 sudo apt-get install ctrlx-scheduler -y

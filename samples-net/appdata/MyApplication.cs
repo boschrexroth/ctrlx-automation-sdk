@@ -178,16 +178,14 @@ namespace Samples.AppData
             try
             {
                 var jsonString = File.ReadAllText(path, Encoding.UTF8);
-                var options = new JsonSerializerOptions()
-                {
-                };
+                var options = new JsonSerializerOptions();
                 var serializerContext = new AppDataSerializerContext(options).AppData;
                 MyAppData = JsonSerializer.Deserialize(jsonString, serializerContext);
 
                 Console.WriteLine($"Loaded application data from file '{path}'.");
                 return true;
             }
-            catch (Exception exc) when (exc is IOException || exc is JsonException)
+            catch (Exception exc) when (exc is IOException or JsonException)
             {
                 Console.WriteLine($"Loading application data from file '{path}' failed! {exc.Message}");
                 return false;
@@ -357,8 +355,17 @@ namespace Samples.AppData
                 {
                     while (true)
                     {
-                        // Note: The GetContext method blocks while waiting for a request.
-                        var context = _httpListener.GetContext();
+                        HttpListenerContext context;
+                        try
+                        {
+                            // Note: The GetContext method blocks while waiting for a request.
+                            context = _httpListener.GetContext();
+                        }
+                        catch (HttpListenerException)
+                        {
+                            // Listener was stopped, exit the loop gracefully.
+                            break;
+                        }
                         var request = context.Request;
                         var response = context.Response;
 
@@ -400,7 +407,7 @@ namespace Samples.AppData
                             Console.WriteLine($"Payload: {appDataHttpRequest}");
                             if (request.Url == null)
                             {
-                                return false;
+                                continue;
                             }
 
                             var route = request.Url.ToString();

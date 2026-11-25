@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD033 -->
+
 # Remote Debugging Snaps Python
 
 ## Overview
@@ -12,14 +14,14 @@ Then each following chapter describes for one programming language the  language
 
 ### IP Address of a ctrlX CORE
 
-From the build environment ctrlX CORE devices are connected via TCP/IP. Assuming we are using a (QEMU) virtual machine as build environment the different kind of ctrlX CORE devices are reachable over these IP addresses:
+From the build environment ctrlX CORE devices are connected via TCP/IP. Assuming we are using a (QEMU) Virtual Machine as build environment the different kind of ctrlX CORE devices are reachable over these IP addresses:
 
 1. ctrlX CORE<sup>virtual</sup> with port forwarding: 10.0.2.2
 2. ctrlX CORE<sup>virtual</sup> with network adapter: 192.168.1.1
 3. ctrlX CORE: real IP address
 
 To point 1.:
-From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE<sup>virtual</sup> has no own IP address. The connections to the control are realized via port forwarding.
+From the point of view of the Virtual Machine this is the IP address of the host computer. The ctrlX CORE<sup>virtual</sup> has no own IP address. The connections to the control are realized via port forwarding.
 
 ### Set up SSH Public Key Authentication
 
@@ -27,8 +29,7 @@ Debugging is based on SSH, so SSH should be set up between the debugger client o
 
 For this kind of authorization a private / public key pair is generated. The private key is stored into a file kept secret on your host computer. The content of the public key is appended to the file ~/.ssh/authorized_keys in your home directory of the ctrlX CORE (remote computer).
 
-!!! important
-    You need an account with root rights and a home directory on the ctrlX CORE.
+> !!! important: You need an account with root rights and a home directory on the ctrlX CORE.
 
 Creating the key pair and the installation both on the host computer and on the ctrlX CORE (remote computer) is described here
 
@@ -60,9 +61,9 @@ For general informations regarding Python debugging in Visual Studio Code see [h
 
 The Python Visual Studio Code extension has a Python debug client. For a remote debugging session we have add a configuration set with these parameters/values:
 
-* The request type is __"attach"__: "request": "attach",
+* The request type is **"attach"**: "request": "attach",
 * The IP address of the ctrlX CORE has to be provided e.g.: "host": "192.168.2.61",
-* The port number where the debug server is listening has to be provided e.g.: "port": 12345,
+* The port number where the debug server is listening has to be provided e.g.: "port": 15678,
 * and a link to the exe
 
 Here you can find the complete file: samples-python/datalayer.remote.debug/.vscode/launch.json
@@ -77,7 +78,7 @@ There are three launch configurations for remote debugging:
 
 Installing the required Python packages into your build environment ist described here: samples-python/python.md
 
-In our sample project the Python package  __debugpy__ is used for remote debugging of Python code.
+In our sample project the Python package  **debugpy** is used for remote debugging of Python code.
 
 #### The Python Package debugpy
 
@@ -87,9 +88,8 @@ The configuration of the debug connection and the start of the debug server have
 
 Setting breakpoints by program code is optional.
 
-To make the usage of debugpy easier the essential function calls are extracted and provided in the script samples-python/datalayer.remote.debug/debugging.py.
+To make the usage of debugpy easier the essential function calls are extracted and provided in the script samples-python/datalayer.remote.debug/main.py.
 
-* debugging.init() scans the applications parameter list for --debug-port=... If this parameter is not found remote debugging will be not enabled. Usage see main.py.
 * debugging.wait_for_client(port: int) is an internal function called by init(). It configures the remote debug connections and starts the debug server. The application is stopped until a debug client connects.
 * With debugging.breakpoint() breakpoints can be set by the Python code itself - see main.py.
 
@@ -126,7 +126,7 @@ Stop the snap:
 Start the app providing a debug port as command line parameter:
 
 ```code
-    sudo snap run sdk-py-remote-debug.app --debug-port=12345
+    sudo snap run sdk-py-remote-debug.app
 ```
 
 !!! important
