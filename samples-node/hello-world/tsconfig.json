@@ -2,6 +2,7 @@
     "compilerOptions": {
         "target": "es2025",
         "module": "commonjs",
+        "ignoreDeprecations": "6.0",
         "outDir": "./dist",
         "rootDir": "./src",
         "strict": true,
