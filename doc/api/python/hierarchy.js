@@ -23,6 +23,8 @@ var hierarchy =
     [ "NotifyInfoPublish", "classctrlxdatalayer_1_1provider__subscription_1_1NotifyInfoPublish.html", null ],
     [ "NotifyItem", "classctrlxdatalayer_1_1subscription_1_1NotifyItem.html", null ],
     [ "NotifyItemPublish", "classctrlxdatalayer_1_1provider__subscription_1_1NotifyItemPublish.html", null ],
+    [ "Owner", "classctrlxdatalayer_1_1owner_1_1Owner.html", null ],
+    [ "OwnerAccessGuard", "classctrlxdatalayer_1_1owner_1_1OwnerAccessGuard.html", null ],
     [ "Provider", "classctrlxdatalayer_1_1provider_1_1Provider.html", null ],
     [ "ProviderNode", "classctrlxdatalayer_1_1provider__node_1_1ProviderNode.html", null ],
     [ "ProviderNodeCallbacks", "classctrlxdatalayer_1_1provider__node_1_1ProviderNodeCallbacks.html", null ],
@@ -35,6 +37,8 @@ var hierarchy =
     ] ],
     [ "SubscriptionPropertiesBuilder", "classctrlxdatalayer_1_1subscription__properties__builder_1_1SubscriptionPropertiesBuilder.html", null ],
     [ "System", "classctrlxdatalayer_1_1system_1_1System.html", null ],
+    [ "User", "classctrlxdatalayer_1_1user_1_1User.html", null ],
+    [ "UserAccessGuard", "classctrlxdatalayer_1_1user_1_1UserAccessGuard.html", null ],
     [ "Variant", "classctrlxdatalayer_1_1variant_1_1Variant.html", [
       [ "VariantRef", "classctrlxdatalayer_1_1variant_1_1VariantRef.html", null ]
     ] ],

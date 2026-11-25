@@ -1,4 +1,7 @@
-### **Table of content**
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD060 -->
+
+# **Table of content**
 
 [Introduction](#introduction)
 

@@ -150,14 +150,14 @@ In order to participate in the save and load operations triggered by the Solutio
   "activeConfiguration": {
     "save": [
       {
-        "id": "motion",
+        "id": "rexroth-motion",
         "subject": "motion settings",
         "url": "/automation/api/v1/motion/admin/cfg/save"
       }
     ],
     "load": [
       {
-        "id": "motion",
+        "id": "rexroth-motion",
         "subject": "motion settings",
         "url": "/automation/api/v1/motion/admin/cfg/load"
       }
@@ -168,11 +168,11 @@ In order to participate in the save and load operations triggered by the Solutio
 
 For each command, the following elements must be specified:
 
-- **id** (required): a string serving as the identifier of the save or load command; must be unique within the “commands/activeConfiguration/save” and “commands/activeConfiguration/load” paths, respectively
+- **id** (required): a string serving as the identifier of the save or load command; to ensure that the id is unique within the “commands/activeConfiguration/save” and “commands/activeConfiguration/load” paths, respectively, it must be equal to the snap name (e.g., rexroth-motion) or be prefixed with the snap name (e.g., rexroth-motion.kinematics).
 - **subject** (required): a string denoting what will be saved or loaded; used to inform users, e.g. in messages like “Loading *motion settings*” or “Failed to load *motion settings*”
-- **url** (required): a string representing the request URL; URLs starting with a slash are interpreted to be relative to `https://localhost`. The URL is used for HTTP POST requests which include command parameters in the request body (see section "Request parameters" for details)
+- **url** (required): a string representing the request URL; only the https protocol and the localhost hostname are permitted. URLs starting with a slash are interpreted to be relative to `https://localhost`. The URL is used for HTTP POST requests which include command parameters in the request body (see section "Request parameters" for details).
 
-By default there is no defined order of command execution. Starting with version XCR-V-0112, a command may declare that it needs to be executed **after** other commands. If this is required (which should be the exception), add an after element to your command declaration with an array containing the IDs of the predecessor commands.
+The order of command execution is undefined.
 
 >**Hint for developers providing ctrlX Data Layer endpoints for loading and saving**
 >

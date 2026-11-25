@@ -2,6 +2,58 @@
 
 ## CHANGELOG
 
+### 5.4.0
+
+#### FIXED
+
++ n/a
+
+#### CHANGED
+
++ [Changes](https://github.com/boschrexroth/ctrlx-automation-sdk/compare/5.2.0...5.4.0)
+
+### 5.2.0
+
+#### FIXED
+
++ n/a
+
+#### CHANGED
+
++ [Changes](https://github.com/boschrexroth/ctrlx-automation-sdk/compare/4.6.3...5.2.0)
+
+### 4.6.3
+
+#### FIXED
+
++ n/a
+
+#### CHANGED
+
++ [Changes](https://github.com/boschrexroth/ctrlx-automation-sdk/compare/4.6.2...4.6.3)
+
+
+### 4.6.2
+
+#### FIXED
+
++ n/a
+
+#### CHANGED
+
++ [Changes](https://github.com/boschrexroth/ctrlx-automation-sdk/compare/4.6.1...4.6.2)
+
+
+### 4.6.1
+
+#### FIXED
+
++ n/a
+
+#### CHANGED
+
++ [Changes](https://github.com/boschrexroth/ctrlx-automation-sdk/compare/4.6.0...4.6.1)
+
 ### 4.6.0
 
 #### FIXED
@@ -10,7 +62,7 @@
 
 #### CHANGED
 
-+ [Changes](https://github.com/boschrexroth/ctrlx-automation-sdk/compare/3.6.0...4.6.0)
++ [Changes](https://github.com/boschrexroth/ctrlx-automation-sdk/compare/4.4.0...4.6.0)
 
 ### 4.4.0
 

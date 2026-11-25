@@ -160,7 +160,7 @@ int main(void)
   // Note:
   //  * input is data an owner provides for other shared memory users
   //  * output is data on owner consumes from other shared memory users
-  
+
   auto dlPath = dlBasePath + "input";
   std::cout << "INFO Creating sharded memory " << dlPath << std::endl;
   result = datalayerSystem.factory()->createMemorySync(input, dlPath, provider, MEM_SIZE, comm::datalayer::MemoryType_Input);
@@ -229,7 +229,6 @@ int main(void)
   {
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
-    uint8_t* inData;
     uint8_t* outData;
     result = output->beginAccess(outData, REVISION);
     if (comm::datalayer::STATUS_FAILED(result))

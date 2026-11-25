@@ -1,8 +1,8 @@
 module github.com/boschrexroth/ctrlx-automation-sdk/samples-go/webdav.client
 
-go 1.25
+go 1.26
 
 require (
-	github.com/dustin/go-humanize v1.0.1
-	github.com/emersion/go-webdav v0.7.0
+	github.com/dustin/go-humanize v1.1.0
+	github.com/emersion/go-webdav v0.8.0
 )

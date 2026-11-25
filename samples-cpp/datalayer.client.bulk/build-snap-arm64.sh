@@ -1,0 +1,1 @@
+../../scripts/samples-cpp/build-snap-arm64.sh

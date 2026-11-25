@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["NotifyItem","Subscription"],"trait":["SubscriptionCallback"],"type":["SubscriptionCallbackBox"]};

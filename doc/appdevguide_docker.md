@@ -1,3 +1,7 @@
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD060 -->
+# Introduction
+
 This document is part of the Bosch Rexroth ctrlX OS App Development Guideline, and describes specific topics for Apps which are based on the Docker container technology
 
 Please refer to the App Development Guide for further information about general requirements and checks
@@ -6,7 +10,7 @@ The content of this document may be subject of change in future.
 
 **<span style="color: red;">Currently, the ctrlX App Store does not support Docker-based applications.</span>**
 
-# 1. Artifacts / Files
+## 1. Artifacts / Files
 
 In addition to a native Ubuntu Core App, a Docker App shall provide the files in this list
 
@@ -15,16 +19,16 @@ In addition to a native Ubuntu Core App, a Docker App shall provide the files in
 | Docker-compose.yml | The docker-compose.yml file contains the configuration and options to run the services required by the snap | docker-compose.yml	| Mandatory |
 | Docker-compose.env | The docker-compose.env file contains the environment variable(s) set to run the snaps | docker-compose.env |Optional |
 
-# 2. Base Checks
+## 2. Base Checks
 
-## 2.1 snapcraft yaml / snap.yaml
+### 2.1 snapcraft yaml / snap.yaml
 
-In addition to the checks for snap.yaml which are described [here](appdevguide_basechecks.md), a Docker App has additional elements:
+In addition to the checks for snap.yaml which are [described here](appdevguide_basechecks.md), a Docker App has additional elements:
 
-| Item | Content | Optional / Mandatory |
-| --- | --- | --- |
-| docker-compose | configuration file | Mandatory |
-| docker-volumes | manage app data | Mandatory |
+| Item           | Content            | Optional / Mandatory |
+| -------------- | ------------------ | -------------------- |
+| docker-compose | configuration file | Mandatory            |
+| docker-volumes | manage app data    | Mandatory            |
 
 The mandatory entries must be provided like the following:
 
@@ -51,7 +55,7 @@ slots:
 
 ```
 
-## 2.2 docker-compose.yml
+### 2.2 docker-compose.yml
 
 | Item | Content | Optional / Mandatory |
 | --- | --- | --- |
@@ -60,9 +64,9 @@ slots:
 | volumes | mounted volumes | Optional |
 | ports | described ports are not conflicting with standard/blocked ports. and app uses only described ports | Optional |
 
-Note: For example, here you can find information about syntax of a compose file: <https://github.com/compose-spec/compose-spec/blob/master/spec.md>
+Note: For example, here you can find information about syntax of a [compose file:]<https://github.com/compose-spec/compose-spec/blob/master/spec.md>
 
-## 2.3 docker-compose.env
+### 2.3 docker-compose.env
 
 This file is optional and provides all environment variables which are used in the docker-compose.yml
 

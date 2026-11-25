@@ -15,7 +15,7 @@ It demonstrates how you can use the TPM2.0 of the ctrlX CORE or the emulated TPM
 
 ## Pre-requisites
 
-* Recommended: ctrlX WORKS App Build Environment (QEMU Virtual Machine) - see Setup
+* Recommended: App Build Environment (QEMU VM) - see Setup
 * ctrlX AUTOMATION SDK Version 1.
 * ctrlX CORE<sup>virtual</sup> or ctrlX CORE or other ctrlX OS Device with TPM
 

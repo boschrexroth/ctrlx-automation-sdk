@@ -1,4 +1,4 @@
-# Samples Nodejs
+# Samples Node.js
 
 ![.Node.js](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/320px-node.js_logo.svg.png)
 

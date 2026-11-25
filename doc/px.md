@@ -1,71 +1,48 @@
-# Use Px as Local Proxy on a Windows Host
+# Internet Proxy for Windows
 
-This documentation is __for Windows hosts only without direct internet access__.
+If your Windows host is behind a **Corporate Proxy**, you need to create the **App Build Environment (QEMU VM)** with option **Use HTTP and HTTPS proxy on localhost:3128** and install [Px Proxy](px.md). 
 
-## Introduction
+Px Proxy forwards HTTP and HTTPS requests from the **App Build Environment (QEMU VM)** to the configured **Corporate Proxy** and uses your **Windows credentials** for authentication.
 
-Host computers without direct internet access are using a proxy server to connect to the internet. __In this case we have to provide the proxy service also for a SDK builder VM running on this host__.
+For more information, see [Px Proxy](https://github.com/genotrance/px).
 
-We recommend to install and run __px.exe__ as local proxy server on your Windows host. This local proxy forwards http and https requests to the configured remote proxy.
+## Install Px Proxy
 
-Here some advantages of px.exe:
+### AI-assisted installation
 
-* Simple to install and configure
-* Same port for http and https forwarding
-* No need to store credential informations (user, password) in config file(s) because Px uses the encrypted Windows credentials.
-* Preconfigured usage in the ctrlX AUTOMATION SDK QEMU VMs
+> !!! info AI-assisted Px Proxy setup using skill [install-pxproxy](ai.md#install-pxproxy).
 
-For more informations about Px see [What is Px](https://github.com/genotrance/px)
+### Manual Installation
 
-## Installation of Px as Local Proxy Server
+1. Open the [Releases](https://github.com/genotrance/px/releases/) page.
+2. Click **Latest** and scroll down to the Windows assets.
+3. Download the **px-v*-windows-amd64.zip** file.
+4. Extract the contents to a folder, for example `C:\tools\px`.
+5. Create a file named `px-start.bat` with the following content:
 
-* Open [https://github.com/genotrance/px/releases/](https://github.com/genotrance/px/releases/)
-* Click button Latest
-* Click px-v?.?.?-windows.zip (v?.?.? e.g. v0.8.4)
-* The zip archive will be downloaded
-* Unzip the content e.g. to c:\tools\px
-* Create a px-start.bat file in  with the content:
-
-```code
-    cd c:\tools\px
+```Shell
+    cd C:\tools\px
 
     px.exe
 ```
 
-* Manually call this bat file
+6. Run `px-start.bat` manually before starting your **App Build Environment (QEMU VM)**. Alternatively, you can install Px Proxy as a Windows service. Follow the instructions in [AI Agents setup](ai.md).
 
-Enter this command for further usage of Px:
+> !!! important
+> Px Proxy provides HTTP and HTTPS access through the default port **3128**. If this port is already in use on the host, you can change it in `px.ini`. You must also change the port in the VM. See [Setup a QEMU VM](setup_qemu_ubuntu.md) and [Setup a VirtualBox VM](setup_windows_virtualbox_ubuntu.md).
 
-```code
-    px.exe --help
-```
+## Details: Proxy configuration on the App Build Environment (QEMU VM)
+!!! info If you create the App Build Environment (QEMU VM) with option **Use HTTP and HTTPS proxy on localhost:3128**, the proxy configuration is set up automatically.
 
-For automatically run at startup do following steps:
+The address `10.0.2.2` is the host computer's IP address from the VM's point of view. See also [QEMU Virtual Machine Networking](setup_qemu_ubuntu.md#qemu-virtual-machine-networking).
 
-* Create a link to px-start.bat
-* Open the startup folder with Windows logo key + R, enter __shell:startup__
-* Move the link to px-start.bat into this folder
+The proxy URL is stored in the App Build Environment (QEMU VM) proxy configuration:
 
-!!! important
-    Px provides both http and https access via default port __3128__. If this port is not available on the host it can be changed in px.ini BUT: The alternative port has to be changed in the VM too - see [Setup a QEMU VM](setup_qemu_ubuntu.md) and [Setup a Virtual Box VM](setup_windows_virtualbox_ubuntu.md).
+* `/etc/environment`
+* `/etc/wgetrc`
+* `~/.nuget/NuGet/NuGet.Config`
 
-## Proxy Settings in the App Build Environment
-
-As mentioned a VM running on a host without direct internet access has to use a proxy server too.
-
-For the VM Px on the host is reachable via the URL __<http://10.0.2.2:3128>__
-
-Note: 10.0.2.2 is the IP address of the host from the perspective of the App Build Environment. See also [QEMU Virtual Machine Networking](setup_qemu_ubuntu.md#qemu-virtual-machine-networking)
-
-For your information only - do not change if not necessary:
-
-This URL is stored as so called "Proxy Settings" in the VM e.g. in following files:
-
-* /etc/environment *1)
-* /etc/wgetrc
-* ~/.nuget/NuGet/NuGet.Config
-
-*1) Here these environment variables are defined:
+These environment variables are defined in `/etc/environment`:
 
 * `http_proxy="http://10.0.2.2:3128"`
 * `https_proxy="http://10.0.2.2:3128"`
@@ -75,21 +52,21 @@ This URL is stored as so called "Proxy Settings" in the VM e.g. in following fil
 
 ## Troubleshooting
 
-Check proxy function in the App Build Environment:
+To test the proxy connection from the App Build Environment (QEMU VM), run:
 
 ```code
     wget http://www.boschrexroth.com
 ```
 
-If no error occurs the internet access via the proxy server is working. In this case remove the downloaded file.
+If the command completes without an error, internet access through the proxy is working. Remove the downloaded file afterwards:
 
 ```code
     rm index.html*
 ```
 
-Check the following points if there are problems with Px:
+If Px does not work, check the following:
 
-* Are the proxy settings Proxy Settings in the App Build Environment fitting to the px.ini file on the host?
-* For more informations about the settings in px.in see [px.ini on github](https://github.com/genotrance/px/blob/master/px.ini)
-* Host PC: Is another proxy running e.g. cntlm?
-* Host PC: Enable logging with parameter log = 1 in px.ini
+* Do the proxy settings in the App Build Environment (QEMU VM) match the settings in `px.ini` on the host?
+* For more information about `px.ini`, see [px.ini on GitHub](https://github.com/genotrance/px/blob/master/px.ini).
+* Is another proxy, such as cntlm, already running on the host?
+* To enable logging, set `log = 1` in `px.ini` on the host.

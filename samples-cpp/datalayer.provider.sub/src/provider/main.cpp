@@ -24,6 +24,7 @@
  // Add some signal Handling so we are able to abort the program with sending sigint
 static bool g_endProcess = false;
 
+// Signal handler: sets the global termination flag to exit the main loop gracefully
 static void sigIntHandler(int signal)
 {
   std::cout << "signal: " << signal << std::endl;
@@ -36,6 +37,7 @@ using comm::datalayer::ISubscriptionNode;
 class MyProviderNode : public ISubscriptionNode
 {
 private:
+  // Current node value published to subscribers (type: int64)
   comm::datalayer::Variant m_data;
 
   /* Keep this comment section - it can be used as a sample for creating metadata programmatically.
@@ -84,15 +86,20 @@ private:
   }
 */
 
-std::recursive_mutex m_mtx;
-std::map<comm::datalayer::ISubscription*, std::shared_ptr<ClientPublisher>> m_mapSubscriptions;
+  // Mutex to protect m_mapSubscriptions against concurrent access from publish threads and onUnsubscription
+  std::recursive_mutex m_mtx;
+
+  // Maps each active subscription to its dedicated ClientPublisher instance
+  std::map<comm::datalayer::ISubscription*, std::shared_ptr<ClientPublisher>> m_mapSubscriptions;
 
 public:
+  // Constructor: initializes the node data with a default int64 value
   MyProviderNode()
   {
     m_data.setValue((int64_t)-123456789);
   };
 
+  // Destructor: all ClientPublisher instances are destroyed via the map's shared_ptr
   virtual ~MyProviderNode() override {
     std::cout << __func__ << std::endl;
   };
@@ -137,7 +144,7 @@ public:
     callback(comm::datalayer::DlResult::DL_FAILED, nullptr);
   }
 
-  // Read function of metadata of an object. Function will be called whenever a node should be written.
+  // Read function of metadata of a node. Function will be called whenever the metadata of a node is requested.
   virtual void onMetadata(const std::string& address, const comm::datalayer::IProviderNode::ResponseCallback& callback) override
   {
     // Keep this comment! Can be used as sample creating metadata programmatically.
@@ -146,9 +153,10 @@ public:
   }
 
 
-  // Starts a subscription of a node
-  // Object holding detailed information about subscription. This object can be stored till onUnsubscription() will be called for this address.
-  // Address to subscribe
+  // Called when a client subscribes to a node address.
+  // Creates a ClientPublisher for the subscription and stores it in the map.
+  // @param subscription  Subscription object valid until onUnsubscription() is called
+  // @param address       The subscribed node address
   virtual comm::datalayer::DlResult onSubscription(comm::datalayer::ISubscription* subscription, const std::string& address) override
   {
     std::cout << "INFO " << __func__ << " address: " << address << std::endl;
@@ -158,7 +166,10 @@ public:
     return comm::datalayer::DlResult::DL_OK;
   }
 
-  // Stops a subscription of a node
+  // Called when a client unsubscribes from a node address.
+  // Removes the associated ClientPublisher once no more nodes remain in the subscription.
+  // @param subscription  The subscription being removed
+  // @param address       The unsubscribed node address
   virtual comm::datalayer::DlResult onUnsubscription(comm::datalayer::ISubscription* subscription, const std::string& address) override
   {
     std::cout << "INFO " << __func__ << " address: " << address << std::endl;
@@ -179,12 +190,13 @@ int main()
   raise(SIGSTOP);
   std::cout << "Debugger connected, continuing program..." << std::endl;
 #endif
-  
+
   // Prepare signal structure to interrupt the endless loop with ctrl + c
   std::signal(SIGINT, sigIntHandler);
   std::signal(SIGTERM, sigIntHandler);
   std::signal(SIGABRT, sigIntHandler);
 
+  // Base path under which all provider nodes are registered in the ctrlX Data Layer
   std::string dlBasePath = "sdk/cpp/datalayer/provider/sub/";
 
   comm::datalayer::DatalayerSystem datalayerSystem;
@@ -211,7 +223,7 @@ int main()
     // Register a node as int64 value
     std::string dlNodesPath = dlBasePath + "**";
     std::cout << "INFO Register node " << dlNodesPath << std::endl;
-    
+
     std::shared_ptr<MyProviderNode> pnode(new MyProviderNode());
 
     comm::datalayer::DlResult result = provider->registerSubscriptionNode(dlNodesPath, pnode.get());
@@ -239,7 +251,7 @@ int main()
     }
 
     provider->unregisterSubscriptionNode(dlNodesPath);
-    
+
     // Clean up datalayer instances so that process ends properly
     provider->stop();
   }

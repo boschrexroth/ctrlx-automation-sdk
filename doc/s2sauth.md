@@ -2,9 +2,6 @@ Service to Service (S2S) authentication provides an easy-to-use interface for ap
 
 In order to integrate service-to-service authentication into your application follow the instructions below.
 
-!!! important
-    Service-to-Service authentication is not available for apps which are installed from "unkown sources". Only apps which have been validated & digitally signed by Bosch Rexroth AG are permitted to use the interface.
-
 ## Add Content Plug to snapcraft.yaml
 
 To be able to retrieve a token, the app has to provide two content slots. The definition for those slots must be added to the snapcraft.yaml:

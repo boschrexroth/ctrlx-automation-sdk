@@ -1,0 +1,61 @@
+# Getting started
+# See https://snapcraft.io/docs/getting-started
+# Snapcraft references
+# See https://snapcraft.io/docs/snapcraft-yaml-reference
+
+name: sdk-cpp-client-bulk
+title: SDK C++ Client Bulk
+version: 1.0.0
+grade: stable
+
+contact: https://github.com/boschrexroth/ctrlx-automation-sdk
+license: MIT
+donation: https://github.com/boschrexroth/ctrlx-automation-sdk
+issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
+source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
+website: https://github.com/boschrexroth/ctrlx-automation-sdk
+
+summary: Sample app for datalayer client
+description: |
+  This app demonstrates how to use bulk operations.
+base: core24
+confinement: strict
+
+platforms:
+  amd64:
+  arm64:
+    build-on: [amd64, arm64]
+    build-for: [arm64]
+
+# define how apps & services are exposed to host system
+apps:
+  app:
+    command: datalayerClientBulk
+    # interfaces to connect to https://snapcraft.io/docs/supported-interfaces
+    plugs:
+      - network
+      - datalayer
+    daemon: simple
+    passthrough:
+      restart-condition: always
+      restart-delay: 10s
+
+parts:
+  datalayerclient:
+    plugin: dump
+    source: ./generated/build
+    stage-packages:
+      - ctrlx-datalayer
+
+# describes which interface slots are supported by defining the plugs
+plugs:
+  datalayer:
+    interface: content
+    content: datalayer
+    target: $SNAP_DATA/.datalayer
+
+lint:
+  ignore:
+    - library:
+        - usr/lib/aarch64-linux-gnu/libcomm_datalayer.so.*
+        - usr/lib/x86_64-linux-gnu/libcomm_datalayer.so.*

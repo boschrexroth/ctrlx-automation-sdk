@@ -8,6 +8,7 @@ using Datalayer;
 using Samples.Datalayer.Provider.Alldata;
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 // Create TaskCompletionSource to wait for process termination.
@@ -136,10 +137,12 @@ if (!provider.IsConnected)
     return;
 }
 
+// CancellationTokenSource to stop the dynamic node update loop on shutdown.
+using var cts = new CancellationTokenSource();
 
 _ = Task.Run(async () =>
 {
-    while (true)
+    while (!cts.Token.IsCancellationRequested)
     {
         // Change dynamic nodes value every 1000 milliseconds.
         foreach (var node in dynamicNodes)
@@ -147,14 +150,17 @@ _ = Task.Run(async () =>
             node.ChangeValue(DateTime.UtcNow);
         }
 
-        await Task.Delay(1000);
+        await Task.Delay(1000, cts.Token).ConfigureAwait(false);
     }
-});
+}, cts.Token);
 
 // Wait for process termination.
 Console.WriteLine("Waiting for process exit event 'SIGTERM'...");
 await tcs.Task;
 Console.WriteLine("Graceful shutdown.");
+
+// Cancel the update loop before stopping the provider.
+await cts.CancelAsync();
 
 // Stop the provider.
 provider.Stop();

@@ -1,54 +1,25 @@
-Storage extension is a feature to extend the internal storage by an external media like μSD card or USB device. Storage extension was introduced with Device Admin 1.18.
+# Introduction
 
-This storage is encrypted and bond to one ctrlX CORE, so it cannot be used to transfer data from one ctrlX CORE to another one. If a data transfer is required, please see documentation of [Data exchange](data-exchange.md).
+Storage Extension allows you to add a secondary storage device to your ctrlX using external media, such as a μSD card or USB drive. To ensure optimal system performance and device longevity, we recommend configuring your applications to run and store their data on this external media. This configuration must be done manually for each app to enable storage extension on the external media.
 
-!!! attention
-    >
-    - All data on the storage extension partition will be erased! Be sure you back up your data before.
-    - The partition will be formatted with ext4 and encrypted with dmcrypt.
-    - Each app has an own, exclusive area on the storage extension partition, no other app can access this location.
+The device variants ctrlX CORE X3plus, X5 and X7 can be ordered with an 80 GB SSD memory extension module. This extension module is listed under its fixed system name e.g. "nvme1n1p1" for the X7, and "nvme0n1p1" for the X3plus and X5.
 
-# Requirements
+>!!! warning
+> External media mounted as storage extension is fully encrypted with dmcrypt and bound to this device. Removing the external medium will require a complete reformat before it can be used again. This reformatting process will permanently delete all data on the medium.
 
-To use the extended storage in your app, some changes are needed in your app. The minimum requirements are shown in the samples.
+If a data transfer is required, please see documentation of [Data exchange](data-exchange.md).
 
-The storage extension mount point must be added as a mount-control plug in the [snapcraft.yaml](https://snapcraft.io/docs/snapcraft-yaml-reference). Additionally your app needs the mount-observe plug and a remove hook.
+## App Configuration
 
-And as the last step some modifications of the start script of your app are required.
+To enable your application to utilize the Storage Extension, you must perform several configuration steps before building your app.
 
-The storage extension parent for your app is mounted by the Device Admin. The location is `/writable/system-data/var/run/mnt/storage-extension/${SNAPCRAFT_PROJECT_NAME}`.
+**App Isolation:**
+Each app is allocated its own exclusive, isolated area on the storage extension partition: `$SNAP_COMMON/storage-extension/<app-name>`.
+No other application can access this path.
 
-# Development
+## Step 1: Update snapcraft.yaml
 
-!!! attention
-
-## Root user required
-
-The storage extension plug is on the denylist.
-Therefore only signed apps can use storage extension.
-To avoid trouble during the development, a root user for the ctrlX is required
-and the denylist has to be empty.
-
-## Empty the denylist
-
-```bash
-    sudo -s
-    mkdir -p /etc/writable/integrity
-    echo [] >/etc/writable/integrity/denylist.json
-    snap restart rexroth-deviceadmin.web
-```
-
-After clearing the denylist it's possible to test storage extension without signed apps.
-
-# Configuration
-
-Some modifications in your app are required to use storage extension.
-
-# Snapcraft.yaml
-
-The storage extension plug is required in **[snapcraft.yaml](https://snapcraft.io/docs/snapcraft-yaml-reference)**. The type of the plug is **mount-control**, the necessary parameters are shown in the sample:
-
-## Example
+You must declare the mount-control plug in your snapcraft.yaml to allow your app to bind to the system-provided mount point.
 
 ```yaml title="snapcraft.yaml"
 name: storage-extension-sample
@@ -73,10 +44,10 @@ plugs:
         interface: mount-control
         mount:
             - what: /writable/system-data/var/run/mnt/storage-extension/${SNAPCRAFT_PROJECT_NAME}
-            where: $SNAP_COMMON/storage-extension/${SNAPCRAFT_PROJECT_NAME}
-            options:
-                - rw
-                - bind
+              where: $SNAP_COMMON/storage-extension/${SNAPCRAFT_PROJECT_NAME}
+              options:
+                  - rw
+                  - bind
 
 apps:
     sample:
@@ -86,34 +57,29 @@ apps:
             - mount-observe
 ```
 
-Remark: the variable `${SNAPCRAFT_PROJECT_NAME}` is a known variable by snapcraft and will be replaced with the project name (here: **storage-extension-sample**). So no modifications in this block is required! The variable `$SNAP_COMMON` is known in the snap context.
+- ${SNAPCRAFT_PROJECT_NAME}: A native Snapcraft variable automatically replaced with your project name (e.g., storage-extension-sample). No manual modification is required in this block.
 
-Your app needs the plugs **mount-observe** and the defined storage extension plug (here: **storage-extension-mnt**). If one of the plugs are missing, your app won't run like expected.
+- mount-observe: This system plug is mandatory. If either mount-control (under your custom name) or mount-observe is missing, your application will fail to run correctly.
 
-# Remove hook
+## Step 2: Add a Remove Hook
 
-There has to be a remove hook in your app. Otherwise, it's not possible to remove your app if a storage extension is available.
+A remove hook is required so the system can cleanly unmount your application's storage area if the app is uninstalled. Without this, the system will prevent the application from being removed.
 
-To add the remove hook, the file `remove` has to be placed in the `snap/hooks` folder.
+Create an executable shell script named remove and place it in your project's snap/hooks/ directory:
 
-Don't forget to mark the file as executable:
+```bash title="snap/hooks/remove"
+     snapctl umount $SNAP_COMMON/storage-extension/$SNAP_NAME
+```
+
+Make sure the file is marked as executable in your build environment:
 
 ```bash
     chmod +x remove
 ```
 
-!!! remove
-    ```title=""
-     snapctl umount $SNAP_COMMON/storage-extension/$SNAP_NAME
-    ```
+## Step 3: Update the App Start Script
 
-Remark: The variables `$SNAP_COMMON` and `$SNAP_NAME` are known in the snap context.
-
-# App start script
-
-Before your app can start and use the storage extension, the storage extension mount must be done. Therefore, your start script has to mount the storage extension.
-
-## Example
+Your application must mount the Storage Extension folder inside its virtual environment before executing the main application binary.
 
 ```bash title="script.sh"
 
@@ -133,28 +99,36 @@ snapctl mount -o rw,bind /writable/system-data/var/run/mnt/storage-extension/$SN
 $SNAP/your-app.sh
 ```
 
-# Sample app
+## Step 4: Test Unsigned Apps (Optional for Development)
 
-This sample app ( [storage-extension-sample](./samples-snap/storage-extension/README.md) ) is the minimum set to use storage extension.
-Feel free to add the content to your app.
+By default, the storage extension interface is on a security denylist. Consequently, only cryptographically signed production apps are permitted to access it.
 
-# Use storage extension
+If you want to test your own unsigned apps during the active development phase, you must temporarily clear this denylist on your ctrlX CORE. This requires root user privileges.
 
-To use storage extension, mount the media with the option "To extend system data".
+Establish an SSH connection to your ctrlX CORE and execute the following commands:
+
+```bash
+    sudo -s
+    mkdir -p /etc/writable/integrity
+    echo [] >/etc/writable/integrity/denylist.json
+    snap restart rexroth-deviceadmin.web
+```
+
+## Activating the Storage Extension
+
+Once your app is configured for the storage extension, follow these steps on the ctrlX CORE to activate the storage medium.
+
+1. Insert the external media (μSD card or USB device) into the control.
+2. In the ctrlX CORE Web UI, navigate to the "Settings" -> "Storage" and mount the media using the option "To extend system data".
+3. Click Continue. The storage extension is prepared and integrated. Subsequently, the control automatically reboots.
+4. After the reboot, the extended storage is active and available to your configured apps under the following path:
+$SNAP_COMMON/storage-extension/**app-name**
 
 !!! attention
-    The partition will be formatted and encrypted. All data on the partition will be lost!
+To safely disconnect the media, use the Remove Safely button. This process will conclude with a system restart. Removing the external medium will require a complete reformat before it can be used again. This reformatting process will permanently delete all data on the medium.
 
-After clicking "continue" the storage extension will be added to the system and the control will be rebooted.
+**Remarks:**
 
-After the next reboot the storage extension will be available for the system.
-
-Each app has its own area, the path is `$SNAP_COMMON/storage-extension/<app-name>`.
-
-!!! Remarks
-    - By pressing the remove safely button, you can remove the storage extension (this will be finished with a restart of the control).
-    - !!! warning
-        Be careful: You cannot reuse the partition without formatting and encrypting it again. So all data will be lost!
-    - **Only one** partition can be used as storage-extension at one time
-    - storage-extension can not be used together with [Ubuntu Snapshot mechanism](persist-device-settings.md)
-    - If necessary, you have to switch to service state to mount or unmount storage-extension partitions
+- Ubuntu Snapshots: Storage Extension cannot be used in combination with the Ubuntu Snapshot Mechanism.
+- System State: If necessary, you must switch the control to the Service State to mount or unmount Storage Extension partitions.
+- Hardware Limit: Only one partition can be actively used as a Storage Extension at any given time.

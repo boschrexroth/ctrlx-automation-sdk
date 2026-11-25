@@ -9,7 +9,7 @@
  /*! \file
   *
   * This header file provides auxiliary methods to create ctrlX Datalayer client and provider connections to ctrlX CORE devices.
-  * It can be used for both running in an app build environment (QEMU VM) and within the snap environment on the ctrlX CORE.
+  * It can be used for both running in an App Build Environment (QEMU VM) and within the snap environment on the ctrlX CORE.
   *
   * Feel free to use it in your projects and to change it if necessary.
   *
@@ -28,12 +28,12 @@
   *
   *     client, client_connection = get_client(system, ip="192.168.1.100", user="admin", password="-$_U/{X$aG}Z3/e<")
   *
-  * 2. ctrlX COREvirtual with port forwarding running on the same host as the app build environment (QEMU VM):
+  * 2. ctrlX COREvirtual with port forwarding running on the same host as the App Build Environment (QEMU VM):
   *
   *     client, client_connection = get_client(system, ip="10.0.2.2", ssl_port=8443)
   *
   *     Remarks:
-  *     10.0.2.2 is the IP address of the host from the point of view of the app build environment (QEMU VM).
+  *     10.0.2.2 is the IP address of the host from the point of view of the App Build Environment (QEMU VM).
   *     8443 is the host port which is forwarded to the SSL port (=433) of the ctrlX COREvirtual
   *
   *

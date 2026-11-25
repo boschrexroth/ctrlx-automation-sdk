@@ -376,7 +376,7 @@ then
 			--insecure --no-progress-meter --silent --show-error
 
 			echo "Waiting ${SECONDS_TO_WAIT_AFTER_UNINSTALL}s after uninstallation ..."
-			read -r-t ${SECONDS_TO_WAIT_AFTER_UNINSTALL} -p "Wait or press ENTER to continue"
+			read -r -t ${SECONDS_TO_WAIT_AFTER_UNINSTALL} -p "Wait or press ENTER to continue"
 			echo " "  
 
 		else

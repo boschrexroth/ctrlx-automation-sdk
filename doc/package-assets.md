@@ -962,50 +962,14 @@ The definition of licenses:
 
 <!-- md:version 1.4 -->
 
-Contains ui extensions for the home screen.
-
-You can provide own widgets to be shown in the Home screen. These widgets need to be implemented as [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
-
-In short, widgets are provided in a JavaScript file and define a custom HTML tag. This JavaScript file can be loaded into any web page and the widget is instantiated by just inserting its tag into an HTML file (just like standard tags like <div\> or <table\>). One JavaScript file can contain several Web Components. Your app must serve this JavaScript file, just like other assets, so that it can be addressed via a URL.
-
-For the Home screen to know about all the widgets, these need to be made publicly known in some way. This is done in the app's manifest in "uiExtensions" → "dashboard". Each element here defines one widget by providing the information needed to instantiate the widget (like the URL of the JavaScript file, where the widget is implemented, and the widget's tag name, size information) and metadata to display in the widget catalog. For a detailed description see the PackageManager-API, schema "DashboardWidget".
-
-!!! Example
-    ```json
-      "uiExtensions": {
-        "dashboard": [
-          {
-            "order": 10,
-            "src": "/motion/widgets.js",
-            "tag": "rexroth-axes-widget",
-            "title": "Axes",
-            "description": "Shows the status of your axes",
-            "categories": ["Motion"],
-            "i18n": "dashboard.motion.axes",
-            "image": "/motion/assets/img/DC_AE_ctrlX_DRIVE-axes_Symbol_bl_192x192_202102.svg",
-            "initialSize": {
-              "rows": 3,
-              "cols": 3
-            },
-            "minSize": {
-              "rows": 3,
-              "cols": 3
-            },
-            "maxSize": {
-              "rows": 3,
-              "cols": 3
-            }
-          }
-        ]
-      }
-    ```
+Contains ui extensions for the home screen. See ["Providing widgets in the Home screen"](dashboard-widgets.md).
 
 The definition of uiExtensions object
 
 |Field        |Description                                                                    |
 |-------------|-------------------------------------------------------------------------------|
 |**header**   |array of uiExtensionHeaderItem                                                 |
-|**dashboard**|array of uiExtensionDashboardItem, which references to dashboardWidgetExtension|
+|**dashboard**|<a id="dashboard"></a>array of uiExtensionDashboardItem, which references to dashboardWidgetExtension.|
 
 The definition of uiExtensionHeaderItem object
 
@@ -1019,12 +983,14 @@ The definition of dashboardWidgetExtension object
 
 |Field|Description|
 |-|-|
-|**order**      |integer,order of the item in the header. Lower numbers are displayed first|
+|**order**      |integer, not used|
 |**src**        |string,the url of the web component's implementation file|
-|**tag**        |string,the tag name that creates a new instance of the web component|
+|**tag**        |string,the tag name that creates a new instance of the web component for the widget|
+|**settingsTag**|<a id="dashboard-widget-settings-tag"></a>string,the tag name that creates a new instance of the web component for the widget's settings editor. Only needed for configurable widgets.|
 |**title**      |string,the widget's description as shown in the widget catalog|
 |**icon**       |string,the icon to be displayed in the widget catalog. <a href="./material/templates/icons.html" target="_blank">icon library</a> as a reference.|
 |**image**      |string,the path to the image to be displayed in the widget catalog|
+|**initialConfig**|<a id="dashboard-widget-initial-config"></a>reference to dashboardWidgetConfig object. Holds the widget's initial configuration data. Only needed for configurable widgets.|
 |**initialSize**|reference to dashboardWidgetSize object|
 |**minSize**    |object, which references to dashboardWidgetSize object|
 |**maxSize**    |object, which references to dashboardWidgetSize object|
@@ -1038,6 +1004,12 @@ The definition of dashboardWidgetSize object
 |--------|-----------------------------------------------|
 |**cols**|number, number of columns in the dashboard grid|
 |**rows**|number, number of rows in the dashboard grid   |
+
+The definition of dashboardWidgetConfig object
+
+|Field   |Description                                    |
+|--------|-----------------------------------------------|
+|**specificConfig**|<a id="dashboard-widget-specific-config"></a>object, which defines the widget-specific config data. The data structure can be defined freely.|
 
 ### Example package-manifest.json
 
@@ -1073,37 +1045,26 @@ The definition of dashboardWidgetSize object
         "services": {
           "proxyMapping": [
             {
-              "name": "ctrlx-helloworld.web",
-              "url": "/ctrlx-helloworld",
-              "binding": "unix://{$SNAP_DATA}/package-run/ctrlx-helloworld/ctrlx-helloworld.web.sock",
+              "name": "ctrlx-helloworld.simple",
+              "url": "/ctrlx-helloworld/simple",
+              "binding": "unix://{$SNAP_DATA}/package-run/ctrlx-helloworld/ctrlx-helloworld.simple.sock",
+              "restricted": {
+                "path": "/ctrlx-helloworld/simple/api"
+              }
+            },
+            {
+              "name": "ctrlx-helloworld.caddyfile",
+              "url": "/ctrlx-helloworld/caddyfile",
               "caddyfile": "./caddyfile",
-              "options": [
-                {
-                  "option": "websockets",
-                  "value": ""
-                },
-                {
-                  "option": "max_conns",
-                  "value": "2"
-                }
-              ],
               "restricted": [
-                "/ctrlx-helloworld/api/v1",
                 {
-                  "path": "/my-app/api/v1.0",
+                  "path": "/ctrlx-helloworld/caddyfile/api",
                   "except": [
-                    "/my-app/api/v1.0/except-path-1",
-                    "/my-app/api/v1.0/except-path-2"
+                    "/ctrlx-helloworld/caddyfile/api/except-path-1",
+                    "/ctrlx-helloworld/caddyfile/api/except-path-2"
                   ],
                   "headersForwarding": [
-                    "X-Auth-Name",
-                    "X-Auth-ID",
-                    "X-Auth-Scopes",
-                    "X-Auth-Expires",
-                    "X-Auth-Issued",
-                    "X-Auth-PlcHandle",
-                    "X-Auth-RemoteAuth",
-                    "X-Auth-Nonce"
+                    "X-Auth-Name"
                   ]
                 }
               ]

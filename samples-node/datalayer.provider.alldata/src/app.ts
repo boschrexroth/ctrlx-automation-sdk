@@ -26,7 +26,6 @@ import Node from './node';
 // Utils
 import { Remote } from 'ctrlx-datalayer/dist/remote';
 
-
 async function main() {
 
     // Create a new ctrlX Data Layer system
@@ -44,7 +43,7 @@ async function main() {
     await provider.start();
 
     // Initially exit and retry after app restart-delay (see snapcraft.yaml)
-    if (provider.isConnected() === false) {
+    if (!provider.isConnected()) {
         console.log('provider is not connected -> exit.');
         return;
     }
@@ -127,7 +126,7 @@ async function main() {
     ];
 
     // Create map with key address and value node for the callback functions.
-    let addressToNode = new Map<string, Node>();
+    const addressToNode = new Map<string, Node>();
 
     // Add all static nodes to the map.
     staticNodes.forEach(node => {
@@ -193,23 +192,38 @@ async function main() {
 
     // Keep the process alive until disconnected
     const intervalHandle = setInterval(() => {
-        dynamicNodes.forEach(async node => {
+        dynamicNodes.forEach(node => {
             node.incrementValue(new Date());
         });
 
-        if (system.isStarted() === false || provider.isConnected() === false) {
+        if (!system.isStarted() || !provider.isConnected()) {
             clearInterval(intervalHandle);
         }
     }, 1_000);
 
 
-    // Handle process event 'SIGTERM'
-    process.on('SIGTERM', () => {
-        console.info('SIGTERM signal received.');
+    // Common shutdown routine used by both 'SIGTERM' and 'SIGINT'
+    const shutdown = async (signal: string) => {
+        console.info(`${signal} signal received.`);
 
-        system.stop();
+        // Stop keeping the process alive
+        clearInterval(intervalHandle);
+
+        // Stop the provider
+        await provider.stop();
+        console.log('Provider stopped.');
+
+        // Stop the ctrlX Data Layer system
+        await system.stop();
         console.log('ctrlX Data Layer system stopped.');
-    });
+    };
+
+    // Handle process events 'SIGTERM' and 'SIGINT'
+    process.on('SIGTERM', () => void shutdown('SIGTERM'));
+    process.on('SIGINT', () => void shutdown('SIGINT'));
 }
 
-main();
+main().catch((err) => {
+    console.error('Fatal error:', err);
+    process.exitCode = 1;
+});

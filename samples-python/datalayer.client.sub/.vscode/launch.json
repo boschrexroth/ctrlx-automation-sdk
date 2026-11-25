@@ -12,6 +12,16 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {"PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}" }
-        }
+        },
+        {
+            "name": "lossless",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/app/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {"PYTHONPATH": "${workspaceFolder}:${PYTHONPATH}" },
+            "args": ["lossless"]
+        }        
     ]
 }

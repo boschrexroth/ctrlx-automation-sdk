@@ -62,7 +62,7 @@ To set up remote debugging:
     sudo snap run --experimental-gdbserver=:12345 sdk-cpp-remote-scheduler.app
     ```
 
-    **Note:** When using a virtual machine, ensure that port forwarding for port `12345` is configured.
+    **Note:** When using a Virtual Machine, ensure that port forwarding for port `12345` is configured.
 
 4. Return to VS Code and select the pre-defined `launch.json` task `remote <arch>: debug executable`.  
 

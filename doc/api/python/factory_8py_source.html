@@ -26,7 +26,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="icon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">ctrlX Data Layer API for Python<span id="projectnumber">&#160;3.6.0</span>
+   <div id="projectname">ctrlX Data Layer API for Python<span id="projectnumber">&#160;3.8.0</span>
    </div>
    <div id="projectbrief">The ctrlX Data Layer API allows access to the ctrlX Data Layer with Python</div>
   </td>
@@ -102,70 +102,121 @@ $(document).ready(function(){initNavTree('factory_8py_source.html',''); initResi
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="stringliteral">    Factory class</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> ctrlxdatalayer</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">from</span> ctrlxdatalayer.clib_factory <span class="keyword">import</span> C_DLR_FACTORY</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespacectrlxdatalayer_1_1client.html">ctrlxdatalayer.client</a> <span class="keyword">import</span> Client</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespacectrlxdatalayer_1_1provider.html">ctrlxdatalayer.provider</a> <span class="keyword">import</span> Provider</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">class </span><a class="code hl_class" href="classctrlxdatalayer_1_1factory_1_1Factory.html">Factory</a>:</div>
-<div class="foldopen" id="foldopen00011" data-start="" data-end="">
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html">   11</a></span>    <span class="stringliteral">&quot;&quot;&quot; Factory class &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    __slots__ = [<span class="stringliteral">&#39;__factory&#39;</span>]</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a31a3d5f2fb0b5c4e3c4cc197f81b4ac1">__init__</a>(self, c_factory: C_DLR_FACTORY):</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="stringliteral">        generate Factory</span></div>
-<div class="foldopen" id="foldopen00018" data-start="" data-end="">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a31a3d5f2fb0b5c4e3c4cc197f81b4ac1">   18</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a> = c_factory</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">import</span> ctypes</div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> ctrlxdatalayer</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">from</span> ctrlxdatalayer.clib_factory <span class="keyword">import</span> C_DLR_FACTORY</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespacectrlxdatalayer_1_1owner.html">ctrlxdatalayer.owner</a> <span class="keyword">import</span> Owner</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">from</span> ctrlxdatalayer.clib_owner <span class="keyword">import</span> C_DLR_OWNER</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespacectrlxdatalayer_1_1variant.html">ctrlxdatalayer.variant</a> <span class="keyword">import</span> Result</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespacectrlxdatalayer_1_1client.html">ctrlxdatalayer.client</a> <span class="keyword">import</span> Client</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespacectrlxdatalayer_1_1provider.html">ctrlxdatalayer.provider</a> <span class="keyword">import</span> Provider</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">from</span> comm.datalayer <span class="keyword">import</span> MemoryType</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespacectrlxdatalayer_1_1user.html">ctrlxdatalayer.user</a> <span class="keyword">import</span> User, C_DLR_USER</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">class </span><a class="code hl_class" href="classctrlxdatalayer_1_1factory_1_1Factory.html">Factory</a>:</div>
+<div class="foldopen" id="foldopen00019" data-start="" data-end="">
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html">   19</a></span>    <span class="stringliteral">&quot;&quot;&quot; Factory class &quot;&quot;&quot;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    __slots__ = [<span class="stringliteral">&#39;__factory&#39;</span>]</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a31a3d5f2fb0b5c4e3c4cc197f81b4ac1">__init__</a>(self, c_factory: C_DLR_FACTORY):</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="stringliteral">        generate Factory</span></div>
+<div class="foldopen" id="foldopen00026" data-start="" data-end="">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a31a3d5f2fb0b5c4e3c4cc197f81b4ac1">   26</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a> = c_factory</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#aa67be05534ad9eec11581a16119d6190">get_handle</a>(self):</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="stringliteral">        handle value of Factory</span></div>
-<div class="foldopen" id="foldopen00024" data-start="" data-end="">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#aa67be05534ad9eec11581a16119d6190">   24</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordflow">return</span> self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac1e11e43644987a9d766014d192a3eac">create_client</a>(self, remote: str) -&gt; Client:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="stringliteral">        Creates a client for accessing data of the system</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="stringliteral">        @param[in] remote     Remote address of the data layer</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="stringliteral">        @returns &lt;Client&gt;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#aa67be05534ad9eec11581a16119d6190">get_handle</a>(self):</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="stringliteral">        handle value of Factory</span></div>
 <div class="foldopen" id="foldopen00032" data-start="" data-end="">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac1e11e43644987a9d766014d192a3eac">   32</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        b_remote = remote.encode(<span class="stringliteral">&#39;utf-8&#39;</span>)</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        c_client = ctrlxdatalayer.clib.libcomm_datalayer.DLR_factoryCreateClient(</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a>, b_remote)</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classctrlxdatalayer_1_1client_1_1Client.html">Client</a>(c_client)</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#aa67be05534ad9eec11581a16119d6190">   32</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <span class="keywordflow">return</span> self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a70593e62040d99948079f6f6328420f0">create_provider</a>(self, remote: str) -&gt; Provider:</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="stringliteral">        Creates a provider to provide data to the datalayer</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="stringliteral">        @param[in] remote     Remote address of the data layer</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="stringliteral">        @returns &lt;Provider&gt;</span></div>
-<div class="foldopen" id="foldopen00043" data-start="" data-end="">
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a70593e62040d99948079f6f6328420f0">   43</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        b_remote = remote.encode(<span class="stringliteral">&#39;utf-8&#39;</span>)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        c_provider = ctrlxdatalayer.clib.libcomm_datalayer.DLR_factoryCreateProvider(</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a>, b_remote)</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classctrlxdatalayer_1_1provider_1_1Provider.html">Provider</a>(c_provider)</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac1e11e43644987a9d766014d192a3eac">create_client</a>(self, remote: str) -&gt; Client:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="stringliteral">        Creates a client for accessing data of the system</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="stringliteral">        @param[in] remote     Remote address of the data layer</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="stringliteral">        @returns &lt;Client&gt;</span></div>
+<div class="foldopen" id="foldopen00040" data-start="" data-end="">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac1e11e43644987a9d766014d192a3eac">   40</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        b_remote = remote.encode(<span class="stringliteral">&#39;utf-8&#39;</span>)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        c_client = ctrlxdatalayer.clib.libcomm_datalayer.DLR_factoryCreateClient(</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a>, b_remote)</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classctrlxdatalayer_1_1client_1_1Client.html">Client</a>(c_client)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a70593e62040d99948079f6f6328420f0">create_provider</a>(self, remote: str) -&gt; Provider:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="stringliteral">        Creates a provider to provide data to the datalayer</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="stringliteral">        @param[in] remote     Remote address of the data layer</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="stringliteral">        @returns &lt;Provider&gt;</span></div>
+<div class="foldopen" id="foldopen00051" data-start="" data-end="">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a70593e62040d99948079f6f6328420f0">   51</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        b_remote = remote.encode(<span class="stringliteral">&#39;utf-8&#39;</span>)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        c_provider = ctrlxdatalayer.clib.libcomm_datalayer.DLR_factoryCreateProvider(</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a>, b_remote)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> <a class="code hl_class" href="classctrlxdatalayer_1_1provider_1_1Provider.html">Provider</a>(c_provider)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a9b118a712504922aff7768589f664454">create_memory</a>(self, address: str, provider: Provider, size: int, ty: MemoryType):</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="stringliteral">        Creates a memory in the datalayer</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="stringliteral">        @param[in] provider   Provider to create the memory</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="stringliteral">        @param[in] address    Address of the memory</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="stringliteral">        @param[in] size       Size of the memory</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="stringliteral">        @param[in] ty         Type of the memory</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="stringliteral">        @returns &lt;result, Owner&gt; Handle of the created memory</span></div>
+<div class="foldopen" id="foldopen00065" data-start="" data-end="">
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a9b118a712504922aff7768589f664454">   65</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        b_addr = address.encode(<span class="stringliteral">&#39;utf-8&#39;</span>)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        owner = C_DLR_OWNER()</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        r = <a class="code hl_class" href="classctrlxdatalayer_1_1variant_1_1Result.html">Result</a>(ctrlxdatalayer.clib.libcomm_datalayer.DLR_factoryCreateMemorySync(self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a>, ctypes.byref(owner), b_addr, provider.get_handle(), size, ty))</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">if</span> r != Result.OK:</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keywordflow">return</span> r, <span class="keywordtype">None</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        o = <a class="code hl_class" href="classctrlxdatalayer_1_1owner_1_1Owner.html">Owner</a>(self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a>, owner)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">return</span> r, o</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">def </span><a class="code hl_function" href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac88b14a58dd136fc1aac7b8edc189b0d">open_memory</a>(self, address: str):</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="stringliteral">        Opens a memory in the datalayer</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="stringliteral">        @param[in] address    Address of the memory</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="stringliteral">        @returns &lt;result, User&gt; Handle of the opened memory</span></div>
+<div class="foldopen" id="foldopen00079" data-start="" data-end="">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac88b14a58dd136fc1aac7b8edc189b0d">   79</a></span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        b_addr = address.encode(<span class="stringliteral">&#39;utf-8&#39;</span>)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        user = C_DLR_USER()</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        r = <a class="code hl_class" href="classctrlxdatalayer_1_1variant_1_1Result.html">Result</a>(ctrlxdatalayer.clib.libcomm_datalayer.DLR_factoryOpenMemory(self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a>, ctypes.byref(user), b_addr))</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <span class="keywordflow">if</span> r != Result.OK:</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            <span class="keywordflow">return</span> r, <span class="keywordtype">None</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        u = <a class="code hl_class" href="classctrlxdatalayer_1_1user_1_1User.html">User</a>(self.<a class="code hl_variable" href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">__factory</a>, user)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">return</span> r, u</div>
 </div>
 </div>
-<div class="ttc" id="aclassctrlxdatalayer_1_1client_1_1Client_html"><div class="ttname"><a href="classctrlxdatalayer_1_1client_1_1Client.html">ctrlxdatalayer.client.Client</a></div><div class="ttdoc">Client interface for accessing data from the system.</div><div class="ttdef"><b>Definition</b> <a href="client_8py_source.html#l00061">client.py:61</a></div></div>
-<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html">ctrlxdatalayer.factory.Factory</a></div><div class="ttdoc">Factory class.</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00011">factory.py:11</a></div></div>
-<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_a26b12601f4036609de2996a43c5b0209"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">ctrlxdatalayer.factory.Factory.__factory</a></div><div class="ttdeci">__factory</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00019">factory.py:19</a></div></div>
-<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_a31a3d5f2fb0b5c4e3c4cc197f81b4ac1"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#a31a3d5f2fb0b5c4e3c4cc197f81b4ac1">ctrlxdatalayer.factory.Factory.__init__</a></div><div class="ttdeci">__init__(self, C_DLR_FACTORY c_factory)</div><div class="ttdoc">generate Factory</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00018">factory.py:18</a></div></div>
-<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_a70593e62040d99948079f6f6328420f0"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#a70593e62040d99948079f6f6328420f0">ctrlxdatalayer.factory.Factory.create_provider</a></div><div class="ttdeci">Provider create_provider(self, str remote)</div><div class="ttdoc">Creates a provider to provide data to the datalayer.</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00043">factory.py:43</a></div></div>
-<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_aa67be05534ad9eec11581a16119d6190"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#aa67be05534ad9eec11581a16119d6190">ctrlxdatalayer.factory.Factory.get_handle</a></div><div class="ttdeci">get_handle(self)</div><div class="ttdoc">handle value of Factory</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00024">factory.py:24</a></div></div>
-<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_ac1e11e43644987a9d766014d192a3eac"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac1e11e43644987a9d766014d192a3eac">ctrlxdatalayer.factory.Factory.create_client</a></div><div class="ttdeci">Client create_client(self, str remote)</div><div class="ttdoc">Creates a client for accessing data of the system.</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00032">factory.py:32</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1client_1_1Client_html"><div class="ttname"><a href="classctrlxdatalayer_1_1client_1_1Client.html">ctrlxdatalayer.client.Client</a></div><div class="ttdoc">Client interface for accessing data from the system.</div><div class="ttdef"><b>Definition</b> <a href="client_8py_source.html#l00065">client.py:65</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html">ctrlxdatalayer.factory.Factory</a></div><div class="ttdoc">Factory class.</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00019">factory.py:19</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_a26b12601f4036609de2996a43c5b0209"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#a26b12601f4036609de2996a43c5b0209">ctrlxdatalayer.factory.Factory.__factory</a></div><div class="ttdeci">__factory</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00027">factory.py:27</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_a31a3d5f2fb0b5c4e3c4cc197f81b4ac1"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#a31a3d5f2fb0b5c4e3c4cc197f81b4ac1">ctrlxdatalayer.factory.Factory.__init__</a></div><div class="ttdeci">__init__(self, C_DLR_FACTORY c_factory)</div><div class="ttdoc">generate Factory</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00026">factory.py:26</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_a70593e62040d99948079f6f6328420f0"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#a70593e62040d99948079f6f6328420f0">ctrlxdatalayer.factory.Factory.create_provider</a></div><div class="ttdeci">Provider create_provider(self, str remote)</div><div class="ttdoc">Creates a provider to provide data to the datalayer.</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00051">factory.py:51</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_a9b118a712504922aff7768589f664454"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#a9b118a712504922aff7768589f664454">ctrlxdatalayer.factory.Factory.create_memory</a></div><div class="ttdeci">create_memory(self, str address, Provider provider, int size, MemoryType ty)</div><div class="ttdoc">Creates a memory in the datalayer.</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00065">factory.py:65</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_aa67be05534ad9eec11581a16119d6190"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#aa67be05534ad9eec11581a16119d6190">ctrlxdatalayer.factory.Factory.get_handle</a></div><div class="ttdeci">get_handle(self)</div><div class="ttdoc">handle value of Factory</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00032">factory.py:32</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_ac1e11e43644987a9d766014d192a3eac"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac1e11e43644987a9d766014d192a3eac">ctrlxdatalayer.factory.Factory.create_client</a></div><div class="ttdeci">Client create_client(self, str remote)</div><div class="ttdoc">Creates a client for accessing data of the system.</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00040">factory.py:40</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1factory_1_1Factory_html_ac88b14a58dd136fc1aac7b8edc189b0d"><div class="ttname"><a href="classctrlxdatalayer_1_1factory_1_1Factory.html#ac88b14a58dd136fc1aac7b8edc189b0d">ctrlxdatalayer.factory.Factory.open_memory</a></div><div class="ttdeci">open_memory(self, str address)</div><div class="ttdoc">Opens a memory in the datalayer.</div><div class="ttdef"><b>Definition</b> <a href="factory_8py_source.html#l00079">factory.py:79</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1owner_1_1Owner_html"><div class="ttname"><a href="classctrlxdatalayer_1_1owner_1_1Owner.html">ctrlxdatalayer.owner.Owner</a></div><div class="ttdoc">Owne.</div><div class="ttdef"><b>Definition</b> <a href="owner_8py_source.html#l00018">owner.py:18</a></div></div>
 <div class="ttc" id="aclassctrlxdatalayer_1_1provider_1_1Provider_html"><div class="ttname"><a href="classctrlxdatalayer_1_1provider_1_1Provider.html">ctrlxdatalayer.provider.Provider</a></div><div class="ttdef"><b>Definition</b> <a href="provider_8py_source.html#l00016">provider.py:16</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1user_1_1User_html"><div class="ttname"><a href="classctrlxdatalayer_1_1user_1_1User.html">ctrlxdatalayer.user.User</a></div><div class="ttdoc">Use.</div><div class="ttdef"><b>Definition</b> <a href="user_8py_source.html#l00019">user.py:19</a></div></div>
+<div class="ttc" id="aclassctrlxdatalayer_1_1variant_1_1Result_html"><div class="ttname"><a href="classctrlxdatalayer_1_1variant_1_1Result.html">ctrlxdatalayer.variant.Result</a></div><div class="ttdef"><b>Definition</b> <a href="variant_8py_source.html#l00024">variant.py:24</a></div></div>
 <div class="ttc" id="anamespacectrlxdatalayer_1_1client_html"><div class="ttname"><a href="namespacectrlxdatalayer_1_1client.html">ctrlxdatalayer.client</a></div><div class="ttdef"><b>Definition</b> <a href="client_8py_source.html#l00001">client.py:1</a></div></div>
+<div class="ttc" id="anamespacectrlxdatalayer_1_1owner_html"><div class="ttname"><a href="namespacectrlxdatalayer_1_1owner.html">ctrlxdatalayer.owner</a></div><div class="ttdef"><b>Definition</b> <a href="owner_8py_source.html#l00001">owner.py:1</a></div></div>
 <div class="ttc" id="anamespacectrlxdatalayer_1_1provider_html"><div class="ttname"><a href="namespacectrlxdatalayer_1_1provider.html">ctrlxdatalayer.provider</a></div><div class="ttdef"><b>Definition</b> <a href="provider_8py_source.html#l00001">provider.py:1</a></div></div>
+<div class="ttc" id="anamespacectrlxdatalayer_1_1user_html"><div class="ttname"><a href="namespacectrlxdatalayer_1_1user.html">ctrlxdatalayer.user</a></div><div class="ttdef"><b>Definition</b> <a href="user_8py_source.html#l00001">user.py:1</a></div></div>
+<div class="ttc" id="anamespacectrlxdatalayer_1_1variant_html"><div class="ttname"><a href="namespacectrlxdatalayer_1_1variant.html">ctrlxdatalayer.variant</a></div><div class="ttdef"><b>Definition</b> <a href="variant_8py_source.html#l00001">variant.py:1</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -9,7 +9,6 @@ summary: ctrlX Data Layer WebDAV sample written in Node.js for ctrlX OS.
 description: |
   The sample app shows how to use a WebDAV client for app data access.
 confinement: strict
-#confinement: devmode
 #icon: assets/icons/ICONHERE.png
 grade: stable
 
@@ -21,7 +20,6 @@ source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
 website: https://github.com/boschrexroth/ctrlx-automation-sdk
 
 base: core24
-type: app
 
 platforms:
   amd64:
@@ -45,11 +43,11 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: "24.14.0"
+      - NODE_VERSION: "24.22.3"
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "24.14.0"
+    # npm-node-version: "24.22.3"
     plugin: nil
     override-build: |
     

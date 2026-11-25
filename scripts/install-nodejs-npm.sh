@@ -2,7 +2,7 @@
 
 echo " "
 echo "============================================"
-echo Installing node.js and npm
+echo "Installing Node.js ..."
 echo "============================================"
 echo " "
 
@@ -17,5 +17,14 @@ if [[ -n "$HTTPS_PROXY" ]]; then
   echo https-proxy=http://10.0.2.2:3128/ >> ~/.npmrc
 fi
 
-node --version
-npm --version
+# Add Environment variables to user profile
+profile=$(cat ~/.profile)
+if [[ "$profile" != *"NPM"* ]];then
+  sudo echo 'export NPM=~/npm/bin' | sudo tee -a ~/.profile
+  sudo echo 'export PATH=$NPM:$PATH' | sudo tee -a ~/.profile
+  export NPM=~/npm/bin
+  export PATH=$NPM:$PATH
+fi
+
+echo "Node.js: $(node --version)"
+echo "npm:     $(npm --version)"

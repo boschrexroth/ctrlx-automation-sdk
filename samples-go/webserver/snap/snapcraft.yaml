@@ -20,7 +20,6 @@ website: https://github.com/boschrexroth/ctrlx-automation-sdk
 
 confinement: strict
 base: core24
-
 platforms:
   amd64:
   arm64:

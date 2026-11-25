@@ -12,7 +12,6 @@ description: |
   The 'static' folder provides nodes with constant values.
   In the 'dynamic' folder the same nodes are provided as in 'static' folder but with changing value every second.
 confinement: strict
-#confinement: devmode
 #icon: assets/icons/ICONHERE.png
 grade: stable
 
@@ -24,7 +23,6 @@ source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
 website: https://github.com/boschrexroth/ctrlx-automation-sdk
 
 base: core24
-type: app
 
 platforms:
   amd64:
@@ -47,11 +45,11 @@ parts:
     source: .
     build-environment:
       # Set the node version here. We recommend to use the latest LTS version.
-      - NODE_VERSION: "24.14.0"
+      - NODE_VERSION: "24.22.3"
 
     # We don't use the npm plugin here, because it has no X-build capability (can't build arm64 target snaps on amd64).
     # plugin: npm
-    # npm-node-version: "24.14.0"
+    # npm-node-version: "24.22.3"
     plugin: nil
     override-build: |
     

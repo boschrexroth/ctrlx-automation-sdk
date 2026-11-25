@@ -2,9 +2,12 @@
 
 echo " "
 echo "============================================"
-echo Installing latest LTS dotnet-sdk 
+echo "Installing .NET SDK (LTS)"
 echo "============================================"
 echo " "
+
+# IMPORTANT 
+# THIS SCRIPT HAS TO BE CALLED WITH 'source install-dotnet-sdk.sh' TO ENSURE ENVIRONMENT VARIABLES ARE SET IN THE CURRENT SHELL SESSION
 
 # Scripted installation based on
 # https://learn.microsoft.com/en-us/dotnet/core/install/linux-scripted-manual#scripted-install
@@ -21,24 +24,10 @@ profile=$(cat ~/.profile)
 if [[ "$profile" != *"DOTNET_ROOT"* ]];then
   sudo echo 'export DOTNET_ROOT=$HOME/.dotnet' | sudo tee -a ~/.profile
   sudo echo 'export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools' | sudo tee -a ~/.profile
+  export DOTNET_ROOT=$HOME/.dotnet
+  export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 fi
 
-# Dump version and sdk
+# Dump installed SDK version
 dotnet --list-sdks
-
-# break the info output
-if [ "$1" == "quiet" ]; then
-  exit 0
-fi
-
-echo
-echo "dotnet-sdk installation completed."
-echo
-echo "============================================"
-echo "NOW, PLEASE DO EITHER OF THE FOLLOWING:"
-echo " - Reload your profile by executing command '. ~/.profile' in terminal."
-echo " or"
-echo " - Restart your App Builder Environment."
-echo "============================================"
-echo
-read -r -p "Press enter to continue"
+echo ".NET SDK installation completed."

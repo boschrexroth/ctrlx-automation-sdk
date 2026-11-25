@@ -21,13 +21,13 @@ issues: https://github.com/boschrexroth/ctrlx-automation-sdk/issues
 source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
 website: https://github.com/boschrexroth/ctrlx-automation-sdk
 
-confinement: strict
-
 platforms:
   amd64:
   arm64:
     build-on: [amd64, arm64]
     build-for: [arm64]
+
+confinement: strict
 
 apps:
   app:

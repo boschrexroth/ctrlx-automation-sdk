@@ -1,0 +1,55 @@
+name: nvidia-cuda-check
+base: core24
+version: 1.0.0
+summary: Minimal snap showing NVIDIA GPU and CUDA access
+description: |
+  Demonstrates a strictly confined snap that talks to the NVIDIA kernel
+  driver. The NVIDIA userspace libraries are bundled in exactly the same
+  version (580.65.06) as the open-gpu-kernel-modules shipped in the kernel,
+  because userspace and kernel module versions must match.
+
+platforms: 
+  amd64:
+
+grade: devel
+confinement: strict
+
+parts:
+  nvidia-userspace:
+    plugin: nil
+    source: https://download.nvidia.com/XFree86/Linux-x86_64/580.65.06/NVIDIA-Linux-x86_64-580.65.06.run
+    source-type: file
+    source-checksum: sha256/04b10867af585e765cfbfdcf39ed5f4bd112375bebab0172eaa187c6aa5024ff
+    override-build: |
+      VERSION=580.65.06
+      sh NVIDIA-Linux-x86_64-$VERSION.run --extract-only --target extracted
+      LIBDIR=$CRAFT_PART_INSTALL/nvidia/lib
+      mkdir -p $LIBDIR $CRAFT_PART_INSTALL/nvidia/bin
+      # Only the compute subset: CUDA driver, NVML and their dependencies
+      for lib in libcuda libnvidia-ml libnvidia-ptxjitcompiler libnvidia-nvvm libnvidia-gpucomp; do
+        install -m 755 extracted/$lib.so.$VERSION $LIBDIR/
+        ln -s $lib.so.$VERSION $LIBDIR/$lib.so.1
+      done
+      install -m 755 extracted/libnvidia-nvvm70.so.4 $LIBDIR/
+      install -m 755 extracted/nvidia-smi $CRAFT_PART_INSTALL/nvidia/bin/
+    prime:
+      - nvidia
+
+  cuda-check:
+    plugin: nil
+    source: ./src
+    build-packages:
+      - gcc
+    override-build: |
+      mkdir -p $CRAFT_PART_INSTALL/bin
+      gcc -O2 -Wall -o $CRAFT_PART_INSTALL/bin/cuda_check cuda_check.c -ldl
+      install -m 755 launch.sh $CRAFT_PART_INSTALL/bin/launch.sh
+
+apps:
+  cuda-check:
+    command: bin/launch.sh
+    plugs:
+      - hardware-observe
+      - nvidia-drivers-support
+      - network-bind # seccomp: allows listen() used by CUDA's UVM socket (cuInit fails with 304 otherwise)
+      - opengl # /proc/driver/nvidia, /sys/devices/system/{memory,node}, device nodes used by CUDA

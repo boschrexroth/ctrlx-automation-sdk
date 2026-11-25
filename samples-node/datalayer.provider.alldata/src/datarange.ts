@@ -17,23 +17,10 @@ interface IDataRange {
  */
 class DataRange implements IDataRange {
 
-    /**
-     * The min value.
-     */
-    private min: any;
-
-    /** 
-     * The max value.
-     */
-    private max: any;
-
     /** 
      * Creates a new instance of the DataRange class
      */
-    constructor(min: any, max: any) {
-        this.min = min;
-        this.max = max;
-    }
+    constructor(private min: any, private max: any) { }
 
     /**
      * Factory to create a new instance of the DataRange class.

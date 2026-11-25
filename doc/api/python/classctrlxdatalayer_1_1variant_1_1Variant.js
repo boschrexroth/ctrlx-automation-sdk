@@ -41,6 +41,7 @@ var classctrlxdatalayer_1_1variant_1_1Variant =
     [ "get_uint32", "classctrlxdatalayer_1_1variant_1_1Variant.html#aff7d110d7bb6eb02ee76f98ec2024204", null ],
     [ "get_uint64", "classctrlxdatalayer_1_1variant_1_1Variant.html#a4babda83909e9fce66740907145d6422", null ],
     [ "get_uint8", "classctrlxdatalayer_1_1variant_1_1Variant.html#a0acd19505aab6486030ae2528e68e4bb", null ],
+    [ "is_null", "classctrlxdatalayer_1_1variant_1_1Variant.html#a308f7e55f89d764af736621b18eb7a78", null ],
     [ "set_array_bool8", "classctrlxdatalayer_1_1variant_1_1Variant.html#abfe205a3679dd35b1fa85f01cf4c6866", null ],
     [ "set_array_datetime", "classctrlxdatalayer_1_1variant_1_1Variant.html#a0134a60e0ab576362dd4f5bf80543ee9", null ],
     [ "set_array_float32", "classctrlxdatalayer_1_1variant_1_1Variant.html#a738cc9935653c5657291c639b655814c", null ],

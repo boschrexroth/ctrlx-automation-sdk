@@ -21,19 +21,19 @@ Any use of the source code and related documents of this repository in applicati
 
 ## Installation of the App Build Environment
 
-__To develop ctrlX Apps we recommend to use a ctrlX App Build Environment.__ Otherwise a Ubuntu Server or Desktop system is needed.
+**To develop ctrlX Apps we recommend to use a App Build Environment (QEMU VM).** Otherwise a Ubuntu Server or Desktop system is needed.
 
-How to create and start a ctrlX App Build Environment is described in [ctrlX WORKS App Build Environment](https://boschrexroth.github.io/ctrlx-automation-sdk/setup_qemu_ctrlx_works.html)
+How to create and start a App Build Environment (QEMU VM) is described in [App Build Environment (QEMU VM)](https://boschrexroth.github.io/ctrlx-automation-sdk/setup_qemu_ctrlx_works.html)
 
-If your ctrlX App Build Environment is running, you can log in and install the ctrlX AUTOMATION SDK - see below.
+If your App Build Environment (QEMU VM) is running, you can log in and install the ctrlX AUTOMATION SDK - see below.
 
 ## Installation of the ctrlX AUTOMATION SDK
 
-__These installation steps are required on both an App Build Environment and an Ubuntu Server or Desktop System.__
+**These installation steps are required on both an App Build Environment and an Ubuntu Server or Desktop System.**
 
 ### Prerequisite for the following Scripts
 
-The following packages must be installed so that the following scripts can be executed. When using the __App Build Environment__, packages are installed when setting up an instance.
+The following packages must be installed so that the following scripts can be executed. When using the **App Build Environment**, packages are installed when setting up an instance.
 
 ```bash
     sudo apt-get update
@@ -56,10 +56,10 @@ The following packages must be installed so that the following scripts can be ex
 Start a console session, change to your destination directory and enter:
 
 ```bash
-    wget https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh && chmod a+x *.sh && ./clone-install-sdk.sh
+    curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/boschrexroth/ctrlx-automation-sdk/main/scripts/clone-install-sdk.sh | bash
 ```
 
-As a result, your local copy of the github repo is stored within the directory __ctrlx-automation-sdk/__
+As a result, your local copy of the github repo is stored within the directory **ctrlx-automation-sdk/**
 
 ### Install required Debian packages
 
@@ -69,6 +69,14 @@ Stay in the directory and enter:
     ctrlx-automation-sdk/scripts/install-required-packages.sh
 ```
 
+This script installs all required packages and additionally prepares the system for cross-compilation by adding the foreign architecture (`arm64` on `amd64` systems and vice versa) and installing the corresponding cross-build packages (e.g. `crossbuild-essential-arm64`, `libxml2-dev:arm64`).
+
+To skip cross-build preparation and only install the native packages, pass the `--no-cross-build` flag:
+
+```bash
+    ctrlx-automation-sdk/scripts/install-required-packages.sh --no-cross-build
+```
+
 ### Install snapcraft
 
 Stay in the directory and enter:
@@ -76,6 +84,12 @@ Stay in the directory and enter:
 ```bash
     ctrlx-automation-sdk/scripts/install-snapcraft.sh
 ```
+
+> **Note:** A system reboot is required after running `install-snapcraft.sh` before continuing with the next steps.
+>
+> ```bash
+>     sudo reboot
+> ```
 
 ### Install ctrlx-datalayer Debian package
 
@@ -98,25 +112,37 @@ Change to the directory `ctrlx-automation-sdk/scripts` and start the according i
 For go samples:
 
 ```bash
-    install-go.sh
+    ./install-go.sh
 ```
 
 For .NET samples:
 
 ```bash
-    install-dotnet-sdk.sh
+    source ./install-dotnet-sdk.sh
 ```
 
 For nodejs samples:
 
 ```bash
-    install-nodejs-npm.sh
+    source ./install-nodejs-npm.sh
 ```
 
 For java samples:
 
 ```bash
-    install-java-gradle.sh
+    ./install-java-gradle.sh
+```
+
+For rust samples:
+
+```bash
+    ./install-rust.sh
+```
+
+For python samples:
+
+```bash
+    ./install-python.sh
 ```
 
 Overview of all scripts: [Description of the scripts](scripts/README.md)
@@ -135,7 +161,7 @@ SPDX-FileCopyrightText: Bosch Rexroth AG
 
 ## About
 
-Please note that any trademarks, logos and pictures contained or linked to in this Software are owned by or copyright © Bosch Rexroth AG 2021-2025 and not licensed under the Software's license terms.
+Please note that any trademarks, logos and pictures contained or linked to in this Software are owned by or copyright © Bosch Rexroth AG 2021-2026 and not licensed under the Software's license terms.
 
 <https://www.boschrexroth.com>
 

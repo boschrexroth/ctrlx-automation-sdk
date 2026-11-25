@@ -19,6 +19,7 @@ __main.py__ is the single module. It has following tasks:
 * Create a __ctrlX Data Layer__ client connection
 * Subscribe/unsubscribe a __ctrlX Data Layer__ single node subscription
 * Subscribe/unsubscribe a __ctrlX Data Layer__ multi node subscription
+* Subscribe/unsubscribe a __ctrlX Data Layer__ lossless node subscription
 * Close app on __ctrlX Data Layer__ client connection break
 
 ___

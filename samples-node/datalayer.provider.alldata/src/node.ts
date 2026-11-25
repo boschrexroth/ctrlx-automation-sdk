@@ -53,20 +53,15 @@ class Node implements INode {
     // Root node for all nodes
     private static rootNode = 'sdk/node/provider/all-data';
 
-    private address: string;
-    private value: any;
-    private dataType: DataType;
-    private metadata: Uint8Array;
-
     /** 
      * Creates a new instance of Node class
      */
-    constructor(dataType: DataType, address: string, value: any, metadata: Uint8Array) {
-        this.dataType = dataType;
-        this.address = address;
-        this.value = value;
-        this.metadata = metadata;
-    }
+    constructor(
+        private dataType: DataType,
+        private address: string,
+        private value: any,
+        private metadata: Uint8Array
+    ) { }
 
     /**
      * Creates a static node.
@@ -204,9 +199,7 @@ class Node implements INode {
                 this.value = now;
                 break;
             case DataTypes.arrayOfBool8:
-                for (let i = 0; i < this.value.length; ++i) {
-                    this.value[i] = !this.value[i];
-                }
+                this.value = this.value.map((v: boolean) => !v);
                 break;
             case DataTypes.arrayOfInt8:
             case DataTypes.arrayOfUint8:
@@ -214,31 +207,21 @@ class Node implements INode {
             case DataTypes.arrayOfUint16:
             case DataTypes.arrayOfInt32:
             case DataTypes.arrayOfUint32:
-                for (let i = 0; i < this.value.length; ++i) {
-                    this.value[i] = this.value[i] + 1;
-                }
+                this.value = this.value.map((v: number) => v + 1);
                 break;
             case DataTypes.arrayOfFloat:
             case DataTypes.arrayOfFloat64:
-                for (let i = 0; i < this.value.length; ++i) {
-                    this.value[i] = this.value[i] + 0.1;
-                }
+                this.value = this.value.map((v: number) => v + 0.1);
                 break;
             case DataTypes.arrayOfInt64:
             case DataTypes.arrayOfUint64:
-                for (let i = 0; i < this.value.length; ++i) {
-                    this.value[i] = this.value[i] + 1n;
-                }
+                this.value = this.value.map((v: bigint) => v + 1n);
                 break;
             case DataTypes.arrayOfString:
-                for (let i = 0; i < this.value.length; ++i) {
-                    this.value[i] = this.incrementStringValue(this.value[i], '_');
-                }
+                this.value = this.value.map((v: string) => this.incrementStringValue(v, '_'));
                 break;
             case DataTypes.arrayOfTimestamp:
-                for (let i = 0; i < this.value.length; ++i) {
-                    this.value[i] = now;
-                }
+                this.value = this.value.map(() => now);
                 break;
             case DataTypes.inertialValue:
                 {

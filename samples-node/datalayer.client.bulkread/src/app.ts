@@ -10,7 +10,6 @@
 import DatalayerSystem from 'ctrlx-datalayer/dist/datalayersystem';
 import { Remote } from 'ctrlx-datalayer/dist/remote';
 
-
 async function main() {
 
     // Create a new ctrlX Data Layer system
@@ -23,7 +22,7 @@ async function main() {
     const remote = Remote.build({ ip: "10.0.2.2", sslPort: 8443 });
     console.log('connection string:', remote);
 
-    // Create a Datalayer Client instance and connects. Automatically reconnects if the connection is interrupted.s
+    // Create a Datalayer Client instance and connects. Automatically reconnects if the connection is interrupted.
     const client = await system.createClient(remote);
 
     // Define node addresses for bulk read
@@ -47,18 +46,29 @@ async function main() {
 
     //Keep the process alive until disconnected
     const intervalHandle = setInterval(() => {
-        if (system.isStarted() === false || client.isConnected() === false) {
+        if (!system.isStarted() || !client.isConnected()) {
             clearInterval(intervalHandle);
         }
     }, 10_000);
 
-    // Handle process event 'SIGTERM'
-    process.on('SIGTERM', () => {
-        console.info('SIGTERM signal received.');
+    // Common shutdown routine used by both 'SIGTERM' and 'SIGINT'
+    const shutdown = async (signal: string) => {
+        console.info(`${signal} signal received.`);
 
-        system.stop();
+        // Stop keeping the process alive
+        clearInterval(intervalHandle);
+
+        // Stop the ctrlX Data Layer system
+        await system.stop();
         console.log('ctrlX Data Layer system stopped.');
-    });
+    };
+
+    // Handle process events 'SIGTERM' and 'SIGINT'
+    process.on('SIGTERM', () => void shutdown('SIGTERM'));
+    process.on('SIGINT', () => void shutdown('SIGINT'));
 }
 
-main();
+main().catch((err) => {
+    console.error('Fatal error:', err);
+    process.exitCode = 1;
+});

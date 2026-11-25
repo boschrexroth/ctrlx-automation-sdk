@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["OPERATION_BROWSE","OPERATION_CREATE","OPERATION_DELETE","OPERATION_READ","OPERATION_WRITE"],"enum":["ReferenceType"],"struct":["MetadataBuilder"]};

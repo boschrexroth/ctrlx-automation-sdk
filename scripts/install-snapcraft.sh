@@ -1,4 +1,9 @@
-#!/usr/bin/env bash    
+#!/usr/bin/env bash   
+
+# This script installs snapcraft, if not already installed.
+
+# Set the snapcraft major version to install.
+SNAPCRAFT_VERSION="8"
 
 etc_environment=$(cat /etc/environment)
 if [[ ${etc_environment} != *"SNAPCRAFT_BUILD_ENVIRONMENT=host"* ]];then
@@ -17,11 +22,11 @@ fi
 function  install_snapcraft() {
     echo ""
     echo "-------------------------------------------------------"
-    echo "install snapcraft 8.x"
+    echo "Installing Snapcraft ${SNAPCRAFT_VERSION} ..."
     echo "-------------------------------------------------------"
     echo ""
 
-    sudo snap install snapcraft --channel=8.x/stable --classic
+    sudo snap install snapcraft --channel=${SNAPCRAFT_VERSION}.x/stable --classic
 }
 
 # Avoid return or exit, so that thsi sscript can be called from elsewhere
@@ -33,7 +38,7 @@ if [[ ${snap_list} != *"snapcraft"* ]];then
 else
     # snapcraft is installed
     snapcraft_installed=$(snap list snapcraft)
-    if [[ ${snapcraft_installed} != *"8."* ]];then
+    if [[ ${snapcraft_installed} != *"${SNAPCRAFT_VERSION}."* ]];then
         # but not the desired version, so remove this versin and install the right one
         echo Uninstalling inappropriate snapcraft version...
         sudo snap remove snapcraft 2>/dev/null
@@ -41,3 +46,12 @@ else
     fi
 fi
 
+echo ""
+echo "-------------------------------------------------------"
+echo "NOTE: A system reboot is required before continuing"
+echo "      with the next installation steps."
+echo ""
+echo "      Please reboot now:"
+echo "          sudo reboot"
+echo "-------------------------------------------------------"
+echo ""

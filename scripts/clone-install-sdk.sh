@@ -5,6 +5,28 @@
 # installes the required files from ctrlx-automation-sdk-*.zip.
 #
 
+# Reads the git tag list from stdin and marks the first (oldest) tag of each
+# major version series with the Ubuntu Core base used from that release on.
+append_core_info() {
+	# ANSI color definitions
+    local YELLOW='\033[1;33m' # yellow and bold for better visibility
+    local NC='\033[0m'        # Color reset
+
+    awk -v nc="$NC" -v yellow="$YELLOW" '
+
+		# Then apply general rules for the first major version
+		!v1_done && /^1\./ { print $0 "  " yellow "(core20)" nc; v1_done=1; next }
+        !v2_done && /^2\./ { print $0 "  " yellow "(core22)" nc; v2_done=1; next }
+        !v3_done && /^3\./ { print $0 "  " yellow "(core22)" nc; v3_done=1; next }
+        !v4_done && /^4\./ { print $0 "  " yellow "(core24)" nc; v4_done=1; next }
+        !v5_done && /^5\./ { print $0 "  " yellow "(core24)" nc; v5_done=1; next }
+		!v6_done && /^6\./ { print $0 "  " yellow "(core26)" nc; v6_done=1; next }
+
+		# Default action: output line unchanged
+        { print }
+    '
+}
+
 if [[ "--help" = "${1}" ]]; then
 	echo ""
 	echo "This script creates a local copy of the ctrlX AUTOMATION SDK github repository"
@@ -22,7 +44,7 @@ SEPARATION_LINE_2="-------------------------------------------------------------
 
 if [ -d "${SDK_DIR}" ]; then
 	echo ""
-	read -rp "Delete existing directory ${SDK_DIR} Y/n? " ANS
+	read -rp "Delete existing directory ${SDK_DIR} Y/n? " ANS </dev/tty
 	if [[ "$ANS" == *"n"* ]]; then
 		echo "Change your working directory or delete the directory yourself ctrlx-automation-sdk/"
 		exit 1
@@ -42,10 +64,10 @@ cd "$SDK_DIR" || exit
 echo ""
 echo $SEPARATION_LINE_1
 echo "Enter the desired tag to be checked out from this list:"
-git tag
+git --no-pager tag | append_core_info
 echo $SEPARATION_LINE_2
 TAG_LATEST=$(git describe --tags --abbrev=0)
-read -rp "Version ($TAG_LATEST)? " TAG
+read -rp "Version ($TAG_LATEST)? " TAG </dev/tty
 if [ -z "$TAG" ]; then
 	TAG=$TAG_LATEST
 fi
@@ -55,7 +77,7 @@ echo $SEPARATION_LINE_1
 echo "Local SDK github repo: ${SDK_DIR}"
 echo "Version (release):     ${TAG}"
 echo $SEPARATION_LINE_2
-read -rt 20 -p "OK? "
+read -rt 20 -p "OK? " </dev/tty
 
 echo ""
 echo $SEPARATION_LINE_1

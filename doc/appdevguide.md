@@ -1,6 +1,10 @@
-**Liability** The information in this guideline is intended for product description purposes only and shall not be deemed to be of a warranty nature, unless expressly stipulated by contract. All rights are reserved with respect to the content of this documentation and the availability of the product.
+<!-- markdownlint-disable MD033 -->
 
-### **Table of Contents**
+# **Liability**
+
+The information in this guideline is intended for product description purposes only and shall not be deemed to be of a warranty nature, unless expressly stipulated by contract. All rights are reserved with respect to the content of this documentation and the availability of the product.
+
+## **Table of Contents**
 
 [1 Introduction](#introduction)
 
@@ -49,7 +53,7 @@ This document describes the technical aspects for ctrlX apps. These aspects each
 
 ### 1.3 Partner Contract and Legal Framework
 
-This development guide describes the technical integration of an app into ctrlX CORE. The following documents of the ctrlX World partner program also need to be available and signed as non-technical prerequisites before an app gets published:
+This development guide describes the technical integration of an app into ctrlX OS. The following documents of the ctrlX World partner program also need to be available and signed as non-technical prerequisites before an app gets published:
 
 - The **Distribution Framework Agreement** ("Partner Contract") describes the fundamental conditions of the partnership between you as app developer and Bosch Rexroth and affiliates
 - A **Individual Contract** describes all app related licenses as part of the product to be sold within Bosch Rexroth and affiliates sales channels
@@ -115,6 +119,28 @@ Basically, the workflow will be as follows:
 3. Once the artifacts are complete, the validation will start. Again, if rework is required, the partner will be notified with an attached report
 4. Once validation has been successful, Bosch Rexroth will sign the app and inform the partner by email.
 
+### 2.5 Integration level (<span style="color:green;">**OPTIONAL**</span>)<a name="premium"></a>
+
+### 2.5.1 Premium Integration
+
+In addition to the mandatory signing checks above, Bosch Rexroth performs a **Premium Integration** assessment for every submitted app.
+
+
+An app receives Premium status when its total integration score reaches 80% or higher. For a detailed breakdown of the scoring system, see [Section 3.4](#premium-category).
+
+- **If the score is 80% or higher**: Premium Integration status is prominently displayed in the App Validator report.
+- **If the score is below 80%**: the report includes technical recommendations for the next iteration.
+
+Partner workflow:
+
+1. Upload `artifacts.zip` with all required artifacts.
+2. Include `additionalinfo.json` from [Section 4.2.5](#additionalinfo).
+3. Bosch Rexroth validates the artifact and computes the integration score.
+4. The validation report shows the result and improvement actions (if needed).
+
+!!! tip
+    Premium scoring relies in part on information that cannot be obtained solely from the snap package (such as the presence of a datalayer or certificate). Therefore, partners are required to generate and include the `additionalinfo.json` file as specified in [Section 4.2.5](#additionalinfo).
+
 ## 3 App Categories<a name="categories"></a>
 
 Apps can be integrated into ctrlX on different levels. Three categories are defined as guidance for the prerequisites and possibilities on different levels. A category, however, is not a formal boundary, and an app can seamlessly support aspects in the different categories. Also, subsequent versions of an app might support more aspects than an earlier version.
@@ -123,20 +149,23 @@ However, at least all aspects that are mentioned in **Category 1** need to be me
 
 The aspects are briefly described in this section The remainder of these documents provides detailed information about all aspects and also refers to additional sources of information, like how-to documents and code samples.
 
+!!! note
+    The three categories below describe **what** an app can integrate. The Premium Integration assessment in [Section 2.5](#premium) measures **how deeply** the optional integration aspects are implemented and awards the Premium status based on a scored evaluation.
+
 ### 3.1 Category 1 (Basic): Applies to ctrlX basic mechanisms
 
-To be approved as an official ctrlX CORE app, an app must support a minimum set of mandatory aspects.
+To be approved as an official ctrlX OS app, an app must support a minimum set of mandatory aspects.
 
 #### **3.1.1 Overview**
 
 The app itself and corresponding user documentation need to be provided. Legal aspects like FOSS are also required.
 Working set information is needed to support the test and validation process.
-During runtime, the app must use the ctrlX CORE onboard licensing mechanism.
+During runtime, the app must use the ctrlX OS onboard licensing mechanism.
 
 #### **3.1.2 Customer User Experience**
 
-Customers can find the app in the ctrlX App Store. They know how the app is licensed and can use the overall Bosch Rexroth licensing system for ctrlX CORE.
-They can also be sure that the app contributes to the basic ctrlX CORE security mechanisms.
+Customers can find the app in the ctrlX App Store. They know how the app is licensed and can use the overall Bosch Rexroth licensing system for ctrlX OS.
+They can also be sure that the app contributes to the basic ctrlX OS security mechanisms.
 
 #### **3.1.3 Technical Prerequisites**
 
@@ -145,7 +174,7 @@ They can also be sure that the app contributes to the basic ctrlX CORE security 
 
 Basic app information:
 
-- App artifacts (“Executables” for ctrlX CORE and ctrlX CORE<sup>virtual</sup> and basic technical information)
+- App artifacts (“Executables” for ctrlX OS and ctrlX OS<sup>virtual</sup> and basic technical information)
 
 - App documentation / user manual and release notes
 
@@ -188,13 +217,11 @@ The app contributes to the ctrlX user interface and system behavior. It integrat
 
 Further app information:
 
-- FOSS sources
-
 - Semantic versioning scheme
 
-Integration into ctrlX CORE security system:
+Integration into ctrlX OS security system:
 
-- ctrlX CORE reverse proxy
+- ctrlX OS reverse proxy
 
 - ctrlX Key & Certificate Management
 
@@ -204,9 +231,9 @@ Integration into ctrlX CORE security system:
 
 Integration into ctrlX user interface and project handling
 
-- ctrlX CORE navigation pane and landing page
+- ctrlX OS navigation pane and landing page
 
-- ctrlX CORE configuration storage
+- ctrlX OS configuration storage
 
 ### 3.3 Category 3 (Extended): Extends ctrlX AUTOMATION features
 
@@ -217,7 +244,7 @@ Finally, an app can integrate in the Automation framework and extend the ctrlX r
 
 #### **3.3.1 Description**
 
-The app exposes information in the __ctrlX Data Layer__ for all other apps. It also can extend the real time functions of ctrlX CORE if connected to the real-time task scheduler
+The app exposes information in the **ctrlX Data Layer** for all other apps. It also can extend the real time functions of ctrlX OS if connected to the real-time task scheduler
 
 #### **3.3.2 Customer User Experience**
 
@@ -229,11 +256,153 @@ Integration into ctrlX AUTOMATION system functions:
 
 - ctrlX Data Layer
 
-- ctrlX CORE logbook and diagnostics system
+- ctrlX OS logbook and diagnostics system
 
 Real-time extension:
 
-- ctrlX CORE Scheduler
+- ctrlX OS Scheduler
+
+### 3.4 Premium Integration <a name="premium-category"></a>
+
+Premium Integration is a cross-category score that recognizes apps with deep integration into ctrlX OS.
+
+#### **3.4.1 Overview**
+
+Bosch Rexroth evaluates every submitted app against seven integration categories. Apps achieving a **score of 20 or more out of 25** receive Premium Integration status.
+
+| Category | Max score |
+| --- | :---: |
+| App Data | 5 |
+| Backup/Restore | 5 |
+| Certificate | 2 |
+| LogBook | 2 |
+| Identity Management | 3 |
+| Reverse proxy | 5 |
+| Data layer | 3 |
+| **Total** | **25** |
+
+#### **3.4.2 Premium Integration Level Details**
+
+??? note "Click to show Premium Integration Level Details"
+    | Category | Level | Description | Scores |
+    |---|---|---|---|
+    | **App Data** | 1 | Not Applicable | 5 |
+    |  | 2 | Partially Integrated | 3 |
+    |  | 3 | Fully Integrated | 5 |
+    | **Backup/Restore** | 1 | Not Integrated | 0 |
+    |  | 2 | Fully Integrated | 5 |
+    | **Certificate** | 1 | Not Integrated (self signed) | 1 |
+    |  | 2 | Fully Integrated | 2 |
+    |  | 3 | Not Applicable | 2 |
+    | **LogBook** | 1 | Not Integrated | 0 |
+    |  | 2 | Partially Integrated | 1 |
+    |  | 3 | Fully Integrated | 2 |
+    | **Identity Management** | 1 | Not Integrated | 0 |
+    |  | 2 | Partially Integrated - own authorization | 2 |
+    |  | 3 | Partially Integrated - scope is not implemented | 2 |
+    |  | 4 | Fully Integrated | 3 |
+    | **Reverse proxy** | 1 | Not Integrated | 5 |
+    |  | 2 | Partially Integrated - Port Used | 2 |
+    |  | 3 | Partially Integrated - Unrestricted Access | 4 |
+    |  | 4 | Fully Integrated | 5 |
+    | **Data layer** | 1 | Not Integrated | 0 |
+    |  | 2 | Partially Integrated | 2 |
+    |  | 3 | Fully Integrated | 3 |
+
+    **Note:** For Premium status, your app should aim for the highest level in as many categories as possible. See the table above to understand what is required for each score.
+
+#### **3.4.3 Premium Integration Improvement Steps** <a name="premium-improvement-steps"></a>
+
+If Premium status is not achieved, use the steps below to improve your score — ordered by the score each step unlocks.
+
+??? note "Click to show Premium Integration Improvement Steps"
+    Steps assume a Level 1 starting point and are labeled with the Level and Score they unlock, matching the table above. Check your app's current Level per category, then apply the remaining steps for whichever categories you choose to improve.
+
+    **App Data**
+
+    1. **(Level 2 · Score 3)** Declare app directories in `package-manifest.json` and the active-solution plug in `snapcraft.yaml`.
+       Add an `appDirectories` array under `configuration` in `package-manifest.json` with at least one entry that names an app directory the app owns, and add a plug (e.g. `active-solution`) with `interface: content`, `content: solutions` and `target: $SNAP_COMMON/solutions` in `snapcraft.yaml`.
+       For further information see [App Directories](persistdata.md#3-specify-your-app-directories)
+    2. **(Level 3 · Score 5)** Register save and load commands so the app's configuration can be saved and restored.
+       Add both a `save` and a `load` command under `commands`->`activeConfiguration` in `package-manifest.json` so Solutions can save and restore the app's configuration; both are required. Each command has a unique `id`, a `subject` (what is saved or loaded) and a `url` (the app's endpoint that ctrlX OS calls with a POST request).
+       For further information see [Register for Saving and Loading](persistdata.md#4-register-for-saving-and-loading)
+
+    **Backup / Restore**
+
+    3. **(Level 2 · Score 5)** Register the app's settings for backup and restore.
+       In `package-manifest.json`, add one or more settings under `apps`->`rexroth-setup`->`settings`, each with a `name` and a `url` (GET to read, PUT to update), so ctrlX Setup can backup and restore the app's settings.
+       For further information see [App Settings](persist-device-settings.md#register-app-settings)
+    4. **(Level 2 · Score 5)** Register the app directories for backup and restore.
+       Add an `appDirectories` array under `configuration` in `package-manifest.json` with at least one entry that names an app directory the app owns, and add a plug (e.g. `active-solution`) with `interface: content`, `content: solutions` and `target: $SNAP_COMMON/solutions` in `snapcraft.yaml`.
+       For further information see [App Directories](persistdata.md#3-specify-your-app-directories)
+
+    **Certificate Management**
+
+    5. **(Level 2 · Score 2)** Manage certificates through ctrlX OS certificate stores instead of a self-signed certificate.
+       Add a slot named `package-certificates` to `snapcraft.yaml` (`interface: content`, `content: package-certificates`) with a non-empty `source.write` list, and add a `certificatestores` array to `package-manifest.json` with at least one entry that has an `id` and a `title`. This integrates the app with ctrlX OS certificate management, so its keys and certificates are managed through a ctrlX certificate store.
+       For further information see [Certificate Stores](package-assets.md#certificate-stores)
+
+    **Logbook Integration**
+
+    6. **(Level 2 · Score 1)** Ensure the app's log output actually reaches the ctrlX logbook.
+       The app's log entries must appear in the ctrlX logbook on the device. Make sure the app writes at least one log entry during normal operation.
+    7. **(Level 3 · Score 2)** Include a diagnosis field (`mainDiagnosisCode`) in the app's log entries to pass ctrlX logbook schema compliance.
+       At least one of the app's logbook entries must include a `mainDiagnosisCode` field - a code that identifies what went wrong and which system caused it, so the problem can be traced.
+       For further information see [ctrlX Logbook and Diagnostic System](#101-ctrlx-logbook-and-diagnostic-system)
+
+    **Identity Management**
+
+    8. **(Level 2 · Score 2)** Reject requests from users who are not logged in.
+       Respond with HTTP 401 when the app is opened without a ctrlX login, or 403 when the user lacks permission. Returning the app content or redirecting instead is treated as unprotected.
+    9. **(Level 3 · Score 2)** Show a login page to users who are not logged in.
+       Return a login form (HTML page, HTTP 200) with a password field instead of the app content when the app is opened without a ctrlX login. Redirecting to a separate login page is treated as unprotected.
+    10. **(Level 4 · Score 3)** Declare ctrlX authorization scopes so ctrlX OS can manage access to the app.
+        Add a scopes-declaration array to `package-manifest.json` so ctrlX OS can manage access to the app the same way it does for other apps. Each scope identifier must be unique and have at least 3 dot-separated parts, e.g. `"ctrlx-helloworld.web.data.rw"`. Avoid declaring ctrlX OS's built-in admin scope (`"rexroth-device.all.rwx"`).
+        For further information see [Scopes and Permissions](package-assets.md#scopes-and-permissions)
+
+    **Reverse Proxy**
+
+    11. **(Level 3 · Score 4)** Bind the `proxyMapping` to a Unix socket instead of a TCP port.
+        In `package-manifest.json`, change the `binding` of the `proxyMapping` from a TCP port/host (e.g. `":5000"`) to a Unix socket path, e.g. `"unix://{$SNAP_DATA}/package-run/third-party-snap/web.sock"`. A TCP binding exposes the service on the network even though the reverse proxy runs on the same device; a Unix socket keeps access controlled by file permissions and never leaves the device.
+    12. **(Level 4 · Score 5)** List authentication-sensitive routes under `restricted`.
+        In `package-manifest.json`, add a `restricted` list to the `proxyMapping` with the URLs that require authentication, typically API endpoints. The reverse proxy rejects unauthenticated calls to these URLs before they reach the app, while any URL not listed is reachable without a ctrlX OS login token:
+        ```json
+        "proxyMapping": [
+          {
+            "name": "third-party-snap.web",
+            "url": "/cool-app",
+            "binding": "unix://{$SNAP_DATA}/package-run/third-party-snap/web.sock",
+            "restricted": [ "/cool-app/api/v1" ]
+          }
+        ]
+        ```
+        For further information see [Proxy Mapping](package-assets.md#proxy-mapping)
+
+    **Data Layer**
+
+    13. **(Level 2 · Score 2)** Read or write existing Data Layer nodes from the app (client).
+        Connect to the Data Layer as a client (`createClient()`) and read or write nodes that already exist, such as nodes from ctrlX OS or another app.
+        For further information see [Usage Of Client](https://boschrexroth.github.io/ctrlx-automation-sdk/latest/datalayer.html#usage-of-client)
+    14. **(Level 3 · Score 3)** Provide the app's own data as Data Layer nodes (provider).
+        Register the app's own node paths as a Data Layer provider and implement provider functions such as `onRead` and `onWrite`, so other apps can read and write the data the app provides. For real-time nodes, contact the Bosch Rexroth partner manager.
+        For further information see [Provider Interface Functions](https://boschrexroth.github.io/ctrlx-automation-sdk/latest/datalayer.html#provider-interface-functions)
+
+#### **3.4.4 Customer User Experience**
+
+Customers can directly see which apps are deeply integrated into ctrlX OS and provide a consistent operating experience.
+
+#### **3.4.5 Technical Recommendations**
+
+!!! note
+    The aspects checked for Premium status are <span style="color:green;">**OPTIONAL**</span>. They overlap with Category 2 and Category 3 and are not a separate mandatory requirement set.
+
+If Premium is not achieved, the report provides actionable recommendations, for example:
+
+- Configure restricted reverse proxy access where required
+- Use scope-based authorization
+- Provide logbook entries with `mainDiagnosisCode`
+- Implement Solutions load/save integration
+- Cover all relevant data in Backup/Restore
 
 ## 4 Basic App Information (<span style="color:red;">**MANDATORY**</span>) <a name="basic"></a>
 
@@ -251,33 +420,13 @@ This will create the required folder structure for the mandatory artifacts out-o
 
 ![image](images/artifacts.png)
 
-The artifacts are organized in five sub folders:
+The artifacts are organized in four sub folders:
 
-#### 4.1.2 "Disclosure" folder (<span style="color:red;">**MANDATORY**</span>)
-
-The FOSS source files and license text files are stored in the disclosure folder
-
-- If the app contains FOSS components, a file containing the license texts must be provided (<span style="color:red;">**MANDATORY**</span>). The file can be in one of the following formats:
-
-  - **"fossinfo.json"** - License texts for all an app’s used open source software. For more information about format and content, refer to the json example and the corresponding json schema in the standard "artifacts.zip" file.
-
-  - **"cyclonedx.json"** - CycloneDX BOM file with license texts inside.
-
-- **"foss-sources.zip" (<span style="color:blue;">**CONDITIONAL**</span>)** - In the foss-sources.zip file, the sources of all used open source libraries / packages are zipped without a password.
-
-- **"foss-offer.x" (<span style="color:blue;">**CONDITIONAL**</span>)** - If the foss-sources.zip file is not provided, a human-readable file with the name "offer.x" is needed. It explains how the user can get the sources.
-
-**Either FOSS sources or FOSS offer is required**.
-
-#### 4.1.3 "Build Info" folder (<span style="color:red;">**MANDATORY**</span>)
+#### 4.1.2 "Build Info" folder (<span style="color:red;">**MANDATORY**</span>)
 
 The build info folder stores all build relevant information.
 
 Note: For the `{xxx}-description` files, a default file (with explanation) and the corresponding schema is provided in the standard `artifacts.zip` example.
-
-- **"snapcraft.yaml" (<span style="color:red;">**MANDATORY**</span>)** - The snapcraft.yaml file is the main entry point to create a snap through Snapcraft. It contains all the details the snapcraft command needs to build a snap. See also <https://snapcraft.io/docs/snapcraft-yaml-reference>
-
-- **"package-manifest.json" (<span style="color:red;">**MANDATORY**</span>)** - The package-manifest.json covers essential settings, like the proxy URL
 
 - **"portlist-description.json" (<span style="color:red;">**MANDATORY**</span>)** - All used ports are described in the port list
 
@@ -287,15 +436,15 @@ Note: For the `{xxx}-description` files, a default file (with explanation) and t
 
 **The [Base checklist](appdevguide_basechecks.md) contains the criteria which are checked in these files.**
 
-#### 4.1.4 "Documentation" folder (<span style="color:red;">**MANDATORY**</span>)
+#### 4.1.3 "Documentation" folder (<span style="color:red;">**MANDATORY**</span>)
 
  All documentation relevant to the app is provided here
 
 - **"manual.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The app description (user manual) documents the app’s overall functionality
-- **"test-setup-description.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The app setup describes how to configure the app on a ctrlX CORE for a typical usage and test scenario
+- **"test-setup-description.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The app setup describes how to configure the app on a ctrlX OS for a typical usage and test scenario
 - **"release-notes.pdf" (<span style="color:red;">**MANDATORY**</span>)** - The latest changes, workarounds and defects are mentioned in the release notes
 
-#### 4.1.5 "App States" folder (<span style="color:red;">**MANDATORY**</span>)
+#### 4.1.4 "App States" folder (<span style="color:red;">**MANDATORY**</span>)
 
 The app validation framework tries to establish relevant states that have to be tested. Therefore, a sequence of API calls has to be provided to bring the app to the test state
 
@@ -303,13 +452,13 @@ The app validation framework tries to establish relevant states that have to be 
 
   - **"standard-scenario{2 to n}.json" (optional)** - One or more scenarios, if appropriate
 
-#### 4.1.6 "Snaps" folder (<span style="color:red;">**MANDATORY**</span>)
+#### 4.1.5 "Snaps" folder (<span style="color:red;">**MANDATORY**</span>)
 
 ctrlX currently supports the amd64 and the arm64 processor architecture. The corresponding target snaps for the app are provided here
 
-- **"ctrlx-{company name}-{app name}_{version}_arm64.snap" (<span style="color:red;">**MANDATORY**</span>)** - Snap that runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX CORE hardware.
+- **"ctrlx-{company name}-{app name}_{version}_arm64.snap" (<span style="color:red;">**MANDATORY**</span>)** - Snap that runs in armd64 environments. Currently, the arm64 architecture is used in ctrlX OS hardware.
 
-- **"ctrlx-{company name}-{app name}_{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX CORE<sup>virtual</sup>. However, future ctrlX CORE hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
+- **"ctrlx-{company name}-{app name}_{version}_amd64.snap" (<span style="color:green;">**OPTIONAL**</span>)** - Snap that runs in amd64 environments. The amd64 is used in ctrlX OS<sup>virtual</sup>. However, future ctrlX OS hardware will also use amd64 architecture. So, it is recommended that a snap is also provided for this platform to avoid future inconvenience.
 
 ### 4.2 App Documentation (<span style="color:red;">**MANDATORY**</span>)
 
@@ -334,6 +483,24 @@ Each app needs product information as part of the sales package. The description
 
 The app description package is necessary in case the app is also to be shown in the ctrlX AUTOMATION Community App Zone or other marketing channels.
 
+#### 4.2.5 Additional Information for Identity Management / Data Layer / Certificates <a name="additionalinfo"></a>
+
+To support consistent and efficient validation, partners must provide standardized information about their app's usage of Identity Management, Data Layer, and certificates. An interactive tool is provided to generate this information in the required JSON format.
+
+This information, provided in JSON format, is also used as input for Premium Integration scoring in [Section 2.5](#premium) and [Section 3.4](#premium-category). For scoring details, see Section 3.4. The JSON file is especially important for categories that cannot be detected automatically during validation.
+
+**Using the Tool:**
+
+1. Open <a href="./material/templates/additionalinfo.html" target="_blank">additionalinfo.html</a> in a web browser
+
+2. For each category (Identity Management, Data Layer, and Certificates), select the appropriate option that describes your app's implementation
+
+3. Click "Download Result" to automatically generate and download the additionalinfo.json file
+
+**File Placement:**
+Place the generated additionalinfo.json file in your artifacts documentation folder:
+`{company}/{app}/{version}/artifacts/documentation/additionalinfo.json`
+
 ### 4.3 Additional App Information According to Linux Ubuntu Conventions (<span style="color:red;">**MANDATORY**</span>)
 
 The following properties must be defined within the **"snapcraft.yaml"** file (see <https://snapcraft.io/docs/snapcraft-yaml-reference>), which also need to be exclusively part of the app and have to be collision free with other apps.
@@ -342,7 +509,7 @@ The following properties must be defined within the **"snapcraft.yaml"** file (s
 
 - **Name** - The technical name of the snap. The name has to be unique in the snap universe and across all snap developer and device vendors. The snap name has to **start with "ctrlx-"** and must be **lowercase** and a **maximum length of 32 characters**. ctrlX World Partners add their company name to the snap name. Example: "ctrlx-partnername-myapp"
 
-- **Description** - The description must include an HTML comment containing the `author` and `url` fields, followed by a short explanation of the app functionality with a **minimum length of 16 characters**. For signed apps this information will be displayed in the app settings section. Example: [storage-extension example](storage-extension.md#example)
+- **Description** - The description must include an HTML comment containing the `author` and `url` fields, followed by a short explanation of the app functionality with a **minimum length of 16 characters**. For signed apps this information will be displayed in the app settings section. Example: [storage-extension example](storage-extension.md#step-1-update-snapcraftyaml)
 
 - **Confinement** - Must be set to **"strict"** for releases. See also <https://snapcraft.io/docs/snap-confinement>
 
@@ -365,7 +532,7 @@ The restart delay of the app daemon should be set to "5s" or similar in the **sn
 
 ### 6.1 Security Information & Considerations
 
-ctrlX CORE is designed with high security requirements. Also, the overall ctrlX CORE architecture is built to be compliant to be certified as defined by IEC62433. This also implies some requirements for the apps and software running in the ctrlX Ecosystem. For the ctrlX app, this means
+ctrlX OS is designed with high security requirements. Also, the overall ctrlX OS architecture is built to be compliant to be certified as defined by IEC62433. This also implies some requirements for the apps and software running in the ctrlX Ecosystem. For the ctrlX app, this means
 
 - Only encrypted and secured communication protocols (e.g. https) must be used. Insecure protocols (e.g. http) are not to be used, unless explicitly defined in the validation process.
 
@@ -386,6 +553,8 @@ The following operating system interfaces which are listed here are denied or re
 [Reserved interfaces](appdevguide_reserved-interfaces.md), (1. Reserved slots and plugs)
 
  This list is subject to change and might be extended. If unsure, please provide the slot/plug you want to use inside your application together with justification to check whether or not this specific slot/plug is allowed and find potential alternatives.
+
+- **Shared memory (`/dev/shm`)**. If your app requires access to `/dev/shm` (e.g. for POSIX semaphores or shared memory objects), use the `shared-memory` interface with `private: true`. This gives your snap its own private `/dev/shm` without requiring a Canonical store declaration. See the [Shared Memory Interface Guidance](appdevguide_reserved-interfaces.md#11-shared-memory-interface-guidance) for details.
 
 #### 6.1.2 Network Security and Ports (<span style="color:blue;">**CONDITIONAL**</span>)
 
@@ -416,7 +585,7 @@ It is very likely that an app stores settings & configuration data in the applic
 
 ### 6.2 Resource Consumption and Read/Write Operations (<span style="color:red;">**MANDATORY**</span>)
 
-Typically, more than one app runs on a ctrlX CORE. It is therefore very important than an app does not consume too many system resources (e.g. RAM or disk space). In addition, the available virtual memory on the device is limited to the amount of physical available memory, because the possibility of swapping unused RAM to disk is disabled on ctrlX CORE. The reasons for this is the otherwise negative impact on real-time capability and flash disk lifetime.
+Typically, more than one app runs on a ctrlX OS. It is therefore very important than an app does not consume too many system resources (e.g. RAM or disk space). In addition, the available virtual memory on the device is limited to the amount of physical available memory, because the possibility of swapping unused RAM to disk is disabled on ctrlX OS. The reasons for this is the otherwise negative impact on real-time capability and flash disk lifetime.
 
 #### 6.2.1 Resource Consumption
 
@@ -430,11 +599,11 @@ If an app exceeds these values by a long way, then please contact your app partn
 
 #### 6.2.2 Integrated Storage/Flash Lifetime
 
-The app must not write diagnostics or similar data cyclically to the internal solid-state memory when running on ctrlX CORE hardware (X3, X5, X7, etc.), as this will damage the flash cells. Instead, cyclical writing can only be done to network storage or other external storage, which allows easy and regular replacement for this use case.
+The app must not write diagnostics or similar data cyclically to the internal solid-state memory when running on ctrlX OS hardware (X3, X5, X7, etc.), as this will damage the flash cells. Instead, cyclical writing can only be done to network storage or other external storage, which allows easy and regular replacement for this use case.
 
 When running on ctrlX OS on other hardware, this check is optional and may be adapted depending on the hardware capabilities.
 
-The integrated storage medium and file system in the ctrlX CORE hardware is based on a solid state flash memory, which inherently has a limited lifetime based on the number of erase cycles for its memory cells. To increase the device’s overall lifetime it is necessary to reduce the number of write/erase cycles on the flash cells.
+The integrated storage medium and file system in the ctrlX OS hardware is based on a solid state flash memory, which inherently has a limited lifetime based on the number of erase cycles for its memory cells. To increase the device’s overall lifetime it is necessary to reduce the number of write/erase cycles on the flash cells.
 
 ### 6.3 Standard Task Scheduling (<span style="color:red;">**MANDATORY**</span>)
 
@@ -452,7 +621,7 @@ Videos and further media can be attached.
 
 ctrlX World Partner apps must use the licensing service that is operated by Bosch Rexroth.
 
-A license model must be defined for each app. To ensure maximum usability for a ctrlX CORE user, the app must call up the ctrlX license manager API when it starts or is running to check if a license is activated.  If a license is missing, the missing license will be shown to the user on a user interface. A warning or error must be shown in case the license is missing.
+A license model must be defined for each app. To ensure maximum usability for a ctrlX OS user, the app must call up the ctrlX license manager API when it starts or is running to check if a license is activated.  If a license is missing, the missing license will be shown to the user on a user interface. A warning or error must be shown in case the license is missing.
 
 Each software license (SWL) bought by a customer generates one or more capabilities:
 
@@ -465,7 +634,7 @@ Each software license (SWL) bought by a customer generates one or more capabilit
 For information how to adapt an app to the licensing service please have look on the [Licensing guideline](licensing.md)
 
 !!! note
-    Currently, the License Manager does not return licenses on a ctrlX COREvirtual.
+    Currently, the License Manager does not return licenses on a ctrlX OSvirtual.
 
 ### 7.2 App Signing (<span style="color:red;">**MANDATORY**</span>)
 
@@ -476,9 +645,9 @@ For apps that are developed and used by OEMs in their appliances, the OEM can be
 
 ## 8 ctrlX Security System (<span style="color:green;">**OPTIONAL**</span>)<a name="security"></a>
 
-### 8.1 ctrlX CORE reverse proxy (<span style="color:green;">**OPTIONAL**</span>)
+### 8.1 ctrlX OS reverse proxy (<span style="color:green;">**OPTIONAL**</span>)
 
-The proxy URL is the most important setting in the **package-manifest.json** file for the app to be integrated seamlessly into the ctrlX CORE. The reverse proxy will forward requests to the URL that are defined for the app web service.
+The proxy URL is the most important setting in the **package-manifest.json** file for the app to be integrated seamlessly into the ctrlX OS. The reverse proxy will forward requests to the URL that are defined for the app web service.
 
 !!! hint
     **Please make sure that your App provides unique URLs for the ctrlX reverse proxy**
@@ -494,18 +663,18 @@ An app is to be bound to a Unix socket instead of a local port. This will also p
 
 ### 8.2 ctrlX Key & Certificate Management (<span style="color:green;">**OPTIONAL**</span>)
 
-The ctrlX CORE certificate management is to be used to manage your application’s certificates through the web interface.
+The ctrlX OS certificate management is to be used to manage your application’s certificates through the web interface.
 (package-manifest.json, snapcraft.yaml)
 
 Note: When the application acts as a ctrlX client, key & certificate based authentication has to be used whenever possible. If user & password based authentication is used, the configuration file permissions have to be correct so that no other user(s) on the system can read those data.
 
 ### 8.3 ctrlX Identity Management/Authentication & Authorization (<span style="color:green;">**OPTIONAL**</span>)
 
-When running a web service, the app should use the authentication & authorization mechanisms that the ctrlX CORE provides to protect the app against unauthorized access.
+When running a web service, the app should use the authentication & authorization mechanisms that the ctrlX OS provides to protect the app against unauthorized access.
 
-If the mechanisms the ctrlX CORE provides are not used, hardcoded accounts/credentials have to be avoided.
+If the mechanisms the ctrlX OS provides are not used, hardcoded accounts/credentials have to be avoided.
 
-The ctrlX CORE's so called "scopes" are to be used to model app permissions. Scopes allow permissions to be assigned to users & groups via the web interface. If case permissions are used, the permissions must be enforced within the app
+The ctrlX OS's so called "scopes" are to be used to model app permissions. Scopes allow permissions to be assigned to users & groups via the web interface. If case permissions are used, the permissions must be enforced within the app
 (package-manifest.json)
 
 !!! hint
@@ -515,11 +684,11 @@ The ctrlX CORE's so called "scopes" are to be used to model app permissions. Sco
 
 ### 9.1 ctrlX Configuration Storage (<span style="color:blue;">**CONDITIONAL**</span>)
 
-The ctrlX CORE system provides multiple ways for an app to store its data. The app data must be persisted within one of these locations to provide consistent backup and restore mechanism to users.
+The ctrlX OS system provides multiple ways for an app to store its data. The app data must be persisted within one of these locations to provide consistent backup and restore mechanism to users.
 
 #### 9.1.1 Solution Handling (<span style="color:green;">**OPTIONAL**</span>)
 
-The so-called "Solution" is an essential part of any ctrlX CORE device. It provides a central storage location for all ctrlX apps that need to persist their app data in configurations. Configuration files are saved to the solution storage or loaded from the storage on demand (by the user or by REST API calls).
+The so-called "Solution" is an essential part of any ctrlX OS device. It provides a central storage location for all ctrlX apps that need to persist their app data in configurations. Configuration files are saved to the solution storage or loaded from the storage on demand (by the user or by REST API calls).
 
 - A configuration file contains project-specific data, like machine-related, PLC, HMI, fieldbus configurations.
 
@@ -560,7 +729,7 @@ In the future, they
 
 ### 10.1 ctrlX Logbook and Diagnostic System
 
-For further information see [ctrlX Diagnostic System](https://docs.automation.boschrexroth.com/doc/748959024/ctrlx-diagnostic-system/latest-11/en/) inside the [ctrlX CORE Runtime Application Manual](https://docs.automation.boschrexroth.com/doc/3327072753/ctrlx-core-runtime-01vrs-application-manual/latest/en/)
+For further information see [ctrlX Diagnostic System](https://docs.automation.boschrexroth.com/doc/748959024/ctrlx-diagnostic-system/latest-11/en/) inside the [ctrlX OS Runtime Application Manual](https://docs.automation.boschrexroth.com/doc/3327072753/ctrlx-core-runtime-01vrs-application-manual/latest/en/)
 
 
 ## 11 Real Time Extension (<span style="color:green;">**OPTIONAL**</span>)<a name="realtime"></a>

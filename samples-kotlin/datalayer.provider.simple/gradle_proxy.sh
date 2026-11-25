@@ -1,0 +1,1 @@
+../../scripts/samples-java/gradle_proxy.sh

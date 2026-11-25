@@ -24,9 +24,31 @@ def handler(signum, frame):
     __close_app = True
     # print('Here you go signum: ', signum, __close_app, flush=True)
 
+def run_lossless_subscription(client: ctrlxdatalayer.client.Client):
+    """run_lossless_subscription
+       Only nodes that have "qos.lossless: true" in the metadata extensions can be subscribed without loss
+    """
+    result, subscription = app.datalayerclient.app.subscribe_single_lossless(client)
+    if result != Result.OK:
+        print("ERROR subscribe_single_lossless() failed with:", result, flush=True)
+        sys.exit(1)
+
+    if subscription is None:
+        print("ERROR subscribe_single_lossless() returned None", flush=True)
+        sys.exit(1)
+
+    with subscription:
+        while client.is_connected() and not __close_app:
+            time.sleep(1.0)
+
+        subscription.unsubscribe_all()
 
 def main():
     """main"""
+
+    loss_less=False
+    if len(sys.argv) > 1:
+        loss_less = sys.argv[1] == "lossless"
 
     print()
     print(
@@ -89,23 +111,26 @@ def main():
                     time.sleep(10.0)
                     subscription.unsubscribe_all()
 
-                result, subscription = app.datalayerclient.app.subscribe_multi(
-                    datalayer_client, subscription_properties
-                )
-                if result != Result.OK:
-                    print("ERROR subscribe_multi() failed with:", result, flush=True)
-                    sys.exit(1)
+                if not loss_less: 
+                    result, subscription = app.datalayerclient.app.subscribe_multi(
+                        datalayer_client, subscription_properties
+                    )
+                    if result != Result.OK:
+                        print("ERROR subscribe_multi() failed with:", result, flush=True)
+                        sys.exit(1)
 
-                if subscription is None:
-                    print("ERROR subscribe_multi() returned None", flush=True)
-                    sys.exit(1)
+                    if subscription is None:
+                        print("ERROR subscribe_multi() returned None", flush=True)
+                        sys.exit(1)
 
-                with subscription:
-                    # Endless loop
-                    while datalayer_client.is_connected() and not __close_app:
-                        time.sleep(1.0)
+                    with subscription:
+                        # Endless loop
+                        while datalayer_client.is_connected() and not __close_app:
+                            time.sleep(1.0)
 
-                    subscription.unsubscribe_all()
+                        subscription.unsubscribe_all()
+                else:
+                    run_lossless_subscription(datalayer_client)
 
         # Attention: Doesn't return if any provider or client instance is still running
         stop_ok = datalayer_system.stop(False)

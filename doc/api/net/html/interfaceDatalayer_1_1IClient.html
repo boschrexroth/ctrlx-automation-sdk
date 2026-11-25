@@ -31,7 +31,7 @@
   </td>  
   <td id="projectalign" style="padding-left: 5em" width="80%">
     <div id="projectname">ctrlX Data Layer .NET API
-      &#160;<span id="projectnumber">6.0.1</span>
+      &#160;<span id="projectnumber">6.2.0</span>
     </div>
     <div id="projectbrief"></div>
   </td>
@@ -256,7 +256,7 @@ Public Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:ab020460331b76e524941ab46ac6ebdfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interfaceDatalayer_1_1IVariant.html">IVariant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceDatalayer_1_1IClient.html#ab020460331b76e524941ab46ac6ebdfa">AuthToken</a><code> [get]</code></td></tr>
-<tr class="memdesc:ab020460331b76e524941ab46ac6ebdfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the authentication token (JWT) as string.  <br /></td></tr>
+<tr class="memdesc:ab020460331b76e524941ab46ac6ebdfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the authentication token for security access. If the target needs a JWT token, the JWT token is returned. If the target does not need a JWT token, the corresponding json is returned.  <br /></td></tr>
 <tr class="separator:ab020460331b76e524941ab46ac6ebdfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3825f7c388e9c468b2908d84f94826a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceDatalayer.html#a0d46a3e31a1859c7602d7d671bf75fc8">DLR_RESULT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfaceDatalayer_1_1IClient.html#af3825f7c388e9c468b2908d84f94826a">ConnectionStatus</a><code> [get]</code></td></tr>
 <tr class="memdesc:af3825f7c388e9c468b2908d84f94826a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the connection status.  <br /></td></tr>
@@ -1287,7 +1287,7 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="IClient_8cs_source.html#l00265">265</a> of file <a class="el" href="IClient_8cs_source.html">IClient.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IClient_8cs_source.html#l00267">267</a> of file <a class="el" href="IClient_8cs_source.html">IClient.cs</a>.</p>
 
 </div>
 </div>
@@ -1486,7 +1486,7 @@ Properties</h2></td></tr>
 </dl>
 <p>var userData = new Variant(42); var builder = new FlatBufferBuilder(Variant.DefaultFlatbuffersInitialSize); var properties = SubscriptionProperties.CreateSubscriptionProperties( builder: builder, idOffset: builder.CreateString("mySubscription"), keepaliveInterval: KeepLiveIntervalMillis, publishInterval: PublishIntervalMillis, rulesOffset: default, errorInterval: ErrorIntervalMillis); builder.Finish(properties.Value); var propertiesFlatbuffers = new Variant(builder); var (result, subscription) = client.CreateSubscription(propertiesFlatbuffers, userData);  </p>
 
-<p class="definition">Definition at line <a class="el" href="IClient_8cs_source.html#l00066">66</a> of file <a class="el" href="IClient_8cs_source.html">IClient.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IClient_8cs_source.html#l00068">68</a> of file <a class="el" href="IClient_8cs_source.html">IClient.cs</a>.</p>
 
 </div>
 </div>
@@ -1511,7 +1511,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the authentication token (JWT) as string. </p>
+<p>Gets the authentication token for security access. If the target needs a JWT token, the JWT token is returned. If the target does not need a JWT token, the corresponding json is returned. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">ObjectDisposedException</td><td>Cannot access a disposed object.</td></tr>
@@ -1520,7 +1520,7 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="IClient_8cs_source.html#l00034">34</a> of file <a class="el" href="IClient_8cs_source.html">IClient.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IClient_8cs_source.html#l00036">36</a> of file <a class="el" href="IClient_8cs_source.html">IClient.cs</a>.</p>
 
 </div>
 </div>

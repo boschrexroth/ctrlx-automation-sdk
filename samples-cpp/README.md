@@ -27,6 +27,7 @@ Visual Studio Code extensions (Install in SSH):
 * [ctrlX Data Layer Provider Subscription](./datalayer.provider.sub/README.md)
 * [ctrlX Data Layer Client Simple](./datalayer.client.simple/README.md)
 * [ctrlX Data Layer Client Subscription](./datalayer.client.sub/README.md)
+* [ctrlX Data Layer Client Bulk](./datalayer.client.bulk/README.md)
 * [Diagnostics Logbook](./diagnostics.logbook/README.md)
 * [ctrlX Data Layer Diagnosis](./datalayer.diagnosis/README.md)
 
@@ -40,7 +41,7 @@ Visual Studio Code extensions (Install in SSH):
 ## Debug and Run
 
 1. Build the executable via cmake plugin.
-2. Launch the app with the debugger attached by pressing __F5__.
+2. Launch the app with the debugger attached by pressing **F5**.
 
 ## Build and Install
 
@@ -53,7 +54,7 @@ Visual Studio Code extensions (Install in SSH):
 
 See [Samples Overview](../samples.md)
 
-__Important:__ Before building an arm64 snap run script `public/scripts/environment/scripts/install-cpp-aarch64-libs.sh` once!
+> Important: Before building an arm64 snap run script `public/scripts/environment/scripts/install-cpp-aarch64-libs.sh` once!
 
 ### Create an Executable for Debugging
 
@@ -67,7 +68,9 @@ Then make these settings in the status bar (blue area) :
 
 Click Build and observe the progress in the output window - the build process should finish without errors (exit code 0).
 
-Now the executable for debugging is available in the subdirectory: generated/__ubuntu24-gcc-x64/Debug/__
+Now the executable for debugging is available in the subdirectory: generated/**ubuntu24-gcc-x64/Debug/**
+
+> Important: Adapt ubuntu24 to match a future installed version.
 
 To start debugging select 'Run and Debug' in the side bar, select 'x64...' as launch configuration an press F5 (or green start button).
 

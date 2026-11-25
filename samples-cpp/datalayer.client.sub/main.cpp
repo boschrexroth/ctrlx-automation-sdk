@@ -5,6 +5,7 @@
  */
 
 #include <csignal>
+#include <memory>
 #include <thread>
 
 #include "ctrlx_datalayer_helper.h"
@@ -32,7 +33,7 @@ int main()
 
   for (;;)
   {
-    auto dataLayerClientSub = new DataLayerClientSub(datalayerSystem);
+    auto dataLayerClientSub = std::make_unique<DataLayerClientSub>(datalayerSystem);
 
     //auto clientConnectionString = getConnectionString(); // default: ctrlX CORE or ctrlX COREvirtual with Network Adpater
     auto clientConnectionString = getConnectionString("10.0.2.2","boschrexroth","boschrexroth", 8443);  // ctrlX COREvirtual with Port Forwarding
@@ -62,7 +63,6 @@ int main()
     }
 
     dataLayerClientSub->disconnect();
-    delete dataLayerClientSub;
 
     if (g_endProcess)
     {

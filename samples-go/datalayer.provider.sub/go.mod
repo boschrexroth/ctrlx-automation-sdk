@@ -1,6 +1,6 @@
 module datalayer.provider.sub
 
-go 1.25
+go 1.26
 
 require github.com/boschrexroth/ctrlx-datalayer-golang/v2 v2.6.0
 

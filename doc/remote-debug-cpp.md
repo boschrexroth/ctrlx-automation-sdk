@@ -1,3 +1,6 @@
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD024 -->
+
 # Remote Debugging Snaps C++
 
 ## Overview
@@ -12,14 +15,14 @@ Then each following chapter describes for one programming language the  language
 
 ### IP Address of a ctrlX CORE
 
-From the build environment ctrlX CORE devices are connected via TCP/IP. Assuming we are using a (QEMU) virtual machine as build environment the different kind of ctrlX CORE devices are reachable over these IP addresses:
+From the build environment ctrlX CORE devices are connected via TCP/IP. Assuming we are using a (QEMU) Virtual Machine as build environment the different kind of ctrlX CORE devices are reachable over these IP addresses:
 
 1. ctrlX CORE<sup>virtual</sup> with port forwarding: 10.0.2.2
 2. ctrlX CORE<sup>virtual</sup> with network adapter: 192.168.1.1
 3. ctrlX CORE: real IP address
 
 To point 1.:
-From the point of view of the virtual machine this is the IP address of the host computer. The ctrlX CORE<sup>virtual</sup> has no own IP address. The connections to the control are realized via port forwarding.
+From the point of view of the Virtual Machine this is the IP address of the host computer. The ctrlX CORE<sup>virtual</sup> has no own IP address. The connections to the control are realized via port forwarding.
 
 ### Set up SSH Public Key Authentication
 
@@ -50,8 +53,8 @@ Additional hints:
 
 Debugging C++ applications in their snap environment is done by two debugging tools:
 
-- The __gdb server__ is running on the remote target. During a debug session he will attach to the running process to be debugged.
-- The __gdb debugger__ is running on the build environment. At the start of a remote debugging session he will connect to the gdb server. For debugging all commands are sent to the server whow will execute them and send to response back to the gdb debugger.
+- The **gdb server** is running on the remote target. During a debug session he will attach to the running process to be debugged.
+- The **gdb debugger** is running on the build environment. At the start of a remote debugging session he will connect to the gdb server. For debugging all commands are sent to the server whow will execute them and send to response back to the gdb debugger.
 
 The snap daemon (snapd) provides the gdb server as buildin tool.
 
@@ -69,7 +72,7 @@ This overview will give you a short explenation how remote debugging of a C++ sn
 These are the basics points:
 
 - Your C++ code has to raise a SIGSTOP signal in debug mode. This is done typically in the startup sequence or somewhere else where needed.
-- You have to build your C++ snap in __debug mode__ and install it on your ctrlX CORE.
+- You have to build your C++ snap in **debug mode** and install it on your ctrlX CORE.
 - The snap application will be restarted manually via ssh with the command `sudo snap run --experimental-gdbserver=:12345 <Snapname>.<Appname>`
 - The execution of the application will stop when the SIGSTOP signal is raised so that the gdb server is able to connect.
 - From your build environment the gdb debugger is started in remote mode. Provided with IP address and port nummber he can communicate with the gdb server on the ctrlX CORE.
@@ -84,7 +87,7 @@ Furthermore we assume that a hardware based ctrlX CORE (aarch64) with the IP add
 #### Prerequisites for the ctrlX
 
 - Snapd > 2.46.1
-- User `rootsshuser` with __root__ and __ssh__ access to the device.
+- User `rootsshuser` with **root** and **ssh** access to the device.
 
 #### Prerequisites for the Linux Build Environment
 
@@ -94,7 +97,7 @@ Furthermore we assume that a hardware based ctrlX CORE (aarch64) with the IP add
 
 ### Getting Started
 
-The code and configuration examples are from the SDK sample in __samples-cpp/datalayer.register.node__
+The code and configuration examples are from the SDK sample in **samples-cpp/hello.world**
 
 So start Visual Studio Code, connect to your build enviroment and open this folder.
 
@@ -125,7 +128,7 @@ Install the debug snap on your ctrlX CORE. The application will be started but s
 
 From Visual Studio Code we want to start the application with the snap run command.
 
-For this the file __tasks.json__ contains the task `Launch Remote GDB Server`
+For this the file **tasks.json** contains the task `Launch Remote GDB Server`
 
 ```code
     {
@@ -138,14 +141,14 @@ For this the file __tasks.json__ contains the task `Launch Remote GDB Server`
 
 The tag 'command' starts the application under the gdb server via ssh.
 
-As second action we want to start the gdb debugger in remote mode so that he connects to the remote gdb server. Therefore in __launch.json__ the configuration set `aarch64 ctrlX (remote)` is stored.
+As second action we want to start the gdb debugger in remote mode so that he connects to the remote gdb server. Therefore in **launch.json** the configuration set `aarch64 ctrlX (remote)` is stored.
 
 ```code
     {
         "name": "aarch64 ctrlX (remote)",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/generated/ubuntu24-gcc-aarch64/Debug/registerNode",
+        "program": "${workspaceFolder}/generated/ubuntu24-gcc-aarch64/Debug/HelloWorld",
         "cwd": "${workspaceFolder}",
         "miDebuggerPath": "/usr/bin/gdb-multiarch",
         "miDebuggerServerAddress": "192.168.1.1:12345",
@@ -164,6 +167,8 @@ As second action we want to start the gdb debugger in remote mode so that he con
 ```
 
 The tag 'miDebuggerPath' select gdb-multiarch as debugger, 'miDebuggerServerAddress' set IP address and port number to connect to the remote gdb server.
+
+> Important: Adapt ubuntu24 to match a future installed version.
 
 #### Starting the Application with VisualStudio Code
 

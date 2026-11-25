@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.boschrexroth.com/ctrlx-automation/ctrlx-core/apps/package-manifest/package-manifest.v1.7.schema.json",
+  "version": "1.0.0",
+  "id": "sdk-kotlin-provider-simple",
+  "services": {
+    "proxyMapping": [
+      {
+        "name": "sdk-kotlin-provider-simple.web",
+        "url": "/sdk-kotlin-provider-simple/",
+        "binding": "unix://{$SNAP_DATA}/package-run/sdk-kotlin-provider-simple/web.sock",
+        "restricted": []
+      }
+    ]
+  },
+  "menus": {
+    "sidebar": [
+      {
+        "id": "sdk-kotlin-provider-simple",
+        "title": "SDK Kotlin Provider",
+        "icon": "bosch-ic-worldwideweb",
+        "items": [
+          {
+            "id": "sdk-kotlin-provider-simple-blank",
+            "title": "Kotlin Provider (New Tab)",
+            "target": "_blank",
+            "link": "/sdk-kotlin-provider-simple/",
+            "items": []
+          },
+          {
+            "id": "sdk-kotlin-provider-simple-embedded",
+            "title": "Kotlin Provider (Embedded)",
+            "target": "embedded",
+            "link": "/sdk-kotlin-provider-simple/",
+            "items": []
+          }
+        ]
+      }
+    ],
+    "settings": [],
+    "overview": []
+  }
+}

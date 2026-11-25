@@ -19,7 +19,6 @@ source-code: https://github.com/boschrexroth/ctrlx-automation-sdk
 website: https://github.com/boschrexroth/ctrlx-automation-sdk
 
 base: core24
-type: app
 
 platforms:
   amd64:

@@ -6,7 +6,7 @@ The sample app reads the values of some __ctrlX Data Layer__ nodes of a ctrlX CO
 
 ## Prerequisite
 
-A running ctrlX WORKS App Build Environment like described [here](https://boschrexroth.github.io/ctrlx-automation-sdk/setup_qemu_ctrlx_works.html)
+A running App Build Environment (QEMU VM) like described [here](https://boschrexroth.github.io/ctrlx-automation-sdk/setup_qemu_ctrlx_works.html)
 
 ## Function Description
 

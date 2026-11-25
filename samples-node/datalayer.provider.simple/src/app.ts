@@ -42,7 +42,7 @@ async function main() {
     await provider.start();
 
     // Initially exit and retry after app restart-delay (see snapcraft.yaml)
-    if (provider.isConnected() === false) {
+    if (!provider.isConnected()) {
         console.log('provider is not connected -> exit.');
         return;
     }
@@ -162,6 +162,10 @@ async function main() {
         console.log('onWrite:', address);
         switch (address) {
             case myString.address:
+                if (typeof args.value !== 'string') {
+                    result.setResult(Result.INVALID_VALUE, null);
+                    break;
+                }
                 myString.value = args.value;
                 result.setResult(Result.OK, myString.value);
                 break;
@@ -176,7 +180,7 @@ async function main() {
         .setOnRead(onRead)
         .setOnWrite(onWrite);
 
-    // Register the nodes we wan't to provide
+    // Register the nodes we want to provide
     await provider.registerNode(myInt.address, providerNodeCallbacks).then((result) => console.log('registered node', myInt.address, 'with result:', result));
     await provider.registerNode(myDouble.address, providerNodeCallbacks).then((result) => console.log('registered node', myDouble.address, 'with result:', result));
     await provider.registerNode(myString.address, providerNodeCallbacks).then((result) => console.log('registered node', myString.address, 'with result:', result));
@@ -186,22 +190,33 @@ async function main() {
     const intervalHandle = setInterval(() => {
         myString.value = `Hello World! ${new Date().toISOString()}`;
 
-        if (system.isStarted() === false || provider.isConnected() === false) {
+        if (!system.isStarted() || !provider.isConnected()) {
             clearInterval(intervalHandle);
         }
     }, 1_000);
 
-    // Handle process event 'SIGTERM'
-    process.on('SIGTERM', () => {
-        console.info('SIGTERM signal received.');
+    // Common shutdown routine used by both 'SIGTERM' and 'SIGINT'
+    const shutdown = async (signal: string) => {
+        console.info(`${signal} signal received.`);
+
+        // Stop keeping the process alive
+        clearInterval(intervalHandle);
 
         // Stop the provider
-        provider.stop();
+        await provider.stop();
         console.log('Provider stopped.');
 
-        system.stop();
+        // Stop the ctrlX Data Layer system
+        await system.stop();
         console.log('ctrlX Data Layer system stopped.');
-    });
+    };
+
+    // Handle process events 'SIGTERM' and 'SIGINT'
+    process.on('SIGTERM', () => void shutdown('SIGTERM'));
+    process.on('SIGINT', () => void shutdown('SIGINT'));
 }
 
-main();
+main().catch((err) => {
+    console.error('Fatal error:', err);
+    process.exitCode = 1;
+});
